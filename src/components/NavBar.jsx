@@ -1,7 +1,9 @@
 import React from "react";
-import { Menu, Dropdown, Button } from "antd";
+import { Menu, Dropdown, Button, Typography } from "antd";
 import { Link } from "react-router-dom"
 import "../assets/css/NavBar.css";
+
+const { Title } = Typography;
 
 export default function Navbar() {
     const menu = (
@@ -11,6 +13,7 @@ export default function Navbar() {
                     Appointments
                 </Link>
             </Menu.Item>
+            <Menu.Divider />
             <Menu.Item>
                 <Link to="/account">
                     Account
@@ -20,11 +23,15 @@ export default function Navbar() {
     );
 
     return (
-        <div>
-            <div className="logo" />
-            <Dropdown className="myAccount" overlay={menu} placement="bottomRight">
-                <Button>Profile</Button>
+        <>
+            <div className="logo">
+                <Link to="/">
+                    <Title level={4}>LookUp</Title>
+                </Link>
+            </div>
+            <Dropdown className="profile" overlay={menu} placement="bottomRight">
+                <Button shape="round">Profile</Button>
             </Dropdown>
-        </div>
+        </>
     );
 }
