@@ -5,10 +5,10 @@ export default function ScheduleCard(props) {
     return (
         <Card id="scheduleCard"
             style={{
-                'border-radius': '12px',
-                'border-style': 'solid',
-                'border-color': 'rgb(165, 165, 165)',
-                'border-width': '1.5px'
+                'borderRadius': '12px',
+                'borderStyle': 'solid',
+                'borderColor': 'rgb(165, 165, 165)',
+                'borderWidth': '1.5px'
             }}>
             <Row>
                 <Col span={4}>Jul 17</Col>
@@ -24,9 +24,9 @@ export default function ScheduleCard(props) {
                     <div>{props.type}</div>
                     <Button className="scheduleCardEditBtn"
                         style={{
-                            'background-color': 'rgb(36,36,36)',
+                            'backgroundColor': 'rgb(36,36,36)',
                             'color': 'white',
-                            'border-radius': '10px'
+                            'borderRadius': '10px'
                         }}>Edit Schedule</Button>
                 </Col>
             </Row>
