@@ -1,12 +1,6 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import 'firebase/auth'
-import {createStore, combineReducers, compose} from 'redux'
-import {
-    ReactReduxFirebaseProvider,
-    firebaseReducer
-} from "react-redux-firebase"
-import { createFirestoreInstance, firestoreReducer} from "redux-firestore";
 
 
 const firebaseConfig = {
@@ -22,24 +16,14 @@ const firebaseConfig = {
 
 
 firebase.initializeApp(firebaseConfig);
+var firestore = firebase.firestore();
+const settings = {timestampsInSnapshots: true};
+firestore.settings(settings);
 
-const db = firebase.firestore()
+export default firestore;
 
-// function for adding user
-export const addUser = (email, phone) => {
-    return db.collection('user')
-        .add({
-
-        })
-}
-
-export const getDesignerList = () => {
-    db.collection('designers').get()
-        .then(docs=>{
-            docs.forEach(doc=>{
-                console.log(doc.data())
-            })
-        })
-    return db.collection('designers')
-        .doc().collection('name').get();
-}
+// const db = firebase.firestore()
+//
+// export const getDesignerList = () => {
+//     return db.collection('designers').get();
+// }
