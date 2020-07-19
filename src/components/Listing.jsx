@@ -5,14 +5,22 @@ import * as fdb from "../config/fbConfig";
 
 export default function Listing(props) {
 
-    //load data
     const dispatch = useDispatch();
     const loadDataBase = useCallback(
         (value) => dispatch(loadFirebaseDB(value)),
         [dispatch]
     );
-    console.log(fdb.getDesignerList());
-    loadDataBase(fdb.getDesignerList());
+
+    //load data
+    const db = fdb.getDesignerList().collection("designers").get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            console.log(doc.id, " => ", doc.data());
+        });
+    });
+
+    const clickEvent = () => {
+        loadDataBase(db);
+    };
 
 
     //display data
@@ -23,9 +31,12 @@ export default function Listing(props) {
         firebaseDB: state.firebase.firebaseDB
     }));
 
+
     return (
         <div>
-            Test Number from redux:
+            <button onClick={clickEvent}>
+                Load DB
+            </button>
         </div>
     );
 }

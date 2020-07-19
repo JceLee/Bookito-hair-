@@ -16,14 +16,9 @@ const firebaseConfig = {
 
 
 firebase.initializeApp(firebaseConfig);
-var firestore = firebase.firestore();
-const settings = {timestampsInSnapshots: true};
-firestore.settings(settings);
 
-export default firestore;
+const db = firebase.firestore();
 
-// const db = firebase.firestore()
-//
-// export const getDesignerList = () => {
-//     return db.collection('designers').get();
-// }
+export const getDesignerList = () => {
+    return db;
+}
