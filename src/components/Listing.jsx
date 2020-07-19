@@ -12,14 +12,16 @@ export default function Listing(props) {
     );
 
     //load data
+    const designerList = [];
     const db = fdb.getDesignerList().collection("designers").get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             console.log(doc.id, " => ", doc.data());
+            designerList.push(doc.data());
         });
     });
 
     const clickEvent = () => {
-        loadDataBase(db);
+        loadDataBase(designerList);
     };
 
 
