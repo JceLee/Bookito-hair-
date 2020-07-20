@@ -1,0 +1,20 @@
+.DesignerNavItem {
+  margin: 10px 10px 0 0;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+}
+
+.DesignerNavItem a {
+  color: black;
+  text-decoration: none;
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
+}
+
+.DesignerNavItem a:hover,
+.DesignerNavItem a:active,
+.DesignerNavItem a.active {
+  color: #1890ff;
+}
