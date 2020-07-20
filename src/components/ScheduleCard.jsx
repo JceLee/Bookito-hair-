@@ -11,7 +11,7 @@ export default function ScheduleCard(props) {
                 'borderWidth': '1.5px'
             }}>
             <Row>
-                <Col span={4}>Jul 17</Col>
+                <Col span={4}>{props.date}</Col>
                 <Col span={2} className="colVerticalDivider">
                     <Divider type="vertical" 
                         style={{ 
