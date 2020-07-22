@@ -20,18 +20,27 @@ export default function Navbar() {
     </Menu>
   );
 
-  return (
-    <>
-      <div className='logo'>
-        <Link to='/'>
-          <Title level={4}>LookUp</Title>
-        </Link>
-      </div>
-      <Dropdown className='profile' overlay={menu} placement='bottomRight'>
-        <Button shape='round'>Profile</Button>
-      </Dropdown>
-      <SignUp />
-      <Login />
-    </>
-  );
+    return (
+        <>
+            <div className="logo">
+                <Link to="/">
+                    <Title level={4}>LookUp</Title>
+                </Link>
+            </div>
+            <div className="listing">
+                <Link to="/listing">
+                    <Title level={4}>Listing</Title>
+                </Link>
+            </div>
+            <div className="listing">
+                <Link to="/Google">
+                    <Title level={4}>Google</Title>
+                </Link>
+            </div>
+            <Dropdown className="profile" overlay={menu} placement="bottomRight">
+                <Button shape="round">Profile</Button>
+            </Dropdown>
+
+        </>
+    );
 }

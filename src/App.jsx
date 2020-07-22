@@ -3,6 +3,8 @@ import { Layout } from "antd";
 import { BrowserRouter as Router, Route } from "react-router-dom"
 import NavBar from "./components/NavBar"
 import Home from "./components/Home"
+import Listing from "./components/Listing"
+import Google from "./components/Google"
 import Appointments from "./components/Appointments"
 import Account from "./components/Account"
 import "antd/dist/antd.css";
@@ -20,6 +22,8 @@ export default function App() {
                 <Content className="outerContent">
                     <div className="innerContent">
                         <Route exact path="/" component={Home} />
+                        <Route path="/listing" component={Listing} />
+                        <Route exact path="/Google" component={Google} />
                         <Route path="/appointments" component={Appointments} />
                         <Route path="/account" component={Account} />
                     </div>
