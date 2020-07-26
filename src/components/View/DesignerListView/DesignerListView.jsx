@@ -1,8 +1,8 @@
 import React from "react";
-import * as db from "../config/fbConfig";
+import * as db from "../../../config/fbConfig";
 import { Row, Col } from "antd";
 
-export default function Listing() {
+export default function DesignerListView() {
   db.getDesignerList();
   return (
     <>

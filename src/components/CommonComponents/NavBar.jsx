@@ -8,11 +8,19 @@ export default function Navbar() {
   const menu = (
     <Menu>
       <Menu.Item>
-        <Link to="/appointments">Appointments</Link>
+        <Link to="/designer_schedule">Schedule (Designer)</Link>
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item>
-        <Link to="/account">Account</Link>
+        <Link to="/client_schedule">Schedule (Client)</Link>
+      </Menu.Item>
+      <Menu.Divider />
+      <Menu.Item>
+        <Link to="/designer_profile">Profile (Designer)</Link>
+      </Menu.Item>
+      <Menu.Divider />
+      <Menu.Item>
+        <Link to="/client_profile">Profile (Client)</Link>
       </Menu.Item>
     </Menu>
   );
@@ -25,7 +33,7 @@ export default function Navbar() {
         </Link>
       </div>
       <div className="listing">
-        <Link to="/listing">
+        <Link to="/designer_list">
           <Title level={4}>Listing</Title>
         </Link>
       </div>
