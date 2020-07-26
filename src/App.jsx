@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Layout } from "antd";
 import { HashRouter as Router, Route } from "react-router-dom";
 import NavBar from "./components/CommonComponents/NavBar";
+import addData from "./components/CommonComponents/AddData";
 import MainView from "./components/View/MainView/MainView";
 import DesignerListView from "./components/View/DesignerListView/DesignerListView";
 import DesignerScheduleView from "./components/View/DesignerScheduleView/DesignerScheduleView";
@@ -23,6 +24,7 @@ export default function App() {
         <Content className="outerContent">
           <div className="innerContent">
             <Route exact path="/" component={MainView} />
+            <Route path="/add_data" component={addData} />
             <Route path="/designer_list" component={DesignerListView} />
             <Route path="/designer_schedule" component={DesignerScheduleView} />
             <Route path="/designer_profile" component={DesignerProfileView} />

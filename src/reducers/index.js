@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
-import test from "./test";
+import firebaseReducer from "./firebaseReducer"
 
 export default combineReducers({
-    test: test,
+    firebase: firebaseReducer
 });
+

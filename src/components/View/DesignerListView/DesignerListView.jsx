@@ -1,7 +1,12 @@
 import React from "react";
-import * as db from "../../../config/fbConfig";
+import { useSelector } from 'react-redux'
 
 export default function DesignerListView() {
-  db.getDesignerList();
+  const {
+    database
+  } = useSelector((state) => ({
+    database: state.firebase.database
+  }));
+  console.log(database);
   return <div>Designer List Page</div>;
 }
