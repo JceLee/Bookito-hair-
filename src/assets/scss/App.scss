@@ -1,2 +1,14 @@
-@import "./View/MainView/MainView.scss";
-@import "./CommonComponents/NavBar.scss";
+@import './View/MainView/MainView.scss';
+@import './CommonComponents/NavBar.scss';
+@import './View/DesignerProfileView/DesignerProfileView.scss';
+@import './View/DesignerProfileView/DesignerTop/DesignerTop.scss';
+@import './View/DesignerProfileView/DesignerTop/DesignerNav/DesignerNav.scss';
+@import './View/DesignerProfileView/DesignerTop/DesignerNav/DesignerNavItem.scss';
+@import './View/DesignerProfileView/DesignerBottom/DesignerBottom.scss';
+@import './View/DesignerProfileView/DesignerBottom/Home.scss';
+@import './View/DesignerProfileView/DesignerBottom/Hours.scss';
+@import './View/DesignerProfileView/DesignerBottom/Location.scss';
+@import './View/DesignerProfileView/DesignerBottom/Reviews.scss';
+@import './View/DesignerProfileView/DesignerBottom/ServiceNPrice.scss';
+@import './View/DesignerProfileView/DesignerBottom/Works.scss';
+@import './View/DesignerListView/DesignerListView.scss';

@@ -1,0 +1,26 @@
+.designerNavItem {
+  margin: 20px;
+  box-sizing: border-box;
+  display: inline;
+}
+
+.designerNavItem li {
+  margin: 0 35px 0 0;
+  width: 60px;
+  float: left;
+  list-style: none;
+}
+
+.designerNavItem a {
+  color: black;
+  text-decoration: none;
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
+}
+
+.designerNavItem a:hover,
+.designerNavItem a:active,
+.designerNavItem a.active {
+  color: #1890ff;
+}
