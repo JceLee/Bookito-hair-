@@ -2,7 +2,7 @@ import React, { useState, useEffect} from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "../../assets/css/searchBar/DesignerTypeCarousel.css";
+import "../../assets/scss/searchBar/DesignerTypeCarousel.scss";
 
 const designerType = ["HAIR", "NAIL", "LASH"];
 

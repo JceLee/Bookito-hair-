@@ -5,6 +5,7 @@
 }
 .outerContent {
   padding: 0 50px;
+  position: relative;
 }
 .innerContent {
   /* background: #fff; */
@@ -14,4 +15,13 @@
 .footer {
   background: #fff;
   text-align: center;
+}
+
+.searchBarSpace {
+  min-height: 80vh; /* 80% screen height */
+  display: flex;
+}
+.annoucementSpace {
+  background: lightgray;
+  min-height: 80vh; /* 80% screen height */
 }

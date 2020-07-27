@@ -1,7 +1,7 @@
 import React from "react";
 import { Input, AutoComplete } from "antd";
 import { AimOutlined } from '@ant-design/icons';
-import "../../assets/css/searchBar/LocationInput.css";
+import "../../assets/scss/searchBar/LocationInput.scss";
 
 export default function LocationSearch(props) {
     const { handleSearch } = props;
@@ -18,7 +18,6 @@ export default function LocationSearch(props) {
 
     return (
         <div className="locationInput">
-            <h3 className="nearBy">near by</h3>
             <AutoComplete
                 dropdownMatchSelectWidth={252}
                 style={{
