@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from "react";
 import { useHistory } from "react-router-dom";
+import QueryString from "query-string"
 import DesignerTypeCarousel from "./DesignerTypeCarousel";
 import LocationInput from "./LocationInput";
 import "../../assets/css/searchBar/SearchBar.css";
@@ -13,7 +14,7 @@ export default function SearchBar() {
 
     const history = useHistory();
     const handleSearch = location => {
-        const route = `/testView?type=${designerType}${location?`location=${location}`:""}`;
+        const route = `/testView?type=${designerType}${location?`&location=${location}`:""}`;
         history.push(route);
     };
 

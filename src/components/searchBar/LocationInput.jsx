@@ -6,6 +6,16 @@ import "../../assets/css/searchBar/LocationInput.css";
 export default function LocationSearch(props) {
     const { handleSearch } = props;
 
+    const handleGeolocation = () => {
+        if(navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                console.log(position.coords);
+            });
+        } else {
+            console.error("Geolocation is not supported by this browser.");
+        }
+    };
+
     return (
         <div className="locationInput">
             <h3 className="nearBy">near by</h3>
@@ -23,10 +33,7 @@ export default function LocationSearch(props) {
                     prefix={
                         <AimOutlined
                             className="site-form-item-icon"
-                            onClick={
-                                // TODO: Prompt automatic location detection
-                                ()=>{console.log("location")}
-                            }
+                            onClick={handleGeolocation}
                         />
                     }
                     size="large"
