@@ -36,7 +36,7 @@ export default function LocationSearch(props) {
                         />
                     }
                     size="large"
-                    placeholder="Where do you live?" // TODO: Extract string to string file
+                    placeholder="Your location" // TODO: Extract string to string file
                     onSearch={handleSearch}
                     enterButton
                 />

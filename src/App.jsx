@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout } from "antd";
-import { HashRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import NavBar from "./components/CommonComponents/NavBar";
 import MainView from "./components/View/MainView/MainView";
 import DesignerListView from "./components/View/DesignerListView/DesignerListView";

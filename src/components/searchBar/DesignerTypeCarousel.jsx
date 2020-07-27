@@ -1,16 +1,15 @@
 import React, { useState, useEffect} from "react";
 import Slider from "react-slick";
+import { designerType } from "../constants/designerType";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../assets/scss/searchBar/DesignerTypeCarousel.scss";
-
-const designerType = ["HAIR", "NAIL", "LASH"];
 
 export default function DesignerTypeCarousel(props) {
     const { setDesignerType } = props;
 
     useEffect(() => {
-        setDesignerType(designerType[0]);
+        setDesignerType(designerType[0]); // Set default designer type as hair designer
     });
 
     const settings = {
@@ -29,7 +28,7 @@ export default function DesignerTypeCarousel(props) {
         vertical: true,
         speed: 500,
         slidesToShow: 3,
-        slidesToScroll: 3,
+        slidesToScroll: 1,
         afterChange: (index) => {
             const selectedDesignerType = designerType[index%designerType.length];
             console.log(

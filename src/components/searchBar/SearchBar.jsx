@@ -13,7 +13,7 @@ export default function SearchBar() {
 
     const history = useHistory();
     const handleSearch = location => {
-        const route = `/testView?type=${designerType}${location?`&location=${location}`:""}`;
+        const route = `/designer_list?type=${designerType}${location?`&location=${location}`:""}`;
         history.push(route);
     };
 
