@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar"
 import Home from "./components/Home"
 import Appointments from "./components/Appointments"
 import Account from "./components/Account"
+import TestView from "./components/searchBar/TestView"
 import "antd/dist/antd.css";
 import "./assets/css/App.css";
 
@@ -22,6 +23,7 @@ export default function App() {
                         <Route exact path="/" component={Home} />
                         <Route path="/appointments" component={Appointments} />
                         <Route path="/account" component={Account} />
+                        <Route path="/testView" component={TestView} />
                     </div>
                 </Content>
                 <Footer className="footer">LookUp WIP July 2020</Footer>

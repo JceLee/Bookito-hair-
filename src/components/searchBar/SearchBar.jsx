@@ -1,18 +1,26 @@
-import React from "react";
-import { Input, AutoComplete } from "antd";
-import { Route } from "react-router-dom"
-import DesignerTypeCarousel from "./DesignerTypeCarousel"
-import LocationInput from "./LocationInput"
-import TestView from "./TestView"
-import "../../assets/css/SearchBar.css";
-
-// import "../assets/css/NavBar.css";
+import React, { useState, useEffect} from "react";
+import { useHistory } from "react-router-dom";
+import DesignerTypeCarousel from "./DesignerTypeCarousel";
+import LocationInput from "./LocationInput";
+import "../../assets/css/searchBar/SearchBar.css";
 
 export default function SearchBar() {
+    const [designerType, setDesignerType] = useState();
+
+    useEffect(() => {
+
+    });
+
+    const history = useHistory();
+    const handleSearch = location => {
+        const route = `/testView?type=${designerType}${location?`location=${location}`:""}`;
+        history.push(route);
+    };
+
     return (
         <div className="searchBar">
-            <DesignerTypeCarousel />
-            <LocationInput />
+            <DesignerTypeCarousel setDesignerType={setDesignerType} />
+            <LocationInput handleSearch={handleSearch} />
         </div>
     );
 }
