@@ -1,5 +1,5 @@
 import React from 'react';
-import '../assets/css/Appointment.css';
+import '../assets/css/Appointment.scss';
 import SliderView from './SliderView';
 
 export default function Appointments() {
