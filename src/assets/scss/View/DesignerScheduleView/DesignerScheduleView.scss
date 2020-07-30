@@ -1,9 +1,14 @@
 .editDesignerCalendar {
-  width: 60%;
+  width: 45%;
   border: 1px solid #f0f0f0;
   border-radius: 2px;
 }
 
-p {
+#designerName {
   text-align: center;
+}
+
+.serviceOptions {
+  width: 50%;
+  margin-left: 500px;
 }

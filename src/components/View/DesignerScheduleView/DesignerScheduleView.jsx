@@ -27,6 +27,7 @@ export default function DesignerSchedule() {
       </Button>
       <Modal
         title='Edit Schedule'
+        width={820}
         visible={visible}
         onOk={handleOk}
         okText='Save Schedule'
@@ -34,8 +35,11 @@ export default function DesignerSchedule() {
         // okButtonProps={{ disabled: true }}
         cancelButtonProps={{ style: { display: 'none' } }}
       >
-        <p>Designer: Jane Smith</p>
+        <p id='designerName'>Designer: Jane Smith</p>
         <EditCalendar />
+        <div className='serviceOptions'>
+          <p>Choose Service</p>
+        </div>
       </Modal>
     </div>
   );
