@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Home from './Home.jsx';
 import Works from './Works.jsx';
 import ServiceNPrice from './ServiceNPrice.jsx';
 import Hours from './Hours.jsx';
@@ -10,7 +9,6 @@ import { Divider } from 'antd';
 
 const DesignerBottom = (props) => (
   <div className='designerBottom'>
-    {/* <Home id='Home' /> */}
     <Works id='Works' />
     <Divider />
     <div className='serviceNPriceHoursGrid'>
@@ -26,6 +24,11 @@ const DesignerBottom = (props) => (
     <Reviews id='Reviews' />
     <Divider />
     <Location id='Location' location={props.location} />
+    <Divider />
+    <Divider />
+    <Divider />
+    <Divider />
+    <Divider />
   </div>
 );
 
