@@ -1,3 +1,9 @@
 @import "./View/MainView/MainView.scss";
 @import "./CommonComponents/NavBar.scss";
 @import "./View/DesignerListView/DesignerListView.scss";
+@import "./CommonComponents/searchBar/SearchBar.scss";
+@import "./CommonComponents/searchBar/DesignerTypeCarousel.scss";
+
+.header{
+    z-index: 1;
+}
