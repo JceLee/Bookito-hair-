@@ -1,5 +1,7 @@
 @import './View/MainView/MainView.scss';
 @import './CommonComponents/NavBar.scss';
+@import "./CommonComponents/searchBar/SearchBar.scss";
+@import "./CommonComponents/searchBar/DesignerTypeCarousel.scss";
 @import './View/DesignerProfileView/DesignerProfileView.scss';
 @import './View/DesignerProfileView/DesignerTop/DesignerTop.scss';
 @import './View/DesignerProfileView/DesignerTop/DesignerNav/DesignerNav.scss';
@@ -11,4 +13,9 @@
 @import './View/DesignerProfileView/DesignerBottom/Reviews.scss';
 @import './View/DesignerProfileView/DesignerBottom/ServiceNPrice.scss';
 @import './View/DesignerProfileView/DesignerBottom/Works.scss';
-@import './View/DesignerListView/DesignerListView.scss';
+@import "./View/DesignerListView/DesignerListView.scss";
+
+
+.header{
+    z-index: 1;
+}
