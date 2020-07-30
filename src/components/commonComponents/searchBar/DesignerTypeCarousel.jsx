@@ -1,9 +1,9 @@
 import React, { useState, useEffect} from "react";
 import Slider from "react-slick";
-import { designerType } from "../constants/designerType";
+import { designerType } from "../../constants/designerType";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "../../assets/scss/searchBar/DesignerTypeCarousel.scss";
+import "../../../assets/scss/commonComponents/searchBar/DesignerTypeCarousel.scss";
 
 export default function DesignerTypeCarousel(props) {
     const { setDesignerType } = props;

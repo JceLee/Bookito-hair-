@@ -2,7 +2,7 @@ import React, { useState, useEffect} from "react";
 import { useHistory } from "react-router-dom";
 import DesignerTypeCarousel from "./DesignerTypeCarousel";
 import LocationInput from "./LocationInput";
-import "../../assets/scss/searchBar/SearchBar.scss";
+import "../../../assets/scss/commonComponents/searchBar/SearchBar.scss";
 
 export default function SearchBar() {
     const [designerType, setDesignerType] = useState();

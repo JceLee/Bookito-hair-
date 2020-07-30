@@ -1,7 +1,7 @@
 import React from "react";
 import { Input, AutoComplete } from "antd";
 import { AimOutlined } from '@ant-design/icons';
-import "../../assets/scss/searchBar/LocationInput.scss";
+import "../../../assets/scss/commonComponents/searchBar/LocationInput.scss";
 
 export default function LocationSearch(props) {
     const { handleSearch } = props;

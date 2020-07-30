@@ -1,6 +1,6 @@
 import React from "react";
-import SearchBar from "../../searchBar/SearchBar";
-import "../../../assets/scss/View/MainView/MainView.scss";
+import SearchBar from "../../commonComponents/searchBar/SearchBar";
+import "../../../assets/scss/view/mainView/MainView.scss";
 
 export default function MainView() {
     return (
