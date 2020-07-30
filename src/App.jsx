@@ -1,13 +1,13 @@
 import React from "react";
 import { Layout } from "antd";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import NavBar from "./components/CommonComponents/NavBar";
-import MainView from "./components/View/MainView/MainView";
-import DesignerListView from "./components/View/DesignerListView/DesignerListView";
-import DesignerScheduleView from "./components/View/DesignerScheduleView/DesignerScheduleView";
-import DesignerProfileView from "./components/View/DesignerProfileView/DesignerProfileView";
-import ClientScheduleView from "./components/View/ClientScheduleView/ClientScheduleView";
-import ClientProfileView from "./components/View/ClientProfileView/ClientProfileView";
+import { HashRouter as Router, Route } from "react-router-dom";
+import NavBar from "./components/commonComponents/NavBar";
+import MainView from "./components/view/mainView/MainView";
+import DesignerListView from "./components/view/designerListView/DesignerListView";
+import DesignerScheduleView from "./components/view/designerScheduleView/DesignerScheduleView";
+import DesignerProfileView from "./components/view/designerProfileView/DesignerProfileView";
+import ClientScheduleView from "./components/view/clientScheduleView/ClientScheduleView";
+import ClientProfileView from "./components/view/clientProfileView/ClientProfileView";
 import "antd/dist/antd.css";
 import "./assets/scss/App.scss";
 
