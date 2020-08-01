@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Modal, Button } from 'antd';
+import { Row, Col, Modal, Button } from 'antd';
 import EditCalendar from './EditCalendar';
+import Services from './Services';
 // import '../../../assets/scss/View/DesignerScheduleView/DesignerScheduleView.scss';
 
 export default function DesignerSchedule() {
@@ -36,10 +37,17 @@ export default function DesignerSchedule() {
         cancelButtonProps={{ style: { display: 'none' } }}
       >
         <p id='designerName'>Designer: Jane Smith</p>
-        <EditCalendar />
-        <div className='serviceOptions'>
-          <p>Choose Service</p>
-        </div>
+        <Row>
+          <Col span={13}>
+            <EditCalendar />
+          </Col>
+          <Col span={11}>
+            <p>Choose Service</p>
+            <div className='ChooseServices'>
+              <Services />
+            </div>
+          </Col>
+        </Row>
       </Modal>
     </div>
   );
