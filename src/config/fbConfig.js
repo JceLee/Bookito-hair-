@@ -3,7 +3,7 @@ import 'firebase/firestore'
 import 'firebase/auth'
 
 
-var firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyB12lo5h6HnQVSeRqpUdsQDVIjrk7XblFM",
     authDomain: "lookup-91667.firebaseapp.com",
     databaseURL: "https://lookup-91667.firebaseio.com",
@@ -15,6 +15,5 @@ var firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-firebase.firestore().settings({timestampsInSnapshots: true});
 
-export default firebase;
+export const firebaseDB = firebase.firestore();

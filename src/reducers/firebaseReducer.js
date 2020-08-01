@@ -1,15 +1,23 @@
 const initialState = {
-    database: [
-        {id: "1", name: "kangmin"},
-        {id: "2", name: "kangmin"},
-        {id: "3", name: "kangmin"},
-    ],
-    clients: [],
-    designers: [],
+    users: [],
+    designers: ["Babo"],
     appointments: [],
     reviews: []
 };
 
 export default function firebaseReducer(state = initialState, action) {
-    return state
+        switch(action.type) {
+            case "ADD_DESIGNERS": {
+                return state
+                ;
+            }
+            case "LOAD_DESIGNERS": {
+                return {
+                    designers: action.db,
+                };
+            }
+            default: {
+                return state;
+            }
+        }
 }
