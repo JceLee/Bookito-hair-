@@ -5,7 +5,10 @@ const initialState = {
     reviews: []
 };
 
-export default function firebaseReducer(state = initialState, action) {
+export default function firestore(state = initialState, action) {
+    console.log("babo1");
+    console.log(action.database);
+    console.log("babo2");
         switch(action.type) {
             case "ADD_DESIGNERS": {
                 return state
@@ -13,7 +16,7 @@ export default function firebaseReducer(state = initialState, action) {
             }
             case "LOAD_DESIGNERS": {
                 return {
-                    designers: action.db,
+                    designers: action.database,
                 };
             }
             default: {
