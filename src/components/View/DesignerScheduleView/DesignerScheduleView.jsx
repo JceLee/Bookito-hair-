@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Row, Col, Modal, Button } from 'antd';
 import EditCalendar from './EditCalendar';
 import Services from './Services';
+import Times from './Times';
 // import '../../../assets/scss/View/DesignerScheduleView/DesignerScheduleView.scss';
 
 export default function DesignerSchedule() {
@@ -45,6 +46,7 @@ export default function DesignerSchedule() {
             <p>Choose Service</p>
             <div className='ChooseServices'>
               <Services />
+              <Times />
             </div>
           </Col>
         </Row>
