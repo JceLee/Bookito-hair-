@@ -1,27 +1,42 @@
+@import "../../Mixin.scss";
+
 .header {
-  background: #fff;
   position: sticky;
   top: 0;
+  z-index: 1;
+  display: flex;
+  padding: 0;
+  align-items: center;
 }
-.outerContent {
-  padding: 0 50px;
-  position: relative;
+
+.ant-layout-header {
+  background-color: white;
+  border: 3px solid $orange;
+  padding: 0 10px;
 }
-.innerContent {
-  /* background: #fff; */
-  padding: 24px 0;
-  min-height: 1000px;
+
+.searchBarSection {
+  min-height: 80vh; /* 80% screen height */
+  display: flex;
+  border: 3px solid $red;
 }
+.annoucementSection {
+  background: lightgray;
+  min-height: 80vh; /* 80% screen height */
+  border: 3px solid $yellow;
+}
+
+.enjoyWithSection {
+  min-height: 80vh; /* 80% screen height */
+  border: 3px solid $blue;
+}
+
+.newDesignersSection {
+  min-height: 80vh; /* 80% screen height */
+  border: 3px solid $green;
+}
+
 .footer {
   background: #fff;
   text-align: center;
-}
-
-.searchBarSpace {
-  min-height: 80vh; /* 80% screen height */
-  display: flex;
-}
-.annoucementSpace {
-  background: lightgray;
-  min-height: 80vh; /* 80% screen height */
 }

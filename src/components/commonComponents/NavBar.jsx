@@ -1,45 +1,60 @@
-import React from "react";
-import { Menu, Dropdown, Button, Typography } from "antd";
+import React, { useState } from "react";
+import { Menu, Dropdown, Button, Typography, Drawer } from "antd";
 import { Link } from "react-router-dom";
+import { MenuOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 
 export default function Navbar() {
-  const menu = (
-    <Menu>
-      <Menu.Item>
-        <Link to="/designer_schedule">Schedule (Designer)</Link>
-      </Menu.Item>
-      <Menu.Divider />
-      <Menu.Item>
-        <Link to="/client_schedule">Schedule (Client)</Link>
-      </Menu.Item>
-      <Menu.Divider />
-      <Menu.Item>
-        <Link to="/designer_profile">Profile (Designer)</Link>
-      </Menu.Item>
-      <Menu.Divider />
-      <Menu.Item>
-        <Link to="/client_profile">Profile (Client)</Link>
-      </Menu.Item>
-    </Menu>
-  );
+  const [visible, setVisible] = useState(false);
+
+  const showDrawer = () => {
+    setVisible(true);
+  };
+
+  const onClose = () => {
+    setVisible(false);
+  };
+
+  const menuItems = [
+    { name: "Listing page", link: "/designer_list" },
+    { name: "Schedule (Designer)", link: "/designer_schedule" },
+    { name: "Schedule (Client)", link: "/client_schedule" },
+    { name: "Profile (Designer)", link: "/designer_profile" },
+    { name: "Profile (Client)", link: "/client_profile" },
+  ];
 
   return (
     <>
       <div className="logo">
-        <Link to="/">
-          <Title level={4}>LookUp</Title>
-        </Link>
+        <Link to="/">LookUp</Link>
       </div>
-      <div className="listing">
-        <Link to="/designer_list">
-          <Title level={4}>Listing</Title>
-        </Link>
-      </div>
-      <Dropdown className="profile" overlay={menu} placement="bottomRight">
-        <Button shape="round">Profile</Button>
-      </Dropdown>
+      {/* < tablet */}
+      {/* <Dropdown className="menu" overlay={menu} placement="bottomRight"> */}
+      {/* <Button shape="round">Profile</Button> */}
+      {/* </Dropdown> */}
+      <Button className="menu" onClick={showDrawer}>
+        <MenuOutlined />
+      </Button>
+      <Drawer
+        title="Menu"
+        placement="right"
+        closable={false}
+        onClose={onClose}
+        visible={visible}
+        getContainer={false}
+        width="60%"
+      >
+        <Menu>
+          {menuItems.map((item, inx) => {
+            return (
+              <Menu.Item key={inx} onClick={onClose}>
+                <Link to={item.link}>{item.name}</Link>
+              </Menu.Item>
+            );
+          })}
+        </Menu>
+      </Drawer>
     </>
   );
 }

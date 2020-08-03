@@ -1,12 +1,22 @@
-.logo {
-    margin: 16px 24px 16px 0;
-    float: left;
-}
-.profile {
-    margin: -12px 0px 16px 0;
-    float: right;
+.logo a {
+  text-decoration: none;
+  color: black;
+  font-size: x-large;
+  font-weight: bold;
 }
 
-.listing {
-    margin: 16px 24px 16px 0;
+.logo {
+  flex-basis: 80%;
+}
+
+.menu {
+  flex-basis: 20%;
+}
+
+.ant-drawer-content-wrapper {
+  width: 60%;
+}
+
+.ant-drawer-body {
+  padding: 0;
 }

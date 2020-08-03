@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import queryString from "query-string"
+import queryString from "query-string";
 import { Row, Col } from "antd";
 import * as db from "../../../config/fbConfig";
 

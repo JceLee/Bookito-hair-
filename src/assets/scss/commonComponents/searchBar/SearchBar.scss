@@ -1,12 +1,7 @@
-.searchBar{
-    display: flex;
-    flex-direction: row;
-    // position: relative; 
-    // display: flex;
-    // justify-content: center;
-    align-items: center;
-    margin:auto;
-}
-.searchBarText{
-    margin-right: 20px;
+@import "../../Mixin.scss";
+
+.searchBar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
