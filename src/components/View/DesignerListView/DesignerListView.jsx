@@ -1,10 +1,11 @@
-import React, {useCallback} from "react";
+import React, {useCallback, useEffect} from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import {load_database} from "../../../actions/firebaseAction";
 import {firebaseDB} from "../../../config/fbConfig";
 
 
 export default function DesignerListView() {
+
     const designers = useSelector(state => state.firestore.designers);
     const dispatch = useDispatch();
     const newDesigners = [];
@@ -14,13 +15,15 @@ export default function DesignerListView() {
                 newDesigners.push(doc.data());
             });
         });
-    console.log(newDesigners);
+
+    useEffect(() => {
+        dispatch(load_database(newDesigners))
+    }, [dispatch]);
+    console.log(designers);
+
 
     const ClickEvent = () => {
-        dispatch(load_database(newDesigners));
-        // setTimeout(function(){ console.log(designers[0]); }, 5000);
-        // console.log(newDesigners[0]['works']);
-        document.getElementById("babo").src = newDesigners[0]['works'][3];
+        document.getElementById("babo").src = designers[0]['works'][3];
     };
 
     const storage = firebaseDB.storage().ref();
