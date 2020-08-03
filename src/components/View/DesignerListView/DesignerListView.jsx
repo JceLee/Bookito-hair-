@@ -7,6 +7,8 @@ import {useDispatch, useSelector} from "react-redux";
 
 export default function DesignerListView(props) {
 
+
+  // Load data from firebase
   const designers = useSelector(state => state.firestore.designers);
   const dispatch = useDispatch();
   const newDesigners = [];
@@ -17,6 +19,7 @@ export default function DesignerListView(props) {
         });
       });
 
+  // Line 24 is params from main page, Line 26, 27 are to dispatch action to reducer.
   useEffect(() => {
     const params = queryString.parse(props.location.search);
     console.log("params:", params);
