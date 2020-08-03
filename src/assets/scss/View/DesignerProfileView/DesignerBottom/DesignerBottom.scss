@@ -5,6 +5,20 @@
   margin: auto;
 }
 
+.activityNBioGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas: 'activity bio';
+}
+
+.activityGrid {
+  grid-area: activity;
+}
+
+.bioGrid {
+  grid-area: bio;
+}
+
 .serviceNPriceHoursGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -20,6 +34,10 @@
 }
 
 @media (max-width: 1025px) {
+  .activityNBioGrid {
+    display: block;
+  }
+
   .serviceNPriceHoursGrid {
     display: block;
   }

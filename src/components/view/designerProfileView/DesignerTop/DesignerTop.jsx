@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 
 import { Affix, Button } from 'antd';
 import DesignerNav from './DesignerNav/DesignerNav.jsx';
+import RatingSymbol from '../RatingSymbol.jsx';
 
 const DesignerTop = (props) => {
   const [top] = useState(64);
   const [height, setHeight] = useState(0);
-  const { fname, lname, img, rating, location } = props;
+  const { fname, lname, img, totalRate, location } = props;
 
   useEffect(() => {
     setHeight(document.getElementById('designerTop').clientHeight);
@@ -26,7 +27,7 @@ const DesignerTop = (props) => {
           <h2>
             {fname} {lname} (DIV'S HEIGHT: {height})
           </h2>
-          <img className='rating' src={rating} alt='rating' />
+          <RatingSymbol rate={totalRate} />
         </div>
         <div>{location}</div>
         <Button className='Button' type='primary'>

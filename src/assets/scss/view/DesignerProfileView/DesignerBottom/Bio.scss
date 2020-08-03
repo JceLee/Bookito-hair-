@@ -1,6 +1,5 @@
-.hours {
+.bio {
   width: 80%;
-  height: 100%;
   padding: 0.5rem;
   margin: 0.5rem;
   margin-left: auto;
@@ -11,7 +10,7 @@
   box-shadow: 10px 20px 20px #dce7fc, 1px 10px 10px #dae6ff;
 }
 
-.hours table,
+.bio table,
 th,
 td {
   padding: 1rem;
@@ -20,7 +19,7 @@ td {
 }
 
 @media (max-width: 1025px) {
-  .hours {
+  .bio {
     width: 90%;
   }
 }
