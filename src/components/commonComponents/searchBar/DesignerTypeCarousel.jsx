@@ -24,11 +24,12 @@ export default function DesignerTypeCarousel(props) {
     centerMode: true,
     centerPadding: 0,
     // Misc
-    infinite: true,
+    infinite: false,
     vertical: true,
+    verticalSwiping: true,
     speed: 500,
     slidesToShow: 3,
-    slidesToScroll: 1,
+    slidesToScroll: 3,
     afterChange: (index) => {
       const selectedDesignerType = designerType[index % designerType.length];
       console.log(`Slider Changed to: ${selectedDesignerType}`);

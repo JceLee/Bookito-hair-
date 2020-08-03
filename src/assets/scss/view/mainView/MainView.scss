@@ -13,6 +13,15 @@
   background-color: white;
   border: 3px solid $orange;
   padding: 0 10px;
+  @include tabletP {
+    border: 3px solid $yellow;
+  }
+  @include tabletL {
+    border: 3px solid $red;
+  }
+  @include desktop {
+    border: 3px solid $green;
+  }
 }
 
 .searchBarSection {
@@ -32,7 +41,7 @@
 }
 
 .newDesignersSection {
-  min-height: 80vh; /* 80% screen height */
+  max-height: 65vh; /* 80% screen height */
   border: 3px solid $green;
 }
 

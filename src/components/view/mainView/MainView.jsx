@@ -1,5 +1,7 @@
 import React from "react";
 import SearchBar from "../../commonComponents/searchBar/SearchBar";
+import NewDesignerCarousel from "./NewDesignerCarousel";
+import InfoCard from "./InfoCard";
 
 export default function MainView() {
   return (
@@ -8,8 +10,11 @@ export default function MainView() {
         <SearchBar />
       </div>
       <div className="annoucementSection">annoucement space here</div>
-      <div className="enjoyWithSection">enjoy with</div>
-      <div className="newDesignersSection">new designers</div>
+      <div className="enjoyWithSection">
+        <InfoCard />
+        <InfoCard />
+      </div>
+      <NewDesignerCarousel />
     </>
   );
 }
