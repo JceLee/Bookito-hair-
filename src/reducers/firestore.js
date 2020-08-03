@@ -1,14 +1,11 @@
 const initialState = {
     users: [],
-    designers: ["Babo"],
+    designers: [],
     appointments: [],
     reviews: []
 };
 
 export default function firestore(state = initialState, action) {
-    console.log("babo1");
-    console.log(action.database);
-    console.log("babo2");
         switch(action.type) {
             case "ADD_DESIGNERS": {
                 return state
