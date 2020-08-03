@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import queryString from "query-string"
 import { Row, Col } from "antd";
 import * as db from "../../../config/fbConfig";
+import DesignerCardComponent from "./designerCardComponent/DesignerCardComponent";
 
 export default function DesignerListView(props) {
   db.getDesignerList();
@@ -19,7 +20,10 @@ export default function DesignerListView(props) {
             listNavBar
             <div className="filter">filter</div>
           </div>
-          <div className="designerList">designerList</div>
+          <div className="designerList">
+            designerList
+          <div><DesignerCardComponent/></div>
+          </div>
         </Col>
         <Col className="mapContainer" span={12}>
           Map container
