@@ -5,7 +5,7 @@ import {firebaseDB} from "../../../config/fbConfig";
 
 
 export default function DesignerListView() {
-
+    
     const designers = useSelector(state => state.firestore.designers);
     const dispatch = useDispatch();
     const newDesigners = [];
@@ -22,10 +22,12 @@ export default function DesignerListView() {
     console.log(designers);
 
 
+    // test button
     const ClickEvent = () => {
         document.getElementById("babo").src = designers[0]['works'][3];
     };
 
+    // test codes for storage of image files
     const storage = firebaseDB.storage().ref();
     const storageRef  = firebaseDB.storage().ref('0002.jpg');
     let imgRef = storage.child('0002.jpg').getDownloadURL();
