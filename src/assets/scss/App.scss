@@ -1,9 +1,13 @@
-@import "./View/MainView/MainView.scss";
-@import "./CommonComponents/NavBar.scss";
-@import "./View/DesignerListView/DesignerListView.scss";
-@import "./CommonComponents/searchBar/SearchBar.scss";
-@import "./CommonComponents/searchBar/DesignerTypeCarousel.scss";
+@import './View/MainView/MainView.scss';
+@import './CommonComponents/NavBar.scss';
+@import './View/DesignerListView/DesignerListView.scss';
+@import './CommonComponents/searchBar/SearchBar.scss';
+@import './CommonComponents/searchBar/DesignerTypeCarousel.scss';
 
-.header{
-    z-index: 1;
+.header {
+  z-index: 1;
 }
+
+//Client Schedule View
+@import './view/clientScheduleView/ClientScheduleView.scss';
+@import './view/clientScheduleView/Slider.scss';

@@ -1,0 +1,23 @@
+.flex-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.items {
+  border: 0.01em solid teal;
+  margin-bottom: 0.5%;
+  text-align: center;
+  height: 50vh;
+}
+
+.upcomingAppointment {
+  grid-column: 1 / span 2;
+}
+
+.waitingList {
+  grid-column: 1 / span 2;
+}
+
+.Designers {
+  grid-column: 1 / span 2;
+}
