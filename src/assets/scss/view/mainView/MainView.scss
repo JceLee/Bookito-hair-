@@ -1,0 +1,27 @@
+.header {
+  background: #fff;
+  position: sticky;
+  top: 0;
+}
+.outerContent {
+  padding: 0 50px;
+  position: relative;
+}
+.innerContent {
+  /* background: #fff; */
+  padding: 24px 0;
+  min-height: 1000px;
+}
+.footer {
+  background: #fff;
+  text-align: center;
+}
+
+.searchBarSpace {
+  min-height: 80vh; /* 80% screen height */
+  display: flex;
+}
+.annoucementSpace {
+  background: lightgray;
+  min-height: 80vh; /* 80% screen height */
+}
