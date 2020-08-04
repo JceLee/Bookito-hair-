@@ -1,14 +1,13 @@
 import React from "react";
-import { Col } from "antd";
 import "../../../../../assets/scss/view/designerListView/DesignerCardComponent/DesignerCardComponent.scss";
 
 export default function DesignerCardTopRight(props) {
     const { types, walk, drive } = props;
     return (
-        <div>
+        <div className="designerCardTopRight">
             <div className="designerCardTopRightTypes">
-                {types.map((type) => (
-                        <span className="designerCardTopRightType">{type}</span>
+                {types.map((type, index) => (
+                        <span key={index} className="designerCardTopRightType">{type}</span>
                     ))}
             </div>
             <div className="designerCardTopRightMinutes">

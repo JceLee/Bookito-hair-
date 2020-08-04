@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Avatar } from "antd";
+import { Col, Avatar } from "antd";
 import ReadOnlyStar from "../../../../commonComponents/ReadOnlyStar";
 import { UserOutlined } from '@ant-design/icons';
 
