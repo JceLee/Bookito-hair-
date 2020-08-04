@@ -13,6 +13,8 @@ export default function DesignerCardTopRight(props) {
             <div className="designerCardTopRightMinutes">
                 {walk} minute walk, {drive} minute drive from your location.
             </div>
+            
+            
         </div>
     );
 }

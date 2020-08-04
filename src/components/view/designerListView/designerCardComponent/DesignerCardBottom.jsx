@@ -10,10 +10,10 @@ export default function DesignerCardBottom(props) {
     }
 
     return (
-        <div className="newDesignersSection">
+        <div className="designerCardBottom">
             <Slider {...settings}>
             {workImgs.map((img, index) => (
-                <div key={index} className="workImageDiv" style={{ width: 300 }}>
+                <div key={index} className="workImageDiv">
                     {img}
                 </div>
             ))}

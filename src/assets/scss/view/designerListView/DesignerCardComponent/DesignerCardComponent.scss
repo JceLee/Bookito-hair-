@@ -1,19 +1,51 @@
-// DesignerCardTopRight.jsx
+// DesignerCardComponent.jsx
+.designerCardComponent {
+    margin: 15px;
+}
 
-.designerCardTopRightTypes {
-    margin: 10px 0px;
+// DesignerCardTop.jsx
+.designerCardTop {
+    margin: 10px 0;
+}
 
-    .designerCardTopRightType {
-        border: 1px solid gray;
-        border-radius: 20px;
-        padding: 5px;
-        margin: 5px;
+// DesignerCardTopLeft.jsx
+.topLeftSecondCol {
+    margin-left: 5px;
+
+    .topLeftSecondColRating {
+        margin-top: 10px;
+        
     }
 }
+
+// DesignerCardTopRight.jsx
+.designerCardTopRight {
+    margin-left: auto;
+    margin-right: 0;
+
+    .designerCardTopRightTypes {
+        margin-top: 10px;
+    
+        .designerCardTopRightType {
+            border: 1px solid gray;
+            border-radius: 20px;
+            padding: 5px;
+            margin: 5px;
+        }
+    }
+}
+
 
 .designerCardTopRightMinutes {
     padding: 5px;
 }
 
+// DesignerCardBottom.jsx
+.designerCardBottom {
 
+    .workImageDiv {
+        border: 1px solid gray;
+        padding-top: 100%; // 1:1 aspect ratio
+    }
+}
 

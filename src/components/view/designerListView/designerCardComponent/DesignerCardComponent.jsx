@@ -1,8 +1,6 @@
 import React from "react";
-import { Row } from "antd";
-import DesignerCardTopLeft from "./DesignerCardTop/DesignerCardTopLeft";
-import DesignerCardTopRight from "./DesignerCardTop/DesignerCardTopRight";
 import DesignerCardBottom from "./DesignerCardBottom";
+import DesignerCardTop from "./designerCardTop/DesignerCardTop";
 
 const designer = {
   fname: 'John',
@@ -19,12 +17,9 @@ const designer = {
 
 export default function DesignerCardComponent(props) {
   return (
-    <>
-    <Row>
-        <DesignerCardTopLeft rating={designer.rating} fname={designer.fname}/>
-        <DesignerCardTopRight types={designer.types} walk={designer.walk} drive={designer.drive}/>
-    </Row>
-    <DesignerCardBottom workImgs={designer.workImgs}/>
-    </>
+    <div className="designerCardComponent">
+      <DesignerCardTop fname={designer.fname} rating={designer.rating} types={designer.types} walk={designer.walk} drive={designer.drive}/>
+      <DesignerCardBottom workImgs={designer.workImgs}/>
+    </div>
   );
 }
