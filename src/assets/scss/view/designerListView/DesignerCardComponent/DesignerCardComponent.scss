@@ -9,12 +9,13 @@
 }
 
 // DesignerCardTopLeft.jsx
-.topLeftSecondCol {
-    margin-left: 5px;
-
-    .topLeftSecondColRating {
-        margin-top: 10px;
-        
+.designerCardTopLeft {
+    .topLeftSecondCol {
+        margin-left: 5px;
+    
+        .topLeftSecondColRating {
+            margin-top: 10px;
+        }
     }
 }
 
@@ -33,11 +34,9 @@
             margin: 5px;
         }
     }
-}
-
-
-.designerCardTopRightMinutes {
-    padding: 5px;
+    .designerCardTopRightMinutes {
+        padding: 5px;
+    }
 }
 
 // DesignerCardBottom.jsx
