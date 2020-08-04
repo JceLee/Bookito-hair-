@@ -12,6 +12,20 @@ export default function DesignerListView(props) {
     console.log("params:", params);
   });
 
+  // for testing
+  const designer = {
+    fname: 'John',
+    lname: 'Doe',
+    location: '111 W Georgia St, Vancouver',
+    rating: 3.7,
+    img:
+      'https://images.vexels.com/media/users/3/145908/preview2/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg',
+    types: [ "Men's Hair", "Women's Hair", "Colour", "Perm"],
+    walk: "10",
+    drive: "5",
+    workImgs: ["1", "2", "3", "4", "5", "6", "7", "8"]
+  };
+
   return (
     <>
       <Row className="listingContainer">
@@ -22,7 +36,9 @@ export default function DesignerListView(props) {
           </div>
           <div className="designerList">
             designerList
-          <div><DesignerCardComponent/></div>
+          <div>
+            <DesignerCardComponent designer={designer}/>
+          </div>
           </div>
         </Col>
         <Col className="mapContainer" span={12}>
