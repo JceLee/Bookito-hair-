@@ -1,7 +1,7 @@
 import React from "../../../../../../node_modules/react";
-import { Row, Col, Avatar } from "../../../../../../node_modules/antd";
+import { Row, Col, Avatar } from "../../../../../../node_modules/antd/lib";
 import ReadOnlyStar from "../../../../commonComponents/ReadOnlyStar";
-import { UserOutlined} from '../../../../../../node_modules/@ant-design/icons';
+import { UserOutlined} from '../../../../../../node_modules/@ant-design/icons/lib';
 
 export default function DesignerCardTopLeft(props) {
   return (

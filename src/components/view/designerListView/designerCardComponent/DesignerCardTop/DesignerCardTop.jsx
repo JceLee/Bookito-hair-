@@ -1,4 +1,4 @@
-import React from "../../../../../../node_modules/react";
+import React from "react";
 import { Row } from "antd";
 import DesignerCardTopRight from "./DesignerCardTopRight";
 import DesignerCardTopLeft from "./DesignerCardTopLeft";

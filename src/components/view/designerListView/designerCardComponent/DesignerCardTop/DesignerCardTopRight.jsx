@@ -1,5 +1,4 @@
-import React from "react";
-import "../../../../../assets/scss/view/designerListView/DesignerCardComponent/DesignerCardComponent.scss";
+import React from "react"
 
 export default function DesignerCardTopRight(props) {
     const { types, walk, drive } = props;
