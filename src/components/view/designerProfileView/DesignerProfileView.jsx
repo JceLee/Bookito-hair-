@@ -38,7 +38,7 @@ const designer = {
   works: [
     {
       src: '/images/designers/designer_works_01.png',
-      // sizes: ['(min-width: 480px) 50vw,(min-width: 1024px) 33.3vw,100vw'],
+      sizes: ['(min-width: 480px) 50vw,(min-width: 1024px) 33.3vw,100vw'],
       width: 1,
       height: 1,
     },
@@ -84,12 +84,6 @@ const designer = {
       width: 1,
       height: 1,
     },
-    // {
-    //   src: '/images/designers/designer_works_09.png',
-    //   sizes: ['(min-width: 480px) 50vw,(min-width: 1024px) 33.3vw,100vw'],
-    //   width: 1,
-    //   height: 1,
-    // },
   ],
   serviceNPrices: [
     { service: 'Male Hair cut', price: '$30' },
@@ -112,11 +106,7 @@ const designer = {
   reviews: [
     {
       customerName: 'customer A',
-      photos: [
-        '/images/designers/reviews/reviews1.png',
-        '/images/designers/reviews/reviews2.png',
-        '/images/designers/reviews/reviews3.png',
-      ],
+      photos: [],
       rate: '4.5',
       review:
         'Nunc a nibh bibendum, mollis elit vitae, interdum ligula. Mauris dictum rhoncus augue et mollis. Nunc facilisis elit eget massa auctor, sed ultrices quam lacinia. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis fermentum turpis tellus, et maximus erat maximus at. Maecenas venenatis lacinia libero, et dapibus nisl vulputate at. Cras sodales, velit et rhoncus posuere, lorem urna fringilla est, pellentesque accumsan lectus tortor a tellus. Fusce facilisis mollis arcu, eget molestie lorem cursus ut. Donec semper velit vel dui rhoncus congue feugiat quis nisi. Fusce sit amet quam vel risus gravida pretium.!',
@@ -125,9 +115,12 @@ const designer = {
     {
       customerName: 'customer B',
       photos: [
-        '/images/designers/reviews/reviews2.png',
-        '/images/designers/reviews/reviews3.png',
-        '/images/designers/reviews/reviews4.png',
+        {
+          src: '/images/designers/designer_works_01.png',
+          sizes: ['(min-width: 480px) 50vw,(min-width: 1024px) 33.3vw,100vw'],
+          width: 1,
+          height: 1,
+        },
       ],
       rate: '3.5',
       review:
@@ -137,9 +130,18 @@ const designer = {
     {
       customerName: 'customer C',
       photos: [
-        '/images/designers/reviews/reviews3.png',
-        '/images/designers/reviews/reviews2.png',
-        '/images/designers/reviews/reviews1.png',
+        {
+          src: '/images/designers/designer_works_01.png',
+          sizes: ['(min-width: 480px) 50vw,(min-width: 1024px) 33.3vw,100vw'],
+          width: 1,
+          height: 1,
+        },
+        {
+          src: '/images/designers/designer_works_02.png',
+          sizes: ['(min-width: 480px) 50vw,(min-width: 1024px) 33.3vw,100vw'],
+          width: 1,
+          height: 1,
+        },
       ],
       rate: '5.0',
       review:
@@ -149,9 +151,24 @@ const designer = {
     {
       customerName: 'customer D',
       photos: [
-        '/images/designers/reviews/reviews4.png',
-        '/images/designers/reviews/reviews3.png',
-        '/images/designers/reviews/reviews2.png',
+        {
+          src: '/images/designers/designer_works_01.png',
+          sizes: ['(min-width: 480px) 50vw,(min-width: 1024px) 33.3vw,100vw'],
+          width: 1,
+          height: 1,
+        },
+        {
+          src: '/images/designers/designer_works_02.png',
+          sizes: ['(min-width: 480px) 50vw,(min-width: 1024px) 33.3vw,100vw'],
+          width: 1,
+          height: 1,
+        },
+        {
+          src: '/images/designers/designer_works_03.png',
+          sizes: ['(min-width: 480px) 50vw,(min-width: 1024px) 33.3vw,100vw'],
+          width: 1,
+          height: 1,
+        },
       ],
       rate: '4.5',
       review:
@@ -161,9 +178,30 @@ const designer = {
     {
       customerName: 'customer E',
       photos: [
-        '/images/designers/reviews/reviews5.png',
-        '/images/designers/reviews/reviews4.png',
-        '/images/designers/reviews/reviews3.png',
+        {
+          src: '/images/designers/designer_works_01.png',
+          sizes: ['(min-width: 480px) 50vw,(min-width: 1024px) 33.3vw,100vw'],
+          width: 1,
+          height: 1,
+        },
+        {
+          src: '/images/designers/designer_works_02.png',
+          sizes: ['(min-width: 480px) 50vw,(min-width: 1024px) 33.3vw,100vw'],
+          width: 1,
+          height: 1,
+        },
+        {
+          src: '/images/designers/designer_works_03.png',
+          sizes: ['(min-width: 480px) 50vw,(min-width: 1024px) 33.3vw,100vw'],
+          width: 1,
+          height: 1,
+        },
+        {
+          src: '/images/designers/designer_works_04.png',
+          sizes: ['(min-width: 480px) 50vw,(min-width: 1024px) 33.3vw,100vw'],
+          width: 1,
+          height: 1,
+        },
       ],
       rate: '5.0',
       review:

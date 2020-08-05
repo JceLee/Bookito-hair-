@@ -25,7 +25,7 @@ const DesignerTop = (props) => {
         />
         <div className='info'>
           <h2>
-            {fname} {lname} (DIV'S HEIGHT: {height})
+            {fname} {lname}
           </h2>
           <RatingSymbol rate={totalRate} />
         </div>
