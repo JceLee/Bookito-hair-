@@ -20,15 +20,13 @@ export default function App() {
         <Header className="header">
           <NavBar />
         </Header>
-        <Content className="outerContent">
-          <div className="innerContent">
-            <Route exact path="/" component={MainView} />
-            <Route path="/designer_list" component={DesignerListView} />
-            <Route path="/designer_schedule" component={DesignerScheduleView} />
-            <Route path="/designer_profile" component={DesignerProfileView} />
-            <Route path="/client_schedule" component={ClientScheduleView} />
-            <Route path="/client_profile" component={ClientProfileView} />
-          </div>
+        <Content className="content">
+          <Route exact path="/" component={MainView} />
+          <Route path="/designer_list" component={DesignerListView} />
+          <Route path="/designer_schedule" component={DesignerScheduleView} />
+          <Route path="/designer_profile" component={DesignerProfileView} />
+          <Route path="/client_schedule" component={ClientScheduleView} />
+          <Route path="/client_profile" component={ClientProfileView} />
         </Content>
         <Footer className="footer">LookUp WIP July 2020</Footer>
       </Layout>

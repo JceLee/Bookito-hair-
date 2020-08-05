@@ -24,39 +24,43 @@ export default function DesignerTypeCarousel(props) {
     centerMode: true,
     centerPadding: 0,
     // Misc
-    infinite: false,
+    infinite: true,
     vertical: true,
     verticalSwiping: true,
     speed: 500,
     slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToScroll: 1,
+
     afterChange: (index) => {
       const selectedDesignerType = designerType[index % designerType.length];
+      console.log(index);
       console.log(`Slider Changed to: ${selectedDesignerType}`);
       setDesignerType(selectedDesignerType);
     },
   };
 
+  const mockJobTypes = ["Hair Designer", "Nail Artist", "MakeUp Artist"];
+
   return (
     <div className="designerTypeCarousel">
       <Slider {...settings}>
         <div>
-          <h3>Hair Designer</h3>
+          <h2>Hair Designer</h2>
         </div>
         <div>
-          <h3>Nail Artist</h3>
+          <h2>Nail Artist</h2>
         </div>
         <div>
-          <h3>Eyelash Something</h3>
+          <h2>Eyelash Something</h2>
         </div>
         <div>
-          <h3>Hair Designer</h3>
+          <h2>Hair Designer</h2>
         </div>
         <div>
-          <h3>Nail Artist</h3>
+          <h2>Nail Artist</h2>
         </div>
         <div>
-          <h3>Eyelash Something</h3>
+          <h2>Eyelash Something</h2>
         </div>
       </Slider>
     </div>

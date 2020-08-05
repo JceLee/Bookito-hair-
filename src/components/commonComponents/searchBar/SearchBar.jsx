@@ -19,9 +19,9 @@ export default function SearchBar() {
 
   return (
     <div className="searchBar">
-      <h3 className="searchBarText">LookUp your new favorite</h3>
+      <h4 className="searchBarText">LookUp your new favorite</h4>
       <DesignerTypeCarousel setDesignerType={setDesignerType} />
-      <h3 className="searchBarText">near by</h3>
+      <h4 className="searchBarText">near by</h4>
       <LocationInput handleSearch={handleSearch} />
     </div>
   );

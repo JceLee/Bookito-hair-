@@ -2,6 +2,7 @@ import React from "react";
 import SearchBar from "../../commonComponents/searchBar/SearchBar";
 import NewDesignerCarousel from "./NewDesignerCarousel";
 import InfoCard from "./InfoCard";
+import Announcement from "./Announcement";
 
 export default function MainView() {
   return (
@@ -9,10 +10,12 @@ export default function MainView() {
       <div className="searchBarSection">
         <SearchBar />
       </div>
-      <div className="annoucementSection">annoucement space here</div>
-      <div className="enjoyWithSection">
-        <InfoCard />
-        <InfoCard />
+      <div className="announcementSection">
+        <Announcement />
+      </div>
+      <div className="infoCardsSection">
+        <InfoCard header="Become our partner!" context="blabalablabalb" />
+        <InfoCard header="Q & A" context="BLABLABLABVLALBA" />
       </div>
       <NewDesignerCarousel />
     </>

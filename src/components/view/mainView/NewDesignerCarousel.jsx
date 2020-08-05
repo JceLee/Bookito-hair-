@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from "react";
+import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -25,7 +25,7 @@ export default function NewDesignerCarousel() {
       <Slider {...settings}>
         {mockCards.map((card, inx) => {
           return (
-            <div key={inx} className="newDesignerCard" style={{ width: 300 }}>
+            <div key={inx} className="newDesignerCard" style={{ width: 220 }}>
               {card}
             </div>
           );
