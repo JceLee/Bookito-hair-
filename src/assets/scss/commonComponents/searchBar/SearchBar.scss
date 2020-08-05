@@ -1,12 +1,13 @@
 .searchBar{
     display: flex;
     flex-direction: row;
-    // position: relative; 
-    // display: flex;
-    // justify-content: center;
     align-items: center;
     margin:auto;
 }
 .searchBarText{
     margin-right: 20px;
+}
+.locationInput{
+    min-width: 350px;
+    margin-top: 15px;
 }

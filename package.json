@@ -17,9 +17,11 @@
     "react-images": "^1.1.7",
     "react-modal-image": "^2.5.0",
     "react-photo-gallery": "^8.0.0",
-    "react-redux": "^7.2.0",
-    "react-redux-firebase": "^3.6.0",
     "react-responsive-carousel": "^3.2.9",
+    "react-places-autocomplete": "^7.3.0",
+    "react-immer": "^1.5.3",
+    "react-redux": "^7.2.1",
+    "react-redux-firebase": "^3.7.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-scroll": "^1.8.0",
@@ -50,5 +52,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-plugin-react-hooks": "^4.0.8"
   }
 }

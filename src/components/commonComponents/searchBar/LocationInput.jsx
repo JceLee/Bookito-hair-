@@ -1,46 +1,62 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 import { Input, AutoComplete } from "antd";
+import PlacesAutocomplete from "react-places-autocomplete";
 import { AimOutlined } from '@ant-design/icons';
 import "../../../assets/scss/commonComponents/searchBar/LocationInput.scss";
 
 export default function LocationSearch(props) {
-    const { handleSearch } = props;
-
-    const handleGeolocation = () => {
-        if(navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(position => {
-                console.log(position.coords);
-            });
-        } else {
-            console.error("Geolocation is not supported by this browser.");
-        }
-    };
+    let {
+        address,
+        clearAddress,
+        handleAddressChange,
+        handleAddressSelect,
+        handleSearch,
+        handleGeolocation,
+    } = props;
 
     return (
-        <div className="locationInput">
-            <AutoComplete
-                dropdownMatchSelectWidth={252}
-                style={{
-                    width: 300
-                }}
-                // options={options}
-                // onSelect={onSelect}
-                onSearch={()=>{}}
-            >
-                <Input.Search
-                    // GPS icon inside input
-                    prefix={
-                        <AimOutlined
-                            className="site-form-item-icon"
-                            onClick={handleGeolocation}
-                        />
-                    }
-                    size="large"
-                    placeholder="Your location" // TODO: Extract string to string file
-                    onSearch={handleSearch}
-                    enterButton
-                />
-            </AutoComplete>
-        </div>
+        <PlacesAutocomplete onChange={handleAddressChange} onSelect={handleAddressSelect} value={address}>
+            {({ getInputProps, getSuggestionItemProps, suggestions, loading }) => (
+                <React.Fragment>
+                    <Input.Search
+                        {...getInputProps({
+                            id: "address-input"
+                        })}
+                        // GPS icon inside input
+                        prefix={
+                            <AimOutlined
+                                className="site-form-item-icon"
+                                onClick={handleGeolocation}
+                            />
+                        }
+                        size="large"
+                        placeholder="Your location" // TODO: Extract string to string file
+                        onSearch={handleSearch}
+                        enterButton
+                    />
+                    <div className="autocomplete-dropdown-container">
+                        {loading ? <div>Loading...</div> : null}
+                        {suggestions.map((suggestion, index) => {
+                            const className = suggestion.active ? "suggestion-item--active" : "suggestion-item";
+                            const style = suggestion.active
+                                ? { backgroundColor: "#fafafa", cursor: "pointer", padding: 10 }
+                                : { backgroundColor: "#ffffff", cursor: "pointer", padding: 10 };
+                            const spread = {
+                                ...getSuggestionItemProps(suggestion, {
+                                    className,
+                                    style
+                                })
+                            };
+
+                            return (
+                                <div {...spread} key={`${suggestion.id}-${index}`}>
+                                    <div>{suggestion.description}</div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </React.Fragment>
+            )}
+        </PlacesAutocomplete>
     );
 }
