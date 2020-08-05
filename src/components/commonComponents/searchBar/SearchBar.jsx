@@ -4,6 +4,7 @@ import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { useHistory } from "react-router-dom";
 import DesignerTypeCarousel from "./DesignerTypeCarousel";
 import LocationInput from "./LocationInput";
+import { reverseGeocode } from "../../../helpers/geocode";
 import "../../../assets/scss/commonComponents/searchBar/SearchBar.scss";
 
 export default function SearchBar() {
@@ -39,7 +40,7 @@ export default function SearchBar() {
             })
             .then((latLng) => {
                 return latLng;
-             })
+            })
             .catch((error) => {
                 console.error("Error", error);
                 return null;
@@ -55,7 +56,13 @@ export default function SearchBar() {
     const handleGeolocation = () => {
         if(navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(position => {
-                console.log(position.coords);
+                reverseGeocode(position.coords.latitude, position.coords.longitude).then(address => {
+                    if (address) {
+                        setAddress(address);
+                    } else {
+                        // TODO: Handle failure (ie. failure popover)
+                    }
+                });
             });
         } else {
             console.error("Geolocation is not supported by this browser.");
