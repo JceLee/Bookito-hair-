@@ -1,0 +1,29 @@
+$red: #ff0000;
+$blue: #0000ff;
+$yellow: #ffff00;
+$orange: #ffa500;
+$green: #00ff00;
+
+@mixin mobileL {
+  @media only screen and (min-width: 480px) {
+    @content;
+  }
+}
+
+@mixin tabletP {
+  @media only screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin tabletL {
+  @media only screen and (min-width: 992px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (min-width: 1200px) {
+    @content;
+  }
+}

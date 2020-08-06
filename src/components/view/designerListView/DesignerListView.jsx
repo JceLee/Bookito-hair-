@@ -4,7 +4,7 @@ import { Row, Col } from "antd";
 import * as db from "../../../config/fbConfig";
 
 export default function DesignerListView(props) {
-  db.getDesignerList();
+  // db.getDesignerList();
 
   useEffect(() => {
     const params = queryString.parse(props.location.search);
@@ -13,18 +13,18 @@ export default function DesignerListView(props) {
 
   return (
     <>
-      <Row className="listingContainer">
-        <Col className="designerContainer" span={12}>
+      <div className="listingContainer">
+        <div className="designerContainer">
           <div className="listNavBar">
             listNavBar
             <div className="filter">filter</div>
           </div>
           <div className="designerList">designerList</div>
-        </Col>
-        <Col className="mapContainer" span={12}>
+        </div>
+        <div className="mapContainer">
           Map container
-        </Col>
-      </Row>
+        </div>
+      </div>
     </>
   );
 }
