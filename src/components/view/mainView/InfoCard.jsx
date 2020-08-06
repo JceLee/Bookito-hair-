@@ -6,7 +6,9 @@ export default function InfoCard(props) {
   const { header, context } = props;
   return (
     <Card
+      className="infoCard"
       hoverable
+      bordered={false}
       cover={
         <img
           alt="example"

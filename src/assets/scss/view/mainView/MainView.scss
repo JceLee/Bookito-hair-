@@ -8,12 +8,13 @@
   z-index: 1;
   display: flex;
   padding: 0;
+  justify-content: space-between;
   align-items: center;
   background-color: white;
 }
 
 .ant-layout-header {
-  border: 3px solid $orange;
+  border: 2px solid $orange;
   padding: 0 10px;
 }
 
@@ -22,8 +23,10 @@
 .searchBarSection {
   min-height: 80vh; /* 80% screen height */
   display: flex;
-  border: 3px solid $red;
+  border: 2px solid $red;
   padding-top: 30px;
+
+  overflow: hidden;
 
   .searchBar {
     text-align: center;
@@ -49,36 +52,48 @@
 // info card section
 
 .infoCardsSection {
-  min-height: 80vh; /* 80% screen height */
-  border: 3px solid $blue;
+  height: 680px;
+  max-height: 700px;
+  border: 2px solid $blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 
-  .ant-card-body {
-    text-align: center;
+  .infoCard {
+    object-fit: scale-down;
+    width: 95%;
+    max-width: 350px;
+    max-height: 335px;
+
+    .img {
+      object-fit: scale-down;
+    }
   }
 }
 
 // new designer section
 
 .newDesignersSection {
-  padding: 10px 10px;
+  padding: 20px 0 40px 0;
   min-height: 300px; /* 80% screen height */
   border: 3px solid $green;
 
   .newDesignerCard {
-    height: 200px;
+    width: 300px;
+    height: 300px;
     border: 1px solid black;
   }
 
   .slick-slide {
-    margin: 0 10px;
+    padding: 0 5px;
   }
 }
 
 // footer
 
 .footer {
-  background-color: #bfbfbf;
-  color: white;
-
+  background-color: #000;
+  color: #fff;
   text-align: center;
 }

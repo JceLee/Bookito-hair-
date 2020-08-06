@@ -5,9 +5,12 @@ import "slick-carousel/slick/slick-theme.css";
 
 export default function NewDesignerCarousel() {
   const settings = {
-    className: "center",
     infinite: true,
+    // centerMode: true,
+    // centerPadding: "50px",
+    // slidesToShow: 4,
     // think about displaying dots
+
     swipeToSlide: true,
     variableWidth: true,
     afterChange: function (index) {
@@ -25,7 +28,7 @@ export default function NewDesignerCarousel() {
       <Slider {...settings}>
         {mockCards.map((card, inx) => {
           return (
-            <div key={inx} className="newDesignerCard" style={{ width: 220 }}>
+            <div key={inx} className="newDesignerCard" style={{ width: 300 }}>
               {card}
             </div>
           );

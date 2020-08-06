@@ -33,9 +33,6 @@ export default function Navbar() {
       {/* <Dropdown className="menu" overlay={menu} placement="bottomRight"> */}
       {/* <Button shape="round">Profile</Button> */}
       {/* </Dropdown> */}
-      <Button className="menu" onClick={showDrawer}>
-        <MenuOutlined />
-      </Button>
       <Drawer
         title="Menu"
         placement="right"
@@ -43,7 +40,7 @@ export default function Navbar() {
         onClose={onClose}
         visible={visible}
         getContainer={false}
-        width="60%"
+        width="55%"
       >
         <Menu>
           {menuItems.map((item, inx) => {
@@ -55,6 +52,9 @@ export default function Navbar() {
           })}
         </Menu>
       </Drawer>
+      <Button className="hambergerBtn" onClick={showDrawer}>
+        <MenuOutlined />
+      </Button>
     </>
   );
 }
