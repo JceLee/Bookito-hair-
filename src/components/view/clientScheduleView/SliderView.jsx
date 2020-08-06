@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../../assets/scss/view/clientScheduleView/Slider.scss';
+import '../../../assets/scss/view/clientScheduleView/ClientScheduleView.scss';
 import Card from './Card';
 import Data from './Data';
 import Slider from 'react-slick';
