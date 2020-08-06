@@ -3,6 +3,7 @@ import queryString from "query-string"
 import { Row, Col } from "antd";
 import * as db from "../../../config/fbConfig";
 import DesignerCardComponent from "./designerCardComponent/DesignerCardComponent";
+import DesignerListFilter from "./DesignerListFilter";
 
 export default function DesignerListView(props) {
   db.getDesignerList();
@@ -32,7 +33,10 @@ export default function DesignerListView(props) {
         <Col className="designerContainer" span={12}>
           <div className="listNavBar">
             listNavBar
-            <div className="filter">filter</div>
+            <div className="filter">
+              filter
+              <DesignerListFilter numberOfDesigners='400' location='Vancouver'/>
+            </div>
           </div>
           <div className="designerList">
             designerList
