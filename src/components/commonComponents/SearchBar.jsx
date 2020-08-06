@@ -1,9 +1,8 @@
 import React from "react";
 import { Input, AutoComplete } from "antd";
-import { AimOutlined } from "@ant-design/icons";
-import "../../../assets/scss/commonComponents/searchBar/LocationInput.scss";
+import { AimOutlined, SearchOutlined } from "@ant-design/icons";
 
-export default function LocationSearch(props) {
+export default function SearchBar(props) {
   const { handleSearch } = props;
 
   const handleGeolocation = () => {
@@ -17,18 +16,19 @@ export default function LocationSearch(props) {
   };
 
   return (
-    <div className="locationInput">
+    <div className="searchBar">
       <AutoComplete dropdownMatchSelectWidth={252} onSearch={() => {}}>
         <Input.Search
           // GPS icon inside input
-          prefix={
-            <AimOutlined
-              className="site-form-item-icon"
-              onClick={handleGeolocation}
-            />
-          }
+          // prefix={
+          //   <AimOutlined
+          //     className="site-form-item-icon"
+          //     onClick={handleGeolocation}
+          //   />
+          // }
+          suffix={<SearchOutlined onClick={handleSearch} />}
           size="large"
-          placeholder="Your location" // TODO: Extract string to string file
+          placeholder="    Your location" // TODO: Extract string to string file
           onSearch={handleSearch}
           enterButton
         />

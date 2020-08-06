@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import DesignerTypeCarousel from "./DesignerTypeCarousel";
-import LocationInput from "./LocationInput";
-import "../../../assets/scss/commonComponents/searchBar/SearchBar.scss";
+import SearchBar from "../../commonComponents/SearchBar";
 
-export default function SearchBar() {
+export default function SearchBarSection() {
   const [designerType, setDesignerType] = useState();
 
   useEffect(() => {});
@@ -18,11 +17,13 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="searchBar">
-      <h4 className="searchBarText">LookUp your new favorite</h4>
+    <div className="searchBarSection">
+      <div className="frontText">
+        <b>LookUp</b> your new favorite
+      </div>
       <DesignerTypeCarousel setDesignerType={setDesignerType} />
-      <h4 className="searchBarText">near by</h4>
-      <LocationInput handleSearch={handleSearch} />
+      <div className="rearText">near by</div>
+      <SearchBar handleSearch={handleSearch} />
     </div>
   );
 }

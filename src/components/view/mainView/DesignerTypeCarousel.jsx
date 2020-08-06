@@ -3,7 +3,6 @@ import Slider from "react-slick";
 import { designerType } from "../../constants/designerType";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "../../../assets/scss/commonComponents/searchBar/DesignerTypeCarousel.scss";
 
 export default function DesignerTypeCarousel(props) {
   const { setDesignerType } = props;
@@ -44,24 +43,12 @@ export default function DesignerTypeCarousel(props) {
   return (
     <div className="designerTypeCarousel">
       <Slider {...settings}>
-        <div>
-          <h2>Hair Designer</h2>
-        </div>
-        <div>
-          <h2>Nail Artist</h2>
-        </div>
-        <div>
-          <h2>Eyelash Something</h2>
-        </div>
-        <div>
-          <h2>Hair Designer</h2>
-        </div>
-        <div>
-          <h2>Nail Artist</h2>
-        </div>
-        <div>
-          <h2>Eyelash Something</h2>
-        </div>
+        <div className="typeText">Hair Designer</div>
+        <div className="typeText">Nail Artist</div>
+        <div className="typeText">Eyelash Something</div>
+        <div className="typeText">Hair Designer</div>
+        <div className="typeText">Nail Artist</div>
+        <div className="typeText">Eyelash Something</div>
       </Slider>
     </div>
   );

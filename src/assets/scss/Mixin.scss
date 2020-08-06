@@ -4,8 +4,8 @@ $yellow: #ffff00;
 $orange: #ffa500;
 $green: #00ff00;
 
-@mixin phone {
-  @media only screen and (max-width: 480px) {
+@mixin mobileL {
+  @media only screen and (min-width: 480px) {
     @content;
   }
 }
