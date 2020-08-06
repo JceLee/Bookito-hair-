@@ -4,9 +4,10 @@ import { Row, Col } from "antd";
 import * as db from "../../../config/fbConfig";
 import DesignerCardComponent from "./designerCardComponent/DesignerCardComponent";
 import DesignerListFilter from "./DesignerListFilter";
+import { useHistory } from "react-router-dom";
 
 export default function DesignerListView(props) {
-  db.getDesignerList();
+  // db.getDesignerList();
 
   useEffect(() => {
     const params = queryString.parse(props.location.search);
@@ -15,6 +16,7 @@ export default function DesignerListView(props) {
 
   // for testing
   const designer = {
+    id: 1,
     fname: 'John',
     lname: 'Doe',
     location: '111 W Georgia St, Vancouver',
