@@ -3,53 +3,40 @@
 .listingContainer {
   border: 1px black solid;
   height: 90vh;
+
   @include tabletP{
     display: flex;
   } 
 
-}
-
-.designerContainer {
-  border: 1px red solid;
-  // display: flex;
-  // flex-direction: column;
-
-  @include tabletP{
-    flex: 50%;
-    // flex-direction: column;
-  } 
-
-
-  .listNavBar {
-    width: 100%;
-    // height: 15%;
-    border: 1px blue solid;
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: flex-end;
-
-    .filter {
-      height: 30%;
-      border: 1px saddlebrown solid;
+  .designerContainer {
+    border: 1px red solid;
+  
+    @include tabletP{
+      flex: 50%;
+    } 
+  
+    .listNavBar {
+      width: 100%;
+      border: 1px blue solid;
+  
+      .filter {
+        height: 30%;
+        border: 1px saddlebrown solid;
+      }
+    }
+  
+    .designerList {
+      width: 100%;
+      border: 1px blue solid;
     }
   }
 
-  .designerList {
-    width: 100%;
-    // height: 85%;
-    border: 1px blue solid;
+  .mapContainer {
+    display: none;
+  
+    @include tabletP{
+      display: flex;
+      flex: 50%;
+    }
   }
-}
-
-.mapContainer {
-  display: none;
-
-  @include tabletP{
-    display: flex;
-    // flex-direction: column;
-    // justify-content: flex-end; 
-    // width: 50%;
-    flex: 50%;
-  } 
-
 }
