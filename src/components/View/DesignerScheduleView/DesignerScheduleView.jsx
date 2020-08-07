@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Steps, message, Row, Col, Modal, Button } from 'antd';
-import EditCalendar from './EditCalendar';
-import Services from './Services';
-import Times from './Times';
+import StepOne from './StepOne';
+import StepTwo from './StepTwo';
+import StepThree from './StepThree';
 // import '../../../assets/scss/View/DesignerScheduleView/DesignerScheduleView.scss';
 
 export default function DesignerSchedule(props) {
@@ -10,13 +10,16 @@ export default function DesignerSchedule(props) {
 
   const steps = [
     {
-      title: 'Choose date and time',
+      title: 'Date and time',
+      content: <StepOne />,
     },
     {
-      title: 'Choose service',
+      title: 'Service and estimated price',
+      content: <StepTwo />,
     },
     {
-      title: 'Confirmation',
+      title: 'Final check',
+      content: <StepThree />,
     },
   ];
 
@@ -53,7 +56,7 @@ export default function DesignerSchedule(props) {
       </Button>
       <Modal
         title='Edit Schedule'
-        width={820}
+        width={900}
         visible={visible}
         onOk={handleOk}
         okText='Save Schedule'
@@ -66,7 +69,7 @@ export default function DesignerSchedule(props) {
             <Step key={item.title} title={item.title} />
           ))}
         </Steps>
-        {/* <div className='stepsContent'>{steps[current].content}</div> */}
+        <div className='stepsContent'>{steps[current].content}</div>
         <div className='stepAction'>
           {current < steps.length - 1 && (
             <Button type='primary' onClick={() => next()}>
@@ -87,19 +90,6 @@ export default function DesignerSchedule(props) {
             </Button>
           )}
         </div>
-        <p id='designerName'>Designer: Jane Smith</p>
-        <Row>
-          <Col span={13}>
-            <EditCalendar />
-          </Col>
-          <Col span={11}>
-            {/* <p>Choose Service</p>
-            <div className='ChooseServices'>
-              <Services /> */}
-            <Times />
-            {/* </div> */}
-          </Col>
-        </Row>
       </Modal>
     </div>
   );
