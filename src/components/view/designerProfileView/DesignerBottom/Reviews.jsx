@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Review from './Review';
-import { Button } from 'antd';
+import { Button, Space } from 'antd';
 
 const reviewsPerClick = 2;
 let reviewsArray = [];
@@ -51,28 +51,29 @@ const Reviews = (props) => {
           />
         ))
       )}
+      <Space>
+        {props.reviews.length >= next && (
+          <Button
+            className='Button'
+            type='primary'
+            shape='round'
+            onClick={handleShowMoreReviews}
+          >
+            Load More
+          </Button>
+        )}
 
-      {props.reviews.length >= next && (
-        <Button
-          className='Button'
-          type='primary'
-          shape='round'
-          onClick={handleShowMoreReviews}
-        >
-          Load More
-        </Button>
-      )}
-
-      {arrayReviewsToShow.length > reviewsPerClick && (
-        <Button
-          className='Button'
-          type='primary'
-          shape='round'
-          onClick={handleShowLessReviews}
-        >
-          Load Less
-        </Button>
-      )}
+        {arrayReviewsToShow.length > reviewsPerClick && (
+          <Button
+            className='Button'
+            type='primary'
+            shape='round'
+            onClick={handleShowLessReviews}
+          >
+            Load Less
+          </Button>
+        )}
+      </Space>
     </div>
   );
 };

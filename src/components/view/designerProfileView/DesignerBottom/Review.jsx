@@ -1,77 +1,116 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 
-import Gallery from 'react-photo-gallery';
-import Carousel, { Modal, ModalGateway } from 'react-images';
-
+import Slider from 'react-slick';
+import { Modal } from 'antd';
 import RatingSymbol from '../RatingSymbol';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
+const NextArrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: 'block' }}
+      onClick={onClick}
+    />
+  );
+};
+
+const PrevArrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: 'block' }}
+      onClick={onClick}
+    />
+  );
+};
+
 const Review = (props) => {
   const { customerName, photos, rate, review, date } = props;
-  const [currentImage, setCurrentImage] = useState(0);
-  const [viewerIsOpen, setViewerIsOpen] = useState(false);
+  const [ModalVisible, setModalVisible] = useState(false);
+  const [CurrentImgIndex, setCurrentImgIndex] = useState(0);
+  const [ImgIndexAfterClosingModal, setImgIndexAfterClosingModal] = useState(
+    CurrentImgIndex
+  );
 
-  const openLightbox = useCallback((event, { index }) => {
-    setCurrentImage(index);
-    setViewerIsOpen(true);
-  }, []);
-
-  const closeLightbox = () => {
-    setCurrentImage(0);
-    setViewerIsOpen(false);
+  const settings = {
+    className: 'center',
+    centerMode: true,
+    centerPadding: '60px',
+    dots: true,
+    initialSlide: CurrentImgIndex,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+    // beforeChange: (current, next) => setCurrentImgIndex(next),
+    // afterChange: (current) => setCurrentImgIndex(current),
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
   };
 
-  let width = 5; // initial width = 5vw
-  const setWidth = (photoLength) => {
-    switch (photoLength) {
-      case 1:
-        width *= 1;
-        break;
-      case 2:
-        width *= 2;
-        break;
-      case 3:
-        width *= 3;
-        break;
-      case 4:
-        width *= 4;
-        break;
-      default:
-        width *= 0;
-    }
-    return width;
+  const onClickModalHandler = (index) => {
+    console.log('open');
+    console.log('Index: ' + index);
+    setModalVisible(true);
+    setCurrentImgIndex(index);
+    console.log('CurrentImgIndex: ' + CurrentImgIndex);
+  };
+
+  const onCancelHandler = (CurrentImgIndex) => {
+    setModalVisible(false);
+    console.log('close');
+    console.log('CurrentImgIndex: ' + CurrentImgIndex);
+    setImgIndexAfterClosingModal(CurrentImgIndex);
+    console.log('ImgIndexAfterClosingModal: ' + ImgIndexAfterClosingModal);
   };
 
   return (
-    <div className='review' id={props.id}>
+    <div className='review fade-in' id={props.id}>
       <div className='reviewNameNRate'>
         <span>
           <strong>{customerName}</strong>
         </span>
         {<RatingSymbol rate={rate} />}
-        <div style={{ width: `${setWidth(photos.length) + 'vw'}` }}>
-          <Gallery
-            margin={5}
-            photos={photos}
-            onClick={openLightbox}
-            targetRowHeight={70}
-            limitNodeSearch={4}
-          />
-          <ModalGateway>
-            {viewerIsOpen ? (
-              <Modal onClose={closeLightbox}>
-                <Carousel
-                  currentIndex={currentImage}
-                  views={photos.map((photo) => ({
-                    ...photo,
-                    srcset: photo.srcSet,
-                    caption: photo.title,
-                  }))}
+
+        {photos.map((photo, index) => {
+          return (
+            <div key={index}>
+              <div className='reviewImgDiv'>
+                <img
+                  src={photo}
+                  alt={`reviewImg${index}`}
+                  width='50'
+                  height='50'
+                  onClick={() => onClickModalHandler(index)}
                 />
-              </Modal>
-            ) : null}
-          </ModalGateway>
-        </div>
+              </div>
+            </div>
+          );
+        })}
+
+        <Modal
+          title='Posted by Customers'
+          visible={ModalVisible}
+          onCancel={() => onCancelHandler(CurrentImgIndex)}
+          footer={null}
+        >
+          <p>clicked img index : {CurrentImgIndex}</p>
+
+          <Slider {...settings} className='slick-slider'>
+            {console.log('initialSlide: ' + settings.initialSlide)}
+            {photos.map((photo, index) => {
+              return (
+                <div key={index}>
+                  <img src={photo} alt={`reviewImg${index}`} />
+                </div>
+              );
+            })}
+          </Slider>
+        </Modal>
       </div>
 
       <div className='reviewContent'>
