@@ -9,3 +9,11 @@
 .header{
     z-index: 1;
 }
+
+.outerContent {
+    padding: 0;
+
+    @include tabletP{
+        padding: 0 50px;
+    } 
+}
