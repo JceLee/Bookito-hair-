@@ -96,6 +96,7 @@ const Review = (props) => {
           title='Posted by Customers'
           visible={ModalVisible}
           onCancel={() => onCancelHandler(CurrentImgIndex)}
+          destroyOnClose={true}
           footer={null}
         >
           <p>clicked img index : {CurrentImgIndex}</p>
