@@ -4,7 +4,7 @@ import { Row, Col } from "antd";
 import * as db from "../../../config/fbConfig";
 
 export default function DesignerListView(props) {
-  db.getDesignerList();
+  // db.getDesignerList();
 
   useEffect(() => {
     const params = queryString.parse(props.location.search);
