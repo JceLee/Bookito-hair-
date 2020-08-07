@@ -27,3 +27,16 @@ $green: #00ff00;
     @content;
   }
 }
+
+// for making DesignerCardComponent responsive
+@mixin designerCard {
+  @media only screen and (min-width: 571px) {
+    @content;
+  }
+}
+
+@mixin designerCard1240 {
+  @media only screen and (min-width: 1240px) {
+    @content;
+  }
+}
