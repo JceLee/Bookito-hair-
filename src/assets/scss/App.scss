@@ -3,6 +3,8 @@
 @import "./View/DesignerListView/DesignerListView.scss";
 @import "./CommonComponents/searchBar/SearchBar.scss";
 @import "./CommonComponents/searchBar/DesignerTypeCarousel.scss";
+@import "./view/designerListView/DesignerCardComponent/DesignerCardComponent.scss";
+@import "./view/designerListView/designerListFilter/DesignerListFilter.scss";
 
 .header{
     z-index: 1;

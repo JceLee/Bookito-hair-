@@ -4,15 +4,12 @@
   border: 1px black solid;
   height: 90vh;
 
-  @include tabletP{
-    display: flex;
-  } 
-
   .designerContainer {
     border: 1px red solid;
   
     @include tabletP{
-      flex: 50%;
+      width: 50%;
+      float: left;
     } 
   
     .listNavBar {
@@ -26,7 +23,6 @@
     }
   
     .designerList {
-      width: 100%;
       border: 1px blue solid;
     }
   }
@@ -35,8 +31,10 @@
     display: none;
   
     @include tabletP{
+      border: 1px green solid;
       display: flex;
-      flex: 50%;
-    }
+      width: 50%;
+      float: right;
+    } 
   }
 }
