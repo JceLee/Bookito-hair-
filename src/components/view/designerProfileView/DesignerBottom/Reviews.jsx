@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Review from './Review';
 import { Button, Space } from 'antd';
+import { Link } from 'react-scroll';
+import Review from './Review';
 
 const reviewsPerClick = 2;
 let reviewsArray = [];
@@ -51,6 +52,7 @@ const Reviews = (props) => {
           />
         ))
       )}
+
       <Space>
         {props.reviews.length >= next && (
           <Button
@@ -64,17 +66,27 @@ const Reviews = (props) => {
         )}
 
         {arrayReviewsToShow.length > reviewsPerClick && (
-          <Button
-            className='Button'
-            type='primary'
-            shape='round'
-            onClick={handleShowLessReviews}
+          <Link
+            activeClass='active'
+            to='reviews'
+            spy={true}
+            smooth={true}
+            duration={500}
+            offset={-300}
           >
-            Load Less
-          </Button>
+            <Button
+              className='Button'
+              type='primary'
+              shape='round'
+              onClick={handleShowLessReviews}
+            >
+              Load Less
+            </Button>
+          </Link>
         )}
       </Space>
     </div>
   );
 };
+
 export default Reviews;

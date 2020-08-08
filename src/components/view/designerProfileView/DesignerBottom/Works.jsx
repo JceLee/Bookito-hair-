@@ -1,75 +1,115 @@
-// import React, { useState, useCallback } from 'react';
-
-// import Gallery from 'react-photo-gallery';
-// import ResponsiveGallery from 'react-responsive-gallery';
-// import Carousel, { Modal, ModalGateway } from 'react-images';
-
-// const Works = (props) => {
-//   const [currentImage, setCurrentImage] = useState(0);
-//   const [viewerIsOpen, setViewerIsOpen] = useState(false);
-
-//   const openLightbox = useCallback((event, { index }) => {
-//     setCurrentImage(index);
-//     setViewerIsOpen(true);
-//   }, []);
-
-//   const closeLightbox = () => {
-//     setCurrentImage(0);
-//     setViewerIsOpen(false);
-//   };
-
-//   return (
-//     <>
-//       <div className='works' id={props.id}>
-//         <h2>Works</h2>
-//         <div className='workGallery'>
-//           <Gallery photos={props.works} onClick={openLightbox} />
-//         </div>
-//         <ModalGateway>
-//           {viewerIsOpen ? (
-//             <Modal onClose={closeLightbox}>
-//               <Carousel
-//                 currentIndex={currentImage}
-//                 views={props.works.map((work) => ({
-//                   ...work,
-//                   srcset: work.srcSet,
-//                   caption: work.title,
-//                 }))}
-//               />
-//             </Modal>
-//           ) : null}
-//         </ModalGateway>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default Works;
-
-import React, { useState, useCallback } from 'react';
-
-import ResponsiveGallery from 'react-responsive-gallery';
+import React, { useState } from 'react';
+import Slider from 'react-slick';
+import { Card, Modal } from 'antd';
 
 const Works = (props) => {
+  const [ModalVisible, setModalVisible] = useState(false);
+  const [CurrentImgIndex, setCurrentImgIndex] = useState(0);
+
+  // To display next image in a carousel(Slider component in react-slick)
+  const NextArrow = (props) => {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: 'block' }}
+        onClick={onClick}
+      />
+    );
+  };
+
+  // To display previous image in a carousel(Slider component in react-slick)
+  const PrevArrow = (props) => {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: 'block' }}
+        onClick={onClick}
+      />
+    );
+  };
+
+  // Settings for carousels(Slider component in react-slick)
+  const settings = {
+    className: 'center',
+    centerMode: true,
+    centerPadding: '60px',
+    dots: true,
+    initialSlide: CurrentImgIndex,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
+  };
+
+  const onOpenModalHandler = (index) => {
+    console.log('opened a modal');
+    console.log('Clicked img index: ' + index);
+    setModalVisible(true);
+    setCurrentImgIndex(index);
+  };
+
+  const onCloseModalHandler = (CurrentImgIndex) => {
+    setModalVisible(false);
+    console.log('destroyed the modal when closing');
+    console.log('CurrentImgIndex: ' + CurrentImgIndex);
+  };
+
   return (
     <>
       <div className='works' id={props.id}>
         <h2>Works</h2>
-        <div className='workGallery'>
-          <ResponsiveGallery
-            images={props.works}
-            // onClick={openLightbox}
-            useLightBox={true}
-            numOfImagesPerRow={{ xs: 1, s: 2, m: 2, l: 4, xl: 4, xxl: 4 }}
-            colsPadding={{ xs: 4, s: 4, m: 4, l: 4, xl: 4, xxl: 4 }}
-            imagesPaddingBottom={{ xs: 8, s: 8, m: 8, l: 8, xl: 8, xxl: 8 }}
-          />
-          {/* xs: From 0 to 420px
-              s: From 420px to 600px
-              m: From 600px to 768px
-              l: From 768px to 992px
-              xl: From 992px to 1200px
-              xxl: From 1200px to infinity */}
+        <div className='workGalleryContainer'>
+          {props.works.map((work, index) => {
+            return props.works.length === 0 ? (
+              'No images attached..'
+            ) : (
+              <div key={index}>
+                <div className='workImgDiv'>
+                  <Card
+                    hoverable={true}
+                    size={'small'}
+                    style={{
+                      backgroundColor: 'whitesmoke',
+                      borderRadius: '15px',
+                      border: '1px outset',
+                    }}
+                  >
+                    <img
+                      src={work}
+                      alt={`workImg${index}`}
+                      width='150'
+                      height='150'
+                      onClick={() => onOpenModalHandler(index)}
+                    />
+                  </Card>
+                </div>
+              </div>
+            );
+          })}
+
+          <Modal
+            title='Posted by Designers'
+            visible={ModalVisible}
+            onCancel={() => onCloseModalHandler(CurrentImgIndex)}
+            destroyOnClose={true}
+            footer={null}
+          >
+            {/* Display work images in a carousel in a modal */}
+            <Slider {...settings} className='slick-slider'>
+              {props.works.map((work, index) => {
+                return (
+                  <div key={index}>
+                    <img src={work} alt={`workImg${index}`} />
+                  </div>
+                );
+              })}
+            </Slider>
+          </Modal>
         </div>
       </div>
     </>
