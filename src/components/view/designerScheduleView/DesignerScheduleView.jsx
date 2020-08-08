@@ -3,7 +3,7 @@ import { Steps, message, Row, Col, Modal, Button } from 'antd';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
 import StepThree from './StepThree';
-// import '../../../assets/scss/View/DesignerScheduleView/DesignerScheduleView.scss';
+// import '../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss';
 
 export default function DesignerSchedule(props) {
   const { Step } = Steps;

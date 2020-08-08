@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Row, Col } from 'antd';
 import Services from './Services';
-import '../../../assets/scss/View/DesignerScheduleView/DesignerScheduleView.scss';
+import '../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss';
 
 export default function StepTwo() {
   return (

@@ -1,9 +1,9 @@
-@import "./View/MainView/MainView.scss";
-@import "./CommonComponents/NavBar.scss";
-@import "./View/DesignerListView/DesignerListView.scss";
-@import "./CommonComponents/searchBar/SearchBar.scss";
-@import "./CommonComponents/searchBar/DesignerTypeCarousel.scss";
+@import './view/mainView/MainView.scss';
+@import './commonComponents/NavBar.scss';
+@import './view/designerListView/DesignerListView.scss';
+@import './commonComponents/searchBar/SearchBar.scss';
+@import './commonComponents/searchBar/DesignerTypeCarousel.scss';
 
-.header{
-    z-index: 1;
+.header {
+  z-index: 1;
 }

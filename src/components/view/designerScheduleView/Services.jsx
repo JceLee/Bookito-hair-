@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Space, Card, Typography, Row, Col, Select, Checkbox } from 'antd';
 import Slider from 'react-slick';
-import '../../../assets/scss/View/DesignerScheduleView/Slick.scss';
+import '../../../assets/scss/view/designerScheduleView/Slick.scss';
 // import CheckboxGroup from 'antd/lib/checkbox/Group';
 
 export default function Services(value) {

@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col } from 'antd';
 import EditCalendar from './EditCalendar';
 import Times from './Times';
-// import '../../../assets/scss/View/DesignerScheduleView/DesignerScheduleView.scss';
+// import '../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss';
 
 export default function StepOne() {
   return (
