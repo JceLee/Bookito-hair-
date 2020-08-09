@@ -8,13 +8,18 @@ import DesignerListFilter from "./DesignerListFilter";
 
 
 export default function DesignerListView(props) {
-  // Load data from firebase
-  const designers = useSelector((state) => state.firestore.designers);
-  const dispatch = useDispatch();
-  const newDesigners = [];
-  firebaseDB
+
+    const designers = useSelector((state) => state.firestore.designers);
+    const dispatch = useDispatch();
+    const newDesigners = [];
+    const params = queryString.parse(props.location.search);
+    console.log("params:", params);
+
+    // Load data from firebase
+
+    firebaseDB
     .firestore()
-    .collection("designers")
+    .collection("designers").where("Location", "==", "Vancouver")
     .get()
     .then((querySnapshot) => {
       querySnapshot.docs.forEach((doc) => {
@@ -22,13 +27,11 @@ export default function DesignerListView(props) {
       });
     });
 
-  // Line 24 is params from main page, Line 26, 27 are to dispatch action to reducer.
-  useEffect(() => {
-    const params = queryString.parse(props.location.search);
-    console.log("params:", params);
+    // Line 24 is params from main page, Line 26, 27 are to dispatch action to reducer.
+    useEffect(() => {
     dispatch(load_database(newDesigners));
-  }, [dispatch]);
-  console.log(designers);
+    }, [dispatch]);
+    console.log(designers);
 
     // for testing
     const designer = {
