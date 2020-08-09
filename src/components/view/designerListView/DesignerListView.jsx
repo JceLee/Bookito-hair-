@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import queryString from "query-string";
-import { Row, Col } from "antd";
 import { load_database } from "../../../actions/firebaseAction";
 import { firebaseDB } from "../../../config/fbConfig";
 import { useDispatch, useSelector } from "react-redux";
-import queryString from "query-string"
-import * as db from "../../../config/fbConfig";
 import DesignerCardComponent from "./designerCardComponent/DesignerCardComponent";
 import DesignerListFilter from "./DesignerListFilter";
 
@@ -57,6 +54,9 @@ export default function DesignerListView(props) {
                         <div className="filter">
                             <DesignerListFilter numberOfDesigners='400' location='Vancouver' />
                         </div>
+                        {/*<div className="sorter">*/}
+                        {/*    <DesignerListFilter numberOfDesigners='400' location='Vancouver' />*/}
+                        {/*</div>*/}
                     </div>
                     <div className="designerList">
                         <DesignerCardComponent designer={designer} />

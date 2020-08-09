@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, Dropdown, Button, DatePicker, TimePicker } from 'antd';
+import { Menu, Dropdown, Button, DatePicker, TimePicker } from 'antd/lib/index';
 
 export default function DesignerListFilter(props) {
 
