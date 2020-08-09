@@ -19,7 +19,7 @@ export default function Services(value) {
             <Text strong>Men cut</Text>
           </Checkbox>
         </Row>
-        <p id='menCut'>
+        <p id='serviceMenu'>
           $35 or up <br />
           The price may differ
         </p>
@@ -29,7 +29,7 @@ export default function Services(value) {
             <Text strong>Women cut</Text>
           </Checkbox>
         </Row>
-        <p id='menCut'>
+        <p id='serviceMenu'>
           $45 or up <br />
           The price may differ
         </p>
@@ -39,15 +39,111 @@ export default function Services(value) {
             <Text strong>Kids cut</Text>
           </Checkbox>
         </Row>
-        <p id='menCut'>
+        <p id='serviceMenu'>
           $25 or up <br />
           The price may differ
         </p>
       </div>
     ),
-    Style: <p>style</p>,
-    Perms: <p>Perms</p>,
-    Colors: <p>Colors</p>,
+    Style: (
+      <div>
+        <Row>
+          <Checkbox>
+            <Text strong>Men style</Text>
+          </Checkbox>
+        </Row>
+        <p id='serviceMenu'>
+          $35 or up <br />
+          The price may differ
+        </p>
+        <Divider />
+        <Row>
+          <Checkbox>
+            <Text strong>Women style</Text>
+          </Checkbox>
+        </Row>
+        <p id='serviceMenu'>
+          $45 or up <br />
+          The price may differ
+        </p>
+        <Divider />
+        <Row>
+          <Checkbox>
+            <Text strong>Kids style</Text>
+          </Checkbox>
+        </Row>
+        <p id='serviceMenu'>
+          $25 or up <br />
+          The price may differ
+        </p>
+      </div>
+    ),
+    Perms: (
+      <div>
+        <Row>
+          <Checkbox>
+            <Text strong>Men perms</Text>
+          </Checkbox>
+        </Row>
+        <p id='serviceMenu'>
+          $35 or up <br />
+          The price may differ
+        </p>
+        <Divider />
+        <Row>
+          <Checkbox>
+            <Text strong>Women perms</Text>
+          </Checkbox>
+        </Row>
+        <p id='serviceMenu'>
+          $45 or up <br />
+          The price may differ
+        </p>
+        <Divider />
+        <Row>
+          <Checkbox>
+            <Text strong>Kids perms</Text>
+          </Checkbox>
+        </Row>
+        <p id='serviceMenu'>
+          $25 or up <br />
+          The price may differ
+        </p>
+      </div>
+    ),
+    Colors: (
+      <div>
+        <Row>
+          <Checkbox>
+            <Text strong>Men colors</Text>
+          </Checkbox>
+        </Row>
+        <p id='serviceMenu'>
+          $35 or up <br />
+          The price may differ
+        </p>
+        <Divider />
+        <Row>
+          <Checkbox>
+            <Text strong>Women colors</Text>
+          </Checkbox>
+        </Row>
+        <p id='serviceMenu'>
+          $45 or up <br />
+          The price may differ
+        </p>
+        <Divider />
+        <Row>
+          <Checkbox>
+            <Text strong>Kids colors</Text>
+          </Checkbox>
+        </Row>
+        <p id='serviceMenu'>
+          $25 or up <br />
+          The price may differ
+        </p>
+      </div>
+    ),
   };
 
   const [key, setKey] = useState('Cuts');
