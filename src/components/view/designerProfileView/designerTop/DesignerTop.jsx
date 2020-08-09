@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { Affix, Button } from 'antd';
-import DesignerNav from './DesignerNav/DesignerNav.jsx';
+import DesignerNav from './designerNav/DesignerNav.jsx';
 import RatingSymbol from '../RatingSymbol.jsx';
 
 const DesignerTop = (props) => {

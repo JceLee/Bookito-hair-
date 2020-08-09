@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import DesignerTop from './DesignerTop/DesignerTop.jsx';
-import DesignerBottom from './DesignerBottom/DesignerBottom.jsx';
+import DesignerTop from './designerTop/DesignerTop.jsx';
+import DesignerBottom from './designerBottom/DesignerBottom.jsx';
 
 const designer = {
   fname: 'John',
