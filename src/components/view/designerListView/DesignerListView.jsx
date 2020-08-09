@@ -15,8 +15,8 @@ export default function DesignerListView(props) {
     const params = queryString.parse(props.location.search);
     console.log("params:", params);
 
-    // Load data from firebase
 
+    // Update API
     firebaseDB
     .firestore()
     .collection("designers").where("Location", "==", "Vancouver")
