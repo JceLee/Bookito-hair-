@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-// import { Calendar } from 'antd';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
-import '../../../assets/scss/View/DesignerScheduleView/DesignerScheduleView.scss';
+import '../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss';
 
 export default function EditCalendar() {
   const [selectedDay, setSelectedDay] = useState(null);
