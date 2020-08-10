@@ -5,12 +5,12 @@ import { UserOutlined } from "@ant-design/icons";
 
 export default function DesignerCardTopLeft(props) {
 
-    const { rate, fname } = props;
+    const { rate, fname, profile } = props;
 
     return (
         <Row className="designerCardTopLeft">
             <Col>
-                <Avatar size={64} icon={<UserOutlined />} />
+                <Avatar size={64} src={profile} />
             </Col>
             <Col className="topLeftSecondCol">
                 <div>

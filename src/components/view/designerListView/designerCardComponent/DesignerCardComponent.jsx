@@ -15,7 +15,7 @@ export default function DesignerCardComponent(props) {
 
     return (
         <div className="designerCardComponent" onClick={handleSearch}>
-            <DesignerCardTop fname={designer.fname} rate={designer.rate} services={designer.services} />
+            <DesignerCardTop fname={designer.fname} rate={designer.rate} services={designer.services} profile={designer.profile}/>
             <DesignerCardBottom works={designer.works} />
         </div>
     );
