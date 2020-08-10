@@ -5,12 +5,12 @@ import DesignerCardTopLeft from "./DesignerCardTopLeft";
 
 export default function DesignerCardTop(props) {
 
-    const { fname, rating, types, walk, drive } = props
+    const { fname, rate, services} = props;
 
     return (
         <Row className="designerCardTop">
-            <DesignerCardTopLeft rating={rating} fname={fname} />
-            <DesignerCardTopRight types={types} walk={walk} drive={drive} />
+            <DesignerCardTopLeft rate={rate} fname={fname} />
+            <DesignerCardTopRight services={services} />
         </Row>
     );
 }

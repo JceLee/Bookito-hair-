@@ -4,6 +4,9 @@ import ReadOnlyStar from "../../../../commonComponents/ReadOnlyStar";
 import { UserOutlined } from "@ant-design/icons";
 
 export default function DesignerCardTopLeft(props) {
+
+    const { rate, fname } = props;
+
     return (
         <Row className="designerCardTopLeft">
             <Col>
@@ -11,10 +14,10 @@ export default function DesignerCardTopLeft(props) {
             </Col>
             <Col className="topLeftSecondCol">
                 <div>
-                    {props.fname}
+                    {fname}
                 </div>
                 <div className="topLeftSecondColRating">
-                    <ReadOnlyStar rating={props.rating} />
+                    <ReadOnlyStar rate={rate} />
                 </div>
             </Col>
         </Row>
