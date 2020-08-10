@@ -6,7 +6,7 @@ import DesignerBottom from './designerBottom/DesignerBottom.jsx';
 const designer = {
   fname: 'John',
   lname: 'Doe',
-  location: '111 W Georgia St, Vancouver',
+  location: 'bcit burnaby, vancouver',
   totalRate: 3.7,
   img:
     'https://images.vexels.com/media/users/3/145908/preview2/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg',
@@ -67,7 +67,7 @@ const designer = {
     {
       customerName: 'customer A',
       photos: [],
-      rate: '4.5',
+      rate: 4.5,
       review:
         'Nunc a nibh bibendum, mollis elit vitae, interdum ligula. Mauris dictum rhoncus augue et mollis. Nunc facilisis elit eget massa auctor, sed ultrices quam lacinia. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis fermentum turpis tellus, et maximus erat maximus at. Maecenas venenatis lacinia libero, et dapibus nisl vulputate at. Cras sodales, velit et rhoncus posuere, lorem urna fringilla est, pellentesque accumsan lectus tortor a tellus. Fusce facilisis mollis arcu, eget molestie lorem cursus ut. Donec semper velit vel dui rhoncus congue feugiat quis nisi. Fusce sit amet quam vel risus gravida pretium.!',
       date: '2020.07.31',
@@ -75,7 +75,7 @@ const designer = {
     {
       customerName: 'customer B',
       photos: ['/images/designers/reviews/reviews1.png'],
-      rate: '3.5',
+      rate: 3.5,
       review:
         'Nunc a nibh bibendum, mollis elit vitae, interdum ligula. Mauris dictum rhoncus augue et mollis. Nunc facilisis elit eget massa auctor, sed ultrices quam lacinia. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis fermentum turpis tellus, et maximus erat maximus at. Maecenas venenatis lacinia libero, et dapibus nisl vulputate at. Cras sodales, velit et rhoncus posuere, lorem urna fringilla est, pellentesque accumsan lectus tortor a tellus. Fusce facilisis mollis arcu, eget molestie lorem cursus ut. Donec semper velit vel dui rhoncus congue feugiat quis nisi. Fusce sit amet quam vel risus gravida pretium.!',
       date: '2020.06.11',
@@ -86,7 +86,7 @@ const designer = {
         '/images/designers/reviews/reviews1.png',
         '/images/designers/reviews/reviews2.png',
       ],
-      rate: '5.0',
+      rate: 5.0,
       review:
         'Nunc a nibh bibendum, mollis elit vitae, interdum ligula. Mauris dictum rhoncus augue et mollis. Nunc facilisis elit eget massa auctor, sed ultrices quam lacinia. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis fermentum turpis tellus, et maximus erat maximus at. Maecenas venenatis lacinia libero, et dapibus nisl vulputate at. Cras sodales, velit et rhoncus posuere, lorem urna fringilla est, pellentesque accumsan lectus tortor a tellus. Fusce facilisis mollis arcu, eget molestie lorem cursus ut. Donec semper velit vel dui rhoncus congue feugiat quis nisi. Fusce sit amet quam vel risus gravida pretium.!',
       date: '2020.05.21',
@@ -98,7 +98,7 @@ const designer = {
         '/images/designers/reviews/reviews2.png',
         '/images/designers/reviews/reviews3.png',
       ],
-      rate: '4.5',
+      rate: 4.5,
       review:
         'Nunc a nibh bibendum, mollis elit vitae, interdum ligula. Mauris dictum rhoncus augue et mollis. Nunc facilisis elit eget massa auctor, sed ultrices quam lacinia. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis fermentum turpis tellus, et maximus erat maximus at. Maecenas venenatis lacinia libero, et dapibus nisl vulputate at. Cras sodales, velit et rhoncus posuere, lorem urna fringilla est, pellentesque accumsan lectus tortor a tellus. Fusce facilisis mollis arcu, eget molestie lorem cursus ut. Donec semper velit vel dui rhoncus congue feugiat quis nisi. Fusce sit amet quam vel risus gravida pretium.!',
       date: '2020.04.11',
@@ -112,7 +112,7 @@ const designer = {
         '/images/designers/reviews/reviews4.png',
         '/images/designers/reviews/reviews5.png',
       ],
-      rate: '5.0',
+      rate: 5.0,
       review: 'AWESOME!',
       date: '2020.01.22',
     },
@@ -133,7 +133,7 @@ const {
   reviews,
 } = designer;
 
-const DesignerProfileView = (getProfileById, match) => (
+const DesignerProfileView = () => (
   <BrowserRouter>
     <div className='designerProfileView'>
       <DesignerTop

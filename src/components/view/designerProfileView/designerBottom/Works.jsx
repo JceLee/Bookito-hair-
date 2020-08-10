@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Slider from 'react-slick';
-import { Card, Modal } from 'antd';
+import { Modal } from 'antd';
 
 const Works = (props) => {
   const [ModalVisible, setModalVisible] = useState(false);
@@ -59,60 +59,48 @@ const Works = (props) => {
     console.log('CurrentImgIndex: ' + CurrentImgIndex);
   };
 
-  return (
-    <>
-      <div className='works' id={props.id}>
-        <h2>Works</h2>
-        <div className='workGalleryContainer'>
-          {props.works.map((work, index) => {
-            return props.works.length === 0 ? (
-              'No images attached..'
-            ) : (
-              <div key={index}>
-                <div className='workImgDiv'>
-                  <Card
-                    hoverable={true}
-                    size={'small'}
-                    style={{
-                      backgroundColor: 'whitesmoke',
-                      borderRadius: '15px',
-                      border: '1px outset',
-                    }}
-                  >
-                    <img
-                      src={work}
-                      alt={`workImg${index}`}
-                      width='150'
-                      height='150'
-                      onClick={() => onOpenModalHandler(index)}
-                    />
-                  </Card>
-                </div>
-              </div>
-            );
-          })}
+  const { id, works } = props;
 
-          <Modal
-            title='Posted by Designers'
-            visible={ModalVisible}
-            onCancel={() => onCloseModalHandler(CurrentImgIndex)}
-            destroyOnClose={true}
-            footer={null}
-          >
-            {/* Display work images in a carousel in a modal */}
-            <Slider {...settings} className='slick-slider'>
-              {props.works.map((work, index) => {
-                return (
-                  <div key={index}>
-                    <img src={work} alt={`workImg${index}`} />
-                  </div>
-                );
-              })}
-            </Slider>
-          </Modal>
-        </div>
+  return (
+    <div className='works' id={id}>
+      <h2>Works</h2>
+      <div className='workGalleryContainer'>
+        {works.map((work, index) => {
+          return works.length === 0 ? (
+            'No images attached..'
+          ) : (
+            <div key={index}>
+              <div className='workImgDiv'>
+                <img
+                  src={work}
+                  alt={`workImg${index}`}
+                  onClick={() => onOpenModalHandler(index)}
+                />
+              </div>
+            </div>
+          );
+        })}
+
+        <Modal
+          title='Posted by Designers'
+          visible={ModalVisible}
+          onCancel={() => onCloseModalHandler(CurrentImgIndex)}
+          destroyOnClose={true}
+          footer={null}
+        >
+          {/* Display work images in a carousel in a modal */}
+          <Slider {...settings} className='slick-slider'>
+            {works.map((work, index) => {
+              return (
+                <div key={index}>
+                  <img src={work} alt={`workImg${index}`} />
+                </div>
+              );
+            })}
+          </Slider>
+        </Modal>
       </div>
-    </>
+    </div>
   );
 };
 

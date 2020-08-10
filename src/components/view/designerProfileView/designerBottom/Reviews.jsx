@@ -35,10 +35,11 @@ const Reviews = (props) => {
     setNext(reviewsPerClick);
   };
 
+  const { id, reviews } = props;
   return (
-    <div className='reviews' id={props.id}>
-      <h2>Reviews ({props.reviews.length})</h2>
-      {props.reviews.length === 0 ? (
+    <div className='reviews' id={id}>
+      <h2>Reviews ({reviews.length})</h2>
+      {reviews.length === 0 ? (
         <h3>No reviews yet...</h3>
       ) : (
         arrayReviewsToShow.map((review, customerId) => (
@@ -54,7 +55,7 @@ const Reviews = (props) => {
       )}
 
       <Space>
-        {props.reviews.length >= next && (
+        {reviews.length >= next && (
           <Button
             className='Button'
             type='primary'

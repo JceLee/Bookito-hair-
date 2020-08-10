@@ -32,9 +32,3 @@ const Activity = (props) => {
 };
 
 export default Activity;
-
-// activity: {
-//   numberOfClientsLookingUp: 38,
-//   avgRespondingTime: 23,
-//   reputations: ['love', 'Great Service', 'Reasonable Price'],
-// },

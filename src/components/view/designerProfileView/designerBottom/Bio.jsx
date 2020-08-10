@@ -1,25 +1,29 @@
 import React from 'react';
 
-const Bio = (props) => (
-  <div className='bio' id={props.id}>
-    <h2>Bio</h2>
-    <table>
-      <tbody>
-        {props.bio.reverse().map((bio, index) => {
-          return (
-            <tr key={index}>
-              <td>
-                <strong>{bio.workplace}</strong>
-              </td>
-              {/* <td>{bio.position}</td> */}
-              <td>{bio.from}</td>
-              <td>{bio.to}</td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-  </div>
-);
+const Bio = (props) => {
+  const { id, bio } = props;
+
+  return (
+    <div className='bio' id={id}>
+      <h2>Bio</h2>
+      <table>
+        <tbody>
+          {bio.reverse().map((bio, index) => {
+            const { workplace, from, to } = bio;
+            return (
+              <tr key={index}>
+                <td>
+                  <strong>{workplace}</strong>
+                </td>
+                <td>{from}</td>
+                <td>{to}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
 export default Bio;

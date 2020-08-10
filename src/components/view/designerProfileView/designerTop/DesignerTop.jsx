@@ -16,13 +16,7 @@ const DesignerTop = (props) => {
   return (
     <Affix offsetTop={top}>
       <div className='designerTop' id='designerTop'>
-        <img
-          className='photo'
-          src={img}
-          alt='profilePhoto'
-          width='100'
-          height='100'
-        />
+        <img className='photo' src={img} alt='profilePhoto' />
         <div className='info'>
           <h2>
             {fname} {lname}

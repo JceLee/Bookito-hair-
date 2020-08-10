@@ -2,11 +2,16 @@
 @import './CommonComponents/NavBar.scss';
 @import './CommonComponents/searchBar/SearchBar.scss';
 @import './CommonComponents/searchBar/DesignerTypeCarousel.scss';
+
+// Designer Profile View
 @import './View/designerProfileView/DesignerProfileView.scss';
-@import './View/designerProfileView/RatingSymbol.scss';
+
+// Designer Profile View - DesingerTop
 @import './View/designerProfileView/designerTop/DesignerTop.scss';
 @import './View/designerProfileView/designerTop/designerNav/DesignerNav.scss';
 @import './View/designerProfileView/designerTop/designerNav/DesignerNavItem.scss';
+
+// Designer Profile View - DesingerBottom
 @import './View/designerProfileView/designerBottom/DesignerBottom.scss';
 @import './View/designerProfileView/designerBottom/Activity.scss';
 @import './View/designerProfileView/designerBottom/Bio.scss';
@@ -16,6 +21,7 @@
 @import './View/designerProfileView/designerBottom/Review.scss';
 @import './View/designerProfileView/designerBottom/ServiceNPrice.scss';
 @import './View/designerProfileView/designerBottom/Works.scss';
+
 @import './View/designerListView/DesignerListView.scss';
 @import './view/MainView/MainView.scss';
 @import './commonComponents/NavBar.scss';

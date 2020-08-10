@@ -47,7 +47,7 @@ const DesignerBottom = (props) => {
           <Divider />
         </div>
       </div>
-      {/* <ReviewsContainer id='Reviews' reviews={reviews} /> */}
+
       <Reviews id='Reviews' reviews={reviews} />
       <Divider />
       <Location id='Location' location={location} />

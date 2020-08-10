@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
 import Slider from 'react-slick';
-import { Card, Modal } from 'antd';
+import { Modal } from 'antd';
 import RatingSymbol from '../RatingSymbol';
 
 const Review = (props) => {
-  const { customerName, photos, rate, review, date } = props;
+  const { id, customerName, photos, rate, review, date } = props;
   const [ModalVisible, setModalVisible] = useState(false);
   const [CurrentImgIndex, setCurrentImgIndex] = useState(0);
 
@@ -63,14 +63,11 @@ const Review = (props) => {
   };
 
   return (
-    <div className='review fade-in' id={props.id}>
-      <div className='reviewNameNRateNImages'>
-        <div className='reviewNameNRate'>
-          <span>
-            <strong>{customerName}</strong>
-          </span>
-          {<RatingSymbol rate={rate} />}
-        </div>
+    <div className='review fade-in' id={id}>
+      <div className='reviewHeader'>
+        <span className='reviewCustomer'>{customerName}</span>
+
+        <div className='reviewRate'>{<RatingSymbol rate={rate} />}</div>
 
         {/* Display review images in a line */}
         <div className='reviewGalleryContainer'>
@@ -80,22 +77,13 @@ const Review = (props) => {
                 return (
                   <div key={index}>
                     <div className='reviewImgDiv'>
-                      <Card
-                        hoverable={true}
-                        size={'small'}
-                        style={{
-                          backgroundColor: 'whitesmoke',
-                          borderRadius: '15px',
-                        }}
-                      >
-                        <img
-                          src={photo}
-                          alt={`reviewImgDiv${index}`}
-                          width='50'
-                          height='50'
-                          onClick={() => onOpenModalHandler(index)}
-                        />
-                      </Card>
+                      <img
+                        src={photo}
+                        alt={`reviewImgDiv${index}`}
+                        width='50'
+                        height='50'
+                        onClick={() => onOpenModalHandler(index)}
+                      />
                     </div>
                   </div>
                 );

@@ -1,4 +1,7 @@
 import React from 'react';
 
-const Home = (props) => <div className='home' id={props.id}></div>;
+const Home = (props) => {
+  const { id } = props;
+  return <div className='home' id={id}></div>;
+};
 export default Home;

@@ -1,16 +1,18 @@
 import React from 'react';
 
 const Hours = (props) => {
+  const { id, hours } = props;
   return (
-    <div className='hours' id={props.id}>
+    <div className='hours' id={id}>
       <h2>Hours</h2>
       <table>
         <tbody>
-          {props.hours.map((dayAndHour, index) => {
+          {hours.map((dayAndHour, index) => {
+            const { day, hour } = dayAndHour;
             return (
               <tr key={index}>
-                <td>{dayAndHour.day}</td>
-                <td>{dayAndHour.hour}</td>
+                <td>{day}</td>
+                <td>{hour}</td>
               </tr>
             );
           })}
