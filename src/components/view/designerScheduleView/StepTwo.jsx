@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 import Services from './Services';
+import EstimatedPrice from './EstimatedPrice';
 import '../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss';
 
 export default function StepTwo() {
@@ -15,6 +16,7 @@ export default function StepTwo() {
         </Col>
         <Col span={11}>
           <p id='title2'>Estimated Price</p>
+          <EstimatedPrice />
         </Col>
       </Row>
     </>

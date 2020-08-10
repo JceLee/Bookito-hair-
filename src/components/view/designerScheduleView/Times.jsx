@@ -2,12 +2,10 @@ import React from 'react';
 import { Radio } from 'antd';
 import '../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss';
 
-export default function Times(time, timeString) {
-  console.log(time, timeString);
-
+export default function Times(props) {
   return (
     <div className='timeButtons'>
-      <Radio.Group defaultValue='time1'>
+      <Radio.Group defaultValue='nine'>
         <Radio.Button
           value='time1'
           className='time1'

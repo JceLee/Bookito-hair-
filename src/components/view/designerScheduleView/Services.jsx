@@ -12,144 +12,75 @@ export default function Services() {
   ];
 
   const servicesContent = {
-    Cuts: (
-      <div>
-        <Row>
-          <Checkbox>
-            <Text strong>Men cut</Text>
-          </Checkbox>
-        </Row>
-        <p id='serviceMenu'>
-          $35 or up <br />
-          The price may differ
-        </p>
-        <Divider />
-        <Row>
-          <Checkbox>
-            <Text strong>Women cut</Text>
-          </Checkbox>
-        </Row>
-        <p id='serviceMenu'>
-          $45 or up <br />
-          The price may differ
-        </p>
-        <Divider />
-        <Row>
-          <Checkbox>
-            <Text strong>Kids cut</Text>
-          </Checkbox>
-        </Row>
-        <p id='serviceMenu'>
-          $25 or up <br />
-          The price may differ
-        </p>
-      </div>
-    ),
-    Style: (
-      <div>
-        <Row>
-          <Checkbox>
-            <Text strong>Men style</Text>
-          </Checkbox>
-        </Row>
-        <p id='serviceMenu'>
-          $35 or up <br />
-          The price may differ
-        </p>
-        <Divider />
-        <Row>
-          <Checkbox>
-            <Text strong>Women style</Text>
-          </Checkbox>
-        </Row>
-        <p id='serviceMenu'>
-          $45 or up <br />
-          The price may differ
-        </p>
-        <Divider />
-        <Row>
-          <Checkbox>
-            <Text strong>Kids style</Text>
-          </Checkbox>
-        </Row>
-        <p id='serviceMenu'>
-          $25 or up <br />
-          The price may differ
-        </p>
-      </div>
-    ),
-    Perms: (
-      <div>
-        <Row>
-          <Checkbox>
-            <Text strong>Men perms</Text>
-          </Checkbox>
-        </Row>
-        <p id='serviceMenu'>
-          $35 or up <br />
-          The price may differ
-        </p>
-        <Divider />
-        <Row>
-          <Checkbox>
-            <Text strong>Women perms</Text>
-          </Checkbox>
-        </Row>
-        <p id='serviceMenu'>
-          $45 or up <br />
-          The price may differ
-        </p>
-        <Divider />
-        <Row>
-          <Checkbox>
-            <Text strong>Kids perms</Text>
-          </Checkbox>
-        </Row>
-        <p id='serviceMenu'>
-          $25 or up <br />
-          The price may differ
-        </p>
-      </div>
-    ),
-    Colors: (
-      <div>
-        <Row>
-          <Checkbox>
-            <Text strong>Men colors</Text>
-          </Checkbox>
-        </Row>
-        <p id='serviceMenu'>
-          $35 or up <br />
-          The price may differ
-        </p>
-        <Divider />
-        <Row>
-          <Checkbox>
-            <Text strong>Women colors</Text>
-          </Checkbox>
-        </Row>
-        <p id='serviceMenu'>
-          $45 or up <br />
-          The price may differ
-        </p>
-        <Divider />
-        <Row>
-          <Checkbox>
-            <Text strong>Kids colors</Text>
-          </Checkbox>
-        </Row>
-        <p id='serviceMenu'>
-          $25 or up <br />
-          The price may differ
-        </p>
-      </div>
-    ),
+    Cuts: [
+      { service: 'Men Cut', price: '$35', description: 'The price may differ' },
+      {
+        service: 'Women Cut',
+        price: '$40',
+        description: 'The price may differ',
+      },
+      {
+        service: 'Kids Cut',
+        price: '$15',
+        description: 'The price may differ',
+      },
+    ],
+    Style: [
+      {
+        service: 'Men Style',
+        price: '$35',
+        description: 'The price may differ',
+      },
+      {
+        service: 'Women Style',
+        price: '$40',
+        description: 'The price may differ',
+      },
+      {
+        service: 'Kids Style',
+        price: '$15',
+        description: 'The price may differ',
+      },
+    ],
+    Perms: [
+      {
+        service: 'Men Perms',
+        price: '$35',
+        description: 'The price may differ',
+      },
+      {
+        service: 'Women Perms',
+        price: '$40',
+        description: 'The price may differ',
+      },
+      {
+        service: 'Kids Perms',
+        price: '$15',
+        description: 'The price may differ',
+      },
+    ],
+    Colors: [
+      {
+        service: 'Men Colors',
+        price: '$35',
+        description: 'The price may differ',
+      },
+      {
+        service: 'Women Colors',
+        price: '$40',
+        description: 'The price may differ',
+      },
+      {
+        service: 'Kids Colors',
+        price: '$15',
+        description: 'The price may differ',
+      },
+    ],
   };
 
   const [key, setKey] = useState('Cuts');
 
   const onTabChange = (key) => {
-    console.log(key);
     setKey(key);
   };
 
@@ -163,7 +94,22 @@ export default function Services() {
           onTabChange(key);
         }}
       >
-        {servicesContent[key]}
+        {servicesContent[key].map((menu, index) => (
+          <div key={index}>
+            <Row>
+              <Checkbox>
+                <Text strong>{menu.service}</Text>
+              </Checkbox>
+            </Row>
+            <p id='serviceMenu'>
+              {menu.price} <br />
+              {menu.description}
+            </p>
+            <Divider />
+          </div>
+        ))}
+        {/* {servicesContent[key]} */}
+        {/* {[key]} */}
       </Card>
     </div>
   );

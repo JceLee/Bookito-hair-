@@ -4,7 +4,7 @@ import StepOne from './StepOne';
 import StepTwo from './StepTwo';
 import StepThree from './StepThree';
 
-export default function DesignerSchedule(props) {
+export default function DesignerSchedule() {
   const { Step } = Steps;
 
   const steps = [
@@ -23,6 +23,10 @@ export default function DesignerSchedule(props) {
   ];
 
   const [current, setCurrent] = useState(0);
+
+  const onChange = (current) => {
+    setCurrent(current);
+  };
 
   const next = () => {
     setCurrent(current + 1);
@@ -63,7 +67,7 @@ export default function DesignerSchedule(props) {
         okButtonProps={{ style: { display: 'none' } }}
         cancelButtonProps={{ style: { display: 'none' } }}
       >
-        <Steps current={current}>
+        <Steps current={current} onChange={onChange}>
           {steps.map((item) => (
             <Step key={item.title} title={item.title} />
           ))}
