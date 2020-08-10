@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Radio, TimePicker } from 'antd';
 // import DatePicker from 'react-datepicker';
-import '../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss';
+import '../../../assets/scss/View/DesignerScheduleView/DesignerScheduleView.scss';
 
 export default function Times(time, timeString) {
   console.log(time, timeString);
