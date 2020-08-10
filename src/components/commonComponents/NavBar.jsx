@@ -1,6 +1,7 @@
 import React from "react";
 import { Menu, Dropdown, Button, Typography } from "antd";
 import { Link } from "react-router-dom";
+import Google from '../view/authView/Google';
 
 const { Title } = Typography;
 
@@ -32,14 +33,10 @@ export default function Navbar() {
           <Title level={4}>LookUp</Title>
         </Link>
       </div>
-      <div className="listing">
-        <Link to="/designer_list">
-          <Title level={4}>Listing</Title>
-        </Link>
-      </div>
       <Dropdown className="profile" overlay={menu} placement="bottomRight">
         <Button shape="round">Profile</Button>
       </Dropdown>
+        <Google />
     </>
   );
 }
