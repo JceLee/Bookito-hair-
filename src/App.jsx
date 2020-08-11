@@ -10,8 +10,6 @@ import ClientScheduleView from "./components/view/clientScheduleView/ClientSched
 import ClientProfileView from "./components/view/clientProfileView/ClientProfileView";
 import "antd/dist/antd.css";
 import "./assets/scss/App.scss";
-import ScheduleCard from "./components/ScheduleCard";
-
 
 const { Header, Content, Footer } = Layout;
 
@@ -30,8 +28,6 @@ export default function App() {
             <Route path="/designer_profile" component={DesignerProfileView} />
             <Route path="/client_schedule" component={ClientScheduleView} />
             <Route path="/client_profile" component={ClientProfileView} />
-            {/* for testing purposes */}
-            <Route path="/scheduleCard" component={ScheduleCard} /> 
           </div>
         </Content>
         <Footer className="footer">LookUp WIP July 2020</Footer>
