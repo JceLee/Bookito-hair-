@@ -21,9 +21,12 @@
   font-size: 1rem;
   line-height: 1;
 
-  .ant-rate-star {
-    margin: 0;
-    padding: 0 0.125rem;
+  &-star {
+    > div {
+      &:hover {
+        transform: scale(1);
+      }
+    }
   }
 }
 
@@ -251,6 +254,8 @@
   .review {
     @extend %profile-layout-shared;
     width: 90%;
+    margin: 1rem auto;
+    box-shadow: unset;
     text-align: left;
     position: relative;
 
