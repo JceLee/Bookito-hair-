@@ -1,36 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { Layout } from "antd";
-import { HashRouter as Router, Route } from "react-router-dom"
-import NavBar from "./components/NavBar"
-import Home from "./components/Home"
-import Listing from "./components/Listing"
-import Appointments from "./components/Appointments"
-import Account from "./components/Account"
-import ScheduleCard from "./components/ScheduleCard"; // for testing
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import NavBar from "./components/commonComponents/NavBar";
+import MainView from "./components/view/mainView/MainView";
+import DesignerListView from "./components/view/designerListView/DesignerListView";
+import DesignerScheduleView from "./components/view/designerScheduleView/DesignerScheduleView";
+import DesignerProfileView from "./components/view/designerProfileView/DesignerProfileView";
+import ClientScheduleView from "./components/view/clientScheduleView/ClientScheduleView";
+import ClientProfileView from "./components/view/clientProfileView/ClientProfileView";
 import "antd/dist/antd.css";
-import "./assets/css/App.css";
+import "./assets/scss/App.scss";
 
 const { Header, Content, Footer } = Layout;
 
 export default function App() {
-    return (
-        <Router>
-            <Layout className="layout">
-                <Header className="header">
-                    <NavBar />
-                </Header>
-                <Content className="outerContent">
-                    <div className="innerContent">
-                        <Route exact path="/" component={Home} />
-                        <Route path="/listing" component={Listing} />
-                        <Route path="/appointments" component={Appointments} />
-                        <Route path="/account" component={Account} />
-                        {/* for testing purposes */}
-                        <Route path="/scheduleCard" component={ScheduleCard} /> 
-                    </div>
-                </Content>
-                <Footer className="footer" >LookUp WIP July 2020</Footer>
-            </Layout>
-        </Router>
-    );
+  return (
+    <Router>
+      <Layout className="layout">
+        <Header className="header">
+          <NavBar />
+        </Header>
+        <Content className="outerContent">
+          <div className="innerContent">
+            <Route exact path="/" component={MainView} />
+            <Route path="/designer_list" component={DesignerListView} />
+            <Route path="/designer_schedule" component={DesignerScheduleView} />
+            <Route path="/designer_profile" component={DesignerProfileView} />
+            <Route path="/client_schedule" component={ClientScheduleView} />
+            <Route path="/client_profile" component={ClientProfileView} />
+          </div>
+        </Content>
+        <Footer className="footer">LookUp WIP July 2020</Footer>
+      </Layout>
+    </Router>
+  );
 }
