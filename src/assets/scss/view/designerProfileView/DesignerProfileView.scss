@@ -1,15 +1,326 @@
-.designerProfileView {
-  width: 60%;
-  height: 100%;
-  padding: 0.5rem;
+// Customized carousel
+.slick-slide img {
   margin: auto;
+}
+
+.slick-next {
+  right: -10px;
+}
+
+.slick-prev {
+  left: -10px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: #1890ff;
+}
+
+// Customized Rate component
+.ant-rate {
+  font-size: 1rem;
+  line-height: 1;
+
+  .ant-rate-star {
+    margin: 0;
+    padding: 0 0.125rem;
+  }
+}
+
+// Fade in effect
+.fade-in {
+  animation: fadeIn ease 1s;
+  -webkit-animation: fadeIn ease 1s;
+  -moz-animation: fadeIn ease 1s;
+  -o-animation: fadeIn ease 1s;
+  -ms-animation: fadeIn ease 1s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+// Profile Layout Shared
+%profile-layout-shared {
+  padding: 0.5rem;
+  margin: 0.5rem auto;
+  text-align: center;
+  line-height: 1.5;
+  background-color: whitesmoke;
   border: 1px solid;
   border-radius: 25px;
   box-shadow: 10px 20px 20px #dce7fc, 1px 10px 10px #dae6ff;
 }
 
-@media (max-width: 1280px) {
-  .designerProfileView {
-    width: 100%;
+// Designer Profile View
+.designerProfileView {
+  @extend %profile-layout-shared;
+  width: 60%;
+
+  // Designer Top
+  .designerTop {
+    @extend %profile-layout-shared;
+    margin: 1rem auto;
+    box-shadow: unset;
+    padding: 1rem;
+    width: 90%;
+    text-align: left;
+    h2 {
+      margin: 0;
+    }
+
+    .profileImage {
+      border-radius: 50%;
+      margin: 1rem;
+      float: left;
+      width: 100px;
+      height: 100px;
+    }
+
+    // Designer Top - Navigation
+    .designerNav {
+      margin: 0.5rem 0 0 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+
+      .designerNavItem {
+        margin: 0 10px;
+        a {
+          color: black;
+        }
+        a:hover,
+        a:active,
+        a.active {
+          color: #1890ff;
+        }
+      }
+    }
+  }
+
+  // Designer Bottom
+  .designerBottom {
+    @extend %profile-layout-shared;
+    width: 90%;
+    background-color: whitesmoke;
+    border: 0;
+    box-shadow: unset;
+
+    .activityNBioGrid,
+    .serviceNPriceHoursGrid {
+      width: 90%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 0;
+      margin: 0 auto;
+    }
+
+    .activityGrid,
+    .bioGrid,
+    .serviceNPriceGrid,
+    .hoursGrid {
+      width: 50%;
+    }
+  }
+
+  // Designer Bottom - Activity
+  .activity {
+    @extend %profile-layout-shared;
+    width: 90%;
+
+    section {
+      text-align: left;
+      padding: 0.5rem 1rem;
+    }
+
+    strong {
+      color: salmon;
+    }
+
+    span {
+      color: rgb(0, 199, 172);
+      font-size: 1.2rem;
+      font-weight: bolder;
+    }
+
+    .reputation {
+      border: 1px solid rgb(51, 68, 161);
+      display: inline-block;
+      margin: 0.5rem;
+      padding: 0.5rem;
+      width: fit-content;
+      border-radius: 25px;
+      box-shadow: 0 2px 2px rgb(4, 11, 48);
+    }
+  }
+
+  // Designer Bottom - Works
+  .works {
+    @extend %profile-layout-shared;
+    width: 90%;
+
+    .workGalleryContainer {
+      width: 90%;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0.5rem;
+      justify-content: space-evenly;
+
+      .workImgDiv {
+        margin: 0.5rem;
+        img {
+          width: 150px;
+          height: 150px;
+        }
+        img:hover {
+          cursor: pointer;
+          opacity: 0.75;
+        }
+      }
+    }
+  }
+
+  // Designer Bottom = Bio / Service & Price / Hours
+  .bio,
+  .serviceNPrice,
+  .hours {
+    @extend %profile-layout-shared;
+    width: 90%;
+    height: unset;
+
+    table,
+    th,
+    td {
+      padding: 1rem;
+      margin: 0 auto;
+    }
+  }
+
+  // Designer Bottom - Reviews
+  .reviews {
+    @extend %profile-layout-shared;
+    width: 90%;
+    position: relative;
+  }
+
+  // Designer Botton - Review
+  .review {
+    @extend %profile-layout-shared;
+    width: 90%;
+    text-align: left;
+    position: relative;
+
+    .reviewHeader {
+      display: flex;
+      align-items: center;
+
+      .reviewCustomer {
+        flex-shrink: 0;
+        padding: 0.5rem;
+        font-size: larger;
+        font-weight: bold;
+        width: fit-content;
+      }
+
+      .reviewRate {
+        width: 120px;
+        text-align: center;
+      }
+
+      .reviewGalleryContainer {
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+
+        .reviewImgDiv {
+          margin: 0.5rem;
+
+          img {
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
+          }
+
+          img:hover {
+            opacity: 0.8;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+
+  .reviewContent {
+    display: inline-flex;
+    margin-right: 0.5rem;
+  }
+
+  // Designer Botton - Location
+  .location {
+    @extend %profile-layout-shared;
+    width: 90%;
+
+    .googleMap {
+      width: 35vw;
+      height: 35vh;
+      margin: 1rem auto;
+    }
+
+    .marker {
+      color: white;
+      background: grey;
+      padding: 15px 10px;
+      display: inline-flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      border-radius: 100%;
+      transform: translate(-50%, -50%);
+    }
   }
 }
