@@ -1,0 +1,45 @@
+.ant-card.scheduleCard {
+    border-style: solid;
+    border-color: rgb(165, 165, 165);
+    border-width: 1.5px;
+
+    .scheduleCardDivider.ant-divider.ant-divider-vertical{
+        height: 100%;
+        border-left: 1px solid rgb(165, 165, 165);
+    }
+
+    .ant-btn.scheduleCardEditBtn {
+        background-color: black;
+        color: white;
+        padding: 0;
+        width: 100%;
+        height: 40px;
+    }
+
+    .ant-btn.scheduleCardReviewBtn {
+        background-color: black;
+        color: white;
+        width: 50%;
+        padding: 0;
+        height: 40px;
+    }
+
+    .ant-btn.scheduleCardRebookBtn {
+        background-color: white;
+        color: black;
+        width: 50%;
+        padding: 0;
+        height: 40px;
+        border-color: rgb(165, 165, 165);
+    }
+
+    .ant-card-actions > li {
+        margin: 0;
+        height: 40px;
+    }
+    
+    .scheduleCardDate {
+        text-align: center;
+        margin: auto;
+    }
+}
