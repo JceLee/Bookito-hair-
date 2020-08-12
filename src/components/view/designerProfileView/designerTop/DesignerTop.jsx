@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { Affix, Button } from 'antd';
 import DesignerNav from './designerNav/DesignerNav.jsx';
-import RatingSymbol from '../RatingSymbol.jsx';
+import ReadOnlyStar from '../../../commonComponents/ReadOnlyStar';
 
 const DesignerTop = (props) => {
   const [top] = useState(64);
@@ -21,7 +21,8 @@ const DesignerTop = (props) => {
         <h2>
           {fname} {lname}
         </h2>
-        <RatingSymbol rate={totalRate} />
+        {/* <RatingSymbol rate={totalRate} /> */}
+        <ReadOnlyStar rating={totalRate} />
         <p>{location}</p>
         <Button className='Button' type='primary' shape='round'>
           Book Now

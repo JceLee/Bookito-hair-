@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import Slider from 'react-slick';
 import { Modal } from 'antd';
-import RatingSymbol from '../RatingSymbol';
+import ReadOnlyStar from '../../../commonComponents/ReadOnlyStar';
 
 const Review = (props) => {
   const { id, customerName, photos, rate, review, date } = props;
@@ -67,7 +67,7 @@ const Review = (props) => {
       <div className='reviewHeader'>
         <span className='reviewCustomer'>{customerName}</span>
 
-        <div className='reviewRate'>{<RatingSymbol rate={rate} />}</div>
+        <div className='reviewRate'>{<ReadOnlyStar rating={rate} />}</div>
 
         {/* Display review images in a line */}
         <div className='reviewGalleryContainer'>
