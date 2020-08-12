@@ -87,7 +87,7 @@
 // Profile Layout Shared
 %profile-layout-shared {
   padding: 0.5rem;
-  margin: 0.5rem auto;
+  margin: 0 auto;
   text-align: center;
   line-height: 1.5;
   background-color: whitesmoke;
@@ -104,10 +104,9 @@
   // Designer Top
   .designerTop {
     @extend %profile-layout-shared;
-    margin: 1rem auto;
     box-shadow: unset;
     padding: 1rem;
-    width: 90%;
+    width: 80%;
     text-align: left;
     h2 {
       margin: 0;
@@ -147,7 +146,7 @@
   .designerBottom {
     @extend %profile-layout-shared;
     width: 90%;
-    background-color: whitesmoke;
+    margin-top: 0.5rem;
     border: 0;
     box-shadow: unset;
 

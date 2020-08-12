@@ -5,7 +5,7 @@ import DesignerNav from './designerNav/DesignerNav.jsx';
 import RatingSymbol from '../RatingSymbol.jsx';
 
 const DesignerTop = (props) => {
-  const [top] = useState(48);
+  const [top] = useState(64);
   const [height, setHeight] = useState(0);
   const { fname, lname, img, totalRate, location } = props;
   console.log(height);
