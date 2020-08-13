@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Menu, Dropdown, Button, Typography, Drawer } from "antd";
 import { Link } from "react-router-dom";
 import { MenuOutlined } from "@ant-design/icons";
+import SearchBar from "./SearchBar";
 
 const { Title } = Typography;
 
@@ -24,15 +25,24 @@ export default function Navbar() {
     { name: "Profile (Client)", link: "/client_profile" },
   ];
 
+  const menu = (
+    <Menu>
+      <Menu.Item>1</Menu.Item>
+      <Menu.Item>2</Menu.Item>
+      <Menu.Item>3</Menu.Item>
+    </Menu>
+  );
+
   return (
     <>
       <div className="logo">
         <Link to="/">LookUp</Link>
       </div>
       {/* < tablet */}
-      {/* <Dropdown className="menu" overlay={menu} placement="bottomRight"> */}
-      {/* <Button shape="round">Profile</Button> */}
-      {/* </Dropdown> */}
+      <Dropdown className="menu" overlay={menu} placement="bottomRight">
+        <Button shape="round">Profile</Button>
+      </Dropdown>
+      {/* <SearchBar /> */}
       <Drawer
         title="Menu"
         placement="right"
