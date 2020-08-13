@@ -2,7 +2,10 @@ import React from 'react';
 import { Link } from 'react-scroll';
 
 const DesignerNavItem = (props) => {
-  const { height, children } = props;
+  let { height, children } = props;
+  if (children === 'Home') {
+    height += 64
+  }
   return (
     <li className='designerNavItem'>
       <Link
@@ -11,7 +14,8 @@ const DesignerNavItem = (props) => {
         spy={true}
         smooth={true}
         duration={500}
-        offset={height * -1.5}
+        // offset={height * -1.75}
+        offset={height * -2.5}
       >
         {children}
       </Link>

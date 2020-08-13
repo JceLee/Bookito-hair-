@@ -25,7 +25,7 @@ const DesignerBottom = (props) => {
   return (
     <div className='designerBottom'>
       <Home id='Home' />
-      <div className='activityNBioGrid'>
+      {/* <div className='activityNBioGrid'>
         <div className='activityGrid'>
           <Activity fname={fname} activity={activity} />
           <Divider />
@@ -34,23 +34,29 @@ const DesignerBottom = (props) => {
           <Bio bio={bio} />
           <Divider />
         </div>
-      </div>
+      </div> */}
       <Works id='Works' works={works} />
-      <Divider />
+      <Divider className='profileDivider' />
       <div className='serviceNPriceHoursGrid'>
         <div className='serviceNPriceGrid'>
           <ServiceNPrice id='Price' serviceNPrices={serviceNPrices} />
-          <Divider />
+          <Divider className='profileDivider' />
         </div>
         <div className='hoursGrid'>
           <Hours id='Hours' hours={hours} />
-          <Divider />
+          <Divider className='profileDivider' />
         </div>
       </div>
-
+      <Divider className='profileDivider' />
       <Reviews id='Reviews' reviews={reviews} />
-      <Divider />
+      <Divider className='profileDivider' />
       <Location id='Location' location={location} />
+      <Divider />
+      <Divider />
+      <Divider />
+      <Divider />
+      <Divider />
+      <Divider />
       <Divider />
       <Divider />
       <Divider />

@@ -84,16 +84,22 @@
   }
 }
 
+// Customized Divider
+.profileDivider {
+  background-color: rgb(165, 165, 165);
+  height: 2px;
+}
+
 // Profile Layout Shared
 %profile-layout-shared {
   padding: 0.5rem;
   margin: 0 auto;
   text-align: center;
   line-height: 1.5;
-  background-color: whitesmoke;
-  border: 1px solid;
-  border-radius: 25px;
-  box-shadow: 10px 20px 20px #dce7fc, 1px 10px 10px #dae6ff;
+  background-color: rgb(240, 242, 245);
+  // border: 1px solid;
+  // border-radius: 25px;
+  // box-shadow: 10px 20px 20px #dce7fc, 1px 10px 10px #dae6ff;
 }
 
 // Designer Profile View
@@ -104,32 +110,42 @@
   // Designer Top
   .designerTop {
     @extend %profile-layout-shared;
+    background-color: skyblue;
     box-shadow: unset;
-    padding: 1rem;
-    width: 80%;
+    // padding: 1rem 1rem 0;
+    padding: 0;
+    width: 90%;
     text-align: left;
-    h2 {
-      margin: 0;
-    }
 
-    .profileImage {
-      border-radius: 50%;
-      margin: 1rem;
-      float: left;
-      width: 100px;
-      height: 100px;
+    .designerProfile {
+      padding: 1rem 0 0 3rem;
+      h2 {
+        margin: 0;
+      }
+      p {
+        padding: 0;
+        margin: 0;
+      }
+
+      .profileImage {
+        border-radius: 50%;
+        margin: 0 1rem 0 0;
+        float: left;
+        width: 60px;
+        height: 60px;
+      }
     }
 
     // Designer Top - Navigation
     .designerNav {
-      margin: 0.5rem 0 0 0;
+      margin: 0 0 0 3rem;
       padding: 0;
       list-style: none;
       display: flex;
       flex-wrap: wrap;
 
       .designerNavItem {
-        margin: 0 10px;
+        margin: 0 1rem 0 0;
         a {
           color: black;
         }
@@ -138,6 +154,21 @@
         a.active {
           color: #1890ff;
         }
+      }
+    }
+
+    .tapWithButton {
+      margin: 0;
+      padding: 0.5rem 0;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      background-color: skyblue;
+
+      .Button {
+        margin-right: 3rem;
       }
     }
   }
@@ -155,9 +186,12 @@
       width: 90%;
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
       padding: 0;
       margin: 0 auto;
+
+      .profileDivider {
+        display: none;
+      }
     }
 
     .activityGrid,
@@ -233,7 +267,6 @@
     @extend %profile-layout-shared;
     width: 90%;
     height: unset;
-
     table,
     th,
     td {
@@ -253,7 +286,7 @@
   .review {
     @extend %profile-layout-shared;
     width: 90%;
-    margin: 1rem auto;
+    margin: 0 auto;
     box-shadow: unset;
     text-align: left;
     position: relative;
@@ -273,6 +306,7 @@
       .reviewRate {
         width: 160px;
         text-align: center;
+        flex-shrink: 0;
       }
 
       .reviewGalleryContainer {
@@ -287,7 +321,6 @@
           img {
             width: 50px;
             height: 50px;
-            border-radius: 15px;
           }
 
           img:hover {
@@ -301,7 +334,6 @@
 
   .reviewContent {
     display: inline-flex;
-    margin-right: 0.5rem;
   }
 
   // Designer Botton - Location

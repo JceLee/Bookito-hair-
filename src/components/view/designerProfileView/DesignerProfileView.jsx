@@ -4,6 +4,7 @@ import DesignerTop from './designerTop/DesignerTop.jsx';
 import DesignerBottom from './designerBottom/DesignerBottom.jsx';
 
 const designer = {
+  isAuthenticated: true,
   fname: 'John',
   lname: 'Doe',
   location: 'bcit burnaby, vancouver',
@@ -120,6 +121,7 @@ const designer = {
 };
 
 const {
+  isAuthenticated,
   fname,
   lname,
   location,
@@ -137,6 +139,7 @@ const DesignerProfileView = () => (
   <BrowserRouter>
     <div className='designerProfileView'>
       <DesignerTop
+        isAuthenticated={isAuthenticated}
         fname={fname}
         lname={lname}
         location={location}
@@ -145,7 +148,6 @@ const DesignerProfileView = () => (
       />
 
       <DesignerBottom
-        path={`/designer_profile/${fname.toLowerCase()}_${lname.toLowerCase()}/`}
         fname={fname}
         location={location}
         activity={activity}

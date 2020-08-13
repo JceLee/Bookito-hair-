@@ -59,7 +59,6 @@ const Reviews = (props) => {
           <Button
             className='Button'
             type='primary'
-            shape='round'
             onClick={handleShowMoreReviews}
           >
             Load More
@@ -73,12 +72,12 @@ const Reviews = (props) => {
             spy={true}
             smooth={true}
             duration={500}
-            offset={-270}
+            // offset={-121 * 1.75}
+            offset={-48 * 2.5}
           >
             <Button
               className='Button'
               type='primary'
-              shape='round'
               onClick={handleShowLessReviews}
             >
               Load Less
