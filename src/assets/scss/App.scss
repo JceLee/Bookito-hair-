@@ -1,19 +1,20 @@
-@import "./view/MainView/MainView.scss";
-@import "./commonComponents/NavBar.scss";
-@import "./view/DesignerListView/DesignerListView.scss";
-@import "./commonComponents/searchBar/SearchBar.scss";
-@import "./commonComponents/searchBar/DesignerTypeCarousel.scss";
-@import "./view/designerListView/DesignerCardComponent/DesignerCardComponent.scss";
-@import "./view/designerListView/designerListFilter/DesignerListFilter.scss";
+@import './view/MainView/MainView.scss';
+@import './commonComponents/NavBar.scss';
+@import './view/DesignerListView/DesignerListView.scss';
+@import './commonComponents/searchBar/SearchBar.scss';
+@import './commonComponents/searchBar/DesignerTypeCarousel.scss';
+@import './view/designerListView/DesignerCardComponent/DesignerCardComponent.scss';
+@import './view/designerListView/designerListFilter/DesignerListFilter.scss';
+@import './view/designerProfileView/DesignerProfileView.scss';
 
-.header{
-    z-index: 1;
+.header {
+  z-index: 1;
 }
 
 .outerContent {
-    padding: 0;
+  padding: 0;
 
-    @include tabletP{
-        padding: 0 50px;
-    } 
+  @include tabletP {
+    padding: 0 50px;
+  }
 }
