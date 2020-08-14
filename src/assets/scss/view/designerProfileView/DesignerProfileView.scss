@@ -21,6 +21,10 @@
   font-size: 1rem;
   line-height: 1;
 
+  .ant-rate-star {
+    margin: 0 1px 0 0;
+  }
+
   &-star {
     > div {
       &:hover {
@@ -97,9 +101,7 @@
   text-align: center;
   line-height: 1.5;
   background-color: rgb(240, 242, 245);
-  // border: 1px solid;
-  // border-radius: 25px;
-  // box-shadow: 10px 20px 20px #dce7fc, 1px 10px 10px #dae6ff;
+  position: relative;
 }
 
 // Designer Profile View
@@ -112,7 +114,6 @@
     @extend %profile-layout-shared;
     background-color: skyblue;
     box-shadow: unset;
-    // padding: 1rem 1rem 0;
     padding: 0;
     width: 90%;
     text-align: left;
@@ -131,8 +132,8 @@
         border-radius: 50%;
         margin: 0 1rem 0 0;
         float: left;
-        width: 60px;
-        height: 60px;
+        width: 75px;
+        height: 75px;
       }
     }
 
@@ -168,7 +169,7 @@
       background-color: skyblue;
 
       .Button {
-        margin-right: 3rem;
+        margin: 0 3rem 0 0;
       }
     }
   }
@@ -239,18 +240,22 @@
     width: 90%;
 
     .workGalleryContainer {
-      width: 90%;
+      text-align: left;
+      width: 800px;
       margin: 0 auto;
       display: flex;
       flex-wrap: wrap;
-      padding: 0.5rem;
-      justify-content: space-evenly;
+      padding: 0;
 
       .workImgDiv {
-        margin: 0.5rem;
+        display: inline-block;
+        margin: 16px 20px;
+        box-sizing: border-box;
+        text-align: center;
+
         img {
-          width: 150px;
-          height: 150px;
+          width: 120px;
+          height: 120px;
         }
         img:hover {
           cursor: pointer;
@@ -282,31 +287,41 @@
     position: relative;
   }
 
-  // Designer Botton - Review
+  // Designer Bottom - Review
   .review {
     @extend %profile-layout-shared;
-    width: 90%;
-    margin: 0 auto;
-    box-shadow: unset;
+    width: 100%;
+    margin: 0.5rem auto;
+    padding: 0;
     text-align: left;
     position: relative;
 
     .reviewHeader {
       display: flex;
       align-items: center;
+      padding: 0.25rem 0;
+
+      .reviewCustomerNrate {
+        display: flex;
+        align-items: center;
+      }
 
       .reviewCustomer {
         flex-shrink: 0;
-        padding: 0.5rem;
+
         font-size: larger;
         font-weight: bold;
         width: fit-content;
       }
 
       .reviewRate {
-        width: 160px;
+        width: 100px;
         text-align: center;
         flex-shrink: 0;
+      }
+
+      .reviewGalleryContainer {
+        padding: 0 0 0 1rem;
       }
 
       .reviewGalleryContainer {
@@ -336,7 +351,7 @@
     display: inline-flex;
   }
 
-  // Designer Botton - Location
+  // Designer Bottom - Location
   .location {
     @extend %profile-layout-shared;
     width: 90%;
@@ -349,7 +364,7 @@
 
     .marker {
       color: white;
-      background: grey;
+      background: #1890ff;
       padding: 15px 10px;
       display: inline-flex;
       text-align: center;
@@ -358,5 +373,234 @@
       border-radius: 100%;
       transform: translate(-50%, -50%);
     }
+  }
+
+  .backTopBtn {
+    line-height: 40px;
+    border-radius: 50%;
+    background-color: #1088e9;
+    color: #fff;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    right: 5vw;
+  }
+}
+
+@media (max-width: 1441px) {
+  .designerProfileView {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+
+    .designerTop {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+
+      .designerProfile {
+        padding: 1rem 0 0 1rem;
+        h2 {
+          margin: 0;
+        }
+        p {
+          padding: 0;
+          margin: 0;
+        }
+
+        .profileImage {
+          border-radius: 50%;
+          margin: 0 1rem 0 0;
+          float: left;
+          width: 50px;
+          height: 50px;
+        }
+      }
+
+      .designerNav {
+        margin: 0 0 0 1rem;
+
+        .designerNavItem {
+          margin: 0 0.5rem 0 0;
+        }
+      }
+
+      .tapWithButton {
+        .Button {
+          margin: 0 0.5rem 0 0;
+          padding: 0 0.5rem;
+        }
+      }
+    }
+
+    .designerBottom {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+
+      .works {
+        width: 100%;
+
+        .workGalleryContainer {
+          text-align: left;
+          width: 800px;
+          margin: 0 auto;
+          display: flex;
+          flex-wrap: wrap;
+          padding: 0;
+
+          .workImgDiv {
+            display: inline-block;
+            margin: 16px 20px;
+            box-sizing: border-box;
+            text-align: center;
+
+            img {
+              width: 120px;
+              height: 120px;
+            }
+            img:hover {
+              cursor: pointer;
+              opacity: 0.75;
+            }
+          }
+        }
+      }
+
+      .serviceNPriceHoursGrid {
+        width: 90%;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0;
+        margin: 0 auto;
+
+        .profileDivider {
+          display: none;
+        }
+      }
+
+      .activityGrid,
+      .bioGrid,
+      .serviceNPriceGrid,
+      .hoursGrid {
+        width: 50%;
+      }
+
+      .reviews {
+        width: 95%;
+        margin: 0 auto;
+        padding: 0;
+      }
+
+      .review {
+        width: 100%;
+        margin: 0.5rem 0;
+        padding: 0;
+
+        .reviewHeader {
+          display: block;
+
+          .reviewCustomerNrate {
+            display: flex;
+            align-items: center;
+          }
+
+          .reviewGalleryContainer {
+            width: 100%;
+            padding: 0;
+          }
+        }
+      }
+    }
+
+    .location {
+      .googleMap {
+        margin: 0 auto;
+        width: 75vw;
+        height: 50vh;
+      }
+    }
+
+    .backTopBtn {
+      right: 1vw;
+    }
+  }
+}
+
+@media (max-width: 769px) {
+  .designerProfileView .designerBottom .works .workGalleryContainer {
+    text-align: left;
+    width: 480px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+
+    .workImgDiv {
+      display: inline-block;
+      margin: 16px 20px;
+      box-sizing: border-box;
+      text-align: center;
+
+      img {
+        width: 120px;
+        height: 120px;
+      }
+      img:hover {
+        cursor: pointer;
+        opacity: 0.75;
+      }
+    }
+  }
+}
+
+@media (max-width: 481px) {
+  .designerProfileView .designerBottom .works .workGalleryContainer {
+    text-align: left;
+    width: 280px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+
+    .workImgDiv {
+      display: inline-block;
+      margin: 16px 10px;
+      box-sizing: border-box;
+      text-align: center;
+
+      img {
+        width: 120px;
+        height: 120px;
+      }
+      img:hover {
+        cursor: pointer;
+        opacity: 0.75;
+      }
+    }
+  }
+
+  .designerProfileView .designerTop .designerNav {
+    margin: 0 0 0 0.25rem;
+  }
+
+  .designerProfileView .designerTop .designerNav .designerNavItem {
+    margin: 0 0.5rem 0 0;
+  }
+
+  .designerProfileView .designerBottom .serviceNPriceHoursGrid {
+    width: 100%;
+    display: block;
+    padding: 0;
+    margin: 0 auto;
+
+    .profileDivider {
+      display: block;
+    }
+  }
+
+  .designerProfileView .designerBottom .serviceNPriceGrid,
+  .designerProfileView .designerBottom .hoursGrid {
+    width: 100%;
   }
 }

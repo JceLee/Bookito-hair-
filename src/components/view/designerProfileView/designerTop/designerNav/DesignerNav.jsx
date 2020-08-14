@@ -9,13 +9,11 @@ const DesignerNav = (props) => {
   return (
     <nav>
       <ul className='designerNav'>
-        {NavItems.map((NavItem) => {
-          return (
+        {NavItems.map((NavItem) =>  (
             <DesignerNavItem key={NavItem} height={height}>
               {NavItem}
             </DesignerNavItem>
-          );
-        })}
+          ))}
       </ul>
     </nav>
   );

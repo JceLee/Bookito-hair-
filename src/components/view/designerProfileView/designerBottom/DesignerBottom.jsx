@@ -44,24 +44,30 @@ const DesignerBottom = (props) => {
         </div>
         <div className='hoursGrid'>
           <Hours id='Hours' hours={hours} />
-          <Divider className='profileDivider' />
         </div>
       </div>
       <Divider className='profileDivider' />
       <Reviews id='Reviews' reviews={reviews} />
       <Divider className='profileDivider' />
       <Location id='Location' location={location} />
-      <Divider />
-      <Divider />
-      <Divider />
-      <Divider />
-      <Divider />
-      <Divider />
-      <Divider />
-      <Divider />
-      <Divider />
-      <Divider />
-      <Divider />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 };

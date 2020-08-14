@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { BackTop } from 'antd';
 import DesignerTop from './designerTop/DesignerTop.jsx';
 import DesignerBottom from './designerBottom/DesignerBottom.jsx';
 
 const designer = {
-  isAuthenticated: true,
+  isAuthenticated: false,
   fname: 'John',
   lname: 'Doe',
   location: 'bcit burnaby, vancouver',
@@ -52,8 +53,8 @@ const designer = {
     { service: 'Styling', price: '$50' },
     { service: 'Perm', price: '$100' },
     { service: 'Male Hair dying', price: '$30' },
-    { service: 'Female Hair dying', price: '$40' },
-    { service: 'Styling2', price: '$50' },
+    // { service: 'Female Hair dying', price: '$40' },
+    // { service: 'Styling2', price: '$50' },
   ],
   hours: [
     { day: 'Monday', hour: '10:00 - 22:00' },
@@ -157,6 +158,10 @@ const DesignerProfileView = () => (
         hours={hours}
         reviews={reviews}
       />
+
+      <BackTop visibilityHeight={0}>
+        <div className='backTopBtn'>Top</div>
+      </BackTop>
     </div>
   </BrowserRouter>
 );

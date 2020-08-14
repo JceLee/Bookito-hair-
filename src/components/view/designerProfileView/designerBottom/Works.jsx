@@ -64,20 +64,19 @@ const Works = (props) => {
   return (
     <div className='works' id={id}>
       <h2>Works</h2>
-      <div className='workGalleryContainer'>
+
+      <ul className='workGalleryContainer'>
         {works.map((work, index) => {
           return works.length === 0 ? (
             'No images attached..'
           ) : (
-            <div key={index}>
-              <div className='workImgDiv'>
-                <img
-                  src={work}
-                  alt={`workImg${index}`}
-                  onClick={() => onOpenModalHandler(index)}
-                />
-              </div>
-            </div>
+            <li key={index} className='workImgDiv'>
+              <img
+                src={work}
+                alt={`workImg${index}`}
+                onClick={() => onOpenModalHandler(index)}
+              />
+            </li>
           );
         })}
 
@@ -99,7 +98,7 @@ const Works = (props) => {
             })}
           </Slider>
         </Modal>
-      </div>
+      </ul>
     </div>
   );
 };

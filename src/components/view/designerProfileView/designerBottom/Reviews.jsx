@@ -73,7 +73,7 @@ const Reviews = (props) => {
             smooth={true}
             duration={500}
             // offset={-121 * 1.75}
-            offset={-48 * 2.5}
+            offset={-48 * 2.25}
           >
             <Button
               className='Button'

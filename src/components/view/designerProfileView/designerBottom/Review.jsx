@@ -65,29 +65,26 @@ const Review = (props) => {
   return (
     <div className='review fade-in' id={id}>
       <div className='reviewHeader'>
-        <span className='reviewCustomer'>{customerName}</span>
-
-        <div className='reviewRate'>{<ReadOnlyStar rating={rate} />}</div>
+        <div className='reviewCustomerNrate'>
+          <span className='reviewCustomer'>{customerName}</span>
+          <div className='reviewRate'>{<ReadOnlyStar rating={rate} />}</div>
+        </div>
 
         {/* Display review images in a line */}
         <div className='reviewGalleryContainer'>
           {photos.length === 0
             ? 'No images attached..'
-            : photos.map((photo, index) => {
-                return (
-                  <div key={index}>
-                    <div className='reviewImgDiv'>
-                      <img
-                        src={photo}
-                        alt={`reviewImgDiv${index}`}
-                        width='50'
-                        height='50'
-                        onClick={() => onOpenModalHandler(index)}
-                      />
-                    </div>
-                  </div>
-                );
-              })}
+            : photos.map((photo, index) => (
+                <div key={index} className='reviewImgDiv'>
+                  <img
+                    src={photo}
+                    alt={`reviewImgDiv${index}`}
+                    width='50'
+                    height='50'
+                    onClick={() => onOpenModalHandler(index)}
+                  />
+                </div>
+              ))}
         </div>
 
         {/* Display review images in a carousel in a modal.
