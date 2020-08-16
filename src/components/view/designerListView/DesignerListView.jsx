@@ -27,6 +27,9 @@ export default function DesignerListView(props) {
             });
     }, [dispatch]);
 
+    console.log(designers);
+
+
     return (
         <>
             <div className="listingContainer">
