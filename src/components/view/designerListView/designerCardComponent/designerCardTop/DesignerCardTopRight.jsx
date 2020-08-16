@@ -1,7 +1,7 @@
 import React from "react"
 
 export default function DesignerCardTopRight(props) {
-    const { services} = props;
+    const { services } = props;
     return (
         <div className="designerCardTopRight">
             <div className="designerCardTopRightTypes">

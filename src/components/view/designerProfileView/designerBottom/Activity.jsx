@@ -2,7 +2,6 @@ import React from 'react';
 
 const Activity = (props) => {
   const { fname, activity } = props;
-  const { numberOfClientsLookingUp, avgRespondingTime, reputations } = activity;
 
   return (
     <div className='activity'>

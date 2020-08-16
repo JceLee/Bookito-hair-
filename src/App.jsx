@@ -3,7 +3,7 @@ import { Layout } from 'antd';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import NavBar from './components/commonComponents/NavBar';
 import MainView from './components/view/mainView/MainView';
-// import DesignerListView from './components/view/designerListView/DesignerListView';
+import DesignerListView from './components/view/designerListView/DesignerListView';
 import DesignerScheduleView from './components/view/designerScheduleView/DesignerScheduleView';
 import DesignerProfileView from './components/view/designerProfileView/DesignerProfileView';
 import ClientScheduleView from './components/view/clientScheduleView/ClientScheduleView';
@@ -23,7 +23,7 @@ export default function App() {
         <Content className='outerContent'>
           <div className='innerContent'>
             <Route exact path='/' component={MainView} />
-            {/* <Route path='/designer_list' component={DesignerListView} /> */}
+            <Route path='/designer_list' component={DesignerListView} />
             <Route path='/designer_schedule' component={DesignerScheduleView} />
             <Route path='/designer_profile' component={DesignerProfileView} />
             <Route path='/client_schedule' component={ClientScheduleView} />
