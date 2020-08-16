@@ -1,8 +1,12 @@
 .ant-card.scheduleCard {
+    width: 100%;
     border-style: solid;
     border-color: rgb(165, 165, 165);
     border-width: 1.5px;
-    width: 320px;
+
+    @include mobileL{
+        width: 320px;    
+    }
 
     .scheduleCardDivider.ant-divider.ant-divider-vertical{
         height: 100%;
