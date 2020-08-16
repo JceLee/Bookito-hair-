@@ -1,0 +1,20 @@
+.designerNavItem {
+  margin: 0 10px;
+}
+
+.designerNavItem li {
+  margin: 0 35px 0 0;
+  width: 60px;
+  float: left;
+  list-style: none;
+}
+
+.designerNavItem a {
+  color: black;
+}
+
+.designerNavItem a:hover,
+.designerNavItem a:active,
+.designerNavItem a.active {
+  color: #1890ff;
+}

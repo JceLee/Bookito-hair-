@@ -1,19 +1,44 @@
-@import "./view/MainView/MainView.scss";
-@import "./commonComponents/NavBar.scss";
-@import "./view/DesignerListView/DesignerListView.scss";
-@import "./commonComponents/searchBar/SearchBar.scss";
-@import "./commonComponents/searchBar/DesignerTypeCarousel.scss";
-@import "./view/designerListView/DesignerCardComponent/DesignerCardComponent.scss";
-@import "./view/designerListView/designerListFilter/DesignerListFilter.scss";
+@import './View/MainView/MainView.scss';
+@import './CommonComponents/NavBar.scss';
+@import './CommonComponents/searchBar/SearchBar.scss';
+@import './CommonComponents/searchBar/DesignerTypeCarousel.scss';
 
-.header{
-    z-index: 1;
+// Designer Profile View
+@import './View/designerProfileView/DesignerProfileView.scss';
+
+// Designer Profile View - DesingerTop
+@import './View/designerProfileView/designerTop/DesignerTop.scss';
+@import './View/designerProfileView/designerTop/designerNav/DesignerNav.scss';
+@import './View/designerProfileView/designerTop/designerNav/DesignerNavItem.scss';
+
+// Designer Profile View - DesingerBottom
+@import './View/designerProfileView/designerBottom/DesignerBottom.scss';
+@import './View/designerProfileView/designerBottom/Activity.scss';
+@import './View/designerProfileView/designerBottom/Bio.scss';
+@import './View/designerProfileView/designerBottom/Hours.scss';
+@import './View/designerProfileView/designerBottom/Location.scss';
+@import './View/designerProfileView/designerBottom/Reviews.scss';
+@import './View/designerProfileView/designerBottom/Review.scss';
+@import './View/designerProfileView/designerBottom/ServiceNPrice.scss';
+@import './View/designerProfileView/designerBottom/Works.scss';
+
+@import './View/designerListView/DesignerListView.scss';
+@import './view/MainView/MainView.scss';
+@import './commonComponents/NavBar.scss';
+@import './view/DesignerListView/DesignerListView.scss';
+@import './commonComponents/searchBar/SearchBar.scss';
+@import './commonComponents/searchBar/DesignerTypeCarousel.scss';
+@import './view/designerListView/DesignerCardComponent/DesignerCardComponent.scss';
+@import './view/designerListView/designerListFilter/DesignerListFilter.scss';
+
+.header {
+  z-index: 1;
 }
 
 .outerContent {
-    padding: 0;
+  padding: 0;
 
-    @include tabletP{
-        padding: 0 50px;
-    } 
+  @include tabletP {
+    padding: 0 50px;
+  }
 }

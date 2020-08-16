@@ -1,0 +1,30 @@
+.designerTop {
+  width: 100%;
+  height: 200px;
+  padding: 15px;
+  margin: auto;
+  background-color: whitesmoke;
+  border-radius: 15px;
+  border-bottom: 1px solid;
+}
+
+.designerTop h2 {
+  margin: 0;
+}
+
+.photo {
+  border-radius: 50%;
+  margin: 0 16px 16px 0;
+  float: left;
+  width: 100px;
+  height: 100px;
+}
+
+.rating {
+  margin: 0.5rem 0;
+}
+
+.designerTop Button {
+  margin: 0.5rem 0;
+  border-radius: 15px;
+}
