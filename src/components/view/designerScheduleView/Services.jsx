@@ -13,13 +13,20 @@ export default function Services() {
 
   const servicesContent = {
     Cuts: [
-      { service: 'Men Cut', price: '$35', description: 'The price may differ' },
       {
+        id: 1,
+        service: 'Men Cut',
+        price: '$35',
+        description: 'The price may differ',
+      },
+      {
+        id: 2,
         service: 'Women Cut',
         price: '$40',
         description: 'The price may differ',
       },
       {
+        id: 3,
         service: 'Kids Cut',
         price: '$15',
         description: 'The price may differ',
@@ -27,16 +34,19 @@ export default function Services() {
     ],
     Style: [
       {
+        id: 4,
         service: 'Men Style',
         price: '$35',
         description: 'The price may differ',
       },
       {
+        id: 5,
         service: 'Women Style',
         price: '$40',
         description: 'The price may differ',
       },
       {
+        id: 6,
         service: 'Kids Style',
         price: '$15',
         description: 'The price may differ',
@@ -44,16 +54,19 @@ export default function Services() {
     ],
     Perms: [
       {
+        id: 7,
         service: 'Men Perms',
         price: '$35',
         description: 'The price may differ',
       },
       {
+        id: 8,
         service: 'Women Perms',
         price: '$40',
         description: 'The price may differ',
       },
       {
+        id: 9,
         service: 'Kids Perms',
         price: '$15',
         description: 'The price may differ',
@@ -61,16 +74,19 @@ export default function Services() {
     ],
     Colors: [
       {
+        id: 10,
         service: 'Men Colors',
         price: '$35',
         description: 'The price may differ',
       },
       {
+        id: 11,
         service: 'Women Colors',
         price: '$40',
         description: 'The price may differ',
       },
       {
+        id: 12,
         service: 'Kids Colors',
         price: '$15',
         description: 'The price may differ',
@@ -79,6 +95,7 @@ export default function Services() {
   };
 
   const [key, setKey] = useState('Cuts');
+  const [isChecked, setIsChecked] = useState(null);
 
   const onTabChange = (key) => {
     setKey(key);
@@ -95,9 +112,14 @@ export default function Services() {
         }}
       >
         {servicesContent[key].map((menu, index) => (
-          <div key={index}>
+          <div className='servicesContent' key={index}>
             <Row>
-              <Checkbox>
+              <Checkbox
+                key={menu.id}
+                id={menu.id}
+                checked={isChecked === menu.id}
+                onChange={() => setIsChecked(menu.id)}
+              >
                 <Text strong>{menu.service}</Text>
               </Checkbox>
             </Row>
