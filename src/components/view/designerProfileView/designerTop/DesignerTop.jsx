@@ -67,14 +67,12 @@ const DesignerTop = (props) => {
         <h2>
           {fname} {lname}
         </h2>
-        <ReadOnlyStar rating={totalRate} />
+        <ReadOnlyStar rate={totalRate} />
         <p>{location}</p>
       </div>
       <Affix offsetTop={top}>
         <div className='tapWithButton' id='tapWithButton'>
-          <DesignerNav
-            height={height}
-          />
+          <DesignerNav height={height} />
           {isAuthenticated ? (
             <Button className='Button' type='primary'>
               Edit Profile

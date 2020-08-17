@@ -86,7 +86,7 @@ const Review = (props) => {
       <div className='reviewHeader'>
         <div className='reviewCustomerNrate'>
           <span className='reviewCustomer'>{customerName}</span>
-          <div className='reviewRate'>{<ReadOnlyStar rating={rate} />}</div>
+          <div className='reviewRate'>{<ReadOnlyStar rate={rate} />}</div>
         </div>
 
         {/* Display review images in a line */}
