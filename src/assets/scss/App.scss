@@ -1,23 +1,28 @@
-@import './View/MainView/MainView.scss';
-@import './CommonComponents/NavBar.scss';
-@import './CommonComponents/searchBar/SearchBar.scss';
-@import './CommonComponents/searchBar/DesignerTypeCarousel.scss';
+// Mixin
+@import './Mixin.scss';
+
+// Main view
+@import './view/MainView/MainView.scss';
+
+// Common components
+@import './commonComponents/NavBar.scss';
+@import './commonComponents/SearchBar.scss';
+@import './commonComponents/ScheduleCard.scss';
 @import './commonComponents/Spinner.scss';
+
+// Designer List view
+@import './view/designerListView/DesignerListView.scss';
+@import './view/designerListView/DesignerCardComponent/DesignerCardComponent.scss';
+@import './view/designerListView/designerListFilter/DesignerListFilter.scss';
+
+// Client Schedule view
+@import './view/clientScheduleView/ClientScheduleView.scss';
 
 // Designer Profile View
 @import './View/designerProfileView/DesignerProfileView.scss';
 
-@import './View/designerListView/DesignerListView.scss';
-@import './view/MainView/MainView.scss';
-@import './commonComponents/NavBar.scss';
-@import './view/DesignerListView/DesignerListView.scss';
-@import './commonComponents/searchBar/SearchBar.scss';
-@import './commonComponents/searchBar/DesignerTypeCarousel.scss';
-@import './view/designerListView/DesignerCardComponent/DesignerCardComponent.scss';
-@import './view/designerListView/designerListFilter/DesignerListFilter.scss';
-
-.header {
-  z-index: 1;
+.layout {
+  background-color: white;
 }
 
 .outerContent {
