@@ -35,6 +35,7 @@ const DesignerBottom = (props) => {
           <Divider />
         </div>
       </div> */}
+
       <Works id='Works' works={works} />
       <Divider className='profileDivider' />
       <div className='serviceNPriceHoursGrid'>

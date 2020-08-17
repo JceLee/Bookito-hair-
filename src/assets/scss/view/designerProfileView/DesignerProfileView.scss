@@ -1,19 +1,42 @@
+// Customized modal
+.ant-modal-content {
+  margin: 0 auto;
+  width: 320px;
+}
+
+.ant-modal-body {
+  padding: 6px 0 24px 0;
+}
+
+.ant-modal-close,
+.ant-modal-close-x {
+  color: grey;
+  background-color: white;
+  line-height: 1;
+  width: 18px;
+  height: 18px;
+  top: 6px;
+  right: 10px;
+}
+
 // Customized carousel
 .slick-slide img {
   margin: auto;
 }
 
 .slick-next {
-  right: -10px;
+  right: 10px;
+  z-index: 1;
 }
 
 .slick-prev {
-  left: -10px;
+  left: 10px;
+  z-index: 1;
 }
 
 .slick-prev:before,
 .slick-next:before {
-  color: #1890ff;
+  color: #fff;
 }
 
 // Customized Rate component
@@ -291,7 +314,7 @@
   .review {
     @extend %profile-layout-shared;
     width: 100%;
-    margin: 0.5rem auto;
+    margin: 1.5rem auto;
     padding: 0;
     text-align: left;
     position: relative;
@@ -494,7 +517,7 @@
 
       .review {
         width: 100%;
-        margin: 0.5rem 0;
+        margin: 1.5rem 0;
         padding: 0;
 
         .reviewHeader {

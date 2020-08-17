@@ -38,14 +38,14 @@ const designer = {
     },
   ],
   works: [
-    '/images/designers/designer_works_01.png',
-    '/images/designers/designer_works_02.png',
-    '/images/designers/designer_works_03.png',
-    '/images/designers/designer_works_04.png',
-    '/images/designers/designer_works_05.png',
-    '/images/designers/designer_works_06.png',
-    '/images/designers/designer_works_07.png',
-    '/images/designers/designer_works_08.png',
+    'https://picsum.photos/id/190/300/300',
+    'https://picsum.photos/id/290/300/300',
+    'https://picsum.photos/id/390/300/300',
+    'https://picsum.photos/id/490/300/300',
+    'https://picsum.photos/id/590/300/300',
+    'https://picsum.photos/id/690/300/300',
+    'https://picsum.photos/id/790/300/300',
+    'https://picsum.photos/id/890/300/300',
   ],
   serviceNPrices: [
     { service: 'Male Hair cut', price: '$30' },
@@ -53,8 +53,6 @@ const designer = {
     { service: 'Styling', price: '$50' },
     { service: 'Perm', price: '$100' },
     { service: 'Male Hair dying', price: '$30' },
-    // { service: 'Female Hair dying', price: '$40' },
-    // { service: 'Styling2', price: '$50' },
   ],
   hours: [
     { day: 'Monday', hour: '10:00 - 22:00' },
@@ -70,52 +68,52 @@ const designer = {
       customerName: 'customer A',
       photos: [],
       rate: 4.5,
-      review:
+      comment:
         'Nunc a nibh bibendum, mollis elit vitae, interdum ligula. Mauris dictum rhoncus augue et mollis. Nunc facilisis elit eget massa auctor, sed ultrices quam lacinia. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis fermentum turpis tellus, et maximus erat maximus at. Maecenas venenatis lacinia libero, et dapibus nisl vulputate at. Cras sodales, velit et rhoncus posuere, lorem urna fringilla est, pellentesque accumsan lectus tortor a tellus. Fusce facilisis mollis arcu, eget molestie lorem cursus ut. Donec semper velit vel dui rhoncus congue feugiat quis nisi. Fusce sit amet quam vel risus gravida pretium.!',
       date: '2020.07.31',
     },
     {
       customerName: 'customer B',
-      photos: ['/images/designers/reviews/reviews1.png'],
+      photos: ['https://picsum.photos/id/190/300/300'],
       rate: 3.5,
-      review:
+      comment:
         'Nunc a nibh bibendum, mollis elit vitae, interdum ligula. Mauris dictum rhoncus augue et mollis. Nunc facilisis elit eget massa auctor, sed ultrices quam lacinia. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis fermentum turpis tellus, et maximus erat maximus at. Maecenas venenatis lacinia libero, et dapibus nisl vulputate at. Cras sodales, velit et rhoncus posuere, lorem urna fringilla est, pellentesque accumsan lectus tortor a tellus. Fusce facilisis mollis arcu, eget molestie lorem cursus ut. Donec semper velit vel dui rhoncus congue feugiat quis nisi. Fusce sit amet quam vel risus gravida pretium.!',
       date: '2020.06.11',
     },
     {
       customerName: 'customer C',
       photos: [
-        '/images/designers/reviews/reviews1.png',
-        '/images/designers/reviews/reviews2.png',
+        'https://picsum.photos/id/190/300/300',
+        'https://picsum.photos/id/290/300/300',
       ],
       rate: 5.0,
-      review:
+      comment:
         'Nunc a nibh bibendum, mollis elit vitae, interdum ligula. Mauris dictum rhoncus augue et mollis. Nunc facilisis elit eget massa auctor, sed ultrices quam lacinia. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis fermentum turpis tellus, et maximus erat maximus at. Maecenas venenatis lacinia libero, et dapibus nisl vulputate at. Cras sodales, velit et rhoncus posuere, lorem urna fringilla est, pellentesque accumsan lectus tortor a tellus. Fusce facilisis mollis arcu, eget molestie lorem cursus ut. Donec semper velit vel dui rhoncus congue feugiat quis nisi. Fusce sit amet quam vel risus gravida pretium.!',
       date: '2020.05.21',
     },
     {
       customerName: 'customer D',
       photos: [
-        '/images/designers/reviews/reviews1.png',
-        '/images/designers/reviews/reviews2.png',
-        '/images/designers/reviews/reviews3.png',
+        'https://picsum.photos/id/190/300/300',
+        'https://picsum.photos/id/290/300/300',
+        'https://picsum.photos/id/390/300/300',
       ],
       rate: 4.5,
-      review:
+      comment:
         'Nunc a nibh bibendum, mollis elit vitae, interdum ligula. Mauris dictum rhoncus augue et mollis. Nunc facilisis elit eget massa auctor, sed ultrices quam lacinia. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis fermentum turpis tellus, et maximus erat maximus at. Maecenas venenatis lacinia libero, et dapibus nisl vulputate at. Cras sodales, velit et rhoncus posuere, lorem urna fringilla est, pellentesque accumsan lectus tortor a tellus. Fusce facilisis mollis arcu, eget molestie lorem cursus ut. Donec semper velit vel dui rhoncus congue feugiat quis nisi. Fusce sit amet quam vel risus gravida pretium.!',
       date: '2020.04.11',
     },
     {
       customerName: 'customer E',
       photos: [
-        '/images/designers/reviews/reviews1.png',
-        '/images/designers/reviews/reviews2.png',
-        '/images/designers/reviews/reviews3.png',
-        '/images/designers/reviews/reviews4.png',
-        '/images/designers/reviews/reviews5.png',
+        'https://picsum.photos/id/190/300/300',
+        'https://picsum.photos/id/290/300/300',
+        'https://picsum.photos/id/390/300/300',
+        'https://picsum.photos/id/490/300/300',
+        'https://picsum.photos/id/590/300/300',
       ],
       rate: 5.0,
-      review: 'AWESOME!',
+      comment: 'AWESOME!',
       date: '2020.01.22',
     },
   ],
