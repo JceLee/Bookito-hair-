@@ -7,56 +7,44 @@ import DesignerCardComponent from "./designerCardComponent/DesignerCardComponent
 import DesignerListFilter from "./DesignerListFilter";
 
 export default function DesignerListView(props) {
-  const designers = useSelector((state) => state.firestore.designers);
-  const dispatch = useDispatch();
-  const newDesigners = [];
-  const params = queryString.parse(props.location.search);
-  console.log("params:", params);
+    const designers = useSelector((state) => state.firestore.designers);
+    const dispatch = useDispatch();
 
-  // Update API
-  firebaseDB
-    .firestore()
-    .collection("designers")
-    .where("Location", "==", "Vancouver")
-    .get()
-    .then((querySnapshot) => {
-      querySnapshot.docs.forEach((doc) => {
-        newDesigners.push(doc.data());
-      });
-    });
+    useEffect(() => {
+        const params = queryString.parse(props.location.search);
+        const newDesigners = [];
+        console.log("params:", params);
+        firebaseDB
+            .firestore()
+            .collection("designers").where("Location", "==", params["location"])
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.docs.forEach((doc) => {
+                    newDesigners.push(doc.data());
+                });
+                dispatch(load_database(newDesigners));
+            });
+    }, [dispatch]);
 
-  // Line 24 is params from main page, Line 26, 27 are to dispatch action to reducer.
-  useEffect(() => {
-    dispatch(load_database(newDesigners));
-  }, [dispatch]);
-  console.log(designers);
-
-  // for testing
-  const designer = {
-    id: 1,
-    fname: "John",
-    lname: "Doe",
-    location: "111 W Georgia St, Vancouver",
-    rating: 3.7,
-    img:
-      "https://images.vexels.com/media/users/3/145908/preview2/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg",
-    types: ["Men's Hair", "Women's Hair", "Colour", "Perm"],
-    walk: "10",
-    drive: "5",
-    workImgs: ["1", "2", "3", "4", "5", "6", "7", "8"],
-  };
-
-  return (
-    <>
-      <div className="listingContainer">
-        <div className="designerContainer">
-          <div className="listNavBar">
-            listNavBar
-            <div className="filter">
-              <DesignerListFilter
-                numberOfDesigners="400"
-                location="Vancouver"
-              />
+    return (
+        <>
+            <div className="listingContainer">
+                <div className="designerContainer">
+                    <div className="listNavBar">
+                        listNavBar
+                        <div className="filter">
+                            <DesignerListFilter numberOfDesigners='400' location='Vancouver' />
+                        </div>
+                    </div>
+                    {designers.map((designer, index) => (
+                        <div key = {index} className="designerList">
+                            <DesignerCardComponent designer={designer} />
+                        </div>
+                    ))}
+                </div>
+                <div className="mapContainer">
+                    Map container
+                </div>
             </div>
             {/*<div className="sorter">*/}
             {/*    <DesignerListFilter numberOfDesigners='400' location='Vancouver' />*/}
