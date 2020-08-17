@@ -1,16 +1,13 @@
 import React from "react"
 
 export default function DesignerCardTopRight(props) {
-    const { types, walk, drive } = props;
+    const { services} = props;
     return (
         <div className="designerCardTopRight">
             <div className="designerCardTopRightTypes">
-                {types.map((type, index) => (
-                        <span key={index} className="designerCardTopRightType">{type}</span>
+                {services && services.map((service, index) => (
+                        <span key={index} className="designerCardTopRightType">{service}</span>
                     ))}
-            </div>
-            <div className="designerCardTopRightMinutes">
-                {walk} minute walk, {drive} minute drive from your location.
             </div>
         </div>
     );
