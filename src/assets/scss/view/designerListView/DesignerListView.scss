@@ -1,34 +1,46 @@
+@import "../../Mixin.scss";
+
 .listingContainer {
   border: 1px black solid;
   height: 90vh;
-}
 
-.designerContainer {
-  border: 1px red solid;
-  display: flex;
-  flex-direction: column;
-
-  .listNavBar {
-    width: 100%;
-    height: 15%;
-    border: 1px blue solid;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-
-    .filter {
-      height: 30%;
-      border: 1px saddlebrown solid;
+  .designerContainer {
+    border: 1px red solid;
+  
+    @include tabletP{
+      width: 50%;
+      float: left;
+    } 
+  
+    .listNavBar {
+      width: 100%;
+      border: 1px blue solid;
+  
+      .filter {
+        height: 30%;
+        border: 1px saddlebrown solid;
+      }
+      //.sorter {
+      //  height: 30%;
+      //  width: 50%;
+      //  border: 1px saddlebrown solid;
+      //  float: right;
+      //}
+    }
+  
+    .designerList {
+      border: 1px blue solid;
     }
   }
 
-  .designerList {
-    width: 100%;
-    height: 85%;
-    border: 1px blue solid;
+  .mapContainer {
+    display: none;
+  
+    @include tabletP{
+      border: 1px green solid;
+      display: flex;
+      width: 50%;
+      float: right;
+    } 
   }
-}
-
-.mapContainer {
-  border: 1px green solid;
 }
