@@ -15,8 +15,9 @@
     "react-dom": "^16.13.1",
     "react-geocode": "^0.2.1",
     "react-places-autocomplete": "^7.3.0",
-    "react-redux": "^7.2.0",
-    "react-redux-firebase": "^3.6.0",
+    "react-immer": "^1.5.3",
+    "react-redux": "^7.2.1",
+    "react-redux-firebase": "^3.7.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
     "react-slick": "^0.27.0",
@@ -45,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-plugin-react-hooks": "^4.0.8"
   }
 }

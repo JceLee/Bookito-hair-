@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Menu, Dropdown, Button, Typography, Drawer } from "antd";
 import { Link } from "react-router-dom";
-import { MenuOutlined } from "@ant-design/icons";
+import { MenuOutlined, UserOutlined, BarsOutlined } from "@ant-design/icons";
 import SearchBar from "./SearchBar";
 
 const { Title } = Typography;
@@ -23,48 +23,59 @@ export default function Navbar() {
     { name: "Schedule (Client)", link: "/client_schedule" },
     { name: "Profile (Designer)", link: "/designer_profile" },
     { name: "Profile (Client)", link: "/client_profile" },
+    { name: "Divider", link: "" },
+    { name: "Log In", link: "" },
+    { name: "Sign up", link: "" },
   ];
 
   const menu = (
     <Menu>
-      <Menu.Item>1</Menu.Item>
-      <Menu.Item>2</Menu.Item>
-      <Menu.Item>3</Menu.Item>
+      {menuItems.map((menu, inx) => {
+        if (menu.name == "Divider") {
+          return <Menu.Divider />;
+        } else {
+          return (
+            <Menu.Item key={inx}>
+              <Link to={menu.link}>{menu.name}</Link>
+            </Menu.Item>
+          );
+        }
+      })}
     </Menu>
   );
+
+  const navBarController = () => {
+    if (
+      document.body.scrollTop > 64 ||
+      document.documentElement.scrollTop > 64
+    ) {
+      document.querySelector(".logo").style.display = "none";
+      document.querySelector(".notMobileSearchBar").style.display = "flex";
+    } else {
+      document.querySelector(".logo").style.display = "unset";
+      document.querySelector(".notMobileSearchBar").style.display = "none";
+    }
+  };
+
+  window.onscroll = function () {
+    navBarController();
+  };
 
   return (
     <>
       <div className="logo">
         <Link to="/">LookUp</Link>
       </div>
+      <SearchBar />
+
       {/* < tablet */}
-      <Dropdown className="menu" overlay={menu} placement="bottomRight">
-        <Button shape="round">Profile</Button>
-      </Dropdown>
-      {/* <SearchBar /> */}
-      <Drawer
-        title="Menu"
-        placement="right"
-        closable={false}
-        onClose={onClose}
-        visible={visible}
-        getContainer={false}
-        width="55%"
-      >
-        <Menu>
-          {menuItems.map((item, inx) => {
-            return (
-              <Menu.Item key={inx} onClick={onClose}>
-                <Link to={item.link}>{item.name}</Link>
-              </Menu.Item>
-            );
-          })}
-        </Menu>
-      </Drawer>
-      <Button className="hambergerBtn" onClick={showDrawer}>
-        <MenuOutlined />
-      </Button>
+      <div className="menuBtn">
+        <Dropdown overlay={menu} placement="bottomRight" trigger={["click"]}>
+          <Button shape="round" icon={<UserOutlined />}>
+            <BarsOutlined />
+          </Button>
+        </Dropdown>
+      </div>
     </>
   );
 }

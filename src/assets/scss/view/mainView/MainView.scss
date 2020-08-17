@@ -1,19 +1,24 @@
 @import "../../Mixin.scss";
 
+.ant-layout-header {
+  padding: 2.5% 5%;
+
+  @include tabletP {
+    padding: 10px 10%;
+  }
+}
+
 // header
 .header {
+  width: 100%;
+  margin: 0 auto;
   position: sticky;
   top: 0;
   z-index: 1;
   display: flex;
-  padding: 0;
   justify-content: space-between;
   align-items: center;
   background-color: white;
-}
-
-.ant-layout-header {
-  padding: 0 10px;
 }
 
 // search bar section
@@ -63,11 +68,11 @@
         width: 30%;
         border-top-left-radius: 25px;
         border-bottom-left-radius: 25px;
+        height: 50px;
 
         .typeSelector {
           width: 100%;
           margin: 0 0;
-          height: 50px;
 
           .ant-select-selector {
             height: 100%;
@@ -158,6 +163,17 @@
 
   .autocomplete-dropdown-container:empty {
     display: none;
+  }
+}
+
+// type selections containter
+.ant-select-dropdown {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 20px;
+
+  .ant-select-item {
+    padding: 10px;
   }
 }
 

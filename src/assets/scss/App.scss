@@ -1,8 +1,8 @@
 @import "./Mixin.scss";
-@import "./View/MainView/MainView.scss";
-@import "./CommonComponents/NavBar.scss";
-@import "./View/DesignerListView/DesignerListView.scss";
+@import "./view/MainView/MainView.scss";
+@import "./commonComponents/NavBar.scss";
+@import "./view/designerListView/DesignerListView.scss";
 
-.content {
+.layout {
   background-color: white;
 }

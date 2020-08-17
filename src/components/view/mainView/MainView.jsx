@@ -1,5 +1,5 @@
 import React from "react";
-import SearchBar from "./SearchBarSection";
+import SearchBarSection from "./SearchBarSection";
 import NewDesignerCarousel from "./NewDesignerCarousel";
 import InfoCard from "./InfoCard";
 import Announcement from "./Announcement";
@@ -7,7 +7,7 @@ import Announcement from "./Announcement";
 export default function MainView() {
   return (
     <>
-      <SearchBar />
+      <SearchBarSection />
       <div className="announcementSection">
         <Announcement />
       </div>
