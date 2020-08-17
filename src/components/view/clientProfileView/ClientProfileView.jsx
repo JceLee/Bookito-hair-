@@ -4,16 +4,19 @@ import { EditOutlined } from '@ant-design/icons';
 import { useDropzone } from 'react-dropzone';
 
 export default function ClientProfileView() {
+    // form layout
     const layout = {
         labelCol: { span: 4 },
         wrapperCol: { span: 20 },
     };
 
+    // for modal
     const [ visible, setVisible ] = useState(false);
     const modalHandler = () => {
         setVisible(!visible);
     }
 
+    // for dropzone
     const [files, setFiles] = useState([]);
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         accept: 'image/*',
@@ -24,6 +27,7 @@ export default function ClientProfileView() {
         }
     })
 
+    // display preview after dropping image
     const preview = files.map(file => (
         <Avatar
             key={file.name}
@@ -90,9 +94,7 @@ export default function ClientProfileView() {
             >
                 <div className="modalProfilePhoto">
                     {files.length === 0 ?
-                        <Avatar 
-                        size={128}
-                        src="" />
+                        <Avatar size={128} src="" />
                         :
                         preview
                     }
