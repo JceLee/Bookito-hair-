@@ -1,21 +1,30 @@
+// Mixin
+@import "./Mixin.scss";
+
+// Main view
 @import "./view/MainView/MainView.scss";
+
+// Common components
 @import "./commonComponents/NavBar.scss";
-@import "./view/DesignerListView/DesignerListView.scss";
-@import "./commonComponents/searchBar/SearchBar.scss";
-@import "./commonComponents/searchBar/DesignerTypeCarousel.scss";
-@import "./view/designerListView/DesignerCardComponent/DesignerCardComponent.scss";
-@import "./view/designerListView/designerListFilter/DesignerListFilter.scss";
-@import "./view//clientScheduleView/ClientScheduleView.scss";
+@import "./commonComponents/SearchBar.scss";
 @import "./commonComponents/ScheduleCard.scss";
 
-.header{
-    z-index: 1;
+// Designer List view
+@import "./view/designerListView/DesignerListView.scss";
+@import "./view/designerListView/DesignerCardComponent/DesignerCardComponent.scss";
+@import "./view/designerListView/designerListFilter/DesignerListFilter.scss";
+
+// Client Schedule view
+@import "./view/clientScheduleView/ClientScheduleView.scss";
+
+.layout {
+  background-color: white;
 }
 
 .outerContent {
-    padding: 0;
+  padding: 0;
 
-    @include tabletP{
-        padding: 0 50px;
-    } 
+  @include tabletP {
+    padding: 0 50px;
+  }
 }
