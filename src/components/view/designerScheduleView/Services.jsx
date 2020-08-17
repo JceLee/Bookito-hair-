@@ -95,7 +95,7 @@ export default function Services() {
   };
 
   const [key, setKey] = useState('Cuts');
-  const [isChecked, setIsChecked] = useState(null);
+  const [isChecked, setIsChecked] = useState({});
 
   const onTabChange = (key) => {
     setKey(key);
@@ -117,8 +117,25 @@ export default function Services() {
               <Checkbox
                 key={menu.id}
                 id={menu.id}
-                checked={isChecked === menu.id}
-                onChange={() => setIsChecked(menu.id)}
+                checked={isChecked[key] === menu.id}
+                onChange={() => {
+                  let newIsChecked = { ...isChecked };
+
+                  // newIsChecked.key = menu.id;
+                  if (key == 'Cuts') {
+                    newIsChecked['Cuts'] = menu.id;
+                  } else if (key == 'Style') {
+                    newIsChecked['Style'] = menu.id;
+                  } else if (key == 'Perms') {
+                    newIsChecked['Perms'] = menu.id;
+                  } else {
+                    newIsChecked['Colors'] = menu.id;
+                  }
+                  // switch statement
+
+                  console.log(newIsChecked);
+                  setIsChecked(newIsChecked);
+                }}
               >
                 <Text strong>{menu.service}</Text>
               </Checkbox>
