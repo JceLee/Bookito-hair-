@@ -637,4 +637,40 @@
   .designerProfileView .designerBottom .hoursGrid {
     width: 100%;
   }
+
+  .editProfileModal {
+    .ant-modal-body {
+      padding: 16px 24px;
+      .clearfix {
+        margin: 0px 20px;
+        .ant-upload-list-picture-card-container {
+          margin: 8px;
+          width: 100px;
+          height: 100px;
+        }
+        .ant-upload-list-picture .ant-upload-list-item,
+        .ant-upload-list-picture-card .ant-upload-list-item {
+          padding: 0;
+          margin: 0;
+          width: 100px;
+          height: 100px;
+        }
+        .ant-upload.ant-upload-select-picture-card {
+          margin: 8px;
+          width: 100px;
+          height: 100px;
+        }
+      }
+    }
+  }
+
+  .workModal {
+    .ant-modal-body {
+      padding: 8px;
+      .workImgInModal {
+        width: 300px;
+        height: 300px;
+      }
+    }
+  }
 }
