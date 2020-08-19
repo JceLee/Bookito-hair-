@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Input, Button, Avatar, Modal } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import { useDropzone } from "react-dropzone";
-import ModalBtn from "../../commonComponents/ModalBtn";
+import BlackBtn from "../../commonComponents/BlackBtn";
 
 // for testing
 const client = {
@@ -35,7 +35,6 @@ export default function ClientProfileView() {
   // form layout
   const layout = {
     labelCol: { span: 4 },
-    wrapperCol: { span: 20 },
   };
 
   // for modal
@@ -96,13 +95,13 @@ export default function ClientProfileView() {
         </Form.Item>
         <Form.Item className="formItems">
           {edit ? (
-            <Button className="saveBtn" onClick={saveProfile}>
-              Save
-            </Button>
+            <BlackBtn
+              className="saveBtn"
+              btnName="Save"
+              onClick={saveProfile}
+            />
           ) : (
-            <Button className="saveBtn" onClick={setEdit}>
-              Edit
-            </Button>
+            <BlackBtn className="editBtn" btnName="Edit" onClick={setEdit} />
           )}
         </Form.Item>
       </Form>
@@ -134,7 +133,7 @@ export default function ClientProfileView() {
             <p>Drag and drop your photo here, or click to select files</p>
           )}
         </div>
-        <ModalBtn btnName="Save" onClick={saveProfilePhoto} />
+        <BlackBtn btnName="Save" onClick={saveProfilePhoto} />
       </Modal>
     </div>
   );

@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function ModalBtn(props) {
+export default function BlackBtn(props) {
   const { btnName, onClick } = props;
   return (
-    <button className="modalBtn" onClick={onClick}>
+    <button className="blackBtn" onClick={onClick}>
       {btnName}
     </button>
   );

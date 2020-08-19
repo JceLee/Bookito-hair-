@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, Row, Col, Button, Divider, Form, Input, Rate } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import DesignerCardLeft from "../view/designerListView/designerCardComponent/designerCardTop/DesignerCardTopLeft";
-import ModalBtn from "./ModalBtn";
+import BlackBtn from "./BlackBtn";
 
 export default function ScheduleCardHistory(props) {
   const { date, name, timeStart, timeEnd, types } = props;
@@ -78,7 +78,7 @@ export default function ScheduleCardHistory(props) {
             <Input.TextArea />
           </Form.Item>
         </Form>
-        <ModalBtn btnName="Submit" onClick={submitReview} />
+        <BlackBtn btnName="Submit" onClick={submitReview} />
       </Modal>
     </>
   );
