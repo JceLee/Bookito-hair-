@@ -31,7 +31,7 @@ const DesignerNavItem = (props) => {
   if (children === 'Home') {
     height += 64;
     if (width <= 480) {
-      console.log('Removed "Home" tap from nav links.');
+      // console.log('Removed "Home" tap from nav links.');
       children = null;
     }
   }

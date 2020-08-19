@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import queryString from "query-string";
-import { load_database } from "../../../actions/firebaseAction";
-import { firebaseDB } from "../../../config/fbConfig";
-import { useDispatch, useSelector } from "react-redux";
-import DesignerCardComponent from "./designerCardComponent/DesignerCardComponent";
-import DesignerListFilter from "./DesignerListFilter";
+import React, { useState, useEffect } from 'react';
+import queryString from 'query-string';
+import { load_database } from '../../../actions/firebaseAction';
+import { firebaseDB } from '../../../config/fbConfig';
+import { useDispatch, useSelector } from 'react-redux';
+import DesignerCardComponent from './designerCardComponent/DesignerCardComponent';
+import DesignerListFilter from './DesignerListFilter';
 
 export default function DesignerListView(props) {
   const designers = useSelector((state) => state.firestore.designers);
@@ -13,11 +13,11 @@ export default function DesignerListView(props) {
   useEffect(() => {
     const params = queryString.parse(props.location.search);
     const newDesigners = [];
-    console.log("params:", params);
+    console.log('params:', params);
     firebaseDB
       .firestore()
-      .collection("designers")
-      .where("Location", "==", params["location"])
+      .collection('designers')
+      .where('location', '==', params['location'])
       .get()
       .then((querySnapshot) => {
         querySnapshot.docs.forEach((doc) => {
@@ -27,26 +27,28 @@ export default function DesignerListView(props) {
       });
   }, [dispatch]);
 
+  console.log(designers);
+
   return (
     <>
-      <div className="listingContainer">
-        <div className="designerContainer">
-          <div className="listNavBar">
+      <div className='listingContainer'>
+        <div className='designerContainer'>
+          <div className='listNavBar'>
             listNavBar
-            <div className="filter">
+            <div className='filter'>
               <DesignerListFilter
-                numberOfDesigners="400"
-                location="Vancouver"
+                numberOfDesigners='400'
+                location='Vancouver'
               />
             </div>
           </div>
           {designers.map((designer, index) => (
-            <div key={index} className="designerList">
+            <div key={index} className='designerList'>
               <DesignerCardComponent designer={designer} />
             </div>
           ))}
         </div>
-        <div className="mapContainer">Map container</div>
+        <div className='mapContainer'>Map container</div>
       </div>
     </>
   );

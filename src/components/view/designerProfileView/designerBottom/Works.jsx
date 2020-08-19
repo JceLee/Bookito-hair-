@@ -112,6 +112,8 @@ const Works = (props) => {
                   <img
                     src={work}
                     alt={`workImg${index}`}
+                    width='300px'
+                    height='300px'
                     onLoad={imageCarouselLoaded}
                   />
                 </div>

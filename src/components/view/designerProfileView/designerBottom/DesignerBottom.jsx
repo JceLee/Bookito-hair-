@@ -38,7 +38,7 @@ const DesignerBottom = (props) => {
 
       <Works id='Works' works={works} />
       <Divider className='profileDivider' />
-      <div className='serviceNPriceHoursGrid'>
+      {/* <div className='serviceNPriceHoursGrid'>
         <div className='serviceNPriceGrid'>
           <ServiceNPrice id='Price' serviceNPrices={serviceNPrices} />
           <Divider className='profileDivider' />
@@ -46,9 +46,9 @@ const DesignerBottom = (props) => {
         <div className='hoursGrid'>
           <Hours id='Hours' hours={hours} />
         </div>
-      </div>
+      </div> */}
       <Divider className='profileDivider' />
-      <Reviews id='Reviews' reviews={reviews} />
+      {/* <Reviews id='Reviews' reviews={reviews} /> */}
       <Divider className='profileDivider' />
       <Location id='Location' location={location} />
       <br />
