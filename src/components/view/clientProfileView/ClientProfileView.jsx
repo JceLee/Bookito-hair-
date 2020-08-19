@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Input, Button, Avatar, Modal } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import { useDropzone } from "react-dropzone";
+import ModalBtn from "../../commonComponents/ModalBtn";
 
 // for testing
 const client = {
@@ -24,6 +25,11 @@ export default function ClientProfileView() {
   // save profile to db and reload page
   const saveProfile = () => {
     window.location.reload(false);
+  };
+
+  // save profile photo to db and close modal
+  const saveProfilePhoto = () => {
+    modalHandler();
   };
 
   // form layout
@@ -107,6 +113,7 @@ export default function ClientProfileView() {
         onCancel={modalHandler}
         destroyOnClose={true}
         className="changePhotoModal"
+        footer={false}
       >
         <div className="modalProfilePhoto">
           {files.length === 0 ? (
@@ -127,6 +134,7 @@ export default function ClientProfileView() {
             <p>Drag and drop your photo here, or click to select files</p>
           )}
         </div>
+        <ModalBtn btnName="Save" onClick={saveProfilePhoto} />
       </Modal>
     </div>
   );
