@@ -1,22 +1,23 @@
 import React from 'react';
-import { List, Button } from 'antd';
+import { List, Button, Steps, Typography } from 'antd';
 import '../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss';
-import StepOne from './StepOne';
-import StepTwo from './StepTwo';
 
 export default function StepThree(props) {
-  const { timeSelection, displayedDay } = props;
+  const { Text } = Typography;
+  const { current, setCurrent } = props;
 
   const titles = [
-    { id: 1, title: 'Date', step: <StepOne />, content: displayedDay },
-    {
-      id: 2,
-      title: 'Time',
-      step: <StepOne />,
-      content: null,
-    },
-    { id: 3, title: 'Service', step: <StepTwo />, content: null },
+    { id: 1, title: 'Date & Time', contents: 'content1' },
+    { id: 2, title: 'Service', contents: 'content2' },
   ];
+
+  const stepChoice = (item) => {
+    if (item.id === 1) {
+      setCurrent(current - 2);
+    } else {
+      setCurrent(current - 1);
+    }
+  };
 
   return (
     <div className='confirmation'>
@@ -24,16 +25,16 @@ export default function StepThree(props) {
         itemLayout='horizontal'
         dataSource={titles}
         renderItem={(item) => {
-          console.log(item);
+          // console.log(item);
           return (
             <List.Item>
-              <List.Item.Meta title={item.title} content={item.content} />
-              {/* {item.content} */}
+              <Text strong>{item.title}</Text>
+              <div className='bookingContents'>{item.contents}</div>
               <Button
                 type='link'
                 value={item.id}
                 id={item.id}
-                onClick={() => console.log(item.step)}
+                onClick={() => stepChoice(item)}
               >
                 Edit
               </Button>

@@ -30,10 +30,10 @@ export default function EditCalendar(props) {
   const { dayValue, calendarHandleDay } = props;
   return (
     <div className='editDesignerCalendar'>
-      <p id='selectDay'>
+      {/* <p id='selectDay'>
         {dayValue ? dayValue.toLocaleDateString() : 'Please select a day'}
       </p>
-      <DayPicker selectedDays={dayValue} onDayClick={calendarHandleDay} />
+      <DayPicker selectedDays={dayValue} onDayClick={calendarHandleDay} /> */}
     </div>
   );
 }

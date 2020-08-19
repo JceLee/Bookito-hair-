@@ -3,15 +3,11 @@ import { Radio } from 'antd';
 import '../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss';
 
 export default function Times(props) {
-  const { timesSelect, handleTime, chosenTime } = props;
-
-  const onRadioChange = (hour) => {
-    console.log(hour.target.value);
-  };
+  const { timesSelect } = props;
 
   return (
     <div className='timeButtons'>
-      <Radio.Group>
+      {/* <Radio.Group>
         {timesSelect.map((hour, index) => {
           const { time, value, disabled } = hour;
           return (
@@ -26,7 +22,7 @@ export default function Times(props) {
             </Radio.Button>
           );
         })}
-      </Radio.Group>
+      </Radio.Group> */}
     </div>
   );
 }

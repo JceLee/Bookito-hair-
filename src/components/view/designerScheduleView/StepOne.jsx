@@ -1,31 +1,59 @@
-import React from 'react';
-import { Row, Col } from 'antd';
-import EditCalendar from './EditCalendar';
-import Times from './Times';
-// import '../../../assets/scss/View/DesignerScheduleView/DesignerScheduleView.scss';
+import React, { useState } from 'react';
+import { Row, Col, Radio } from 'antd';
+import DayPicker from 'react-day-picker';
+import 'react-day-picker/lib/style.css';
+import '../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss';
 
 export default function StepOne(props) {
   const {
     timeSelection,
-    chosenTime,
     displayedDay,
     handleDay,
-    handleTime,
+    radioChange,
+    bookingTime,
   } = props;
+
+  const renderCalendar = () => (
+    <div className='editDesignerCalendar'>
+      <p id='selectDay'>
+        {displayedDay
+          ? displayedDay.toLocaleDateString()
+          : 'Please select a day'}
+      </p>
+      <DayPicker selectedDays={displayedDay} onDayClick={handleDay} />
+    </div>
+  );
+
+  const renderTime = () => (
+    <div className='timeButtons'>
+      <Radio.Group>
+        {timeSelection.map((hour, index) => {
+          const { time, value, disabled } = hour;
+          return (
+            <Radio.Button
+              key={index}
+              value={value}
+              disabled={disabled}
+              checked={bookingTime === hour.index}
+              style={{ marginRight: 50, marginBottom: 20 }}
+              onChange={(index) => radioChange(index)}
+            >
+              {time}
+            </Radio.Button>
+          );
+        })}
+      </Radio.Group>
+    </div>
+  );
+
   return (
     <>
       <p id='designerName'>Designer: Jane Smith</p>
       <Row>
-        <Col span={13}>
-          <EditCalendar dayValue={displayedDay} calendarHandleDay={handleDay} />
-        </Col>
+        <Col span={13}>{renderCalendar()}</Col>
         <Col span={11}>
           <p>Please select time</p>
-          <Times
-            timesSelect={timeSelection}
-            chosenTime={chosenTime}
-            // handleTime={handleTime}
-          />
+          {renderTime()}
         </Col>
       </Row>
     </>
