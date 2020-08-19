@@ -143,7 +143,6 @@ const HoursForm = () => {
 
   return (
     <div className='editHours'>
-      <h3>Hours [NOT YET]</h3>
       {days.map((day, index) => {
         return (
           <div key={index}>

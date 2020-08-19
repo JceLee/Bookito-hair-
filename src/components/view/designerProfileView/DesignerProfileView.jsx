@@ -129,11 +129,21 @@ const DesignerProfileView = () => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const designerId = urlParams.get('id');
-  const found = designers.find((element) => (element.id = designerId));
+  const found = designers.find((element) => element.id === designerId);
   console.log(found);
 
+  // let formattedServiceNPrice = [];
+  // let map = new Map();
+  // const combineServiceNPrice = () => {
+  //   for (let i = 0; i < found.services.length; i++) {
+  //     console.log(map.set(found.services[i], found.prices[i]));
+  //   }
+  // };
+
+  // console.log(combineServiceNPrice());
+
   const {
-    // isAuthenticated,
+    isAuthenticated,
     fname,
     lname,
     location,
@@ -142,7 +152,7 @@ const DesignerProfileView = () => {
     activity,
     bio,
     works,
-    serviceNPrices,
+    services,
     hours,
     reviews,
   } = found;
@@ -151,7 +161,7 @@ const DesignerProfileView = () => {
     <BrowserRouter>
       <div className='designerProfileView'>
         <DesignerTop
-          // isAuthenticated={isAuthenticated}
+          isAuthenticated={isAuthenticated}
           fname={fname}
           lname={lname}
           totalRate={rate}
@@ -166,7 +176,7 @@ const DesignerProfileView = () => {
           activity={activity}
           bio={bio}
           works={works}
-          serviceNPrices={serviceNPrices}
+          serviceNPrices={services}
           hours={hours}
           reviews={reviews}
         />

@@ -9,7 +9,6 @@ const ServiceNPriceForm = () => {
       {(experiences, { add, remove }) => {
         return (
           <div>
-            <h3>Service & Price [NOT YET]</h3>
             {experiences.map((experience) => (
               <Space
                 key={experience.key}

@@ -4,7 +4,6 @@ import { Input, Form } from 'antd';
 const AddressPhoneForm = () => {
   return (
     <div>
-      <h3>Address & Phone [NOT YET]</h3>
       <Form.Item
         name={['user', 'address1']}
         label='Address1'

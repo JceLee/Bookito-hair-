@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Affix, Button, Modal, Divider, Form } from 'antd';
+import { Affix, Button, Modal, Divider, Form, Collapse } from 'antd';
 import DesignerNav from './designerNav/DesignerNav.jsx';
 import ReadOnlyStar from '../../../commonComponents/ReadOnlyStar';
 import ServiceNPriceForm from '../designerEditProfile/ServiceNPriceForm';
@@ -7,6 +7,7 @@ import HoursForm from '../designerEditProfile/HoursForm';
 import AddressPhoneForm from '../designerEditProfile/AddressPhoneForm';
 import WorksForm from '../designerEditProfile/WorksForm';
 
+const { Panel } = Collapse;
 const layout = {
   labelCol: { span: 5 },
   wrapperCol: { span: 24 },
@@ -95,13 +96,20 @@ const DesignerTop = (props) => {
                     autoComplete='off'
                     // validateMessages={validateMessages}
                   >
-                    <ServiceNPriceForm />
-                    <Divider />
-                    <HoursForm />
-                    <Divider />
-                    <AddressPhoneForm />
-                    <Divider />
-                    <WorksForm works={works} />
+                    <Collapse bordered={false} defaultActiveKey={['1']}>
+                      <Panel header='Service & Price' key='1'>
+                        <ServiceNPriceForm />
+                      </Panel>
+                      <Panel header='Hours' key='2'>
+                        <HoursForm />
+                      </Panel>
+                      <Panel header='Address & Phone' key='3'>
+                        <AddressPhoneForm />
+                      </Panel>
+                      <Panel header='Works' key='4'>
+                        <WorksForm works={works} />
+                      </Panel>
+                    </Collapse>
                   </Form>
                 </div>
               </Modal>

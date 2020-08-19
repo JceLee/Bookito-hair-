@@ -82,32 +82,25 @@ const WorksForm = (props) => {
   );
 
   return (
-    <>
-      <h3>Works</h3>
-      <div className='clearfix'>
-        <Upload
-          action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
-          listType='picture-card'
-          fileList={fileList}
-          onPreview={handlePreview}
-          onChange={handleChange}
-        >
-          {fileList.length >= 8 ? null : uploadButton}
-        </Upload>
-        <Modal
-          className='workModal'
-          visible={previewVisible}
-          footer={null}
-          onCancel={handleCancel}
-        >
-          <img
-            className='workImgInModal'
-            alt={previewTitle}
-            src={previewImage}
-          />
-        </Modal>
-      </div>
-    </>
+    <div className='clearfix'>
+      <Upload
+        action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
+        listType='picture-card'
+        fileList={fileList}
+        onPreview={handlePreview}
+        onChange={handleChange}
+      >
+        {fileList.length >= 8 ? null : uploadButton}
+      </Upload>
+      <Modal
+        className='workModal'
+        visible={previewVisible}
+        footer={null}
+        onCancel={handleCancel}
+      >
+        <img className='workImgInModal' alt={previewTitle} src={previewImage} />
+      </Modal>
+    </div>
   );
 };
 
