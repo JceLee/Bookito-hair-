@@ -143,8 +143,10 @@ const {
 const DesignerProfileView = () => {
 
     const designers = useSelector((state) => state.firestore.designers);
-
-    const found = designers.find(element => element.id = 1);
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const designerId = urlParams.get('id');
+    const found = designers.find(element => element.id = designerId);
     console.log(found);
 
     return (
