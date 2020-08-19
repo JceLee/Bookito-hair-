@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link } from "@reach/router";
 import { Modal, Button } from 'antd';
-import { signInWithGoogle } from '../../../config/fbConfig';
+import { firebaseDB, auth } from '../../../config/fbConfig';
+import {useDispatch, useSelector} from "react-redux";
+import {sign_in_with_google} from "../../../actions/googleSignIn";
 
 export default function Login() {
     const [isLoginShowing, setIsLoginShowing] = useState(false);
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
     const signInWithEmailAndPasswordHandler =
-        (event,email, password) => {
+        (event, email, password) => {
             event.preventDefault();
         };
+
+    const user = useSelector((state) => state.user.user);
+    const dispatch = useDispatch();
 
     const onChangeHandler = (event) => {
         const {name, value} = event.currentTarget;
@@ -25,6 +29,28 @@ export default function Login() {
         }
     };
 
+    const provider = new firebaseDB.auth.GoogleAuthProvider();
+
+    const signInWithGoogle = () => {
+        auth.signInWithPopup(provider).then(function(result) {
+            // The signed-in user info.
+            const user = result.user;
+            console.log(user);
+            console.log(user["email"]);
+            dispatch(sign_in_with_google(user));
+        }).catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // The email of the user's account used.
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+            // ...
+        });
+        handleLoginCancel();
+    };
+
     const showLoginModal = () => {
         setIsLoginShowing(!isLoginShowing);
     };
@@ -35,6 +61,10 @@ export default function Login() {
 
     const handleLoginCancel = () => {
         setIsLoginShowing(!isLoginShowing);
+    };
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle();
     };
 
     return (
@@ -67,6 +97,7 @@ export default function Login() {
                                 id="userEmail"
                                 onChange = {(event) => onChangeHandler(event)}
                             />
+                            <br/>
                             <label htmlFor="userPassword" className="block">
                                 Password:
                             </label>
@@ -83,13 +114,17 @@ export default function Login() {
                                 Sign in
                             </button>
                         </form>
+                        <br/>
                         <p className="text-center my-3">or</p>
-                        <button onClick={signInWithGoogle}
+                        <br/>
+                        <button onClick={handleGoogleSignIn}
                             className="bg-red-500 hover:bg-red-600 w-full py-2 text-white">
                             Sign in with Google
                         </button>
+                        <br/>
                         <p className="text-center my-3">
                             Don't have an account?{" "}
+                            <br/>
                             <Link to="signUp" className="text-blue-500 hover:text-blue-600">
                                 Sign up here
                             </Link>{" "}

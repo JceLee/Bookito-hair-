@@ -24,5 +24,17 @@ export const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
 
 export const signInWithGoogle = () => {
-  auth.signInWithPopup(provider);
+  firebase.auth().signInWithPopup(provider).then(function(result) {
+    // The signed-in user info.
+    return result.user;
+  }).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+  });
 };
