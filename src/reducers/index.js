@@ -4,6 +4,6 @@ import signIn from "./signIn";
 
 export default combineReducers({
     firestore: firestore,
-    user: signIn,
+    signedInUser: signIn,
 });
 

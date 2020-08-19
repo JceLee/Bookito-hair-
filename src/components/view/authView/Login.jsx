@@ -15,7 +15,7 @@ export default function Login() {
             event.preventDefault();
         };
 
-    const user = useSelector((state) => state.user.user);
+    const signedInUser = useSelector((state) => state.signedInUser.signedInUser);
     const dispatch = useDispatch();
 
     const onChangeHandler = (event) => {
@@ -35,8 +35,6 @@ export default function Login() {
         auth.signInWithPopup(provider).then(function(result) {
             // The signed-in user info.
             const user = result.user;
-            console.log(user);
-            console.log(user["email"]);
             dispatch(sign_in_with_google(user));
         }).catch(function(error) {
             // Handle Errors here.
@@ -47,6 +45,7 @@ export default function Login() {
             // The firebase.auth.AuthCredential type that was used.
             var credential = error.credential;
             // ...
+
         });
         handleLoginCancel();
     };

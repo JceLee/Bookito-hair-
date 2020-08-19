@@ -1,4 +1,4 @@
-export const sign_in_with_google = (user) => ({
+export const sign_in_with_google = (signedInUser) => ({
     type : 'SIGN_IN_WITH_GOOGLE',
-    user : user
+    signedInUser : signedInUser
 });
