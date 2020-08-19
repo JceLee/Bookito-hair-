@@ -38,6 +38,7 @@ const servicesContent = {
   Cuts: [
     {
       id: 1,
+      //gender?
       service: 'Men Cut',
       price: 35,
       description: 'The price may differ',
@@ -128,6 +129,8 @@ export default function DesignerSchedule() {
   const [current, setCurrent] = useState(0);
   const [bookingTime, setBookingTime] = useState(null);
 
+  console.log('after : ' + bookingTime);
+
   const onChange = (current) => {
     setCurrent(current);
   };
@@ -149,9 +152,8 @@ export default function DesignerSchedule() {
   };
 
   const onRadioChange = (hour) => {
-    // setBookingTime(hour.target.value);
+    setBookingTime(hour.target.value);
     // console.log(setBookingTime);
-    console.log(hour.target.value);
   };
 
   const onTabChange = (key) => {
@@ -179,6 +181,7 @@ export default function DesignerSchedule() {
           displayedDay={DisplayedDay}
           handleDay={handleDayClick}
           radioChange={onRadioChange}
+          bookingTime={bookingTime}
         />
       ),
     },

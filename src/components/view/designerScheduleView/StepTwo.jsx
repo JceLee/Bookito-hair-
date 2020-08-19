@@ -21,6 +21,8 @@ export default function StepTwo(props) {
     totalSum,
   } = props;
 
+  const paraseChecked = () => {};
+
   const renderService = () => (
     <div className='checkboxOption'>
       <Card
@@ -37,24 +39,32 @@ export default function StepTwo(props) {
               <Checkbox
                 key={menu.id}
                 id={menu.id}
-                checked={isChecked[serviceKey] === menu.id}
+                checked={
+                  isChecked[serviceKey] && isChecked[serviceKey].id === menu.id
+                }
+                // disabled={isChecked[serviceKey].gender !== menu.gender}
                 onChange={() => {
                   navigateTo('Estimated Price');
 
                   let newIsChecked = { ...isChecked };
 
-                  if (serviceKey === 'Cuts') {
-                    newIsChecked['Cuts'] = menu.id;
-                    addToCart(menu);
-                  } else if (serviceKey === 'Style') {
-                    newIsChecked['Style'] = menu.id;
-                    addToCart(menu);
-                  } else if (serviceKey === 'Perms') {
-                    newIsChecked['Perms'] = menu.id;
-                    addToCart(menu);
-                  } else {
-                    newIsChecked['Colors'] = menu.id;
-                    addToCart(menu);
+                  switch (serviceKey) {
+                    case 'Cuts':
+                      newIsChecked['Cuts'] =
+                        newIsChecked['Cuts'] === menu ? null : menu;
+                      break;
+                    case 'Style':
+                      newIsChecked['Style'] =
+                        newIsChecked['Style'] === menu ? null : menu;
+                      break;
+                    case 'Perms':
+                      newIsChecked['Perms'] =
+                        newIsChecked['Perms'] === menu ? null : menu;
+                      break;
+                    case 'Colors':
+                      newIsChecked['Colors'] =
+                        newIsChecked['Colors'] === menu ? null : menu;
+                      break;
                   }
 
                   console.log(newIsChecked);
@@ -89,16 +99,23 @@ export default function StepTwo(props) {
           {page === 'Estimated Price' && (
             <>
               <div className='estimatedPrice'>
-                {cart.map((menu, index) => (
-                  <div className='priceTag' key={index}>
-                    <p>
-                      {menu.service} : ${menu.price}{' '}
-                      <Button type='link' onClick={() => removeFromCart(menu)}>
-                        Remove
-                      </Button>
-                    </p>
-                  </div>
-                ))}
+                {isChecked &&
+                  Object.values(isChecked).map(
+                    (menu, index) =>
+                      menu && (
+                        <div className='priceTag' key={index}>
+                          <p>
+                            {menu.service} : ${menu.price}{' '}
+                            <Button
+                              type='link'
+                              onClick={() => removeFromCart(menu)}
+                            >
+                              Remove
+                            </Button>
+                          </p>
+                        </div>
+                      )
+                  )}
               </div>
               <Divider />
               <div className='totalCost'>Estimated total: ${totalSum()}</div>
