@@ -1,15 +1,676 @@
-.designerProfileView {
-  width: 60%;
-  height: 100%;
-  padding: 0.5rem;
-  margin: auto;
-  border: 1px solid;
-  border-radius: 25px;
-  box-shadow: 10px 20px 20px #dce7fc, 1px 10px 10px #dae6ff;
+// Customized date-picker-panel
+.ant-picker-datetime-panel {
+  .ant-picker-time-panel {
+    display: none !important;
+  }
 }
 
-@media (max-width: 1280px) {
+.hoursCheckbox {
+  margin: 0 0 0 2rem;
+}
+
+// Customized modal
+.ant-modal-content {
+  margin: 0 auto;
+  width: 320px;
+}
+
+.ant-modal-body {
+  padding: 6px 0 24px 0;
+}
+
+.ant-modal-close,
+.ant-modal-close-x {
+  color: grey;
+  background-color: white;
+  line-height: 1;
+  width: 18px;
+  height: 18px;
+  top: 6px;
+  right: 10px;
+}
+
+// Customized carousel
+.slick-slide img {
+  margin: auto;
+}
+
+.slick-next {
+  right: 10px;
+  z-index: 1;
+}
+
+.slick-prev {
+  left: 10px;
+  z-index: 1;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: #fff;
+}
+
+// Customized Rate component
+.ant-rate {
+  font-size: 1rem;
+  line-height: 1;
+
+  .ant-rate-star {
+    margin: 0 1px 0 0;
+  }
+
+  &-star {
+    > div {
+      &:hover {
+        transform: scale(1);
+      }
+    }
+  }
+}
+
+// Fade in effect
+.fade-in {
+  animation: fadeIn ease 1s;
+  -webkit-animation: fadeIn ease 1s;
+  -moz-animation: fadeIn ease 1s;
+  -o-animation: fadeIn ease 1s;
+  -ms-animation: fadeIn ease 1s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+// Customized Divider
+.profileDivider {
+  background-color: rgb(165, 165, 165);
+  height: 2px;
+}
+
+// Profile Layout Shared
+%profile-layout-shared {
+  padding: 0.5rem;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 1.5;
+  background-color: rgb(240, 242, 245);
+  position: relative;
+}
+
+// Designer Profile View
+.designerProfileView {
+  @extend %profile-layout-shared;
+  width: 60%;
+
+  // Designer Top
+  .designerTop {
+    @extend %profile-layout-shared;
+    background-color: skyblue;
+    box-shadow: unset;
+    padding: 0;
+    width: 90%;
+    text-align: left;
+
+    .designerProfile {
+      padding: 1rem 0 0 3rem;
+      h2 {
+        margin: 0;
+      }
+      p {
+        padding: 0;
+        margin: 0;
+      }
+
+      .profileImage {
+        border-radius: 50%;
+        margin: 0 1rem 0 0;
+        float: left;
+        width: 75px;
+        height: 75px;
+      }
+    }
+
+    // Designer Top - Navigation
+    .designerNav {
+      margin: 0 0 0 3rem;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+
+      .designerNavItem {
+        margin: 0 1rem 0 0;
+        a {
+          color: black;
+        }
+        a:hover,
+        a:active,
+        a.active {
+          color: #1890ff;
+        }
+      }
+    }
+
+    .tapWithButton {
+      margin: 0;
+      padding: 0.5rem 0;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      background-color: skyblue;
+
+      .Button {
+        margin: 0 3rem 0 0;
+      }
+    }
+  }
+
+  // Designer Bottom
+  .designerBottom {
+    @extend %profile-layout-shared;
+    width: 90%;
+    margin-top: 0.5rem;
+    border: 0;
+    box-shadow: unset;
+
+    .activityNBioGrid,
+    .serviceNPriceHoursGrid {
+      width: 90%;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0;
+      margin: 0 auto;
+
+      .profileDivider {
+        display: none;
+      }
+    }
+
+    .activityGrid,
+    .bioGrid,
+    .serviceNPriceGrid,
+    .hoursGrid {
+      width: 50%;
+    }
+  }
+
+  // Designer Bottom - Activity
+  .activity {
+    @extend %profile-layout-shared;
+    width: 90%;
+
+    section {
+      text-align: left;
+      padding: 0.5rem 1rem;
+    }
+
+    strong {
+      color: salmon;
+    }
+
+    span {
+      color: rgb(0, 199, 172);
+      font-size: 1.2rem;
+      font-weight: bolder;
+    }
+
+    .reputation {
+      border: 1px solid rgb(51, 68, 161);
+      display: inline-block;
+      margin: 0.5rem;
+      padding: 0.5rem;
+      width: fit-content;
+      border-radius: 25px;
+      box-shadow: 0 2px 2px rgb(4, 11, 48);
+    }
+  }
+
+  // Designer Bottom - Works
+  .works {
+    @extend %profile-layout-shared;
+    width: 90%;
+
+    .workGalleryContainer {
+      text-align: left;
+      width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0;
+
+      .workImgDiv {
+        display: inline-block;
+        margin: 16px 20px;
+        box-sizing: border-box;
+        text-align: center;
+
+        img {
+          width: 120px;
+          height: 120px;
+        }
+        img:hover {
+          cursor: pointer;
+          opacity: 0.75;
+        }
+      }
+    }
+  }
+
+  // Designer Bottom = Bio / Service & Price / Hours
+  .bio,
+  .serviceNPrice,
+  .hours {
+    @extend %profile-layout-shared;
+    width: 90%;
+    height: unset;
+    table,
+    th,
+    td {
+      padding: 1rem;
+      margin: 0 auto;
+    }
+  }
+
+  // Designer Bottom - Reviews
+  .reviews {
+    @extend %profile-layout-shared;
+    width: 90%;
+    position: relative;
+  }
+
+  // Designer Bottom - Review
+  .review {
+    @extend %profile-layout-shared;
+    width: 100%;
+    margin: 1.5rem auto;
+    padding: 0;
+    text-align: left;
+    position: relative;
+
+    .reviewHeader {
+      display: flex;
+      align-items: center;
+      padding: 0.25rem 0;
+
+      .reviewCustomerNrate {
+        display: flex;
+        align-items: center;
+      }
+
+      .reviewCustomer {
+        flex-shrink: 0;
+
+        font-size: larger;
+        font-weight: bold;
+        width: fit-content;
+      }
+
+      .reviewRate {
+        width: 100px;
+        text-align: center;
+        flex-shrink: 0;
+      }
+
+      .reviewGalleryContainer {
+        padding: 0 0 0 1rem;
+      }
+
+      .reviewGalleryContainer {
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+
+        .reviewImgDiv {
+          margin: 0.5rem;
+
+          img {
+            width: 50px;
+            height: 50px;
+          }
+
+          img:hover {
+            opacity: 0.8;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+
+  .reviewContent {
+    display: inline-flex;
+  }
+
+  // Designer Bottom - Location
+  .location {
+    @extend %profile-layout-shared;
+    width: 90%;
+
+    .googleMap {
+      width: 35vw;
+      height: 35vh;
+      margin: 1rem auto;
+    }
+
+    .marker {
+      color: white;
+      background: #1890ff;
+      padding: 15px 10px;
+      display: inline-flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      border-radius: 100%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .backTopBtn {
+    line-height: 40px;
+    border-radius: 50%;
+    background-color: #1088e9;
+    color: #fff;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    right: 5vw;
+  }
+}
+
+@media (max-width: 1441px) {
   .designerProfileView {
     width: 100%;
+    padding: 0;
+    margin: 0;
+
+    .designerTop {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+
+      .designerProfile {
+        padding: 1rem 0 0 1rem;
+        h2 {
+          margin: 0;
+        }
+        p {
+          padding: 0;
+          margin: 0;
+        }
+
+        .profileImage {
+          border-radius: 50%;
+          margin: 0 1rem 0 0;
+          float: left;
+          width: 50px;
+          height: 50px;
+        }
+      }
+
+      .designerNav {
+        margin: 0 0 0 1rem;
+
+        .designerNavItem {
+          margin: 0 0.5rem 0 0;
+        }
+      }
+
+      .tapWithButton {
+        .Button {
+          margin: 0 0.5rem 0 0;
+          padding: 0 0.5rem;
+        }
+      }
+    }
+
+    .designerBottom {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+
+      .works {
+        width: 100%;
+
+        .workGalleryContainer {
+          text-align: left;
+          width: 800px;
+          margin: 0 auto;
+          display: flex;
+          flex-wrap: wrap;
+          padding: 0;
+
+          .workImgDiv {
+            display: inline-block;
+            margin: 16px 20px;
+            box-sizing: border-box;
+            text-align: center;
+
+            img {
+              width: 120px;
+              height: 120px;
+            }
+            img:hover {
+              cursor: pointer;
+              opacity: 0.75;
+            }
+          }
+        }
+      }
+
+      .serviceNPriceHoursGrid {
+        width: 90%;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0;
+        margin: 0 auto;
+
+        .profileDivider {
+          display: none;
+        }
+      }
+
+      .activityGrid,
+      .bioGrid,
+      .serviceNPriceGrid,
+      .hoursGrid {
+        width: 50%;
+      }
+
+      .reviews {
+        width: 95%;
+        margin: 0 auto;
+        padding: 0;
+      }
+
+      .review {
+        width: 100%;
+        margin: 1.5rem 0;
+        padding: 0;
+
+        .reviewHeader {
+          display: block;
+
+          .reviewCustomerNrate {
+            display: flex;
+            align-items: center;
+          }
+
+          .reviewGalleryContainer {
+            width: 100%;
+            padding: 0;
+          }
+        }
+      }
+    }
+
+    .location {
+      .googleMap {
+        margin: 0 auto;
+        width: 75vw;
+        height: 50vh;
+      }
+    }
+
+    .backTopBtn {
+      right: 1vw;
+    }
+  }
+}
+
+@media (max-width: 769px) {
+  .designerProfileView .designerBottom .works .workGalleryContainer {
+    text-align: left;
+    width: 480px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+
+    .workImgDiv {
+      display: inline-block;
+      margin: 16px 20px;
+      box-sizing: border-box;
+      text-align: center;
+
+      img {
+        width: 120px;
+        height: 120px;
+      }
+      img:hover {
+        cursor: pointer;
+        opacity: 0.75;
+      }
+    }
+  }
+}
+
+@media (max-width: 481px) {
+  .designerProfileView .designerBottom .works .workGalleryContainer {
+    text-align: left;
+    width: 280px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+
+    .workImgDiv {
+      display: inline-block;
+      margin: 16px 10px;
+      box-sizing: border-box;
+      text-align: center;
+
+      img {
+        width: 120px;
+        height: 120px;
+      }
+      img:hover {
+        cursor: pointer;
+        opacity: 0.75;
+      }
+    }
+  }
+
+  .designerProfileView .designerTop .designerNav {
+    margin: 0 0 0 0.25rem;
+  }
+
+  .designerProfileView .designerTop .designerNav .designerNavItem {
+    margin: 0 0.5rem 0 0;
+  }
+
+  .designerProfileView .designerBottom .serviceNPriceHoursGrid {
+    width: 100%;
+    display: block;
+    padding: 0;
+    margin: 0 auto;
+
+    .profileDivider {
+      display: block;
+    }
+  }
+
+  .designerProfileView .designerBottom .serviceNPriceGrid,
+  .designerProfileView .designerBottom .hoursGrid {
+    width: 100%;
+  }
+
+  .editProfileModal {
+    .ant-modal-body {
+      padding: 16px 24px;
+      .clearfix {
+        margin: 0px 20px;
+        .ant-upload-list-picture-card-container {
+          margin: 8px;
+          width: 100px;
+          height: 100px;
+        }
+        .ant-upload-list-picture .ant-upload-list-item,
+        .ant-upload-list-picture-card .ant-upload-list-item {
+          padding: 0;
+          margin: 0;
+          width: 100px;
+          height: 100px;
+        }
+        .ant-upload.ant-upload-select-picture-card {
+          margin: 8px;
+          width: 100px;
+          height: 100px;
+        }
+      }
+    }
+  }
+
+  .workModal {
+    .ant-modal-body {
+      padding: 8px;
+      .workImgInModal {
+        width: 300px;
+        height: 300px;
+      }
+    }
   }
 }

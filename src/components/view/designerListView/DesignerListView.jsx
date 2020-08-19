@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
-import queryString from "query-string";
-import { load_database } from "../../../actions/firebaseAction";
-import { firebaseDB } from "../../../config/fbConfig";
-import { useDispatch, useSelector } from "react-redux";
-import DesignerCardComponent from "./designerCardComponent/DesignerCardComponent";
-import DesignerListFilter from "./DesignerListFilter";
-
+import React, { useState, useEffect } from 'react';
+import queryString from 'query-string';
+import { load_database } from '../../../actions/firebaseAction';
+import { firebaseDB } from '../../../config/fbConfig';
+import { useDispatch, useSelector } from 'react-redux';
+import DesignerCardComponent from './designerCardComponent/DesignerCardComponent';
+import DesignerListFilter from './DesignerListFilter';
 
 export default function DesignerListView(props) {
-    const designers = useSelector((state) => state.firestore.designers);
-    const dispatch = useDispatch();
+  const designers = useSelector((state) => state.firestore.designers);
+  const dispatch = useDispatch();
 
 
     useEffect(() => {

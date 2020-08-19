@@ -1,10 +1,11 @@
 import React from 'react';
 
 const Activity = (props) => {
-  const { fname, activity } = props;
+  const { id, fname, activity } = props;
+  const { numberOfClientsLookingUp, avgRespondingTime, reputations } = activity;
 
   return (
-    <div className='activity'>
+    <div className='activity' id={id}>
       <h2>LookUp Activity</h2>
       <section>
         <p>

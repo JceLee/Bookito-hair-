@@ -7,8 +7,13 @@ const reviewsPerClick = 2;
 let reviewsArray = [];
 
 const Reviews = (props) => {
+  let { id, reviews } = props;
   const [arrayReviewsToShow, setarrayReviewsToShow] = useState([]);
   const [next, setNext] = useState(reviewsPerClick);
+  const [Collapsed, setCollapsed] = useState({
+    collapsedAllReviews: true,
+    collapsedComment: true,
+  });
 
   const loopWithSlice = (start, end) => {
     const slicedReviews = props.reviews.slice(start, end);
@@ -28,30 +33,35 @@ const Reviews = (props) => {
   const handleShowMoreReviews = () => {
     loopWithSlice(next, next + reviewsPerClick);
     setNext(next + reviewsPerClick);
+    setCollapsed({ collapsedAllReviews: false, collapsedComment: true });
   };
 
   const handleShowLessReviews = () => {
     displayInitialReviews();
     setNext(reviewsPerClick);
+    setCollapsed({ collapsedAllReviews: true, collapsedComment: true });
   };
 
-  const { id, reviews } = props;
   return (
     <div className='reviews' id={id}>
       <h2>Reviews ({reviews.length})</h2>
       {reviews.length === 0 ? (
         <h3>No reviews yet...</h3>
       ) : (
-        arrayReviewsToShow.map((review, customerId) => (
-          <Review
-            key={customerId}
-            customerName={review.customerName}
-            photos={review.photos}
-            rate={review.rate}
-            review={review.review}
-            date={review.date}
-          />
-        ))
+        arrayReviewsToShow.map((review, customerId) => {
+          const { customerName, photos, rate, comment, date } = review;
+          return (
+            <Review
+              key={customerId}
+              customerName={customerName}
+              photos={photos}
+              rate={rate}
+              comment={comment}
+              date={date}
+              collapsed={Collapsed}
+            />
+          );
+        })
       )}
 
       <Space>
@@ -59,7 +69,6 @@ const Reviews = (props) => {
           <Button
             className='Button'
             type='primary'
-            shape='round'
             onClick={handleShowMoreReviews}
           >
             Load More
@@ -73,12 +82,12 @@ const Reviews = (props) => {
             spy={true}
             smooth={true}
             duration={500}
-            offset={-300}
+            // offset={-121 * 1.75}
+            offset={-48 * 2.25}
           >
             <Button
               className='Button'
               type='primary'
-              shape='round'
               onClick={handleShowLessReviews}
             >
               Load Less
