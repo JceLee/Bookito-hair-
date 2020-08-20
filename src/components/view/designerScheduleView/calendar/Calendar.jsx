@@ -18,10 +18,11 @@ import {
 import TooltipContent from "./TooltipContent";
 import AddIcon from "@material-ui/icons/Add";
 import { Badge } from "antd";
+import NewRequests from "./NewRequests";
 
 export default function Calendar(props) {
+  const { newRequests } = props;
   const [newRequestState, setNewRequestState] = useState(false);
-  //   const currentDate = "2018-11-01";
   const currentDate = new Date();
 
   const designer = {
@@ -38,7 +39,7 @@ export default function Calendar(props) {
     },
   ];
 
-  const newRequests = () => {
+  const displayNewRequests = () => {
     setNewRequestState(!newRequestState);
   };
 
@@ -47,7 +48,7 @@ export default function Calendar(props) {
       <Toolbar.FlexibleSpace className="flexibleSpace">
         <div className="flexContainer">
           <Badge className="newRequestBadge" count={designer.notifications}>
-            <button className="newRequestBtn" onClick={newRequests}>
+            <button className="newRequestBtn" onClick={displayNewRequests}>
               NEW REQUESTS
             </button>
           </Badge>
@@ -101,7 +102,7 @@ export default function Calendar(props) {
           </Fab>
         </Scheduler>
       </Paper>
-      {newRequestState ? <div>new request true</div> : null}
+      {newRequestState ? <NewRequests newRequests={newRequests} /> : null}
     </div>
   );
 }
