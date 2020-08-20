@@ -1,27 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { Form } from 'antd';
-import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
-import { useHistory } from 'react-router-dom';
-import DesignerTypeCarousel from './DesignerTypeCarousel';
-import LocationInput from './LocationInput';
-import { reverseGeocode } from '../../../helpers/geocode';
-import '../../../assets/scss/commonComponents/searchBar/SearchBar.scss';
+import React, { useState, useEffect } from "react";
+import { Form } from "antd";
+import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+import { reverseGeocode } from "../../../helpers/geocode";
+import { useHistory } from "react-router-dom";
+import SearchBar from "../../commonComponents/SearchBar";
 
-export default function SearchBar() {
+export default function SearchBarSection() {
   const [designerType, setDesignerType] = useState();
-  const [address, setAddress] = useState('');
+  const [address, setAddress] = useState("");
   const [form] = Form.useForm();
 
   useEffect(() => {
     // TODO: is setFieldsValue working as intended?
     form.setFieldsValue({
-      addressInput: '',
+      addressInput: "",
     });
   });
 
   const clearAddress = () => {
     form.setFieldsValue({
-      addressInput: '',
+      addressInput: "",
     });
   };
 
@@ -42,7 +40,7 @@ export default function SearchBar() {
         return latLng;
       })
       .catch((error) => {
-        console.error('Error', error);
+        console.error("Error", error);
         return null;
       });
   };
@@ -50,7 +48,7 @@ export default function SearchBar() {
   const history = useHistory();
   const handleSearch = (location) => {
     const route = `/designer_list?type=${designerType}${
-      location ? `&location=${location}` : ''
+      location ? `&location=${location}` : ""
     }`;
     history.push(route);
   };
@@ -70,22 +68,22 @@ export default function SearchBar() {
         });
       });
     } else {
-      console.error('Geolocation is not supported by this browser.');
+      console.error("Geolocation is not supported by this browser.");
     }
   };
-
   return (
-    <div className='searchBar'>
-      <h3 className='searchBarText'>LookUp your new favorite</h3>
-      <DesignerTypeCarousel setDesignerType={setDesignerType} />
-      <h3 className='searchBarText'>near by</h3>
-      <Form form={form} className='locationInput'>
+    <div className="searchBarSection">
+      {/* main page */}
+      <div className="frontText">
+        <b>LookUp</b> your new favorite
+      </div>
+      <Form form={form}>
         <Form.Item
-          name='addressInput'
-          initialValue=''
+          name="addressInput"
+          initialValue=""
           rules={[{ required: true }]}
         >
-          <LocationInput
+          <SearchBar
             address={address}
             clearAddress={clearAddress}
             handleAddressChange={handleAddressChange}

@@ -1,45 +1,81 @@
-import React from 'react';
-import { Menu, Dropdown, Button, Typography } from 'antd';
+import React, { useState } from 'react';
+import { Menu, Dropdown, Button, Typography, Drawer } from 'antd';
 import { Link } from 'react-router-dom';
+import { MenuOutlined, UserOutlined, BarsOutlined } from '@ant-design/icons';
+import SearchBar from './SearchBar';
 
 const { Title } = Typography;
 
 export default function Navbar() {
+  const [visible, setVisible] = useState(false);
+
+  const showDrawer = () => {
+    setVisible(true);
+  };
+
+  const onClose = () => {
+    setVisible(false);
+  };
+
+  const menuItems = [
+    { name: 'Listing page', link: '/designer_list' },
+    { name: 'Schedule (Designer)', link: '/designer_schedule' },
+    { name: 'Schedule (Client)', link: '/client_schedule' },
+    { name: 'Profile (Designer)', link: '/designer_profile' },
+    { name: 'Profile (Client)', link: '/client_profile' },
+    { name: 'Divider', link: '' },
+    { name: 'Log In', link: '' },
+    { name: 'Sign up', link: '' },
+  ];
+
   const menu = (
     <Menu>
-      <Menu.Item>
-        <Link to='/designer_schedule'>Schedule (Designer)</Link>
-      </Menu.Item>
-      <Menu.Divider />
-      <Menu.Item>
-        <Link to='/client_schedule'>Schedule (Client)</Link>
-      </Menu.Item>
-      <Menu.Divider />
-      <Menu.Item>
-        <Link to='/designer_profile'>Profile (Designer)</Link>
-      </Menu.Item>
-      <Menu.Divider />
-      <Menu.Item>
-        <Link to='/client_profile'>Profile (Client)</Link>
-      </Menu.Item>
+      {menuItems.map((menu, inx) => {
+        if (menu.name == 'Divider') {
+          return <Menu.Divider />;
+        } else {
+          return (
+            <Menu.Item key={inx}>
+              <Link to={menu.link}>{menu.name}</Link>
+            </Menu.Item>
+          );
+        }
+      })}
     </Menu>
   );
+
+  const navBarController = () => {
+    if (
+      document.body.scrollTop > 64 ||
+      document.documentElement.scrollTop > 64
+    ) {
+      document.querySelector('.logo').style.display = 'none';
+      document.querySelector('.notMobileSearchBar').style.display = 'flex';
+    } else {
+      document.querySelector('.logo').style.display = 'unset';
+      document.querySelector('.notMobileSearchBar').style.display = 'none';
+    }
+  };
+
+  window.onscroll = function () {
+    navBarController();
+  };
 
   return (
     <>
       <div className='logo'>
-        <Link to='/'>
-          <Title level={4}>LookUp</Title>
-        </Link>
+        <Link to='/'>LookUp</Link>
       </div>
-      <div className='listing'>
-        <Link to='/designer_list'>
-          <Title level={4}>Listing</Title>
-        </Link>
+      <SearchBar />
+
+      {/* < tablet */}
+      <div className='menuBtn'>
+        <Dropdown overlay={menu} placement='bottomRight' trigger={['click']}>
+          <Button shape='round' icon={<UserOutlined />}>
+            <BarsOutlined />
+          </Button>
+        </Dropdown>
       </div>
-      <Dropdown className='profile' overlay={menu} placement='bottomRight'>
-        <Button shape='round'>Profile</Button>
-      </Dropdown>
     </>
   );
 }
