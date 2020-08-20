@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Paper from "@material-ui/core/Paper";
 import Fab from "@material-ui/core/Fab";
+import Drawer from "@material-ui/core/Drawer";
 import { ViewState, EditingState } from "@devexpress/dx-react-scheduler";
 import {
   Scheduler,
@@ -26,7 +27,7 @@ export default function Calendar(props) {
   const currentDate = new Date();
 
   const designer = {
-    notifications: 3,
+    notifications: 2,
   };
 
   const appointments = [
@@ -40,6 +41,7 @@ export default function Calendar(props) {
   ];
 
   const displayNewRequests = () => {
+    // setNewRequestState(!newRequestState);
     setNewRequestState(!newRequestState);
   };
 
@@ -66,43 +68,54 @@ export default function Calendar(props) {
   };
 
   return (
-    <div className="calendar">
-      <Paper>
-        <Scheduler data={appointments}>
-          <ViewState defaultCurrentDate={currentDate} />
-          <MonthView />
-          <WeekView />
-          <DayView startDayHour={9} endDayHour={14} />
-          <Toolbar flexibleSpaceComponent={customToolbar} />
-          <TodayButton className="todayBtn" />
-          <DateNavigator />
-          <ViewSwitcher />
-          <Appointments />
-          <EditingState onCommitChanges={commitChanges} />
-          <AppointmentTooltip
-            showOpenButton
-            showCloseButton
-            showDeleteButton
-            contentComponent={TooltipContent}
-          />
-          <AppointmentForm layoutComponent={layout} />
-          <Fab
-            color="secondary"
-            className="addButton"
-            // onClick={() => {
-            //   this.setState({ editingFormVisible: true });
-            //   this.onEditingAppointmentChange(undefined);
-            //   this.onAddedAppointmentChange({
-            //     startDate: new Date(currentDate).setHours(startDayHour),
-            //     endDate: new Date(currentDate).setHours(startDayHour + 1),
-            //   });
-            // }}
-          >
-            <AddIcon />
-          </Fab>
-        </Scheduler>
-      </Paper>
-      {newRequestState ? <NewRequests newRequests={newRequests} /> : null}
-    </div>
+    <>
+      <div className="calendar">
+        <Paper>
+          <Scheduler data={appointments}>
+            <ViewState defaultCurrentDate={currentDate} />
+            <MonthView />
+            <WeekView />
+            <DayView startDayHour={9} endDayHour={14} />
+            <Toolbar flexibleSpaceComponent={customToolbar} />
+            <Drawer
+              anchor="right"
+              open={newRequestState}
+              onClose={displayNewRequests}
+            >
+              <NewRequests
+                newRequests={newRequests}
+                onClick={displayNewRequests}
+              />
+            </Drawer>
+            <TodayButton className="todayBtn" />
+            <DateNavigator />
+            <ViewSwitcher />
+            <Appointments />
+            <EditingState onCommitChanges={commitChanges} />
+            <AppointmentTooltip
+              showOpenButton
+              showCloseButton
+              showDeleteButton
+              contentComponent={TooltipContent}
+            />
+            <AppointmentForm layoutComponent={layout} />
+            <Fab
+              color="secondary"
+              className="addButton"
+              // onClick={() => {
+              //   this.setState({ editingFormVisible: true });
+              //   this.onEditingAppointmentChange(undefined);
+              //   this.onAddedAppointmentChange({
+              //     startDate: new Date(currentDate).setHours(startDayHour),
+              //     endDate: new Date(currentDate).setHours(startDayHour + 1),
+              //   });
+              // }}
+            >
+              <AddIcon />
+            </Fab>
+          </Scheduler>
+        </Paper>
+      </div>
+    </>
   );
 }
