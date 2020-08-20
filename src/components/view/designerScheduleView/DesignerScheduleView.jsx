@@ -1,5 +1,10 @@
 import React from "react";
+import Calendar from "./calendar/Calendar";
 
 export default function DesignerSchedule() {
-  return <div>Designer Schedule View</div>;
+  return (
+    <div className="designerScheduleView">
+      <Calendar />
+    </div>
+  );
 }

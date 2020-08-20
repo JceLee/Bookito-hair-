@@ -40,3 +40,10 @@ $green: #00ff00;
     @content;
   }
 }
+
+// for calendar
+@mixin calendar700 {
+  @media only screen and (min-width: 700px) {
+    @content;
+  }
+}

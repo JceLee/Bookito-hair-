@@ -17,6 +17,12 @@
 // Client Schedule view
 @import "./view/clientScheduleView/ClientScheduleView.scss";
 
+// Calendar
+@import "./view/designerScheduleView/Calendar.scss";
+@import "./view/designerScheduleView/TooltipContent.scss";
+
+@import "./view/designerScheduleView/DesignerScheduleView.scss";
+
 .layout {
   background-color: white;
 }
