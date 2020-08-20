@@ -19,6 +19,7 @@ export default function StepTwo(props) {
     addToCart,
     removeFromCart,
     totalSum,
+    onChecked,
   } = props;
 
   const paraseChecked = () => {};
@@ -39,14 +40,13 @@ export default function StepTwo(props) {
               <Checkbox
                 key={menu.id}
                 id={menu.id}
-                checked={
-                  isChecked[serviceKey] && isChecked[serviceKey].id === menu.id
-                }
+                checked={onChecked(serviceKey, menu)}
                 // disabled={isChecked[serviceKey].gender !== menu.gender}
                 onChange={() => {
                   navigateTo('Estimated Price');
 
                   let newIsChecked = { ...isChecked };
+                  console.log(newIsChecked);
 
                   switch (serviceKey) {
                     case 'Cuts':
@@ -99,23 +99,33 @@ export default function StepTwo(props) {
           {page === 'Estimated Price' && (
             <>
               <div className='estimatedPrice'>
-                {isChecked &&
-                  Object.values(isChecked).map(
-                    (menu, index) =>
-                      menu && (
-                        <div className='priceTag' key={index}>
-                          <p>
-                            {menu.service} : ${menu.price}{' '}
-                            <Button
-                              type='link'
-                              onClick={() => removeFromCart(menu)}
-                            >
-                              Remove
-                            </Button>
-                          </p>
-                        </div>
-                      )
-                  )}
+                {/* {Object.values(isChecked).map((menu, index) => { */}
+                {Object.values(isChecked).map((menu, index) => {
+                  // console.log(isChecked);
+                  // let remainingKeys = Object.keys(isChecked);
+                  // console.log(remainingKeys); // Style
+                  // Object.keys(isChecked) === '0' ?
+
+                  return (
+                    menu && (
+                      <div className='priceTag' key={index}>
+                        <p>
+                          {menu.service} : ${menu.price}{' '}
+                          <Button
+                            type='link'
+                            onClick={() => {
+                              console.log('before', menu);
+                              removeFromCart(serviceKey, menu);
+                              console.log('after', menu);
+                            }}
+                          >
+                            Remove
+                          </Button>
+                        </p>
+                      </div>
+                    )
+                  );
+                })}
               </div>
               <Divider />
               <div className='totalCost'>Estimated total: ${totalSum()}</div>

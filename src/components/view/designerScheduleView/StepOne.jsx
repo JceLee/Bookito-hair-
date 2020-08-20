@@ -29,18 +29,34 @@ export default function StepOne(props) {
       <Radio.Group>
         {timeSelection.map((hour, index) => {
           const { time, value, disabled } = hour;
-          return (
-            <Radio.Button
-              key={index}
-              value={value}
-              disabled={disabled}
-              checked={bookingTime === hour.index}
-              style={{ marginRight: 50, marginBottom: 20 }}
-              onChange={(index) => radioChange(index)}
-            >
-              {time}
-            </Radio.Button>
-          );
+          // console.log('babo1 : ' + bookingTime);
+          if (time == bookingTime) {
+            return (
+              <Radio.Button
+                key={index}
+                value={value}
+                disabled={disabled}
+                checked={true}
+                style={{ marginRight: 50, marginBottom: 20 }}
+                onChange={radioChange}
+              >
+                {time}
+              </Radio.Button>
+            );
+          } else {
+            return (
+              <Radio.Button
+                key={index}
+                value={value}
+                disabled={disabled}
+                checked={false}
+                style={{ marginRight: 50, marginBottom: 20 }}
+                onChange={radioChange}
+              >
+                {time}
+              </Radio.Button>
+            );
+          }
         })}
       </Radio.Group>
     </div>

@@ -123,13 +123,17 @@ export default function DesignerSchedule() {
   const [DisplayedDay, setDisplayedDay] = useState(null);
   // const [bookingTime, setBookingTime] = useState([]);
   const [key, setKey] = useState('Cuts');
-  const [isChecked, setIsChecked] = useState({});
+  const [isChecked, setIsChecked] = useState([]);
   const [cart, setCart] = useState([]);
   const [page, setPage] = useState('Estimated Price');
   const [current, setCurrent] = useState(0);
   const [bookingTime, setBookingTime] = useState(null);
 
-  console.log('after : ' + bookingTime);
+  // console.log('after : ' + bookingTime);
+
+  const onChecked = (Key, menu) => {
+    return isChecked[Key] && isChecked[Key].id === menu.id;
+  };
 
   const onChange = (current) => {
     setCurrent(current);
@@ -160,16 +164,17 @@ export default function DesignerSchedule() {
     setKey(key);
   };
 
-  const addToCart = (serviceToAdd) => {
-    setCart([...cart, { ...serviceToAdd }]);
-  };
-
-  const removeFromCart = (serviceToRemove) => {
-    setCart(cart.filter((serviceCart) => serviceCart !== serviceToRemove));
+  const removeFromCart = (serviceKey, serviceToRemove) => {
+    setIsChecked(
+      Object.values(isChecked).filter(
+        (serviceCart) => serviceCart !== serviceToRemove
+      )
+    );
+    onChecked(isChecked[serviceKey], serviceToRemove);
   };
 
   const totalSum = () => {
-    return cart.reduce((sum, { price }) => sum + price, 0);
+    return Object.values(isChecked).reduce((sum, { price }) => sum + price, 0);
   };
 
   const steps = [
@@ -198,9 +203,9 @@ export default function DesignerSchedule() {
           page={page}
           navigateTo={navigateTo}
           onTabChange={onTabChange}
-          addToCart={addToCart}
           removeFromCart={removeFromCart}
           totalSum={totalSum}
+          onChecked={onChecked}
         />
       ),
     },
