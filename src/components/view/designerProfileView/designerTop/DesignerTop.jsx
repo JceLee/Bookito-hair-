@@ -73,6 +73,7 @@ const DesignerTop = (props) => {
                 title='Edit Profile'
                 onOk={handleOk}
                 onCancel={handleCancel}
+                destroyOnClose={true}
                 footer={[
                   <Button key='back' onClick={handleCancel}>
                     Return

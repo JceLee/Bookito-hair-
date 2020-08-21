@@ -1,101 +1,34 @@
-// import React, { useState } from 'react';
-// import { Checkbox, TimePicker, Form } from 'antd';
-// import moment from 'moment';
-
-// const { RangePicker } = TimePicker;
-// const hoursFormat = 'HH:mm';
-// const days = ['Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
-// const hoursLayout = {
-//   labelCol: { span: 3 },
-//   wrapperCol: { span: 24 },
-// };
-
-// const HoursForm = () => {
-//   const [DayChecked, setDayChecked] = useState({
-//     Mon: false,
-//     Tue: false,
-//     Wed: false,
-//     Thurs: false,
-//     Fri: false,
-//     Sat: false,
-//     Sun: false,
-//   });
-
-//   const onChange = (e) => {
-//     const { name, checked } = e.target;
-//     setDayChecked((prevValue) => ({
-//       ...prevValue,
-//       [name]: checked,
-//     }));
-//   };
-
-//   return (
-//     <div className='editHours'>
-//       <h3>Hours [NOT YET]</h3>
-//       {days.map((day, index) => {
-//         return (
-//           <div key={index}>
-//             <Form.Item
-//               {...hoursLayout}
-//               label={day}
-//               colon={false}
-//               rules={[
-//                 {
-//                   required: true,
-//                 },
-//               ]}
-//             >
-//               <RangePicker
-//                 defaultValue={moment('00:00', hoursFormat)}
-//                 format={hoursFormat}
-//                 disabled={DayChecked[day]}
-//               />
-//               <Checkbox
-//                 className='hoursCheckbox'
-//                 checked={DayChecked[day]}
-//                 name={day}
-//                 onChange={onChange}
-//               >
-//                 'Closed'
-//               </Checkbox>
-//             </Form.Item>
-//           </div>
-//         );
-//       })}
-//     </div>
-//   );
-// };
-
-// export default HoursForm;
-
 import React, { useState } from 'react';
-import { Checkbox, TimePicker, Form } from 'antd';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
+import { Alert, Checkbox, Form, Space } from 'antd';
 import Slider from '@material-ui/core/Slider';
 
-import moment from 'moment';
-
-const { RangePicker } = TimePicker;
-const hoursFormat = 'HH:mm';
 const days = ['Mon', 'Tue', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
-
 const hoursLayout = {
-  labelCol: { span: 3 },
+  labelCol: { span: 10 },
   wrapperCol: { span: 24 },
 };
 
-const useStyles = makeStyles({
-  root: {
-    width: 300,
-  },
-});
-
-function valuetext(value) {
-  return `${value}°C`;
-}
+const minuteToTime = (value) => {
+  value = value > 1439 ? 1439 : value;
+  let hours = Math.floor(value / 60);
+  let minutes = value - hours * 60;
+  if (hours < 10) hours = '0' + hours;
+  if (minutes < 10) minutes = '0' + minutes;
+  if (minutes == 0) minutes = '00';
+  return `${hours}:${minutes}`;
+};
 
 const HoursForm = () => {
+  const [IsValid, setIsValid] = useState({
+    Mon: true,
+    Tue: true,
+    Wed: true,
+    Thurs: true,
+    Fri: true,
+    Sat: true,
+    Sun: true,
+  });
+
   const [DayChecked, setDayChecked] = useState({
     Mon: false,
     Tue: false,
@@ -107,30 +40,46 @@ const HoursForm = () => {
   });
 
   const [TimeValue, setTimeValue] = useState({
-    Mon: [20, 37],
-    Tue: [20, 37],
-    Wed: [20, 37],
-    Thurs: [20, 37],
-    Fri: [20, 37],
-    Sat: [20, 37],
-    Sun: [20, 37],
+    Mon: [480, 1320],
+    Tue: [480, 1320],
+    Wed: [480, 1320],
+    Thurs: [480, 1320],
+    Fri: [480, 1320],
+    Sat: [480, 1320],
+    Sun: [480, 1320],
   });
 
-  const [value, setValue] = useState([20, 37]);
+  const onClose = (e) => {
+    console.log(e, 'Closed Alert');
+  };
 
   const handleChange = (event, newValue) => {
-    let currentEventTarget = event.currentTarget;
-    let inputTagInfo = currentEventTarget.getElementsByTagName('input');
-    console.log(inputTagInfo[days[0]].name);
-    // console.log(day.Mon.name);
-    // console.log(day.Tue.name);
-    // console.log(day.Wed.name);
-    // console.log(day.Thurs.name);
-    // console.log(day.Fri.name);
-    // console.log(day.Sat.name);
-    // console.log(day.Sun.name);
+    let [start, end] = newValue;
+    let inputTagInfo = event.currentTarget.getElementsByTagName('input');
+    let touchmoveInputTagInfo = event.path[1].getElementsByTagName('input');
+    let selectedDay = Object.values(inputTagInfo)[0].name;
+    let touchmoveSelectedDay = Object.values(touchmoveInputTagInfo)[0].name;
 
-    // setTimeValue({day[day].name: newValue});
+    if (event.type === 'touchmove') {
+      selectedDay = touchmoveSelectedDay;
+    }
+
+    if (end - start < 60) {
+      console.log(start, end);
+      setIsValid((prevValue) => ({
+        ...prevValue,
+        [selectedDay]: false,
+      }));
+    } else {
+      setIsValid((prevValue) => ({
+        ...prevValue,
+        [selectedDay]: true,
+      }));
+      setTimeValue((prevValue) => ({
+        ...prevValue,
+        [selectedDay]: newValue,
+      }));
+    }
   };
 
   const onChange = (e) => {
@@ -148,31 +97,43 @@ const HoursForm = () => {
           <div key={index}>
             <Form.Item
               {...hoursLayout}
-              label={day}
-              colon={false}
               rules={[
                 {
                   required: true,
                 },
               ]}
             >
+              <Space>
+                <span className='dayInHoursForm'>{day}</span>
+                {'Start: ' + minuteToTime(TimeValue[day][0]) + ' '}
+                {'End: ' + minuteToTime(TimeValue[day][1])}
+                <Checkbox
+                  className='hoursCheckbox'
+                  checked={DayChecked[day]}
+                  name={day}
+                  onChange={onChange}
+                >
+                  Closed
+                </Checkbox>
+              </Space>
+
+              {IsValid[day] ? null : (
+                <Alert
+                  message='Invalid values.'
+                  type='error'
+                  closable
+                  onClose={onClose}
+                />
+              )}
               <Slider
                 name={day}
                 disabled={DayChecked[day]}
-                value={value}
+                value={TimeValue[day]}
                 onChange={handleChange}
-                aria-labelledby={day}
-                getAriaValueText={valuetext}
+                min={360}
+                max={1439}
+                step={30}
               />
-
-              <Checkbox
-                className='hoursCheckbox'
-                checked={DayChecked[day]}
-                name={day}
-                onChange={onChange}
-              >
-                'Closed'
-              </Checkbox>
             </Form.Item>
           </div>
         );

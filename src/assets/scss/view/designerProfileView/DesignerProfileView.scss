@@ -6,7 +6,10 @@
 }
 
 .hoursCheckbox {
-  margin: 0 0 0 2rem;
+  // margin: 0 0 0 2rem;
+  position: absolute;
+  top: 2px;
+  right: 0;
 }
 
 // Customized modal
@@ -644,11 +647,52 @@
     }
 
     .ant-modal-body {
-      // padding: 16px 24px;
       padding: 0;
       .ant-collapse-borderless {
         background-color: inherit;
       }
+
+      .ant-form .ant-form-item {
+        margin: 4px 0;
+
+        .ant-form-item-control-input-content {
+          background-color: aliceblue;
+        }
+
+        .addServiceTypeBtn {
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+        .serviceTypeInput {
+          width: 100%;
+          margin: 4px 0;
+        }
+        .serviceNameNPrice {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .serviceNameInput {
+          width: 150px;
+          margin-left: 30px;
+        }
+        .servicePriceInput {
+          width: 55px;
+        }
+        .addServicePriceBtn {
+          margin: 4px 0 4px 30px;
+          width: 297px;
+        }
+      }
+      .dayInHoursForm {
+        display: block;
+        width: 45px;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
       .clearfix {
         margin: 0px 20px;
         .ant-upload-list-picture-card-container {

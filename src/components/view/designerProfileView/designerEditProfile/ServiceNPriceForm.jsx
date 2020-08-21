@@ -1,64 +1,138 @@
 import React from 'react';
-import { Button, Input, DatePicker, Form, Space } from 'antd';
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { Form, Input, Button, Space } from 'antd';
+import {
+  PlusCircleOutlined,
+  MinusCircleOutlined,
+  PlusOutlined,
+} from '@ant-design/icons';
+
+// const formItemLayout = {
+//   labelCol: {
+//     xs: { span: 24 },
+//     sm: { span: 4 },
+//   },
+//   wrapperCol: {
+//     xs: { span: 24 },
+//     sm: { span: 20 },
+//   },
+// };
+// const formItemLayoutWithOutLabel = {
+//   wrapperCol: {
+//     xs: { span: 24, offset: 0 },
+//     sm: { span: 20, offset: 4 },
+//   },
+// };
 
 const ServiceNPriceForm = () => {
-  const experienceDateFormat = 'YYYY-MM-DD';
   return (
-    <Form.List name='experience'>
-      {(experiences, { add, remove }) => {
+    <Form.List name='serviceNpriceForm'>
+      {(fields, { add, remove }) => {
         return (
           <div>
-            {experiences.map((experience) => (
-              <Space
-                key={experience.key}
-                style={{ display: 'flex' }}
-                align='start'
+            {fields.map((field) => (
+              <Form.Item
+                className='serviceNpriceForm'
+                required={false}
+                key={field.key}
               >
                 <Form.Item
-                  {...experience}
-                  name={[experience.name, 'experience']}
-                  fieldKey={[experience.fieldKey, 'experience']}
+                  {...field}
+                  validateTrigger={['onChange', 'onBlur']}
                   rules={[
                     {
                       required: true,
-                      message: 'Missing work experience',
+                      whitespace: true,
+                      message: 'Please input valid service.',
                     },
                   ]}
+                  noStyle
                 >
-                  <Input placeholder='Work Experience' />
-                </Form.Item>
-                <Form.Item
-                  {...experience}
-                  name={[experience.name, 'period']}
-                  fieldKey={[experience.fieldKey, 'period']}
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Missing work period',
-                    },
-                  ]}
-                >
-                  <DatePicker.RangePicker
-                    showTime
-                    format={experienceDateFormat}
+                  <Input
+                    className='serviceTypeInput'
+                    placeholder='Service Type'
                   />
+                  <Form.List name='serviceNameNPrice'>
+                    {(fields, { add, remove }) => {
+                      return (
+                        <div className='serviceNameNPrice'>
+                          {fields.map((field) => (
+                            <>
+                              <Form.Item
+                                {...field}
+                                className='serviceNameInput'
+                                name={[field.name, 'service']}
+                                fieldKey={[field.fieldKey, 'service']}
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: 'Missing service name',
+                                  },
+                                ]}
+                              >
+                                <Input placeholder='Service Name' />
+                              </Form.Item>
+                              <Form.Item
+                                {...field}
+                                className='servicePriceInput'
+                                name={[field.name, 'price']}
+                                fieldKey={[field.fieldKey, 'price']}
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: 'Missing price',
+                                  },
+                                ]}
+                              >
+                                <Input placeholder='Price' />
+                              </Form.Item>
+                              <MinusCircleOutlined
+                                onClick={() => {
+                                  remove(field.name);
+                                }}
+                              />
+                              Remove
+                            </>
+                          ))}
+
+                          <Form.Item>
+                            <Button
+                              className='addServicePriceBtn'
+                              onClick={() => {
+                                add();
+                              }}
+                            >
+                              <PlusOutlined />
+                              Service & Price
+                            </Button>
+                          </Form.Item>
+                        </div>
+                      );
+                    }}
+                  </Form.List>
                 </Form.Item>
-                <MinusCircleOutlined
-                  onClick={() => {
-                    remove(experience.name);
-                  }}
-                />
-              </Space>
+                {fields.length > 0 ? (
+                  <>
+                    <MinusCircleOutlined
+                      className='dynamic-delete-button'
+                      style={{ margin: '0 8px' }}
+                      onClick={() => {
+                        remove(field.name);
+                      }}
+                    />
+                    Remove
+                  </>
+                ) : null}
+              </Form.Item>
             ))}
             <Form.Item>
               <Button
-                type='dashed'
+                className='addServiceTypeBtn'
                 onClick={() => {
                   add();
                 }}
               >
-                <PlusOutlined /> Add
+                <PlusOutlined />
+                Service Type
               </Button>
             </Form.Item>
           </div>
