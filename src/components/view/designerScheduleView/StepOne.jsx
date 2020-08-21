@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Row, Col, Radio } from 'antd';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
@@ -29,34 +29,18 @@ export default function StepOne(props) {
       <Radio.Group>
         {timeSelection.map((hour, index) => {
           const { time, value, disabled } = hour;
-          // console.log('babo1 : ' + bookingTime);
-          if (time == bookingTime) {
-            return (
-              <Radio.Button
-                key={index}
-                value={value}
-                disabled={disabled}
-                checked={true}
-                style={{ marginRight: 50, marginBottom: 20 }}
-                onChange={radioChange}
-              >
-                {time}
-              </Radio.Button>
-            );
-          } else {
-            return (
-              <Radio.Button
-                key={index}
-                value={value}
-                disabled={disabled}
-                checked={false}
-                style={{ marginRight: 50, marginBottom: 20 }}
-                onChange={radioChange}
-              >
-                {time}
-              </Radio.Button>
-            );
-          }
+          return (
+            <Radio.Button
+              key={index}
+              value={value}
+              disabled={disabled}
+              checked={bookingTime === value}
+              style={{ marginRight: 50, marginBottom: 20 }}
+              onChange={radioChange}
+            >
+              {time}
+            </Radio.Button>
+          );
         })}
       </Radio.Group>
     </div>

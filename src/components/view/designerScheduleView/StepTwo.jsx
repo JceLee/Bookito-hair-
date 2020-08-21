@@ -10,19 +10,14 @@ export default function StepTwo(props) {
     services,
     servicesContent,
     serviceKey,
-    isChecked,
-    setIsChecked,
-    cart,
+    calculationBox,
+    setCalculationBox,
     page,
     navigateTo,
     onTabChange,
-    addToCart,
-    removeFromCart,
+    removeFromBox,
     totalSum,
-    onChecked,
   } = props;
-
-  const paraseChecked = () => {};
 
   const renderService = () => (
     <div className='checkboxOption'>
@@ -40,35 +35,39 @@ export default function StepTwo(props) {
               <Checkbox
                 key={menu.id}
                 id={menu.id}
-                checked={onChecked(serviceKey, menu)}
-                // disabled={isChecked[serviceKey].gender !== menu.gender}
+                checked={
+                  calculationBox[serviceKey] &&
+                  calculationBox[serviceKey].id === menu.id
+                }
+                // disabled={calculationBox[serviceKey].gender !== menu.gender}
                 onChange={() => {
                   navigateTo('Estimated Price');
 
-                  let newIsChecked = { ...isChecked };
-                  console.log(newIsChecked);
+                  let newCalculationBox = { ...calculationBox };
+                  console.log(newCalculationBox);
 
                   switch (serviceKey) {
                     case 'Cuts':
-                      newIsChecked['Cuts'] =
-                        newIsChecked['Cuts'] === menu ? null : menu;
+                      newCalculationBox['Cuts'] =
+                        newCalculationBox['Cuts'] === menu ? !menu : menu;
                       break;
                     case 'Style':
-                      newIsChecked['Style'] =
-                        newIsChecked['Style'] === menu ? null : menu;
+                      newCalculationBox['Style'] =
+                        newCalculationBox['Style'] === menu ? !menu : menu;
                       break;
                     case 'Perms':
-                      newIsChecked['Perms'] =
-                        newIsChecked['Perms'] === menu ? null : menu;
+                      newCalculationBox['Perms'] =
+                        newCalculationBox['Perms'] === menu ? !menu : menu;
                       break;
                     case 'Colors':
-                      newIsChecked['Colors'] =
-                        newIsChecked['Colors'] === menu ? null : menu;
+                      newCalculationBox['Colors'] =
+                        newCalculationBox['Colors'] === menu ? !menu : menu;
                       break;
                   }
 
-                  console.log(newIsChecked);
-                  setIsChecked(newIsChecked);
+                  console.log(newCalculationBox);
+                  setCalculationBox(newCalculationBox);
+                  // setIsChecked(isChecked);
                 }}
               >
                 <Text strong>{menu.service}</Text>
@@ -99,33 +98,26 @@ export default function StepTwo(props) {
           {page === 'Estimated Price' && (
             <>
               <div className='estimatedPrice'>
-                {/* {Object.values(isChecked).map((menu, index) => { */}
-                {Object.values(isChecked).map((menu, index) => {
-                  // console.log(isChecked);
-                  // let remainingKeys = Object.keys(isChecked);
-                  // console.log(remainingKeys); // Style
-                  // Object.keys(isChecked) === '0' ?
-
-                  return (
-                    menu && (
-                      <div className='priceTag' key={index}>
-                        <p>
-                          {menu.service} : ${menu.price}{' '}
-                          <Button
-                            type='link'
-                            onClick={() => {
-                              console.log('before', menu);
-                              removeFromCart(serviceKey, menu);
-                              console.log('after', menu);
-                            }}
-                          >
-                            Remove
-                          </Button>
-                        </p>
-                      </div>
-                    )
-                  );
-                })}
+                {calculationBox &&
+                  Object.values(calculationBox).map((menu, index) => {
+                    return (
+                      menu && (
+                        <div className='priceTag' key={index}>
+                          <p>
+                            {menu.service} : ${menu.price}{' '}
+                            <Button
+                              type='link'
+                              onClick={() => {
+                                removeFromBox(menu);
+                              }}
+                            >
+                              Remove
+                            </Button>
+                          </p>
+                        </div>
+                      )
+                    );
+                  })}
               </div>
               <Divider />
               <div className='totalCost'>Estimated total: ${totalSum()}</div>

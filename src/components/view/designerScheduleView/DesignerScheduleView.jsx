@@ -120,20 +120,12 @@ const servicesContent = {
 
 export default function DesignerSchedule() {
   const { Step } = Steps;
-  const [DisplayedDay, setDisplayedDay] = useState(null);
-  // const [bookingTime, setBookingTime] = useState([]);
+  const [displayedDay, setDisplayedDay] = useState(null);
   const [key, setKey] = useState('Cuts');
-  const [isChecked, setIsChecked] = useState([]);
-  const [cart, setCart] = useState([]);
+  const [calculationBox, setCalculationBox] = useState([]);
   const [page, setPage] = useState('Estimated Price');
   const [current, setCurrent] = useState(0);
-  const [bookingTime, setBookingTime] = useState(null);
-
-  // console.log('after : ' + bookingTime);
-
-  const onChecked = (Key, menu) => {
-    return isChecked[Key] && isChecked[Key].id === menu.id;
-  };
+  const [bookingTime, setBookingTime] = useState('');
 
   const onChange = (current) => {
     setCurrent(current);
@@ -156,25 +148,27 @@ export default function DesignerSchedule() {
   };
 
   const onRadioChange = (hour) => {
+    console.log(hour.target.value);
     setBookingTime(hour.target.value);
-    // console.log(setBookingTime);
   };
 
   const onTabChange = (key) => {
     setKey(key);
   };
 
-  const removeFromCart = (serviceKey, serviceToRemove) => {
-    setIsChecked(
-      Object.values(isChecked).filter(
-        (serviceCart) => serviceCart !== serviceToRemove
+  const removeFromBox = (serviceToRemove) => {
+    setCalculationBox(
+      Object.values(calculationBox).filter(
+        (service) => service !== serviceToRemove
       )
     );
-    onChecked(isChecked[serviceKey], serviceToRemove);
   };
 
   const totalSum = () => {
-    return Object.values(isChecked).reduce((sum, { price }) => sum + price, 0);
+    return Object.values(calculationBox).reduce(
+      (sum, { price }) => sum + price,
+      0
+    );
   };
 
   const steps = [
@@ -183,10 +177,11 @@ export default function DesignerSchedule() {
       content: (
         <StepOne
           timeSelection={timeSelect}
-          displayedDay={DisplayedDay}
+          displayedDay={displayedDay}
           handleDay={handleDayClick}
           radioChange={onRadioChange}
           bookingTime={bookingTime}
+          setBookingTime={setBookingTime}
         />
       ),
     },
@@ -197,15 +192,13 @@ export default function DesignerSchedule() {
           services={services}
           servicesContent={servicesContent}
           serviceKey={key}
-          isChecked={isChecked}
-          setIsChecked={setIsChecked}
-          cart={cart}
+          calculationBox={calculationBox}
+          setCalculationBox={setCalculationBox}
           page={page}
           navigateTo={navigateTo}
           onTabChange={onTabChange}
-          removeFromCart={removeFromCart}
+          removeFromBox={removeFromBox}
           totalSum={totalSum}
-          onChecked={onChecked}
         />
       ),
     },
@@ -215,6 +208,7 @@ export default function DesignerSchedule() {
         <StepThree
           current={current}
           setCurrent={setCurrent}
+          displayedDay={displayedDay}
           bookingTime={bookingTime}
         />
       ),
