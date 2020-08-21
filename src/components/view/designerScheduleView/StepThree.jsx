@@ -4,7 +4,28 @@ import '../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss
 
 export default function StepThree(props) {
   const { Text } = Typography;
-  const { current, setCurrent, displayedDay, bookingTime } = props;
+  const {
+    current,
+    setCurrent,
+    displayedDay,
+    bookingTime,
+    calculationBox,
+    totalSum,
+  } = props;
+
+  const getServiceContent = () => {
+    let contentString = '';
+    let totalPrice = totalSum();
+    for (let [key, value] of Object.entries(calculationBox)) {
+      let { service, price } = value;
+      contentString += `${service} : $${price}`;
+      // contentString += service + ': $' + price + '\n';
+    }
+    contentString += `Total Price: $${totalPrice}`;
+
+    return contentString;
+  };
+
   const titles = [
     {
       id: 1,
@@ -16,7 +37,7 @@ export default function StepThree(props) {
       title: 'Time',
       contents: bookingTime,
     },
-    { id: 3, title: 'Service', contents: 'service contents' },
+    { id: 3, title: 'Service', contents: getServiceContent() },
   ];
 
   const stepChoice = (item) => {
@@ -37,7 +58,9 @@ export default function StepThree(props) {
           return (
             <List.Item>
               <Text strong>{item.title}</Text>
-              <div className='bookingContents'>{item.contents}</div>
+              <div className='bookingContents'>
+                <span className='content'>{item.contents}</span>
+              </div>
               <Button
                 type='link'
                 value={item.id}

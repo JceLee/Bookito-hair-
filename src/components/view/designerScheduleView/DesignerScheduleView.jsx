@@ -157,18 +157,32 @@ export default function DesignerSchedule() {
   };
 
   const removeFromBox = (serviceToRemove) => {
-    setCalculationBox(
-      Object.values(calculationBox).filter(
-        (service) => service !== serviceToRemove
-      )
-    );
+    let newCalculationBox = { ...calculationBox };
+
+    for (let [key, value] of Object.entries(newCalculationBox)) {
+      if (serviceToRemove === value) {
+        console.log(newCalculationBox[key]);
+        newCalculationBox[key] = null;
+        console.log(newCalculationBox[key]);
+      }
+    }
+
+    setCalculationBox(newCalculationBox);
+
+    // setCalculationBox(
+    //   Object.values(calculationBox).filter(
+    //     (service) => service !== serviceToRemove
+    //   )
+    // );
   };
 
   const totalSum = () => {
-    return Object.values(calculationBox).reduce(
-      (sum, { price }) => sum + price,
-      0
-    );
+    return Object.values(calculationBox).reduce((sum, service) => {
+      if (!service) {
+        return sum;
+      }
+      return sum + service.price;
+    }, 0);
   };
 
   const steps = [
@@ -210,6 +224,8 @@ export default function DesignerSchedule() {
           setCurrent={setCurrent}
           displayedDay={displayedDay}
           bookingTime={bookingTime}
+          calculationBox={calculationBox}
+          totalSum={totalSum}
         />
       ),
     },

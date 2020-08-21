@@ -49,19 +49,19 @@ export default function StepTwo(props) {
                   switch (serviceKey) {
                     case 'Cuts':
                       newCalculationBox['Cuts'] =
-                        newCalculationBox['Cuts'] === menu ? !menu : menu;
+                        newCalculationBox['Cuts'] === menu ? null : menu;
                       break;
                     case 'Style':
                       newCalculationBox['Style'] =
-                        newCalculationBox['Style'] === menu ? !menu : menu;
+                        newCalculationBox['Style'] === menu ? null : menu;
                       break;
                     case 'Perms':
                       newCalculationBox['Perms'] =
-                        newCalculationBox['Perms'] === menu ? !menu : menu;
+                        newCalculationBox['Perms'] === menu ? null : menu;
                       break;
                     case 'Colors':
                       newCalculationBox['Colors'] =
-                        newCalculationBox['Colors'] === menu ? !menu : menu;
+                        newCalculationBox['Colors'] === menu ? null : menu;
                       break;
                   }
 
