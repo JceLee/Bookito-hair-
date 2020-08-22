@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, Row, Col, Divider, Card, Typography, Checkbox } from 'antd';
 // import EstimatedPrice from './EstimatedPrice';
 import '../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss';
-import '../../../assets/scss/view/designerScheduleView/Slick.scss';
 
 export default function StepTwo(props) {
   const { Text } = Typography;
@@ -39,7 +38,10 @@ export default function StepTwo(props) {
                   calculationBox[serviceKey] &&
                   calculationBox[serviceKey].id === menu.id
                 }
-                // disabled={calculationBox[serviceKey].gender !== menu.gender}
+                disabled={
+                  calculationBox[serviceKey] &&
+                  calculationBox[serviceKey].gender !== menu.gender
+                }
                 onChange={() => {
                   navigateTo('Estimated Price');
 

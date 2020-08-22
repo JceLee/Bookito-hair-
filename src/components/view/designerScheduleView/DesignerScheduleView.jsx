@@ -38,6 +38,7 @@ const servicesContent = {
   Cuts: [
     {
       id: 1,
+      gender: 'male',
       //gender?
       service: 'Men Cut',
       price: 35,
@@ -45,12 +46,14 @@ const servicesContent = {
     },
     {
       id: 2,
+      gender: 'female',
       service: 'Women Cut',
       price: 40,
       description: 'The price may differ',
     },
     {
       id: 3,
+      gender: 'kid',
       service: 'Kids Cut',
       price: 15,
       description: 'The price may differ',
@@ -59,18 +62,21 @@ const servicesContent = {
   Style: [
     {
       id: 4,
+      gender: 'male',
       service: 'Men Style',
       price: 35,
       description: 'The price may differ',
     },
     {
       id: 5,
+      gender: 'female',
       service: 'Women Style',
       price: 40,
       description: 'The price may differ',
     },
     {
       id: 6,
+      gender: 'kid',
       service: 'Kids Style',
       price: 15,
       description: 'The price may differ',
@@ -79,18 +85,21 @@ const servicesContent = {
   Perms: [
     {
       id: 7,
+      gender: 'male',
       service: 'Men Perms',
       price: 35,
       description: 'The price may differ',
     },
     {
       id: 8,
+      gender: 'female',
       service: 'Women Perms',
       price: 40,
       description: 'The price may differ',
     },
     {
       id: 9,
+      gender: 'kid',
       service: 'Kids Perms',
       price: 15,
       description: 'The price may differ',
@@ -99,18 +108,21 @@ const servicesContent = {
   Colors: [
     {
       id: 10,
+      gender: 'male',
       service: 'Men Colors',
       price: 35,
       description: 'The price may differ',
     },
     {
       id: 11,
+      gender: 'female',
       service: 'Women Colors',
       price: 40,
       description: 'The price may differ',
     },
     {
       id: 12,
+      gender: 'kid',
       service: 'Kids Colors',
       price: 15,
       description: 'The price may differ',
@@ -168,12 +180,6 @@ export default function DesignerSchedule() {
     }
 
     setCalculationBox(newCalculationBox);
-
-    // setCalculationBox(
-    //   Object.values(calculationBox).filter(
-    //     (service) => service !== serviceToRemove
-    //   )
-    // );
   };
 
   const totalSum = () => {

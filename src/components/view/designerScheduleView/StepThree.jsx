@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Button, Typography, Divider } from 'antd';
+import { List, Button, Typography } from 'antd';
 import '../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss';
 
 export default function StepThree(props) {
@@ -15,13 +15,18 @@ export default function StepThree(props) {
 
   const getServiceContent = () => {
     let contentString = '';
-    let totalPrice = totalSum();
+    // // let totalPrice = totalSum();
     for (let [key, value] of Object.entries(calculationBox)) {
+      if (value === null) {
+        let { service } = key;
+        contentString += `${service}` + ' ';
+        return contentString;
+      }
       let { service, price } = value;
-      contentString += `${service} : $${price}`;
+      contentString += `${service}` + ' ';
       // contentString += service + ': $' + price + '\n';
     }
-    contentString += `Total Price: $${totalPrice}`;
+    // contentString += `Total Price: $${totalPrice}`;
 
     return contentString;
   };
