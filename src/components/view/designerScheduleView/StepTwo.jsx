@@ -21,7 +21,7 @@ export default function StepTwo(props) {
   const renderService = () => (
     <div className='checkboxOption'>
       <Card
-        style={{ width: '70%' }}
+        style={{ width: 310, height: 398 }}
         tabList={services}
         activeTabKey={serviceKey}
         onTabChange={(serviceKey) => {

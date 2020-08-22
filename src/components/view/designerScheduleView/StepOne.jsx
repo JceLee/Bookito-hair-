@@ -47,7 +47,7 @@ export default function StepOne(props) {
   );
 
   return (
-    <>
+    <div className='stepOne'>
       <p id='designerName'>Designer: Jane Smith</p>
       <Row>
         <Col span={13}>{renderCalendar()}</Col>
@@ -56,6 +56,6 @@ export default function StepOne(props) {
           {renderTime()}
         </Col>
       </Row>
-    </>
+    </div>
   );
 }

@@ -262,6 +262,7 @@ export default function DesignerSchedule() {
       <Modal
         title='Book Now'
         width={900}
+        max-height={700}
         visible={visible}
         onOk={handleOk}
         okText='Save Schedule'
@@ -279,20 +280,30 @@ export default function DesignerSchedule() {
 
         <div className='stepAction'>
           {current < steps.length - 1 && (
-            <Button type='primary' onClick={() => next()}>
+            <Button
+              type='primary'
+              style={{ float: 'right', marginTop: -20 }}
+              onClick={() => next()}
+            >
               Next
             </Button>
           )}
+
           {current === steps.length - 1 && (
             <Button
               type='primary'
+              style={{ float: 'right', marginTop: -20 }}
               onClick={() => message.success('Processing complete!')}
             >
               Done
             </Button>
           )}
+
           {current > 0 && (
-            <Button style={{ margin: '0 8px' }} onClick={() => prev()}>
+            <Button
+              style={{ float: 'right', marginTop: -20 }}
+              onClick={() => prev()}
+            >
               Previous
             </Button>
           )}
