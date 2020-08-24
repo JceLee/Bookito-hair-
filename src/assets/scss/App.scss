@@ -17,6 +17,14 @@
 
 // Client Schedule view
 @import './view/clientScheduleView/ClientScheduleView.scss';
+@import "./view/MainView/MainView.scss";
+@import "./commonComponents/NavBar.scss";
+@import "./view/DesignerListView/DesignerListView.scss";
+@import "./commonComponents/searchBar/SearchBar.scss";
+@import "./commonComponents/searchBar/DesignerTypeCarousel.scss";
+@import "./view/designerListView/DesignerCardComponent/DesignerCardComponent.scss";
+@import "./view/designerListView/designerListFilter/DesignerListFilter.scss";
+@import "./view/clientProfileView/ClientProfileView.scss";
 
 // Designer Profile View
 @import './View/designerProfileView/DesignerProfileView.scss';
