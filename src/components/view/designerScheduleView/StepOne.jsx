@@ -15,11 +15,11 @@ export default function StepOne(props) {
 
   const renderCalendar = () => (
     <div className='editDesignerCalendar'>
-      <p id='selectDay'>
+      {/* <p id='selectDay'>
         {displayedDay
           ? displayedDay.toLocaleDateString()
           : 'Please select a day'}
-      </p>
+      </p> */}
       <DayPicker selectedDays={displayedDay} onDayClick={handleDay} />
     </div>
   );
@@ -48,13 +48,9 @@ export default function StepOne(props) {
 
   return (
     <div className='stepOne'>
-      <p id='designerName'>Designer: Jane Smith</p>
       <Row>
         <Col span={13}>{renderCalendar()}</Col>
-        <Col span={11}>
-          <p>Please select time</p>
-          {renderTime()}
-        </Col>
+        <Col span={11}>{renderTime()}</Col>
       </Row>
     </div>
   );

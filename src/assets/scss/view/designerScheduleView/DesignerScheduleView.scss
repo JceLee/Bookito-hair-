@@ -1,60 +1,76 @@
-.editDesignerCalendar {
-  width: 370px;
-  height: auto;
-  border: 1px solid #f0f0f0;
-  text-align: center;
-  // border-radius: 2px;
-}
+@import '../../Mixin.scss';
 
-.timeButtons {
-  margin-top: 30px;
-  margin-left: 20px;
-}
+@include mobileL {
+  // .editDesignerCalendar {
 
-.stepOne {
-  height: 435.5px;
-}
-
-.checkboxOption {
-  text-align: center;
-  height: 400px;
-  margin-left: 30px;
-}
-
-#serviceMenu {
-  margin-left: 25px;
-  text-align: left;
-}
-
-#designerName {
-  text-align: center;
-}
-
-.service {
-  margin-left: 50px;
-}
-p {
-  margin-left: 100px;
-}
-
-.totalCost {
-  margin-left: 100px;
-}
-
-#selectDay {
-  margin-left: 0;
-}
-
-.confirmation {
-  height: 385.5px;
-  width: 600px;
-  margin-top: 50px;
-  margin-left: 130px;
-}
-
-.bookingContents {
-  text-align: center;
-
-  // .content {
   // }
+}
+
+@include tabletP {
+}
+
+@include tabletL {
+}
+
+@include desktop {
+  .editDesignerCalendar {
+    width: 80%;
+    height: auto;
+    border: 1px solid #f0f0f0;
+    text-align: center;
+    // border-radius: 2px;
+  }
+
+  .timeButtons {
+    margin-top: 30px;
+    margin-left: 20px;
+  }
+
+  .stepOne {
+    height: 435.5px;
+  }
+
+  .checkboxOption {
+    text-align: center;
+    height: 400px;
+    margin-left: 30px;
+  }
+
+  #serviceMenu {
+    margin-left: 25px;
+    text-align: left;
+  }
+
+  #designerName {
+    text-align: center;
+  }
+
+  .service {
+    margin-left: 50px;
+  }
+  p {
+    margin-left: 100px;
+  }
+
+  .totalCost {
+    margin-left: 100px;
+  }
+
+  #selectDay {
+    margin-left: 0;
+  }
+
+  .confirmation {
+    height: 385.5px;
+    width: 600px;
+    margin-top: 50px;
+    margin-left: 130px;
+  }
+
+  .bookingContents {
+    text-align: center;
+
+    // .content {
+    // }
+  }
 }

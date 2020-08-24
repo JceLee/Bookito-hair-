@@ -15,19 +15,13 @@ export default function StepThree(props) {
 
   const getServiceContent = () => {
     let contentString = '';
-    // // let totalPrice = totalSum();
     for (let [key, value] of Object.entries(calculationBox)) {
       if (value === null) {
-        let { service } = key;
-        contentString += `${service}` + ' ';
-        return contentString;
+        continue;
       }
-      let { service, price } = value;
-      contentString += `${service}` + ' ';
-      // contentString += service + ': $' + price + '\n';
+      let { service } = value;
+      contentString += `[${service}]` + ' ';
     }
-    // contentString += `Total Price: $${totalPrice}`;
-
     return contentString;
   };
 
