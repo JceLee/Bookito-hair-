@@ -3,6 +3,8 @@ import { Menu, Dropdown, Button, Typography, Drawer } from 'antd';
 import { Link } from 'react-router-dom';
 import { MenuOutlined, UserOutlined, BarsOutlined } from '@ant-design/icons';
 import SearchBar from './SearchBar';
+import SignUp from "../view/authView/SignUp";
+import LogIn from '../view/authView/LogIn';
 
 const { Title } = Typography;
 
@@ -33,6 +35,11 @@ export default function Navbar() {
       {menuItems.map((menu, inx) => {
         if (menu.name == 'Divider') {
           return <Menu.Divider />;
+        }
+        else if (menu.name == 'Log In') {
+          return (
+                <LogIn />
+          )
         } else {
           return (
             <Menu.Item key={inx}>

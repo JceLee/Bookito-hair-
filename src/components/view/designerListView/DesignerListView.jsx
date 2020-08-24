@@ -14,7 +14,6 @@ export default function DesignerListView(props) {
     useEffect(() => {
         const params = queryString.parse(props.location.search);
         const newDesigners = [];
-        console.log("params:", params);
         firebaseDB
             .firestore()
             .collection("designers").where("location", "==", params["location"])
@@ -27,7 +26,6 @@ export default function DesignerListView(props) {
             });
     }, [dispatch]);
 
-    console.log(designers);
 
 
     return (

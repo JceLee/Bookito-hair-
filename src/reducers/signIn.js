@@ -9,6 +9,16 @@ export default function signIn(state = initialState, action) {
                 signedInUser: action.signedInUser,
             };
         }
+        case "SIGN_IN_WITH_FACEBOOK": {
+            return {
+                signedInUser: action.signedInUser,
+            };
+        }
+        case "SIGN_IN_WITH_APPLE": {
+            return {
+                signedInUser: action.signedInUser,
+            };
+        }
         default: {
             return state;
         }

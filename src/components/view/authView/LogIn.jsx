@@ -3,9 +3,9 @@ import { Link } from "@reach/router";
 import { Modal, Button } from 'antd';
 import { firebaseDB, auth } from '../../../config/fbConfig';
 import {useDispatch, useSelector} from "react-redux";
-import {sign_in_with_google} from "../../../actions/googleSignIn";
+import {sign_in_with_google} from "../../../actions/signIn";
 
-export default function Login() {
+export default function LogIn() {
     const [isLoginShowing, setIsLoginShowing] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -67,10 +67,12 @@ export default function Login() {
     };
 
     return (
-        <div>
-            <Button className='login' onClick={showLoginModal} shape='round'>
+        <div className="Login">
+            <p onClick={showLoginModal}>
                 Login
-            </Button>
+            </p>
+
+
             <Modal
                 title='Login'
                 visible={isLoginShowing}
