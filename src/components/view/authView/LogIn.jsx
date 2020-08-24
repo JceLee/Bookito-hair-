@@ -67,8 +67,8 @@ export default function LogIn() {
     };
 
     return (
-        <div className="Login">
-            <p onClick={showLoginModal}>
+        <div>
+            <p onClick={showLoginModal}  className="Login">
                 Login
             </p>
 

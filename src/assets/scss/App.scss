@@ -21,6 +21,9 @@
 // Designer Profile View
 @import './View/designerProfileView/DesignerProfileView.scss';
 
+// Auth components
+@import '/commonComponents/Auth.scss';
+
 .layout {
   background-color: white;
 }
