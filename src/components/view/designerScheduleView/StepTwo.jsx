@@ -62,6 +62,14 @@ export default function StepTwo(props) {
                         newCalculationBox['Colors'] =
                           newCalculationBox['Colors'] === menu ? null : menu;
                         break;
+                      case 'Clinic':
+                        newCalculationBox['Clinic'] =
+                          newCalculationBox['Clinic'] === menu ? null : menu;
+                        break;
+                      case 'Promo':
+                        newCalculationBox['Promo'] =
+                          newCalculationBox['Promo'] === menu ? null : menu;
+                        break;
                     }
 
                     console.log(newCalculationBox);
@@ -76,7 +84,7 @@ export default function StepTwo(props) {
                 ${menu.price} <br />
                 {menu.description}
               </p>
-              <Divider />
+              <Divider className='estPriceDivider' />
             </div>
           );
         })}
@@ -86,10 +94,12 @@ export default function StepTwo(props) {
 
   return (
     <>
+      <p id='title'>Service and Price</p>
       <Row>
         <Col span={13}>
           <div className='genderService'>{renderService()}</div>
         </Col>
+        <p id='estimatedPrice'>Estimated Price</p>
         <Col span={11}>
           {page === 'Estimated Price' && (
             <>

@@ -1,76 +1,227 @@
 @import '../../Mixin.scss';
 
-@include mobileL {
-  // .editDesignerCalendar {
-
+@include mobileM {
+  //375
+  // .ant-modal-content {
+  //   height: 1003.6px;
   // }
+  .ant-modal-body {
+    .ant-steps-item-title {
+      display: none;
+    }
+
+    #title {
+      text-align: center;
+      margin: 20px 0 10px 0;
+      font-weight: bolder;
+      font-size: 20px;
+    }
+    // padding: 5px;
+    .ant-col-13 {
+      max-width: none;
+    }
+    .editDesignerCalendar {
+      // border: none;
+      // background-color: aliceblue;
+      margin: 10px 1px 10px -19.5px;
+      width: 351px;
+      .DayPicker-Month {
+        width: 330px;
+        height: 308px;
+        margin: 17px 16px 0 10px;
+        .DayPicker-Day {
+          border-radius: 50%;
+        }
+        .DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
+          background-color: lightskyblue;
+        }
+      }
+    }
+    #serviceMenu {
+      margin-left: 45px;
+    }
+    #selectTime {
+      text-align: center;
+      margin: 0 20px 20px 95px;
+      font-weight: bold;
+      font-size: 15px;
+    }
+    .timeButtons {
+      width: 350px;
+      // background-color: aliceblue;
+      text-align: center;
+      margin: 0 0 0 -19.5px;
+    }
+    .hourRadioBtn {
+      margin: 8.5px 8.5px 15px 8.5px;
+    }
+    .checkboxOption {
+      margin: 28px 0 40px 0;
+      .ant-card-body {
+        padding: 24px 0 0 0;
+        .ant-checkbox-wrapper {
+          margin-left: 20px;
+        }
+      }
+    }
+
+    .ant-steps-horizontal.ant-steps-label-horizontal {
+      display: flex;
+      flex-direction: row;
+      margin: 0 0 0 30px;
+    }
+
+    .ant-steps-horizontal.ant-steps-label-horizontal
+      > .ant-steps-item:not(:last-child)
+      > .ant-steps-item-container
+      > .ant-steps-item-tail {
+      display: none;
+    }
+
+    .ant-tabs-large > .ant-tabs-nav .ant-tabs-tab {
+      padding: 13px 0;
+      font-size: 14px;
+    }
+    .ant-tabs-tab {
+      margin: 0 13px 0 0;
+    }
+    .ant-card-head {
+      padding: 0 10px;
+      .ant-card-head .ant-tabs {
+        margin-bottom: -25px;
+      }
+    }
+    .ant-divider-horizontal {
+      margin: 25.7px 0;
+    }
+    #estimatedPrice {
+      text-align: center;
+      margin: 0 20px 20px 100px;
+      font-weight: bold;
+      font-size: 15px;
+    }
+  }
+
+  .ant-modal-body .ant-divider-horizontal {
+    width: 309px;
+  }
+
+  .confirmation {
+    margin: 30px -15px 0 0;
+    .bookingContents {
+      max-width: 140px;
+    }
+  }
+  .ant-col-11 {
+    display: block;
+    // text-align: right;
+    flex: none;
+    width: 100%;
+    max-width: none;
+
+    .estimatedPrice {
+      margin-top: 5px;
+      width: 320px;
+    }
+    .totalCost {
+      width: 315px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .ant-btn-link {
+      color: red;
+      float: right;
+    }
+  }
+  .ant-modal-footer button + button {
+    float: left;
+    // margin-left: 1px;
+  }
+}
+
+@include mobileL {
+  //480
+  .ant-modal-body {
+    background-color: brown;
+  }
+  .ant-steps-horizontal.ant-steps-label-horizontal {
+    display: flex;
+    flex-direction: row;
+  }
 }
 
 @include tabletP {
+  .ant-modal-body {
+    background-color: yellow;
+  }
 }
 
 @include tabletL {
 }
 
 @include desktop {
-  .editDesignerCalendar {
-    width: 80%;
-    height: auto;
-    border: 1px solid #f0f0f0;
-    text-align: center;
-    // border-radius: 2px;
+  .ant-modal-body {
+    background-color: pink;
   }
+  // .editDesignerCalendar {
+  //   width: 80%;
+  //   height: auto;
+  //   border: 1px solid #f0f0f0;
+  //   text-align: center;
+  //   // border-radius: 2px;
+  // }
 
-  .timeButtons {
-    margin-top: 30px;
-    margin-left: 20px;
-  }
+  // .timeButtons {
+  //   margin-top: 30px;
+  //   margin-left: 20px;
+  // }
 
-  .stepOne {
-    height: 435.5px;
-  }
+  // .stepOne {
+  //   height: 435.5px;
+  // }
 
-  .checkboxOption {
-    text-align: center;
-    height: 400px;
-    margin-left: 30px;
-  }
+  // .checkboxOption {
+  //   text-align: center;
+  //   height: 400px;
+  //   margin-left: 30px;
+  // }
 
-  #serviceMenu {
-    margin-left: 25px;
-    text-align: left;
-  }
+  // #serviceMenu {
+  //   margin-left: 25px;
+  //   text-align: left;
+  // }
 
-  #designerName {
-    text-align: center;
-  }
+  // #designerName {
+  //   text-align: center;
+  // }
 
-  .service {
-    margin-left: 50px;
-  }
-  p {
-    margin-left: 100px;
-  }
+  // .service {
+  //   margin-left: 50px;
+  // }
+  // p {
+  //   margin-left: 100px;
+  // }
 
-  .totalCost {
-    margin-left: 100px;
-  }
+  // .totalCost {
+  //   margin-left: 100px;
+  // }
 
-  #selectDay {
-    margin-left: 0;
-  }
+  // #selectDay {
+  //   margin-left: 0;
+  // }
 
-  .confirmation {
-    height: 385.5px;
-    width: 600px;
-    margin-top: 50px;
-    margin-left: 130px;
-  }
+  // .confirmation {
+  //   height: 385.5px;
+  //   width: 600px;
+  //   margin-top: 50px;
+  //   margin-left: 130px;
+  // }
 
-  .bookingContents {
-    text-align: center;
+  // .bookingContents {
+  //   text-align: center;
 
-    // .content {
-    // }
-  }
+  //   // .content {
+  //   // }
+  // }
 }

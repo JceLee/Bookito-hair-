@@ -22,9 +22,11 @@ const timeSelect = [
   { time: '15:00', value: '15:00', disabled: true },
   { time: '15:30', value: '15:30', disabled: false },
   { time: '16:00', value: '16:00', disabled: false },
-  { time: '16:30', value: '16:30', disabled: false },
+  { time: '16:30', value: '16:30', disabled: true },
   { time: '17:00', value: '17:00', disabled: false },
   { time: '17:30', value: '17:30', disabled: false },
+  { time: '18:00', value: '18:00', disabled: false },
+  { time: '18:30', value: '18:30', disabled: false },
 ];
 
 const services = [
@@ -113,6 +115,46 @@ const servicesContent = {
     {
       id: 12,
       service: 'Kids Colors',
+      price: 15,
+      description: 'The price may differ',
+    },
+  ],
+  Clinic: [
+    {
+      id: 13,
+      service: 'Men Clinic',
+      price: 35,
+      description: 'The price may differ',
+    },
+    {
+      id: 14,
+      service: 'Women Clinic',
+      price: 40,
+      description: 'The price may differ',
+    },
+    {
+      id: 15,
+      service: 'Kids Clinic',
+      price: 15,
+      description: 'The price may differ',
+    },
+  ],
+  Promo: [
+    {
+      id: 16,
+      service: 'Men Promo',
+      price: 35,
+      description: 'The price may differ',
+    },
+    {
+      id: 17,
+      service: 'Women Promo',
+      price: 40,
+      description: 'The price may differ',
+    },
+    {
+      id: 18,
+      service: 'Kids Promo',
       price: 15,
       description: 'The price may differ',
     },
@@ -250,7 +292,7 @@ export default function DesignerSchedule() {
   };
 
   return (
-    <div>
+    <div className='bookNow'>
       <Button type='primary' onClick={showModal}>
         Book Now
       </Button>
@@ -261,6 +303,30 @@ export default function DesignerSchedule() {
         width={900}
         visible={visible}
         onOk={handleOk}
+        footer={
+          <div className='stepAction'>
+            {current < steps.length - 1 && (
+              <Button type='primary' onClick={() => next()}>
+                Next
+              </Button>
+            )}
+
+            {current === steps.length - 1 && (
+              <Button
+                type='primary'
+                onClick={() => console.log(finalBookingObject)}
+              >
+                Done
+              </Button>
+            )}
+
+            {current > 0 && (
+              <Button style={{ marginLeft: 0 }} onClick={() => prev()}>
+                Previous
+              </Button>
+            )}
+          </div>
+        }
         okText='Save Schedule'
         onCancel={handleCancel}
         okButtonProps={{ style: { display: 'none' } }}
@@ -273,37 +339,6 @@ export default function DesignerSchedule() {
         </Steps>
 
         <div className='stepsContent'>{steps[current].content}</div>
-
-        <div className='stepAction'>
-          {current < steps.length - 1 && (
-            <Button
-              type='primary'
-              style={{ float: 'right', marginTop: -20 }}
-              onClick={() => next()}
-            >
-              Next
-            </Button>
-          )}
-
-          {current === steps.length - 1 && (
-            <Button
-              type='primary'
-              style={{ float: 'right', marginTop: -20 }}
-              onClick={() => console.log(finalBookingObject)}
-            >
-              Done
-            </Button>
-          )}
-
-          {current > 0 && (
-            <Button
-              style={{ float: 'right', marginTop: -20 }}
-              onClick={() => prev()}
-            >
-              Previous
-            </Button>
-          )}
-        </div>
       </Modal>
     </div>
   );

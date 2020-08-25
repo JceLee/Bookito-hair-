@@ -48,30 +48,33 @@ export default function StepThree(props) {
   };
 
   return (
-    <div className='confirmation'>
-      <List
-        itemLayout='horizontal'
-        dataSource={titles}
-        renderItem={(item) => {
-          // console.log(item);
-          return (
-            <List.Item>
-              <Text strong>{item.title}</Text>
-              <div className='bookingContents'>
-                <span className='content'>{item.contents}</span>
-              </div>
-              <Button
-                type='link'
-                value={item.id}
-                id={item.id}
-                onClick={() => stepChoice(item)}
-              >
-                Edit
-              </Button>
-            </List.Item>
-          );
-        }}
-      ></List>
-    </div>
+    <>
+      <p id='title'>Final Check</p>
+      <div className='confirmation'>
+        <List
+          itemLayout='horizontal'
+          dataSource={titles}
+          renderItem={(item) => {
+            // console.log(item);
+            return (
+              <List.Item>
+                <Text strong>{item.title}</Text>
+                <div className='bookingContents'>
+                  <span className='content'>{item.contents}</span>
+                </div>
+                <Button
+                  type='link'
+                  value={item.id}
+                  id={item.id}
+                  onClick={() => stepChoice(item)}
+                >
+                  Edit
+                </Button>
+              </List.Item>
+            );
+          }}
+        ></List>
+      </div>
+    </>
   );
 }
