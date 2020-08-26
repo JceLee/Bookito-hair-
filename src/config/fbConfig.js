@@ -16,25 +16,23 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-
-
-export const firebaseDB = firebase;
-export const auth = firebase.auth();
-
-const provider = new firebase.auth.GoogleAuthProvider();
-
-export const signInWithGoogle = () => {
-  firebase.auth().signInWithPopup(provider).then(function(result) {
-    // The signed-in user info.
-    return result.user;
-  }).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // The email of the user's account used.
-    var email = error.email;
-    // The firebase.auth.AuthCredential type that was used.
-    var credential = error.credential;
-    // ...
-  });
+export const firebaseStore = firebase.firestore();
+export const firebaseAuth = firebase.auth();
+export const generateUserDocument = async (user, additionalData) => {
+  if (!user) return;
+  const userRef = firebaseStore.doc(`users/${user.uid}`);
+  const snapshot = await userRef.get();
+  if (!snapshot.exists) {
+    const { email, displayName, photoURL } = user;
+    try {
+      await userRef.set({
+        displayName,
+        email,
+        photoURL,
+        ...additionalData
+      });
+    } catch (error) {
+      console.error("Error creating user document", error);
+    }
+  }
 };

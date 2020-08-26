@@ -5,11 +5,14 @@ import { MenuOutlined, UserOutlined, BarsOutlined } from '@ant-design/icons';
 import SearchBar from './SearchBar';
 import SignUp from "../view/authView/SignUp";
 import LogIn from '../view/authView/LogIn';
+import {useSelector} from "react-redux";
 
 const { Title } = Typography;
 
 export default function Navbar() {
   const [visible, setVisible] = useState(false);
+
+  const signedInUser = useSelector((state) => state.signedInUser.signedInUser);
 
   const showDrawer = () => {
     setVisible(true);
@@ -38,7 +41,9 @@ export default function Navbar() {
         }
         else if (menu.name == 'Log In') {
           return (
+              <Menu.Item key={inx}>
                 <LogIn />
+              </Menu.Item>
           )
         } else {
           return (
