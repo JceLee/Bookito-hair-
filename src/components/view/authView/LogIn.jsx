@@ -35,9 +35,11 @@ export default function LogIn() {
         auth.signInWithPopup(provider).then(function(result) {
             // The signed-in user info.
             const user = result.user;
-            const token = result.credential.accessToken;
             console.log(user);
-            dispatch(sign_in_with_google(user, token));
+            console.log(user.email);
+            dispatch(sign_in_with_google(user));
+
+
         }).catch(function(error) {
             // Handle Errors here.
             var errorCode = error.code;

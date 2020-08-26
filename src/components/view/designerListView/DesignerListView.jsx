@@ -10,6 +10,8 @@ export default function DesignerListView(props) {
   const designers = useSelector((state) => state.firestore.designers);
   const dispatch = useDispatch();
 
+    console.log(firebaseDB.auth().currentUser);
+
 
     useEffect(() => {
         const params = queryString.parse(props.location.search);
