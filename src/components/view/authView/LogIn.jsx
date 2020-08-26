@@ -9,27 +9,9 @@ import {sign_in_with_google} from "../../../actions/signIn";
 
 export default function LogIn() {
     const [isLoginShowing, setIsLoginShowing] = useState(false);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
-    const signInWithEmailAndPasswordHandler =
-        (event, email, password) => {
-            event.preventDefault();
-        };
 
     const signedInUser = useSelector((state) => state.signedInUser.signedInUser);
     const dispatch = useDispatch();
-
-    const onChangeHandler = (event) => {
-        const {name, value} = event.currentTarget;
-
-        if(name === 'userEmail') {
-            setEmail(value);
-        }
-        else if(name === 'userPassword'){
-            setPassword(value);
-        }
-    };
 
     const provider = new firebase.auth.GoogleAuthProvider();
 
