@@ -10,7 +10,6 @@ export default function StepThree(props) {
     displayedDay,
     bookingTime,
     calculationBox,
-    totalSum,
   } = props;
 
   const getServiceContent = () => {

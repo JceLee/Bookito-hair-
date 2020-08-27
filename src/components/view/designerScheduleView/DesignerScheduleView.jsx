@@ -271,7 +271,6 @@ export default function DesignerSchedule() {
           displayedDay={displayedDay}
           bookingTime={bookingTime}
           calculationBox={calculationBox}
-          totalSum={totalSum}
         />
       ),
     },
@@ -283,9 +282,9 @@ export default function DesignerSchedule() {
     setVisible(true);
   };
 
-  const handleOk = () => {
-    setVisible(false);
-  };
+  // const handleOk = () => {
+  //   setVisible(false);
+  // };
 
   const handleCancel = () => {
     setVisible(false);
@@ -300,9 +299,10 @@ export default function DesignerSchedule() {
       <Modal
         className='bookNowModal'
         title='Book Now'
-        width={900}
+        // width={900}
+        style={{ top: 50 }}
         visible={visible}
-        onOk={handleOk}
+        // onOk={handleOk}
         footer={
           <div className='stepAction'>
             {current < steps.length - 1 && (
@@ -327,9 +327,9 @@ export default function DesignerSchedule() {
             )}
           </div>
         }
-        okText='Save Schedule'
+        // okText='Save Schedule'
         onCancel={handleCancel}
-        okButtonProps={{ style: { display: 'none' } }}
+        // okButtonProps={{ style: { display: 'none' } }}
         cancelButtonProps={{ style: { display: 'none' } }}
       >
         <Steps current={current} onChange={onChange}>

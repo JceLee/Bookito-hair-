@@ -6,13 +6,21 @@
   //   height: 1003.6px;
   // }
   .ant-modal-body {
+    overflow: auto;
+    height: 70vh;
     .ant-steps-item-title {
       display: none;
     }
+    // .ant-steps-item-process .ant-steps-item-icon {
+    //   background: black;
+    // }
+    // .ant-steps-item-process .ant-steps-item-icon {
+    //   border-color: black;
+    // }
 
     #title {
       text-align: center;
-      margin: 20px 0 10px 0;
+      margin: 5px 0 10px 0;
       font-weight: bolder;
       font-size: 20px;
     }
@@ -32,13 +40,14 @@
         .DayPicker-Day {
           border-radius: 50%;
         }
-        .DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
-          background-color: lightskyblue;
-        }
+        // .DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
+        //   background-color: black;
+        // }
       }
     }
     #serviceMenu {
-      margin-left: 45px;
+      margin: 5px 0 0 45px;
+      // margin-left: 45px;
     }
     #selectTime {
       text-align: center;
@@ -57,7 +66,9 @@
     }
     .checkboxOption {
       margin: 28px 0 40px 0;
+      width: 311px;
       .ant-card-body {
+        height: 363.5px;
         padding: 24px 0 0 0;
         .ant-checkbox-wrapper {
           margin-left: 20px;
@@ -78,17 +89,26 @@
       display: none;
     }
 
+    .ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap,
+    .ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-wrap {
+      overflow: none;
+    }
+
     .ant-tabs-large > .ant-tabs-nav .ant-tabs-tab {
       padding: 13px 0;
       font-size: 14px;
     }
     .ant-tabs-tab {
-      margin: 0 13px 0 0;
+      margin: 0 16px 0 0;
     }
     .ant-card-head {
       padding: 0 10px;
       .ant-card-head .ant-tabs {
         margin-bottom: -25px;
+      }
+      .ant-tabs-top,
+      .ant-tabs-bottom {
+        flex-direction: row;
       }
     }
     .ant-divider-horizontal {
@@ -109,7 +129,7 @@
   .confirmation {
     margin: 30px -15px 0 0;
     .bookingContents {
-      max-width: 140px;
+      max-width: 170px;
     }
   }
   .ant-col-11 {
@@ -136,14 +156,24 @@
   }
   .ant-modal-footer button + button {
     float: left;
-    // margin-left: 1px;
   }
+  // .ant-modal-footer {
+  //   .ant-btn-primary:hover,
+  //   .ant-btn-primary:focus {
+  //     background: black;
+  //     border-color: black;
+  //   }
+  //   .ant-btn-primary {
+  //     background: black;
+  //     border-color: black;
+  //   }
+  // }
 }
 
 @include mobileL {
   //480
   .ant-modal-body {
-    background-color: brown;
+    background-color: pink;
   }
   .ant-steps-horizontal.ant-steps-label-horizontal {
     display: flex;
@@ -153,7 +183,7 @@
 
 @include tabletP {
   .ant-modal-body {
-    background-color: yellow;
+    background-color: antiquewhite;
   }
 }
 
@@ -162,7 +192,7 @@
 
 @include desktop {
   .ant-modal-body {
-    background-color: pink;
+    background-color: aliceblue;
   }
   // .editDesignerCalendar {
   //   width: 80%;
