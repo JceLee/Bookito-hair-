@@ -1,14 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import AccessTime from "@material-ui/icons/AccessTime";
 import FaceIcon from "@material-ui/icons/Face";
 import LocalPhoneOutlinedIcon from "@material-ui/icons/LocalPhoneOutlined";
+import AppointmentEditForm from "./AppointmentEditForm";
+import Drawer from "@material-ui/core/Drawer";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
+import CloseIcon from "@material-ui/icons/Close";
 
 export default function TooltipContent(props) {
-  const { appointmentData, formatDate } = props;
+  const { appointmentData, formatDate, onOpenButtonClick } = props;
+  const [appointmentEdit, setAppointmentEdit] = useState(false);
+
+  const displayForm = () => {
+    setAppointmentEdit(!appointmentEdit);
+  };
+
   return (
     <div className="tooltipContent">
+      <Grid className="headerIcons">
+        <Grid>
+          <EditIcon className="tooltipHeaderIcon" onClick={displayForm} />
+          <DeleteIcon className="tooltipHeaderIcon" />
+          <CloseIcon
+            className="tooltipHeaderIcon"
+            onClick={onOpenButtonClick}
+          />
+        </Grid>
+      </Grid>
       <Grid container alignItems="flex-start" className="contentContainer">
         <Grid item xs={2} className="textCenter">
           <FaceIcon className="icon" />
@@ -58,6 +79,9 @@ export default function TooltipContent(props) {
           <span className="text">{appointmentData.phoneNumber}</span>
         </Grid>
       </Grid>
+      <Drawer anchor="left" open={appointmentEdit} onClose={displayForm}>
+        <AppointmentEditForm appointmentData={appointmentData} />
+      </Drawer>
     </div>
   );
 }

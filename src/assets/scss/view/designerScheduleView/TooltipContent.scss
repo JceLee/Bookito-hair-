@@ -21,4 +21,10 @@
       line-height: 1.1;
     }
   }
+  .headerIcons {
+    float: right;
+    .tooltipHeaderIcon {
+      margin: 12px;
+    }
+  }
 }

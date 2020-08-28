@@ -20,10 +20,19 @@ import TooltipContent from "./TooltipContent";
 import AddIcon from "@material-ui/icons/Add";
 import { Badge } from "antd";
 import NewRequests from "./NewRequests";
+import AppointmentEditForm from "./AppointmentEditForm";
+import Grid from "@material-ui/core/Grid";
+import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
+import AccessTime from "@material-ui/icons/AccessTime";
+import FaceIcon from "@material-ui/icons/Face";
+import LocalPhoneOutlinedIcon from "@material-ui/icons/LocalPhoneOutlined";
 
 export default function Calendar(props) {
   const { newRequests } = props;
   const [newRequestState, setNewRequestState] = useState(false);
+
+  const [selectedAppointment, setSelectedAppointment] = useState();
+
   const currentDate = new Date();
 
   const designer = {
@@ -41,7 +50,6 @@ export default function Calendar(props) {
   ];
 
   const displayNewRequests = () => {
-    // setNewRequestState(!newRequestState);
     setNewRequestState(!newRequestState);
   };
 
@@ -63,8 +71,20 @@ export default function Calendar(props) {
     console.log("Save");
   };
 
-  const layout = () => {
-    return <div>temp</div>;
+  const layout = (props) => {
+    console.log(props);
+    return <AppointmentEditForm />;
+  };
+
+  // const Content = ({ children, appointmentData, classes, ...restProps }) =>
+  const Content = ({ appointmentData, formatDate, onOpenButtonClick }) => {
+    return (
+      <TooltipContent
+        appointmentData={appointmentData}
+        formatDate={formatDate}
+        onOpenButtonClick={onOpenButtonClick}
+      />
+    );
   };
 
   return (
@@ -92,13 +112,8 @@ export default function Calendar(props) {
             <ViewSwitcher />
             <Appointments />
             <EditingState onCommitChanges={commitChanges} />
-            <AppointmentTooltip
-              showOpenButton
-              showCloseButton
-              showDeleteButton
-              contentComponent={TooltipContent}
-            />
-            <AppointmentForm layoutComponent={layout} />
+            <AppointmentTooltip contentComponent={Content} />
+            {/* <AppointmentForm layoutComponent={AppointmentEditForm} /> */}
             <Fab
               color="secondary"
               className="addButton"
