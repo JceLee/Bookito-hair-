@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Card, Row, Col, Button, Divider, Form, Input, Rate } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import DesignerCardLeft from "../view/designerListView/designerCardComponent/designerCardTop/DesignerCardTopLeft";
+import BlackBtn from "./BlackBtn";
 
 export default function ScheduleCardHistory(props) {
   const { appointment } = props;
