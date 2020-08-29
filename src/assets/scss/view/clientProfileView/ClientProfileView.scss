@@ -1,0 +1,60 @@
+.clientProfileView {
+  margin: 20px;
+  .profileForm {
+    margin-top: 3vh;
+
+    .saveBtn {
+      width: 100%;
+    }
+    .profilePhoto {
+      text-align: center;
+      .editIcon {
+        position: absolute;
+      }
+    }
+    .clientName {
+      text-align: center;
+    }
+  }
+
+  @include clientProfile576 {
+    .profileForm {
+      width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+
+      .saveBtn {
+        width: 500px;
+      }
+
+      .profilePhoto .ant-form-item-control-input {
+        width: 500px;
+      }
+
+      .clientName .ant-form-item-control-input {
+        width: 500px;
+      }
+    }
+    .formItems {
+      .ant-form-item-label {
+        text-align: left;
+      }
+    }
+  }
+}
+
+.changePhotoModal {
+  .modalProfilePhoto {
+    text-align: center;
+  }
+  .dragDropContainer {
+    border: dashed 2px gray;
+    padding: 40px;
+    margin: 24px 0px;
+    text-align: center;
+
+    p {
+      margin: 0;
+    }
+  }
+}
