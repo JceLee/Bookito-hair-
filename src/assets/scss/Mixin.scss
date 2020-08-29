@@ -4,6 +4,12 @@ $yellow: #ffff00;
 $orange: #ffa500;
 $green: #00ff00;
 
+@mixin mobileM {
+  @media only screen and (min-width: 375px) {
+    @content;
+  }
+}
+
 @mixin mobileL {
   @media only screen and (min-width: 480px) {
     @content;

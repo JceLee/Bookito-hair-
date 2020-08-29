@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react';
-import Slider from 'react-slick';
-import { Modal } from 'antd';
-import Spinner from '../../../commonComponents/Spinner';
+import React, { useState, useRef } from "react";
+import Slider from "react-slick";
+import { Modal } from "antd";
+import Spinner from "../../../commonComponents/Spinner";
 
 const Works = (props) => {
   const { id, works } = props;
@@ -32,7 +32,7 @@ const Works = (props) => {
     return (
       <div
         className={className}
-        style={{ ...style, display: 'block' }}
+        style={{ ...style, display: "block" }}
         onClick={onClick}
       />
     );
@@ -44,7 +44,7 @@ const Works = (props) => {
     return (
       <div
         className={className}
-        style={{ ...style, display: 'block' }}
+        style={{ ...style, display: "block" }}
         onClick={onClick}
       />
     );
@@ -64,29 +64,29 @@ const Works = (props) => {
   };
 
   const onOpenModalHandler = (index) => {
-    console.log('opened a modal');
-    console.log('Clicked img index: ' + index);
+    console.log("opened a modal");
+    console.log("Clicked img index: " + index);
     setModalVisible(true);
     setCurrentImgIndex(index);
   };
 
   const onCloseModalHandler = (CurrentImgIndex) => {
     setModalVisible(false);
-    console.log('destroyed the modal when closing');
-    console.log('CurrentImgIndex: ' + CurrentImgIndex);
+    console.log("destroyed the modal when closing");
+    console.log("CurrentImgIndex: " + CurrentImgIndex);
     setImgCarouselLoading(true);
   };
 
   return (
-    <div className='works' id={id}>
+    <div className="works" id={id}>
       <h2>Works</h2>
       {works.length !== 0 && ImgLoading ? <Spinner /> : null}
-      <ul className='workGalleryContainer'>
+      <ul className="workGalleryContainer">
         {works.map((work, index) => {
           return works.length === 0 ? (
-            'No images attached..'
+            "No images attached.."
           ) : (
-            <li key={index} className='workImgDiv'>
+            <li key={index} className="workImgDiv">
               <img
                 src={work}
                 alt={`workImg${index}`}
@@ -98,6 +98,7 @@ const Works = (props) => {
         })}
 
         <Modal
+          className="workImgModal"
           visible={ModalVisible}
           onCancel={() => onCloseModalHandler(CurrentImgIndex)}
           destroyOnClose={true}
@@ -105,15 +106,15 @@ const Works = (props) => {
         >
           {/* Display work images in a carousel in a modal */}
           {works.length !== 0 && ImgCarouselLoading ? <Spinner /> : null}
-          <Slider {...settings} className='slick-slider'>
+          <Slider {...settings} className="slick-slider">
             {works.map((work, index) => {
               return (
                 <div key={index}>
                   <img
                     src={work}
                     alt={`workImg${index}`}
-                    width='300px'
-                    height='300px'
+                    width="300px"
+                    height="300px"
                     onLoad={imageCarouselLoaded}
                   />
                 </div>

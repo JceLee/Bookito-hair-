@@ -16,7 +16,7 @@ export default function DesignerListView(props) {
     console.log('params:', params);
     firebaseDB
       .firestore()
-      .collection('designers')
+      .collection('users')
       .where('location', '==', params['location'])
       .get()
       .then((querySnapshot) => {

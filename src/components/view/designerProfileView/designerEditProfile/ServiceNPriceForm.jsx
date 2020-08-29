@@ -1,144 +1,124 @@
-import React from 'react';
-import { Form, Input, Button, Space } from 'antd';
-import {
-  PlusCircleOutlined,
-  MinusCircleOutlined,
-  PlusOutlined,
-} from '@ant-design/icons';
+import React from "react";
+import { Form, Input, InputNumber, Button, Space, Tabs, Divider } from "antd";
+import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
-// const formItemLayout = {
-//   labelCol: {
-//     xs: { span: 24 },
-//     sm: { span: 4 },
-//   },
-//   wrapperCol: {
-//     xs: { span: 24 },
-//     sm: { span: 20 },
-//   },
-// };
-// const formItemLayoutWithOutLabel = {
-//   wrapperCol: {
-//     xs: { span: 24, offset: 0 },
-//     sm: { span: 20, offset: 4 },
-//   },
-// };
+const { TabPane } = Tabs;
+const tapNames = ["Cut", "Style", "Perm", "Color", "Clinic", "Promo"];
+
+const callback = (key) => {
+  console.log("Current Tap: " + key);
+};
 
 const ServiceNPriceForm = () => {
   return (
-    <Form.List name='serviceNpriceForm'>
-      {(fields, { add, remove }) => {
+    <Tabs onChange={callback} type="card">
+      {tapNames.map((tap) => {
         return (
-          <div>
-            {fields.map((field) => (
-              <Form.Item
-                className='serviceNpriceForm'
-                required={false}
-                key={field.key}
-              >
-                <Form.Item
-                  {...field}
-                  validateTrigger={['onChange', 'onBlur']}
-                  rules={[
-                    {
-                      required: true,
-                      whitespace: true,
-                      message: 'Please input valid service.',
-                    },
-                  ]}
-                  noStyle
-                >
-                  <Input
-                    className='serviceTypeInput'
-                    placeholder='Service Type'
-                  />
-                  <Form.List name='serviceNameNPrice'>
-                    {(fields, { add, remove }) => {
-                      return (
-                        <div className='serviceNameNPrice'>
-                          {fields.map((field) => (
-                            <>
+          <TabPane tab={tap} key={tap} animated={false}>
+            <Form.List name={["services", `${tap}`]}>
+              {(fields, { add, remove }) => {
+                return (
+                  <div>
+                    <div className="servicePriceDescription">
+                      {fields.map((field, index) => {
+                        return (
+                          <div key={index}>
+                            <Space
+                              className="serviceNameNPrice"
+                              style={{
+                                position: "relative",
+                                alignItems: "center",
+                                paddingLeft: "12px",
+                              }}
+                              key={field.key}
+                              align="start"
+                            >
                               <Form.Item
                                 {...field}
-                                className='serviceNameInput'
-                                name={[field.name, 'service']}
-                                fieldKey={[field.fieldKey, 'service']}
+                                name={[field.name, "serviceName"]}
+                                className="serviceNameInput"
+                                fieldKey={[field.fieldKey, "serviceName"]}
+                                hasFeedback
                                 rules={[
                                   {
                                     required: true,
-                                    message: 'Missing service name',
                                   },
                                 ]}
                               >
-                                <Input placeholder='Service Name' />
+                                <Input allowClear placeholder="Service Name" />
                               </Form.Item>
                               <Form.Item
                                 {...field}
-                                className='servicePriceInput'
-                                name={[field.name, 'price']}
-                                fieldKey={[field.fieldKey, 'price']}
+                                name={[field.name, "price"]}
+                                className="servicePriceInput"
+                                fieldKey={[field.fieldKey, "price"]}
+                                hasFeedback
+                                validateFirst={true}
                                 rules={[
                                   {
                                     required: true,
-                                    message: 'Missing price',
+                                    type: "number",
+                                    min: 1,
+                                    max: 1000,
                                   },
                                 ]}
                               >
-                                <Input placeholder='Price' />
+                                <InputNumber
+                                  placeholder="Price"
+                                  // formatter={(value) => `$ ${value}`}
+                                />
                               </Form.Item>
                               <MinusCircleOutlined
+                                className="removeServicePriceBtn"
                                 onClick={() => {
                                   remove(field.name);
                                 }}
                               />
-                              Remove
-                            </>
-                          ))}
-
-                          <Form.Item>
-                            <Button
-                              className='addServicePriceBtn'
-                              onClick={() => {
-                                add();
+                              <Form.Item
+                                {...field}
+                                name={[field.name, "description"]}
+                                className="serviceDescriptionInput"
+                                fieldKey={[field.fieldKey, "description"]}
+                                hasFeedback
+                              >
+                                <Input.TextArea
+                                  allowClear
+                                  placeholder="Description (optional)"
+                                />
+                              </Form.Item>
+                            </Space>
+                            <Divider
+                              style={{
+                                margin: "0 0 0 12px",
+                                width: "300px",
+                                minWidth: "unset",
+                                color: "#c6c6c6",
                               }}
-                            >
-                              <PlusOutlined />
-                              Service & Price
-                            </Button>
-                          </Form.Item>
-                        </div>
-                      );
-                    }}
-                  </Form.List>
-                </Form.Item>
-                {fields.length > 0 ? (
-                  <>
-                    <MinusCircleOutlined
-                      className='dynamic-delete-button'
-                      style={{ margin: '0 8px' }}
-                      onClick={() => {
-                        remove(field.name);
-                      }}
-                    />
-                    Remove
-                  </>
-                ) : null}
-              </Form.Item>
-            ))}
-            <Form.Item>
-              <Button
-                className='addServiceTypeBtn'
-                onClick={() => {
-                  add();
-                }}
-              >
-                <PlusOutlined />
-                Service Type
-              </Button>
-            </Form.Item>
-          </div>
+                            />
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <Form.Item className="formItemAddServiceTypeBtn">
+                      <Button
+                        className="addServiceTypeBtn"
+                        type="dashed"
+                        onClick={() => {
+                          add();
+                        }}
+                        block
+                      >
+                        <PlusOutlined /> Add Service to {tap}
+                      </Button>
+                    </Form.Item>
+                  </div>
+                );
+              }}
+            </Form.List>
+          </TabPane>
         );
-      }}
-    </Form.List>
+      })}
+    </Tabs>
   );
 };
 
