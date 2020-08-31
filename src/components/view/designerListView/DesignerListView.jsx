@@ -17,7 +17,7 @@ export default function DesignerListView(props) {
         const params = queryString.parse(props.location.search);
         const newDesigners = [];
         firebaseStore
-            .collection("designers").where("location", "==", params["location"])
+            .collection("users").where("location", "==", params["location"])
             .get()
             .then((querySnapshot) => {
                 querySnapshot.docs.forEach((doc) => {

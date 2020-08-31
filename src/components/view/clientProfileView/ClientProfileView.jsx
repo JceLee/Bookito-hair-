@@ -20,6 +20,7 @@ const client = {
 
 export default function ClientProfileView() {
   // kangmin working on here
+
   const signedInUser = useSelector((state) => state.signedInUser.signedInUser);
 
   console.log("babo1");

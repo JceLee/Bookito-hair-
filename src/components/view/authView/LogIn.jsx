@@ -89,6 +89,23 @@ export default function LogIn() {
             const lname = "";
             const phone = "";
             const gender = "";
+            const hours = {
+                Mon: [{ tradingHours: [16, 42], closed: false }],
+                Tue: [{ tradingHours: [16, 42], closed: false }],
+                Wed: [{ tradingHours: [16, 42], closed: false }],
+                Thu: [{ tradingHours: [16, 42], closed: false }],
+                Fri: [{ tradingHours: [16, 42], closed: false }],
+                Sat: [{ tradingHours: [16, 42], closed: false }],
+                Sun: [{ tradingHours: [16, 42], closed: false }],
+            };
+            const services = {
+                    Cut: [{"serviceName" : "female cut", "price" : 35, "description" : "sample data"}],
+                    Style: [],
+                    Perm: [],
+                    Color: [],
+                    Clinic: [],
+                    Promo: [],
+                };
             try {
                 await userRef.set({
                     isDesigner,
@@ -99,6 +116,8 @@ export default function LogIn() {
                     lname,
                     phone,
                     gender,
+                    hours,
+                    services,
                 });
             } catch (error) {
                 console.error("Error creating user document", error);
