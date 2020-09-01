@@ -14,6 +14,7 @@ import ServiceNPriceForm from "../designerEditProfile/ServiceNPriceForm";
 import HoursForm from "../designerEditProfile/HoursForm";
 import AddressPhoneForm from "../designerEditProfile/AddressPhoneForm";
 import WorksForm from "../designerEditProfile/WorksForm";
+import DesignerSchedule from "../../designerScheduleView/DesignerScheduleView";
 
 const { Panel } = Collapse;
 const layout = {
@@ -53,6 +54,7 @@ const DesignerTop = (props) => {
     img,
     totalRate,
     works,
+    hours,
     location,
   } = props;
   const [top] = useState(64);
@@ -191,7 +193,7 @@ const DesignerTop = (props) => {
               </Modal>
             </>
           ) : (
-            <Button className="buttonInProfileLayoutTab">Book Now</Button>
+            <DesignerSchedule hours={hours} />
           )}
         </div>
       </Affix>

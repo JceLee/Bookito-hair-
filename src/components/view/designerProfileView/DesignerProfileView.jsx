@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 import { BrowserRouter } from "react-router-dom";
 import { BackTop } from "antd";
@@ -126,30 +126,14 @@ const found = {
 };
 
 const DesignerProfileView = () => {
-  // const designers = useSelector((state) => state.firestore.designers);
-  // const queryString = window.location.search;
-  // const urlParams = new URLSearchParams(queryString);
-  // const designerId = urlParams.get('id');
-  // const found = designers.find((element) => element.id === designerId);
-  // console.log(found);
-
-  // let formattedServiceNPrice = [];
-  // let map = new Map();
-  // const combineServiceNPrice = () => {
-  //   for (let i = 0; i < found.services.length; i++) {
-  //     console.log(map.set(found.services[i], found.prices[i]));
-  //   }
-  // };
-
-  // console.log(combineServiceNPrice());
-
-  //  const designers = useSelector((state) => state.firestore.designers);
-  // const queryString = window.location.search;
-  // const urlParams = new URLSearchParams(queryString);
-  // const designerId = urlParams.get('uid');
-  // const found = designers.find((element) => (element.uid === designerId));
-
-  // console.log(designers);
+  const designers = useSelector((state) => state.firestore.designers);
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const designerId = urlParams.get("uid");
+  // console.log(designerId);
+  const found = designers.find((element) => element.uid === designerId);
+  console.log(found);
+  console.log(designers);
 
   const {
     isAuthenticated,
@@ -176,6 +160,7 @@ const DesignerProfileView = () => {
           fname={fname}
           lname={lname}
           totalRate={rate}
+          hours={hours}
           works={works}
           location={location}
           img={profile}

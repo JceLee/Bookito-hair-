@@ -21,19 +21,9 @@ const displayTime = (value) => {
 };
 
 const Hours = (props) => {
-  // const { id, hours } = props;
-  const hours = {
-    Mon: [{ tradingHours: [16, 42], closed: true }],
-    Tue: [{ tradingHours: [16, 42], closed: false }],
-    Wed: [{ tradingHours: [16, 42], closed: false }],
-    Thu: [{ tradingHours: [16, 42], closed: false }],
-    Fri: [{ tradingHours: [16, 42], closed: false }],
-    Sat: [{ tradingHours: [16, 42], closed: false }],
-    Sun: [{ tradingHours: [16, 42], closed: false }],
-  };
-
+  const { id, hours } = props;
   return (
-    <div className="hours" id={props.id}>
+    <div className="hours" id={id}>
       <h2>Hours</h2>
       <table>
         <tbody>
