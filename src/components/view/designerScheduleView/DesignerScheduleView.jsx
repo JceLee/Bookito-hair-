@@ -1,36 +1,36 @@
 import React, { useState } from 'react';
 import 'react-day-picker/lib/style.css';
 import '../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss';
-import { Steps, message, Modal, Button } from 'antd';
+import { Steps, Result, Modal, Button, message, Checkbox } from 'antd';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
 import StepThree from './StepThree';
 
 const timeSelect = [
-  { time: '09:00', value: '09:00', disabled: false },
-  { time: '09:30', value: '09:30', disabled: false },
-  { time: '10:00', value: '10:00', disabled: false },
-  { time: '10:30', value: '10:30', disabled: true },
-  { time: '11:00', value: '11:00', disabled: false },
-  { time: '11:30', value: '11:30', disabled: false },
-  { time: '12:00', value: '12:00', disabled: false },
-  { time: '12:30', value: '12:30', disabled: false },
-  { time: '13:00', value: '13:00', disabled: true },
-  { time: '13:30', value: '13:30', disabled: false },
-  { time: '14:00', value: '14:00', disabled: false },
-  { time: '14:30', value: '14:30', disabled: false },
-  { time: '15:00', value: '15:00', disabled: true },
-  { time: '15:30', value: '15:30', disabled: false },
-  { time: '16:00', value: '16:00', disabled: false },
-  { time: '16:30', value: '16:30', disabled: true },
-  { time: '17:00', value: '17:00', disabled: false },
-  { time: '17:30', value: '17:30', disabled: false },
-  { time: '18:00', value: '18:00', disabled: false },
-  { time: '18:30', value: '18:30', disabled: false },
+  { time: '09:00', disabled: false },
+  { time: '09:30', disabled: false },
+  { time: '10:00', disabled: false },
+  { time: '10:30', disabled: true },
+  { time: '11:00', disabled: false },
+  { time: '11:30', disabled: false },
+  { time: '12:00', disabled: false },
+  { time: '12:30', disabled: false },
+  { time: '13:00', disabled: true },
+  { time: '13:30', disabled: false },
+  { time: '14:00', disabled: false },
+  { time: '14:30', disabled: false },
+  { time: '15:00', disabled: true },
+  { time: '15:30', disabled: false },
+  { time: '16:00', disabled: false },
+  { time: '16:30', disabled: true },
+  { time: '17:00', disabled: false },
+  { time: '17:30', disabled: false },
+  { time: '18:00', disabled: false },
+  { time: '18:30', disabled: false },
 ];
 
 const services = [
-  { key: 'Cuts', tab: 'Cuts' },
+  { key: 'Cut', tab: 'Cut' },
   { key: 'Style', tab: 'Style' },
   { key: 'Perms', tab: 'Perms' },
   { key: 'Colors', tab: 'Colors' },
@@ -39,7 +39,7 @@ const services = [
 ];
 
 const servicesContent = {
-  Cuts: [
+  Cut: [
     {
       id: 1,
       service: 'Men Cut',
@@ -164,7 +164,7 @@ const servicesContent = {
 export default function DesignerSchedule() {
   const { Step } = Steps;
   const [displayedDay, setDisplayedDay] = useState(null);
-  const [key, setKey] = useState('Cuts');
+  const [key, setKey] = useState('Cut');
   const [calculationBox, setCalculationBox] = useState([]);
   const [page, setPage] = useState('Estimated Price');
   const [current, setCurrent] = useState(0);
@@ -193,7 +193,19 @@ export default function DesignerSchedule() {
   };
 
   const next = () => {
-    setCurrent(current + 1);
+    if (displayedDay && bookingTime) {
+      setCurrent(current + 1);
+    } else {
+      return message.error({
+        content: 'ERROR!',
+        // className: 'custom-class',
+        // style: {
+        //   marginTop: '40vh',
+        //   width: '200px',
+        //   height: '100px',
+        // },
+      });
+    }
   };
 
   const prev = () => {
@@ -229,6 +241,11 @@ export default function DesignerSchedule() {
     }
 
     setCalculationBox(newCalculationBox);
+  };
+
+  const loadSuccessMessage = () => {
+    console.log(finalBookingObject);
+    message.success('Successfully booked!');
   };
 
   const steps = [
@@ -290,6 +307,8 @@ export default function DesignerSchedule() {
     setVisible(false);
   };
 
+  window.history.pushState('', document.title, window.location.pathname);
+
   return (
     <div className='bookNow'>
       <Button type='primary' onClick={showModal}>
@@ -299,30 +318,36 @@ export default function DesignerSchedule() {
       <Modal
         className='bookNowModal'
         title='Book Now'
-        // width={900}
-        style={{ top: 50 }}
         visible={visible}
-        // onOk={handleOk}
         footer={
           <div className='stepAction'>
+            {current > 0 && (
+              <Button
+                className='previousBtn'
+                href='#stepToTopId'
+                onClick={() => prev()}
+              >
+                Previous
+              </Button>
+            )}
             {current < steps.length - 1 && (
-              <Button type='primary' onClick={() => next()}>
+              <Button
+                className='nextBtnInStepOne'
+                href='#stepToTopId'
+                type='primary'
+                style={{ position: 'absolute', right: 0 }}
+                onClick={() => next()}
+              >
                 Next
               </Button>
             )}
-
             {current === steps.length - 1 && (
               <Button
+                className='DoneBtn'
                 type='primary'
-                onClick={() => console.log(finalBookingObject)}
+                onClick={() => loadSuccessMessage()}
               >
                 Done
-              </Button>
-            )}
-
-            {current > 0 && (
-              <Button style={{ marginLeft: 0 }} onClick={() => prev()}>
-                Previous
               </Button>
             )}
           </div>
@@ -332,11 +357,13 @@ export default function DesignerSchedule() {
         // okButtonProps={{ style: { display: 'none' } }}
         cancelButtonProps={{ style: { display: 'none' } }}
       >
-        <Steps current={current} onChange={onChange}>
-          {steps.map((item) => (
-            <Step key={item.title} title={item.title} />
-          ))}
-        </Steps>
+        <div className='stepsClass' id='stepToTopId'>
+          <Steps current={current} onChange={onChange}>
+            {steps.map((item) => (
+              <Step key={item.title} title={item.title} />
+            ))}
+          </Steps>
+        </div>
 
         <div className='stepsContent'>{steps[current].content}</div>
       </Modal>

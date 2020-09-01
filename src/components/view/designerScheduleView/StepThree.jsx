@@ -47,8 +47,8 @@ export default function StepThree(props) {
   };
 
   return (
-    <>
-      <p id='title'>Final Check</p>
+    <div id='stepThreeTopId'>
+      <p id='title3'>Final Check</p>
       <div className='confirmation'>
         <List
           itemLayout='horizontal'
@@ -74,6 +74,6 @@ export default function StepThree(props) {
           }}
         ></List>
       </div>
-    </>
+    </div>
   );
 }

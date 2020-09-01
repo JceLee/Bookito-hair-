@@ -33,7 +33,7 @@ export default function StepOne(props) {
             <Radio.Button
               key={index}
               className='hourRadioBtn'
-              value={value}
+              value={time}
               disabled={disabled}
               checked={bookingTime === value}
               onChange={radioChange}
@@ -48,7 +48,7 @@ export default function StepOne(props) {
 
   return (
     <div className='stepOne'>
-      <p id='title'>Date and Time</p>
+      <p id='title1'>Date and Time</p>
       <Row>
         <Col span={13}>{renderCalendar()}</Col>
         <p id='selectTime'>Please select time</p>

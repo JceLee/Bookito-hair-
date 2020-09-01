@@ -46,9 +46,9 @@ export default function StepTwo(props) {
                     console.log(newCalculationBox);
 
                     switch (serviceKey) {
-                      case 'Cuts':
-                        newCalculationBox['Cuts'] =
-                          newCalculationBox['Cuts'] === menu ? null : menu;
+                      case 'Cut':
+                        newCalculationBox['Cut'] =
+                          newCalculationBox['Cut'] === menu ? null : menu;
                         break;
                       case 'Style':
                         newCalculationBox['Style'] =
@@ -93,8 +93,8 @@ export default function StepTwo(props) {
   );
 
   return (
-    <>
-      <p id='title'>Service and Price</p>
+    <div id='stepTwoTopId'>
+      <p id='title2'>Service and Price</p>
       <Row>
         <Col span={13}>
           <div className='genderService'>{renderService()}</div>
@@ -131,6 +131,6 @@ export default function StepTwo(props) {
           )}
         </Col>
       </Row>
-    </>
+    </div>
   );
 }
