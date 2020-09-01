@@ -15,7 +15,7 @@ const found = {
   gender: "man",
   location: "bcit burnaby, vancouver",
   address: "",
-  rate: 3.7,
+  rate: 4.5,
   photoURL:
     "https://images.vexels.com/media/users/3/145908/preview2/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg",
   // activity: {
@@ -133,7 +133,23 @@ const DesignerProfileView = () => {
   // const found = designers.find((element) => element.id === designerId);
   // console.log(found);
 
-  // const signedInUser = useSelector((state) => state.signedInUser.signedInUser);
+  // let formattedServiceNPrice = [];
+  // let map = new Map();
+  // const combineServiceNPrice = () => {
+  //   for (let i = 0; i < found.services.length; i++) {
+  //     console.log(map.set(found.services[i], found.prices[i]));
+  //   }
+  // };
+
+  // console.log(combineServiceNPrice());
+
+  //  const designers = useSelector((state) => state.firestore.designers);
+  // const queryString = window.location.search;
+  // const urlParams = new URLSearchParams(queryString);
+  // const designerId = urlParams.get('uid');
+  // const found = designers.find((element) => (element.uid === designerId));
+
+  // console.log(designers);
 
   const {
     isAuthenticated,
@@ -149,6 +165,8 @@ const DesignerProfileView = () => {
     hours,
     reviews,
   } = found;
+
+  // console.log(works);
 
   return (
     <BrowserRouter>

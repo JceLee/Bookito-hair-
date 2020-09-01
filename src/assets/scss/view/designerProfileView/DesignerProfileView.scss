@@ -1,5 +1,19 @@
 @import "../../Mixin.scss";
 
+.ant-notification {
+  margin: 0;
+  margin-right: 85px;
+
+  .notificationSaved {
+    text-align: center;
+    width: 205px;
+    height: 50px;
+    margin: 0;
+  }
+}
+.ant-notification-notice-closable .ant-notification-notice-message {
+  padding-right: 0;
+}
 // Customized date-picker-panel
 .ant-picker-datetime-panel {
   .ant-picker-time-panel {
@@ -43,7 +57,6 @@
 .ant-rate {
   font-size: 1rem;
   line-height: 1;
-  color: white;
 
   .ant-rate-star {
     margin: 0 1px 0 0;
@@ -56,6 +69,12 @@
       }
     }
   }
+}
+
+.ant-form-item .ant-mentions,
+.ant-form-item textarea.ant-input {
+  border-color: #d9d9d9;
+  box-shadow: none;
 }
 
 .ant-checkbox-wrapper:hover .ant-checkbox-inner {
@@ -73,9 +92,11 @@
 }
 .ant-input-affix-wrapper:focus,
 .ant-input-affix-wrapper-focused {
+  border-color: #d9d9d9;
   box-shadow: none;
 }
 .ant-input-number-focused {
+  border-color: #d9d9d9;
   box-shadow: none;
 }
 .ant-input-number:hover {
@@ -84,6 +105,17 @@
 .ant-input:hover {
   border-color: #d9d9d9;
   box-shadow: none;
+}
+.ant-message-notice-content {
+  width: 200px;
+  height: 50px;
+  background-color: white;
+  display: flex;
+  margin: 40vh auto 0;
+  font-size: large;
+  justify-content: center;
+  color: black;
+  align-items: center;
 }
 
 // Fade in effect
@@ -208,6 +240,8 @@
         a.active {
           // color: #1890ff;
           font-weight: 600;
+          padding-bottom: 4px;
+          border-bottom: 2px solid white;
         }
       }
     }
@@ -618,7 +652,14 @@
 }
 
 @include mobileM {
-  //375px
+  // .ant-layout-footer {
+  //   display: none;
+  // }
+  .designerProfileView {
+    .footer {
+      display: none;
+    }
+  }
 
   .ant-modal {
     width: 100vw !important;
@@ -786,6 +827,9 @@
           border-color: black;
           width: 300px;
         }
+        .addServiceTypeBtn:after {
+          box-shadow: none !important;
+        }
       }
 
       .ant-form-item-explain > :nth-child(even) {
@@ -912,11 +956,6 @@
       border-style: none none solid;
     }
 
-    .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab-active,
-    .ant-tabs-card > div > .ant-tabs-nav .ant-tabs-tab-active::after {
-      // border: 2px solid red;
-      // border-style: none none solid;
-    }
     .ant-tabs-tab-btn {
       color: black;
     }

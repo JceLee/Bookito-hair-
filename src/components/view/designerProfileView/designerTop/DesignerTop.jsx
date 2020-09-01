@@ -1,5 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Affix, Button, Modal, Form, Collapse } from "antd";
+import {
+  Affix,
+  Button,
+  Modal,
+  Form,
+  Collapse,
+  notification,
+  message,
+} from "antd";
 import DesignerNav from "./designerNav/DesignerNav.jsx";
 import ReadOnlyStar from "../../../commonComponents/ReadOnlyStar";
 import ServiceNPriceForm from "../designerEditProfile/ServiceNPriceForm";
@@ -37,7 +45,7 @@ const useResetFormOnCloseModal = ({ form, visible }) => {
   }, [visible]);
 };
 
-const DesignerTop = (props, { visible, onCancel }) => {
+const DesignerTop = (props) => {
   const {
     isAuthenticated,
     fname,
@@ -54,7 +62,7 @@ const DesignerTop = (props, { visible, onCancel }) => {
   const [form] = Form.useForm();
   useResetFormOnCloseModal({
     form,
-    visible,
+    Visible,
   });
 
   const showModal = () => {
@@ -67,11 +75,27 @@ const DesignerTop = (props, { visible, onCancel }) => {
 
   const onFinish = (values) => {
     console.log(values);
+    // return message
+    //   .success({
+    //     content: "Saved",
+    //     duration: "1",
+    //   })
+    //   .then(() => setVisible(false));
+    setVisible(false);
+    return notification.success({
+      className: "notificationSaved",
+      style: { top: "550px" },
+      message: "Saved",
+      duration: "2",
+    });
+  };
+
+  const onFinishFailed = (errors) => {
+    console.log(errors);
   };
 
   const onOk = () => {
     form.submit();
-    // setVisible(false);
   };
 
   useEffect(() => {
@@ -118,6 +142,7 @@ const DesignerTop = (props, { visible, onCancel }) => {
                   form={form}
                   name="editProfile"
                   onFinish={onFinish}
+                  onFinishFailed={onFinishFailed}
                   initialValues={{
                     services: {
                       Cut: [],

@@ -3,6 +3,7 @@ import { Form, Input, InputNumber, Button, Space, Tabs, Divider } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 const { TabPane } = Tabs;
+const { TextArea } = Input;
 const tapNames = ["Cut", "Style", "Perm", "Color", "Clinic", "Promo"];
 
 const callback = (key) => {
@@ -45,7 +46,7 @@ const ServiceNPriceForm = () => {
                                   },
                                 ]}
                               >
-                                <Input allowClear placeholder="Service Name" />
+                                <Input placeholder="Service Name" />
                               </Form.Item>
                               <Form.Item
                                 {...field}
@@ -53,7 +54,6 @@ const ServiceNPriceForm = () => {
                                 className="servicePriceInput"
                                 fieldKey={[field.fieldKey, "price"]}
                                 hasFeedback
-                                validateFirst={true}
                                 rules={[
                                   {
                                     required: true,
@@ -81,10 +81,7 @@ const ServiceNPriceForm = () => {
                                 fieldKey={[field.fieldKey, "description"]}
                                 hasFeedback
                               >
-                                <Input.TextArea
-                                  allowClear
-                                  placeholder="Description (optional)"
-                                />
+                                <TextArea placeholder="Description (optional)" />
                               </Form.Item>
                             </Space>
                             <Divider
