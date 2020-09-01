@@ -46,3 +46,10 @@ $green: #00ff00;
     @content;
   }
 }
+
+// for making client profile form responsive
+@mixin clientProfile576 {
+  @media only screen and (min-width: 576px) {
+    @content;
+  }
+}
