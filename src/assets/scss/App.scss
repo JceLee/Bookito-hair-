@@ -19,11 +19,14 @@
 // Client Schedule view
 @import "./view/clientScheduleView/ClientScheduleView.scss";
 
+// Deisgner Schedule view
+@import "./view/designerScheduleView/DesignerScheduleView.scss";
+
 // Calendar
 @import "./view/designerScheduleView/Calendar.scss";
 @import "./view/designerScheduleView/TooltipContent.scss";
-
-@import "./view/designerScheduleView/DesignerScheduleView.scss";
+@import "./view/designerScheduleView/DeleteAppointmentModal.scss";
+@import "./view/designerScheduleView/AddAppointmentModal.scss";
 
 .layout {
   background-color: white;

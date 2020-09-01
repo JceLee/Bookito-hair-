@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Paper from "@material-ui/core/Paper";
 import Fab from "@material-ui/core/Fab";
 import Drawer from "@material-ui/core/Drawer";
-import { ViewState, EditingState } from "@devexpress/dx-react-scheduler";
+import { ViewState } from "@devexpress/dx-react-scheduler";
 import {
   Scheduler,
   DayView,
@@ -14,29 +14,42 @@ import {
   Toolbar,
   DateNavigator,
   TodayButton,
-  AppointmentForm,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import TooltipContent from "./TooltipContent";
 import AddIcon from "@material-ui/icons/Add";
 import { Badge } from "antd";
 import NewRequests from "./NewRequests";
-import AppointmentEditForm from "./AppointmentEditForm";
-import Grid from "@material-ui/core/Grid";
-import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
-import AccessTime from "@material-ui/icons/AccessTime";
-import FaceIcon from "@material-ui/icons/Face";
-import LocalPhoneOutlinedIcon from "@material-ui/icons/LocalPhoneOutlined";
+import { IconButton } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
+import DeleteAppointmentModal from "../calendar/DeleteAppointmentModal";
+import AddAppointmentModal from "./AddAppointmentModal";
+import { withStyles } from "@material-ui/core/styles";
+import { fade } from "@material-ui/core/styles/colorManipulator";
 
 export default function Calendar(props) {
-  const { newRequests } = props;
-  const [newRequestState, setNewRequestState] = useState(false);
-
-  const [selectedAppointment, setSelectedAppointment] = useState();
-
   const currentDate = new Date();
+
+  const { newRequests } = props;
+
+  const [newRequestState, setNewRequestState] = useState(false);
+  const [addAppointmentModalState, setAddAppointmentModal] = useState(false);
+  const [deleteAppointmentModalState, setDeleteAppointmentModal] = useState(
+    false
+  );
+
+  const displayNewRequests = () => {
+    setNewRequestState(!newRequestState);
+  };
+  const displayAddAppointmentModal = () => {
+    setAddAppointmentModal(!addAppointmentModalState);
+  };
+  const displayDeleteAppointmentModal = () => {
+    setDeleteAppointmentModal(!deleteAppointmentModalState);
+  };
 
   const designer = {
     notifications: 2,
+    holidays: [0, 6], // 0 for sunday 6 for saturday
   };
 
   const appointments = [
@@ -48,10 +61,6 @@ export default function Calendar(props) {
       phoneNumber: "7781231234",
     },
   ];
-
-  const displayNewRequests = () => {
-    setNewRequestState(!newRequestState);
-  };
 
   const customToolbar = () => {
     return (
@@ -67,25 +76,72 @@ export default function Calendar(props) {
     );
   };
 
-  const commitChanges = (added, changed, deleted) => {
-    console.log("Save");
-  };
-
-  const layout = (props) => {
-    console.log(props);
-    return <AppointmentEditForm />;
-  };
-
-  // const Content = ({ children, appointmentData, classes, ...restProps }) =>
-  const Content = ({ appointmentData, formatDate, onOpenButtonClick }) => {
+  const getTooltipContent = ({ appointmentData, formatDate, ...restProps }) => {
     return (
       <TooltipContent
         appointmentData={appointmentData}
         formatDate={formatDate}
-        onOpenButtonClick={onOpenButtonClick}
       />
     );
   };
+
+  const getTooltipHeader = ({ appointmentData, ...restProps }) => {
+    return (
+      <AppointmentTooltip.Header {...restProps}>
+        <IconButton onClick={() => displayDeleteAppointmentModal()}>
+          <DeleteIcon />
+        </IconButton>
+      </AppointmentTooltip.Header>
+    );
+  };
+
+  const TimeTableCellBase = ({ classes, ...restProps }) => {
+    const { startDate } = restProps;
+    const date = new Date(startDate);
+    if (designer.holidays.includes(date.getDay())) {
+      return (
+        <WeekView.TimeTableCell
+          {...restProps}
+          className={classes.weekendCell}
+        />
+      );
+    }
+    return <WeekView.TimeTableCell {...restProps} />;
+  };
+
+  const TimeTableCellBaseMonth = ({ classes, ...restProps }) => {
+    const { startDate } = restProps;
+    const date = new Date(startDate);
+    if (designer.holidays.includes(date.getDay())) {
+      return (
+        <MonthView.TimeTableCell
+          {...restProps}
+          className={classes.weekendCell}
+        />
+      );
+    }
+    return <MonthView.TimeTableCell {...restProps} />;
+  };
+
+  const grayCellStyle = (theme) => ({
+    weekendCell: {
+      backgroundColor: fade(theme.palette.action.disabledBackground, 0.04),
+      color: fade(theme.palette.action.disabledBackground, 0.38),
+      "&:hover": {
+        backgroundColor: fade(theme.palette.action.disabledBackground, 0.04),
+      },
+      "&:focus": {
+        backgroundColor: fade(theme.palette.action.disabledBackground, 0.04),
+      },
+    },
+  });
+
+  const grayWeekTimeTableCell = withStyles(grayCellStyle, {
+    name: "TimeTableCell",
+  })(TimeTableCellBase);
+  const grayMonthTimeTableCell = withStyles(grayCellStyle, {
+    name: "TimeTableCell",
+  })(TimeTableCellBaseMonth);
 
   return (
     <>
@@ -93,9 +149,17 @@ export default function Calendar(props) {
         <Paper>
           <Scheduler data={appointments}>
             <ViewState defaultCurrentDate={currentDate} />
-            <MonthView />
-            <WeekView />
-            <DayView startDayHour={9} endDayHour={14} />
+            <MonthView timeTableCellComponent={grayMonthTimeTableCell} />
+            <WeekView
+              startDayHour={9}
+              endDayHour={19}
+              timeTableCellComponent={grayWeekTimeTableCell}
+            />
+            <DayView
+              startDayHour={9}
+              endDayHour={19}
+              timeTableCellComponent={grayWeekTimeTableCell}
+            />
             <Toolbar flexibleSpaceComponent={customToolbar} />
             <Drawer
               anchor="right"
@@ -111,25 +175,28 @@ export default function Calendar(props) {
             <DateNavigator />
             <ViewSwitcher />
             <Appointments />
-            <EditingState onCommitChanges={commitChanges} />
-            <AppointmentTooltip contentComponent={Content} />
-            {/* <AppointmentForm layoutComponent={AppointmentEditForm} /> */}
+            <AppointmentTooltip
+              headerComponent={getTooltipHeader}
+              contentComponent={getTooltipContent}
+              showCloseButton
+            />{" "}
             <Fab
               color="secondary"
               className="addButton"
-              // onClick={() => {
-              //   this.setState({ editingFormVisible: true });
-              //   this.onEditingAppointmentChange(undefined);
-              //   this.onAddedAppointmentChange({
-              //     startDate: new Date(currentDate).setHours(startDayHour),
-              //     endDate: new Date(currentDate).setHours(startDayHour + 1),
-              //   });
-              // }}
+              onClick={displayAddAppointmentModal}
             >
               <AddIcon />
             </Fab>
           </Scheduler>
         </Paper>
+        <DeleteAppointmentModal
+          deleteAppointmentModalState={deleteAppointmentModalState}
+          displayDeleteAppointmentModal={displayDeleteAppointmentModal}
+        />
+        <AddAppointmentModal
+          addAppointmentModalState={addAppointmentModalState}
+          displayAddAppointmentModal={displayAddAppointmentModal}
+        />
       </div>
     </>
   );
