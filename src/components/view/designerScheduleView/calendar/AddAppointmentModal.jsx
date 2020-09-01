@@ -21,13 +21,7 @@ export default function AddAppointmentModal(props) {
           <CloseOutlined onClick={displayAddAppointmentModal} />
         </Col>
       </Row>
-      <Row className="modalContent">
-        {/* <Form>
-          <Form.Item label="Client Name">
-            <Input />
-          </Form.Item>
-        </Form> */}
-      </Row>
+      <Row className="modalContent"></Row>
       <Row className="modalFooter">
         <BlackBtn btnName="Add" />
       </Row>
