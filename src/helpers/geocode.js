@@ -1,13 +1,13 @@
-import Geocode from "react-geocode";
+import Geocode from 'react-geocode';
 
 // Set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
-Geocode.setApiKey("AIzaSyDUz5tzN9Fm76pLUherzsDE-jG0LKBEhIc");
+Geocode.setApiKey('AIzaSyDUz5tzN9Fm76pLUherzsDE-jG0LKBEhIc');
 
 // Set response language. Defaults to english.
-Geocode.setLanguage("en");
+Geocode.setLanguage('en');
 
 // Set response region. Its optional.
-Geocode.setRegion("us");
+Geocode.setRegion('us');
 
 // Enable or disable logs. Its optional.
 // Geocode.enableDebug();
