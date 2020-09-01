@@ -128,12 +128,11 @@ const DesignerProfileView = () => {
   const designers = useSelector((state) => state.firestore.designers);
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const designerId = urlParams.get('id');
-  const found = designers.find((element) => (element.id === designerId));
-  console.log(found);
+  const designerId = urlParams.get('uid');
+  const found = designers.find((element) => (element.uid === designerId));
+
 
   const {
-    // isAuthenticated,
     fname,
     lname,
     location,

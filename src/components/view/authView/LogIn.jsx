@@ -8,6 +8,7 @@ import {sign_in_with_facebook, sign_in_with_google} from "../../../actions/signI
 
 export default function LogIn() {
     const [isLoginShowing, setIsLoginShowing] = useState(false);
+    const currentUser = useSelector((state) => state.signedInUser.signedInUser);
     const dispatch = useDispatch();
 
     const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -139,6 +140,23 @@ export default function LogIn() {
         }
     };
 
+    const testAppointment = () => {
+        const appointment = {
+            customerId: currentUser.uid,
+            designerId: currentUser.uid,
+            dateExample: firebase.firestore.Timestamp.fromDate(new Date("October 30, 2020")),
+            services: {Cut: [{"serviceName" : "female cut", "price" : 35, "description" : "sample data"}]},
+            review: {rate: 4.5, content: "very good"},
+        };
+        firebaseStore.collection("appointments").add(appointment)
+            .then(function(docRef) {
+                console.log("Document written with ID: ", docRef.id);
+            })
+            .catch(function(error) {
+                console.error("Error adding document: ", error);
+            });
+    };
+
     const history = useHistory();
 
     const directProfile = () => {
@@ -180,6 +198,16 @@ export default function LogIn() {
                     <div>
                         <button onClick={signInWithFaceBook} className="loginBtn loginBtn--facebook">
                             Sign in with Facebook
+                        </button>
+                    </div>
+                    <div>
+                        <button onClick={testAppointment}>
+                            TestAppointment
+                        </button>
+                    </div>
+                    <div>
+                        <button onClick={testAppointment}>
+                            TestReview
                         </button>
                     </div>
                 </div>
