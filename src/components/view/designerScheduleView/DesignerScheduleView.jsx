@@ -1,162 +1,153 @@
-import React, { useState } from 'react';
-import 'react-day-picker/lib/style.css';
-import '../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss';
-import { Steps, Result, Modal, Button, message, Checkbox } from 'antd';
-import StepOne from './StepOne';
-import StepTwo from './StepTwo';
-import StepThree from './StepThree';
+import React, { useState, useEffect } from "react";
+import "react-day-picker/lib/style.css";
+import "../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss";
+import { Steps, Modal, Button, message } from "antd";
+import StepOne from "./StepOne";
+import StepTwo from "./StepTwo";
+import StepThree from "./StepThree";
 
 const timeSelect = [
-  { time: '09:00', disabled: false },
-  { time: '09:30', disabled: false },
-  { time: '10:00', disabled: false },
-  { time: '10:30', disabled: true },
-  { time: '11:00', disabled: false },
-  { time: '11:30', disabled: false },
-  { time: '12:00', disabled: false },
-  { time: '12:30', disabled: false },
-  { time: '13:00', disabled: true },
-  { time: '13:30', disabled: false },
-  { time: '14:00', disabled: false },
-  { time: '14:30', disabled: false },
-  { time: '15:00', disabled: true },
-  { time: '15:30', disabled: false },
-  { time: '16:00', disabled: false },
-  { time: '16:30', disabled: true },
-  { time: '17:00', disabled: false },
-  { time: '17:30', disabled: false },
-  { time: '18:00', disabled: false },
-  { time: '18:30', disabled: false },
-];
-
-const services = [
-  { key: 'Cut', tab: 'Cut' },
-  { key: 'Style', tab: 'Style' },
-  { key: 'Perms', tab: 'Perms' },
-  { key: 'Colors', tab: 'Colors' },
-  { key: 'Clinic', tab: 'Clinic' },
-  { key: 'Promo', tab: 'Promo' },
+  { time: "09:00", disabled: false },
+  { time: "09:30", disabled: false },
+  { time: "10:00", disabled: false },
+  { time: "10:30", disabled: true },
+  { time: "11:00", disabled: false },
+  { time: "11:30", disabled: false },
+  { time: "12:00", disabled: false },
+  { time: "12:30", disabled: false },
+  { time: "13:00", disabled: true },
+  { time: "13:30", disabled: false },
+  { time: "14:00", disabled: false },
+  { time: "14:30", disabled: false },
+  { time: "15:00", disabled: true },
+  { time: "15:30", disabled: false },
+  { time: "16:00", disabled: false },
+  { time: "16:30", disabled: true },
+  { time: "17:00", disabled: false },
+  { time: "17:30", disabled: false },
+  { time: "18:00", disabled: false },
+  { time: "18:30", disabled: false },
 ];
 
 const servicesContent = {
   Cut: [
     {
       id: 1,
-      service: 'Men Cut',
+      service: "Men Cut",
       price: 35,
-      description: 'The price may differ',
+      description: "The price may differ",
     },
     {
       id: 2,
-      service: 'Women Cut',
+      service: "Women Cut",
       price: 40,
-      description: 'The price may differ',
+      description: "The price may differ",
     },
     {
       id: 3,
-      service: 'Kids Cut',
+      service: "Kids Cut",
       price: 15,
-      description: 'The price may differ',
+      description: "The price may differ",
     },
   ],
   Style: [
     {
       id: 4,
-      service: 'Men Style',
+      service: "Men Style",
       price: 35,
-      description: 'The price may differ',
+      description: "The price may differ",
     },
     {
       id: 5,
-      service: 'Women Style',
+      service: "Women Style",
       price: 40,
-      description: 'The price may differ',
+      description: "The price may differ",
     },
     {
       id: 6,
-      service: 'Kids Style',
+      service: "Kids Style",
       price: 15,
-      description: 'The price may differ',
+      description: "The price may differ",
     },
   ],
-  Perms: [
+  Perm: [
     {
       id: 7,
-      service: 'Men Perms',
+      service: "Men Perm",
       price: 35,
-      description: 'The price may differ',
+      description: "The price may differ",
     },
     {
       id: 8,
-      service: 'Women Perms',
+      service: "Women Perm",
       price: 40,
-      description: 'The price may differ',
+      description: "The price may differ",
     },
     {
       id: 9,
-      service: 'Kids Perms',
+      service: "Kids Perm",
       price: 15,
-      description: 'The price may differ',
+      description: "The price may differ",
     },
   ],
-  Colors: [
+  Color: [
     {
       id: 10,
-      service: 'Men Colors',
+      service: "Men Color",
       price: 35,
-      description: 'The price may differ',
+      description: "The price may differ",
     },
     {
       id: 11,
-      service: 'Women Colors',
+      service: "Women Color",
       price: 40,
-      description: 'The price may differ',
+      description: "The price may differ",
     },
     {
       id: 12,
-      service: 'Kids Colors',
+      service: "Kids Color",
       price: 15,
-      description: 'The price may differ',
+      description: "The price may differ",
     },
   ],
   Clinic: [
     {
       id: 13,
-      service: 'Men Clinic',
+      service: "Men Clinic",
       price: 35,
-      description: 'The price may differ',
+      description: "The price may differ",
     },
     {
       id: 14,
-      service: 'Women Clinic',
+      service: "Women Clinic",
       price: 40,
-      description: 'The price may differ',
+      description: "The price may differ",
     },
     {
       id: 15,
-      service: 'Kids Clinic',
+      service: "Kids Clinic",
       price: 15,
-      description: 'The price may differ',
+      description: "The price may differ",
     },
   ],
   Promo: [
     {
       id: 16,
-      service: 'Men Promo',
+      service: "Men Promo",
       price: 35,
-      description: 'The price may differ',
+      description: "The price may differ",
     },
     {
       id: 17,
-      service: 'Women Promo',
+      service: "Women Promo",
       price: 40,
-      description: 'The price may differ',
+      description: "The price may differ",
     },
     {
       id: 18,
-      service: 'Kids Promo',
+      service: "Kids Promo",
       price: 15,
-      description: 'The price may differ',
+      description: "The price may differ",
     },
   ],
 };
@@ -164,11 +155,11 @@ const servicesContent = {
 export default function DesignerSchedule() {
   const { Step } = Steps;
   const [displayedDay, setDisplayedDay] = useState(null);
-  const [key, setKey] = useState('Cut');
+  const [key, setKey] = useState("Cut");
   const [calculationBox, setCalculationBox] = useState([]);
-  const [page, setPage] = useState('Estimated Price');
+  const [page, setPage] = useState("Estimated Price");
   const [current, setCurrent] = useState(0);
-  const [bookingTime, setBookingTime] = useState('');
+  const [bookingTime, setBookingTime] = useState("");
 
   const totalSum = () => {
     return Object.values(calculationBox).reduce((sum, service) => {
@@ -179,9 +170,22 @@ export default function DesignerSchedule() {
     }, 0);
   };
 
+  const serviceTabData = () =>
+    Object.keys(servicesContent) &&
+    Object.keys(servicesContent)
+      .filter((service) => servicesContent[service].length > 0)
+      .map((service) => {
+        if (service.length) {
+          return {
+            key: service,
+            tab: service,
+          };
+        }
+      });
+
   const finalBookingObject = {
-    customerId: '', // need to be added
-    designerId: '', // need to be added
+    customerId: "", // need to be added
+    designerId: "", // need to be added
     date: displayedDay,
     time: bookingTime,
     bookedServices: calculationBox,
@@ -197,13 +201,7 @@ export default function DesignerSchedule() {
       setCurrent(current + 1);
     } else {
       return message.error({
-        content: 'ERROR!',
-        // className: 'custom-class',
-        // style: {
-        //   marginTop: '40vh',
-        //   width: '200px',
-        //   height: '100px',
-        // },
+        content: "ERROR!",
       });
     }
   };
@@ -245,12 +243,32 @@ export default function DesignerSchedule() {
 
   const loadSuccessMessage = () => {
     console.log(finalBookingObject);
-    message.success('Successfully booked!');
+    message.success("Successfully booked!");
+  };
+
+  const getServiceContent = () => {
+    let contentString = "";
+    for (let [key, value] of Object.entries(calculationBox)) {
+      if (value === null) {
+        continue;
+      }
+      let { service } = value;
+      contentString += `[${service}]` + " ";
+    }
+    return contentString;
+  };
+
+  const stepChoice = (item) => {
+    if (item.id === 1 || item.id === 2) {
+      setCurrent(current - 2);
+    } else {
+      setCurrent(current - 1);
+    }
   };
 
   const steps = [
     {
-      title: 'Date and time',
+      title: "Date and time",
       content: (
         <StepOne
           timeSelection={timeSelect}
@@ -263,10 +281,10 @@ export default function DesignerSchedule() {
       ),
     },
     {
-      title: 'Service and estimated price',
+      title: "Service and estimated price",
       content: (
         <StepTwo
-          services={services}
+          services={serviceTabData(servicesContent)}
           servicesContent={servicesContent}
           serviceKey={key}
           calculationBox={calculationBox}
@@ -280,7 +298,7 @@ export default function DesignerSchedule() {
       ),
     },
     {
-      title: 'Final check',
+      title: "Final check",
       content: (
         <StepThree
           current={current}
@@ -288,6 +306,8 @@ export default function DesignerSchedule() {
           displayedDay={displayedDay}
           bookingTime={bookingTime}
           calculationBox={calculationBox}
+          getServiceContent={getServiceContent}
+          stepChoice={stepChoice}
         />
       ),
     },
@@ -299,32 +319,30 @@ export default function DesignerSchedule() {
     setVisible(true);
   };
 
-  // const handleOk = () => {
-  //   setVisible(false);
-  // };
-
   const handleCancel = () => {
     setVisible(false);
   };
 
-  window.history.pushState('', document.title, window.location.pathname);
+  window.history.pushState("", document.title, window.location.pathname);
 
   return (
-    <div className='bookNow'>
-      <Button type='primary' onClick={showModal}>
+    <div className="bookNow">
+      <Button type="primary" onClick={showModal}>
         Book Now
       </Button>
 
       <Modal
-        className='bookNowModal'
-        title='Book Now'
+        className="bookNowModal"
+        title="Book Now"
         visible={visible}
+        width="100vw"
+        bodyStyle={{ height: "83.5vh" }}
         footer={
-          <div className='stepAction'>
+          <div className="stepAction">
             {current > 0 && (
               <Button
-                className='previousBtn'
-                href='#stepToTopId'
+                className="previousBtn"
+                href="#stepToTopId"
                 onClick={() => prev()}
               >
                 Previous
@@ -332,10 +350,10 @@ export default function DesignerSchedule() {
             )}
             {current < steps.length - 1 && (
               <Button
-                className='nextBtnInStepOne'
-                href='#stepToTopId'
-                type='primary'
-                style={{ position: 'absolute', right: 0 }}
+                className="nextBtnInStepOne"
+                href="#stepToTopId"
+                type="primary"
+                style={{ position: "absolute", right: 0 }}
                 onClick={() => next()}
               >
                 Next
@@ -343,8 +361,8 @@ export default function DesignerSchedule() {
             )}
             {current === steps.length - 1 && (
               <Button
-                className='DoneBtn'
-                type='primary'
+                className="DoneBtn"
+                type="primary"
                 onClick={() => loadSuccessMessage()}
               >
                 Done
@@ -352,12 +370,10 @@ export default function DesignerSchedule() {
             )}
           </div>
         }
-        // okText='Save Schedule'
         onCancel={handleCancel}
-        // okButtonProps={{ style: { display: 'none' } }}
-        cancelButtonProps={{ style: { display: 'none' } }}
+        cancelButtonProps={{ style: { display: "none" } }}
       >
-        <div className='stepsClass' id='stepToTopId'>
+        <div className="stepsClass" id="stepToTopId">
           <Steps current={current} onChange={onChange}>
             {steps.map((item) => (
               <Step key={item.title} title={item.title} />
@@ -365,7 +381,7 @@ export default function DesignerSchedule() {
           </Steps>
         </div>
 
-        <div className='stepsContent'>{steps[current].content}</div>
+        <div className="stepsContent">{steps[current].content}</div>
       </Modal>
     </div>
   );

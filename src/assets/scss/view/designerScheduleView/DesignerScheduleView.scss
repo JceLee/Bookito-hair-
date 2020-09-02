@@ -1,9 +1,9 @@
-@import '../../Mixin.scss';
+@import "../../Mixin.scss";
 
 @include mobileM {
   //375
   .ant-modal-wrap {
-    // width: 85vw;
+    // width: 100vw;
     // height: 100vh;
     overflow: unset !important;
 
@@ -26,12 +26,7 @@
     width: 100vw;
     height: 100vh;
 
-    .stepsClass {
-      padding: 4px 0 0 0;
-    }
     .ant-modal-body {
-      width: 100vw;
-      height: 83.5vh;
       overflow: auto;
       .ant-steps-item-title {
         display: none;
@@ -94,8 +89,8 @@
         margin: 10px 1px 10px -19.5px;
         width: 351px;
         .DayPicker-Month {
-          width: 330px;
-          height: 308px;
+          width: 333px;
+          height: 270px;
           margin: 17px 16px 0 16px;
           .DayPicker-Day {
             border-radius: 50%;
@@ -120,7 +115,7 @@
         // background-color: aliceblue;
         text-align: center;
         margin: 0 0 0 -12px;
-        .ant-radio-button-wrapper-checked:not([class*=' ant-radio-button-wrapper-disabled']).ant-radio-button-wrapper:first-child {
+        .ant-radio-button-wrapper-checked:not([class*=" ant-radio-button-wrapper-disabled"]).ant-radio-button-wrapper:first-child {
           border-right-color: black;
         }
         .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover::before {
@@ -210,7 +205,7 @@
   }
 
   .ant-modal-body .ant-divider-horizontal {
-    width: 309px;
+    width: 305px;
   }
 
   .confirmation {
