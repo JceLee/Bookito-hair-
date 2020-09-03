@@ -191,12 +191,12 @@ export default function DesignerSchedule(props) {
       Object.values(appointmentArray).forEach((appointment) => {
         if (appointment.time === timeSlot.time) {
           timeSlot.disabled = true;
-          console.log("appointment: ", appointment.time);
-          console.log("matched timeSlot: ", timeSlot.time);
+          // console.log("appointment: ", appointment.time);
+          // console.log("matched timeSlot: ", timeSlot.time);
         }
       });
     });
-    console.log(temp);
+    // console.log(temp);
     setTimeSelect(temp);
     return timeSelect;
   };
@@ -256,13 +256,13 @@ export default function DesignerSchedule(props) {
   useEffect(() => {
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     if (displayedDay != null) {
-      console.log(days[displayedDay.getDay()]);
+      // console.log(days[displayedDay.getDay()]);
       createTimeSelect(days[displayedDay.getDay()]);
     }
   }, [displayedDay]);
 
   const onRadioChange = (hour) => {
-    console.log(hour.target.value);
+    // console.log(hour.target.value);
     setBookingTime(hour.target.value);
   };
 
@@ -275,9 +275,9 @@ export default function DesignerSchedule(props) {
 
     for (let [key, value] of Object.entries(newCalculationBox)) {
       if (serviceToRemove === value) {
-        console.log(newCalculationBox[key]);
+        // console.log(newCalculationBox[key]);
         newCalculationBox[key] = null;
-        console.log(newCalculationBox[key]);
+        // console.log(newCalculationBox[key]);
       }
     }
 
@@ -285,7 +285,7 @@ export default function DesignerSchedule(props) {
   };
 
   const loadSuccessMessage = () => {
-    console.log(finalBookingObject);
+    // console.log(finalBookingObject);
     message.success("Successfully booked!");
   };
 
