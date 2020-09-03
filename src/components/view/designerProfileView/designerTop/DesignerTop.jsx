@@ -15,6 +15,7 @@ import HoursForm from "../designerEditProfile/HoursForm";
 import AddressPhoneForm from "../designerEditProfile/AddressPhoneForm";
 import WorksForm from "../designerEditProfile/WorksForm";
 import DesignerSchedule from "../../designerScheduleView/DesignerScheduleView";
+import Avatar from "antd/lib/avatar/avatar";
 
 const { Panel } = Collapse;
 const layout = {
@@ -107,12 +108,14 @@ const DesignerTop = (props) => {
   return (
     <div className="designerTop" id="designerTop">
       <div className="designerProfile">
-        <img className="profileImage" src={img} alt="profileImage" />
-        <h2>
-          {fname} {lname}
-        </h2>
-        <ReadOnlyStar rate={totalRate} />
-        <p>{location}</p>
+        <Avatar className="designerProfileImage" size={64} src={img} />
+        <div className="designerNameRateLocation">
+          <h2>
+            {fname} {lname}
+          </h2>
+          <ReadOnlyStar rate={totalRate} />
+          <p>{location}</p>
+        </div>
       </div>
       <Affix offsetTop={top}>
         <div className="tabWithButton" id="tabWithButton">

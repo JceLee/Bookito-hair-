@@ -204,21 +204,22 @@
     text-align: left;
 
     .designerProfile {
+      display: flex;
+      align-items: center;
       padding: 1rem 0 0 3rem;
+      .designerNameRateLocation {
+        margin-left: 16px;
+      }
       h2 {
+        color: white;
         margin: 0;
       }
       p {
         padding: 0;
         margin: 0;
       }
-
-      .profileImage {
-        border-radius: 50%;
-        margin: 0 1rem 0 0;
-        float: left;
-        width: 75px;
-        height: 75px;
+      .designerProfileImage {
+        border: 1px solid white;
       }
     }
 

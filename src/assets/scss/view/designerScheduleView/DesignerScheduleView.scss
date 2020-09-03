@@ -1,4 +1,4 @@
-@import '../../Mixin.scss';
+@import "../../Mixin.scss";
 
 @include mobileM {
   //375
@@ -120,7 +120,7 @@
         // background-color: aliceblue;
         text-align: center;
         margin: 0 0 0 -12px;
-        .ant-radio-button-wrapper-checked:not([class*=' ant-radio-button-wrapper-disabled']).ant-radio-button-wrapper:first-child {
+        .ant-radio-button-wrapper-checked:not([class*=" ant-radio-button-wrapper-disabled"]).ant-radio-button-wrapper:first-child {
           border-right-color: black;
         }
         .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover::before {

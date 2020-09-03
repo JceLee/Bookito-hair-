@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "react-day-picker/lib/style.css";
 import "../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss";
 import { Steps, Result, Modal, Button, message, Checkbox } from "antd";
@@ -147,31 +147,59 @@ export default function DesignerSchedule(props) {
   const [page, setPage] = useState("Estimated Price");
   const [current, setCurrent] = useState(0);
   const [bookingTime, setBookingTime] = useState("");
+  const [timeSelect, setTimeSelect] = useState([]);
+  const elementForScrollingTopInModal = document.getElementById("stepToTopId");
 
-  const timeSelect = [
-    { time: "09:00", disabled: false },
-    { time: "09:30", disabled: false },
-    { time: "10:00", disabled: false },
-    { time: "10:30", disabled: true },
-    { time: "11:00", disabled: false },
-    { time: "11:30", disabled: false },
-    { time: "12:00", disabled: false },
-    { time: "12:30", disabled: false },
-    { time: "13:00", disabled: true },
-    { time: "13:30", disabled: false },
-    { time: "14:00", disabled: false },
-    { time: "14:30", disabled: false },
-    { time: "15:00", disabled: true },
-    { time: "15:30", disabled: false },
-    { time: "16:00", disabled: false },
-    { time: "16:30", disabled: true },
-    { time: "17:00", disabled: false },
-    { time: "17:30", disabled: false },
-    { time: "18:00", disabled: false },
-    { time: "18:30", disabled: false },
-  ];
+  let timeSlotTemplate = {
+    time: null,
+    disabled: false,
+  };
 
-  console.log(hours);
+  const formatTime = (value) => {
+    value = value > 1439 ? 1439 : value;
+    let hours = Math.floor(value / 60);
+    let minutes = value - hours * 60;
+    if (hours < 10) hours = "0" + hours;
+    if (minutes < 10) minutes = "0" + minutes;
+    if (minutes === 0) minutes = "00";
+    return `${hours}:${minutes}`;
+  };
+
+  const createTimeSelect = (day) => {
+    const appointmentArray = [
+      { date: "", time: "08:00" },
+      { date: "", time: "08:30" },
+      { date: "", time: "09:00" },
+      { date: "", time: "11:00" },
+      { date: "", time: "12:00" },
+      { date: "", time: "12:30" },
+      { date: "", time: "15:00" },
+    ];
+    const [starRawTime, endRawTime] = hours[day][0].tradingHours;
+    const closed = hours[day][0].closed;
+    const temp = [];
+    for (let i = starRawTime * 30; i <= endRawTime * 30; i += 30) {
+      timeSlotTemplate = {
+        ...timeSlotTemplate,
+        time: formatTime(i),
+        disabled: closed,
+      };
+      temp.push(timeSlotTemplate);
+    }
+
+    Object.values(temp).forEach((timeSlot) => {
+      Object.values(appointmentArray).forEach((appointment) => {
+        if (appointment.time === timeSlot.time) {
+          timeSlot.disabled = true;
+          console.log("appointment: ", appointment.time);
+          console.log("matched timeSlot: ", timeSlot.time);
+        }
+      });
+    });
+    console.log(temp);
+    setTimeSelect(temp);
+    return timeSelect;
+  };
 
   const totalSum = () => {
     return Object.values(calculationBox).reduce((sum, service) => {
@@ -197,6 +225,7 @@ export default function DesignerSchedule(props) {
 
   const next = () => {
     if (displayedDay && bookingTime) {
+      elementForScrollingTopInModal.scrollIntoView();
       setCurrent(current + 1);
     } else {
       return message.error({
@@ -212,6 +241,7 @@ export default function DesignerSchedule(props) {
   };
 
   const prev = () => {
+    elementForScrollingTopInModal.scrollIntoView();
     setCurrent(current - 1);
   };
 
@@ -222,6 +252,14 @@ export default function DesignerSchedule(props) {
   const handleDayClick = (day, { selected }) => {
     setDisplayedDay(selected ? undefined : day);
   };
+
+  useEffect(() => {
+    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    if (displayedDay != null) {
+      console.log(days[displayedDay.getDay()]);
+      createTimeSelect(days[displayedDay.getDay()]);
+    }
+  }, [displayedDay]);
 
   const onRadioChange = (hour) => {
     console.log(hour.target.value);
@@ -310,15 +348,9 @@ export default function DesignerSchedule(props) {
     setVisible(false);
   };
 
-  window.history.pushState("", document.title, window.location.pathname);
-
   return (
     <div className="bookNow">
-      <Button
-        className="buttonInProfileLayoutTab"
-        type="primary"
-        onClick={showModal}
-      >
+      <Button className="buttonInProfileLayoutTab" onClick={showModal}>
         Book Now
       </Button>
 
@@ -329,18 +361,13 @@ export default function DesignerSchedule(props) {
         footer={
           <div className="stepAction">
             {current > 0 && (
-              <Button
-                className="previousBtn"
-                href="#stepToTopId"
-                onClick={() => prev()}
-              >
+              <Button className="previousBtn" onClick={() => prev()}>
                 Previous
               </Button>
             )}
             {current < steps.length - 1 && (
               <Button
                 className="nextBtnInStepOne"
-                href="#stepToTopId"
                 type="primary"
                 style={{ position: "absolute", right: 0 }}
                 onClick={() => next()}
