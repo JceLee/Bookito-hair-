@@ -165,15 +165,16 @@ export default function DesignerSchedule(props) {
     return `${hours}:${minutes}`;
   };
 
-  const createTimeSelect = (day) => {
+  const createTimeSelect = (dayAndDate) => {
+    const day = dayAndDate.substring(0, 3);
     const appointmentArray = [
-      { date: "", time: "08:00" },
-      { date: "", time: "08:30" },
-      { date: "", time: "09:00" },
-      { date: "", time: "11:00" },
-      { date: "", time: "12:00" },
-      { date: "", time: "12:30" },
-      { date: "", time: "15:00" },
+      { date: "Thu Sep 03 2020", time: "08:00" },
+      { date: "Wed Sep 02 2020", time: "08:30" },
+      { date: "Wed Sep 09 2020", time: "09:00" },
+      { date: "Wed Sep 16 2020", time: "11:00" },
+      { date: "Wed Sep 23 2020", time: "12:00" },
+      { date: "Wed Sep 30 2020", time: "12:30" },
+      { date: "Wed Sep 02 2020", time: "15:00" },
     ];
     const [starRawTime, endRawTime] = hours[day][0].tradingHours;
     const closed = hours[day][0].closed;
@@ -189,7 +190,10 @@ export default function DesignerSchedule(props) {
 
     Object.values(temp).forEach((timeSlot) => {
       Object.values(appointmentArray).forEach((appointment) => {
-        if (appointment.time === timeSlot.time) {
+        if (
+          appointment.date === dayAndDate &&
+          appointment.time === timeSlot.time
+        ) {
           timeSlot.disabled = true;
           // console.log("appointment: ", appointment.time);
           // console.log("matched timeSlot: ", timeSlot.time);
@@ -254,10 +258,8 @@ export default function DesignerSchedule(props) {
   };
 
   useEffect(() => {
-    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     if (displayedDay != null) {
-      // console.log(days[displayedDay.getDay()]);
-      createTimeSelect(days[displayedDay.getDay()]);
+      createTimeSelect(displayedDay.toDateString());
     }
   }, [displayedDay]);
 
