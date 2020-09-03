@@ -11,9 +11,7 @@ const DesignerProfileView = () => {
   const urlParams = new URLSearchParams(queryString);
   const designerId = urlParams.get("uid");
   const found = designers.find((element) => element.uid === designerId);
-  // console.log(designerId);
-  // console.log(found);
-  // console.log(designers);
+
 
   const {
     isAuthenticated,

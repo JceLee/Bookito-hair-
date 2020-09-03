@@ -3,6 +3,7 @@ import DesignerCardBottom from "./DesignerCardBottom";
 import DesignerCardTop from "./designerCardTop/DesignerCardTop";
 import { useHistory } from "react-router-dom";
 
+
 export default function DesignerCardComponent(props) {
   const { designer } = props;
 
