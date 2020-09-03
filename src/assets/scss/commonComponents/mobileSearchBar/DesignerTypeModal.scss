@@ -1,0 +1,75 @@
+.searchBarModal {
+  top: 0;
+  margin: 0;
+
+  .ant-modal-body {
+    padding: 15px;
+
+    #designerTypeBtnContainer {
+      margin: 5px 0 20px 0;
+      .ant-radio-group {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .ant-radio-button-wrapper {
+        border-left-width: 1px;
+        border-radius: 20px;
+        width: 45%;
+        height: 40px;
+        margin: 2%;
+        text-align: center;
+        color: #858585;
+        font-size: 1rem;
+        white-space: nowrap;
+      }
+
+      .ant-radio-button-wrapper:hover {
+        color: #1b1b1b;
+        border: 2px solid #1b1b1b;
+      }
+
+      .ant-radio-button-wrapper:not(:first-child)::before {
+        background-color: unset;
+      }
+
+      .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled),
+      .ant-radio-button-wrapper-checked:not([class*=" ant-radio-button-wrapper-disabled"]).ant-radio-button-wrapper {
+        border: 2px solid #1b1b1b;
+        color: #1b1b1b;
+      }
+    }
+
+    #locationInputContainer {
+      margin: 20px 0;
+
+      .ant-input-affix-wrapper {
+        height: 50px;
+        border-radius: 25px;
+      }
+
+      .ant-input-affix-wrapper:hover,
+      .ant-input-affix-wrapper:focus,
+      .ant-input-affix-wrapper-focused {
+        box-shadow: unset;
+        border: 2px solid #1b1b1b;
+      }
+
+      #address-input {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  #designerTypeText,
+  #locationText {
+    padding-left: 10px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .designerTypeBtn {
+    margin-right: 5px;
+  }
+}

@@ -1,59 +1,15 @@
-.logo a {
+#logo a {
   text-decoration: none;
   color: black;
   font-size: x-large;
   font-weight: bold;
 }
 
-.logo {
+#logo {
   width: 150px;
 }
 
-.header {
-  .mobileSearchBar {
-    display: none;
-  }
-
-  .searchBar {
-    width: 80%;
-  }
-  .notMobileSearchBar {
-    display: none;
-
-    .ant-input-wrapper {
-      display: flex;
-      width: 80%;
-      margin: 0 auto;
-      height: 40px;
-
-      .ant-input-group-addon {
-        width: 30%;
-        border-top-left-radius: 20px;
-        border-bottom-left-radius: 20px;
-        height: 40px;
-        line-height: 40px;
-
-        .typeSelector {
-          width: 100%;
-          margin: 0 0;
-        }
-      }
-
-      .locationSelector {
-        width: 70%;
-        border-top-right-radius: 20px;
-        border-bottom-right-radius: 20px;
-
-        .ant-input-prefix {
-          font-size: 10px;
-          font-weight: bold;
-        }
-      }
-    }
-  }
-}
-
-.menuBtn {
+#menuBtn {
   @include tabletP {
     margin-left: auto;
     align-items: center;

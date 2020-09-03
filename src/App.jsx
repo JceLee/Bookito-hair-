@@ -11,14 +11,13 @@ import ClientProfileView from "./components/view/clientProfileView/ClientProfile
 import "antd/dist/antd.css";
 import "./assets/scss/App.scss";
 
-
 const { Header, Content, Footer } = Layout;
 
 export default function App() {
   return (
     <Router>
       <Layout className="layout">
-        <Header className="header">
+        <Header id="header">
           <NavBar />
         </Header>
         <Content className="content">

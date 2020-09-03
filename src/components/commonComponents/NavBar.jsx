@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Menu, Dropdown, Button, Typography, Drawer } from "antd";
 import { Link } from "react-router-dom";
 import { MenuOutlined, UserOutlined, BarsOutlined } from "@ant-design/icons";
-import SearchBar from "./SearchBar";
+import SearchBar from "./mobileSearchBar/SearchBar";
 
 const { Title } = Typography;
 
@@ -32,7 +32,7 @@ export default function Navbar() {
     <Menu>
       {menuItems.map((menu, inx) => {
         if (menu.name == "Divider") {
-          return <Menu.Divider />;
+          return <Menu.Divider key={inx} />;
         } else {
           return (
             <Menu.Item key={inx}>
@@ -43,33 +43,14 @@ export default function Navbar() {
       })}
     </Menu>
   );
-
-  const navBarController = () => {
-    if (
-      document.body.scrollTop > 64 ||
-      document.documentElement.scrollTop > 64
-    ) {
-      document.querySelector(".logo").style.display = "none";
-      document.querySelector(".notMobileSearchBar").style.display = "flex";
-    } else {
-      document.querySelector(".logo").style.display = "unset";
-      document.querySelector(".notMobileSearchBar").style.display = "none";
-    }
-  };
-
-  window.onscroll = function () {
-    navBarController();
-  };
-
   return (
     <>
-      <div className="logo">
+      <div id="logo">
         <Link to="/">LookUp</Link>
       </div>
-      <SearchBar />
 
       {/* < tablet */}
-      <div className="menuBtn">
+      <div id="menuBtn">
         <Dropdown overlay={menu} placement="bottomRight" trigger={["click"]}>
           <Button shape="round" icon={<UserOutlined />}>
             <BarsOutlined />

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Form } from "antd";
+import { Modal, Button, Form, Radio } from "antd";
+import LocationInput from "../LocationInput";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { reverseGeocode } from "../../../helpers/geocode";
 import { useHistory } from "react-router-dom";
-import SearchBar from "../../commonComponents/mobileSearchBar/SearchBar";
 
-export default function SearchBarSection() {
+export default function DesignerTypeModal(props) {
+  const { visible, onCancel, showNavBarElements } = props;
+
+  const designerTypes = ["Hair Designer", "Nail Artist", "MakeUp Artist"];
   const [designerType, setDesignerType] = useState();
   const [address, setAddress] = useState("");
   const [form] = Form.useForm();
@@ -46,10 +49,16 @@ export default function SearchBarSection() {
   };
 
   const history = useHistory();
+
   const handleSearch = (location) => {
+    if (document.getElementById("logo").style.display === "none") {
+      showNavBarElements("logo");
+      showNavBarElements("menuBtn");
+    }
     const route = `/designer_list?type=${designerType}${
       location ? `&location=${location}` : ""
     }`;
+    window.scrollTo(0, 0);
     history.push(route);
   };
 
@@ -71,34 +80,45 @@ export default function SearchBarSection() {
       console.error("Geolocation is not supported by this browser.");
     }
   };
-
   return (
-    <div className="searchBarSection">
-      <img
-        className="searchBarSectionImg"
-        src="https://images.unsplash.com/photo-1512206375328-39c0d295e698?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=633&q=80"
-        width="100%"
-        height="100%"
-        alt="searchBarSectionImg"
-      />
-      {/* main page */}
-      <Form form={form} id="searchBarForm">
-        <Form.Item
-          name="addressInput"
-          initialValue=""
-          rules={[{ required: true }]}
-        >
-          <SearchBar
-            address={address}
-            clearAddress={clearAddress}
-            handleAddressChange={handleAddressChange}
-            handleAddressSelect={handleAddressSelect}
-            handleSearch={handleSearch}
-            handleGeolocation={handleGeolocation}
-            id="searchBarOnMainPage"
-          />
-        </Form.Item>
-      </Form>
-    </div>
+    <Modal
+      title="Untitlted"
+      onCancel={onCancel}
+      visible={visible}
+      footer={null}
+      width="100vw"
+      bodyStyle={{ height: "100vh" }}
+      className="searchBarModal"
+    >
+      <div id="designerTypeBtnContainer">
+        <div id="designerTypeText">1. Choose designer type</div>
+        <Radio.Group
+          size="large"
+          buttonStyle="outlined"
+          options={designerTypes}
+          optionType="button"
+        ></Radio.Group>
+      </div>
+      <hr />
+      <div id="locationInputContainer">
+        <div id="locationText">2. Find your location</div>
+        <Form form={form}>
+          <Form.Item
+            name="addressInput"
+            initialValue=""
+            rules={[{ required: true }]}
+          >
+            <LocationInput
+              address={address}
+              clearAddress={clearAddress}
+              handleAddressChange={handleAddressChange}
+              handleAddressSelect={handleAddressSelect}
+              handleSearch={handleSearch}
+              handleGeolocation={handleGeolocation}
+            />
+          </Form.Item>
+        </Form>
+      </div>
+    </Modal>
   );
 }

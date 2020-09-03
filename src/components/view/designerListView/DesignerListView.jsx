@@ -14,6 +14,7 @@ export default function DesignerListView(props) {
     const params = queryString.parse(props.location.search);
     const newDesigners = [];
     console.log("params:", params);
+    console.log(params.location);
     firebaseDB
       .firestore()
       .collection("designers")
