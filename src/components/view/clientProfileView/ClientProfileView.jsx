@@ -3,6 +3,7 @@ import { Form, Input, Button, Avatar, Modal } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import { useDropzone } from "react-dropzone";
 import BlackBtn from "../../commonComponents/BlackBtn";
+import { useSelector } from "react-redux";
 
 // for testing
 const client = {
@@ -15,7 +16,16 @@ const client = {
   city: "Vancouver",
   province: "BC",
 };
+
 export default function ClientProfileView() {
+  // kangmin working on here
+
+  const signedInUser = useSelector((state) => state.signedInUser.signedInUser);
+
+  console.log("babo1");
+  console.log(signedInUser);
+  console.log("babo2");
+
   // display inputs upon edit button click
   const [edit, setEdit] = useState(false);
   const editProfile = () => {

@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import queryString from "query-string";
 import { load_database } from "../../../actions/firebaseAction";
-import { firebaseDB } from "../../../config/fbConfig";
+import { firebaseStore, firebaseAuth } from "../../../config/fbConfig";
 import { useDispatch, useSelector } from "react-redux";
 import DesignerCardComponent from "./designerCardComponent/DesignerCardComponent";
 import DesignerListFilter from "./DesignerListFilter";
@@ -10,14 +10,14 @@ export default function DesignerListView(props) {
   const designers = useSelector((state) => state.firestore.designers);
   const dispatch = useDispatch();
 
+  console.log(firebaseAuth.currentUser);
+
   useEffect(() => {
     const params = queryString.parse(props.location.search);
     const newDesigners = [];
-    console.log("params:", params);
-    firebaseDB
-      .firestore()
-      .collection("designers")
-      .where("Location", "==", params["location"])
+    firebaseStore
+      .collection("users")
+      .where("location", "==", params["location"])
       .get()
       .then((querySnapshot) => {
         querySnapshot.docs.forEach((doc) => {
