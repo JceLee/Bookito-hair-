@@ -21,15 +21,15 @@
 //   );
 // }
 
-import React from 'react';
-import DayPicker from 'react-day-picker';
-import 'react-day-picker/lib/style.css';
-import '../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss';
+import React from "react";
+import DayPicker from "react-day-picker";
+import "react-day-picker/lib/style.css";
+import "../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss";
 
 export default function EditCalendar(props) {
   const { dayValue, calendarHandleDay } = props;
   return (
-    <div className='editDesignerCalendar'>
+    <div className="editDesignerCalendar">
       {/* <p id='selectDay'>
         {dayValue ? dayValue.toLocaleDateString() : 'Please select a day'}
       </p>

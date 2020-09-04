@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Menu, Dropdown, Button, Typography, Drawer } from 'antd';
-import { Link } from 'react-router-dom';
-import { MenuOutlined, UserOutlined, BarsOutlined } from '@ant-design/icons';
-import SearchBar from './SearchBar';
+import React, { useState } from "react";
+import { Menu, Dropdown, Button, Typography, Drawer } from "antd";
+import { Link } from "react-router-dom";
+import { MenuOutlined, UserOutlined, BarsOutlined } from "@ant-design/icons";
+import SearchBar from "./SearchBar";
 
 const { Title } = Typography;
 
@@ -18,20 +18,20 @@ export default function Navbar() {
   };
 
   const menuItems = [
-    { name: 'Listing page', link: '/designer_list' },
-    { name: 'Schedule (Designer)', link: '/designer_schedule' },
-    { name: 'Schedule (Client)', link: '/client_schedule' },
-    { name: 'Profile (Designer)', link: '/designer_profile' },
-    { name: 'Profile (Client)', link: '/client_profile' },
-    { name: 'Divider', link: '' },
-    { name: 'Log In', link: '' },
-    { name: 'Sign up', link: '' },
+    { name: "Listing page", link: "/designer_list" },
+    { name: "Schedule (Designer)", link: "/designer_schedule" },
+    { name: "Schedule (Client)", link: "/client_schedule" },
+    { name: "Profile (Designer)", link: "/designer_profile" },
+    { name: "Profile (Client)", link: "/client_profile" },
+    { name: "Divider", link: "" },
+    { name: "Log In", link: "" },
+    { name: "Sign up", link: "" },
   ];
 
   const menu = (
     <Menu>
       {menuItems.map((menu, inx) => {
-        if (menu.name == 'Divider') {
+        if (menu.name == "Divider") {
           return <Menu.Divider />;
         } else {
           return (
@@ -49,11 +49,11 @@ export default function Navbar() {
       document.body.scrollTop > 64 ||
       document.documentElement.scrollTop > 64
     ) {
-      document.querySelector('.logo').style.display = 'none';
-      document.querySelector('.notMobileSearchBar').style.display = 'flex';
+      document.querySelector(".logo").style.display = "none";
+      document.querySelector(".notMobileSearchBar").style.display = "flex";
     } else {
-      document.querySelector('.logo').style.display = 'unset';
-      document.querySelector('.notMobileSearchBar').style.display = 'none';
+      document.querySelector(".logo").style.display = "unset";
+      document.querySelector(".notMobileSearchBar").style.display = "none";
     }
   };
 
@@ -63,15 +63,15 @@ export default function Navbar() {
 
   return (
     <>
-      <div className='logo'>
-        <Link to='/'>LookUp</Link>
+      <div className="logo">
+        <Link to="/">LookUp</Link>
       </div>
       <SearchBar />
 
       {/* < tablet */}
-      <div className='menuBtn'>
-        <Dropdown overlay={menu} placement='bottomRight' trigger={['click']}>
-          <Button shape='round' icon={<UserOutlined />}>
+      <div className="menuBtn">
+        <Dropdown overlay={menu} placement="bottomRight" trigger={["click"]}>
+          <Button shape="round" icon={<UserOutlined />}>
             <BarsOutlined />
           </Button>
         </Dropdown>

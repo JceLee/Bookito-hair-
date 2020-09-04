@@ -1,8 +1,8 @@
-import React from 'react';
-import { Row, Col, Radio } from 'antd';
-import DayPicker from 'react-day-picker';
-import 'react-day-picker/lib/style.css';
-import '../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss';
+import React from "react";
+import { Row, Col, Radio } from "antd";
+import DayPicker from "react-day-picker";
+import "react-day-picker/lib/style.css";
+import "../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss";
 
 export default function StepOne(props) {
   const {
@@ -14,7 +14,7 @@ export default function StepOne(props) {
   } = props;
 
   const renderCalendar = () => (
-    <div className='editDesignerCalendar'>
+    <div className="editDesignerCalendar">
       {/* <p id='selectDay'>
         {displayedDay
           ? displayedDay.toLocaleDateString()
@@ -25,14 +25,14 @@ export default function StepOne(props) {
   );
 
   const renderTime = () => (
-    <div className='timeButtons'>
+    <div className="timeButtons">
       <Radio.Group>
         {timeSelection.map((hour, index) => {
           const { time, value, disabled } = hour;
           return (
             <Radio.Button
               key={index}
-              className='hourRadioBtn'
+              className="hourRadioBtn"
               value={time}
               disabled={disabled}
               checked={bookingTime === value}
@@ -47,11 +47,11 @@ export default function StepOne(props) {
   );
 
   return (
-    <div className='stepOne'>
-      <p id='title1'>Date and Time</p>
+    <div className="stepOne">
+      <p id="title1">Date and Time</p>
       <Row>
         <Col span={13}>{renderCalendar()}</Col>
-        <p id='selectTime'>Please select time</p>
+        <p id="selectTime">Please select time</p>
         <Col span={11}>{renderTime()}</Col>
       </Row>
     </div>
