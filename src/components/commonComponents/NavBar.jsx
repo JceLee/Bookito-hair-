@@ -3,7 +3,7 @@ import { Menu, Dropdown, Button, Typography, Drawer } from 'antd';
 import { Link } from 'react-router-dom';
 import { MenuOutlined, UserOutlined, BarsOutlined } from '@ant-design/icons';
 import SearchBar from './SearchBar';
-import SignUp from "../view/authView/SignUp";
+// import SignUp from "../view/authView/SignUp";
 import LogIn from '../view/authView/LogIn';
 import {useSelector} from "react-redux";
 
@@ -30,7 +30,7 @@ export default function Navbar() {
     { name: 'Profile (Client)', link: '/client_profile' },
     { name: 'Divider', link: '' },
     { name: 'Log In', link: '' },
-    { name: 'Sign up', link: '' },
+    { name: 'Sign Up', link: '' },
   ];
 
   const menu = (
@@ -45,7 +45,15 @@ export default function Navbar() {
                 <LogIn />
               </Menu.Item>
           )
-        } else {
+        }
+        // else if (menu.name == 'Sign Up') {
+        //   return (
+        //       <Menu.Item key={inx}>
+        //         <SignUp />
+        //       </Menu.Item>
+        //   )
+        // }
+        else {
           return (
             <Menu.Item key={inx}>
               <Link to={menu.link}>{menu.name}</Link>

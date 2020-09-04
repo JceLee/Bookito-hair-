@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import { BrowserRouter } from "react-router-dom";
 import { BackTop } from "antd";
 import DesignerTop from "./designerTop/DesignerTop.jsx";
@@ -12,17 +12,20 @@ const DesignerProfileView = () => {
   const urlParams = new URLSearchParams(queryString);
   const designerId = urlParams.get("uid");
   const found = designers.find((element) => element.uid === designerId);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  console.log(currentUser);
-
+  useEffect(() => {
+    if (currentUser != null && currentUser.uid === found.uid) {
+      setIsAuthenticated(true);
+    }
+  }, []);
 
   const {
-    isAuthenticated,
     fname,
     lname,
     location,
     rate,
-    profile,
+    photoURL,
     activity,
     bio,
     works,
@@ -42,7 +45,7 @@ const DesignerProfileView = () => {
           hours={hours}
           works={works}
           location={location}
-          img={profile}
+          img={photoURL}
         />
 
         <DesignerBottom

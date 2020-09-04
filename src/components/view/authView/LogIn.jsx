@@ -23,7 +23,6 @@ export default function LogIn() {
                 dispatch(sign_in_with_google(result));
             });
         }).catch(function(error) {
-
             // Handle Errors here.
             const errorCode = error.code;
             const errorMessage = error.message;
@@ -32,13 +31,6 @@ export default function LogIn() {
             // The firebase.auth.AuthCredential type that was used.
             const credential = error.credential;
             // ...
-
-            console.log(errorCode);
-            console.log(errorMessage);
-            console.log(email);
-            console.log(credential);
-
-
         }).then( function() {
             handleLoginCancel();
             directProfile();
@@ -49,9 +41,6 @@ export default function LogIn() {
         firebaseAuth.signInWithPopup(faceBookProvider).then(function(result) {
             // The signed-in user info.
             const user = result.user;
-            console.log("facebook1");
-            console.log(user);
-            console.log('facebook12');
             generateUserDocument(user).then(function (result) {
                 dispatch(sign_in_with_facebook(result));
             });
@@ -66,13 +55,6 @@ export default function LogIn() {
             // The firebase.auth.AuthCredential type that was used.
             var credential = error.credential;
             // ...
-
-
-            console.log(errorCode);
-            console.log(errorMessage);
-            console.log(email);
-            console.log(credential);
-
         }).then( function() {
             handleLoginCancel();
             directProfile();
@@ -84,10 +66,11 @@ export default function LogIn() {
         const userRef = firebaseStore.doc(`users/${user.uid}`);
         const snapshot = await userRef.get();
         if (!snapshot.exists) {
-            const { email, displayName, photoURL } = user;
+            const { email, displayName, photoURL, uid } = user;
             const isDesigner = false;
             const fname = "";
             const lname = "";
+            const location = "";
             const phone = "";
             const gender = "";
             const hours = {
@@ -119,6 +102,7 @@ export default function LogIn() {
                     gender,
                     hours,
                     services,
+                    uid,
                 });
             } catch (error) {
                 console.error("Error creating user document", error);
@@ -184,8 +168,6 @@ export default function LogIn() {
             <Modal
                 title='Sign In'
                 visible={isLoginShowing}
-                onOk={handleLoginOk}
-                okText='Continue'
                 onCancel={handleLoginCancel}
                 cancelButtonProps={{ style: { display: 'none' } }}
             >

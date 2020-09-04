@@ -10,11 +10,9 @@ export default function DesignerListView(props) {
   const designers = useSelector((state) => state.firestore.designers);
   const dispatch = useDispatch();
 
-  console.log(firebaseAuth.currentUser);
-
-
   useEffect(() => {
     const params = queryString.parse(props.location.search);
+    console.log(params);
     const newDesigners = [];
     firebaseStore
         .collection("users").where("location", "==", params["location"])
@@ -26,8 +24,6 @@ export default function DesignerListView(props) {
           dispatch(load_database(newDesigners));
         });
   }, [dispatch]);
-
-
 
   return (
       <>

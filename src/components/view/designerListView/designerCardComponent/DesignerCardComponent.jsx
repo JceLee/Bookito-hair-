@@ -19,7 +19,7 @@ export default function DesignerCardComponent(props) {
         fname={designer.fname}
         rate={designer.rate}
         services={designer.services}
-        profile={designer.profile}
+        profile={designer.photoURL}
       />
       <DesignerCardBottom works={designer.works} />
     </div>
