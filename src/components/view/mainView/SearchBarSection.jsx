@@ -4,6 +4,7 @@ import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { reverseGeocode } from "../../../helpers/geocode";
 import { useHistory } from "react-router-dom";
 import SearchBar from "../../commonComponents/SearchBar";
+import desktopMainPageBackground from "../../../assets/images/desktopMainPageBackground.jpeg";
 
 export default function SearchBarSection() {
   const [designerType, setDesignerType] = useState();
@@ -74,9 +75,14 @@ export default function SearchBarSection() {
   return (
     <div className="searchBarSection">
       {/* main page */}
-      <div className="frontText">
+      {/* <div className="frontText">
         <b>LookUp</b> your new favorite
+      </div> */}
+      {/* <img className="bgImg" src={desktopMainPageBackground} /> */}
+      <div style={{ fontSize: "36px", fontWeight: "bold" }}>
+        Find your favourite beautician
       </div>
+
       <Form form={form}>
         <Form.Item
           name="addressInput"

@@ -4,7 +4,7 @@
   padding: 2.5% 5%;
 
   @include tabletP {
-    padding: 10px 10%;
+    padding: 10px 5%;
   }
 }
 
@@ -21,148 +21,179 @@
   background-color: white;
 }
 
-// search bar section
-.searchBarSection {
-  height: 400px;
-  padding-top: 50px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-
-  @include mobileL {
-    height: 300px;
-  }
+.searchBarSectionContainer {
+  background-color: rgb(230, 230, 230);
+  height: 70vh;
 
   @include tabletP {
-    height: 300px;
-    padding-top: 0px;
-    justify-content: center;
+    height: 80vh;
+    background-color: none;
   }
 
-  .ant-form {
-    width: 100%;
-  }
-
-  .frontText {
-    font-size: 32px;
-
-    @include tabletP {
-      display: none;
-    }
-  }
-
-  .notMobileSearchBar {
+  .backgroundImage {
     display: none;
 
     @include tabletP {
-      display: flex;
+      display: block;
+      width: 100%;
+      height: 80vh;
+      object-fit: cover;
+    }
+  }
+
+  // search bar section
+  .searchBarSection {
+    padding-top: 50px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+
+    @include mobileL {
+      height: 300px;
     }
 
-    .ant-input-wrapper {
-      display: flex;
-      width: 80%;
-      margin: 0 auto;
-      height: 50px;
+    @include tabletP {
+      padding-top: 0px;
+      justify-content: center;
+      margin-left: 5%;
+      position: absolute;
+      top: 30vh;
+    }
 
-      .ant-input-group-addon {
-        width: 30%;
-        border-top-left-radius: 25px;
-        border-bottom-left-radius: 25px;
+    .ant-form {
+      width: 100%;
+      padding-top: 10px;
+    }
+
+    .frontText {
+      font-size: 32px;
+
+      @include tabletP {
+        display: none;
+      }
+    }
+
+    .notMobileSearchBar {
+      display: none;
+
+      @include tabletP {
+        display: flex;
+      }
+
+      .ant-input-wrapper {
+        display: flex;
+        // width: 80%;
+        // margin: 0 auto;
         height: 50px;
 
-        .typeSelector {
-          width: 100%;
-          margin: 0 0;
+        .ant-input-group-addon {
+          width: 30%;
+          border-top-left-radius: 25px;
+          border-bottom-left-radius: 25px;
+          height: 50px;
 
-          .ant-select-selector {
-            height: 100%;
+          .typeSelector {
+            width: 100%;
+            margin: 0 0;
+
+            .ant-select-selector {
+              height: 100%;
+            }
+
+            .ant-select.typeSelector.ant-select-focused.ant-select-single.ant-select-open {
+              width: 500px;
+            }
+
+            .ant-select-selection-item,
+            .ant-select-selection-placeholder {
+              line-height: 50px;
+            }
           }
+        }
+
+        .locationSelector {
+          // width: 80%;
+          border-top-right-radius: 25px;
+          border-bottom-right-radius: 25px;
+
+          .ant-input-prefix {
+            font-size: 10px;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+
+    // Searchbar on mobile
+
+    .mobileSearchBar {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+
+      @include tabletP {
+        display: none;
+      }
+
+      .typeSelector {
+        margin: 0 auto;
+        width: 90%;
+        margin-bottom: 20px;
+
+        .ant-select-selector {
+          height: 50px;
 
           .ant-select-selection-item,
           .ant-select-selection-placeholder {
             line-height: 50px;
+            font-size: 16px;
           }
         }
       }
 
       .locationSelector {
-        width: 70%;
-        border-top-right-radius: 25px;
-        border-bottom-right-radius: 25px;
-
-        .ant-input-prefix {
-          font-size: 10px;
-          font-weight: bold;
-        }
-      }
-    }
-  }
-
-  // Searchbar on mobile
-
-  .mobileSearchBar {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-
-    @include tabletP {
-      display: none;
-    }
-
-    .typeSelector {
-      margin: 0 auto;
-      width: 90%;
-      margin-bottom: 20px;
-
-      .ant-select-selector {
+        margin: 0 auto;
+        margin-top: 20px;
+        width: 90%;
         height: 50px;
 
-        .ant-select-selection-item,
-        .ant-select-selection-placeholder {
-          line-height: 50px;
-          font-size: 16px;
+        @include tabletP {
+          width: 50%;
+        }
+
+        .ant-input-prefix {
+          font-size: 12px;
+          font-weight: bolder;
+          flex-direction: column;
+        }
+
+        .ant-input-search-icon {
+          padding: 0 15px 0px 0px;
         }
       }
     }
 
-    .locationSelector {
-      margin: 0 auto;
-      margin-top: 20px;
-      width: 90%;
-      height: 50px;
+    .rearText {
+      font-size: 16px;
 
       @include tabletP {
-        width: 50%;
-      }
-
-      .ant-input-prefix {
-        font-size: 12px;
-        font-weight: bolder;
-        flex-direction: column;
+        width: 40%;
+        text-align: start;
       }
     }
-  }
 
-  .rearText {
-    font-size: 16px;
-
-    @include tabletP {
-      width: 40%;
-      text-align: start;
+    .autocomplete-dropdown-container {
+      background-color: #fff;
+      box-shadow: 0 1px 3px 0 #e6ebf1;
+      padding: 10px;
+      position: absolute;
+      width: 100%;
+      z-index: 1;
     }
-  }
 
-  .autocomplete-dropdown-container {
-    background-color: #fff;
-    box-shadow: 0 1px 3px 0 #e6ebf1;
-    padding: 10px;
-    position: absolute;
-    width: 100%;
-    z-index: 1;
-  }
-
-  .autocomplete-dropdown-container:empty {
-    display: none;
+    .autocomplete-dropdown-container:empty {
+      display: none;
+    }
   }
 }
 
@@ -192,30 +223,33 @@
 
 // info card section
 .infoCardsSection {
-  height: 700px;
-  max-height: 700px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  background-color: #11264f;
+  margin: 15px 0px;
+  display: block;
+  @include tabletP {
+    display: flex;
+    justify-content: center;
+    margin: 50px;
+  }
 
   .infoCard {
-    margin: 5px 0;
+    margin: 15px;
     object-fit: scale-down;
-    width: 95%;
-    max-width: 350px;
+    max-width: 334px;
     max-height: 335px;
 
-    .img {
-      object-fit: scale-down;
+    @include tabletL {
+      margin: 15px 60px;
+    }
+    .ant-card-cover {
+      max-width: 334px;
+      max-height: 216px;
+      overflow: hidden;
     }
   }
 }
 
 // new designer section
 .newDesignersSection {
-  padding: 20px 0;
   height: 470px;
 
   .newDesignerText {

@@ -3,15 +3,17 @@ import SearchBarSection from "./SearchBarSection";
 import NewDesignerCarousel from "./NewDesignerCarousel";
 import InfoCard from "./InfoCard";
 import Announcement from "./Announcement";
+import desktopMainPageBackground from "../../../assets/images/desktopMainPageBackground.jpeg";
+import mobileMainPageBackground from "../../../assets/images/mobileMainPageBackground.jpeg";
 
 export default function MainView() {
   return (
     <>
-      <SearchBarSection />
-      <div className="announcementSection">
-        <Announcement />
+      <div className="searchBarSectionContainer">
+        <img className="backgroundImage" src={desktopMainPageBackground} />
+        <SearchBarSection />
       </div>
-      <div className="infoCardsSection">
+      <div align="middle" className="infoCardsSection">
         <InfoCard
           header="Become our partner!"
           context="blabalablabalb"
@@ -23,7 +25,6 @@ export default function MainView() {
           src="https://cdn.pixabay.com/photo/2016/10/20/18/36/search-1756278_960_720.jpg"
         />
       </div>
-      <NewDesignerCarousel />
     </>
   );
 }

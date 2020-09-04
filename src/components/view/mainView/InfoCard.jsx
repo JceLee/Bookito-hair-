@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "antd";
+import { Card, Col } from "antd";
 
 export default function InfoCard(props) {
   const { Meta } = Card;
@@ -8,7 +8,6 @@ export default function InfoCard(props) {
     <Card
       className="infoCard"
       hoverable
-      bordered={false}
       cover={<img alt="example" src={src} />}
     >
       <Meta title={header} description={context} />

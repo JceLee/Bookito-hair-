@@ -46,10 +46,10 @@ export default function Navbar() {
 
   const navBarController = () => {
     if (
-      document.body.scrollTop > 64 ||
-      document.documentElement.scrollTop > 64
+      document.body.scrollTop > 350 ||
+      document.documentElement.scrollTop > 350
     ) {
-      document.querySelector(".logo").style.display = "none";
+      // document.querySelector(".logo").style.display = "none";
       document.querySelector(".notMobileSearchBar").style.display = "flex";
     } else {
       document.querySelector(".logo").style.display = "unset";
@@ -64,7 +64,7 @@ export default function Navbar() {
   return (
     <>
       <div className="logo">
-        <Link to="/">LookUp</Link>
+        <Link to="/">Bookito</Link>
       </div>
       <SearchBar />
 
