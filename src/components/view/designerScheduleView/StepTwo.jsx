@@ -97,7 +97,7 @@ export default function StepTwo(props) {
 
   return (
     <div id="stepTwoTopId">
-      <p id="title2">Service and Price</p>
+      {/* <p id="title2">Service and Price</p> */}
       <Row>
         <Col span={13}>
           <div className="genderService">{renderService()}</div>
