@@ -11,23 +11,22 @@ import ClientProfileView from "./components/view/clientProfileView/ClientProfile
 import "antd/dist/antd.css";
 import "./assets/scss/App.scss";
 
-
 const { Header, Content, Footer } = Layout;
 
 export default function App() {
   return (
     <Router>
       <Layout className="layout">
-        <Header className="header">
+        <Header id="header">
           <NavBar />
         </Header>
         <Content className="content">
           <Route exact path="/" component={MainView} />
           <Route path="/designer_list" component={DesignerListView} />
           <Route path="/designer_schedule" component={DesignerScheduleView} />
-          <Route path="/designer_profile" component={DesignerProfileView} />
           <Route path="/client_schedule" component={ClientScheduleView} />
           <Route path="/client_profile" component={ClientProfileView} />
+          <Route path="/designer_profile" component={DesignerProfileView} />
         </Content>
         <Footer className="footer">LookUp WIP July 2020</Footer>
       </Layout>

@@ -9,10 +9,9 @@ import mobileMainPageBackground from "../../../assets/images/mobileMainPageBackg
 export default function MainView() {
   return (
     <>
-      <div className="searchBarSectionContainer">
-        <img className="backgroundImage" src={desktopMainPageBackground} />
-        <SearchBarSection />
-      </div>
+      {/* <img className="backgroundImage" src={desktopMainPageBackground} /> */}
+      <SearchBarSection />
+
       <div align="middle" className="infoCardsSection">
         <InfoCard
           header="Become our partner!"
