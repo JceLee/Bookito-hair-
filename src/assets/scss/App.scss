@@ -8,6 +8,7 @@
 @import "./commonComponents/NavBar.scss";
 @import "./commonComponents/SearchBar.scss";
 @import "./commonComponents/ScheduleCard.scss";
+@import "./commonComponents/Spinner.scss";
 @import "./commonComponents/BlackBtn.scss";
 @import "./commonComponents/NavBar.scss";
 @import "./commonComponents/SearchBar.scss";
@@ -25,6 +26,9 @@
 @import "./view/designerListView/DesignerCardComponent/DesignerCardComponent.scss";
 @import "./view/designerListView/designerListFilter/DesignerListFilter.scss";
 @import "./view/clientProfileView/ClientProfileView.scss";
+
+// Designer Schedule view
+@import "./view/designerScheduleView/DesignerScheduleView.scss";
 
 // Designer Profile View
 @import "view/designerProfileView/DesignerProfileView";

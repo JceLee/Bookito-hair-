@@ -1,5 +1,4 @@
 import React from "react";
-
 import { BrowserRouter } from "react-router-dom";
 import { BackTop } from "antd";
 import DesignerTop from "./designerTop/DesignerTop.jsx";
@@ -14,6 +13,7 @@ const DesignerProfileView = () => {
   const found = designers.find((element) => element.uid === designerId);
 
   const {
+    isAuthenticated,
     fname,
     lname,
     location,
@@ -22,7 +22,7 @@ const DesignerProfileView = () => {
     activity,
     bio,
     works,
-    serviceNPrices,
+    services,
     hours,
     reviews,
   } = found;
@@ -31,10 +31,11 @@ const DesignerProfileView = () => {
     <BrowserRouter>
       <div className="designerProfileView">
         <DesignerTop
-          // isAuthenticated={isAuthenticated}
+          isAuthenticated={isAuthenticated}
           fname={fname}
           lname={lname}
           totalRate={rate}
+          hours={hours}
           works={works}
           location={location}
           img={profile}
@@ -46,13 +47,13 @@ const DesignerProfileView = () => {
           activity={activity}
           bio={bio}
           works={works}
-          serviceNPrices={serviceNPrices}
+          serviceNPrices={services}
           hours={hours}
           reviews={reviews}
         />
 
         <BackTop visibilityHeight={0}>
-          <div className="backTopBtn">Top</div>
+          <div className="backTopButton">Top</div>
         </BackTop>
       </div>
     </BrowserRouter>

@@ -1,50 +1,56 @@
-import React from 'react';
-import { Input, Form } from 'antd';
+import React from "react";
+import { Input, Form } from "antd";
 
 const AddressPhoneForm = () => {
   return (
-    <div>
-      <h3>Address & Phone [NOT YET]</h3>
+    <div className="addressPhoneForm">
       <Form.Item
-        name={['user', 'address1']}
-        label='Address1'
+        name={["addressPhone", "street"]}
+        className="addressPhoneFormItem"
+        label="Street"
         rules={[{ required: true }]}
       >
-        <Input />
+        <Input allowClear placeholder="Street" />
       </Form.Item>
       <Form.Item
-        name={['user', 'address2']}
-        label='Address2'
+        name={["addressPhone", "unit"]}
+        className="addressPhoneFormItem"
+        label="Unit"
         rules={[{ required: false }]}
       >
-        <Input />
+        <Input allowClear placeholder="Unit" />
       </Form.Item>
       <Form.Item
-        name={['user', 'city']}
-        label='City'
+        name={["addressPhone", "city"]}
+        className="addressPhoneFormItem"
+        label="City"
         rules={[{ required: true }]}
       >
-        <Input />
+        <Input allowClear placeholder="City" />
       </Form.Item>
       <Form.Item
-        name={['user', 'postalCode']}
-        label='Postal Code'
+        name={["addressPhone", "province"]}
+        className="addressPhoneFormItem"
+        label="Province"
         rules={[{ required: true }]}
       >
-        <Input />
+        <Input allowClear placeholder="Province" />
       </Form.Item>
       <Form.Item
-        name={['user', 'phone']}
-        label='Phone'
-        rules={[
-          {
-            required: true,
-            message: 'Please input your phone number!',
-            type: 'number',
-          },
-        ]}
+        name={["addressPhone", "postalCode"]}
+        className="addressPhoneFormItem"
+        label="Postal Code"
+        rules={[{ required: false }]}
       >
-        <Input />
+        <Input allowClear placeholder="Postal Code" />
+      </Form.Item>
+      <Form.Item
+        name={["addressPhone", "phone"]}
+        className="addressPhoneFormItem"
+        label="Phone"
+        rules={[{ required: false }]}
+      >
+        <Input allowClear placeholder="Phone Number" />
       </Form.Item>
     </div>
   );

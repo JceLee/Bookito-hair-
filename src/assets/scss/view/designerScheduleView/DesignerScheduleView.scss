@@ -1,0 +1,383 @@
+@import "../../Mixin.scss";
+
+@include mobileM {
+  //375
+  .ant-modal-wrap {
+    // width: 85vw;
+    // height: 100vh;
+    overflow: unset !important;
+
+    @include mobileM {
+    }
+
+    @include mobileL {
+    }
+
+    @include tabletP {
+    }
+  }
+
+  .ant-modal {
+    top: 0 !important;
+    margin: 0 !important;
+  }
+
+  .ant-modal-content {
+    width: 100vw;
+    height: 100vh;
+
+    .stepsClass {
+      padding: 4px 0 0 0;
+    }
+    .ant-modal-body {
+      width: 100vw;
+      height: 83.5vh;
+      overflow: auto;
+      .ant-steps-item-title {
+        display: none;
+      }
+      .ant-steps-item-process .ant-steps-item-icon {
+        background: black;
+      }
+      .ant-steps-item-process .ant-steps-item-icon {
+        border-color: black;
+      }
+      .ant-steps-item-finish .ant-steps-item-icon {
+        border-color: black;
+      }
+      .ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon {
+        color: black;
+      }
+
+      .ant-steps-horizontal.ant-steps-label-horizontal {
+        display: flex;
+        flex-direction: row;
+        margin: 0 0 0 30px;
+      }
+
+      .ant-steps-horizontal.ant-steps-label-horizontal
+        > .ant-steps-item:not(:last-child)
+        > .ant-steps-item-container
+        > .ant-steps-item-tail {
+        display: none;
+      }
+
+      // #title {
+      //   // text-align: center;
+      //   // margin: 5px 0 10px 0;
+      //   font-weight: bolder;
+      //   font-size: 15px;
+      // }
+
+      #title1 {
+        font-weight: bolder;
+        font-size: 15px;
+      }
+      #title2 {
+        font-weight: bolder;
+        font-size: 15px;
+        text-align: center;
+      }
+      #title3 {
+        font-weight: bolder;
+        font-size: 15px;
+        text-align: right;
+        margin-right: 15px;
+      }
+      // padding: 5px;
+      .ant-col-13 {
+        max-width: none;
+      }
+      .editDesignerCalendar {
+        // border: none;
+        // background-color: aliceblue;
+        margin: 10px 1px 10px -19.5px;
+        width: 351px;
+        .DayPicker-Month {
+          width: 330px;
+          height: 308px;
+          margin: 17px 16px 0 16px;
+          .DayPicker-Day {
+            border-radius: 50%;
+          }
+          .DayPicker-Day--selected:not(.DayPicker-Day--disabled):not(.DayPicker-Day--outside) {
+            background-color: black;
+          }
+        }
+      }
+      #serviceMenu {
+        margin: 5px 0 0 45px;
+        // margin-left: 45px;
+      }
+      #selectTime {
+        text-align: center;
+        margin: 0 20px 20px 95px;
+        font-weight: bold;
+        font-size: 15px;
+      }
+      .timeButtons {
+        width: 350px;
+        // background-color: aliceblue;
+        text-align: center;
+        margin: 0 0 0 -12px;
+        .ant-radio-button-wrapper-checked:not([class*=" ant-radio-button-wrapper-disabled"]).ant-radio-button-wrapper:first-child {
+          border-right-color: black;
+        }
+        .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover::before {
+          background-color: black;
+        }
+        .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::before {
+          background-color: black;
+        }
+        .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover {
+          color: black;
+          border-color: black;
+        }
+        .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):active {
+          color: black;
+          border-color: black;
+        }
+        .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+          color: black;
+          border-color: black;
+        }
+      }
+      .hourRadioBtn {
+        margin: 8.5px 8.5px 15px 8.5px;
+      }
+      .checkboxOption {
+        margin: 28px 0 40px 7px;
+        width: 311px;
+        .ant-card-body {
+          height: 363.5px;
+          padding: 24px 0 0 0;
+          .ant-checkbox-wrapper {
+            margin-left: 20px;
+          }
+        }
+      }
+      .ant-tabs-ink-bar {
+        background: black;
+      }
+
+      .ant-checkbox-checked::after {
+        border: 1px solid black;
+      }
+      .ant-checkbox-checked .ant-checkbox-inner {
+        background-color: black;
+        border-color: black;
+      }
+
+      .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+        color: black;
+      }
+      .ant-tabs-tab:hover {
+        color: black;
+      }
+
+      .ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap,
+      .ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-wrap {
+        overflow: none;
+      }
+
+      .ant-tabs-large > .ant-tabs-nav .ant-tabs-tab {
+        padding: 13px 0;
+        font-size: 14px;
+      }
+      .ant-tabs-tab {
+        margin: 0 16px 0 0;
+      }
+      .ant-card-head {
+        padding: 0 13px;
+        .ant-card-head .ant-tabs {
+          // margin-bottom: -25px;
+        }
+        .ant-tabs-top,
+        .ant-tabs-bottom {
+          flex-direction: row;
+        }
+      }
+      .ant-divider-horizontal {
+        margin: 25.7px 1px;
+      }
+      #estimatedPrice {
+        text-align: center;
+        margin: 0 20px 20px 110px;
+        font-weight: bold;
+        font-size: 15px;
+      }
+    }
+  }
+
+  .ant-modal-body .ant-divider-horizontal {
+    width: 309px;
+  }
+
+  .confirmation {
+    margin: 30px -15px 0 0;
+    .bookingContents {
+      max-width: 170px;
+    }
+  }
+  .ant-col-11 {
+    display: block;
+    // text-align: right;
+    flex: none;
+    width: 100%;
+    max-width: none;
+
+    .estimatedPrice {
+      // margin-top: 5px;
+      margin: 5px 0 0 10px;
+      width: 320px;
+    }
+    .totalCost {
+      width: 315px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .ant-btn-link {
+      color: red;
+      float: right;
+    }
+  }
+  // .ant-modal-footer button + button {
+  //   float: left;
+  // }
+  .ant-modal-footer {
+    padding: 0 0 !important;
+    border-top: 0 !important;
+    .ant-btn-primary:hover,
+    .ant-btn-primary:focus {
+      background: black;
+      border-color: black;
+    }
+    .ant-btn-primary {
+      background: black;
+      color: white;
+      border-color: black;
+      width: 50%;
+      height: 55px;
+      padding: auto;
+    }
+    a.ant-btn {
+      width: 50%;
+      height: 55px;
+      padding-top: 9px;
+    }
+    .stepAction {
+      padding: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      .ant-btn:active {
+        color: black;
+        border-color: black;
+      }
+      .ant-btn:hover,
+      .ant-btn:focus {
+        color: rgba(0, 0, 0, 0.65);
+        border-color: #d9d9d9;
+      }
+      .ant-btn-primary:hover,
+      .ant-btn-primary:focus {
+        color: #fff;
+        border-color: black;
+      }
+    }
+  }
+}
+
+@include mobileL {
+  //480
+  .ant-modal-body {
+    background-color: pink;
+  }
+  .ant-steps-horizontal.ant-steps-label-horizontal {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+@include tabletP {
+  //768
+  // .ant-modal-body {
+  //   background-color: antiquewhite;
+  // }
+  // .ant-modal {
+  //   top: 50px !important;
+  //   margin: 50px !important;
+  // }
+}
+
+@include tabletL {
+  // 992
+}
+
+@include desktop {
+  // 1200
+  .ant-modal-body {
+    background-color: aliceblue;
+  }
+  // .editDesignerCalendar {
+  //   width: 80%;
+  //   height: auto;
+  //   border: 1px solid #f0f0f0;
+  //   text-align: center;
+  //   // border-radius: 2px;
+  // }
+
+  // .timeButtons {
+  //   margin-top: 30px;
+  //   margin-left: 20px;
+  // }
+
+  // .stepOne {
+  //   height: 435.5px;
+  // }
+
+  // .checkboxOption {
+  //   text-align: center;
+  //   height: 400px;
+  //   margin-left: 30px;
+  // }
+
+  // #serviceMenu {
+  //   margin-left: 25px;
+  //   text-align: left;
+  // }
+
+  // #designerName {
+  //   text-align: center;
+  // }
+
+  // .service {
+  //   margin-left: 50px;
+  // }
+  // p {
+  //   margin-left: 100px;
+  // }
+
+  // .totalCost {
+  //   margin-left: 100px;
+  // }
+
+  // #selectDay {
+  //   margin-left: 0;
+  // }
+
+  // .confirmation {
+  //   height: 385.5px;
+  //   width: 600px;
+  //   margin-top: 50px;
+  //   margin-left: 130px;
+  // }
+
+  // .bookingContents {
+  //   text-align: center;
+
+  //   // .content {
+  //   // }
+  // }
+}

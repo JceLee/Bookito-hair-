@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-scroll';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-scroll";
 
 const getWindowDimensions = () => {
   const { innerWidth: width } = window;
@@ -18,8 +18,8 @@ const useWindowDimensions = () => {
       setWindowDimensions(getWindowDimensions());
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return windowDimensions;
@@ -28,7 +28,7 @@ const useWindowDimensions = () => {
 const DesignerNavItem = (props) => {
   let { height, children } = props;
   const { width } = useWindowDimensions();
-  if (children === 'Home') {
+  if (children === "Home") {
     height += 64;
     if (width <= 480) {
       // console.log('Removed "Home" tap from nav links.');
@@ -36,9 +36,9 @@ const DesignerNavItem = (props) => {
     }
   }
   return (
-    <li className='designerNavItem'>
+    <li className="designerNavItem">
       <Link
-        activeClass='active'
+        activeClass="active"
         to={`${children}`}
         spy={true}
         smooth={true}

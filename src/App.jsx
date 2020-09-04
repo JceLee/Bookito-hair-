@@ -24,9 +24,9 @@ export default function App() {
           <Route exact path="/" component={MainView} />
           <Route path="/designer_list" component={DesignerListView} />
           <Route path="/designer_schedule" component={DesignerScheduleView} />
-          <Route path="/designer_profile" component={DesignerProfileView} />
           <Route path="/client_schedule" component={ClientScheduleView} />
           <Route path="/client_profile" component={ClientProfileView} />
+          <Route path="/designer_profile" component={DesignerProfileView} />
         </Content>
         <Footer className="footer">LookUp WIP July 2020</Footer>
       </Layout>
