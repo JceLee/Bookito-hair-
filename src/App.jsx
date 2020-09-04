@@ -17,7 +17,7 @@ export default function App() {
   return (
     <Router>
       <Layout className="layout">
-        <Header className="header">
+        <Header id="header">
           <NavBar />
         </Header>
         <Content className="content">

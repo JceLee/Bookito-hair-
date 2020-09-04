@@ -6,13 +6,10 @@
 
 // Common components
 @import "./commonComponents/NavBar.scss";
-@import "./commonComponents/SearchBar.scss";
 @import "./commonComponents/ScheduleCard.scss";
-@import "./commonComponents/Spinner.scss";
+@import "./commonComponents/mobileSearchBar/mobileSearchBar.scss";
+@import "./commonComponents/mobileSearchBar/DesignerTypeModal.scss";
 @import "./commonComponents/BlackBtn.scss";
-@import "./commonComponents/NavBar.scss";
-@import "./commonComponents/SearchBar.scss";
-@import "./commonComponents/ScheduleCard.scss";
 @import "./commonComponents/Spinner.scss";
 
 // Designer List view
@@ -37,7 +34,7 @@
 @import "/commonComponents/Auth.scss";
 
 .layout {
-  background-color: white;
+  background-color: #fdfdfd;
 }
 
 .outerContent {
