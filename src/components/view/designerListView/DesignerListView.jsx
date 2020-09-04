@@ -12,39 +12,40 @@ export default function DesignerListView(props) {
 
   useEffect(() => {
     const params = queryString.parse(props.location.search);
-    console.log(params);
     const newDesigners = [];
     firebaseStore
-        .collection("users").where("location", "==", params["location"])
-        .get()
-        .then((querySnapshot) => {
-          querySnapshot.docs.forEach((doc) => {
-            newDesigners.push(doc.data());
-          });
-          dispatch(load_database(newDesigners));
+      .collection("users")
+      .where("location", "==", params["location"])
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.docs.forEach((doc) => {
+          newDesigners.push(doc.data());
         });
+        dispatch(load_database(newDesigners));
+      });
   }, [dispatch]);
 
   return (
-      <>
-        <div className="listingContainer">
-          <div className="designerContainer">
-            <div className="listNavBar">
-              listNavBar
-              <div className="filter">
-                <DesignerListFilter numberOfDesigners='400' location='Vancouver' />
-              </div>
+    <>
+      <div className="listingContainer">
+        <div className="designerContainer">
+          <div className="listNavBar">
+            listNavBar
+            <div className="filter">
+              <DesignerListFilter
+                numberOfDesigners="400"
+                location="Vancouver"
+              />
             </div>
-            {designers.map((designer, index) => (
-                <div key = {index} className="designerList">
-                  <DesignerCardComponent designer={designer} />
-                </div>
-            ))}
           </div>
-          <div className="mapContainer">
-            Map container
-          </div>
+          {designers.map((designer, index) => (
+            <div key={index} className="designerList">
+              <DesignerCardComponent designer={designer} />
+            </div>
+          ))}
         </div>
-      </>
+        <div className="mapContainer">Map container</div>
+      </div>
+    </>
   );
 }

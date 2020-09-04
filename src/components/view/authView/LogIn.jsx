@@ -1,18 +1,21 @@
-import React, { useState} from 'react';
-import { Modal } from 'antd';
-import firebase from 'firebase/app';
+import React, { useState } from "react";
+import { Modal } from "antd";
+import firebase from "firebase/app";
 import { useHistory } from "react-router-dom";
-import {firebaseAuth, firebaseStore} from '../../../config/fbConfig';
-import {useDispatch, useSelector} from "react-redux";
-import {sign_in_with_facebook, sign_in_with_google} from "../../../actions/signIn";
+import { firebaseAuth, firebaseStore } from "../../../config/fbConfig";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  sign_in_with_facebook,
+  sign_in_with_google,
+} from "../../../actions/signIn";
 
 export default function LogIn() {
-    const [isLoginShowing, setIsLoginShowing] = useState(false);
-    const currentUser = useSelector((state) => state.signedInUser.signedInUser);
-    const dispatch = useDispatch();
+  const [isLoginShowing, setIsLoginShowing] = useState(false);
+  const currentUser = useSelector((state) => state.signedInUser.signedInUser);
+  const dispatch = useDispatch();
 
-    const googleProvider = new firebase.auth.GoogleAuthProvider();
-    const faceBookProvider = new firebase.auth.FacebookAuthProvider();
+  const googleProvider = new firebase.auth.GoogleAuthProvider();
+  const faceBookProvider = new firebase.auth.FacebookAuthProvider();
 
 
     const signInWithGoogle = () => {
@@ -124,49 +127,55 @@ export default function LogIn() {
         }
     };
 
-    const testAppointment = () => {
-        const appointment = {
-            customerId: currentUser.uid,
-            designerId: currentUser.uid,
-            dateExample: firebase.firestore.Timestamp.fromDate(new Date("October 30, 2020")),
-            services: {Cut: [{"serviceName" : "female cut", "price" : 35, "description" : "sample data"}]},
-            review: {rate: 4.5, content: "very good"},
-        };
-        firebaseStore.collection("appointments").add(appointment)
-            .then(function(docRef) {
-                console.log("Document written with ID: ", docRef.id);
-            })
-            .catch(function(error) {
-                console.error("Error adding document: ", error);
-            });
+  const testAppointment = () => {
+    const appointment = {
+      customerId: currentUser.uid,
+      designerId: currentUser.uid,
+      dateExample: firebase.firestore.Timestamp.fromDate(
+        new Date("October 30, 2020")
+      ),
+      services: {
+        Cut: [
+          { serviceName: "female cut", price: 35, description: "sample data" },
+        ],
+      },
+      review: { rate: 4.5, content: "very good" },
     };
+    firebaseStore
+      .collection("appointments")
+      .add(appointment)
+      .then(function (docRef) {
+        console.log("Document written with ID: ", docRef.id);
+      })
+      .catch(function (error) {
+        console.error("Error adding document: ", error);
+      });
+  };
 
-    const history = useHistory();
+  const history = useHistory();
 
-    const directProfile = () => {
-        history.push('/client_profile');
-    };
+  const directProfile = () => {
+    history.push("/client_profile");
+  };
 
-    const showLoginModal = () => {
-        setIsLoginShowing(!isLoginShowing);
-    };
+  const showLoginModal = () => {
+    setIsLoginShowing(!isLoginShowing);
+  };
 
-    const handleLoginOk = () => {
-        setIsLoginShowing(!isLoginShowing);
-    };
+  const handleLoginOk = () => {
+    setIsLoginShowing(!isLoginShowing);
+  };
 
-    const handleLoginCancel = () => {
-        setIsLoginShowing(!isLoginShowing);
-    };
+  const handleLoginCancel = () => {
+    setIsLoginShowing(!isLoginShowing);
+  };
 
-    return (
-        <div>
-            <p onClick={showLoginModal}>
-                Sign In
-            </p>
+  return (
+    <div>
+      <p onClick={showLoginModal}>Sign In</p>
 
             <Modal
-                title='Sign In'
+                title="Sign In"
                 visible={isLoginShowing}
                 onCancel={handleLoginCancel}
                 cancelButtonProps={{ style: { display: 'none' } }}

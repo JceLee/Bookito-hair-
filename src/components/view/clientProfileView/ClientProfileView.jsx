@@ -3,7 +3,7 @@ import { Form, Input, Button, Avatar, Modal } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import { useDropzone } from "react-dropzone";
 import BlackBtn from "../../commonComponents/BlackBtn";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 // for testing
 const client = {
@@ -16,6 +16,7 @@ const client = {
   city: "Vancouver",
   province: "BC",
 };
+
 export default function ClientProfileView() {
   // kangmin working on here
 

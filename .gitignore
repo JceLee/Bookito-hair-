@@ -21,5 +21,13 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+<<<<<<< HEAD
+.idea/LookUp.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
+=======
 *.iml
 *.xml
+>>>>>>> dev

@@ -7,7 +7,7 @@
   .designerContainer {
     border: 1px red solid;
 
-    @include tabletP{
+    @include tabletP {
       width: 50%;
       float: left;
     }
@@ -36,7 +36,7 @@
   .mapContainer {
     display: none;
 
-    @include tabletP{
+    @include tabletP {
       border: 1px green solid;
       display: flex;
       width: 50%;

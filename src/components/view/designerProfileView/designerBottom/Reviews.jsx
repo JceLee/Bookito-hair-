@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Space } from 'antd';
-import { Link } from 'react-scroll';
-import Review from './Review';
+import React, { useState, useEffect } from "react";
+import { Button, Space } from "antd";
+import { Link } from "react-scroll";
+import Review from "./Review";
 
 const reviewsPerClick = 2;
 let reviewsArray = [];
@@ -43,7 +43,7 @@ const Reviews = (props) => {
   };
 
   return (
-    <div className='reviews' id={id}>
+    <div className="reviews" id={id}>
       <h2>Reviews ({reviews.length})</h2>
       {reviews.length === 0 ? (
         <h3>No reviews yet...</h3>
@@ -67,8 +67,8 @@ const Reviews = (props) => {
       <Space>
         {reviews.length >= next && (
           <Button
-            className='Button'
-            type='primary'
+            className="Button"
+            type="primary"
             onClick={handleShowMoreReviews}
           >
             Load More
@@ -77,8 +77,8 @@ const Reviews = (props) => {
 
         {arrayReviewsToShow.length > reviewsPerClick && (
           <Link
-            activeClass='active'
-            to='reviews'
+            activeClass="active"
+            to="reviews"
             spy={true}
             smooth={true}
             duration={500}
@@ -86,8 +86,8 @@ const Reviews = (props) => {
             offset={-48 * 2.25}
           >
             <Button
-              className='Button'
-              type='primary'
+              className="Button"
+              type="primary"
               onClick={handleShowLessReviews}
             >
               Load Less
