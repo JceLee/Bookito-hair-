@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Card, Row, Col, Button, Divider, Form, Input, Rate } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import DesignerCardLeft from "../view/designerListView/designerCardComponent/designerCardTop/DesignerCardTopLeft";
+import BlackBtn from "./BlackBtn";
 
 export default function ScheduleCardHistory(props) {
   const { date, name, timeStart, timeEnd, types } = props;
@@ -9,6 +10,8 @@ export default function ScheduleCardHistory(props) {
   const modalHandler = () => {
     setVisible(!visible);
   };
+
+  const submitReview = () => {};
 
   return (
     <>
@@ -50,26 +53,32 @@ export default function ScheduleCardHistory(props) {
           </Col>
         </Row>
       </Card>
+
       {/* modal */}
       <Modal
         title="Review"
         visible={visible}
         onCancel={modalHandler}
         destroyOnClose={true}
-        width={800}
+        footer={false}
+        className="reviewModal"
       >
         <div>
           <DesignerCardLeft fname={name} />
         </div>
         <Form>
-          <Form.Item name="rating">
-            <div>How was the service?</div>
-            <Rate />
+          <Form.Item name="ratingFormItem">
+            <div className="prompt">How was the service?</div>
+            <div className="ratingContainer">
+              <Rate />
+            </div>
           </Form.Item>
           <Form.Item name="comment">
+            <div>Comments</div>
             <Input.TextArea />
           </Form.Item>
         </Form>
+        <BlackBtn btnName="Submit" onClick={submitReview} />
       </Modal>
     </>
   );

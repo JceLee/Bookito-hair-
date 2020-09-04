@@ -1,11 +1,12 @@
-.searchBarModal {
+.mobileSearchBarModal {
   top: 0;
-  margin: 0;
+  margin: 0 auto;
+  max-width: 100%;
 
   .ant-modal-body {
     padding: 15px;
 
-    #designerTypeBtnContainer {
+    #designerTypeBtnContainerInMobileSearchBar {
       margin: 5px 0 20px 0;
       .ant-radio-group {
         display: flex;
@@ -40,7 +41,7 @@
       }
     }
 
-    #locationInputContainer {
+    #locationInputContainerInMobileSearchBar {
       margin: 20px 0;
 
       .ant-input-affix-wrapper {
@@ -55,14 +56,23 @@
         border: 2px solid #1b1b1b;
       }
 
+      .ant-input-suffix {
+        margin-right: 10px;
+        font-size: 20px;
+      }
+
+      .ant-input-search-icon::before {
+        border: unset;
+      }
+
       #address-input {
         margin-left: 10px;
       }
     }
   }
 
-  #designerTypeText,
-  #locationText {
+  #designerTypeTextInMobileSearchBar,
+  #locationTextInMobileSearchBar {
     padding-left: 10px;
     margin-bottom: 15px;
     font-size: 16px;

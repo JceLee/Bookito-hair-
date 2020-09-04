@@ -1,27 +1,25 @@
 @import "../../Mixin.scss";
 
-.ant-layout-header {
-  padding: 2.5% 5%;
+// search bar section
+.searchBarSection {
+  width: 100%;
+  height: 600px;
+  position: relative;
+}
+
+.searchBarSectionImg {
+  object-fit: cover;
+  position: absolute;
+}
+
+#searchBarForm {
+  border: 1px solid #fdfdfd;
+  width: 100%;
 
   @include tabletP {
-    padding: 10px 10%;
+    display: none;
   }
 }
-
-// header
-#header {
-  width: 100%;
-  margin: 0 auto;
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: white;
-}
-
-// search bar section
 
 // annoucement section
 .announcementSection {

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Input, Modal } from "antd";
-
+import { Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import DesignerTypeModal from "./DesignerTypeModal";
 import { useScrollPosition } from "@n8tb1t/use-scroll-position";
 
-export default function SearchBar(props) {
+export default function MobileSearchBar() {
   var heightToShowSearchBarOnNav = null;
 
   useEffect(() => {
@@ -34,7 +33,8 @@ export default function SearchBar(props) {
   };
 
   const stickSearchBarOnNavBar = () => {
-    var searchBarHeight = document.getElementById("searchBar").clientHeight;
+    var searchBarHeight = document.getElementById("mobileSearchBar")
+      .clientHeight;
     var navBarHeight = document.getElementById("header").clientHeight;
     var searchBarMarginOnNavBar = (navBarHeight - searchBarHeight) / 2 + "px";
 
@@ -50,7 +50,7 @@ export default function SearchBar(props) {
     document.getElementById("searchBarForm").style.position = "unset";
     document.getElementById("searchBarForm").style.zIndex = "unset";
     document.getElementById("searchBarForm").style.top = "unset";
-    document.getElementById("searchBar").style.marginTop = "100px";
+    document.getElementById("mobileSearchBar").style.marginTop = "100px";
   };
 
   useScrollPosition(({ prevPos, currPos }) => {
@@ -66,7 +66,7 @@ export default function SearchBar(props) {
   });
 
   return (
-    <div id="searchBar">
+    <div id="mobileSearchBar">
       <Input
         size="large"
         placeholder="Your location" // TODO: Extract string to string file

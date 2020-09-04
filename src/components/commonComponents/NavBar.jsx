@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { Menu, Dropdown, Button, Typography, Drawer } from "antd";
 import { Link } from "react-router-dom";
-import { MenuOutlined, UserOutlined, BarsOutlined } from "@ant-design/icons";
-import SearchBar from "./mobileSearchBar/SearchBar";
-
-const { Title } = Typography;
+import { UserOutlined, BarsOutlined } from "@ant-design/icons";
+import SignUp from "../view/authView/SignUp";
+import LogIn from "../view/authView/LogIn";
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
   const [visible, setVisible] = useState(false);
+
+  const signedInUser = useSelector((state) => state.signedInUser.signedInUser);
 
   const showDrawer = () => {
     setVisible(true);
@@ -33,6 +35,12 @@ export default function Navbar() {
       {menuItems.map((menu, inx) => {
         if (menu.name == "Divider") {
           return <Menu.Divider key={inx} />;
+        } else if (menu.name == "Log In") {
+          return (
+            <Menu.Item key={inx}>
+              <LogIn />
+            </Menu.Item>
+          );
         } else {
           return (
             <Menu.Item key={inx}>

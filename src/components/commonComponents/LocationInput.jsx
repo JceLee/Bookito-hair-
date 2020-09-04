@@ -1,6 +1,5 @@
 import React from "react";
 import { Input } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
 import PlacesAutocomplete from "react-places-autocomplete";
 
 export default function LocationInput(props) {
@@ -22,14 +21,13 @@ export default function LocationInput(props) {
       >
         {({ getInputProps, getSuggestionItemProps, suggestions, loading }) => (
           <React.Fragment>
-            <Input
+            <Input.Search
               {...getInputProps({
                 id: "address-input",
               })}
-              suffix={<SearchOutlined />}
               size="large"
               placeholder="Your location" // TODO: Extract string to string file
-              onPressEnter={handleSearch}
+              onSearch={handleSearch}
             />
             <div className="autocompleteDropdownContainer">
               {loading ? <div>Loading...</div> : null}

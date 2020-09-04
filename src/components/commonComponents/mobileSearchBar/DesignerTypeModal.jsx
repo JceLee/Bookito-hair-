@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Button, Form, Radio } from "antd";
+import { Modal, Form, Radio } from "antd";
 import LocationInput from "../LocationInput";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { reverseGeocode } from "../../../helpers/geocode";
@@ -9,7 +9,7 @@ export default function DesignerTypeModal(props) {
   const { visible, onCancel, showNavBarElements } = props;
 
   const designerTypes = ["Hair Designer", "Nail Artist", "MakeUp Artist"];
-  const [designerType, setDesignerType] = useState();
+  const [designerType, setDesignerType] = useState("");
   const [address, setAddress] = useState("");
   const [form] = Form.useForm();
 
@@ -50,6 +50,11 @@ export default function DesignerTypeModal(props) {
 
   const history = useHistory();
 
+  const onSelected = (e) => {
+    console.log(e.target.value + " selected");
+    setDesignerType(e.target.value);
+  };
+
   const handleSearch = (location) => {
     if (document.getElementById("logo").style.display === "none") {
       showNavBarElements("logo");
@@ -58,6 +63,7 @@ export default function DesignerTypeModal(props) {
     const route = `/designer_list?type=${designerType}${
       location ? `&location=${location}` : ""
     }`;
+    console.log(route);
     window.scrollTo(0, 0);
     history.push(route);
   };
@@ -80,6 +86,7 @@ export default function DesignerTypeModal(props) {
       console.error("Geolocation is not supported by this browser.");
     }
   };
+
   return (
     <Modal
       title="Untitlted"
@@ -88,20 +95,23 @@ export default function DesignerTypeModal(props) {
       footer={null}
       width="100vw"
       bodyStyle={{ height: "100vh" }}
-      className="searchBarModal"
+      className="mobileSearchBarModal"
     >
-      <div id="designerTypeBtnContainer">
-        <div id="designerTypeText">1. Choose designer type</div>
+      <div id="designerTypeBtnContainerInMobileSearchBar">
+        <div id="designerTypeTextInMobileSearchBar">
+          1. Choose designer type
+        </div>
         <Radio.Group
           size="large"
           buttonStyle="outlined"
           options={designerTypes}
+          onChange={onSelected}
           optionType="button"
         ></Radio.Group>
       </div>
       <hr />
-      <div id="locationInputContainer">
-        <div id="locationText">2. Find your location</div>
+      <div id="locationInputContainerInMobileSearchBar">
+        <div id="locationTextInMobileSearchBar">2. Find your location</div>
         <Form form={form}>
           <Form.Item
             name="addressInput"
