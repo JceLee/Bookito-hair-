@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "react-day-picker/lib/style.css";
 import "../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss";
 import { Steps, Modal, Button, message } from "antd";
@@ -52,19 +52,19 @@ const servicesContent = {
   ],
   Style: [
     {
-      id: 4,
+      id: 1,
       service: "Men Style",
       price: 35,
       description: "The price may differ",
     },
     {
-      id: 5,
+      id: 2,
       service: "Women Style",
       price: 40,
       description: "The price may differ",
     },
     {
-      id: 6,
+      id: 3,
       service: "Kids Style",
       price: 15,
       description: "The price may differ",
@@ -72,19 +72,19 @@ const servicesContent = {
   ],
   Perm: [
     {
-      id: 7,
+      id: 1,
       service: "Men Perm",
       price: 35,
       description: "The price may differ",
     },
     {
-      id: 8,
+      id: 2,
       service: "Women Perm",
       price: 40,
       description: "The price may differ",
     },
     {
-      id: 9,
+      id: 3,
       service: "Kids Perm",
       price: 15,
       description: "The price may differ",
@@ -92,19 +92,19 @@ const servicesContent = {
   ],
   Color: [
     {
-      id: 10,
+      id: 1,
       service: "Men Color",
       price: 35,
       description: "The price may differ",
     },
     {
-      id: 11,
+      id: 2,
       service: "Women Color",
       price: 40,
       description: "The price may differ",
     },
     {
-      id: 12,
+      id: 3,
       service: "Kids Color",
       price: 15,
       description: "The price may differ",
@@ -112,19 +112,19 @@ const servicesContent = {
   ],
   Clinic: [
     {
-      id: 13,
+      id: 1,
       service: "Men Clinic",
       price: 35,
       description: "The price may differ",
     },
     {
-      id: 14,
+      id: 2,
       service: "Women Clinic",
       price: 40,
       description: "The price may differ",
     },
     {
-      id: 15,
+      id: 3,
       service: "Kids Clinic",
       price: 15,
       description: "The price may differ",
@@ -132,19 +132,19 @@ const servicesContent = {
   ],
   Promo: [
     {
-      id: 16,
+      id: 1,
       service: "Men Promo",
       price: 35,
       description: "The price may differ",
     },
     {
-      id: 17,
+      id: 2,
       service: "Women Promo",
       price: 40,
       description: "The price may differ",
     },
     {
-      id: 18,
+      id: 3,
       service: "Kids Promo",
       price: 15,
       description: "The price may differ",
@@ -160,6 +160,12 @@ export default function DesignerSchedule() {
   const [page, setPage] = useState("Estimated Price");
   const [current, setCurrent] = useState(0);
   const [bookingTime, setBookingTime] = useState("");
+  const elementForScrollingTopInModal = document.getElementById("stepToTopId");
+  const elementForScrollingBottomInModal = document.getElementById(
+    "stepToBottomId"
+  );
+  // const selectTimeElement = document.getElementById("selectTime");
+  // console.log(selectTimeElement);
 
   const totalSum = () => {
     return Object.values(calculationBox).reduce((sum, service) => {
@@ -198,6 +204,7 @@ export default function DesignerSchedule() {
 
   const next = () => {
     if (displayedDay && bookingTime) {
+      elementForScrollingTopInModal.scrollIntoView();
       setCurrent(current + 1);
     } else {
       return message.error({
@@ -207,7 +214,13 @@ export default function DesignerSchedule() {
   };
 
   const prev = () => {
+    elementForScrollingTopInModal.scrollIntoView();
     setCurrent(current - 1);
+  };
+
+  const cheatKey = () => {
+    elementForScrollingBottomInModal.scrollIntoView({ block: "end" });
+    setCurrent(current - 2);
   };
 
   const navigateTo = (rightPage) => {
@@ -259,8 +272,10 @@ export default function DesignerSchedule() {
   };
 
   const stepChoice = (item) => {
-    if (item.id === 1 || item.id === 2) {
+    if (item.id === 1) {
       setCurrent(current - 2);
+    } else if (item.id === 2) {
+      cheatKey();
     } else {
       setCurrent(current - 1);
     }
@@ -323,8 +338,6 @@ export default function DesignerSchedule() {
     setVisible(false);
   };
 
-  window.history.pushState("", document.title, window.location.pathname);
-
   return (
     <div className="bookNow">
       <Button type="primary" onClick={showModal}>
@@ -340,18 +353,12 @@ export default function DesignerSchedule() {
         footer={
           <div className="stepAction">
             {current > 0 && (
-              <Button
-                className="previousBtn"
-                href="#stepToTopId"
-                onClick={() => prev()}
-              >
+              <Button className="previousBtn" onClick={() => prev()}>
                 Previous
               </Button>
             )}
             {current < steps.length - 1 && (
               <Button
-                className="nextBtnInStepOne"
-                href="#stepToTopId"
                 type="primary"
                 style={{ position: "absolute", right: 0 }}
                 onClick={() => next()}
@@ -368,6 +375,9 @@ export default function DesignerSchedule() {
                 Done
               </Button>
             )}
+            {current === steps.length - 1 && bookingTime && (
+              <Button onClick={() => cheatKey()}>CHEATKEY</Button>
+            )}
           </div>
         }
         onCancel={handleCancel}
@@ -380,8 +390,11 @@ export default function DesignerSchedule() {
             ))}
           </Steps>
         </div>
-
+        <span id="title1">Date and Time</span>
+        <span id="title2">Service and Price</span>
+        <span id="title3">Final Check</span>
         <div className="stepsContent">{steps[current].content}</div>
+        <div id="stepToBottomId"></div>
       </Modal>
     </div>
   );

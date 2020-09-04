@@ -2,6 +2,10 @@
 
 @include mobileM {
   //375
+
+  .hiddenBtn {
+    display: none;
+  }
   .ant-modal-wrap {
     // width: 100vw;
     // height: 100vh;
@@ -27,6 +31,9 @@
     height: 100vh;
 
     .ant-modal-body {
+      #stepToTopId {
+        padding-top: 3px;
+      }
       overflow: auto;
       .ant-steps-item-title {
         display: none;
@@ -57,29 +64,50 @@
         display: none;
       }
 
-      // #title {
-      //   // text-align: center;
-      //   // margin: 5px 0 10px 0;
+      #title {
+        text-align: center;
+        margin: 5px 0 10px 0;
+        font-weight: bolder;
+        font-size: 20px;
+      }
+
+      // #title1 {
       //   font-weight: bolder;
       //   font-size: 15px;
+      // }
+      // #title2 {
+      //   font-weight: bolder;
+      //   font-size: 15px;
+      //   text-align: center;
+      // }
+      // #title3 {
+      //   font-weight: bolder;
+      //   font-size: 15px;
+      //   text-align: right;
+      //   margin-right: 15px;
       // }
 
       #title1 {
         font-weight: bolder;
-        font-size: 15px;
+        font-size: 12px;
+        // margin-left: -236px;
+        text-align: center;
       }
       #title2 {
         font-weight: bolder;
-        font-size: 15px;
+        font-size: 12px;
         text-align: center;
+        margin-top: -85px;
+        // margin-left: -5px;
       }
       #title3 {
         font-weight: bolder;
-        font-size: 15px;
-        text-align: right;
-        margin-right: 15px;
+        font-size: 12px;
+        text-align: center;
+        margin-top: -85px;
+        // margin-right: -220px;
       }
-      // padding: 5px;
+
       .ant-col-13 {
         max-width: none;
       }
@@ -87,6 +115,7 @@
         // border: none;
         // background-color: aliceblue;
         margin: 10px 1px 10px -19.5px;
+        // margin: 35px 1px 10px -19.5px;
         width: 351px;
         .DayPicker-Month {
           width: 333px;
@@ -141,7 +170,8 @@
         margin: 8.5px 8.5px 15px 8.5px;
       }
       .checkboxOption {
-        margin: 28px 0 40px 7px;
+        // margin: 28px 0 40px 7px;
+        margin: 55px 0 40px 7px;
         width: 311px;
         .ant-card-body {
           height: 363.5px;
@@ -209,7 +239,8 @@
   }
 
   .confirmation {
-    margin: 30px -15px 0 0;
+    // margin: 30px -15px 0 0;
+    margin: 50px -15px 0 0;
     .bookingContents {
       max-width: 170px;
     }
@@ -254,18 +285,26 @@
       border-color: black;
       width: 50%;
       height: 55px;
-      padding: auto;
+      padding: 0;
+      margin: 0;
     }
     a.ant-btn {
       width: 50%;
       height: 55px;
       padding-top: 9px;
+      border: none;
+      margin: 0;
     }
     .stepAction {
-      padding: none;
+      padding: 0;
       display: flex;
+      background-color: lightblue;
       flex-wrap: wrap;
       justify-content: space-between;
+      .previousBtn {
+        height: 55px;
+        width: 50%;
+      }
       .ant-btn:active {
         color: black;
         border-color: black;
