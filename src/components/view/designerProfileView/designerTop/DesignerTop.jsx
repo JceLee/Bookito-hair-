@@ -16,6 +16,7 @@ import AddressPhoneForm from "../designerEditProfile/AddressPhoneForm";
 import WorksForm from "../designerEditProfile/WorksForm";
 import DesignerSchedule from "../../designerScheduleView/DesignerScheduleView";
 import Avatar from "antd/lib/avatar/avatar";
+import {useSelector} from "react-redux";
 
 const { Panel } = Collapse;
 const layout = {
@@ -61,6 +62,9 @@ const DesignerTop = (props) => {
   const [top] = useState(64);
   const [height, setHeight] = useState(0);
   const [Visible, setVisible] = useState(false);
+
+  const currentUser = useSelector((state) => state.signedInUser.signedInUser);
+  console.log(currentUser);
 
   const [form] = Form.useForm();
   useResetFormOnCloseModal({
