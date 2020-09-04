@@ -9,7 +9,6 @@ export default function DesignerCardComponent(props) {
   const history = useHistory();
   const handleSearch = (designer) => () => {
     const route = `/designer_profile?uid=${designer.uid}`;
-    console.log(route);
     history.push(route);
   };
 

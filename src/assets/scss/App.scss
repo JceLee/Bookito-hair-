@@ -10,7 +10,6 @@
 @import "./commonComponents/mobileSearchBar/mobileSearchBar.scss";
 @import "./commonComponents/mobileSearchBar/DesignerTypeModal.scss";
 @import "./commonComponents/BlackBtn.scss";
-@import "./commonComponents/ScheduleCard.scss";
 @import "./commonComponents/Spinner.scss";
 
 // Designer List view
@@ -24,6 +23,9 @@
 @import "./view/designerListView/DesignerCardComponent/DesignerCardComponent.scss";
 @import "./view/designerListView/designerListFilter/DesignerListFilter.scss";
 @import "./view/clientProfileView/ClientProfileView.scss";
+
+// Designer Schedule view
+@import "./view/designerScheduleView/DesignerScheduleView.scss";
 
 // Designer Profile View
 @import "view/designerProfileView/DesignerProfileView";

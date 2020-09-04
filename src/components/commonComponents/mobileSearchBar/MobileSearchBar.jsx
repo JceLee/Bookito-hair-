@@ -43,7 +43,7 @@ export default function MobileSearchBar() {
     document.getElementById(
       "searchBarForm"
     ).style.top = searchBarMarginOnNavBar;
-    document.getElementById("searchBar").style.marginTop = 0;
+    document.getElementById("mobileSearchBar").style.marginTop = 0;
   };
 
   const takeSearchBarOffFromNavBar = () => {

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Menu, Dropdown, Button, Typography, Drawer } from "antd";
 import { Link } from "react-router-dom";
-import { UserOutlined, BarsOutlined } from "@ant-design/icons";
+import { MenuOutlined, UserOutlined, BarsOutlined } from "@ant-design/icons";
 import SignUp from "../view/authView/SignUp";
 import LogIn from "../view/authView/LogIn";
 import { useSelector } from "react-redux";
+
+const { Title } = Typography;
 
 export default function Navbar() {
   const [visible, setVisible] = useState(false);
