@@ -7,13 +7,13 @@ export default function DesignerCardComponent(props) {
   const { designer } = props;
 
   const history = useHistory();
-  const handleSearch = (location) => {
+  const handleSearch = (designer) => () => {
     const route = `/designer_profile?uid=${designer.uid}`;
     history.push(route);
   };
 
   return (
-    <div className="designerCardComponent" onClick={handleSearch}>
+    <div className="designerCardComponent" onClick={handleSearch(designer)}>
       <DesignerCardTop
         fname={designer.fname}
         rate={designer.rate}

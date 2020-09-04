@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { BackTop } from "antd";
 import DesignerTop from "./designerTop/DesignerTop.jsx";
@@ -11,9 +11,6 @@ const DesignerProfileView = () => {
   const urlParams = new URLSearchParams(queryString);
   const designerId = urlParams.get("uid");
   const found = designers.find((element) => element.uid === designerId);
-  // console.log(designerId);
-  // console.log(found);
-  // console.log(designers);
 
   const {
     isAuthenticated,
