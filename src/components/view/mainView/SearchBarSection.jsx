@@ -1,7 +1,6 @@
 import React from "react";
 import MobileSearchBar from "../../commonComponents/mobileSearchBar/MobileSearchBar";
 import desktopMainPageBackground from "../../../assets/images/desktopMainPageBackground.jpeg";
-import mobileMainPageBackground from "../../../assets/images/mobileMainPageBackground.jpeg";
 
 export default function SearchBarSection() {
   return (

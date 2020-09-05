@@ -6,7 +6,6 @@ export default function MainView() {
   return (
     <>
       <SearchBarSection />
-
       <div align="middle" className="infoCardsSection">
         <InfoCard
           header="Become our partner!"

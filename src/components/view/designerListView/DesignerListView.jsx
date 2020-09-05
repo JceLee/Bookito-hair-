@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import queryString from "query-string";
 import { load_database } from "../../../actions/firebaseAction";
-import { firebaseStore, firebaseAuth } from "../../../config/fbConfig";
+import { firebaseStore } from "../../../config/fbConfig";
 import { useDispatch, useSelector } from "react-redux";
 import DesignerCardComponent from "./designerCardComponent/DesignerCardComponent";
 import DesignerListFilter from "./DesignerListFilter";
