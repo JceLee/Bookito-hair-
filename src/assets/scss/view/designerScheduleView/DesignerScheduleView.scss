@@ -35,9 +35,13 @@
         padding-top: 3px;
       }
       overflow: auto;
-      .ant-steps-item-title {
-        display: none;
+      .ant-steps-horizontal.ant-steps-label-horizontal {
+        display: flex;
+        flex-direction: row;
       }
+      // .ant-steps-item-title {
+      //   display: none;
+      // }
       .ant-steps-item-process .ant-steps-item-icon {
         background: black;
       }
@@ -51,10 +55,19 @@
         color: black;
       }
 
-      .ant-steps-horizontal.ant-steps-label-horizontal {
-        display: flex;
-        flex-direction: row;
-        margin: 0 0 0 30px;
+      // .ant-steps-horizontal.ant-steps-label-horizontal {
+      //   display: flex;
+      //   flex-direction: row;
+      //   margin: 0 0 0 30px;
+      // }
+
+      .ant-steps-horizontal.ant-steps-label-horizontal .ant-steps-item-content {
+        overflow: unset;
+      }
+      .ant-steps-horizontal.ant-steps-label-horizontal .ant-steps-item-title {
+        line-height: 100px;
+        font-size: 13px;
+        font-weight: bolder;
       }
 
       .ant-steps-horizontal.ant-steps-label-horizontal
@@ -62,6 +75,11 @@
         > .ant-steps-item-container
         > .ant-steps-item-tail {
         display: none;
+      }
+
+      .ant-steps:not(.ant-steps-dot):not(.ant-steps-navigation):not(.ant-steps-vertical)
+        .ant-steps-item {
+        padding-top: 0;
       }
 
       #title {

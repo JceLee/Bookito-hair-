@@ -5,6 +5,7 @@ import { Steps, Modal, Button, message } from "antd";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
+import { useEffect } from "react";
 
 const timeSelect = [
   { time: "09:00", disabled: false },
@@ -161,11 +162,7 @@ export default function DesignerSchedule() {
   const [current, setCurrent] = useState(0);
   const [bookingTime, setBookingTime] = useState("");
   const elementForScrollingTopInModal = document.getElementById("stepToTopId");
-  const elementForScrollingBottomInModal = document.getElementById(
-    "stepToBottomId"
-  );
-  // const selectTimeElement = document.getElementById("selectTime");
-  // console.log(selectTimeElement);
+  const [backToTimePosition, setBackToTimePosition] = useState(false);
 
   const totalSum = () => {
     return Object.values(calculationBox).reduce((sum, service) => {
@@ -218,11 +215,6 @@ export default function DesignerSchedule() {
     setCurrent(current - 1);
   };
 
-  const cheatKey = () => {
-    elementForScrollingBottomInModal.scrollIntoView({ block: "end" });
-    setCurrent(current - 2);
-  };
-
   const navigateTo = (rightPage) => {
     setPage(rightPage);
   };
@@ -271,11 +263,18 @@ export default function DesignerSchedule() {
     return contentString;
   };
 
+  useEffect(() => {
+    if (backToTimePosition) {
+      document.getElementById("selectTimePosition").scrollIntoView();
+    }
+    setBackToTimePosition(false);
+  });
+
   const stepChoice = (item) => {
     if (item.id === 1) {
       setCurrent(current - 2);
     } else if (item.id === 2) {
-      cheatKey();
+      setCurrent(current - 2);
     } else {
       setCurrent(current - 1);
     }
@@ -283,7 +282,7 @@ export default function DesignerSchedule() {
 
   const steps = [
     {
-      title: "Date and time",
+      title: "Date and Time",
       content: (
         <StepOne
           timeSelection={timeSelect}
@@ -296,7 +295,7 @@ export default function DesignerSchedule() {
       ),
     },
     {
-      title: "Service and estimated price",
+      title: "Service and Price",
       content: (
         <StepTwo
           services={serviceTabData(servicesContent)}
@@ -313,7 +312,7 @@ export default function DesignerSchedule() {
       ),
     },
     {
-      title: "Final check",
+      title: "Final Check",
       content: (
         <StepThree
           current={current}
@@ -323,6 +322,7 @@ export default function DesignerSchedule() {
           calculationBox={calculationBox}
           getServiceContent={getServiceContent}
           stepChoice={stepChoice}
+          setBackToTimePosition={setBackToTimePosition}
         />
       ),
     },
@@ -368,15 +368,12 @@ export default function DesignerSchedule() {
             )}
             {current === steps.length - 1 && (
               <Button
-                className="DoneBtn"
+                className="doneBtn"
                 type="primary"
                 onClick={() => loadSuccessMessage()}
               >
                 Done
               </Button>
-            )}
-            {current === steps.length - 1 && bookingTime && (
-              <Button onClick={() => cheatKey()}>CHEATKEY</Button>
             )}
           </div>
         }
@@ -384,17 +381,16 @@ export default function DesignerSchedule() {
         cancelButtonProps={{ style: { display: "none" } }}
       >
         <div className="stepsClass" id="stepToTopId">
-          <Steps current={current} onChange={onChange}>
+          <Steps current={current} onChange={onChange} progressDot>
             {steps.map((item) => (
               <Step key={item.title} title={item.title} />
             ))}
           </Steps>
         </div>
-        <span id="title1">Date and Time</span>
+        {/* <span id="title1">Date and Time</span>
         <span id="title2">Service and Price</span>
-        <span id="title3">Final Check</span>
+        <span id="title3">Final Check</span> */}
         <div className="stepsContent">{steps[current].content}</div>
-        <div id="stepToBottomId"></div>
       </Modal>
     </div>
   );

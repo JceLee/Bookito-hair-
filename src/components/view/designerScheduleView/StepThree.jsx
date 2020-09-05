@@ -4,7 +4,13 @@ import "../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss
 
 export default function StepThree(props) {
   const { Text } = Typography;
-  const { displayedDay, bookingTime, getServiceContent, stepChoice } = props;
+  const {
+    displayedDay,
+    bookingTime,
+    getServiceContent,
+    stepChoice,
+    setBackToTimePosition,
+  } = props;
 
   const titles = [
     {
@@ -19,6 +25,13 @@ export default function StepThree(props) {
     },
     { id: 3, title: "Service", contents: getServiceContent() },
   ];
+
+  const moveToSelectTimePosition = (item) => {
+    if (item.title === "Time") {
+      setBackToTimePosition(true);
+    }
+    stepChoice(item);
+  };
 
   return (
     <div id="stepThreeTopId">
@@ -38,7 +51,7 @@ export default function StepThree(props) {
                   type="link"
                   value={item.id}
                   id={item.id}
-                  onClick={() => stepChoice(item)}
+                  onClick={() => moveToSelectTimePosition(item)}
                 >
                   Edit
                 </Button>

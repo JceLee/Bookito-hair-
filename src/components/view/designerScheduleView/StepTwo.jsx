@@ -47,7 +47,6 @@ export default function StepTwo(props) {
                     navigateTo("Estimated Price");
 
                     let newCalculationBox = { ...calculationBox };
-                    console.log(newCalculationBox);
 
                     switch (serviceKey) {
                       case "Cut":
@@ -76,7 +75,6 @@ export default function StepTwo(props) {
                         break;
                     }
 
-                    console.log(newCalculationBox);
                     setCalculationBox(newCalculationBox);
                   }}
                 >
