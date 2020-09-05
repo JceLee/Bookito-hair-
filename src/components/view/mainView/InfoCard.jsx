@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Col } from "antd";
+import { Card } from "antd";
 
 export default function InfoCard(props) {
   const { Meta } = Card;

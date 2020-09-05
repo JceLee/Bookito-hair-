@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Input, Button, Avatar, Modal } from "antd";
+import { Form, Input, Avatar, Modal } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import { useDropzone } from "react-dropzone";
 import BlackBtn from "../../commonComponents/BlackBtn";

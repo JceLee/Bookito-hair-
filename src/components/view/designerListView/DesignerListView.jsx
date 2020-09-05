@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import queryString from "query-string";
 import { load_database } from "../../../actions/firebaseAction";
 import { firebaseStore, firebaseAuth } from "../../../config/fbConfig";
