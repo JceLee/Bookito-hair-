@@ -1,15 +1,10 @@
 import React from "react";
 import SearchBarSection from "./SearchBarSection";
-import NewDesignerCarousel from "./NewDesignerCarousel";
 import InfoCard from "./InfoCard";
-import Announcement from "./Announcement";
-import desktopMainPageBackground from "../../../assets/images/desktopMainPageBackground.jpeg";
-import mobileMainPageBackground from "../../../assets/images/mobileMainPageBackground.jpeg";
 
 export default function MainView() {
   return (
     <>
-      {/* <img className="backgroundImage" src={desktopMainPageBackground} /> */}
       <SearchBarSection />
 
       <div align="middle" className="infoCardsSection">

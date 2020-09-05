@@ -10,10 +10,6 @@
 
 // search bar section
 .searchBarSection {
-  width: 100%;
-  height: 600px;
-  position: relative;
-
   .searchBarSectionImg {
     object-fit: cover;
     @include tabletP {
