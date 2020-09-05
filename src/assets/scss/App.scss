@@ -1,29 +1,40 @@
 // Mixin
-@import './Mixin.scss';
+@import "./Mixin.scss";
 
 // Main view
-@import './view/MainView/MainView.scss';
+@import "./view/MainView/MainView.scss";
 
 // Common components
-@import './commonComponents/NavBar.scss';
-@import './commonComponents/SearchBar.scss';
-@import './commonComponents/ScheduleCard.scss';
-@import './commonComponents/BlackBtn.scss';
+@import "./commonComponents/NavBar.scss";
+@import "./commonComponents/ScheduleCard.scss";
+@import "./commonComponents/mobileSearchBar/mobileSearchBar.scss";
+@import "./commonComponents/mobileSearchBar/DesignerTypeModal.scss";
+@import "./commonComponents/BlackBtn.scss";
+@import "./commonComponents/Spinner.scss";
 
 // Designer List view
-@import './view/designerListView/DesignerListView.scss';
-@import './view/designerListView/DesignerCardComponent/DesignerCardComponent.scss';
-@import './view/designerListView/designerListFilter/DesignerListFilter.scss';
-@import './view/clientProfileView/ClientProfileView.scss';
+@import "./view/designerListView/DesignerCardComponent/DesignerCardComponent.scss";
+@import "./view/designerListView/designerListFilter/DesignerListFilter.scss";
 
 // Client Schedule view
-@import './view/clientScheduleView/ClientScheduleView.scss';
+@import "./view/clientScheduleView/ClientScheduleView.scss";
+@import "./view/MainView/MainView.scss";
+@import "./commonComponents/NavBar.scss";
+@import "./view/designerListView/DesignerCardComponent/DesignerCardComponent.scss";
+@import "./view/designerListView/designerListFilter/DesignerListFilter.scss";
+@import "./view/clientProfileView/ClientProfileView.scss";
 
 // Designer Schedule view
-@import './view/designerScheduleView/DesignerScheduleView.scss';
+@import "./view/designerScheduleView/DesignerScheduleView.scss";
+
+// Designer Profile View
+@import "view/designerProfileView/DesignerProfileView";
+
+// Auth components
+@import "/commonComponents/Auth.scss";
 
 .layout {
-  background-color: white;
+  background-color: #fdfdfd;
 }
 
 .outerContent {
