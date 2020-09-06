@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Popover, Rate } from 'antd';
-import { HomeTwoTone, ScissorOutlined } from '@ant-design/icons';
+import { Button, Popover, Tag, Divider} from 'antd';
+import ReadOnlyStar from "../ReadOnlyStar";
 import Slider from "react-slick";
+import { HomeTwoTone, ScissorOutlined } from '@ant-design/icons';
 import "../../../assets/scss/commonComponents/map/Map.scss";
 
 export default function Marker(props) {
@@ -21,6 +22,8 @@ export default function Marker(props) {
         slidesToScroll: 1
     };
 
+    const tagColors = ["#332C1E"];
+
     const hide = () => {
         setVisible(false);
     };
@@ -31,37 +34,30 @@ export default function Marker(props) {
 
     return designer ? (
         <Popover
-            className={"designerPopover"}
+            overlayClassName="designerPopover"
             content={
                 <div className={"popoverContent"}>
-                    <Slider {...carouselSettings} style={{width: 200, height: 210}}>
-                        <div><img src="https://www.cuded.com/wp-content/uploads/2017/08/hair-styles-for-men-31.jpg" alt="" width="200px" height="210px"/></div>
-                        <div><img src="https://www.menshairstyletrends.com/wp-content/uploads/2017/03/mokumbarbers-messy-styles-for-men-2017-trends-texture.jpg" alt="" width="200px" height="210px"/></div>
+                    <Slider {...carouselSettings} style={{width: "170px", height: "170px"}}>
+                        <div><img src="https://www.cuded.com/wp-content/uploads/2017/08/hair-styles-for-men-31.jpg" alt="" width="170px" height="170px"/></div>
+                        <div><img src="https://www.menshairstyletrends.com/wp-content/uploads/2017/03/mokumbarbers-messy-styles-for-men-2017-trends-texture.jpg" alt="" width="170px" height="170px"/></div>
                     </Slider>
-                    <div style={{display: "flex", flexDirection: "row", paddingTop: 10}}>
-                        <h4>{designer.name}</h4>
-                        {/* <Rate disabled defaultValue={2} style={{justifyContent: "center"}} /> */}
+                    <div style = {{margin: 10}}>
+                        <h4 style={{color: "#332C1E", marginBottom: 0}}>{designer.name}</h4>
+                        <ReadOnlyStar rate={designer.rate}/>
+                        <p style={{color: "#332C1E", marginTop: 2}}>15 minutes away</p>
+                        <div style={{width: 170}}>
+                            {designer.services && designer.services.map((service, index) => (
+                                <Tag shape="rounded" style={{marginBottom: 5, borderRadius: 20}} color={tagColors[index%tagColors.length]}>{service}</Tag>
+                            ))}
+                        </div>
                     </div>
-
-                    <p>15 minutes away</p>
-                    <div style={{display: "flex", flexDirection: "row", paddingRight: "10px"}}>
-                        {designer.services && designer.services.map(service => 
-                            <div style={{marginRight: "5px"}}>
-                                <p>{service}</p>
-                            </div>
-                        )}
-                    </div>
-
                 </div>
-                /* <a onClick={hide}>Close</a> */
             }
-            // title={designer?.name}
             trigger="click"
             visible={visible}
             onVisibleChange={handleVisibleChange}
-            // getPopupContainer={trigger => trigger.parentElement} // Ensures popup position is relative to marker position
         >
-            <Button className="marker" type="primary" shape="circle" icon={<ScissorOutlined />} />
+            <Button className="markerButton" type="primary" shape="circle" icon={<ScissorOutlined />} />
         </Popover> 
     ) : (
         <HomeTwoTone style={{fontSize: 20, transform: "translate(-50%, -50%)"}} />

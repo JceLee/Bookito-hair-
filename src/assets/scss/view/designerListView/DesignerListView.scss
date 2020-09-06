@@ -4,10 +4,24 @@
   border: 1px black solid;
   height: 90vh;
 
-  .designerContainer {
-    border: 1px red solid;
 
-    @include tabletP {
+  .designerContainer {
+    position: relative;
+    border: 1px red solid;
+    height: 90vh;
+    width: 100vw;
+
+    .ant-drawer-content-wrapper {
+      width: 100vw !important;
+
+      @include tabletP{
+        width: 49.1vw !important;
+      }
+    }
+
+    
+  
+    @include tabletP{
       width: 50%;
       float: left;
     }
@@ -35,12 +49,22 @@
 
   .mapContainer {
     display: none;
+<<<<<<< HEAD
 
     @include tabletP {
       border: 1px green solid;
       display: flex;
       width: 50%;
       float: right;
+=======
+    position: relative;
+  
+    @include tabletP{
+      border: 1px green solid;
+      display: flex;
+      // width: 50%;
+      // float: right;
+>>>>>>> Add map drawer for mobile listing view
     }
   }
 }

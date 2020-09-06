@@ -1,3 +1,5 @@
+@import "../../Mixin.scss";
+
 .marker {
     position: absolute;
     top: 50%;
@@ -11,12 +13,44 @@
     transform: translate(-50%, -50%);
     z-index: 100;
 }
+.map {
 
-.popoverContent {
-    // background-color: yellow;
 }
+
+.markerButton {
+    background: #5e5546 !important;
+    border-color: transparent !important;
+    &:focus {
+        background: #332C1E !important;
+    }
+    .ant-btn-background-ghost {
+        border: none !important;
+    }
+}
+
+.designerPopover {
+    .popoverContent {
+        background: whitesmoke;
+    }
+    .ant-popover-arrow {
+        visibility: hidden;
+    }
+    .ant-popover-inner-content {
+        border-radius: 15px !important;
+        padding: 0 !important;
+    }
+    .popoverContent {
+        display: flex;
+        flex-direction: row;
+        padding: 10px;
+        @include tabletP {
+            
+        }
+    }
+}
+
 .slick-dots  {
-    bottom: 5px;
+    bottom: 0px;
 
     li button:before {
         color: whitesmoke;
@@ -26,10 +60,12 @@
     }
 }
 .slick-arrow.slick-prev {
+    visibility: hidden;
     left: 0px;
     z-index: 100;
 }
 .slick-arrow.slick-next {
+    visibility: hidden;
     right: 0px;
     z-index: 100;
 }
