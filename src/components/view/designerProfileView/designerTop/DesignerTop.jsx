@@ -14,7 +14,7 @@ import ServiceNPriceForm from "../designerEditProfile/ServiceNPriceForm";
 import HoursForm from "../designerEditProfile/HoursForm";
 import AddressPhoneForm from "../designerEditProfile/AddressPhoneForm";
 import WorksForm from "../designerEditProfile/WorksForm";
-import DesignerSchedule from "../../designerScheduleView/DesignerScheduleView";
+import BookNowModal from "../../designerProfileView/designerTop/bookNowModal/BookNowModal";
 import Avatar from "antd/lib/avatar/avatar";
 
 const { Panel } = Collapse;
@@ -196,7 +196,7 @@ const DesignerTop = (props) => {
               </Modal>
             </>
           ) : (
-            <DesignerSchedule hours={hours} />
+            <BookNowModal hours={hours} />
           )}
         </div>
       </Affix>

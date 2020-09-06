@@ -2,7 +2,6 @@ import React from "react";
 import { Row, Col, Radio } from "antd";
 import DayPicker from "react-day-picker";
 import "react-day-picker/lib/style.css";
-import "../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss";
 
 export default function StepOne(props) {
   const {

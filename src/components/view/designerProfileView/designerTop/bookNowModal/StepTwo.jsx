@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Button, Row, Col, Divider, Card, Typography, Checkbox } from "antd";
-import "../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss";
 
 export default function StepTwo(props) {
   const { Text } = Typography;

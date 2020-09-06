@@ -1,6 +1,5 @@
 import React from "react";
 import { List, Button, Typography } from "antd";
-import "../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss";
 
 export default function StepThree(props) {
   const { Text } = Typography;
