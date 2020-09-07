@@ -1,49 +1,126 @@
 @import "../../../Mixin.scss";
 
-// $black: #1b1b1b;
-
+.ant-modal-wrap {
+  @include mobileM {
+    overflow: unset;
+  }
+}
 .bookNowModal {
-  .ant-modal-content {
-    width: 100vw;
-    height: 100vh;
+  .ant-modal-body {
     @include mobileM {
-      .ant-modal-body {
-        padding: 0;
-        .stepsClass {
-          margin-top: 10%;
-          .ant-steps-item-title {
-            font-size: 13px;
+      width: 100vw;
+      height: 83vh;
+      padding: 0;
+      overflow: auto;
+    }
+    .stepsClass {
+      @include mobileM {
+        margin-top: 10%;
+        .ant-steps-item-title {
+          font-size: 14px;
+        }
+      }
+      .ant-steps-icon-dot {
+        background: $black;
+      }
+      .ant-steps-item-tail::after {
+        background-color: $black;
+      }
+    }
+    .stepsContent {
+      .stepOne {
+        .editDesignerCalendar {
+          margin: 7% 0 5% 0;
+          @include mobileM {
+            .DayPicker {
+              width: 100vw;
+              .DayPicker-NavButton {
+                top: 5.5%;
+                right: 8%;
+              }
+              .DayPicker-Month {
+                width: 92vw;
+                height: 43vh;
+                .DayPicker-Body {
+                  .DayPicker-Day--selected {
+                    background-color: $black;
+                  }
+                  .DayPicker-Day:not(.DayPicker-Day--selected):hover {
+                    background-color: $white;
+                  }
+                }
+              }
+            }
           }
-          .ant-steps-icon-dot {
-            background: $black;
-          }
-
-          .ant-steps-item-finish
-            .ant-steps-item-icon
-            > .ant-steps-icon
-            .ant-steps-icon-dot {
-            background: $black;
-          }
-
-          .ant-steps-item-finish
-            > .ant-steps-item-container
-            > .ant-steps-item-tail::after {
-            background-color: $white;
+        }
+        .timeButtons {
+          @include mobileM {
+            margin-bottom: 9%;
+            #selectTimePtag {
+              text-align: center;
+              font-size: 15px;
+              font-weight: bolder;
+              margin-bottom: 8%;
+            }
+            .ant-radio-button-wrapper {
+              border-left-width: 1px;
+              border-left-color: $black;
+              // margin: 0 0 2% 2.2%;
+              margin: 0 1% 2% 5.5%;
+              color: $black;
+              border-color: $black;
+            }
+            .ant-radio-button-wrapper:not(:first-child)::before {
+              background-color: $black;
+            }
           }
         }
       }
     }
-
-    @include mobileL {
-    }
-
-    @include tabletP {
-    }
-
-    @include tabletL {
-    }
-
-    @include desktop {
+  }
+  .ant-modal-footer {
+    @include mobileM {
+      height: 8.5vh;
+      padding: 0 0;
+      border: none;
+      .stepAction {
+        .nextBtnInStepOne {
+          background: $black;
+          border-color: $black;
+          color: $white;
+          width: 50%;
+          height: 55px;
+        }
+        .previousBtn {
+          color: $black;
+          border-color: #f0f0f0;
+          float: left;
+          width: 50%;
+          height: 55px;
+        }
+        .doneBtn {
+          background: $black;
+          border-color: $black;
+          color: $white;
+          width: 50%;
+          height: 55px;
+        }
+      }
     }
   }
+  .ant-modal-footer button + button {
+    margin-left: 0;
+  }
+}
+
+@include mobileL {
+}
+
+@include tabletP {
+}
+
+@include tabletL {
+}
+
+@include desktop {
 }

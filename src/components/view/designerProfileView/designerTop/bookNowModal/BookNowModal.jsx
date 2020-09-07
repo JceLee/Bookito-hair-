@@ -129,7 +129,7 @@ const servicesContent = {
   ],
 };
 
-export default function DesignerSchedule(props) {
+export default function BookNowModal(props) {
   const { hours } = props;
   const { Step } = Steps;
   const [displayedDay, setDisplayedDay] = useState(null);
@@ -263,7 +263,6 @@ export default function DesignerSchedule(props) {
   }, [displayedDay]);
 
   const onRadioChange = (hour) => {
-    // console.log(hour.target.value);
     setBookingTime(hour.target.value);
   };
 
@@ -276,9 +275,7 @@ export default function DesignerSchedule(props) {
 
     for (let [key, value] of Object.entries(newCalculationBox)) {
       if (serviceToRemove === value) {
-        // console.log(newCalculationBox[key]);
         newCalculationBox[key] = null;
-        // console.log(newCalculationBox[key]);
       }
     }
 
@@ -387,8 +384,8 @@ export default function DesignerSchedule(props) {
         className="bookNowModal"
         title="Book Now"
         visible={visible}
-        width="100vw"
-        bodyStyle={{ height: "100vh" }}
+        // width="100vw"
+        // bodyStyle={{ height: "85vh" }}
         footer={
           <div className="stepAction">
             {current > 0 && (
