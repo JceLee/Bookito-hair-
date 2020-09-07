@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Space } from 'antd';
-import { Link } from 'react-scroll';
-import Review from './Review';
+import React, { useState, useEffect } from "react";
+import { Button, Space } from "antd";
+import { Link } from "react-scroll";
+import Review from "./Review";
 
 const reviewsPerClick = 2;
 let reviewsArray = [];
 
-const Reviews = (props) => {
+export default function ReviewContainer(props) {
   let { id, reviews } = props;
   const [arrayReviewsToShow, setarrayReviewsToShow] = useState([]);
   const [next, setNext] = useState(reviewsPerClick);
-  const [Collapsed, setCollapsed] = useState({
+  const [collapsed, setCollapsed] = useState({
     collapsedAllReviews: true,
     collapsedComment: true,
   });
@@ -43,7 +43,7 @@ const Reviews = (props) => {
   };
 
   return (
-    <div className='reviews' id={id}>
+    <div className="reviews" id={id}>
       <h2>Reviews ({reviews.length})</h2>
       {reviews.length === 0 ? (
         <h3>No reviews yet...</h3>
@@ -58,7 +58,7 @@ const Reviews = (props) => {
               rate={rate}
               comment={comment}
               date={date}
-              collapsed={Collapsed}
+              collapsed={collapsed}
             />
           );
         })
@@ -67,8 +67,8 @@ const Reviews = (props) => {
       <Space>
         {reviews.length >= next && (
           <Button
-            className='Button'
-            type='primary'
+            className="Button"
+            type="primary"
             onClick={handleShowMoreReviews}
           >
             Load More
@@ -77,17 +77,16 @@ const Reviews = (props) => {
 
         {arrayReviewsToShow.length > reviewsPerClick && (
           <Link
-            activeClass='active'
-            to='reviews'
+            activeClass="active"
+            to="reviews"
             spy={true}
             smooth={true}
             duration={500}
-            // offset={-121 * 1.75}
             offset={-48 * 2.25}
           >
             <Button
-              className='Button'
-              type='primary'
+              className="Button"
+              type="primary"
               onClick={handleShowLessReviews}
             >
               Load Less
@@ -97,6 +96,4 @@ const Reviews = (props) => {
       </Space>
     </div>
   );
-};
-
-export default Reviews;
+}

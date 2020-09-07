@@ -1,12 +1,12 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from "react";
 
-import ShowMoreText from 'react-show-more-text';
-import Slider from 'react-slick';
-import { Modal } from 'antd';
-import ReadOnlyStar from '../../../commonComponents/ReadOnlyStar';
-import Spinner from '../../../commonComponents/Spinner';
+import ShowMoreText from "react-show-more-text";
+import Slider from "react-slick";
+import { Modal } from "antd";
+import ReadOnlyStar from "../../../commonComponents/ReadOnlyStar";
+import Spinner from "../../../commonComponents/Spinner";
 
-const Review = (props) => {
+export default function Review(props) {
   const { id, customerName, photos, rate, comment, date } = props;
   const imgCounter = useRef(0);
   const imgCarouselCounter = useRef(0);
@@ -35,7 +35,7 @@ const Review = (props) => {
     return (
       <div
         className={className}
-        style={{ ...style, display: 'block' }}
+        style={{ ...style, display: "block" }}
         onClick={onClick}
       />
     );
@@ -47,7 +47,7 @@ const Review = (props) => {
     return (
       <div
         className={className}
-        style={{ ...style, display: 'block' }}
+        style={{ ...style, display: "block" }}
         onClick={onClick}
       />
     );
@@ -67,39 +67,35 @@ const Review = (props) => {
   };
 
   const onOpenModalHandler = (index) => {
-    console.log('opened a modal');
-    console.log('Clicked img index: ' + index);
     setModalVisible(true);
     setCurrentImgIndex(index);
   };
 
-  const onCloseModalHandler = (CurrentImgIndex) => {
+  const onCloseModalHandler = () => {
     setModalVisible(false);
-    console.log('destroyed the modal when closing');
-    console.log('CurrentImgIndex: ' + CurrentImgIndex);
     setImgCarouselLoading(true);
   };
 
   return (
-    <div className='review fade-in' id={id}>
+    <div className="review fade-in" id={id}>
       {photos.length !== 0 && ImgLoading ? <Spinner /> : null}
-      <div className='reviewHeader'>
-        <div className='reviewCustomerNrate'>
-          <span className='reviewCustomer'>{customerName}</span>
-          <div className='reviewRate'>{<ReadOnlyStar rate={rate} />}</div>
+      <div className="reviewHeader">
+        <div className="reviewCustomerNrate">
+          <span className="reviewCustomer">{customerName}</span>
+          <div className="reviewRate">{<ReadOnlyStar rate={rate} />}</div>
         </div>
 
         {/* Display review images in a line */}
-        <div className='reviewGalleryContainer'>
+        <div className="reviewGalleryContainer">
           {photos.length === 0
-            ? 'No images attached..'
+            ? "No images attached.."
             : photos.map((photo, index) => (
-                <div key={index} className='reviewImgDiv'>
+                <div key={index} className="reviewImgDiv">
                   <img
                     src={photo}
                     alt={`reviewImgDiv${index}`}
-                    width='50'
-                    height='50'
+                    width="50"
+                    height="50"
                     onClick={() => onOpenModalHandler(index)}
                     onLoad={imageLoaded}
                   />
@@ -117,7 +113,7 @@ const Review = (props) => {
         >
           {/* Display review images in a carousel in a modal */}
           {photos.length !== 0 && ImgCarouselLoading ? <Spinner /> : null}
-          <Slider {...settings} className='slick-slider'>
+          <Slider {...settings} className="slick-slider">
             {photos.map((photo, index) => {
               return (
                 <div key={index}>
@@ -133,9 +129,9 @@ const Review = (props) => {
         </Modal>
       </div>
 
-      <div className='reviewContent'>
+      <div className="reviewContent">
         <section>
-          <ShowMoreText lines={2} more='Show More' less='Show Less' width={0}>
+          <ShowMoreText lines={2} more="Show More" less="Show Less" width={0}>
             <p>{comment}</p>
             <p>Posted on {date}</p>
           </ShowMoreText>
@@ -143,6 +139,4 @@ const Review = (props) => {
       </div>
     </div>
   );
-};
-
-export default Review;
+}

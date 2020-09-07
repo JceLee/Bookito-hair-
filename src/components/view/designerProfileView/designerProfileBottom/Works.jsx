@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import { Modal } from "antd";
 import Spinner from "../../../commonComponents/Spinner";
 
-const Works = (props) => {
+export default function Works(props) {
   const { id, works } = props;
   const imgCounter = useRef(0);
   const imgCarouselCounter = useRef(0);
@@ -64,23 +64,18 @@ const Works = (props) => {
   };
 
   const onOpenModalHandler = (index) => {
-    console.log("opened a modal");
-    console.log("Clicked img index: " + index);
     setModalVisible(true);
     setCurrentImgIndex(index);
   };
 
-  const onCloseModalHandler = (CurrentImgIndex) => {
+  const onCloseModalHandler = () => {
     setModalVisible(false);
-    console.log("destroyed the modal when closing");
-    console.log("CurrentImgIndex: " + CurrentImgIndex);
     setImgCarouselLoading(true);
   };
 
   return (
     <div className="works" id={id}>
       <h2>Works</h2>
-
       {works.length !== 0 && ImgLoading ? <Spinner /> : null}
       <ul className="workGalleryContainer">
         {works.map((work, index) => {
@@ -126,6 +121,4 @@ const Works = (props) => {
       </ul>
     </div>
   );
-};
-
-export default Works;
+}

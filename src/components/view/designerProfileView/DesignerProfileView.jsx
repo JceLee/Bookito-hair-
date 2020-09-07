@@ -1,20 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { BackTop } from "antd";
-import DesignerTop from "./designerTop/DesignerTop.jsx";
-import DesignerBottom from "./designerBottom/DesignerBottom.jsx";
+import DesignerProfileTop from "./designerProfileTop/DesignerProfileTop.jsx";
+import DesignerProfileBottom from "./designerProfileBottom/DesignerProfileBottom.jsx";
 import { useSelector } from "react-redux";
 
-const DesignerProfileView = () => {
+export default function DesignerProfileView() {
   const designers = useSelector((state) => state.firestore.designers);
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const designerId = urlParams.get("uid");
-  const found = designers.find((element) => element.uid === designerId);
-  // console.log(designerId);
-  // console.log(found);
-  // console.log(designers);
-
+  const selectedDesigner = designers.find(
+    (element) => element.uid === designerId
+  );
   const {
     isAuthenticated,
     fname,
@@ -28,12 +26,13 @@ const DesignerProfileView = () => {
     services,
     hours,
     reviews,
-  } = found;
+  } = selectedDesigner;
+  console.log(selectedDesigner);
 
   return (
     <BrowserRouter>
       <div className="designerProfileView">
-        <DesignerTop
+        <DesignerProfileTop
           isAuthenticated={isAuthenticated}
           fname={fname}
           lname={lname}
@@ -42,9 +41,9 @@ const DesignerProfileView = () => {
           works={works}
           location={location}
           img={profile}
+          services={services}
         />
-
-        <DesignerBottom
+        <DesignerProfileBottom
           fname={fname}
           location={location}
           activity={activity}
@@ -54,13 +53,10 @@ const DesignerProfileView = () => {
           hours={hours}
           reviews={reviews}
         />
-
-        <BackTop visibilityHeight={0}>
+        <BackTop>
           <div className="backTopButton">Top</div>
         </BackTop>
       </div>
     </BrowserRouter>
   );
-};
-
-export default DesignerProfileView;
+}

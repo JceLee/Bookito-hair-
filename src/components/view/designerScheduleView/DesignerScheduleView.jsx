@@ -168,13 +168,55 @@ export default function DesignerSchedule(props) {
   const createTimeSelect = (dayAndDate) => {
     const day = dayAndDate.substring(0, 3);
     const appointmentArray = [
-      { date: "Thu Sep 03 2020", time: "08:00" },
-      { date: "Wed Sep 02 2020", time: "08:30" },
-      { date: "Wed Sep 09 2020", time: "09:00" },
-      { date: "Wed Sep 16 2020", time: "11:00" },
-      { date: "Wed Sep 23 2020", time: "12:00" },
-      { date: "Wed Sep 30 2020", time: "12:30" },
-      { date: "Wed Sep 02 2020", time: "15:00" },
+      {
+        date: "Thu Sep 03 2020",
+        time: "08:00",
+        serviceName: "Male hair cut",
+        price: 50,
+        userName: "ddddddd",
+      },
+      {
+        date: "Wed Sep 02 2020",
+        time: "08:30",
+        serviceName: "Male hair cut",
+        price: 50,
+        userName: "ddddddd",
+      },
+      {
+        date: "Wed Sep 09 2020",
+        time: "09:00",
+        serviceName: "Male hair cut",
+        price: 50,
+        userName: "ddddddd",
+      },
+      {
+        date: "Wed Sep 16 2020",
+        time: "11:00",
+        serviceName: "Male hair cut",
+        price: 50,
+        userName: "ddddddd",
+      },
+      {
+        date: "Wed Sep 23 2020",
+        time: "12:00",
+        serviceName: "Male hair cut",
+        price: 50,
+        userName: "ddddddd",
+      },
+      {
+        date: "Wed Sep 30 2020",
+        time: "12:30",
+        serviceName: "Male hair cut",
+        price: 50,
+        userName: "ddddddd",
+      },
+      {
+        date: "Wed Sep 02 2020",
+        time: "15:00",
+        serviceName: "Male hair cut",
+        price: 50,
+        userName: "ddddddd",
+      },
     ];
     const [starRawTime, endRawTime] = hours[day][0].tradingHours;
     const closed = hours[day][0].closed;

@@ -1,39 +1,33 @@
 import React, { useState } from "react";
 import { Checkbox, Form, Space, Slider } from "antd";
+import formatTime from "../../../../../helpers/timeFunctions";
 
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const minValueInSlider = 0; // "00:00"
+const maxValueInSlider = 47; // "23:30"
+const timeConvertingFactor = 30;
+const dash = " - ";
 
 let sliderDisplay;
 let checkboxOffset;
 
-const formatTime = (value) => {
-  value = value > 1439 ? 1439 : value;
-  let hours = Math.floor(value / 60);
-  let minutes = value - hours * 60;
-  if (hours < 10) hours = "0" + hours;
-  if (minutes < 10) minutes = "0" + minutes;
-  if (minutes === 0) minutes = "00";
-  return `${hours}:${minutes}`;
-};
-
-const formatter = (value) => {
-  const formattedValue = formatTime(value * 30);
+const formatter = (minutes) => {
+  const formattedValue = formatTime(minutes * timeConvertingFactor);
   return `${formattedValue}`;
 };
 
-const destructureTimeRange = (value) => {
-  const [startTime, endTime] = value;
-  const convertedStartTime = startTime * 30;
-  const convertedEndTime = endTime * 30;
+const destructureTimeRange = (minutes) => {
+  const [startTime, endTime] = minutes;
+  const convertedStartTime = startTime * timeConvertingFactor;
+  const convertedEndTime = endTime * timeConvertingFactor;
   const from = formatTime(convertedStartTime);
   const to = formatTime(convertedEndTime);
-  const whitespace = " - ";
-  // const startLabel = "Start: ";
-  // const endLabel = "End: ";
-  return { from, whitespace, to };
+  return { from, dash, to };
 };
 
-const HoursForm = () => {
+export default function HoursForm(props) {
+  const { defaultTradingHours } = props;
+  const [defaultStartTime, defaultEndTime] = defaultTradingHours;
   const [DayChecked, setDayChecked] = useState({
     Mon: false,
     Tue: false,
@@ -45,95 +39,94 @@ const HoursForm = () => {
   });
 
   const [FormattedTimes, setFormattedTimes] = useState({
-    Mon: [formatter(16), " - ", formatter(42)],
-    Tue: [formatter(16), " - ", formatter(42)],
-    Wed: [formatter(16), " - ", formatter(42)],
-    Thu: [formatter(16), " - ", formatter(42)],
-    Fri: [formatter(16), " - ", formatter(42)],
-    Sat: [formatter(16), " - ", formatter(42)],
-    Sun: [formatter(16), " - ", formatter(42)],
+    Mon: [formatter(defaultStartTime), dash, formatter(defaultEndTime)],
+    Tue: [formatter(defaultStartTime), dash, formatter(defaultEndTime)],
+    Wed: [formatter(defaultStartTime), dash, formatter(defaultEndTime)],
+    Thu: [formatter(defaultStartTime), dash, formatter(defaultEndTime)],
+    Fri: [formatter(defaultStartTime), dash, formatter(defaultEndTime)],
+    Sat: [formatter(defaultStartTime), dash, formatter(defaultEndTime)],
+    Sun: [formatter(defaultStartTime), dash, formatter(defaultEndTime)],
   });
 
-  const onChangeSlider1 = (value) => {
-    const { from, whitespace, to } = destructureTimeRange(value);
+  const onChangeSlider1 = (minutes) => {
+    const { from, dash, to } = destructureTimeRange(minutes);
     setFormattedTimes((prevValue) => ({
       ...prevValue,
-      Mon: [from, whitespace, to],
+      Mon: [from, dash, to],
     }));
   };
 
-  const onChangeSlider2 = (value) => {
-    const { from, whitespace, to } = destructureTimeRange(value);
+  const onChangeSlider2 = (minutes) => {
+    const { from, dash, to } = destructureTimeRange(minutes);
     setFormattedTimes((prevValue) => ({
       ...prevValue,
-      Tue: [from, whitespace, to],
+      Tue: [from, dash, to],
     }));
   };
 
-  const onChangeSlider3 = (value) => {
-    const { from, whitespace, to } = destructureTimeRange(value);
+  const onChangeSlider3 = (minutes) => {
+    const { from, dash, to } = destructureTimeRange(minutes);
     setFormattedTimes((prevValue) => ({
       ...prevValue,
-      Wed: [from, whitespace, to],
+      Wed: [from, dash, to],
     }));
   };
 
-  const onChangeSlider4 = (value) => {
-    const { from, whitespace, to } = destructureTimeRange(value);
+  const onChangeSlider4 = (minutes) => {
+    const { from, dash, to } = destructureTimeRange(minutes);
     setFormattedTimes((prevValue) => ({
       ...prevValue,
-      Thu: [from, whitespace, to],
+      Thu: [from, dash, to],
     }));
   };
 
-  const onChangeSlider5 = (value) => {
-    const { from, whitespace, to } = destructureTimeRange(value);
+  const onChangeSlider5 = (minutes) => {
+    const { from, dash, to } = destructureTimeRange(minutes);
     setFormattedTimes((prevValue) => ({
       ...prevValue,
-      Fri: [from, whitespace, to],
+      Fri: [from, dash, to],
     }));
   };
 
-  const onChangeSlider6 = (value) => {
-    const { from, whitespace, to } = destructureTimeRange(value);
+  const onChangeSlider6 = (minutes) => {
+    const { from, dash, to } = destructureTimeRange(minutes);
     setFormattedTimes((prevValue) => ({
       ...prevValue,
-      Sat: [from, whitespace, to],
+      Sat: [from, dash, to],
     }));
   };
 
-  const onChangeSlider7 = (value) => {
-    const { from, whitespace, to } = destructureTimeRange(value);
+  const onChangeSlider7 = (minutes) => {
+    const { from, dash, to } = destructureTimeRange(minutes);
     setFormattedTimes((prevValue) => ({
       ...prevValue,
-      Sun: [from, whitespace, to],
+      Sun: [from, dash, to],
     }));
   };
 
-  const selectedDayHandler = (day, value) => {
+  const selectedDayHandler = (day, minutes) => {
     switch (day) {
       case "Mon":
-        return onChangeSlider1(value);
+        return onChangeSlider1(minutes);
       case "Tue":
-        return onChangeSlider2(value);
+        return onChangeSlider2(minutes);
       case "Wed":
-        return onChangeSlider3(value);
+        return onChangeSlider3(minutes);
       case "Thu":
-        return onChangeSlider4(value);
+        return onChangeSlider4(minutes);
       case "Fri":
-        return onChangeSlider5(value);
+        return onChangeSlider5(minutes);
       case "Sat":
-        return onChangeSlider6(value);
+        return onChangeSlider6(minutes);
       case "Sun":
-        return onChangeSlider7(value);
+        return onChangeSlider7(minutes);
       default:
         break;
     }
   };
 
-  const onChange = (e) => {
-    const { name, checked } = e.target;
-    console.log(name, checked);
+  const onChange = (event) => {
+    const { name, checked } = event.target;
     setDayChecked((prevValue) => ({
       ...prevValue,
       [name]: checked,
@@ -150,18 +143,14 @@ const HoursForm = () => {
                 return (
                   <div>
                     {fields.map((field) => {
-                      {
-                        DayChecked[day]
-                          ? (sliderDisplay = "none") &&
-                            (checkboxOffset = "-29px")
-                          : (sliderDisplay = "block") &&
-                            (checkboxOffset = "-48px");
-                      }
+                      DayChecked[day]
+                        ? (sliderDisplay = "none") && (checkboxOffset = "-29px")
+                        : (sliderDisplay = "block") &&
+                          (checkboxOffset = "-48px");
                       return (
                         <Space
                           key={field.key}
                           style={{
-                            // backgroundColor: "rgb(159, 201, 238)",
                             position: "relative",
                             display: "block",
                             alignItems: "center",
@@ -180,8 +169,8 @@ const HoursForm = () => {
                             <Slider
                               allowCross={false}
                               range
-                              min={0}
-                              max={47}
+                              min={minValueInSlider}
+                              max={maxValueInSlider}
                               disabled={DayChecked[day]}
                               onChange={(value) =>
                                 selectedDayHandler(day, value)
@@ -194,7 +183,6 @@ const HoursForm = () => {
                           <span className="formattedTimesInSpan">
                             {DayChecked[day] ? "Holiday" : FormattedTimes[day]}
                           </span>
-
                           <Form.Item
                             {...field}
                             name={[field.name, "closed"]}
@@ -224,6 +212,4 @@ const HoursForm = () => {
       })}
     </div>
   );
-};
-
-export default HoursForm;
+}
