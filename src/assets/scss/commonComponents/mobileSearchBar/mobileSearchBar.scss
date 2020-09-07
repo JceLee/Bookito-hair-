@@ -1,3 +1,5 @@
+@import "../../Mixin.scss";
+
 #mobileSearchBar {
   margin: 0 10%;
   margin-top: 100px;
@@ -6,6 +8,7 @@
     height: 50px;
     border-radius: 25px;
     border: 1px solid #c6c6c6;
+    box-shadow: 0 1px 3px 0 $black;
 
     .ant-input {
       margin-left: 20px;
@@ -19,16 +22,18 @@
   }
 }
 
-.autocompleteDropdownContainer {
-  box-shadow: 0 1px 3px 0 #1b1b1b;
-  padding: 10px;
-  position: absolute;
-  width: 100%;
-  border-radius: 20px;
-  margin-top: 10px;
-  z-index: 1;
-}
+.mobileSearchBarModal {
+  .autocompleteDropdownContainer {
+    box-shadow: 0 1px 3px 0 $black;
+    padding: 10px;
+    position: absolute;
+    width: 100%;
+    border-radius: 20px;
+    margin-top: 10px;
+    z-index: 1;
+  }
 
-.autocompleteDropdownContainer:empty {
-  display: none;
+  .autocompleteDropdownContainer:empty {
+    display: none;
+  }
 }

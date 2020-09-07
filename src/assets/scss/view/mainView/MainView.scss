@@ -15,9 +15,18 @@
 #searchBarForm {
   border: 1px solid #fdfdfd;
   width: 100%;
+}
 
+#mobileSearchBar {
   @include tabletP {
     display: none;
+  }
+}
+
+#mainSearchBar {
+  display: none;
+  @include tabletP {
+    display: flex;
   }
 }
 
