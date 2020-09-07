@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Divider, Card, Typography, Row, Checkbox } from 'antd';
-import '../../../assets/scss/view/designerScheduleView/Slick.scss';
+import React, { useState } from "react";
+import { Divider, Card, Typography, Row, Checkbox } from "antd";
+import "../../../assets/scss/view/designerScheduleView/Slick.scss";
 
 export default function Services() {
   const { Text } = Typography;
@@ -20,7 +20,7 @@ export default function Services() {
   // };
 
   return (
-    <div className='checkboxOption'>
+    <div className="checkboxOption">
       {/* <Card
         style={{ width: '70%' }}
         tabList={services}

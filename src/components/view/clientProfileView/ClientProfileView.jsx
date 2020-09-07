@@ -1,21 +1,31 @@
-import React, { useState } from 'react';
-import { Form, Input, Button, Avatar, Modal } from 'antd';
-import { EditOutlined } from '@ant-design/icons';
-import { useDropzone } from 'react-dropzone';
-import BlackBtn from '../../commonComponents/BlackBtn';
+import React, { useState } from "react";
+import { Form, Input, Button, Avatar, Modal } from "antd";
+import { EditOutlined } from "@ant-design/icons";
+import { useDropzone } from "react-dropzone";
+import BlackBtn from "../../commonComponents/BlackBtn";
+import { useSelector } from "react-redux";
 
 // for testing
 const client = {
   img:
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQNOhpV67XSI4Vz5Z_L7XoWiH7UzZQDBTzS3g&usqp=CAU',
-  fname: 'John',
-  lname: 'Doe',
-  email: 'johndoe@gmail.com',
-  phone: '7781231234',
-  city: 'Vancouver',
-  province: 'BC',
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQNOhpV67XSI4Vz5Z_L7XoWiH7UzZQDBTzS3g&usqp=CAU",
+  fname: "John",
+  lname: "Doe",
+  email: "johndoe@gmail.com",
+  phone: "7781231234",
+  city: "Vancouver",
+  province: "BC",
 };
+
 export default function ClientProfileView() {
+  // kangmin working on here
+
+  const signedInUser = useSelector((state) => state.signedInUser.signedInUser);
+
+  console.log("babo1");
+  console.log(signedInUser);
+  console.log("babo2");
+
   // display inputs upon edit button click
   const [edit, setEdit] = useState(false);
   const editProfile = () => {
@@ -46,7 +56,7 @@ export default function ClientProfileView() {
   // for dropzone
   const [files, setFiles] = useState([]);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: 'image/*',
+    accept: "image/*",
     onDrop: (acceptedFiles) => {
       setFiles(
         acceptedFiles.map((file) =>
@@ -64,57 +74,57 @@ export default function ClientProfileView() {
   ));
 
   return (
-    <div className='clientProfileView'>
-      <Form className='profileForm' {...layout}>
-        <Form.Item className='profilePhoto'>
+    <div className="clientProfileView">
+      <Form className="profileForm" {...layout}>
+        <Form.Item className="profilePhoto">
           <Avatar size={128} src={client.img} />
           {edit ? (
-            <EditOutlined className='editIcon' onClick={modalHandler} />
+            <EditOutlined className="editIcon" onClick={modalHandler} />
           ) : null}
         </Form.Item>
-        <Form.Item className='clientName'>
+        <Form.Item className="clientName">
           <div>
             {client.fname} {client.lname}
           </div>
         </Form.Item>
-        <Form.Item label='Email' className='formItems'>
+        <Form.Item label="Email" className="formItems">
           {edit ? <Input value={client.email} /> : <div>{client.email}</div>}
         </Form.Item>
-        <Form.Item label='Phone' className='formItems'>
+        <Form.Item label="Phone" className="formItems">
           {edit ? <Input value={client.phone} /> : <div>{client.phone}</div>}
         </Form.Item>
-        <Form.Item label='City' className='formItems'>
+        <Form.Item label="City" className="formItems">
           {edit ? <Input value={client.city} /> : <div>{client.city}</div>}
         </Form.Item>
-        <Form.Item label='Province' className='formItems'>
+        <Form.Item label="Province" className="formItems">
           {edit ? (
             <Input value={client.province} />
           ) : (
             <div>{client.province}</div>
           )}
         </Form.Item>
-        <Form.Item className='formItems'>
+        <Form.Item className="formItems">
           {edit ? (
             <BlackBtn
-              className='saveBtn'
-              btnName='Save'
+              className="saveBtn"
+              btnName="Save"
               onClick={saveProfile}
             />
           ) : (
-            <BlackBtn className='editBtn' btnName='Edit' onClick={setEdit} />
+            <BlackBtn className="editBtn" btnName="Edit" onClick={setEdit} />
           )}
         </Form.Item>
       </Form>
       {/* modal */}
       <Modal
-        title='Change Photo'
+        title="Change Photo"
         visible={visible}
         onCancel={modalHandler}
         destroyOnClose={true}
-        className='changePhotoModal'
+        className="changePhotoModal"
         footer={false}
       >
-        <div className='modalProfilePhoto'>
+        <div className="modalProfilePhoto">
           {files.length === 0 ? (
             <Avatar size={128} src={client.img} />
           ) : (
@@ -123,8 +133,8 @@ export default function ClientProfileView() {
         </div>
 
         <div
-          {...getRootProps({ className: 'dropzone' })}
-          className='dragDropContainer'
+          {...getRootProps({ className: "dropzone" })}
+          className="dragDropContainer"
         >
           <input {...getInputProps()} />
           {isDragActive ? (
@@ -133,7 +143,7 @@ export default function ClientProfileView() {
             <p>Drag and drop your photo here, or click to select files</p>
           )}
         </div>
-        <BlackBtn btnName='Save' onClick={saveProfilePhoto} />
+        <BlackBtn btnName="Save" onClick={saveProfilePhoto} />
       </Modal>
     </div>
   );

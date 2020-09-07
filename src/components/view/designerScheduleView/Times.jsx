@@ -1,12 +1,12 @@
-import React from 'react';
-import { Radio } from 'antd';
-import '../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss';
+import React from "react";
+import { Radio } from "antd";
+import "../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss";
 
 export default function Times(props) {
   const { timesSelect } = props;
 
   return (
-    <div className='timeButtons'>
+    <div className="timeButtons">
       {/* <Radio.Group>
         {timesSelect.map((hour, index) => {
           const { time, value, disabled } = hour;

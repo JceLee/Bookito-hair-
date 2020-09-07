@@ -6,16 +6,16 @@
 
   .designerContainer {
     border: 1px red solid;
-  
-    @include tabletP{
+
+    @include tabletP {
       width: 50%;
       float: left;
-    } 
-  
+    }
+
     .listNavBar {
       width: 100%;
       border: 1px blue solid;
-  
+
       .filter {
         height: 30%;
         border: 1px saddlebrown solid;
@@ -27,7 +27,7 @@
       //  float: right;
       //}
     }
-  
+
     .designerList {
       border: 1px blue solid;
     }
@@ -35,12 +35,12 @@
 
   .mapContainer {
     display: none;
-  
-    @include tabletP{
+
+    @include tabletP {
       border: 1px green solid;
       display: flex;
       width: 50%;
       float: right;
-    } 
+    }
   }
 }

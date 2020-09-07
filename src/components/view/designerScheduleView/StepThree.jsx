@@ -1,6 +1,6 @@
-import React from 'react';
-import { List, Button, Typography } from 'antd';
-import '../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss';
+import React from "react";
+import { List, Button, Typography } from "antd";
+import "../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss";
 
 export default function StepThree(props) {
   const { Text } = Typography;
@@ -13,13 +13,13 @@ export default function StepThree(props) {
   } = props;
 
   const getServiceContent = () => {
-    let contentString = '';
+    let contentString = "";
     for (let [key, value] of Object.entries(calculationBox)) {
       if (value === null) {
         continue;
       }
       let { service } = value;
-      contentString += `[${service}]` + ' ';
+      contentString += `[${service}]` + " ";
     }
     return contentString;
   };
@@ -27,15 +27,15 @@ export default function StepThree(props) {
   const titles = [
     {
       id: 1,
-      title: 'Date',
+      title: "Date",
       contents: displayedDay.toLocaleDateString(),
     },
     {
       id: 2,
-      title: 'Time',
+      title: "Time",
       contents: bookingTime,
     },
-    { id: 3, title: 'Service', contents: getServiceContent() },
+    { id: 3, title: "Service", contents: getServiceContent() },
   ];
 
   const stepChoice = (item) => {
@@ -47,22 +47,22 @@ export default function StepThree(props) {
   };
 
   return (
-    <div id='stepThreeTopId'>
-      <p id='title3'>Final Check</p>
-      <div className='confirmation'>
+    <div id="stepThreeTopId">
+      <p id="title3">Final Check</p>
+      <div className="confirmation">
         <List
-          itemLayout='horizontal'
+          itemLayout="horizontal"
           dataSource={titles}
           renderItem={(item) => {
             // console.log(item);
             return (
               <List.Item>
                 <Text strong>{item.title}</Text>
-                <div className='bookingContents'>
-                  <span className='content'>{item.contents}</span>
+                <div className="bookingContents">
+                  <span className="content">{item.contents}</span>
                 </div>
                 <Button
-                  type='link'
+                  type="link"
                   value={item.id}
                   id={item.id}
                   onClick={() => stepChoice(item)}
