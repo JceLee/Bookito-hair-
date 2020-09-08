@@ -8,7 +8,8 @@ import AppointmentEditForm from "./AppointmentEditForm";
 import Drawer from "@material-ui/core/Drawer";
 
 export default function TooltipContent(props) {
-  const { appointmentData, formatDate, onOpenButtonClick } = props;
+  const { appointmentData, formatDate } = props;
+  const { date, time, serviceName, phoneNumber, userName } = appointmentData;
 
   return (
     <div className="tooltipContent">
@@ -18,7 +19,7 @@ export default function TooltipContent(props) {
         </Grid>
         <Grid item xs={10}>
           <div>
-            <div className="title dateAndTitle">{appointmentData.title}</div>
+            <div className="title dateAndTitle">{userName}</div>
             <div className="text dateAndTitle">
               {formatDate(appointmentData.startDate, {
                 day: "numeric",
@@ -50,7 +51,7 @@ export default function TooltipContent(props) {
           <InfoOutlinedIcon className="icon" />
         </Grid>
         <Grid item xs={10}>
-          <span className="text">{appointmentData.style}</span>
+          <span className="text">{serviceName}</span>
         </Grid>
       </Grid>
       <Grid container alignItems="center" className="contentContainer">
@@ -58,7 +59,7 @@ export default function TooltipContent(props) {
           <LocalPhoneOutlinedIcon className="icon" />
         </Grid>
         <Grid item xs={10}>
-          <span className="text">{appointmentData.phoneNumber}</span>
+          <span className="text">{phoneNumber}</span>
         </Grid>
       </Grid>
     </div>

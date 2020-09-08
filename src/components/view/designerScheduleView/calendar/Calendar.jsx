@@ -29,7 +29,7 @@ import { fade } from "@material-ui/core/styles/colorManipulator";
 export default function Calendar(props) {
   const currentDate = new Date();
 
-  const { newRequests } = props;
+  const { newRequests, appointmentArray } = props;
 
   const [newRequestState, setNewRequestState] = useState(false);
   const [addAppointmentModalState, setAddAppointmentModal] = useState(false);
@@ -147,7 +147,7 @@ export default function Calendar(props) {
     <>
       <div className="calendar">
         <Paper>
-          <Scheduler data={appointments}>
+          <Scheduler data={appointmentArray}>
             <ViewState defaultCurrentDate={currentDate} />
             <MonthView timeTableCellComponent={grayMonthTimeTableCell} />
             <WeekView
