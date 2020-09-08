@@ -41,10 +41,10 @@ export default function Map(props) {
     }, [defaultCenter, initialLocationString, props.designers]);
 
     return (
-        <div style={{ height: '89.7vh', width: '100%', zIndex: 10 }}>
+        <div style={{ height: "91.2vh", width: "100%", zIndex: 10 }}>
             <GoogleMapReact
                 className="mapComponent"
-                bootstrapURLKeys={{ key: 'AIzaSyDUz5tzN9Fm76pLUherzsDE-jG0LKBEhIc' }}
+                bootstrapURLKeys={{ key: "AIzaSyDUz5tzN9Fm76pLUherzsDE-jG0LKBEhIc" }}
                 // center={location}
                 defaultCenter={defaultCenter}
                 defaultZoom={15}

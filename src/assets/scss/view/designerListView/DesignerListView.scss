@@ -2,28 +2,25 @@
 
 .listingContainer {
   border: 1px black solid;
-  height: 90vh;
-
+  height: 91.5vh;
 
   .designerContainer {
     position: relative;
     border: 1px red solid;
-    height: 90vh;
+    height: 91.5vh;
     width: 100vw;
+
+    @include tabletP{
+      width: 60vw;
+      float: left;
+    }
 
     .ant-drawer-content-wrapper {
       width: 100vw !important;
 
       @include tabletP{
-        width: 49.1vw !important;
+        width: 38.5vw !important;
       }
-    }
-
-    
-  
-    @include tabletP{
-      width: 50%;
-      float: left;
     }
 
     .listNavBar {
@@ -47,24 +44,29 @@
     }
   }
 
-  .mapContainer {
+  .desktopOnly {
     display: none;
-<<<<<<< HEAD
-
-    @include tabletP {
-      border: 1px green solid;
-      display: flex;
-      width: 50%;
-      float: right;
-=======
-    position: relative;
-  
     @include tabletP{
-      border: 1px green solid;
-      display: flex;
-      // width: 50%;
-      // float: right;
->>>>>>> Add map drawer for mobile listing view
+      display: block;
+    }
+  }
+
+  .mobileOnly {
+    display: block;
+    @include tabletP{
+      display: none;
+    }
+  }
+
+  .mapCloseButton {
+    position: absolute;
+    margin: 1em;
+    z-index: 50;
+  }
+
+  .mapContainer {
+    @include tabletP{
+      width: 38.5vw;
     }
   }
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Drawer} from 'antd';
+import { Button, Drawer } from 'antd';
 import queryString from "query-string";
 import { load_database } from "../../../actions/firebaseAction";
 import { firebaseStore } from "../../../config/fbConfig";
@@ -7,54 +7,91 @@ import { useDispatch, useSelector } from "react-redux";
 import DesignerCardComponent from "./designerCardComponent/DesignerCardComponent";
 import DesignerListFilter from "./DesignerListFilter";
 import Map from "../../commonComponents/map/Map";
+import { CloseOutlined } from '@ant-design/icons';
+
 
 export default function DesignerListView(props) {
   const designers = useSelector((state) => state.firestore.designers);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const params = queryString.parse(props.location.search);
-    const newDesigners = [];
-    firebaseStore
-      .collection("users")
-      .where("location", "==", params["location"])
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.docs.forEach((doc) => {
-          newDesigners.push(doc.data());
-        });
-        dispatch(load_database(newDesigners));
-      });
+    // const params = queryString.parse(props.location.search);
+    // const newDesigners = [];
+    // firebaseStore
+    //   .collection("users")
+    //   .where("location", "==", params["location"])
+    //   .get()
+    //   .then((querySnapshot) => {
+    //     querySnapshot.docs.forEach((doc) => {
+    //       newDesigners.push(doc.data());
+    //     });
+    //     dispatch(load_database(newDesigners));
+    //   });
   }, [dispatch]);
 
-  const [visible, setVisible] = useState(false);
+  const [mapVisibleMobile, setMapVisibleMobile] = useState(false);
+  const [mapVisibleDesktop, setMapVisibleDesktop] = useState(true);
 
-  const showDrawer = () => {
-    setVisible(true);
+  // Desktop map controls
+  const openMapDesktop = () => {
+    setMapVisibleDesktop(true);
+  };
+  const closeMapDesktop = () => {
+    setMapVisibleDesktop(false);
   };
 
-  const onClose = () => {
-    setVisible(false);
+  // Mobile map controls
+  const openMapMobile = () => {
+    setMapVisibleMobile(true);
+  };
+  const closeMapMobile = () => {
+    setMapVisibleMobile(false);
   };
 
   return (
     <>
       <div className="listingContainer">
-        <div className="designerContainer" >
+        <div className="designerContainer"> {/*style={{ width: mapVisibleDesktop ? "100vw" : "50vw" }}>*/}
 
-          <Button type="primary" onClick={showDrawer}>
-            Open
+          {/* Desktop map toggle button - used to show map if closed by the user */}
+          <Button className="desktopOnly" onClick={openMapDesktop} hidden={mapVisibleDesktop}>
+            <span role="img" aria-label="map">🗺️ Show map</span>
           </Button>
-          <Drawer
+          {/* Mobile map toggle button - used to open map drawer */}
+          <Button className="mobileOnly"onClick={openMapMobile} shape="circle">
+            <span role="img" aria-label="map">🗺️</span>
+          </Button>
+
+          {mapVisibleDesktop && <Drawer
               // title="Basic Drawer"
               placement="right"
               closable={false}
-              onClose={onClose}
-              visible={visible}
+              onClose={closeMapMobile}
+              visible={mapVisibleMobile}
               getContainer={false}
               style={{ position: "absolute"}}
             >
-            <div > {/*className="mapContainer">*/}
+
+            {/* Desktop map toggle button - used to show map if closed by the user */}
+            <Button
+                className="desktopOnly mapCloseButton"
+                type="primary"
+                shape="circle"
+                onClick={closeMapDesktop}
+            >
+                <CloseOutlined />
+            </Button>
+            {/* Desktop map toggle button - used to show map if closed by the user */}
+            <Button
+                className="mobileOnly mapCloseButton"
+                type="primary"
+                shape="circle"
+                onClick={closeMapMobile}
+            >
+                <CloseOutlined />
+            </Button>
+
+            <div className="mapContainer">
               <Map initialLocationString={props.location.search} designers={[
                 {
                   id: 0,
@@ -95,7 +132,7 @@ export default function DesignerListView(props) {
                 }
               ]}/>
             </div>
-          </Drawer>
+          </Drawer>}
 
           <div className="listNavBar">
             listNavBar

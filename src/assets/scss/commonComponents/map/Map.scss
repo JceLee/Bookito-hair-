@@ -11,10 +11,16 @@
     // border-radius: 100%;
     user-select: none;
     transform: translate(-50%, -50%);
-    z-index: 100;
+    z-index: 50;
 }
-.map {
 
+.mapComponent {
+    margin: 1em;
+
+    // visibility: hidden !important;
+
+    position: absolute !important;
+    // .gm-fullscreen-control
 }
 
 .markerButton {
