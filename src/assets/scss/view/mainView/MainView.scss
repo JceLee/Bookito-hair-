@@ -124,6 +124,10 @@
           width: 150px;
           height: 150px;
           padding: 0;
+          + div:last-child {
+            margin-right: 0px;
+          }
+
           .designerImage {
             width: 150px;
             height: 150px;
