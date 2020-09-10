@@ -27,8 +27,10 @@ export default function NewDesignerCarousel() {
   ];
 
   return (
-    <div className="newDesignersSection">
-      <div className="newDesignerText">New Designers</div>
+    <div className="newDesignersMobileSection">
+      <div className="newDesignersHeading">
+        <h2>New Designers</h2>
+      </div>
       <Slider {...settings}>
         {mockCards.map((card, inx) => {
           return (

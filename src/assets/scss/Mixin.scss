@@ -53,3 +53,10 @@ $green: #00ff00;
     @content;
   }
 }
+
+// for main page's new designer secion
+@mixin mainPageNewDesigners1090 {
+  @media only screen and (min-width: 1090px) {
+    @content;
+  }
+}
