@@ -14,13 +14,11 @@ const defaultEndTime = 42; // 21:00
 const defaultTradingHours = [defaultStartTime, defaultEndTime];
 const searchBarHeight = 64;
 const avatarSize = 64;
-
 const { Panel } = Collapse;
 const layout = {
   labelCol: { span: 4 },
   wrapperCol: { span: 14 },
 };
-
 const validateMessages = {
   required: "Required",
   types: {
@@ -30,7 +28,6 @@ const validateMessages = {
     range: "Invalid",
   },
 };
-
 const formInitialValues = {
   services: {
     Cut: [],

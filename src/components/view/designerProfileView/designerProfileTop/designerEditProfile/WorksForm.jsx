@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Upload, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
-const maxWorkImages = 8;
+const maxNumberOfWorkImages = 8;
 
 // To set file.preview
 // https://ant.design/components/upload/#components-upload-demo-picture-card
@@ -80,7 +80,7 @@ export default function WorksForm(props) {
         onPreview={handlePreview}
         onChange={handleChange}
       >
-        {fileList.length >= maxWorkImages ? null : uploadButton}
+        {fileList.length >= maxNumberOfWorkImages ? null : uploadButton}
       </Upload>
       <Modal
         className="workModal"

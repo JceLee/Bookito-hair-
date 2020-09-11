@@ -1,28 +1,19 @@
 import React, { useState } from "react";
 import { Checkbox, Form, Space, Slider } from "antd";
-import formatTime from "../../../../../helpers/timeFunctions";
+import formatTime, {
+  destructureTimeRange,
+} from "../../../../../helpers/timeFunctions";
 
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const minValueInSlider = 0; // "00:00"
 const maxValueInSlider = 47; // "23:30"
 const timeConvertingFactor = 30;
-const dash = " - ";
-
 let sliderDisplay;
 let checkboxOffset;
 
 const formatter = (minutes) => {
   const formattedValue = formatTime(minutes * timeConvertingFactor);
   return `${formattedValue}`;
-};
-
-const destructureTimeRange = (minutes) => {
-  const [startTime, endTime] = minutes;
-  const convertedStartTime = startTime * timeConvertingFactor;
-  const convertedEndTime = endTime * timeConvertingFactor;
-  const from = formatTime(convertedStartTime);
-  const to = formatTime(convertedEndTime);
-  return { from, dash, to };
 };
 
 export default function HoursForm(props) {
@@ -39,93 +30,24 @@ export default function HoursForm(props) {
   });
 
   const [FormattedTimes, setFormattedTimes] = useState({
-    Mon: [formatter(defaultStartTime), dash, formatter(defaultEndTime)],
-    Tue: [formatter(defaultStartTime), dash, formatter(defaultEndTime)],
-    Wed: [formatter(defaultStartTime), dash, formatter(defaultEndTime)],
-    Thu: [formatter(defaultStartTime), dash, formatter(defaultEndTime)],
-    Fri: [formatter(defaultStartTime), dash, formatter(defaultEndTime)],
-    Sat: [formatter(defaultStartTime), dash, formatter(defaultEndTime)],
-    Sun: [formatter(defaultStartTime), dash, formatter(defaultEndTime)],
+    Mon: [formatter(defaultStartTime), formatter(defaultEndTime)],
+    Tue: [formatter(defaultStartTime), formatter(defaultEndTime)],
+    Wed: [formatter(defaultStartTime), formatter(defaultEndTime)],
+    Thu: [formatter(defaultStartTime), formatter(defaultEndTime)],
+    Fri: [formatter(defaultStartTime), formatter(defaultEndTime)],
+    Sat: [formatter(defaultStartTime), formatter(defaultEndTime)],
+    Sun: [formatter(defaultStartTime), formatter(defaultEndTime)],
   });
 
-  const onChangeSlider1 = (minutes) => {
-    const { from, dash, to } = destructureTimeRange(minutes);
+  const onChangeSliderHandler = (day, minutes) => {
+    const [from, to] = destructureTimeRange(minutes);
     setFormattedTimes((prevValue) => ({
       ...prevValue,
-      Mon: [from, dash, to],
+      [day]: [from, to],
     }));
   };
 
-  const onChangeSlider2 = (minutes) => {
-    const { from, dash, to } = destructureTimeRange(minutes);
-    setFormattedTimes((prevValue) => ({
-      ...prevValue,
-      Tue: [from, dash, to],
-    }));
-  };
-
-  const onChangeSlider3 = (minutes) => {
-    const { from, dash, to } = destructureTimeRange(minutes);
-    setFormattedTimes((prevValue) => ({
-      ...prevValue,
-      Wed: [from, dash, to],
-    }));
-  };
-
-  const onChangeSlider4 = (minutes) => {
-    const { from, dash, to } = destructureTimeRange(minutes);
-    setFormattedTimes((prevValue) => ({
-      ...prevValue,
-      Thu: [from, dash, to],
-    }));
-  };
-
-  const onChangeSlider5 = (minutes) => {
-    const { from, dash, to } = destructureTimeRange(minutes);
-    setFormattedTimes((prevValue) => ({
-      ...prevValue,
-      Fri: [from, dash, to],
-    }));
-  };
-
-  const onChangeSlider6 = (minutes) => {
-    const { from, dash, to } = destructureTimeRange(minutes);
-    setFormattedTimes((prevValue) => ({
-      ...prevValue,
-      Sat: [from, dash, to],
-    }));
-  };
-
-  const onChangeSlider7 = (minutes) => {
-    const { from, dash, to } = destructureTimeRange(minutes);
-    setFormattedTimes((prevValue) => ({
-      ...prevValue,
-      Sun: [from, dash, to],
-    }));
-  };
-
-  const selectedDayHandler = (day, minutes) => {
-    switch (day) {
-      case "Mon":
-        return onChangeSlider1(minutes);
-      case "Tue":
-        return onChangeSlider2(minutes);
-      case "Wed":
-        return onChangeSlider3(minutes);
-      case "Thu":
-        return onChangeSlider4(minutes);
-      case "Fri":
-        return onChangeSlider5(minutes);
-      case "Sat":
-        return onChangeSlider6(minutes);
-      case "Sun":
-        return onChangeSlider7(minutes);
-      default:
-        break;
-    }
-  };
-
-  const onChange = (event) => {
+  const onChangeCheckboxHandler = (event) => {
     const { name, checked } = event.target;
     setDayChecked((prevValue) => ({
       ...prevValue,
@@ -136,6 +58,7 @@ export default function HoursForm(props) {
   return (
     <div className="editHours">
       {days.map((day) => {
+        const [startTime, endTime] = FormattedTimes[day];
         return (
           <div key={day}>
             <Form.List name={["hours", `${day}`]}>
@@ -172,8 +95,8 @@ export default function HoursForm(props) {
                               min={minValueInSlider}
                               max={maxValueInSlider}
                               disabled={DayChecked[day]}
-                              onChange={(value) =>
-                                selectedDayHandler(day, value)
+                              onChange={(minutes) =>
+                                onChangeSliderHandler(day, minutes)
                               }
                               tooltipPlacement="bottom"
                               tipFormatter={formatter}
@@ -181,7 +104,9 @@ export default function HoursForm(props) {
                             />
                           </Form.Item>
                           <span className="formattedTimesInSpan">
-                            {DayChecked[day] ? "Holiday" : FormattedTimes[day]}
+                            {DayChecked[day]
+                              ? "Holiday"
+                              : `${startTime} - ${endTime}`}
                           </span>
                           <Form.Item
                             {...field}
@@ -194,7 +119,7 @@ export default function HoursForm(props) {
                               className="hoursCheckbox"
                               checked={DayChecked[day]}
                               name={day}
-                              onChange={onChange}
+                              onChange={onChangeCheckboxHandler}
                               style={{ top: `${checkboxOffset}` }}
                             >
                               Closed

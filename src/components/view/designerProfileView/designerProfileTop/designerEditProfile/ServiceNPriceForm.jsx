@@ -7,7 +7,6 @@ const tapNames = ["Cut", "Style", "Perm", "Color", "Clinic", "Promo"];
 
 export default function ServiceNPriceForm(props) {
   const { services } = props;
-
   return (
     <Tabs type="card">
       {tapNames.map((tap) => {

@@ -1,7 +1,6 @@
 const maxMinuteValueInDay = 1439; // 60mins * 24hours = 1440
 const minutesInHour = 60;
 const timeConvertingFactor = 30;
-const dash = " - ";
 
 export default function formatTime(value) {
   value = value > maxMinuteValueInDay ? maxMinuteValueInDay : value;
@@ -13,11 +12,11 @@ export default function formatTime(value) {
   return `${hours}:${minutes}`;
 }
 
-export function displayTime(value) {
+export function destructureTimeRange(value) {
   const [startTime, endTime] = value;
   const convertedStartTime = startTime * timeConvertingFactor;
   const convertedEndTime = endTime * timeConvertingFactor;
   const from = formatTime(convertedStartTime);
   const to = formatTime(convertedEndTime);
-  return [from, dash, to];
+  return [from, to];
 }

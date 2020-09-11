@@ -1,5 +1,5 @@
 import React from "react";
-import { displayTime } from "../../../../helpers/timeFunctions";
+import { destructureTimeRange } from "../../../../helpers/timeFunctions";
 
 export default function Hours(props) {
   const { id, hours } = props;
@@ -10,13 +10,18 @@ export default function Hours(props) {
       <table>
         <tbody>
           {days.map((day) => {
+            const [startTime, endTime] = destructureTimeRange(
+              hours[day][0].tradingHours
+            );
             return (
               <tr key={day}>
                 <td>{day}</td>
                 {hours[day][0].closed ? (
                   <td>Closed</td>
                 ) : (
-                  <td>{displayTime(hours[day][0].tradingHours)}</td>
+                  <td>
+                    {startTime} - {endTime}
+                  </td>
                 )}
               </tr>
             );
