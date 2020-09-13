@@ -12,61 +12,72 @@ export default function MainSearchBar() {
   const [address, setAddress] = useState("");
   const [form] = Form.useForm();
   const designerTypes = ["Hair Designer", "Nail Artist", "MakeUp Artist"];
-  const desktopWidth = 1024;
-
-  var screenWidth = window.innerWidth;
+  const tabletLWidth = 1024;
+  const half = 2;
   var heightToShowSearchBarOnNav = null;
 
   const setSelectedType = (value) => {
     setDesignerType(value);
   };
 
-  //#region SearchBar related functions
+  const hide = (element) => {
+    document.getElementById(element).style.display = "none";
+  };
+
+  const show = (element) => {
+    document.getElementById(element).style.display = "flex";
+  };
+
+  //#region Functions related SearchBar
   // calculate and set height to show search bar on nav bar
   useEffect(() => {
     heightToShowSearchBarOnNav =
-      (window.pageYOffset +
-        document.getElementById("searchBarForm").clientHeight) *
-      -1;
-  }, []);
+      (window.pageYOffset + document.getElementById("searchBarForm").clientHeight) * -1;
+  });
 
   // give css when search bar sticks on nav bar
-  const stickSearchBarOnNavBar = () => {
+  const stickSearchBarOnNavBar = (width) => {
     var searchBarHeight = document.getElementById("mainSearchBar").clientHeight;
     var navBarHeight = document.getElementById("header").clientHeight;
-    var searchBarMarginOnNavBar = (navBarHeight - searchBarHeight) / 2 + "px";
+    var searchBarMarginOnNavBar = (navBarHeight - searchBarHeight) / half + "px";
 
-    document.getElementById("searchBarForm").style.position = "fixed";
-    document.getElementById("searchBarForm").style.zIndex = 2;
-    document.getElementById(
-      "searchBarForm"
-    ).style.top = searchBarMarginOnNavBar;
+    if (width < tabletLWidth) {
+      hide("logo");
+      hide("menuBtn");
+    }
+
+    document.getElementById("searchBarForm").classList.add("stickedSearchBarOnNav");
+    document.getElementById("searchBarForm").style.top = searchBarMarginOnNavBar;
     document.getElementById("mainSearchBar").style.textAlign = "center";
     document.getElementById("mainSearchBar").style.marginTop = 0;
   };
 
   // give css when search bar is taken off from nav bar
-  const takeSearchBarOffFromNavBar = () => {
-    document.getElementById("searchBarForm").style.position = "unset";
-    document.getElementById("searchBarForm").style.zIndex = "unset";
+  const takeSearchBarOffFromNavBar = (width) => {
+    show("logo");
+    show("menuBtn");
+
+    document.getElementById("searchBarForm").classList.remove("stickedSearchBarOnNav");
     document.getElementById("searchBarForm").style.top = "unset";
     document.getElementById("mainSearchBar").style.textAlign = "unset";
-    if (screenWidth < desktopWidth)
+
+    if (width <= tabletLWidth) {
       document.getElementById("mainSearchBar").style.marginTop = "30%";
-    else document.getElementById("mainSearchBar").style.marginTop = "15%";
+    } else {
+      document.getElementById("mainSearchBar").style.marginTop = "15%";
+    }
   };
 
   useScrollPosition(({ prevPos, currPos }) => {
-    console.log(` ${currPos.y} : ${heightToShowSearchBarOnNav}`);
     if (currPos.y < heightToShowSearchBarOnNav) {
-      stickSearchBarOnNavBar();
+      stickSearchBarOnNavBar(window.innerWidth);
     } else {
-      takeSearchBarOffFromNavBar();
+      takeSearchBarOffFromNavBar(window.innerWidth);
     }
   });
   //#endregion
 
-  //#region Location related functions
+  //#region Functions related Location
   useEffect(() => {
     // TODO: is setFieldsValue working as intended?
     form.setFieldsValue({
@@ -104,19 +115,8 @@ export default function MainSearchBar() {
 
   const history = useHistory();
 
-  const onSelected = (e) => {
-    console.log(e.target.value + " selected");
-    setDesignerType(e.target.value);
-  };
-
   const handleSearch = (location) => {
-    // if (document.getElementById("logo").style.display === "none") {
-    //   show("logo");
-    //   show("menuBtn");
-    // }
-    const route = `/designer_list?type=${designerType}${
-      location ? `&location=${location}` : ""
-    }`;
+    const route = `/designer_list?type=${designerType}${location ? `&location=${location}` : ""}`;
     console.log(route);
     window.scrollTo(0, 0);
     history.push(route);
@@ -125,10 +125,7 @@ export default function MainSearchBar() {
   const handleGeolocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        reverseGeocode(
-          position.coords.latitude,
-          position.coords.longitude
-        ).then((address) => {
+        reverseGeocode(position.coords.latitude, position.coords.longitude).then((address) => {
           if (address) {
             setAddress(address);
           } else {
@@ -159,11 +156,7 @@ export default function MainSearchBar() {
           })}
         </Select>
         <Form form={form}>
-          <Form.Item
-            name="addressInput"
-            initialValue=""
-            rules={[{ required: true }]}
-          >
+          <Form.Item name="addressInput" initialValue="" rules={[{ required: true }]}>
             <LocationInput
               address={address}
               clearAddress={clearAddress}

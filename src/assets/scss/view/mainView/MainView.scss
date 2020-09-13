@@ -14,20 +14,15 @@
 
 #searchBarForm {
   border: 1px solid #fdfdfd;
-  width: 100%;
+  z-index: 2;
 }
 
-#mobileSearchBar {
-  @include tabletP {
-    display: none;
-  }
-}
-
-#mainSearchBar {
-  display: none;
-  @include tabletP {
-    display: flex;
-  }
+.stickedSearchBarOnNav {
+  position: fixed;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  z-index: 2;
 }
 
 // annoucement section

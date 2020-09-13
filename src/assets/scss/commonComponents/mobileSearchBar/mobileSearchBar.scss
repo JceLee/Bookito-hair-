@@ -7,7 +7,7 @@
   .ant-input-affix-wrapper {
     height: 50px;
     border-radius: 25px;
-    border: 1px solid #c6c6c6;
+    border: 1px solid $searchBarBorderColor;
     box-shadow: 0 1px 3px 0 $black;
 
     .ant-input {
