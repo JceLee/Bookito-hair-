@@ -65,76 +65,74 @@
 .newDesignersDesktopSection {
   display: none;
   margin: 50px;
+  height: 50vh;
 
   @include tabletP {
     display: block;
+  }
+  @include mainPageNewDesigners1090 {
+    display: flex;
   }
 
   .newDesignersHeading {
     padding: 0 50px;
   }
-  .designerImagesContainer {
-    height: 50vh;
+
+  .leftSection {
+    display: none;
     @include mainPageNewDesigners1090 {
-      display: flex;
+      display: block;
+      width: 30%;
     }
-
-    .leftSection {
+    .topLine {
+      @include mainPageNewDesigners1090 {
+        font-size: 30pt;
+        font-weight: 500;
+      }
+    }
+    .bottomLine {
+      @include mainPageNewDesigners1090 {
+        font-weight: 300;
+      }
+    }
+  }
+  .mobileNewDesignersHeaderSection {
+    font-size: 30pt;
+    font-weight: 500;
+    @include mainPageNewDesigners1090 {
       display: none;
-      @include mainPageNewDesigners1090 {
-        display: block;
-        width: 30%;
-      }
-      .topLine {
-        @include mainPageNewDesigners1090 {
-          font-size: 30pt;
-          font-weight: 500;
-        }
-      }
-      .bottomLine {
-        @include mainPageNewDesigners1090 {
-          font-weight: 300;
-        }
-      }
     }
-    .mobileNewDesignersHeaderSection {
-      font-size: 30pt;
-      font-weight: 500;
-      @include mainPageNewDesigners1090 {
-        display: none;
-      }
+  }
+  .rightSection {
+    width: 100%;
+    @include mainPageNewDesigners1090 {
+      width: 70%;
     }
-    .rightSection {
+
+    .designerImagesRow {
       width: 100%;
+      display: flex;
+      margin-top: 20px;
+      justify-content: center;
       @include mainPageNewDesigners1090 {
-        width: 70%;
+        justify-content: flex-end;
       }
 
-      .designerImagesRow {
-        width: 100%;
-        display: flex;
-        margin-top: 20px;
-        justify-content: center;
-        @include mainPageNewDesigners1090 {
-          justify-content: flex-end;
+      .newDesignerCard {
+        margin-right: 20px;
+        width: 150px;
+        height: 150px;
+        padding: 0;
+        + div:last-child {
+          margin-right: 0px;
         }
 
-        .newDesignerCard {
-          margin-right: 20px;
+        .designerImage {
           width: 150px;
           height: 150px;
+        }
+        .ant-card-body {
           padding: 0;
-          + div:last-child {
-            margin-right: 0px;
-          }
-
-          .designerImage {
-            width: 150px;
-            height: 150px;
-          }
-          .ant-card-body {
-            padding: 0;
-          }
         }
       }
     }

@@ -30,12 +30,10 @@ export default function MainView() {
           src="https://cdn.pixabay.com/photo/2016/10/20/18/36/search-1756278_960_720.jpg"
         />
       </div>
-      <div className="newDesignersDesktopSection">
-        <NewDesignersDesktopSection newDesignerImages={newDesignerImages} />
-      </div>
-      <div className="newDesignerMobileSection">
-        <NewDesignerCarousel />
-      </div>
+
+      <NewDesignersDesktopSection newDesignerImages={newDesignerImages} />
+
+      <div className="newDesignerMobileSection"></div>
     </>
   );
 }
