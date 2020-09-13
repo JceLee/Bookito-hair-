@@ -21,7 +21,6 @@ const DesignerProfileView = () => {
   }, []);
 
   const {
-    isAuthenticated,
     fname,
     lname,
     location,

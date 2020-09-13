@@ -6,7 +6,6 @@
 
 // Common components
 @import "./commonComponents/NavBar.scss";
-@import "./commonComponents/SearchBar.scss";
 @import "./commonComponents/ScheduleCard.scss";
 @import "./commonComponents/mobileSearchBar/mobileSearchBar.scss";
 @import "./commonComponents/mobileSearchBar/DesignerTypeModal.scss";
@@ -29,7 +28,7 @@
 @import "view/designerProfileView/DesignerProfileView";
 
 // Auth components
-@import "/commonComponents/Auth.scss";
+@import "commonComponents/LogIn";
 
 .layout {
   background-color: #fdfdfd;

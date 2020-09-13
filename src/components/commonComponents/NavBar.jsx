@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Menu, Dropdown, Button, Typography, Drawer } from "antd";
 import { Link } from "react-router-dom";
 import { MenuOutlined, UserOutlined, BarsOutlined } from "@ant-design/icons";
-// import SignUp from "../view/authView/SignUp";
+import SignUp from "../view/authView/SignUp";
 import LogIn from "../view/authView/LogIn";
 import { useSelector } from "react-redux";
 
@@ -42,6 +42,12 @@ export default function Navbar() {
             <Menu.Item key={inx}>
               <LogIn />
             </Menu.Item>
+          );
+        } else if (menu.name == "Sign up") {
+          return (
+              <Menu.Item key={inx}>
+                <SignUp />
+              </Menu.Item>
           );
         } else {
           return (

@@ -1,19 +1,20 @@
 import React, { useState } from "react";
-import { Modal } from "antd";
+import {Modal, Divider, Button } from "antd";
 import firebase from "firebase/app";
-import { useHistory } from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import { firebaseAuth, firebaseStore } from "../../../config/fbConfig";
 import { useDispatch, useSelector } from "react-redux";
 import {
   sign_in_with_facebook,
   sign_in_with_google,
 } from "../../../actions/signIn";
+import SignUp from "./SignUp";
+import SignUpOption from "./SignUpOption";
 
 export default function LogIn() {
   const [isLoginShowing, setIsLoginShowing] = useState(false);
   const currentUser = useSelector((state) => state.signedInUser.signedInUser);
   const dispatch = useDispatch();
-
   const googleProvider = new firebase.auth.GoogleAuthProvider();
   const faceBookProvider = new firebase.auth.FacebookAuthProvider();
 
@@ -48,8 +49,6 @@ export default function LogIn() {
                 dispatch(sign_in_with_facebook(result));
             });
         }).catch(function(error) {
-
-            console.log("22");
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -127,30 +126,30 @@ export default function LogIn() {
         }
     };
 
-  const testAppointment = () => {
-    const appointment = {
-      customerId: currentUser.uid,
-      designerId: currentUser.uid,
-      dateExample: firebase.firestore.Timestamp.fromDate(
-        new Date("October 30, 2020")
-      ),
-      services: {
-        Cut: [
-          { serviceName: "female cut", price: 35, description: "sample data" },
-        ],
-      },
-      review: { rate: 4.5, content: "very good" },
-    };
-    firebaseStore
-      .collection("appointments")
-      .add(appointment)
-      .then(function (docRef) {
-        console.log("Document written with ID: ", docRef.id);
-      })
-      .catch(function (error) {
-        console.error("Error adding document: ", error);
-      });
-  };
+  // const testAppointment = () => {
+  //   const appointment = {
+  //     customerId: currentUser.uid,
+  //     designerId: currentUser.uid,
+  //     dateExample: firebase.firestore.Timestamp.fromDate(
+  //       new Date("October 30, 2020")
+  //     ),
+  //     services: {
+  //       Cut: [
+  //         { serviceName: "female cut", price: 35, description: "sample data" },
+  //       ],
+  //     },
+  //     review: { rate: 4.5, content: "very good" },
+  //   };
+  //   firebaseStore
+  //     .collection("appointments")
+  //     .add(appointment)
+  //     .then(function (docRef) {
+  //       console.log("Document written with ID: ", docRef.id);
+  //     })
+  //     .catch(function (error) {
+  //       console.error("Error adding document: ", error);
+  //     });
+  // };
 
   const history = useHistory();
 
@@ -162,10 +161,6 @@ export default function LogIn() {
     setIsLoginShowing(!isLoginShowing);
   };
 
-  const handleLoginOk = () => {
-    setIsLoginShowing(!isLoginShowing);
-  };
-
   const handleLoginCancel = () => {
     setIsLoginShowing(!isLoginShowing);
   };
@@ -173,35 +168,34 @@ export default function LogIn() {
   return (
     <div>
       <p onClick={showLoginModal}>Sign In</p>
-
             <Modal
-                title="Sign In"
+                className="loginModal"
                 visible={isLoginShowing}
+                closable={false}
                 onCancel={handleLoginCancel}
-                cancelButtonProps={{ style: { display: 'none' } }}
+                okButtonProps={{ style: { display: "none" } }}
+                cancelButtonProps={{ style: { display: "none" } }}
             >
+              <div className="loginModalContent">
+                <p id="logoFont">Bookito</p>
                 <div>
-                    <div>
-                        <button onClick={signInWithGoogle} className="loginBtn loginBtn--google">
-                            Sign in with Google
-                        </button>
-                    </div>
-                    <div>
-                        <button onClick={signInWithFaceBook} className="loginBtn loginBtn--facebook">
-                            Sign in with Facebook
-                        </button>
-                    </div>
-                    <div>
-                        <button onClick={testAppointment}>
-                            TestAppointment
-                        </button>
-                    </div>
-                    <div>
-                        <button onClick={testAppointment}>
-                            TestReview
-                        </button>
-                    </div>
+                    <button onClick={signInWithGoogle} className="loginBtn loginBtn--google">
+                        Sign in with Google
+                    </button>
                 </div>
+                <div>
+                    <button onClick={signInWithFaceBook} className="loginBtn loginBtn--facebook">
+                        Sign in with Facebook
+                    </button>
+                </div>
+               <Divider> OR </Divider>
+                <div>
+                  <p> Don't have an account? </p>
+                  <SignUpOption
+                      handleLoginCancel = {handleLoginCancel}
+                  />
+                </div>
+              </div>
             </Modal>
         </div>
     );
