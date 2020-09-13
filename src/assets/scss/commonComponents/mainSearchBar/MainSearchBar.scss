@@ -1,0 +1,131 @@
+@import "../../Mixin.scss";
+
+// variables
+$searchBarHeight: 50px;
+$designerTypeSelectorWidth: 200px;
+$locationInputWidth: 400px;
+$locationInputLeftMargin: 25px;
+
+#mainSearchBar {
+  width: 100%;
+  padding: 0 5%;
+  margin-top: 30%;
+  z-index: 1;
+
+  @include desktop {
+    padding: 0 10%;
+    margin-top: 15%;
+  }
+
+  .ant-select {
+    width: $designerTypeSelectorWidth;
+  }
+
+  .ant-select-selector,
+  .ant-input-affix-wrapper {
+    box-shadow: 0 1px 3px 0 $black;
+    height: $searchBarHeight;
+    font-weight: bold;
+    font-size: 12px;
+  }
+
+  .ant-select-selector {
+    z-index: 1;
+    border-radius: 25px;
+
+    .ant-select-selection-search {
+      margin-bottom: 40px;
+    }
+  }
+
+  .ant-form-item {
+    margin-bottom: 0;
+  }
+
+  .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+    border-color: transparent;
+  }
+
+  .ant-select-arrow {
+    font-size: 18px;
+    margin-right: 10px;
+    margin-top: -8px;
+  }
+
+  .ant-select-selection-placeholder,
+  .ant-select-selection-item {
+    text-align: center;
+    line-height: $searchBarHeight;
+  }
+
+  .ant-select-selection-item {
+    font-size: 16px;
+  }
+
+  .ant-input-affix-wrapper {
+    width: $locationInputWidth;
+    margin: 0 0 0 -25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+
+    @include desktop {
+      width: 500px;
+    }
+
+    &:focus,
+    &:hover,
+    &-focused {
+      border-color: transparent;
+    }
+
+    .ant-input {
+      font-weight: 600;
+      margin-left: $locationInputLeftMargin + 10px;
+    }
+  }
+
+  .ant-input-search-icon::before {
+    border-left: transparent;
+  }
+
+  .ant-input-search-icon {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+
+  .autocompleteDropdownContainer {
+    box-shadow: 0 1px 3px 0 #1b1b1b;
+    margin-left: -$locationInputLeftMargin;
+    width: $locationInputWidth;
+
+    padding: 10px;
+    background-color: $white;
+    border-radius: 20px;
+    z-index: 1;
+  }
+
+  .autocompleteDropdownContainer:empty {
+    display: none;
+  }
+}
+
+.ant-select-dropdown {
+  border-radius: 20px;
+  padding: 10px;
+
+  .ant-select-item {
+    transition: none;
+  }
+
+  .ant-select-item-option-selected {
+    background-color: $white;
+    color: rgba(0, 0, 0, 0.65);
+    border-radius: 10px;
+  }
+
+  .ant-select-item-option-active {
+    background-color: $black;
+    color: $white;
+    border-radius: 10px;
+  }
+}

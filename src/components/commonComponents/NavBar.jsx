@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Menu, Dropdown, Button, Typography, Drawer } from "antd";
 import { Link } from "react-router-dom";
-import { MenuOutlined, UserOutlined, BarsOutlined } from "@ant-design/icons";
+import { UserOutlined, BarsOutlined } from "@ant-design/icons";
 import SignUp from "../view/authView/SignUp";
 import LogIn from "../view/authView/LogIn";
 import { useSelector } from "react-redux";
@@ -9,17 +9,7 @@ import { useSelector } from "react-redux";
 const { Title } = Typography;
 
 export default function Navbar() {
-  const [visible, setVisible] = useState(false);
-
   const signedInUser = useSelector((state) => state.signedInUser.signedInUser);
-
-  const showDrawer = () => {
-    setVisible(true);
-  };
-
-  const onClose = () => {
-    setVisible(false);
-  };
 
   const menuItems = [
     { name: "Listing page", link: "/designer_list" },

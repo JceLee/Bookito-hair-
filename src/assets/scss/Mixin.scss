@@ -1,8 +1,6 @@
-$red: #ff0000;
-$blue: #0000ff;
-$yellow: #ffff00;
-$orange: #ffa500;
-$green: #00ff00;
+$black: #1b1b1b;
+$white: #fdfdfd;
+$searchBarBorderColor: #c6c6c6;
 
 @mixin mobileM {
   @media only screen and (min-width: 375px) {
@@ -23,7 +21,7 @@ $green: #00ff00;
 }
 
 @mixin tabletL {
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: 1024px) {
     @content;
   }
 }
