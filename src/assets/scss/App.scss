@@ -1,6 +1,3 @@
-// Montserrat font
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800&display=swap");
-
 // Mixin
 @import "./Mixin.scss";
 
@@ -10,7 +7,8 @@
 // Common components
 @import "./commonComponents/NavBar.scss";
 @import "./commonComponents/ScheduleCard.scss";
-@import "./commonComponents/mobileSearchBar/mobileSearchBar.scss";
+@import "./commonComponents/mobileSearchBar/MobileSearchBar.scss";
+@import "./commonComponents/mainSearchBar/MainSearchBar.scss";
 @import "./commonComponents/mobileSearchBar/DesignerTypeModal.scss";
 @import "./commonComponents/BlackBtn.scss";
 @import "./commonComponents/Spinner.scss";
@@ -39,14 +37,7 @@
 body {
   font-family: "Montserrat", sans-serif;
 }
-.layout {
-  background-color: #fdfdfd;
-}
 
-.outerContent {
-  padding: 0;
-
-  @include tabletP {
-    padding: 0 50px;
-  }
+#layout {
+  background-color: $white;
 }

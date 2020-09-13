@@ -9,17 +9,7 @@ import { useSelector } from "react-redux";
 const { Title } = Typography;
 
 export default function Navbar() {
-  const [visible, setVisible] = useState(false);
-
   const signedInUser = useSelector((state) => state.signedInUser.signedInUser);
-
-  const showDrawer = () => {
-    setVisible(true);
-  };
-
-  const onClose = () => {
-    setVisible(false);
-  };
 
   const menuItems = [
     { name: "Listing page", link: "/designer_list" },
