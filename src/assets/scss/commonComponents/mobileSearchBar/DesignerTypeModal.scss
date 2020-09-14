@@ -1,3 +1,5 @@
+@import "../../Mixin.scss";
+
 .mobileSearchBarModal {
   top: 0;
   margin: 0 auto;
@@ -26,8 +28,8 @@
       }
 
       .ant-radio-button-wrapper:hover {
-        color: #1b1b1b;
-        border: 2px solid #1b1b1b;
+        color: $black;
+        border: 2px solid $black;
       }
 
       .ant-radio-button-wrapper:not(:first-child)::before {
@@ -36,8 +38,8 @@
 
       .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled),
       .ant-radio-button-wrapper-checked:not([class*=" ant-radio-button-wrapper-disabled"]).ant-radio-button-wrapper {
-        border: 2px solid #1b1b1b;
-        color: #1b1b1b;
+        border: 2px solid $black;
+        color: $black;
       }
     }
 
@@ -53,7 +55,7 @@
       .ant-input-affix-wrapper:focus,
       .ant-input-affix-wrapper-focused {
         box-shadow: unset;
-        border: 2px solid #1b1b1b;
+        border: 2px solid $black;
       }
 
       .ant-input-suffix {
@@ -67,6 +69,7 @@
 
       #address-input {
         margin-left: 10px;
+        font-weight: bold;
       }
     }
   }

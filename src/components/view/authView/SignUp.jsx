@@ -12,9 +12,7 @@ export default function SignUp(props) {
     const dispatch = useDispatch();
     const googleProvider = new firebase.auth.GoogleAuthProvider();
     const faceBookProvider = new firebase.auth.FacebookAuthProvider();
-
     const { Option } = Select;
-
     const layout = {
       labelCol: { span: 8 },
       wrapperCol: { span: 16 },
@@ -68,11 +66,9 @@ export default function SignUp(props) {
         setIsSignUpShowing(!isSignUpShowing);
     };
 
-
     const handleSignUpCancel = () => {
         setIsSignUpShowing(!isSignUpShowing);
     };
-
 
     const signUpWithFaceBook = () => {
         firebaseAuth.signInWithPopup(faceBookProvider).then(function(result) {

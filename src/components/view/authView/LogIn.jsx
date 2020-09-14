@@ -37,7 +37,6 @@ export default function LogIn() {
             // ...
         }).then( function() {
             handleLoginCancel();
-            directProfile();
         });
     };
 
@@ -59,7 +58,6 @@ export default function LogIn() {
             // ...
         }).then( function() {
             handleLoginCancel();
-            directProfile();
         });
     };
 
