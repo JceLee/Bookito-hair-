@@ -1,13 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchBarSection from "./SearchBarSection";
 import NewDesignerCarousel from "./NewDesignerCarousel";
 import InfoCard from "./InfoCard";
 import Announcement from "./Announcement";
-import {useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function MainView() {
-
-
   return (
     <>
       <SearchBarSection />

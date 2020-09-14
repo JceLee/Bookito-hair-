@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
-import { Divider, Form, Input, Modal, Button } from 'antd';
-import {firebaseAuth, firebaseStore} from "../../../config/fbConfig";
-import {sign_in_with_facebook, sign_in_with_google} from "../../../actions/signIn";
+import React, { useState } from "react";
+import { Divider, Form, Input, Modal, Button } from "antd";
+import { firebaseAuth, firebaseStore } from "../../../config/fbConfig";
+import {
+  sign_in_with_facebook,
+  sign_in_with_google,
+} from "../../../actions/signIn";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import firebase from "firebase/app";
 import SignUp from "./SignUp";
 
 export default function SignUpOption(props) {
-  const {handleLoginCancel} = props;
+  const { handleLoginCancel } = props;
   const [isSignUpOptionShowing, setIsSignUpOptionShowing] = useState(false);
   const dispatch = useDispatch();
   const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -19,76 +22,73 @@ export default function SignUpOption(props) {
     setIsSignUpOptionShowing(!isSignUpOptionShowing);
   };
 
-
   const handleSignUpOptionCancel = () => {
     setIsSignUpOptionShowing(!isSignUpOptionShowing);
   };
 
   const signUpWithGoogle = () => {
-    firebaseAuth.signInWithPopup(googleProvider).then(function(result) {
-      // The signed-in user info.
-      const user = result.user;
-      console.log("papa1");
-      console.log(result);
-      generateUserDocument(user).then(function (result) {
-        console.log("papa2");
-        console.log(result);
-        dispatch(sign_in_with_google(result));
+    firebaseAuth
+      .signInWithPopup(googleProvider)
+      .then(function (result) {
+        // The signed-in user info.
+        const user = result.user;
+        generateUserDocument(user).then(function (result) {
+          dispatch(sign_in_with_google(result));
+        });
+      })
+      .catch(function (error) {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        const credential = error.credential;
+        // ...
+
+        console.log(errorCode);
+        console.log(errorMessage);
+        console.log(email);
+        console.log(credential);
+      })
+      .then(function () {
+        handleSignUpOptionCancel();
       });
-    }).catch(function(error) {
-
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      const credential = error.credential;
-      // ...
-
-      console.log(errorCode);
-      console.log(errorMessage);
-      console.log(email);
-      console.log(credential);
-
-
-    }).then( function() {
-      handleSignUpOptionCancel();
-    });
   };
 
   const signUpWithFaceBook = () => {
-    firebaseAuth.signInWithPopup(faceBookProvider).then(function(result) {
-      // The signed-in user info.
-      const user = result.user;
-      console.log("facebook1");
-      console.log(user);
-      console.log('facebook12');
-      generateUserDocument(user).then(function (result) {
-        dispatch(sign_in_with_facebook(result));
+    firebaseAuth
+      .signInWithPopup(faceBookProvider)
+      .then(function (result) {
+        // The signed-in user info.
+        const user = result.user;
+        console.log("facebook1");
+        console.log(user);
+        console.log("facebook12");
+        generateUserDocument(user).then(function (result) {
+          dispatch(sign_in_with_facebook(result));
+        });
+      })
+      .catch(function (error) {
+        console.log("22");
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+
+        console.log(errorCode);
+        console.log(errorMessage);
+        console.log(email);
+        console.log(credential);
+      })
+      .then(function () {
+        handleSignUpOptionCancel();
+        directProfile();
       });
-    }).catch(function(error) {
-
-      console.log("22");
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // The email of the user's account used.
-      var email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
-      // ...
-
-
-      console.log(errorCode);
-      console.log(errorMessage);
-      console.log(email);
-      console.log(credential);
-
-    }).then( function() {
-      handleSignUpOptionCancel();
-      directProfile();
-    });
   };
 
   const generateUserDocument = async (user) => {
@@ -113,7 +113,9 @@ export default function SignUpOption(props) {
         Sun: [{ tradingHours: [16, 42], closed: false }],
       };
       const services = {
-        Cut: [{"serviceName" : "female cut", "price" : 35, "description" : "sample data"}],
+        Cut: [
+          { serviceName: "female cut", price: 35, description: "sample data" },
+        ],
         Style: [],
         Perm: [],
         Color: [],
@@ -141,13 +143,13 @@ export default function SignUpOption(props) {
     return getUserDocument(user.uid);
   };
 
-  const getUserDocument = async uid => {
+  const getUserDocument = async (uid) => {
     if (!uid) return null;
     try {
       const userDocument = await firebaseStore.doc(`users/${uid}`).get();
       return {
         uid,
-        ...userDocument.data()
+        ...userDocument.data(),
       };
     } catch (error) {
       console.error("Error fetching user", error);
@@ -161,38 +163,34 @@ export default function SignUpOption(props) {
   };
 
   return (
-      <div>
-        <p onClick={showSignUpOptionModal}>
-          Sign Up
-        </p>
+    <div>
+      <p onClick={showSignUpOptionModal}>Sign Up</p>
 
-        <Modal
-            className="loginModal"
-            visible={isSignUpOptionShowing}
-            closable={false}
-            onCancel={handleLoginCancel}
-            okButtonProps={{ style: { display: "none" } }}
-            cancelButtonProps={{ style: { display: "none" } }}
-        >
-          <div className="loginModalContent">
-
-            <Divider> OR </Divider>
-            <div>
-              <button className="loginBtn loginBtn--google">
-                <SignUp
-                 title = {"Continue with Google"}
-                />
-              </button>
-            </div>
-            <div>
-              <button onClick={signUpWithFaceBook} className="loginBtn loginBtn--facebook">
-                <SignUp
-                    title = {"Continue with Facebook"}
-                />
-              </button>
-            </div>
+      <Modal
+        className="loginModal"
+        visible={isSignUpOptionShowing}
+        closable={false}
+        onCancel={handleLoginCancel}
+        okButtonProps={{ style: { display: "none" } }}
+        cancelButtonProps={{ style: { display: "none" } }}
+      >
+        <div className="loginModalContent">
+          <Divider> OR </Divider>
+          <div>
+            <button className="loginBtn loginBtn--google">
+              <SignUp title={"Continue with Google"} />
+            </button>
           </div>
-        </Modal>
-      </div>
+          <div>
+            <button
+              onClick={signUpWithFaceBook}
+              className="loginBtn loginBtn--facebook"
+            >
+              <SignUp title={"Continue with Facebook"} />
+            </button>
+          </div>
+        </div>
+      </Modal>
+    </div>
   );
 }

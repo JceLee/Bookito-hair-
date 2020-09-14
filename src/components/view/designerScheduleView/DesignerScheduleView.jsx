@@ -139,7 +139,7 @@ const servicesContent = {
 };
 
 export default function DesignerSchedule(props) {
-  const { hours } = props;
+  const { hours, customerId, designerId } = props;
   const { Step } = Steps;
   const [displayedDay, setDisplayedDay] = useState(null);
   const [key, setKey] = useState("Cut");
@@ -215,8 +215,8 @@ export default function DesignerSchedule(props) {
   };
 
   const finalBookingObject = {
-    customerId: "", // need to be added
-    designerId: "", // need to be added
+    customerId: customerId, // need to be added
+    designerId: designerId, // need to be added
     date: displayedDay,
     time: bookingTime,
     bookedServices: calculationBox,
@@ -287,7 +287,7 @@ export default function DesignerSchedule(props) {
   };
 
   const loadSuccessMessage = () => {
-    // console.log(finalBookingObject);
+    console.log(finalBookingObject);
     message.success("Successfully booked!");
   };
 

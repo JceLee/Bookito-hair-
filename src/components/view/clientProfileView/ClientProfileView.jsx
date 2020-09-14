@@ -20,11 +20,7 @@ const client = {
 export default function ClientProfileView() {
   // kangmin working on here
 
-  const signedInUser = useSelector((state) => state.signedInUser.signedInUser);
-
-  console.log("babo1");
-  console.log(signedInUser);
-  console.log("babo2");
+  const signedInUser = useSelector((state) => state.signIn.currentUser);
 
   // display inputs upon edit button click
   const [edit, setEdit] = useState(false);

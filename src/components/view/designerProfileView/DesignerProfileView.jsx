@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 const DesignerProfileView = () => {
   const designers = useSelector((state) => state.firestore.designers);
-  const currentUser = useSelector((state) => state.signedInUser.signedInUser);
+  const currentUser = useSelector((state) => state.signIn.currentUser);
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const designerId = urlParams.get("uid");
@@ -46,6 +46,8 @@ const DesignerProfileView = () => {
           works={works}
           location={location}
           img={photoURL}
+          customerId={currentUser.uid}
+          designerId={found.uid}
         />
 
         <DesignerBottom

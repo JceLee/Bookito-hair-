@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Menu, Dropdown, Button, Typography, Drawer } from "antd";
 import { Link } from "react-router-dom";
 import { UserOutlined, BarsOutlined } from "@ant-design/icons";
 import SignUp from "../view/authView/SignUp";
 import LogIn from "../view/authView/LogIn";
-import { useSelector } from "react-redux";
+import { firebaseAuth } from "../../config/fbConfig";
+import { useDispatch, useSelector } from "react-redux";
+import { sign_out } from "../../actions/signIn";
+import SignOut from "../view/authView/SignOut";
 
 const { Title } = Typography;
 
 export default function Navbar() {
-  const signedInUser = useSelector((state) => state.signedInUser.signedInUser);
+  const signedInUser = useSelector((state) => state.signIn.currentUser);
+  const dispatch = useDispatch();
 
   const menuItems = [
     { name: "Listing page", link: "/designer_list" },
@@ -30,14 +34,14 @@ export default function Navbar() {
         } else if (menu.name == "Log In") {
           return (
             <Menu.Item key={inx}>
-              {signedInUser == null ? (<LogIn />) : (<div>Log out</div>)}
+              {signedInUser == null ? <LogIn /> : <SignOut />}
             </Menu.Item>
           );
         } else if (menu.name == "Sign up") {
           return (
-              <Menu.Item key={inx}>
-                <SignUp />
-              </Menu.Item>
+            <Menu.Item key={inx}>
+              <SignUp />
+            </Menu.Item>
           );
         } else {
           return (

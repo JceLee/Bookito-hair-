@@ -16,7 +16,7 @@ import AddressPhoneForm from "../designerEditProfile/AddressPhoneForm";
 import WorksForm from "../designerEditProfile/WorksForm";
 import DesignerSchedule from "../../designerScheduleView/DesignerScheduleView";
 import Avatar from "antd/lib/avatar/avatar";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 const { Panel } = Collapse;
 const layout = {
@@ -58,12 +58,14 @@ const DesignerTop = (props) => {
     works,
     hours,
     location,
+    customerId,
+    designerId,
   } = props;
   const [top] = useState(64);
   const [height, setHeight] = useState(0);
   const [Visible, setVisible] = useState(false);
 
-  const currentUser = useSelector((state) => state.signedInUser.signedInUser);
+  const currentUser = useSelector((state) => state.signIn.currentUser);
   console.log(currentUser);
 
   const [form] = Form.useForm();
@@ -200,7 +202,11 @@ const DesignerTop = (props) => {
               </Modal>
             </>
           ) : (
-            <DesignerSchedule hours={hours} />
+            <DesignerSchedule
+              hours={hours}
+              customerId={customerId}
+              designerId={designerId}
+            />
           )}
         </div>
       </Affix>
