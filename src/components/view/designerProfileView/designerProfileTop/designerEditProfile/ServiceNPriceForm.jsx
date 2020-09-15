@@ -11,7 +11,12 @@ export default function ServiceNPriceForm(props) {
     <Tabs type="card">
       {tapNames.map((tap) => {
         return (
-          <TabPane tab={tap} key={tap} animated={false}>
+          <TabPane
+            classname="editProfileTabPane"
+            tab={tap}
+            key={tap}
+            animated={false}
+          >
             <Form.List name={["services", `${tap}`]}>
               {(fields, { add, remove }) => {
                 return (
@@ -25,7 +30,6 @@ export default function ServiceNPriceForm(props) {
                               style={{
                                 position: "relative",
                                 alignItems: "center",
-                                paddingLeft: "12px",
                               }}
                               key={field.key}
                               align="start"
@@ -80,14 +84,7 @@ export default function ServiceNPriceForm(props) {
                                 <TextArea placeholder="Description (optional)" />
                               </Form.Item>
                             </Space>
-                            <Divider
-                              style={{
-                                margin: "0 0 0 12px",
-                                width: "300px",
-                                minWidth: "unset",
-                                color: "#c6c6c6",
-                              }}
-                            />
+                            <Divider className="dividerInServiceAndPrice" />
                           </div>
                         );
                       })}

@@ -107,10 +107,9 @@ export default function Works(props) {
               return (
                 <div key={index}>
                   <img
+                    className="workImgInSlider"
                     src={work}
                     alt={`workImg${index}`}
-                    width="300px"
-                    height="300px"
                     onLoad={imageCarouselLoaded}
                   />
                 </div>

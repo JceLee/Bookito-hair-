@@ -11,11 +11,6 @@ const timeConvertingFactor = 30;
 let sliderDisplay;
 let checkboxOffset;
 
-const formatter = (minutes) => {
-  const formattedValue = formatTime(minutes * timeConvertingFactor);
-  return `${formattedValue}`;
-};
-
 export default function HoursForm(props) {
   const { defaultTradingHours } = props;
   const [defaultStartTime, defaultEndTime] = defaultTradingHours;
@@ -38,6 +33,11 @@ export default function HoursForm(props) {
     Sat: [formatter(defaultStartTime), formatter(defaultEndTime)],
     Sun: [formatter(defaultStartTime), formatter(defaultEndTime)],
   });
+
+  const formatter = (minutes) => {
+    const formattedValue = formatTime(minutes * timeConvertingFactor);
+    return `${formattedValue}`;
+  };
 
   const onChangeSliderHandler = (day, minutes) => {
     const [from, to] = destructureTimeRange(minutes);

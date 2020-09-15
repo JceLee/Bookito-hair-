@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Affix, Button, Modal, Form, Collapse, notification } from "antd";
+import { Affix, Button, Modal, Form, Collapse, message } from "antd";
 import DesignerNav from "./designerNav/DesignerNav.jsx";
 import ReadOnlyStar from "../../../commonComponents/ReadOnlyStar";
 import ServiceNPriceForm from "./designerEditProfile/ServiceNPriceForm";
@@ -17,7 +17,7 @@ const avatarSize = 64;
 const { Panel } = Collapse;
 const layout = {
   labelCol: { span: 4 },
-  wrapperCol: { span: 14 },
+  wrapperCol: { span: 24 },
 };
 const validateMessages = {
   required: "Required",
@@ -96,11 +96,10 @@ export default function DesignerProfileTop(props) {
   const onFinish = (values) => {
     console.log(values);
     setVisible(false);
-    return notification.success({
-      className: "notificationSaved",
-      style: { top: "550px" },
-      message: "Saved",
+    return message.success({
+      content: "Saved",
       duration: "2",
+      className: "onFinishMessage",
     });
   };
 
@@ -163,10 +162,18 @@ export default function DesignerProfileTop(props) {
                   validateMessages={validateMessages}
                   scrollToFirstError
                 >
-                  <Collapse bordered={false} defaultActiveKey={["1"]}>
+                  <Collapse
+                    className="editProfileCollapse"
+                    bordered={false}
+                    defaultActiveKey={["1"]}
+                  >
                     {editProfilePanels.map((panel, index) => {
                       return (
-                        <Panel header={panel.header} key={index + 1}>
+                        <Panel
+                          className="editProfilePanel"
+                          header={panel.header}
+                          key={index + 1}
+                        >
                           {panel.content}
                         </Panel>
                       );
