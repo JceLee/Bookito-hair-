@@ -141,7 +141,7 @@ const servicesContent = {
 };
 
 export default function DesignerSchedule(props) {
-  const { hours, customerId, designerId } = props;
+  const { hours, customer, designer } = props;
   const { Step } = Steps;
   const [displayedDay, setDisplayedDay] = useState(null);
   const [key, setKey] = useState("Cut");
@@ -214,8 +214,10 @@ export default function DesignerSchedule(props) {
   };
 
   const finalBookingObject = {
-    customerId: customerId, // need to be added
-    designerId: designerId, // need to be added
+    customerId: customer.uid, // need to be added
+    designerId: designer.uid, // need to be added
+    customerName: customer.fname + " " + customer.lname,
+    designerName: designer.fname + " " + designer.lname,
     date: displayedDay,
     time: bookingTime,
     bookedServices: calculationBox,

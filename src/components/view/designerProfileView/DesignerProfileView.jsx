@@ -46,8 +46,8 @@ const DesignerProfileView = () => {
           works={works}
           location={location}
           img={photoURL}
-          customerId={currentUser.uid}
-          designerId={found.uid}
+          customer={currentUser}
+          designer={found}
         />
 
         <DesignerBottom

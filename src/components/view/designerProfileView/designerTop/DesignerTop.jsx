@@ -58,8 +58,8 @@ const DesignerTop = (props) => {
     works,
     hours,
     location,
-    customerId,
-    designerId,
+    customer,
+      designer,
   } = props;
   const [top] = useState(64);
   const [height, setHeight] = useState(0);
@@ -204,8 +204,8 @@ const DesignerTop = (props) => {
           ) : (
             <DesignerSchedule
               hours={hours}
-              customerId={customerId}
-              designerId={designerId}
+              customer={customer}
+              designer={designer}
             />
           )}
         </div>
