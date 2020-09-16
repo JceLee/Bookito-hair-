@@ -5,6 +5,8 @@ import { Steps, Result, Modal, Button, message, Checkbox } from "antd";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
+import firebase from "firebase/app";
+import {firebaseStore} from "../../../config/fbConfig";
 
 const services = [
   { key: "Cut", tab: "Cut" },
@@ -195,12 +197,9 @@ export default function DesignerSchedule(props) {
           appointment.time === timeSlot.time
         ) {
           timeSlot.disabled = true;
-          // console.log("appointment: ", appointment.time);
-          // console.log("matched timeSlot: ", timeSlot.time);
         }
       });
     });
-    // console.log(temp);
     setTimeSelect(temp);
     return timeSelect;
   };
@@ -289,7 +288,20 @@ export default function DesignerSchedule(props) {
   const loadSuccessMessage = () => {
     console.log(finalBookingObject);
     message.success("Successfully booked!");
+    generateAppointmentDocument(finalBookingObject);
   };
+
+  const generateAppointmentDocument = async (finalBookingObject) => {
+    firebaseStore.collection("appointments").add(finalBookingObject)
+        .then(function (docRef) {
+          console.log("create appointment :" + docRef.id);
+        })
+        .catch(function (error) {
+          console.log("error :" + error)
+        })
+  };
+
+
 
   const steps = [
     {
