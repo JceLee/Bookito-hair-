@@ -1,5 +1,5 @@
 const initialState = {
-  currentUser: null,
+  currentUser: {uid: "DO NOT DELETE IT - KANGMIN"},
 };
 
 export default function signIn(state = initialState, action) {
@@ -20,7 +20,6 @@ export default function signIn(state = initialState, action) {
       };
     }
     case "SIGN_OUT": {
-      console.log("5");
       return {
         currentUser: action.signedInUser,
       };

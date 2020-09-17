@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "react-day-picker/lib/style.css";
 import "../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss";
-import { Steps, Result, Modal, Button, message, Checkbox } from "antd";
+import { Steps, Modal, Button, message } from "antd";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
-import firebase from "firebase/app";
 import {firebaseStore} from "../../../config/fbConfig";
 
 const services = [
@@ -214,8 +213,8 @@ export default function DesignerSchedule(props) {
   };
 
   const finalBookingObject = {
-    customerId: customer.uid, // need to be added
-    designerId: designer.uid, // need to be added
+    customerId: customer.uid,
+    designerId: designer.uid,
     customerName: customer.fname + " " + customer.lname,
     designerName: designer.fname + " " + designer.lname,
     date: displayedDay,
@@ -235,12 +234,6 @@ export default function DesignerSchedule(props) {
     } else {
       return message.error({
         content: "ERROR!",
-        // className: 'custom-class',
-        // style: {
-        //   marginTop: '40vh',
-        //   width: '200px',
-        //   height: '100px',
-        // },
       });
     }
   };
@@ -265,7 +258,6 @@ export default function DesignerSchedule(props) {
   }, [displayedDay]);
 
   const onRadioChange = (hour) => {
-    // console.log(hour.target.value);
     setBookingTime(hour.target.value);
   };
 
@@ -278,9 +270,7 @@ export default function DesignerSchedule(props) {
 
     for (let [key, value] of Object.entries(newCalculationBox)) {
       if (serviceToRemove === value) {
-        // console.log(newCalculationBox[key]);
         newCalculationBox[key] = null;
-        // console.log(newCalculationBox[key]);
       }
     }
 
@@ -356,10 +346,6 @@ export default function DesignerSchedule(props) {
     setVisible(true);
   };
 
-  // const handleOk = () => {
-  //   setVisible(false);
-  // };
-
   const handleCancel = () => {
     setVisible(false);
   };
@@ -402,9 +388,7 @@ export default function DesignerSchedule(props) {
             )}
           </div>
         }
-        // okText='Save Schedule'
         onCancel={handleCancel}
-        // okButtonProps={{ style: { display: 'none' } }}
         cancelButtonProps={{ style: { display: "none" } }}
       >
         <div className="stepsClass" id="stepToTopId">

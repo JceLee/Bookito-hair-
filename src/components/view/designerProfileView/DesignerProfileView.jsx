@@ -5,7 +5,7 @@ import DesignerTop from "./designerTop/DesignerTop.jsx";
 import DesignerBottom from "./designerBottom/DesignerBottom.jsx";
 import { useSelector } from "react-redux";
 
-const DesignerProfileView = () => {
+export default function DesignerProfileView() {
   const designers = useSelector((state) => state.firestore.designers);
   const currentUser = useSelector((state) => state.signIn.currentUser);
   const queryString = window.location.search;
@@ -68,5 +68,3 @@ const DesignerProfileView = () => {
     </BrowserRouter>
   );
 };
-
-export default DesignerProfileView;
