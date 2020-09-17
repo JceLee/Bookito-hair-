@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SearchBarSection from "./SearchBarSection";
 import InfoCard from "./InfoCard";
 import NewDesignersDesktopSection from "./NewDesignersDesktopSection";

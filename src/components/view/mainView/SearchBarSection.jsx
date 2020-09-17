@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MobileSearchBar from "../../commonComponents/mobileSearchBar/MobileSearchBar";
 import desktopMainPageBackground from "../../../assets/images/desktopMainPageBackground.jpeg";
-import mobileMainPageBackground from "../../../assets/images/mobileMainPageBackground.jpeg";
+import mobileMainPageBackground from "../../../assets/images/mobile.png";
 import MainSearchBar from "../../commonComponents/mainSearchBar/MainSearchBar";
 
 export default function SearchBarSection() {
@@ -19,8 +19,6 @@ export default function SearchBarSection() {
       <img
         className="searchBarSectionImg"
         src={mobileMainPageBackground}
-        width="100%"
-        height="100%"
         alt="searchBarSectionImg"
       />
       <img

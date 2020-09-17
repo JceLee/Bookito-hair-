@@ -1,29 +1,36 @@
-@import "../../Mixin.scss";
+.searchBarSectionDesktopImg {
+  display: none;
+
+  @include tabletP {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 700px;
+    object-fit: cover;
+  }
+}
 
 // search bar section
 .searchBarSection {
+  width: 100%;
+  height: 600px;
+  @include tabletP {
+    height: 700px;
+  }
   .searchBarSectionImg {
     object-fit: cover;
+    position: absolute;
+    width: 100%;
+    height: 600px;
     @include tabletP {
       display: none;
     }
   }
 
-  .searchBarSectionDesktopImg {
-    display: none;
-
-    @include tabletP {
-      display: block;
-      width: 100%;
-      height: 80vh;
-      object-fit: cover;
-    }
+  #searchBarForm {
+    border: 1px solid #fdfdfd;
+    z-index: 2;
   }
-}
-
-#searchBarForm {
-  border: 1px solid #fdfdfd;
-  z-index: 2;
 }
 
 .stickedSearchBarOnNav {
@@ -36,10 +43,10 @@
 
 // info card section
 .infoCardsSection {
+  margin: 10%;
   @include tabletP {
     display: flex;
     justify-content: center;
-    margin: 100px;
   }
 
   .infoCard {
@@ -67,9 +74,8 @@
 
 // new designer desktop section
 .newDesignersDesktopSection {
-  display: none;
-  margin: 50px;
-  height: 50vh;
+  padding: 0 5%;
+  margin-bottom: 5vh;
 
   @include tabletP {
     display: block;
@@ -78,36 +84,46 @@
     display: flex;
   }
 
+  @include desktop {
+    padding: 0 10%;
+  }
+
   .newDesignersHeading {
     padding: 0 50px;
   }
 
-  .leftSection {
-    display: none;
+  .headerSection {
+    text-align: center;
+    margin-bottom: 5vh;
     @include mainPageNewDesigners1090 {
+      text-align: left;
       display: block;
       width: 30%;
     }
     .topLine {
-      @include mainPageNewDesigners1090 {
-        font-size: 30pt;
-        font-weight: 500;
-      }
+      font-size: 30pt;
+      font-weight: 500;
     }
     .bottomLine {
+      font-weight: 300;
+      margin: 0 auto;
+      @include tabletP {
+        width: 660px;
+      }
+
       @include mainPageNewDesigners1090 {
-        font-weight: 300;
+        width: 100%;
       }
     }
   }
-  .mobileNewDesignersHeaderSection {
+  .newDesignersHeaderSmallDesktopSection {
     font-size: 30pt;
     font-weight: 500;
     @include mainPageNewDesigners1090 {
       display: none;
     }
   }
-  .rightSection {
+  .imagesSection {
     width: 100%;
     @include mainPageNewDesigners1090 {
       width: 70%;
@@ -127,6 +143,21 @@
         width: 150px;
         height: 150px;
         padding: 0;
+
+        + div:nth-last-child(-n + 2) {
+          display: none;
+          @include mainPageNewDesigners1090 {
+            display: unset;
+          }
+        }
+
+        + div:nth-child(2) {
+          margin-right: 0px;
+          @include mainPageNewDesigners1090 {
+            margin-right: 20px;
+          }
+        }
+
         + div:last-child {
           margin-right: 0px;
         }

@@ -1,8 +1,15 @@
 @import "../../Mixin.scss";
 
 #mobileSearchBar {
-  margin: 0 10%;
+  margin: 0 5%;
   margin-top: 100px;
+  text-align: center;
+  #mainHeader {
+    position: relative;
+    font-size: 25pt;
+    font-weight: 700;
+    padding: 10px 0;
+  }
 
   .ant-input-affix-wrapper {
     height: 50px;

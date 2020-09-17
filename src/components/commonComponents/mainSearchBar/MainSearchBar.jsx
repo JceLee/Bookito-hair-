@@ -32,24 +32,32 @@ export default function MainSearchBar() {
   // calculate and set height to show search bar on nav bar
   useEffect(() => {
     heightToShowSearchBarOnNav =
-      (window.pageYOffset + document.getElementById("searchBarForm").clientHeight) * -1;
+      (window.pageYOffset +
+        document.getElementById("searchBarForm").clientHeight) *
+      -1;
   });
 
   // give css when search bar sticks on nav bar
   const stickSearchBarOnNavBar = (width) => {
     var searchBarHeight = document.getElementById("mainSearchBar").clientHeight;
     var navBarHeight = document.getElementById("header").clientHeight;
-    var searchBarMarginOnNavBar = (navBarHeight - searchBarHeight) / half + "px";
+    var searchBarMarginOnNavBar =
+      (navBarHeight - searchBarHeight) / half + "px";
 
     if (width < tabletLWidth) {
       hide("logo");
       hide("menuBtn");
     }
 
-    document.getElementById("searchBarForm").classList.add("stickedSearchBarOnNav");
-    document.getElementById("searchBarForm").style.top = searchBarMarginOnNavBar;
+    document
+      .getElementById("searchBarForm")
+      .classList.add("stickedSearchBarOnNav");
+    document.getElementById(
+      "searchBarForm"
+    ).style.top = searchBarMarginOnNavBar;
     document.getElementById("mainSearchBar").style.textAlign = "center";
     document.getElementById("mainSearchBar").style.marginTop = 0;
+    document.getElementById("mainHeader").style.display = "none";
   };
 
   // give css when search bar is taken off from nav bar
@@ -57,15 +65,18 @@ export default function MainSearchBar() {
     show("logo");
     show("menuBtn");
 
-    document.getElementById("searchBarForm").classList.remove("stickedSearchBarOnNav");
+    document
+      .getElementById("searchBarForm")
+      .classList.remove("stickedSearchBarOnNav");
     document.getElementById("searchBarForm").style.top = "unset";
     document.getElementById("mainSearchBar").style.textAlign = "unset";
 
-    if (width <= tabletLWidth) {
-      document.getElementById("mainSearchBar").style.marginTop = "30%";
-    } else {
-      document.getElementById("mainSearchBar").style.marginTop = "15%";
-    }
+    // if (width <= tabletLWidth) {
+    document.getElementById("mainSearchBar").style.marginTop = "300px";
+    // } else {
+    // document.getElementById("mainSearchBar").style.marginTop = "15%";
+    // }
+    document.getElementById("mainHeader").style.display = "unset";
   };
 
   useScrollPosition(({ prevPos, currPos }) => {
@@ -116,7 +127,9 @@ export default function MainSearchBar() {
   const history = useHistory();
 
   const handleSearch = (location) => {
-    const route = `/designer_list?type=${designerType}${location ? `&location=${location}` : ""}`;
+    const route = `/designer_list?type=${designerType}${
+      location ? `&location=${location}` : ""
+    }`;
     console.log(route);
     window.scrollTo(0, 0);
     history.push(route);
@@ -125,7 +138,10 @@ export default function MainSearchBar() {
   const handleGeolocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        reverseGeocode(position.coords.latitude, position.coords.longitude).then((address) => {
+        reverseGeocode(
+          position.coords.latitude,
+          position.coords.longitude
+        ).then((address) => {
           if (address) {
             setAddress(address);
           } else {
@@ -141,6 +157,7 @@ export default function MainSearchBar() {
 
   return (
     <div id="mainSearchBar">
+      <div id="mainHeader">Find your favourite beautician</div>
       <Input.Group compact>
         <Select
           onChange={setSelectedType}
@@ -156,7 +173,11 @@ export default function MainSearchBar() {
           })}
         </Select>
         <Form form={form}>
-          <Form.Item name="addressInput" initialValue="" rules={[{ required: true }]}>
+          <Form.Item
+            name="addressInput"
+            initialValue=""
+            rules={[{ required: true }]}
+          >
             <LocationInput
               address={address}
               clearAddress={clearAddress}
