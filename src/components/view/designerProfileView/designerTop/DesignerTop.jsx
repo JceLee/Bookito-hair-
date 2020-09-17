@@ -59,7 +59,7 @@ const DesignerTop = (props) => {
     hours,
     location,
     customer,
-      designer,
+    designer,
   } = props;
   const [top] = useState(64);
   const [height, setHeight] = useState(0);

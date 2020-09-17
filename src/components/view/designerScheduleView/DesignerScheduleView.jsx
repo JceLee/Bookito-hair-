@@ -5,7 +5,7 @@ import { Steps, Modal, Button, message } from "antd";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
-import {firebaseStore} from "../../../config/fbConfig";
+import { firebaseStore } from "../../../config/fbConfig";
 
 const services = [
   { key: "Cut", tab: "Cut" },
@@ -140,8 +140,8 @@ const servicesContent = {
 };
 
 export default function DesignerSchedule(props) {
-  const {hours, customer, designer} = props;
-  const {Step} = Steps;
+  const { hours, customer, designer } = props;
+  const { Step } = Steps;
   const [displayedDay, setDisplayedDay] = useState(null);
   const [key, setKey] = useState("Cut");
   const [calculationBox, setCalculationBox] = useState([]);
@@ -153,20 +153,18 @@ export default function DesignerSchedule(props) {
   const [appointments, setAppointments] = useState([]);
   const loadingAppointment = [];
 
-
-  useEffect(()=> {
+  useEffect(() => {
     firebaseStore
-        .collection("appointments")
-        .where("designerId", "==", designer.uid)
-        .get()
-        .then((querySnapshot) => {
-          querySnapshot.docs.forEach((doc) => {
-            loadingAppointment.push(doc.data());
-          });
-          setAppointments(loadingAppointment);
+      .collection("appointments")
+      .where("designerId", "==", designer.uid)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.docs.forEach((doc) => {
+          loadingAppointment.push(doc.data());
         });
+        setAppointments(loadingAppointment);
+      });
   }, [appointments]);
-
 
   let timeSlotTemplate = {
     time: null,
@@ -200,8 +198,8 @@ export default function DesignerSchedule(props) {
     Object.values(temp).forEach((timeSlot) => {
       Object.values(appointments).forEach((appointment) => {
         if (
-            appointment.date === dayAndDate &&
-            appointment.time === timeSlot.time
+          appointment.date === dayAndDate &&
+          appointment.time === timeSlot.time
         ) {
           timeSlot.disabled = true;
         }
@@ -244,7 +242,7 @@ export default function DesignerSchedule(props) {
     setPage(rightPage);
   };
 
-  const handleDayClick = (day, {selected}) => {
+  const handleDayClick = (day, { selected }) => {
     setDisplayedDay(selected ? undefined : day);
   };
 
@@ -263,7 +261,7 @@ export default function DesignerSchedule(props) {
   };
 
   const removeFromBox = (serviceToRemove) => {
-    let newCalculationBox = {...calculationBox};
+    let newCalculationBox = { ...calculationBox };
 
     for (let [key, value] of Object.entries(newCalculationBox)) {
       if (serviceToRemove === value) {
@@ -291,57 +289,58 @@ export default function DesignerSchedule(props) {
   };
 
   const writeAppointmentIntoDB = async (newAppointment) => {
-    firebaseStore.collection("appointments").add(newAppointment)
-        .then(function (docRef) {
-          console.log("create appointment :" + docRef.id);
-        })
-        .catch(function (error) {
-          console.log("error :" + error)
-        })
+    firebaseStore
+      .collection("appointments")
+      .add(newAppointment)
+      .then(function (docRef) {
+        console.log("create appointment :" + docRef.id);
+      })
+      .catch(function (error) {
+        console.log("error :" + error);
+      });
   };
-
 
   const steps = [
     {
       title: "Date and time",
       content: (
-          <StepOne
-              timeSelection={timeSelect}
-              displayedDay={displayedDay}
-              handleDay={handleDayClick}
-              radioChange={onRadioChange}
-              bookingTime={bookingTime}
-              setBookingTime={setBookingTime}
-          />
+        <StepOne
+          timeSelection={timeSelect}
+          displayedDay={displayedDay}
+          handleDay={handleDayClick}
+          radioChange={onRadioChange}
+          bookingTime={bookingTime}
+          setBookingTime={setBookingTime}
+        />
       ),
     },
     {
       title: "Service and estimated price",
       content: (
-          <StepTwo
-              services={services}
-              servicesContent={servicesContent}
-              serviceKey={key}
-              calculationBox={calculationBox}
-              setCalculationBox={setCalculationBox}
-              page={page}
-              navigateTo={navigateTo}
-              onTabChange={onTabChange}
-              removeFromBox={removeFromBox}
-              totalSum={totalSum}
-          />
+        <StepTwo
+          services={services}
+          servicesContent={servicesContent}
+          serviceKey={key}
+          calculationBox={calculationBox}
+          setCalculationBox={setCalculationBox}
+          page={page}
+          navigateTo={navigateTo}
+          onTabChange={onTabChange}
+          removeFromBox={removeFromBox}
+          totalSum={totalSum}
+        />
       ),
     },
     {
       title: "Final check",
       content: (
-          <StepThree
-              current={current}
-              setCurrent={setCurrent}
-              displayedDay={displayedDay}
-              bookingTime={bookingTime}
-              calculationBox={calculationBox}
-          />
+        <StepThree
+          current={current}
+          setCurrent={setCurrent}
+          displayedDay={displayedDay}
+          bookingTime={bookingTime}
+          calculationBox={calculationBox}
+        />
       ),
     },
   ];
@@ -357,56 +356,56 @@ export default function DesignerSchedule(props) {
   };
 
   return (
-      <div className="bookNow">
-        <Button className="buttonInProfileLayoutTab" onClick={showModal}>
-          Book Now
-        </Button>
+    <div className="bookNow">
+      <Button className="buttonInProfileLayoutTab" onClick={showModal}>
+        Book Now
+      </Button>
 
-        <Modal
-            className="bookNowModal"
-            title="Book Now"
-            visible={visible}
-            footer={
-              <div className="stepAction">
-                {current > 0 && (
-                    <Button className="previousBtn" onClick={() => prev()}>
-                      Previous
-                    </Button>
-                )}
-                {current < steps.length - 1 && (
-                    <Button
-                        className="nextBtnInStepOne"
-                        type="primary"
-                        style={{position: "absolute", right: 0}}
-                        onClick={() => next()}
-                    >
-                      Next
-                    </Button>
-                )}
-                {current === steps.length - 1 && (
-                    <Button
-                        className="DoneBtn"
-                        type="primary"
-                        onClick={() => requestNewAppointment()}
-                    >
-                      Done
-                    </Button>
-                )}
-              </div>
-            }
-            onCancel={handleCancel}
-            cancelButtonProps={{style: {display: "none"}}}
-        >
-          <div className="stepsClass" id="stepToTopId">
-            <Steps current={current} onChange={onChange}>
-              {steps.map((item) => (
-                  <Step key={item.title} title={item.title}/>
-              ))}
-            </Steps>
+      <Modal
+        className="bookNowModal"
+        title="Book Now"
+        visible={visible}
+        footer={
+          <div className="stepAction">
+            {current > 0 && (
+              <Button className="previousBtn" onClick={() => prev()}>
+                Previous
+              </Button>
+            )}
+            {current < steps.length - 1 && (
+              <Button
+                className="nextBtnInStepOne"
+                type="primary"
+                style={{ position: "absolute", right: 0 }}
+                onClick={() => next()}
+              >
+                Next
+              </Button>
+            )}
+            {current === steps.length - 1 && (
+              <Button
+                className="DoneBtn"
+                type="primary"
+                onClick={() => requestNewAppointment()}
+              >
+                Done
+              </Button>
+            )}
           </div>
+        }
+        onCancel={handleCancel}
+        cancelButtonProps={{ style: { display: "none" } }}
+      >
+        <div className="stepsClass" id="stepToTopId">
+          <Steps current={current} onChange={onChange}>
+            {steps.map((item) => (
+              <Step key={item.title} title={item.title} />
+            ))}
+          </Steps>
+        </div>
 
-          <div className="stepsContent">{steps[current].content}</div>
-        </Modal>
-      </div>
+        <div className="stepsContent">{steps[current].content}</div>
+      </Modal>
+    </div>
   );
 }
