@@ -15,7 +15,7 @@ export default function StepOne(props) {
 
   const renderCalendar = () => (
     <div className="editDesignerCalendar">
-      <DayPicker selectedDays={displayedDay} onDayClick={handleDay} />
+      <DayPicker format={'MM/dd/yyyy'} selectedDays={displayedDay} onDayClick={handleDay} />
     </div>
   );
 

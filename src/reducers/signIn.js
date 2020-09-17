@@ -1,5 +1,5 @@
 const initialState = {
-  currentUser: {uid: "DO NOT DELETE IT - KANGMIN"},
+  currentUser: null,
 };
 
 export default function signIn(state = initialState, action) {
