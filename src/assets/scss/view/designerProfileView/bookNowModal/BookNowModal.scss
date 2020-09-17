@@ -1,86 +1,174 @@
 @import "../../../Mixin.scss";
 
-.ant-modal-wrap {
-  @include mobileM {
-    overflow: unset;
-  }
-}
 .bookNowModal {
-  .ant-modal-body {
-    @include mobileM {
-      width: 100vw;
-      height: 83vh;
+  margin: 0;
+  padding: 0;
+  .ant-modal-content {
+    height: 100%;
+
+    .ant-modal-body {
+      // width: 100vw;
       padding: 0;
+      height: calc(100% - (54.6px + 55px));
       overflow: auto;
     }
     .stepsClass {
-      @include mobileM {
-        margin-top: 10%;
-        .ant-steps-item-title {
-          font-size: 14px;
-        }
+      margin-top: 10%;
+      .ant-steps-item-title {
+        font-size: 14px;
+      }
+      .ant-steps {
+        width: 95%;
+        margin-left: 14px;
+      }
+      .ant-steps-icon {
+        background: $black;
       }
       .ant-steps-icon-dot {
         background: $black;
+        margin-left: -10px;
+      }
+      .ant-steps-icon-dot::after {
+        width: 70px;
+        height: 42px;
+      }
+      .ant-steps-item-tail {
+        margin: 0 0 0 60.5px;
       }
       .ant-steps-item-tail::after {
         background-color: $black;
+        height: 2px;
       }
     }
     .stepsContent {
       .stepOne {
         .editDesignerCalendar {
+          font-size: 16px;
           margin: 7% 0 5% 0;
-          @include mobileM {
-            .DayPicker {
-              width: 100vw;
-              .DayPicker-NavButton {
-                top: 5.5%;
-                right: 8%;
-              }
-              .DayPicker-Month {
-                width: 92vw;
-                height: 43vh;
-                .DayPicker-Body {
-                  .DayPicker-Day--selected {
-                    background-color: $black;
-                  }
-                  .DayPicker-Day:not(.DayPicker-Day--selected):hover {
-                    background-color: $white;
-                  }
+          .DayPicker {
+            width: 100vw;
+            .DayPicker-NavButton {
+              top: 5.5%;
+              right: 8%;
+            }
+            .DayPicker-Weekday {
+              width: 14%;
+            }
+            .DayPicker-Month {
+              width: 300px;
+              height: 300px;
+              .DayPicker-Body {
+                .DayPicker-Day--selected {
+                  background-color: $black;
+                }
+                .DayPicker-Day:not(.DayPicker-Day--selected):hover {
+                  background-color: $white;
                 }
               }
             }
           }
         }
         .timeButtons {
-          @include mobileM {
-            margin-bottom: 9%;
-            #selectTimePtag {
-              text-align: center;
-              font-size: 15px;
-              font-weight: bolder;
-              margin-bottom: 8%;
+          margin-bottom: 9%;
+
+          #selectTimePtag {
+            text-align: center;
+            font-size: 15px;
+            font-weight: bolder;
+            margin-bottom: 8%;
+          }
+
+          .ant-radio-button-wrapper {
+            border-left-width: 1px;
+            border-left-color: $black;
+            margin: 0 1% 2% 5.5%;
+            color: $black;
+            border-color: $black;
+            .hourRadioBtn:focus {
+              content: none;
             }
-            .ant-radio-button-wrapper {
-              border-left-width: 1px;
-              border-left-color: $black;
-              // margin: 0 0 2% 2.2%;
-              margin: 0 1% 2% 5.5%;
-              color: $black;
-              border-color: $black;
-            }
-            .ant-radio-button-wrapper:not(:first-child)::before {
-              background-color: $black;
-            }
+          }
+          .ant-radio-button-wrapper:not(:first-child)::before {
+            background-color: $black;
+          }
+          .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled),
+          .ant-radio-button-wrapper-checked:not([class*=" ant-radio-button-wrapper-disabled"]).ant-radio-button-wrapper {
+            border: 2px solid $black;
+            color: $black;
+          }
+          .ant-radio-button-wrapper:hover {
+            color: $black;
+            border: 2px solid $black;
           }
         }
       }
+      .stepTwo {
+        .checkboxOption {
+          width: 87%;
+          margin: 14% 0 15% 6.5%;
+          .ant-card-head {
+            // padding: 0 13px;
+            .ant-tabs-top {
+              // flex-direction: row;
+              .ant-tabs-tab {
+                margin: 0 16px 0 0;
+                .ant-tabs-tab-btn {
+                  color: $black;
+                }
+              }
+              .ant-tabs-tab:hover {
+                color: $black;
+              }
+              .ant-tabs-ink-bar {
+                background: $black;
+              }
+            }
+          }
+          .ant-card-body {
+            padding: 0;
+            .servicesContent {
+              margin-top: 30px;
+              .ant-checkbox-wrapper {
+                margin-left: 20px;
+              }
+              .serviceMenu {
+                margin: 0 0 30px 43px;
+              }
+              .ant-divider-horizontal {
+                margin: 0 0;
+              }
+            }
+          }
+        }
+        .estimatedPrice {
+          .estimatedPricePtag {
+            text-align: center;
+            font-size: 15px;
+            font-weight: bolder;
+            margin-bottom: 8%;
+          }
+          .servicePriceTag {
+            margin: 0 0 0 25px;
+            .removeButton {
+              float: right;
+              margin-right: 14px;
+              color: $red;
+            }
+          }
+        }
+        .totalCost {
+          text-align: center;
+          margin: 0 0 40px -10px;
+        }
+      }
+      .stepThree {
+        .ant-list-items {
+          margin: 10% 3.5% 0 7%;
+        }
+      }
     }
-  }
-  .ant-modal-footer {
-    @include mobileM {
-      height: 8.5vh;
+
+    .ant-modal-footer {
       padding: 0 0;
       border: none;
       .stepAction {
@@ -105,11 +193,16 @@
           width: 50%;
           height: 55px;
         }
+        .nextBtnInStepOne::after,
+        .previousBtn::after,
+        .doneBtn::after {
+          content: none;
+        }
       }
     }
-  }
-  .ant-modal-footer button + button {
-    margin-left: 0;
+    .ant-modal-footer button + button {
+      margin-left: 0;
+    }
   }
 }
 

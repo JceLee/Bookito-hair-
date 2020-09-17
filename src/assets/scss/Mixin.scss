@@ -7,6 +7,7 @@ $black: #1b1b1b;
 $white: #fdfdfd;
 
 @mixin mobileM {
+  //mobileP
   @media only screen and (min-width: 375px) {
     @content;
   }

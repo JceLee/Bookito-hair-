@@ -33,7 +33,7 @@ export default function StepThree(props) {
   };
 
   return (
-    <div id="stepThreeTopId">
+    <div className="stepThree" id="stepThreeTopId">
       {/* <p id="title3">Final Check</p> */}
       <div className="confirmation">
         <List

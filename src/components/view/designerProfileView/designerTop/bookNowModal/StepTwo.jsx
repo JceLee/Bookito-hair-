@@ -80,7 +80,7 @@ export default function StepTwo(props) {
                   <Text strong>{menu.service}</Text>
                 </Checkbox>
               </Row>
-              <p id="serviceMenu">
+              <p className="serviceMenu">
                 ${menu.price} <br />
                 {menu.description}
               </p>
@@ -93,44 +93,38 @@ export default function StepTwo(props) {
   );
 
   return (
-    <div id="stepTwoTopId">
-      {/* <p id="title2">Service and Price</p> */}
-      <Row>
-        <Col span={13}>
-          <div className="genderService">{renderService()}</div>
-        </Col>
-        <p id="estimatedPrice">Estimated Price</p>
-        <Col span={11}>
-          {page === "Estimated Price" && (
-            <>
-              <div className="estimatedPrice">
-                {calculationBox &&
-                  Object.values(calculationBox).map((menu, index) => {
-                    return (
-                      menu && (
-                        <div className="priceTag" key={index}>
-                          <p>
-                            {menu.service} : ${menu.price}{" "}
-                            <Button
-                              type="link"
-                              onClick={() => {
-                                removeFromBox(menu);
-                              }}
-                            >
-                              Remove
-                            </Button>
-                          </p>
-                        </div>
-                      )
-                    );
-                  })}
-              </div>
-              <Divider />
-              <div className="totalCost">Estimated total: ${totalSum()}</div>
-            </>
-          )}
-        </Col>
-      </Row>
+    <div className="stepTwo" id="stepTwoTopId">
+      <div className="genderService">{renderService()}</div>
+      {page === "Estimated Price" && (
+        <>
+          <div className="estimatedPrice">
+            <p className="estimatedPricePtag">Estimated price</p>
+            {calculationBox &&
+              Object.values(calculationBox).map((menu, index) => {
+                return (
+                  menu && (
+                    <div className="servicePriceTag" key={index}>
+                      <p>
+                        {menu.service} : ${menu.price}{" "}
+                        <Button
+                          className="removeButton"
+                          type="link"
+                          onClick={() => {
+                            removeFromBox(menu);
+                          }}
+                        >
+                          Remove
+                        </Button>
+                      </p>
+                    </div>
+                  )
+                );
+              })}
+          </div>
+          <Divider />
+          <div className="totalCost">Estimated total: ${totalSum()}</div>
+        </>
+      )}
     </div>
   );
 }
