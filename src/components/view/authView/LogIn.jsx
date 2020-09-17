@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { Modal, Divider, Button } from "antd";
 import firebase from "firebase/app";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { firebaseAuth, firebaseStore } from "../../../config/fbConfig";
 import { useDispatch, useSelector } from "react-redux";
 import {
   sign_in_with_facebook,
   sign_in_with_google,
 } from "../../../actions/signIn";
-import SignUp from "./SignUp";
 import SignUpOption from "./SignUpOption";
 
 export default function LogIn() {
@@ -22,21 +21,16 @@ export default function LogIn() {
     firebaseAuth
       .signInWithPopup(googleProvider)
       .then(function (result) {
-        // The signed-in user info.
         const user = result.user;
         generateUserDocument(user).then(function (result) {
           dispatch(sign_in_with_google(result));
         });
       })
       .catch(function (error) {
-        // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
-        // The email of the user's account used.
         const email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
         const credential = error.credential;
-        // ...
       })
       .then(function () {
         handleLoginCancel();
@@ -54,14 +48,10 @@ export default function LogIn() {
         });
       })
       .catch(function (error) {
-        // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
-        // The email of the user's account used.
         var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
-        // ...
       })
       .then(function () {
         handleLoginCancel();
@@ -75,9 +65,9 @@ export default function LogIn() {
     if (!snapshot.exists) {
       const { email, displayName, photoURL, uid } = user;
       const isDesigner = false;
-      const fname = "";
+      const fname = displayName;
       const lname = "";
-      const location = "";
+      const location = "Vancouver, BC, Canada";
       const phone = "";
       const gender = "";
       const hours = {
@@ -91,20 +81,134 @@ export default function LogIn() {
       };
       const services = {
         Cut: [
-          { serviceName: "female cut", price: 35, description: "sample data" },
+          {
+            id: 1,
+            service: "Men Cut",
+            price: 35,
+            description: "The price may differ",
+          },
+          {
+            id: 2,
+            service: "Women Cut",
+            price: 40,
+            description: "The price may differ",
+          },
+          {
+            id: 3,
+            service: "Kids Cut",
+            price: 15,
+            description: "The price may differ",
+          },
         ],
-        Style: [],
-        Perm: [],
-        Color: [],
-        Clinic: [],
-        Promo: [],
+        Style: [
+          {
+            id: 4,
+            service: "Men Style",
+            price: 35,
+            description: "The price may differ",
+          },
+          {
+            id: 5,
+            service: "Women Style",
+            price: 40,
+            description: "The price may differ",
+          },
+          {
+            id: 6,
+            service: "Kids Style",
+            price: 15,
+            description: "The price may differ",
+          },
+        ],
+        Perms: [
+          {
+            id: 7,
+            service: "Men Perms",
+            price: 35,
+            description: "The price may differ",
+          },
+          {
+            id: 8,
+            service: "Women Perms",
+            price: 40,
+            description: "The price may differ",
+          },
+          {
+            id: 9,
+            service: "Kids Perms",
+            price: 15,
+            description: "The price may differ",
+          },
+        ],
+        Colors: [
+          {
+            id: 10,
+            service: "Men Colors",
+            price: 35,
+            description: "The price may differ",
+          },
+          {
+            id: 11,
+            service: "Women Colors",
+            price: 40,
+            description: "The price may differ",
+          },
+          {
+            id: 12,
+            service: "Kids Colors",
+            price: 15,
+            description: "The price may differ",
+          },
+        ],
+        Clinic: [
+          {
+            id: 13,
+            service: "Men Clinic",
+            price: 35,
+            description: "The price may differ",
+          },
+          {
+            id: 14,
+            service: "Women Clinic",
+            price: 40,
+            description: "The price may differ",
+          },
+          {
+            id: 15,
+            service: "Kids Clinic",
+            price: 15,
+            description: "The price may differ",
+          },
+        ],
+        Promo: [
+          {
+            id: 16,
+            service: "Men Promo",
+            price: 35,
+            description: "The price may differ",
+          },
+          {
+            id: 17,
+            service: "Women Promo",
+            price: 40,
+            description: "The price may differ",
+          },
+          {
+            id: 18,
+            service: "Kids Promo",
+            price: 15,
+            description: "The price may differ",
+          },
+        ],
       };
+      const works = [];
       try {
         await userRef.set({
           isDesigner,
           displayName,
           email,
           photoURL,
+          location,
           fname,
           lname,
           phone,
@@ -112,6 +216,7 @@ export default function LogIn() {
           hours,
           services,
           uid,
+          works,
         });
       } catch (error) {
         console.error("Error creating user document", error);
@@ -172,6 +277,20 @@ export default function LogIn() {
     setIsLoginShowing(!isLoginShowing);
   };
 
+  // Sample accounts
+
+  const testAccount = (name) => {
+    const user = {
+      email: "",
+      displayName: name,
+      photoURL : "",
+      uid : name,
+    };
+    generateUserDocument(user).then(function (result) {
+      dispatch(sign_in_with_facebook(result));
+    });
+  };
+
   return (
     <div>
       <p onClick={showLoginModal}>Sign In</p>
@@ -199,6 +318,48 @@ export default function LogIn() {
               className="loginBtn loginBtn--facebook"
             >
               Sign in with Facebook
+            </button>
+          </div>
+          <div>
+            <button
+                onClick={() => testAccount("joshua")}
+            >
+              Log in with Joshua
+            </button>
+          </div>
+          <div>
+            <button
+                onClick={() => testAccount("Gina")}
+            >
+              Log in with Gina
+            </button>
+          </div>
+          <div>
+            <button
+                onClick={() => testAccount("KangMin")}
+            >
+              Log in with KangMin
+            </button>
+          </div>
+          <div>
+            <button
+                onClick={() => testAccount("Yongju")}
+            >
+              Log in with Yongju
+            </button>
+          </div>
+          <div>
+            <button
+                onClick={() => testAccount("JW")}
+            >
+              Login with JW
+            </button>
+          </div>
+          <div>
+            <button
+                onClick={() => testAccount("Erica")}
+            >
+              Login with Erica
             </button>
           </div>
           <Divider> OR </Divider>

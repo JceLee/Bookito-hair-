@@ -13,6 +13,7 @@ export default function DesignerProfileView() {
   const designerId = urlParams.get("uid");
   const found = designers.find((element) => element.uid === designerId);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  console.log(currentUser);
 
   useEffect(() => {
     if (currentUser != null && currentUser.uid === found.uid) {

@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Row, Col, Button, Divider } from "antd";
 
 export default function ScheduleCard(props) {
-  const { date, name, timeStart, timeEnd, types } = props;
+  const { date, name, time, types } = props;
   return (
     <Card
       className="scheduleCard"
@@ -22,7 +22,7 @@ export default function ScheduleCard(props) {
         <Col span={18}>
           <div>Designer: {name}</div>
           <div>
-            Time: {timeStart}-{timeEnd}
+            Time: {time}
           </div>
           <div>
             Type:{" "}

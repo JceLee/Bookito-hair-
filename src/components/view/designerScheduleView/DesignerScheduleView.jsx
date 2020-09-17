@@ -16,129 +16,6 @@ const services = [
   { key: "Promo", tab: "Promo" },
 ];
 
-const servicesContent = {
-  Cut: [
-    {
-      id: 1,
-      service: "Men Cut",
-      price: 35,
-      description: "The price may differ",
-    },
-    {
-      id: 2,
-      service: "Women Cut",
-      price: 40,
-      description: "The price may differ",
-    },
-    {
-      id: 3,
-      service: "Kids Cut",
-      price: 15,
-      description: "The price may differ",
-    },
-  ],
-  Style: [
-    {
-      id: 4,
-      service: "Men Style",
-      price: 35,
-      description: "The price may differ",
-    },
-    {
-      id: 5,
-      service: "Women Style",
-      price: 40,
-      description: "The price may differ",
-    },
-    {
-      id: 6,
-      service: "Kids Style",
-      price: 15,
-      description: "The price may differ",
-    },
-  ],
-  Perms: [
-    {
-      id: 7,
-      service: "Men Perms",
-      price: 35,
-      description: "The price may differ",
-    },
-    {
-      id: 8,
-      service: "Women Perms",
-      price: 40,
-      description: "The price may differ",
-    },
-    {
-      id: 9,
-      service: "Kids Perms",
-      price: 15,
-      description: "The price may differ",
-    },
-  ],
-  Colors: [
-    {
-      id: 10,
-      service: "Men Colors",
-      price: 35,
-      description: "The price may differ",
-    },
-    {
-      id: 11,
-      service: "Women Colors",
-      price: 40,
-      description: "The price may differ",
-    },
-    {
-      id: 12,
-      service: "Kids Colors",
-      price: 15,
-      description: "The price may differ",
-    },
-  ],
-  Clinic: [
-    {
-      id: 13,
-      service: "Men Clinic",
-      price: 35,
-      description: "The price may differ",
-    },
-    {
-      id: 14,
-      service: "Women Clinic",
-      price: 40,
-      description: "The price may differ",
-    },
-    {
-      id: 15,
-      service: "Kids Clinic",
-      price: 15,
-      description: "The price may differ",
-    },
-  ],
-  Promo: [
-    {
-      id: 16,
-      service: "Men Promo",
-      price: 35,
-      description: "The price may differ",
-    },
-    {
-      id: 17,
-      service: "Women Promo",
-      price: 40,
-      description: "The price may differ",
-    },
-    {
-      id: 18,
-      service: "Kids Promo",
-      price: 15,
-      description: "The price may differ",
-    },
-  ],
-};
-
 export default function DesignerSchedule(props) {
   const { hours, customer, designer } = props;
   const { Step } = Steps;
@@ -319,7 +196,7 @@ export default function DesignerSchedule(props) {
       content: (
         <StepTwo
           services={services}
-          servicesContent={servicesContent}
+          servicesContent={designer.services}
           serviceKey={key}
           calculationBox={calculationBox}
           setCalculationBox={setCalculationBox}
