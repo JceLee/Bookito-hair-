@@ -1,6 +1,6 @@
 import React from "react";
 
-const ServiceNPrice = (props) => {
+export default function ServiceNPrice(props) {
   const { id, serviceNPrices } = props;
   return (
     <div className="serviceNPrice" id={id}>
@@ -20,6 +20,4 @@ const ServiceNPrice = (props) => {
       </table>
     </div>
   );
-};
-
-export default ServiceNPrice;
+}

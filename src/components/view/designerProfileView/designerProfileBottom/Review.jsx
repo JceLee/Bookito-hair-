@@ -1,10 +1,13 @@
 import React, { useState, useRef } from "react";
+
+import ShowMoreText from "react-show-more-text";
 import Slider from "react-slick";
 import { Modal } from "antd";
+import ReadOnlyStar from "../../../commonComponents/ReadOnlyStar";
 import Spinner from "../../../commonComponents/Spinner";
 
-const Works = (props) => {
-  const { id, works } = props;
+export default function Review(props) {
+  const { id, customerName, photos, rate, comment, date } = props;
   const imgCounter = useRef(0);
   const imgCarouselCounter = useRef(0);
   const [ImgLoading, setImgLoading] = useState(true);
@@ -14,14 +17,14 @@ const Works = (props) => {
 
   const imageLoaded = () => {
     imgCounter.current += 1;
-    if (imgCounter.current >= works.length) {
+    if (imgCounter.current >= photos.length) {
       setImgLoading(false);
     }
   };
 
   const imageCarouselLoaded = () => {
     imgCarouselCounter.current += 1;
-    if (imgCarouselCounter.current >= works.length) {
+    if (imgCarouselCounter.current >= photos.length) {
       setImgCarouselLoading(false);
     }
   };
@@ -64,58 +67,59 @@ const Works = (props) => {
   };
 
   const onOpenModalHandler = (index) => {
-    console.log("opened a modal");
-    console.log("Clicked img index: " + index);
     setModalVisible(true);
     setCurrentImgIndex(index);
   };
 
-  const onCloseModalHandler = (CurrentImgIndex) => {
+  const onCloseModalHandler = () => {
     setModalVisible(false);
-    console.log("destroyed the modal when closing");
-    console.log("CurrentImgIndex: " + CurrentImgIndex);
     setImgCarouselLoading(true);
   };
 
   return (
-    <div className="works" id={id}>
-      <h2>Works</h2>
+    <div className="review fade-in" id={id}>
+      {photos.length !== 0 && ImgLoading ? <Spinner /> : null}
+      <div className="reviewHeader">
+        <div className="reviewCustomerNrate">
+          <span className="reviewCustomer">{customerName}</span>
+          <div className="reviewRate">{<ReadOnlyStar rate={rate} />}</div>
+        </div>
 
-      {works.length !== 0 && ImgLoading ? <Spinner /> : null}
-      <ul className="workGalleryContainer">
-        {works.map((work, index) => {
-          return works.length === 0 ? (
-            "No images attached.."
-          ) : (
-            <li key={index} className="workImgDiv">
-              <img
-                src={work}
-                alt={`workImg${index}`}
-                onClick={() => onOpenModalHandler(index)}
-                onLoad={imageLoaded}
-              />
-            </li>
-          );
-        })}
+        {/* Display review images in a line */}
+        <div className="reviewGalleryContainer">
+          {photos.length === 0
+            ? "No images attached.."
+            : photos.map((photo, index) => (
+                <div key={index} className="reviewImgDiv">
+                  <img
+                    src={photo}
+                    alt={`reviewImgDiv${index}`}
+                    width="50"
+                    height="50"
+                    onClick={() => onOpenModalHandler(index)}
+                    onLoad={imageLoaded}
+                  />
+                </div>
+              ))}
+        </div>
 
+        {/* Display review images in a carousel in a modal.
+        To fix previous img index issue, set 'destroyOnClose' true */}
         <Modal
-          className="workImgModal"
           visible={ModalVisible}
           onCancel={() => onCloseModalHandler(CurrentImgIndex)}
           destroyOnClose={true}
           footer={null}
         >
-          {/* Display work images in a carousel in a modal */}
-          {works.length !== 0 && ImgCarouselLoading ? <Spinner /> : null}
+          {/* Display review images in a carousel in a modal */}
+          {photos.length !== 0 && ImgCarouselLoading ? <Spinner /> : null}
           <Slider {...settings} className="slick-slider">
-            {works.map((work, index) => {
+            {photos.map((photo, index) => {
               return (
                 <div key={index}>
                   <img
-                    src={work}
-                    alt={`workImg${index}`}
-                    width="300px"
-                    height="300px"
+                    src={photo}
+                    alt={`reviewImg${index}`}
                     onLoad={imageCarouselLoaded}
                   />
                 </div>
@@ -123,9 +127,16 @@ const Works = (props) => {
             })}
           </Slider>
         </Modal>
-      </ul>
+      </div>
+
+      <div className="reviewContent">
+        <section>
+          <ShowMoreText lines={2} more="Show More" less="Show Less" width={0}>
+            <p>{comment}</p>
+            <p>Posted on {date}</p>
+          </ShowMoreText>
+        </section>
+      </div>
     </div>
   );
-};
-
-export default Works;
+}

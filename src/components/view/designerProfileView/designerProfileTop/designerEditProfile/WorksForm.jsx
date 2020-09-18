@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Upload, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
+const maxNumberOfWorkImages = 8;
+
 // To set file.preview
 // https://ant.design/components/upload/#components-upload-demo-picture-card
 const getBase64 = (file) => {
@@ -13,20 +15,8 @@ const getBase64 = (file) => {
   });
 };
 
-const WorksForm = (props) => {
+export default function WorksForm(props) {
   const { works } = props;
-  /*
-     works: [
-      'https://picsum.photos/id/190/300/300',
-      'https://picsum.photos/id/290/300/300',
-      'https://picsum.photos/id/390/300/300',
-      'https://picsum.photos/id/490/300/300',
-      'https://picsum.photos/id/590/300/300',
-      'https://picsum.photos/id/690/300/300',
-      'https://picsum.photos/id/790/300/300',
-      'https://picsum.photos/id/890/300/300',
-    ],
-   */
   let formattedWorks = [];
   let objectTemplate = {
     uid: null,
@@ -90,7 +80,7 @@ const WorksForm = (props) => {
         onPreview={handlePreview}
         onChange={handleChange}
       >
-        {fileList.length >= 8 ? null : uploadButton}
+        {fileList.length >= maxNumberOfWorkImages ? null : uploadButton}
       </Upload>
       <Modal
         className="workModal"
@@ -102,6 +92,4 @@ const WorksForm = (props) => {
       </Modal>
     </div>
   );
-};
-
-export default WorksForm;
+}

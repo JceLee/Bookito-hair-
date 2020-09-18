@@ -1,8 +1,7 @@
 import React from "react";
 
-const Bio = (props) => {
+export default function Bio(props) {
   const { id, bio } = props;
-
   return (
     <div className="bio" id={id}>
       <h2>Bio</h2>
@@ -24,6 +23,4 @@ const Bio = (props) => {
       </table>
     </div>
   );
-};
-
-export default Bio;
+}

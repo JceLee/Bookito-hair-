@@ -26,7 +26,8 @@
 @import "./view/designerProfileView/bookNowModal/BookNowModal.scss";
 
 // Designer Profile View
-@import "view/designerProfileView/DesignerProfileView";
+@import "./view/designerProfileView/DesignerProfileView.scss";
+@import "./view/designerProfileView/designerEditProfile/DesignerEditProfile.scss";
 
 // Auth components
 @import "commonComponents/LogIn";
