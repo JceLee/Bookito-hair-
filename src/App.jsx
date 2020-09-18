@@ -11,7 +11,6 @@ import ClientProfileView from "./components/view/clientProfileView/ClientProfile
 import SignUp from "./components/view/authView/SignUp";
 import "antd/dist/antd.css";
 import "./assets/scss/App.scss";
-import { useDispatch, useSelector } from "react-redux";
 
 const { Header, Content, Footer } = Layout;
 

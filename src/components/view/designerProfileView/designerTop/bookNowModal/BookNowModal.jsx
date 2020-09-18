@@ -1,136 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "react-day-picker/lib/style.css";
-import "../../../../../assets/scss/view/designerProfileView/bookNowModal/BookNowModal.scss";
 import { Steps, Modal, Button, message } from "antd";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
+import { firebaseStore } from "../../../../../config/fbConfig";
 
-const servicesContent = {
-  Cut: [
-    {
-      id: 1,
-      service: "Men Cut",
-      price: 35,
-      description: "The price may differ",
-    },
-    {
-      id: 2,
-      service: "Women Cut",
-      price: 40,
-      description: "The price may differ",
-    },
-    {
-      id: 3,
-      service: "Kids Cut",
-      price: 15,
-      description: "The price may differ",
-    },
-  ],
-  Style: [
-    {
-      id: 1,
-      service: "Men Style",
-      price: 35,
-      description: "The price may differ",
-    },
-    {
-      id: 2,
-      service: "Women Style",
-      price: 40,
-      description: "The price may differ",
-    },
-    {
-      id: 3,
-      service: "Kids Style",
-      price: 15,
-      description: "The price may differ",
-    },
-  ],
-  Perm: [
-    {
-      id: 1,
-      service: "Men Perm",
-      price: 35,
-      description: "The price may differ",
-    },
-    {
-      id: 2,
-      service: "Women Perm",
-      price: 40,
-      description: "The price may differ",
-    },
-    {
-      id: 3,
-      service: "Kids Perm",
-      price: 15,
-      description: "The price may differ",
-    },
-  ],
-  Color: [
-    {
-      id: 1,
-      service: "Men Color",
-      price: 35,
-      description: "The price may differ",
-    },
-    {
-      id: 2,
-      service: "Women Color",
-      price: 40,
-      description: "The price may differ",
-    },
-    {
-      id: 3,
-      service: "Kids Color",
-      price: 15,
-      description: "The price may differ",
-    },
-  ],
-  Clinic: [
-    {
-      id: 1,
-      service: "Men Clinic",
-      price: 35,
-      description: "The price may differ",
-    },
-    {
-      id: 2,
-      service: "Women Clinic",
-      price: 40,
-      description: "The price may differ",
-    },
-    {
-      id: 3,
-      service: "Kids Clinic",
-      price: 15,
-      description: "The price may differ",
-    },
-  ],
-  Promo: [
-    {
-      id: 1,
-      service: "Men Promo",
-      price: 35,
-      description: "The price may differ",
-    },
-    {
-      id: 2,
-      service: "Women Promo",
-      price: 40,
-      description: "The price may differ",
-    },
-    {
-      id: 3,
-      service: "Kids Promo",
-      price: 15,
-      description: "The price may differ",
-    },
-  ],
-};
-
-export default function DesignerSchedule(props) {
-  const { hours } = props;
+export default function BookNowModal(props) {
+  const { hours, customer, designer } = props;
   const { Step } = Steps;
   const [displayedDay, setDisplayedDay] = useState(null);
   const [key, setKey] = useState("Cut");
@@ -141,6 +18,21 @@ export default function DesignerSchedule(props) {
   const [backToTimePosition, setBackToTimePosition] = useState(false);
   const [timeSelect, setTimeSelect] = useState([]);
   const elementForScrollingTopInModal = document.getElementById("stepToTopId");
+  const [appointments, setAppointments] = useState([]);
+  const loadingAppointment = [];
+
+  useEffect(() => {
+    firebaseStore
+        .collection("appointments")
+        .where("designerId", "==", designer.uid)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.docs.forEach((doc) => {
+            loadingAppointment.push(doc.data());
+          });
+          setAppointments(loadingAppointment);
+        });
+  }, [appointments]);
 
   let timeSlotTemplate = {
     time: null,
@@ -159,15 +51,6 @@ export default function DesignerSchedule(props) {
 
   const createTimeSelect = (dayAndDate) => {
     const day = dayAndDate.substring(0, 3);
-    const appointmentArray = [
-      { date: "Thu Sep 03 2020", time: "08:00" },
-      { date: "Wed Sep 02 2020", time: "08:30" },
-      { date: "Wed Sep 09 2020", time: "09:00" },
-      { date: "Wed Sep 16 2020", time: "11:00" },
-      { date: "Wed Sep 23 2020", time: "12:00" },
-      { date: "Wed Sep 30 2020", time: "12:30" },
-      { date: "Wed Sep 02 2020", time: "15:00" },
-    ];
     const [starRawTime, endRawTime] = hours[day][0].tradingHours;
     const closed = hours[day][0].closed;
     const temp = [];
@@ -181,18 +64,15 @@ export default function DesignerSchedule(props) {
     }
 
     Object.values(temp).forEach((timeSlot) => {
-      Object.values(appointmentArray).forEach((appointment) => {
+      Object.values(appointments).forEach((appointment) => {
         if (
-          appointment.date === dayAndDate &&
-          appointment.time === timeSlot.time
+            appointment.date === dayAndDate &&
+            appointment.time === timeSlot.time
         ) {
           timeSlot.disabled = true;
-          // console.log("appointment: ", appointment.time);
-          // console.log("matched timeSlot: ", timeSlot.time);
         }
       });
     });
-    // console.log(temp);
     setTimeSelect(temp);
     return timeSelect;
   };
@@ -207,9 +87,9 @@ export default function DesignerSchedule(props) {
   };
 
   const serviceTabData = () =>
-    Object.keys(servicesContent) &&
-    Object.keys(servicesContent)
-      .filter((service) => servicesContent[service].length > 0)
+    Object.keys(designer.services) &&
+    Object.keys(designer.services)
+      .filter((service) => designer.services[service].length > 0)
       .map((service) => {
         if (service.length) {
           return {
@@ -219,13 +99,33 @@ export default function DesignerSchedule(props) {
         }
       });
 
-  const finalBookingObject = {
-    customerId: "", // need to be added
-    designerId: "", // need to be added
-    date: displayedDay,
-    time: bookingTime,
-    bookedServices: calculationBox,
-    totalPrice: totalSum(),
+  const requestNewAppointment = () => {
+    const newAppointment = {
+      customerId: customer.uid,
+      designerId: designer.uid,
+      customerName: customer.fname + " " + customer.lname,
+      designerName: designer.fname + " " + designer.lname,
+      state: "pending",
+      date: displayedDay.toDateString(),
+      time: bookingTime,
+      bookedServices: calculationBox,
+      totalPrice: totalSum(),
+    };
+    console.log(newAppointment);
+    message.success("Successfully booked!");
+    writeAppointmentIntoDB(newAppointment);
+  };
+
+  const writeAppointmentIntoDB = async (newAppointment) => {
+    firebaseStore
+        .collection("appointments")
+        .add(newAppointment)
+        .then(function (docRef) {
+          console.log("create appointment :" + docRef.id);
+        })
+        .catch(function (error) {
+          console.log("error :" + error);
+        });
   };
 
   const onChange = (current) => {
@@ -263,7 +163,6 @@ export default function DesignerSchedule(props) {
   }, [displayedDay]);
 
   const onRadioChange = (hour) => {
-    // console.log(hour.target.value);
     setBookingTime(hour.target.value);
   };
 
@@ -276,19 +175,13 @@ export default function DesignerSchedule(props) {
 
     for (let [key, value] of Object.entries(newCalculationBox)) {
       if (serviceToRemove === value) {
-        // console.log(newCalculationBox[key]);
         newCalculationBox[key] = null;
-        // console.log(newCalculationBox[key]);
       }
     }
 
     setCalculationBox(newCalculationBox);
   };
 
-  const loadSuccessMessage = () => {
-    console.log(finalBookingObject);
-    message.success("Successfully booked!");
-  };
 
   const getServiceContent = () => {
     let contentString = "";
@@ -337,8 +230,8 @@ export default function DesignerSchedule(props) {
       title: "Service and Price",
       content: (
         <StepTwo
-          services={serviceTabData(servicesContent)}
-          servicesContent={servicesContent}
+          services={serviceTabData(designer.services)}
+          servicesContent={designer.services}
           serviceKey={key}
           calculationBox={calculationBox}
           setCalculationBox={setCalculationBox}
@@ -410,7 +303,7 @@ export default function DesignerSchedule(props) {
               <Button
                 className="doneBtn"
                 type="primary"
-                onClick={() => loadSuccessMessage()}
+                onClick={() => requestNewAppointment()}
               >
                 Done
               </Button>
