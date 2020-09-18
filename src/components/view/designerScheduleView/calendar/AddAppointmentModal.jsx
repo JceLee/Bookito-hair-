@@ -1,7 +1,7 @@
 import React from "react";
 import Dialog from "@material-ui/core/Dialog";
 import { CloseOutlined } from "@ant-design/icons";
-import { Row, Col, Form, Input } from "antd";
+import { Row, Col } from "antd";
 import BlackBtn from "../../../commonComponents/BlackBtn";
 
 export default function AddAppointmentModal(props) {

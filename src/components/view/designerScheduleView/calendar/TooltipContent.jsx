@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Grid from "@material-ui/core/Grid";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import AccessTime from "@material-ui/icons/AccessTime";
 import FaceIcon from "@material-ui/icons/Face";
 import LocalPhoneOutlinedIcon from "@material-ui/icons/LocalPhoneOutlined";
-import AppointmentEditForm from "./AppointmentEditForm";
-import Drawer from "@material-ui/core/Drawer";
 
 export default function TooltipContent(props) {
   const { appointmentData, formatDate } = props;
