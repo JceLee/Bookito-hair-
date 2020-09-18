@@ -6,6 +6,7 @@ import {
   Form,
   Collapse,
   notification,
+  message,
 } from "antd";
 import DesignerNav from "./designerNav/DesignerNav.jsx";
 import ReadOnlyStar from "../../../commonComponents/ReadOnlyStar";
@@ -13,7 +14,7 @@ import ServiceNPriceForm from "../designerEditProfile/ServiceNPriceForm";
 import HoursForm from "../designerEditProfile/HoursForm";
 import AddressPhoneForm from "../designerEditProfile/AddressPhoneForm";
 import WorksForm from "../designerEditProfile/WorksForm";
-import DesignerSchedule from "../../designerScheduleView/DesignerScheduleView";
+import BookNowModal from "../../designerProfileView/designerTop/bookNowModal/BookNowModal";
 import Avatar from "antd/lib/avatar/avatar";
 import {firebaseStore} from "../../../../config/fbConfig";
 
@@ -202,10 +203,9 @@ const DesignerTop = (props) => {
               </Modal>
             </>
           ) : (
-            <DesignerSchedule
-              hours={hours}
-              customer={customer}
-              designer={designer}
+            <BookNowModal hours={hours}
+                          customer={customer}
+                          designer={designer}
             />
           )}
         </div>

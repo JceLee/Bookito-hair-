@@ -1,0 +1,49 @@
+@import "../../../Mixin.scss";
+
+// $black: #1b1b1b;
+
+.bookNowModal {
+  .ant-modal-content {
+    width: 100vw;
+    height: 100vh;
+    @include mobileM {
+      .ant-modal-body {
+        padding: 0;
+        .stepsClass {
+          margin-top: 10%;
+          .ant-steps-item-title {
+            font-size: 13px;
+          }
+          .ant-steps-icon-dot {
+            background: $black;
+          }
+
+          .ant-steps-item-finish
+            .ant-steps-item-icon
+            > .ant-steps-icon
+            .ant-steps-icon-dot {
+            background: $black;
+          }
+
+          .ant-steps-item-finish
+            > .ant-steps-item-container
+            > .ant-steps-item-tail::after {
+            background-color: $white;
+          }
+        }
+      }
+    }
+
+    @include mobileL {
+    }
+
+    @include tabletP {
+    }
+
+    @include tabletL {
+    }
+
+    @include desktop {
+    }
+  }
+}
