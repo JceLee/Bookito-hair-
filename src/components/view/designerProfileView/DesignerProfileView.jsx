@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { BackTop } from "antd";
-import DesignerProfileTop from "./designerProfileTop/DesignerProfileTop.jsx";
+import DesignerProfileTop from "./designerProfileTop/DesignerProfileTop";
 import DesignerProfileBottom from "./designerProfileBottom/DesignerProfileBottom.jsx";
 import { useSelector } from "react-redux";
 
@@ -38,7 +38,7 @@ export default function DesignerProfileView() {
   return (
       <BrowserRouter>
         <div className="designerProfileView">
-          <DesignerTop
+          <DesignerProfileTop
               isAuthenticated={isAuthenticated}
               fname={fname}
               lname={lname}
@@ -51,7 +51,7 @@ export default function DesignerProfileView() {
               designer={found}
           />
 
-          <DesignerBottom
+          <DesignerProfileBottom
               fname={fname}
               location={location}
               activity={activity}
