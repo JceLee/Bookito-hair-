@@ -38,7 +38,7 @@ export default function DesignerProfileView() {
   return (
       <BrowserRouter>
         <div className="designerProfileView">
-          <DesignerTop
+          <DesignerProfileTop
               isAuthenticated={isAuthenticated}
               fname={fname}
               lname={lname}
@@ -52,7 +52,7 @@ export default function DesignerProfileView() {
               designer={found}
           />
 
-          <DesignerBottom
+          <DesignerProfileBottom
               fname={fname}
               location={location}
               activity={activity}

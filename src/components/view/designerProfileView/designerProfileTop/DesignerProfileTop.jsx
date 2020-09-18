@@ -6,8 +6,9 @@ import ServiceNPriceForm from "./designerEditProfile/ServiceNPriceForm";
 import HoursForm from "./designerEditProfile/HoursForm";
 import AddressPhoneForm from "./designerEditProfile/AddressPhoneForm";
 import WorksForm from "./designerEditProfile/WorksForm";
-import DesignerSchedule from "../../designerScheduleView/DesignerScheduleView";
+import BookNowModal from "../../designerProfileView/designerProfileTop/bookNowModal/BookNowModal";
 import Avatar from "antd/lib/avatar/avatar";
+import {firebaseStore} from "../../../../config/fbConfig";
 
 const defaultStartTime = 16; // 08:00
 const defaultEndTime = 42; // 21:00
@@ -67,6 +68,8 @@ export default function DesignerProfileTop(props) {
     hours,
     location,
     services,
+    customer,
+    designer,
   } = props;
   const [stickyNavPositionFromTop] = useState(searchBarHeight);
   const [height, setHeight] = useState(0);
@@ -94,13 +97,23 @@ export default function DesignerProfileTop(props) {
   };
 
   const onFinish = (values) => {
-    console.log(values);
     setVisible(false);
-    return notification.success({
-      className: "notificationSaved",
-      style: { top: "550px" },
-      message: "Saved",
-      duration: "2",
+    const updatedProfile = {
+      services: values.services,
+      hours: values.hours,
+      addressPhone: values.addressPhone,
+    };
+    console.log(firebaseStore.collection("users").doc(customer.uid).get()
+        .then(function (doc) {
+          return doc.data();
+        }));
+    firebaseStore.collection("users").doc(customer.uid).set(updatedProfile).then(function() {
+      return notification.success({
+        className: "notificationSaved",
+        style: {top: "550px"},
+        message: "Saved",
+        duration: "2",
+      });
     });
   };
 
@@ -176,7 +189,10 @@ export default function DesignerProfileTop(props) {
               </Modal>
             </>
           ) : (
-            <DesignerSchedule hours={hours} />
+              <BookNowModal hours={hours}
+                            customer={customer}
+                            designer={designer}
+              />
           )}
         </div>
       </Affix>
