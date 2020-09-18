@@ -6,7 +6,6 @@ import {
   Form,
   Collapse,
   notification,
-  message,
 } from "antd";
 import DesignerNav from "./designerNav/DesignerNav.jsx";
 import ReadOnlyStar from "../../../commonComponents/ReadOnlyStar";
@@ -16,7 +15,7 @@ import AddressPhoneForm from "../designerEditProfile/AddressPhoneForm";
 import WorksForm from "../designerEditProfile/WorksForm";
 import DesignerSchedule from "../../designerScheduleView/DesignerScheduleView";
 import Avatar from "antd/lib/avatar/avatar";
-import { useSelector } from "react-redux";
+import {firebaseStore} from "../../../../config/fbConfig";
 
 const { Panel } = Collapse;
 const layout = {
@@ -65,9 +64,6 @@ const DesignerTop = (props) => {
   const [height, setHeight] = useState(0);
   const [Visible, setVisible] = useState(false);
 
-  const currentUser = useSelector((state) => state.signIn.currentUser);
-  console.log(currentUser);
-
   const [form] = Form.useForm();
   useResetFormOnCloseModal({
     form,
@@ -83,19 +79,23 @@ const DesignerTop = (props) => {
   };
 
   const onFinish = (values) => {
-    console.log(values);
-    // return message
-    //   .success({
-    //     content: "Saved",
-    //     duration: "1",
-    //   })
-    //   .then(() => setVisible(false));
     setVisible(false);
-    return notification.success({
-      className: "notificationSaved",
-      style: { top: "550px" },
-      message: "Saved",
-      duration: "2",
+    const updatedProfile = {
+      services: values.services,
+      hours: values.hours,
+      addressPhone: values.addressPhone,
+    };
+    console.log(firebaseStore.collection("users").doc(customer.uid).get()
+        .then(function (doc) {
+          return doc.data();
+        }));
+    firebaseStore.collection("users").doc(customer.uid).set(updatedProfile).then(function() {
+      return notification.success({
+        className: "notificationSaved",
+        style: {top: "550px"},
+        message: "Saved",
+        duration: "2",
+      });
     });
   };
 

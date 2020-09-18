@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { firebaseAuth } from "../../../config/fbConfig";
+import {firebaseAuth, firebaseStore} from "../../../config/fbConfig";
 import { sign_out } from "../../../actions/signIn";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function SignOut() {
-  const signedInUser = useSelector((state) => state.signIn.currentUser);
   const [loggedIn, setLoggedIn] = useState(true);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -21,7 +20,6 @@ export default function SignOut() {
         // An error happened.
       })
       .then(function () {
-        console.log(signedInUser);
       });
   };
 

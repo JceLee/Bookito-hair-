@@ -36,36 +36,36 @@ export default function DesignerProfileView() {
   } = found;
 
   return (
-    <BrowserRouter>
-      <div className="designerProfileView">
-        <DesignerTop
-          isAuthenticated={isAuthenticated}
-          fname={fname}
-          lname={lname}
-          totalRate={rate}
-          hours={hours}
-          works={works}
-          location={location}
-          img={photoURL}
-          customer={currentUser}
-          designer={found}
-        />
+      <BrowserRouter>
+        <div className="designerProfileView">
+          <DesignerTop
+              isAuthenticated={isAuthenticated}
+              fname={fname}
+              lname={lname}
+              totalRate={rate}
+              hours={hours}
+              works={works}
+              location={location}
+              img={photoURL}
+              customer={currentUser}
+              designer={found}
+          />
 
-        <DesignerBottom
-          fname={fname}
-          location={location}
-          activity={activity}
-          bio={bio}
-          works={works}
-          serviceNPrices={services}
-          hours={hours}
-          reviews={reviews}
-        />
+          <DesignerBottom
+              fname={fname}
+              location={location}
+              activity={activity}
+              bio={bio}
+              works={works}
+              serviceNPrices={services}
+              hours={hours}
+              reviews={reviews}
+          />
 
-        <BackTop visibilityHeight={0}>
-          <div className="backTopButton">Top</div>
-        </BackTop>
-      </div>
-    </BrowserRouter>
+          <BackTop visibilityHeight={0}>
+            <div className="backTopButton">Top</div>
+          </BackTop>
+        </div>
+      </BrowserRouter>
   );
 }
