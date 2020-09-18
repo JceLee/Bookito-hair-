@@ -1,28 +1,15 @@
 import React from "react";
 import { List, Button, Typography } from "antd";
-import "../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss";
 
 export default function StepThree(props) {
   const { Text } = Typography;
   const {
-    current,
-    setCurrent,
     displayedDay,
     bookingTime,
-    calculationBox,
+    getServiceContent,
+    stepChoice,
+    setBackToTimePosition,
   } = props;
-
-  const getServiceContent = () => {
-    let contentString = "";
-    for (let [key, value] of Object.entries(calculationBox)) {
-      if (value === null) {
-        continue;
-      }
-      let { service } = value;
-      contentString += `[${service}]` + " ";
-    }
-    return contentString;
-  };
 
   const titles = [
     {
@@ -38,23 +25,21 @@ export default function StepThree(props) {
     { id: 3, title: "Service", contents: getServiceContent() },
   ];
 
-  const stepChoice = (item) => {
-    if (item.id === 1 || item.id === 2) {
-      setCurrent(current - 2);
-    } else {
-      setCurrent(current - 1);
+  const moveToSelectTimePosition = (item) => {
+    if (item.title === "Time") {
+      setBackToTimePosition(true);
     }
+    stepChoice(item);
   };
 
   return (
     <div id="stepThreeTopId">
-      <p id="title3">Final Check</p>
+      {/* <p id="title3">Final Check</p> */}
       <div className="confirmation">
         <List
           itemLayout="horizontal"
           dataSource={titles}
           renderItem={(item) => {
-            // console.log(item);
             return (
               <List.Item>
                 <Text strong>{item.title}</Text>
@@ -65,7 +50,7 @@ export default function StepThree(props) {
                   type="link"
                   value={item.id}
                   id={item.id}
-                  onClick={() => stepChoice(item)}
+                  onClick={() => moveToSelectTimePosition(item)}
                 >
                   Edit
                 </Button>

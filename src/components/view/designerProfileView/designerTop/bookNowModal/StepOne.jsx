@@ -2,7 +2,6 @@ import React from "react";
 import { Row, Col, Radio } from "antd";
 import DayPicker from "react-day-picker";
 import "react-day-picker/lib/style.css";
-import "../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss";
 
 export default function StepOne(props) {
   const {
@@ -24,7 +23,7 @@ export default function StepOne(props) {
   );
 
   const renderTime = () => (
-    <div className="timeButtons">
+    <div className="timeButtons" id="selectTimePosition">
       <Radio.Group>
         {timeSelection.map((hour, index) => {
           const { time, value, disabled } = hour;
@@ -47,7 +46,7 @@ export default function StepOne(props) {
 
   return (
     <div className="stepOne">
-      <p id="title1">Date and Time</p>
+      {/* <p id="title">Date and Time</p> */}
       <Row>
         <Col span={13}>{renderCalendar()}</Col>
         <p id="selectTime">Please select time</p>

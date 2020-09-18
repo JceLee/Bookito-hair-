@@ -1,7 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Row, Col, Divider, Card, Typography, Checkbox } from "antd";
-// import EstimatedPrice from './EstimatedPrice';
-import "../../../assets/scss/view/designerScheduleView/DesignerScheduleView.scss";
 
 export default function StepTwo(props) {
   const { Text } = Typography;
@@ -18,10 +16,15 @@ export default function StepTwo(props) {
     totalSum,
   } = props;
 
+  useEffect(() => {
+    if (services) {
+      onTabChange(services[0]?.key);
+    }
+  }, []);
+
   const renderService = () => (
     <div className="checkboxOption">
       <Card
-        // style={{ width: 310, height: 400 }}
         tabList={services}
         activeTabKey={serviceKey}
         onTabChange={(serviceKey) => {
@@ -43,7 +46,6 @@ export default function StepTwo(props) {
                     navigateTo("Estimated Price");
 
                     let newCalculationBox = { ...calculationBox };
-                    console.log(newCalculationBox);
 
                     switch (serviceKey) {
                       case "Cut":
@@ -54,13 +56,13 @@ export default function StepTwo(props) {
                         newCalculationBox["Style"] =
                           newCalculationBox["Style"] === menu ? null : menu;
                         break;
-                      case "Perms":
-                        newCalculationBox["Perms"] =
-                          newCalculationBox["Perms"] === menu ? null : menu;
+                      case "Perm":
+                        newCalculationBox["Perm"] =
+                          newCalculationBox["Perm"] === menu ? null : menu;
                         break;
-                      case "Colors":
-                        newCalculationBox["Colors"] =
-                          newCalculationBox["Colors"] === menu ? null : menu;
+                      case "Color":
+                        newCalculationBox["Color"] =
+                          newCalculationBox["Color"] === menu ? null : menu;
                         break;
                       case "Clinic":
                         newCalculationBox["Clinic"] =
@@ -72,9 +74,7 @@ export default function StepTwo(props) {
                         break;
                     }
 
-                    console.log(newCalculationBox);
                     setCalculationBox(newCalculationBox);
-                    // setIsChecked(isChecked);
                   }}
                 >
                   <Text strong>{menu.service}</Text>
@@ -94,7 +94,7 @@ export default function StepTwo(props) {
 
   return (
     <div id="stepTwoTopId">
-      <p id="title2">Service and Price</p>
+      {/* <p id="title2">Service and Price</p> */}
       <Row>
         <Col span={13}>
           <div className="genderService">{renderService()}</div>
