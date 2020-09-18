@@ -2,21 +2,22 @@ import React from "react";
 import DesignerNavItem from "./DesignerNavItem.jsx";
 
 const NavItems = ["Home", "Works", "Price", "Hours", "Reviews", "Location"];
-// const NavItems = ['Works', 'Price', 'Hours', 'Reviews', 'Location'];
 
-const DesignerNav = (props) => {
-  const { height } = props;
+export default function DesignerNav(props) {
+  const { searchBarHeight, height } = props;
   return (
     <nav>
       <ul className="designerNav">
         {NavItems.map((NavItem) => (
-          <DesignerNavItem key={NavItem} height={height}>
+          <DesignerNavItem
+            key={NavItem}
+            searchBarHeight={searchBarHeight}
+            height={height}
+          >
             {NavItem}
           </DesignerNavItem>
         ))}
       </ul>
     </nav>
   );
-};
-
-export default DesignerNav;
+}

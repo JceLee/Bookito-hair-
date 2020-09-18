@@ -1,18 +1,14 @@
 import React from "react";
 import { Form, Input, InputNumber, Button, Space, Tabs, Divider } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
-
 const { TabPane } = Tabs;
 const { TextArea } = Input;
 const tapNames = ["Cut", "Style", "Perm", "Color", "Clinic", "Promo"];
 
-const callback = (key) => {
-  console.log("Current Tap: " + key);
-};
-
-const ServiceNPriceForm = () => {
+export default function ServiceNPriceForm(props) {
+  const { services } = props;
   return (
-    <Tabs onChange={callback} type="card">
+    <Tabs type="card">
       {tapNames.map((tap) => {
         return (
           <TabPane tab={tap} key={tap} animated={false}>
@@ -117,6 +113,4 @@ const ServiceNPriceForm = () => {
       })}
     </Tabs>
   );
-};
-
-export default ServiceNPriceForm;
+}

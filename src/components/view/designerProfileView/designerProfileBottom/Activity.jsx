@@ -1,9 +1,8 @@
 import React from "react";
 
-const Activity = (props) => {
+export default function Activity(props) {
   const { id, fname, activity } = props;
   const { numberOfClientsLookingUp, avgRespondingTime, reputations } = activity;
-
   return (
     <div className="activity" id={id}>
       <h2>LookUp Activity</h2>
@@ -29,6 +28,4 @@ const Activity = (props) => {
       </section>
     </div>
   );
-};
-
-export default Activity;
+}

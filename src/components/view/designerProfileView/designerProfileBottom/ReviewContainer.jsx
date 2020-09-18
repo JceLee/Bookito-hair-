@@ -6,11 +6,11 @@ import Review from "./Review";
 const reviewsPerClick = 2;
 let reviewsArray = [];
 
-const Reviews = (props) => {
+export default function ReviewContainer(props) {
   let { id, reviews } = props;
   const [arrayReviewsToShow, setarrayReviewsToShow] = useState([]);
   const [next, setNext] = useState(reviewsPerClick);
-  const [Collapsed, setCollapsed] = useState({
+  const [collapsed, setCollapsed] = useState({
     collapsedAllReviews: true,
     collapsedComment: true,
   });
@@ -58,7 +58,7 @@ const Reviews = (props) => {
               rate={rate}
               comment={comment}
               date={date}
-              collapsed={Collapsed}
+              collapsed={collapsed}
             />
           );
         })
@@ -82,7 +82,6 @@ const Reviews = (props) => {
             spy={true}
             smooth={true}
             duration={500}
-            // offset={-121 * 1.75}
             offset={-48 * 2.25}
           >
             <Button
@@ -97,6 +96,4 @@ const Reviews = (props) => {
       </Space>
     </div>
   );
-};
-
-export default Reviews;
+}

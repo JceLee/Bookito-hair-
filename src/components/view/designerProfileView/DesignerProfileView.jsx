@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { BackTop } from "antd";
-import DesignerTop from "./designerTop/DesignerTop.jsx";
-import DesignerBottom from "./designerBottom/DesignerBottom.jsx";
+import DesignerProfileTop from "./designerProfileTop/DesignerProfileTop.jsx";
+import DesignerProfileBottom from "./designerProfileBottom/DesignerProfileBottom.jsx";
 import { useSelector } from "react-redux";
 
 export default function DesignerProfileView() {

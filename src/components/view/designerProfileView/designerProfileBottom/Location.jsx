@@ -3,7 +3,7 @@ import Geocode from "react-geocode";
 import GoogleMapReact from "google-map-react";
 import Marker from "./Marker.jsx";
 
-const Location = (props) => {
+export default function Location(props) {
   const [position, setPosition] = useState({ lat: null, lng: null });
   const [loading, setLoading] = useState(true);
   const { id, location } = props;
@@ -45,5 +45,4 @@ const Location = (props) => {
     </div>
   );
   return <>{googleMap}</>;
-};
-export default Location;
+}
