@@ -24,6 +24,11 @@ export default function HoursForm(props) {
     Sun: false,
   });
 
+  const formatter = (minutes) => {
+    const formattedValue = formatTime(minutes * timeConvertingFactor);
+    return `${formattedValue}`;
+  };
+
   const [FormattedTimes, setFormattedTimes] = useState({
     Mon: [formatter(defaultStartTime), formatter(defaultEndTime)],
     Tue: [formatter(defaultStartTime), formatter(defaultEndTime)],
@@ -33,11 +38,6 @@ export default function HoursForm(props) {
     Sat: [formatter(defaultStartTime), formatter(defaultEndTime)],
     Sun: [formatter(defaultStartTime), formatter(defaultEndTime)],
   });
-
-  const formatter = (minutes) => {
-    const formattedValue = formatTime(minutes * timeConvertingFactor);
-    return `${formattedValue}`;
-  };
 
   const onChangeSliderHandler = (day, minutes) => {
     const [from, to] = destructureTimeRange(minutes);

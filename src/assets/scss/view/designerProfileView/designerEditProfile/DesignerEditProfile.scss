@@ -70,19 +70,25 @@
       .ant-collapse-header {
         font-weight: 500;
       }
-      .ant-space {
+      .servicePriceDescription {
         display: flex;
         flex-wrap: wrap;
+        flex-direction: row;
         margin: 16px 0 0 0;
-        align-items: center;
+        align-items: baseline;
         .serviceNameInput {
           width: 50vw;
+          margin-right: 2.5vw;
+
           @include tabletP {
             width: 54vw;
           }
         }
-        .ant-form-item .ant-input-number-handler-wrap {
-          display: none;
+        .servicePriceInput {
+          margin-right: 2.5vw;
+        }
+        .removeServicePriceBtn {
+          // width: 5vw;
         }
         .serviceDescriptionInput {
           width: 90vw;
@@ -90,8 +96,9 @@
             width: 66.75vw;
           }
         }
-        .removeServicePriceBtn {
-          padding-bottom: 28px;
+
+        .ant-form-item .ant-input-number-handler-wrap {
+          display: none;
         }
       }
       .dividerInServiceAndPrice {
