@@ -44,5 +44,21 @@ export default function Location(props) {
       </div>
     </div>
   );
-  return <>{googleMap}</>;
+  return (
+    <>
+      {googleMap}
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+    </>
+  );
 }

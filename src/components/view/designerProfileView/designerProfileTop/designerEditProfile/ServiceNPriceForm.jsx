@@ -11,83 +11,62 @@ export default function ServiceNPriceForm(props) {
     <Tabs type="card">
       {tapNames.map((tap) => {
         return (
-          <TabPane tab={tap} key={tap} animated={false}>
+          <TabPane classname="editProfileTabPane" tab={tap} key={tap} animated={false}>
             <Form.List name={["services", `${tap}`]}>
               {(fields, { add, remove }) => {
                 return (
-                  <div>
-                    <div className="servicePriceDescription">
+                  <>
+                    <div>
                       {fields.map((field, index) => {
                         return (
-                          <div key={index}>
-                            <Space
-                              className="serviceNameNPrice"
-                              style={{
-                                position: "relative",
-                                alignItems: "center",
-                                paddingLeft: "12px",
-                              }}
-                              key={field.key}
-                              align="start"
+                          <div key={index} className="servicePriceDescription">
+                            <Form.Item
+                              name={[field.name, "serviceName"]}
+                              className="serviceNameInput"
+                              fieldKey={[field.fieldKey, "serviceName"]}
+                              hasFeedback
+                              rules={[
+                                {
+                                  required: true,
+                                },
+                              ]}
                             >
-                              <Form.Item
-                                {...field}
-                                name={[field.name, "serviceName"]}
-                                className="serviceNameInput"
-                                fieldKey={[field.fieldKey, "serviceName"]}
-                                hasFeedback
-                                rules={[
-                                  {
-                                    required: true,
-                                  },
-                                ]}
-                              >
-                                <Input placeholder="Service Name" />
-                              </Form.Item>
-                              <Form.Item
-                                {...field}
-                                name={[field.name, "price"]}
-                                className="servicePriceInput"
-                                fieldKey={[field.fieldKey, "price"]}
-                                hasFeedback
-                                rules={[
-                                  {
-                                    required: true,
-                                    type: "number",
-                                    min: 1,
-                                    max: 1000,
-                                  },
-                                ]}
-                              >
-                                <InputNumber
-                                  placeholder="Price"
-                                  // formatter={(value) => `$ ${value}`}
-                                />
-                              </Form.Item>
-                              <MinusCircleOutlined
-                                className="removeServicePriceBtn"
-                                onClick={() => {
-                                  remove(field.name);
-                                }}
+                              <Input placeholder="Service Name" />
+                            </Form.Item>
+                            <Form.Item
+                              name={[field.name, "price"]}
+                              className="servicePriceInput"
+                              fieldKey={[field.fieldKey, "price"]}
+                              hasFeedback
+                              rules={[
+                                {
+                                  required: true,
+                                  type: "number",
+                                  min: 1,
+                                  max: 1000,
+                                },
+                              ]}
+                            >
+                              <InputNumber
+                                placeholder="Price"
+                                // formatter={(value) => `$ ${value}`}
                               />
-                              <Form.Item
-                                {...field}
-                                name={[field.name, "description"]}
-                                className="serviceDescriptionInput"
-                                fieldKey={[field.fieldKey, "description"]}
-                                hasFeedback
-                              >
-                                <TextArea placeholder="Description (optional)" />
-                              </Form.Item>
-                            </Space>
-                            <Divider
-                              style={{
-                                margin: "0 0 0 12px",
-                                width: "300px",
-                                minWidth: "unset",
-                                color: "#c6c6c6",
+                            </Form.Item>
+                            <MinusCircleOutlined
+                              className="removeServicePriceBtn"
+                              onClick={() => {
+                                remove(field.name);
                               }}
                             />
+                            <Form.Item
+                              name={[field.name, "description"]}
+                              className="serviceDescriptionInput"
+                              fieldKey={[field.fieldKey, "description"]}
+                              hasFeedback
+                            >
+                              <TextArea placeholder="Description (optional)" />
+                            </Form.Item>
+                            <Divider className="dividerInServiceAndPrice" />
                           </div>
                         );
                       })}
@@ -104,7 +83,7 @@ export default function ServiceNPriceForm(props) {
                         <PlusOutlined /> Add Service to {tap}
                       </Button>
                     </Form.Item>
-                  </div>
+                  </>
                 );
               }}
             </Form.List>

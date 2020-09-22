@@ -29,25 +29,13 @@ export default function Works(props) {
   // To display next image in a carousel(Slider component in react-slick)
   const NextArrow = (props) => {
     const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "block" }}
-        onClick={onClick}
-      />
-    );
+    return <div className={className} style={{ ...style, display: "block" }} onClick={onClick} />;
   };
 
   // To display previous image in a carousel(Slider component in react-slick)
   const PrevArrow = (props) => {
     const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{ ...style, display: "block" }}
-        onClick={onClick}
-      />
-    );
+    return <div className={className} style={{ ...style, display: "block" }} onClick={onClick} />;
   };
 
   // Settings for carousels(Slider component in react-slick)
@@ -107,10 +95,9 @@ export default function Works(props) {
               return (
                 <div key={index}>
                   <img
+                    className="workImgInSlider"
                     src={work}
                     alt={`workImg${index}`}
-                    width="300px"
-                    height="300px"
                     onLoad={imageCarouselLoaded}
                   />
                 </div>
