@@ -20,19 +20,17 @@
 // Client Schedule view
 @import "./view/clientScheduleView/ClientScheduleView.scss";
 @import "./view/MainView/MainView.scss";
-@import "./commonComponents/NavBar.scss";
-@import "./view/designerListView/DesignerCardComponent/DesignerCardComponent.scss";
-@import "./view/designerListView/designerListFilter/DesignerListFilter.scss";
 @import "./view/clientProfileView/ClientProfileView.scss";
 
 // Designer Schedule view
-@import "./view/designerScheduleView/DesignerScheduleView.scss";
+@import "./view/designerProfileView/bookNowModal/BookNowModal.scss";
 
 // Designer Profile View
-@import "view/designerProfileView/DesignerProfileView";
+@import "./view/designerProfileView/DesignerProfileView.scss";
+@import "./view/designerProfileView/designerEditProfile/DesignerEditProfile.scss";
 
 // Auth components
-@import "/commonComponents/Auth.scss";
+@import "view/authView/SignInModal";
 
 body {
   font-family: "Montserrat", sans-serif;
