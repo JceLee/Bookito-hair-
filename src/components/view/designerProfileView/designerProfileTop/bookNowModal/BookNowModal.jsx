@@ -23,15 +23,15 @@ export default function BookNowModal(props) {
 
   useEffect(() => {
     firebaseStore
-        .collection("appointments")
-        .where("designerId", "==", designer.uid)
-        .get()
-        .then((querySnapshot) => {
-          querySnapshot.docs.forEach((doc) => {
-            loadingAppointment.push(doc.data());
-          });
-          setAppointments(loadingAppointment);
+      .collection("appointments")
+      .where("designerId", "==", designer.uid)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.docs.forEach((doc) => {
+          loadingAppointment.push(doc.data());
         });
+        setAppointments(loadingAppointment);
+      });
   }, [appointments]);
 
   let timeSlotTemplate = {
@@ -187,14 +187,14 @@ export default function BookNowModal(props) {
 
   const writeAppointmentIntoDB = async (newAppointment) => {
     firebaseStore
-        .collection("appointments")
-        .add(newAppointment)
-        .then(function (docRef) {
-          console.log("create appointment :" + docRef.id);
-        })
-        .catch(function (error) {
-          console.log("error :" + error);
-        });
+      .collection("appointments")
+      .add(newAppointment)
+      .then(function (docRef) {
+        console.log("create appointment :" + docRef.id);
+      })
+      .catch(function (error) {
+        console.log("error :" + error);
+      });
   };
 
   const getServiceContent = () => {
