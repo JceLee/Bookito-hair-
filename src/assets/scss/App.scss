@@ -30,7 +30,7 @@
 @import "./view/designerProfileView/designerEditProfile/DesignerEditProfile.scss";
 
 // Auth components
-@import "commonComponents/LogIn";
+@import "view/authView/SignInModal";
 
 body {
   font-family: "Montserrat", sans-serif;

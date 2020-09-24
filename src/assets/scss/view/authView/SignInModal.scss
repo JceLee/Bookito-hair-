@@ -1,4 +1,4 @@
-@import "../Mixin.scss";
+@import "../../Mixin";
 
 #logoFont {
   margin-bottom: 10vh;
@@ -9,19 +9,15 @@
 
 .loginModal{
   .ant-modal-content {
-    width: 90vw;
-    height: 90vh;
-    margin-left: 5vw;
-    margin-top: 5vh;
+    width: 100vw;
+    height: 100vh;
     vertical-align: middle;
 
     .ant-modal-body {
-      width: 90vw;
       text-align: center;
 
       .ant-divider-horizontal {
         width: 50vw;
-        margin-top: 5vw;
       }
 
       .loginModalContent {

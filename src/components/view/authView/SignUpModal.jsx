@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import firebase from "firebase/app";
 
-export default function SignUp(props) {
+export default function SignUpModal(props) {
   const { title } = props;
   const [isSignUpShowing, setIsSignUpShowing] = useState(false);
   const dispatch = useDispatch();

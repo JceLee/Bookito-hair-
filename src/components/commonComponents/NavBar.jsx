@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Menu, Dropdown, Button, Typography, Drawer } from "antd";
 import { Link } from "react-router-dom";
 import { UserOutlined, BarsOutlined } from "@ant-design/icons";
-import SignUp from "../view/authView/SignUp";
-import LogIn from "../view/authView/LogIn";
+import SignUpModal from "../view/authView/SignUpModal";
+import SignInModal from "../view/authView/SignInModal";
 import { firebaseAuth } from "../../config/fbConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { sign_out } from "../../actions/signIn";
@@ -34,13 +34,13 @@ export default function Navbar() {
         } else if (menu.name == "Log In") {
           return (
             <Menu.Item key={inx}>
-              {signedInUser == null ? <LogIn /> : <SignOut />}
+              {signedInUser == null ? <SignInModal /> : <SignOut />}
             </Menu.Item>
           );
         } else if (menu.name == "Sign up") {
           return (
             <Menu.Item key={inx}>
-              <SignUp />
+              <SignUpModal />
             </Menu.Item>
           );
         } else {
