@@ -5,13 +5,11 @@ import DesignerCardLeft from "../view/designerListView/designerCardComponent/des
 import BlackBtn from "./BlackBtn";
 
 export default function ScheduleCardHistory(props) {
-  const { date, name, timeStart, timeEnd, types } = props;
+  const { appointment } = props;
   const [visible, setVisible] = useState(false);
   const modalHandler = () => {
     setVisible(!visible);
   };
-
-  const submitReview = () => {};
 
   return (
     <>
@@ -34,19 +32,19 @@ export default function ScheduleCardHistory(props) {
       >
         <Row>
           <Col span={4} className="scheduleCardDate">
-            {date}
+            {appointment.date}
           </Col>
           <Col span={2}>
             <Divider type="vertical" className="scheduleCardDivider" />
           </Col>
           <Col span={18}>
-            <div>Designer: {name}</div>
+            <div>Designer: {appointment.designerName}</div>
             <div>
-              Time: {timeStart}-{timeEnd}
+              Time: {appointment.timeStart}-{appointment.timeEnd}
             </div>
             <div>
               Type:{" "}
-              {types.map((type, index) => (
+              {appointment.types.map((type, index) => (
                 <span key={index}>{type} </span>
               ))}
             </div>
@@ -60,25 +58,20 @@ export default function ScheduleCardHistory(props) {
         visible={visible}
         onCancel={modalHandler}
         destroyOnClose={true}
-        footer={false}
-        className="reviewModal"
+        width={800}
       >
         <div>
-          <DesignerCardLeft fname={name} />
+          <DesignerCardLeft fname={appointment.designerName} />
         </div>
         <Form>
-          <Form.Item name="ratingFormItem">
-            <div className="prompt">How was the service?</div>
-            <div className="ratingContainer">
-              <Rate />
-            </div>
+          <Form.Item>
+            <div>How was the service?</div>
+            <Rate />
           </Form.Item>
-          <Form.Item name="comment">
-            <div>Comments</div>
+          <Form.Item>
             <Input.TextArea />
           </Form.Item>
         </Form>
-        <BlackBtn btnName="Submit" onClick={submitReview} />
       </Modal>
     </>
   );

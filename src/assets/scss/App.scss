@@ -22,15 +22,20 @@
 @import "./view/MainView/MainView.scss";
 @import "./view/clientProfileView/ClientProfileView.scss";
 
-// Designer Schedule view
-@import "./view/designerProfileView/bookNowModal/BookNowModal.scss";
+// Designer Schedule view(Calendar)
+@import "./view/designerScheduleView/Calendar.scss";
+@import "./view/designerScheduleView/TooltipContent.scss";
+@import "./view/designerScheduleView/DeleteAppointmentModal.scss";
+@import "./view/designerScheduleView/AddAppointmentModal.scss";
 
 // Designer Profile View
+@import "./view/designerProfileView/bookNowModal/BookNowModal.scss";
 @import "./view/designerProfileView/DesignerProfileView.scss";
 @import "./view/designerProfileView/designerEditProfile/DesignerEditProfile.scss";
 
 // Auth components
-@import "view/authView/SignInModal";
+@import "view/authView/SignInModal.scss";
+@import "view/authView/SignUpModal.scss";
 
 body {
   font-family: "Montserrat", sans-serif;
