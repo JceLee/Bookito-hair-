@@ -5,6 +5,8 @@ $orange: #ffa500;
 $green: #00ff00;
 $white: #fdfdfd;
 $black: #1b1b1b;
+$grey: #a1a1a1;
+$lightGrey: #c6c6c6;
 
 @mixin mobileM {
   @media only screen and (min-width: 375px) {
