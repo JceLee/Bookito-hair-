@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { Tabs, Row } from "antd";
 import ScheduleCard from "../../commonComponents/ScheduleCard";
 import ScheduleCardHistory from "../../commonComponents/ScheduleCardHistory";
@@ -10,18 +10,22 @@ const { TabPane } = Tabs;
 export default function ClientSchedule() {
   const currentUser = useSelector((state) => state.signIn.currentUser);
   const [appointments, setAppointments] = useState([]);
-  const loadingAppointment = [];
 
-  firebaseStore
-      .collection("appointments")
-      .where("customerId", "==", currentUser.uid)
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.docs.forEach((doc) => {
-          loadingAppointment.push(doc.data());
-        });
-        setAppointments(loadingAppointment);
-      });
+  useEffect(() => {
+    const loadingAppointment = [];
+    firebaseStore
+        .collection("appointments")
+        .where("customerId", "==", currentUser.uid)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.docs.forEach((doc) => {
+            loadingAppointment.push(doc.data());
+          });
+          return loadingAppointment;
+        }).then((data)=> {
+      setAppointments(data);
+    });
+  });
 
   return (
     <div className="clientSchedule">

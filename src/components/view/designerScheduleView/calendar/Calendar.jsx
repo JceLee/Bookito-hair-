@@ -46,7 +46,7 @@ export default function Calendar(props) {
   };
 
   const designer = {
-    notifications: 2,
+    notifications: newRequests.length,
     holidays: [0, 6], // 0 for sunday 6 for saturday
   };
 
