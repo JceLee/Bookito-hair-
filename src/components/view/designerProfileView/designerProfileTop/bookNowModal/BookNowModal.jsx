@@ -314,7 +314,7 @@ export default function BookNowModal(props) {
         cancelButtonProps={{ style: { display: "none" } }}
       >
         <div id="stepToTopId">
-          <Steps current={current} onChange={onChange} progressDot>
+          <Steps className="steps" current={current} onChange={onChange} progressDot>
             {steps.map((item) => (
               <Step key={item.title} title={item.title} />
             ))}

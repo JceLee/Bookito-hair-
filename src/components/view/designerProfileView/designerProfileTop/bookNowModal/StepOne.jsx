@@ -32,7 +32,7 @@ export default function StepOne(props) {
   );
 
   return (
-    <div>
+    <div className="stepOne">
       {renderCalendar()}
       <p id="selectTime">Please select time</p>
       {renderTime()}

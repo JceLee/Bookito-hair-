@@ -17,90 +17,94 @@ $modalBodyMargin: 110px;
       overflow: auto;
     }
 
-    .ant-steps-item-title {
-      font-size: 14px;
-    }
-
-    .ant-steps {
-      width: 95%;
-      margin-left: 14px;
-    }
-
-    .ant-steps-icon {
-      background: $black;
-    }
-
-    .ant-steps-icon-dot {
-      background: $black;
-      margin-left: -10px;
-    }
-
-    .ant-steps-icon-dot::after {
-      width: 70px;
-      height: 42px;
-    }
-
-    .ant-steps-item-tail {
-      margin: 0 0 0 60.5px;
-    }
-
-    .ant-steps-item-tail::after {
-      background-color: $black;
-      height: 2px;
-    }
-
-    .DayPicker {
-      display: inline-block;
-      font-size: 1.2rem;
-      .DayPicker-NavButton {
-        top: 5.5%;
-        right: 8%;
+    .steps {
+      .ant-steps-item-title {
+        font-size: 14px;
       }
-      .DayPicker-Month {
-        width: 100%;
-        height: auto;
 
-        .DayPicker-Body {
-          .DayPicker-Day--selected {
-            background-color: $black;
-          }
-          .DayPicker-Day:not(.DayPicker-Day--selected):hover {
-            background-color: $white;
+      .ant-steps {
+        width: 95%;
+        margin-left: 14px;
+      }
+
+      .ant-steps-icon {
+        background: $black;
+      }
+
+      .ant-steps-icon-dot {
+        background: $black;
+        margin-left: -10px;
+      }
+
+      .ant-steps-icon-dot::after {
+        width: 70px;
+        height: 42px;
+      }
+
+      .ant-steps-item-tail {
+        margin: 0 0 0 60.5px;
+      }
+
+      .ant-steps-item-tail::after {
+        background-color: $black;
+        height: 2px;
+      }
+    }
+
+    .stepOne {
+      .DayPicker {
+        display: inline-block;
+        font-size: 1.2rem;
+        .DayPicker-NavButton {
+          top: 5.5%;
+          right: 8%;
+        }
+        .DayPicker-Month {
+          width: 100%;
+          height: auto;
+
+          .DayPicker-Body {
+            .DayPicker-Day--selected {
+              background-color: $black;
+            }
+            .DayPicker-Day:not(.DayPicker-Day--selected):hover {
+              background-color: $white;
+            }
           }
         }
       }
-    }
-    margin-bottom: 9%;
 
-    #selectTimePtag {
-      text-align: center;
-      font-size: 15px;
-      font-weight: bolder;
-      margin-bottom: 8%;
-    }
+      #selectTimePtag {
+        text-align: center;
+        font-size: 15px;
+        font-weight: bolder;
+        margin-bottom: 8%;
+      }
 
-    .ant-radio-button-wrapper {
-      border-left-width: 1px;
-      border-left-color: $black;
-      margin: 0 1% 2% 5.5%;
-      color: $black;
-      border-color: $black;
-      .hourRadioBtn:focus {
-        content: none;
+      .ant-radio-button-wrapper {
+        border-left-width: 1px;
+        border-left-color: $black;
+        margin: 0 1% 2% 5.5%;
+        color: $black;
+        border-color: $black;
+        .hourRadioBtn:focus {
+          content: none;
+        }
+      }
+      .ant-radio-button-wrapper:not(:first-child)::before {
+        background-color: $black;
+      }
+      .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled),
+      .ant-radio-button-wrapper-checked:not([class*=" ant-radio-button-wrapper-disabled"]).ant-radio-button-wrapper {
+        border: 2px solid $black;
+        color: $black;
+      }
+      .ant-radio-button-wrapper:hover {
+        color: $black;
+        border: 2px solid $black;
       }
     }
-    .ant-radio-button-wrapper:not(:first-child)::before {
-      background-color: $black;
-    }
-    .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled),
-    .ant-radio-button-wrapper-checked:not([class*=" ant-radio-button-wrapper-disabled"]).ant-radio-button-wrapper {
-      border: 2px solid $black;
-      color: $black;
-    }
-    .ant-radio-button-wrapper:hover {
-      color: $black;
-      border: 2px solid $black;
-    }
+
     .stepTwo {
       .checkboxOption {
         width: 87%;
@@ -160,6 +164,7 @@ $modalBodyMargin: 110px;
         margin: 0 0 40px -10px;
       }
     }
+
     .stepThree {
       .ant-list-items {
         margin: 10% 3.5% 0 7%;
