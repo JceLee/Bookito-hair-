@@ -8,9 +8,8 @@ import {
   sign_in_with_facebook,
   sign_in_with_google,
 } from "../../../actions/signIn";
-import SignUpOption from "./SignUpOption";
 
-export default function LogIn() {
+export default function SignInModal() {
   const [isLoginShowing, setIsLoginShowing] = useState(false);
   const currentUser = useSelector((state) => state.signIn.currentUser);
   const dispatch = useDispatch();
@@ -365,7 +364,6 @@ export default function LogIn() {
           <Divider> OR </Divider>
           <div>
             <p> Don't have an account? </p>
-            <SignUpOption handleLoginCancel={handleLoginCancel} />
           </div>
         </div>
       </Modal>
