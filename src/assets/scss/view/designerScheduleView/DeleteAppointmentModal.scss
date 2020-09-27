@@ -1,0 +1,29 @@
+.deleteAppointmentModal {
+  .MuiPaper-rounded {
+    border-radius: 0;
+  }
+  .MuiDialog-paperWidthSm {
+    // width: 100%;
+  }
+
+  .MuiDialog-paper {
+    margin: 0;
+  }
+
+  .modalHeader {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 16px 24px;
+    .headerTitleCol {
+      color: rgba(0, 0, 0, 0.85);
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 22px;
+    }
+    .headerDeleteCol {
+      text-align: right;
+    }
+  }
+  .modalContent {
+    padding: 50px 24px;
+  }
+}
