@@ -77,6 +77,9 @@
       display: flex;
       align-items: center;
       padding: 0.5rem 0 0 0.5rem;
+      @include tabletP {
+        padding: 10px;
+      }
       .designerNameRateLocation {
         margin: 0 0 0 16px;
         .ant-rate {
@@ -116,9 +119,9 @@
       width: 75vw;
       display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
-      background-color: violet;
+      justify-content: left;
       .designerNavItem {
+        padding: 0 10px;
         margin: 0 0.2rem 0 0;
         a {
           color: $white;
@@ -140,12 +143,16 @@
       align-items: center;
       justify-content: space-around;
       background-color: $black;
+
       .buttonInProfileLayoutTab {
         font-size: 12px;
         background-color: $white;
         color: $black;
         margin: 0 0.2rem 0 0;
         padding: 0.2rem;
+        @include tabletP {
+          margin-left: 0.5rem;
+        }
       }
       .buttonInProfileLayoutTab:active,
       .buttonInProfileLayoutTab:hover,
