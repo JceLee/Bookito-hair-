@@ -1,7 +1,6 @@
 @import "../../../Mixin.scss";
 
-$headerHeight: 55px;
-$footerHeight: 55px;
+$modalBodyMargin: 110px;
 
 .bookNowModal {
   top: 0;
@@ -13,7 +12,7 @@ $footerHeight: 55px;
     font-size: 16px;
 
     .ant-modal-body {
-      height: calc(100vh - 110px);
+      height: calc(100vh - #{$modalBodyMargin});
       padding: 0;
       overflow: auto;
     }
