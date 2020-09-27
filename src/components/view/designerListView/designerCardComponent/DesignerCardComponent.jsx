@@ -4,13 +4,7 @@ import DesignerCardTop from "./designerCardTop/DesignerCardTop";
 import { useHistory } from "react-router-dom";
 
 export default function DesignerCardComponent(props) {
-  const { designer } = props;
-
-  const history = useHistory();
-  const handleSearch = (designer) => () => {
-    const route = `/designer_profile?uid=${designer.uid}`;
-    history.push(route);
-  };
+  const { designer, handleSearch } = props;
 
   return (
     <div className="designerCardComponent" onClick={handleSearch(designer)}>

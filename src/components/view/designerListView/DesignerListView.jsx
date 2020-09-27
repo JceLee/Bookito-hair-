@@ -8,26 +8,32 @@ import DesignerCardComponent from "./designerCardComponent/DesignerCardComponent
 import DesignerListFilter from "./DesignerListFilter";
 import Map from "../../commonComponents/map/Map";
 import { CloseOutlined } from '@ant-design/icons';
-
+import { useHistory } from "react-router-dom";
 
 export default function DesignerListView(props) {
   const designers = useSelector((state) => state.firestore.designers);
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleSearch = (designer) => () => {
+    const route = `/designer_profile?uid=${designer.uid}`;
+    history.push(route);
+  };
 
   useEffect(() => {
-    // const params = queryString.parse(props.location.search);
-    // const newDesigners = [];
-    // firebaseStore
-    //   .collection("users")
-    //   .where("location", "==", params["location"])
-    //   .get()
-    //   .then((querySnapshot) => {
-    //     querySnapshot.docs.forEach((doc) => {
-    //       newDesigners.push(doc.data());
-    //     });
-    //     dispatch(load_database(newDesigners));
-    //   });
-  }, [dispatch]);
+    const params = queryString.parse(props.location.search);
+    const newDesigners = [];
+    firebaseStore
+      .collection("users")
+      .where("location", "==", params["location"])
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.docs.forEach((doc) => {
+          newDesigners.push(doc.data());
+        });
+        dispatch(load_database(newDesigners));
+      });
+  }, [dispatch, props.location.search]);
 
   const [mapVisibleMobile, setMapVisibleMobile] = useState(false);
   const [mapVisibleDesktop, setMapVisibleDesktop] = useState(true);
@@ -51,7 +57,7 @@ export default function DesignerListView(props) {
   return (
     <>
       <div className="listingContainer">
-        <div className="designerContainer"> {/*style={{ width: mapVisibleDesktop ? "100vw" : "50vw" }}>*/}
+        <div className={mapVisibleDesktop ? "designerContainerMapVisible designerContainer" : "designerContainer"}>
 
           {/* Desktop map toggle button - used to show map if closed by the user */}
           <Button className="desktopOnly" onClick={openMapDesktop} hidden={mapVisibleDesktop}>
@@ -92,45 +98,49 @@ export default function DesignerListView(props) {
             </Button>
 
             <div className="mapContainer">
-              <Map initialLocationString={props.location.search} designers={[
-                {
-                  id: 0,
-                  name: "Joshua Shin",
-                  rate: 4,
-                  services: ["men's cut", "women's cut", "color", "perm", ],
-                  location: {lat: 49.232743, lng: -123.024318}
-                },{
-                  id: 1,
-                  name: "Yongju Babo",
-                  rate: 1,
-                  services: ["cut"],
-                  location: {lat: 49.222743, lng: -123.023318}
-                },{
-                  id: 3,
-                  name: "kangmin",
-                  rate: 3,
-                  services: ["cut", "color", "perm"],
-                  location: {lat: 49.21, lng: -123.022}
-                },{
-                  id: 4,
-                  name: "gina",
-                  rate: 5,
-                  services: ["cut", "color", "perm"],
-                  location: {lat: 49.2, lng: -123.021}
-                },{
-                  id: 5,
-                  name: "heeja",
-                  rate: 2,
-                  services: ["cut", "color", "perm"],
-                  location: {lat: 49.19, lng: -123.020}
-                },{
-                  id: 6,
-                  name: "jaewhee",
-                  rate: 3,
-                  services: ["cut", "color", "perm"],
-                  location: {lat: 49.18, lng: -123.019}
-                }
-              ]}/>
+              <Map initialLocationString={props.location.search} 
+                designers={
+                  // Object.values(designers)
+                  [{
+                    uid: 0,
+                    name: "Joshua Shin",
+                    rate: 4,
+                    // services: ["men's cut", "women's cut", "color", "perm", ],
+                    services: ["cut", "color", "perm"],
+                    latLng: {lat: 49.2505955, lng: -123.1012059}
+                  },{
+                    uid: 1,
+                    name: "Yongju Babo",
+                    rate: 1,
+                    services: ["cut"],
+                    latLng: {lat: 49.2505955, lng: -123.1012059}
+                  },{
+                    uid: 3,
+                    name: "kangmin",
+                    rate: 3,
+                    services: ["cut", "color", "perm"],
+                    latLng: {lat: 49.2505955, lng: -123.1012059}
+                  },{
+                    uid: 4,
+                    name: "gina",
+                    rate: 5,
+                    services: ["cut", "color", "perm"],
+                    latLng: {lat: 49.2505955, lng: -123.1012059}
+                  },{
+                    uid: 5,
+                    name: "heeja",
+                    rate: 2,
+                    services: ["cut", "color", "perm"],
+                    latLng: {lat: 49.2505955, lng: -123.1012059}
+                  },{
+                    uid: 6,
+                    name: "jaewhee",
+                    rate: 3,
+                    services: ["cut", "color", "perm"],
+                    latLng: {lat: 49.2505955, lng: -123.1012059}
+                  }]
+              } 
+              />
             </div>
           </Drawer>}
 
@@ -138,18 +148,18 @@ export default function DesignerListView(props) {
             listNavBar
             <div className="filter">
               <DesignerListFilter
-                numberOfDesigners="400"
+                numberOfDesigners={Object.keys(designers).length}
                 location="Vancouver"
               />
             </div>
           </div>
           {designers.map((designer, index) => (
             <div key={index} className="designerList">
-              <DesignerCardComponent designer={designer} />
+              {console.log(designer)}
+              <DesignerCardComponent designer={designer} handleSearch={handleSearch} />
             </div>
           ))}
         </div>
-        
       </div>
     </>
   );

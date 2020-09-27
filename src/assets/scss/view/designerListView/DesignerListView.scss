@@ -1,17 +1,23 @@
 @import "../../Mixin.scss";
 
 .listingContainer {
-  border: 1px black solid;
-  height: 91.5vh;
+  // border: 1px black solid;
+  // height: 91.3vh;
+  min-height: 100vh;
 
   .designerContainer {
-    position: relative;
-    border: 1px red solid;
-    height: 91.5vh;
-    width: 100vw;
+    // border: 1px red solid;
+    // height: 91.3vh;
+    // position: relative; // makes drawer inside div or not
+    min-height: 100vh;
+  
+    @include mobileOnly{
+      width: 100% !important;
+    }
 
     @include tabletP{
-      width: 60vw;
+      position: relative;
+      width: 100%;
       float: left;
     }
 
@@ -31,16 +37,17 @@
         height: 30%;
         border: 1px saddlebrown solid;
       }
-      //.sorter {
-      //  height: 30%;
-      //  width: 50%;
-      //  border: 1px saddlebrown solid;
-      //  float: right;
-      //}
     }
 
     .designerList {
       border: 1px blue solid;
+    }
+  }
+
+  .designerContainerMapVisible {
+    @include tabletP{
+      width: 60vw;
+      float: left;
     }
   }
 
