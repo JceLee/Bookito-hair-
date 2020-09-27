@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Button, Row, Col, Divider, Card, Typography, Checkbox } from "antd";
+import { Button, Row, Divider, Card, Typography, Checkbox } from "antd";
 
 export default function StepTwo(props) {
   const { Text } = Typography;
@@ -38,10 +38,7 @@ export default function StepTwo(props) {
                 <Checkbox
                   key={menu.id}
                   id={menu.id}
-                  checked={
-                    calculationBox[serviceKey] &&
-                    calculationBox[serviceKey].id === menu.id
-                  }
+                  checked={calculationBox[serviceKey] && calculationBox[serviceKey].id === menu.id}
                   onChange={() => {
                     navigateTo("Estimated Price");
 
@@ -49,8 +46,7 @@ export default function StepTwo(props) {
 
                     switch (serviceKey) {
                       case "Cut":
-                        newCalculationBox["Cut"] =
-                          newCalculationBox["Cut"] === menu ? null : menu;
+                        newCalculationBox["Cut"] = newCalculationBox["Cut"] === menu ? null : menu;
                         break;
                       case "Style":
                         newCalculationBox["Style"] =
@@ -94,43 +90,36 @@ export default function StepTwo(props) {
 
   return (
     <div id="stepTwoTopId">
-      {/* <p id="title2">Service and Price</p> */}
-      <Row>
-        <Col span={13}>
-          <div className="genderService">{renderService()}</div>
-        </Col>
-        <p id="estimatedPrice">Estimated Price</p>
-        <Col span={11}>
-          {page === "Estimated Price" && (
-            <>
-              <div className="estimatedPrice">
-                {calculationBox &&
-                  Object.values(calculationBox).map((menu, index) => {
-                    return (
-                      menu && (
-                        <div className="priceTag" key={index}>
-                          <p>
-                            {menu.service} : ${menu.price}{" "}
-                            <Button
-                              type="link"
-                              onClick={() => {
-                                removeFromBox(menu);
-                              }}
-                            >
-                              Remove
-                            </Button>
-                          </p>
-                        </div>
-                      )
-                    );
-                  })}
-              </div>
-              <Divider />
-              <div className="totalCost">Estimated total: ${totalSum()}</div>
-            </>
-          )}
-        </Col>
-      </Row>
+      {renderService()}
+      <p id="estimatedPrice">Estimated Price</p>
+      {page === "Estimated Price" && (
+        <>
+          <div>
+            {calculationBox &&
+              Object.values(calculationBox).map((menu, index) => {
+                return (
+                  menu && (
+                    <div className="priceTag" key={index}>
+                      <p>
+                        {menu.service} : ${menu.price}{" "}
+                        <Button
+                          type="link"
+                          onClick={() => {
+                            removeFromBox(menu);
+                          }}
+                        >
+                          Remove
+                        </Button>
+                      </p>
+                    </div>
+                  )
+                );
+              })}
+          </div>
+          <Divider />
+          <div className="totalCost">Estimated total: ${totalSum()}</div>
+        </>
+      )}
     </div>
   );
 }

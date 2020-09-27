@@ -128,20 +128,18 @@
           }
         }
       }
-      .estimatedPrice {
-        .estimatedPricePtag {
-          text-align: center;
-          font-size: 15px;
-          font-weight: bolder;
-          margin-bottom: 8%;
-        }
-        .servicePriceTag {
-          margin: 0 0 0 25px;
-          .removeButton {
-            float: right;
-            margin-right: 14px;
-            color: $red;
-          }
+      .estimatedPricePtag {
+        text-align: center;
+        font-size: 15px;
+        font-weight: bolder;
+        margin-bottom: 8%;
+      }
+      .servicePriceTag {
+        margin: 0 0 0 25px;
+        .removeButton {
+          float: right;
+          margin-right: 14px;
+          color: $red;
         }
       }
       .totalCost {
