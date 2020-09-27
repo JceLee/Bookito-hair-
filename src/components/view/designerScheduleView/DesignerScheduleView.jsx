@@ -20,6 +20,7 @@ export default function DesignerSchedule() {
             let {startDate, endDate, monthAndDate }= formatDate(doc.data().date, doc.data().time);
             if(doc.data().state === "conformed") {
               conformed.push({
+                id: doc.data().uid,
                 title: doc.data().customerName,
                 startDate: startDate,
                 endDate: endDate,
@@ -29,6 +30,7 @@ export default function DesignerSchedule() {
               });
             } else if (doc.data().state === "pending") {
               requests.push({
+                id: doc.data().uid,
                 clientName: doc.data().customerName,
                 date: monthAndDate,
                 timeStart: doc.data().time,
