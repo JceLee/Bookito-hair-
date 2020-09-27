@@ -8,6 +8,7 @@
   -o-animation: fadeIn ease 1s;
   -ms-animation: fadeIn ease 1s;
 }
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -16,6 +17,7 @@
     opacity: 1;
   }
 }
+
 @-moz-keyframes fadeIn {
   0% {
     opacity: 0;
@@ -24,6 +26,7 @@
     opacity: 1;
   }
 }
+
 @-webkit-keyframes fadeIn {
   0% {
     opacity: 0;
@@ -32,6 +35,7 @@
     opacity: 1;
   }
 }
+
 @-o-keyframes fadeIn {
   0% {
     opacity: 0;
@@ -40,6 +44,7 @@
     opacity: 1;
   }
 }
+
 @-ms-keyframes fadeIn {
   0% {
     opacity: 0;
@@ -140,6 +145,7 @@
         }
       }
     }
+
     #tabWithButton {
       margin: 0;
       padding: 0.5rem 0;
@@ -159,6 +165,7 @@
           width: 100px;
         }
       }
+
       .buttonInProfileLayoutTab:active,
       .buttonInProfileLayoutTab:hover,
       .buttonInProfileLayoutTab:focus {
@@ -171,10 +178,12 @@
   .designerBottom {
     margin-top: 0.5rem;
     border: 0;
+
     .profileDivider {
       background-color: $lightGrey;
       height: 1px;
     }
+
     // Designer Bottom - Works
     .works {
       width: 95%;
@@ -182,11 +191,13 @@
       @include tabletP {
         width: 100%;
       }
+
       .workGalleryContainer {
         display: flex;
         flex-wrap: wrap;
         margin: 0;
         padding: 0;
+
         .workImgDiv {
           display: inline-block;
           box-sizing: border-box;
@@ -235,6 +246,7 @@
         display: none;
       }
     }
+
     .serviceNPriceGrid,
     .hoursGrid {
       width: 100%;
@@ -312,6 +324,7 @@
         }
       }
     }
+
     .reviewContent {
       display: inline-flex;
     }
@@ -327,6 +340,7 @@
           height: 60vh;
         }
       }
+
       .marker {
         color: $white;
         background-color: $black;
@@ -359,10 +373,10 @@
   @include tabletP {
     top: 25%;
   }
-  // background-color: blue;
   @include desktop {
     width: 100px;
   }
+
   .ant-modal-content {
     margin: 0 auto;
     width: 100vw;

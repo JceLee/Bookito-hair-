@@ -11,16 +11,20 @@ $paddingOfworkImgInModal: 10px;
   height: 100%;
   margin: 0 auto;
   padding: 0;
+
   .ant-tabs-top > .ant-tabs-nav {
     margin: 0;
   }
+
   .ant-tabs-top > .ant-tabs-nav::before {
     border-bottom: none;
   }
+
   .ant-tabs-tab-btn,
   .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
     color: $black;
   }
+
   .ant-tabs-card.ant-tabs-top > .ant-tabs-nav .ant-tabs-tab:not(:last-of-type) {
     margin: 0;
   }
@@ -33,19 +37,23 @@ $paddingOfworkImgInModal: 10px;
       padding: 0 5px;
     }
   }
+
   .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab {
     padding: 0.5rem;
     background-color: inherit;
     border: 2px solid transparent;
     border-style: none none solid;
   }
+
   .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab-active {
     border: 2px solid $black;
     border-style: none none solid;
   }
+
   .ant-tabs-content-holder {
     margin-left: 4px;
   }
+
   .ant-modal-content {
     height: 100%;
     margin: 0 auto;
@@ -70,17 +78,21 @@ $paddingOfworkImgInModal: 10px;
         border-color: $lightGrey;
         box-shadow: none;
       }
+
       .editProfileCollapse {
         .editProfilePanel {
           background-color: $white;
         }
       }
+
       .ant-collapse-content-box {
         padding: 0 13px 16px;
       }
+
       .ant-collapse-header {
         font-weight: 500;
       }
+
       .servicePriceMinusButton {
         width: 100%;
         display: flex;
@@ -89,6 +101,7 @@ $paddingOfworkImgInModal: 10px;
         margin: 16px 0 0 0;
         align-items: baseline;
         justify-content: space-between;
+
         .serviceNameInput {
           width: 57.5%;
           margin-right: 2.5vw;
@@ -99,6 +112,7 @@ $paddingOfworkImgInModal: 10px;
             width: 65%;
           }
         }
+
         .servicePriceInput {
           margin-right: 2.5vw;
           @include tabletP {
@@ -108,6 +122,7 @@ $paddingOfworkImgInModal: 10px;
             margin-right: 1vw;
           }
         }
+
         .serviceDescriptionInput {
           width: 100vw;
           @include tabletP {
@@ -120,15 +135,18 @@ $paddingOfworkImgInModal: 10px;
             width: 30%;
           }
         }
+
         .ant-form-item .ant-input-number-handler-wrap {
           display: none;
         }
       }
+
       .dividerInServiceAndPrice {
         margin: 0;
         width: 100vw;
         background-color: $lightGrey;
       }
+
       .ant-form .ant-form-item {
         .addServiceTypeBtn {
           margin: 18px 0 8px;
@@ -139,13 +157,16 @@ $paddingOfworkImgInModal: 10px;
             width: 100%;
           }
         }
+
         .addServiceTypeBtn:after {
           box-shadow: none !important;
         }
       }
+
       .ant-form-item-explain > :nth-child(even) {
         display: none;
       }
+
       .formItemAddServiceTypeBtn {
         margin-bottom: 0;
       }
@@ -160,32 +181,40 @@ $paddingOfworkImgInModal: 10px;
             left: -80px;
           }
         }
+
         .ant-checkbox-wrapper:hover .ant-checkbox-inner {
           border-color: $lightGrey;
         }
+
         .ant-checkbox-checked .ant-checkbox-inner {
           background-color: $black;
           border-color: $black;
         }
+
         .ant-checkbox-checked:after {
           border-color: $black;
         }
+
         .ant-form-item-control-input {
           min-height: 0;
         }
+
         .hoursFormItem {
           margin: 0 0 0 4px;
         }
+
         .ant-form-item .ant-form-item-label {
           padding: 0;
           @include tabletP {
             text-align: left;
           }
         }
+
         .ant-form-item .ant-form-item-label > label {
           font-weight: 600;
           padding-left: 4px;
         }
+
         .singleDaySliderCheckbox {
           position: relative;
           display: block;
@@ -194,15 +223,18 @@ $paddingOfworkImgInModal: 10px;
             padding-bottom: 16px;
           }
         }
+
         .dayInHoursForm {
           display: block;
           width: 50px;
           font-size: 16px;
           font-weight: bold;
         }
+
         .timeInHoursForm {
           display: block;
         }
+
         .formattedTimesInSpan {
           position: absolute;
           top: 6px;
@@ -211,19 +243,23 @@ $paddingOfworkImgInModal: 10px;
             width: 100px;
           }
         }
+
         .hoursCheckbox {
           position: absolute;
           top: 6px;
           right: 4px;
         }
+
         .ant-slider-rail {
           height: 3px;
           background-color: $lightGrey;
         }
+
         .ant-slider-track {
           background-color: $black;
           height: 3px;
         }
+
         .ant-slider-handle {
           border: solid 1px $black;
           background-color: $black;
@@ -247,12 +283,14 @@ $paddingOfworkImgInModal: 10px;
         .ant-upload-picture-card-wrapper::after {
           content: none;
         }
+
         .ant-upload-list {
           display: flex;
           flex-wrap: wrap;
           margin: 0;
           padding: 0;
         }
+
         .ant-upload-list-picture-card-container {
           display: inline-block;
           box-sizing: border-box;
@@ -276,6 +314,7 @@ $paddingOfworkImgInModal: 10px;
             height: 15vw;
           }
         }
+
         .ant-upload-list-picture .ant-upload-list-item,
         .ant-upload-list-picture-card .ant-upload-list-item {
           padding: 0;
@@ -317,6 +356,7 @@ $paddingOfworkImgInModal: 10px;
         }
       }
     }
+
     .ant-modal-footer {
       border-top: 0;
       padding: 0;
@@ -328,6 +368,7 @@ $paddingOfworkImgInModal: 10px;
         border: none;
       }
     }
+
     .ant-modal-close,
     .ant-modal-close-x {
       color: $grey;
@@ -346,6 +387,7 @@ $paddingOfworkImgInModal: 10px;
   @include tabletP {
     top: 25%;
   }
+
   .ant-modal-content {
     margin: 0 auto;
     width: 100vw;
@@ -363,6 +405,7 @@ $paddingOfworkImgInModal: 10px;
       height: 32.5vw;
     }
   }
+
   .ant-modal-body {
     width: inherit;
     height: inherit;
@@ -384,6 +427,7 @@ $paddingOfworkImgInModal: 10px;
       }
     }
   }
+
   .ant-modal-close,
   .ant-modal-close-x {
     color: $grey;
