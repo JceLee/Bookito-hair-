@@ -33,32 +33,32 @@ export default function StepThree(props) {
   };
 
   return (
-    <div id="stepThreeTopId">
-      {/* <p id="title3">Final Check</p> */}
-      <div className="confirmation">
-        <List
-          itemLayout="horizontal"
-          dataSource={titles}
-          renderItem={(item) => {
-            return (
-              <List.Item>
-                <Text strong>{item.title}</Text>
-                <div className="bookingContents">
-                  <span className="content">{item.contents}</span>
-                </div>
-                <Button
-                  type="link"
-                  value={item.id}
-                  id={item.id}
-                  onClick={() => moveToSelectTimePosition(item)}
-                >
-                  Edit
-                </Button>
-              </List.Item>
-            );
-          }}
-        ></List>
+      <div className="stepThree" id="stepThreeTopId">
+        {/* <p id="title3">Final Check</p> */}
+        <div className="confirmation">
+          <List
+              itemLayout="horizontal"
+              dataSource={titles}
+              renderItem={(item) => {
+                return (
+                    <List.Item>
+                      <Text strong>{item.title}</Text>
+                      <div className="bookingContents">
+                        <span className="content">{item.contents}</span>
+                      </div>
+                      <Button
+                          type="link"
+                          value={item.id}
+                          id={item.id}
+                          onClick={() => moveToSelectTimePosition(item)}
+                      >
+                        Edit
+                      </Button>
+                    </List.Item>
+                );
+              }}
+          ></List>
+        </div>
       </div>
-    </div>
   );
 }
