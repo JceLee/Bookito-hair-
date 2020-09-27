@@ -285,7 +285,6 @@ export default function BookNowModal(props) {
         className="bookNowModal"
         title="Book Now"
         visible={visible}
-        width="100vw"
         footer={
           <div>
             {current > 0 && (

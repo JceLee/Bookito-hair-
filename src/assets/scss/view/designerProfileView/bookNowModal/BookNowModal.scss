@@ -2,6 +2,10 @@
 
 $modalBodyMargin: 110px;
 
+.ant-modal-wrap {
+  background-color: $white;
+}
+
 .bookNowModal {
   top: 0;
   margin: 0;
