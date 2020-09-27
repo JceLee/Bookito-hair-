@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import SearchBarSection from "./SearchBarSection";
 import InfoCard from "./InfoCard";
 import NewDesignersDesktopSection from "./NewDesignersDesktopSection";
-import NewDesignerCarousel from "./NewDesignerCarousel";
 
 export default function MainView() {
   const newDesignerImages = [

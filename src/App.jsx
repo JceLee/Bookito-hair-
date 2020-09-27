@@ -8,6 +8,7 @@ import DesignerScheduleView from "./components/view/designerScheduleView/Designe
 import DesignerProfileView from "./components/view/designerProfileView/DesignerProfileView";
 import ClientScheduleView from "./components/view/clientScheduleView/ClientScheduleView";
 import ClientProfileView from "./components/view/clientProfileView/ClientProfileView";
+import SignUpModal from "./components/view/authView/SignUpModal";
 import "antd/dist/antd.css";
 import "./assets/scss/App.scss";
 
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/client_schedule" component={ClientScheduleView} />
           <Route path="/client_profile" component={ClientProfileView} />
           <Route path="/designer_profile" component={DesignerProfileView} />
+          <Route path="/sign_up" component={SignUpModal} />
         </Content>
         <Footer id="footer">LookUp WIP July 2020</Footer>
       </Layout>

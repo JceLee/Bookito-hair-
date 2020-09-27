@@ -1,6 +1,12 @@
-$black: #1b1b1b;
+$red: #ff0000;
+$blue: #0000ff;
+$yellow: #ffff00;
+$orange: #ffa500;
+$green: #00ff00;
 $white: #fdfdfd;
-$searchBarBorderColor: #c6c6c6;
+$black: #1b1b1b;
+$grey: #a1a1a1;
+$lightGrey: #c6c6c6;
 
 @mixin mobileM {
   @media only screen and (min-width: 375px) {
@@ -45,6 +51,12 @@ $searchBarBorderColor: #c6c6c6;
   }
 }
 
+// for calendar
+@mixin calendar700 {
+  @media only screen and (min-width: 700px) {
+    @content;
+  }
+}
 // for making client profile form responsive
 @mixin clientProfile576 {
   @media only screen and (min-width: 576px) {

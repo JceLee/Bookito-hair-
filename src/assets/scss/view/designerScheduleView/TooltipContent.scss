@@ -1,0 +1,30 @@
+.tooltipContent {
+  padding: 24px 8px;
+  padding-top: 0;
+  box-sizing: "border-box";
+  width: "400px";
+
+  .contentContainer {
+    padding-bottom: 12px;
+
+    .textCenter {
+      text-align: center;
+    }
+
+    .title {
+      color: rgb(165, 165, 165);
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .dateAndTitle {
+      line-height: 1.1;
+    }
+  }
+  .headerIcons {
+    float: right;
+    .tooltipHeaderIcon {
+      margin: 12px;
+    }
+  }
+}
