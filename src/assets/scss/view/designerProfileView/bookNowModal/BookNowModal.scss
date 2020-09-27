@@ -1,44 +1,55 @@
 @import "../../../Mixin.scss";
 
+$headerHeight: 55px;
+$footerHeight: 55px;
+
 .bookNowModal {
+  top: 0;
   margin: 0;
   padding: 0;
+  max-width: 100%;
+
   .ant-modal-content {
-    height: 100%;
+    font-size: 16px;
 
     .ant-modal-body {
-      // width: 100vw;
+      height: calc(100vh - ($headerHeight + $footerHeight));
       padding: 0;
-      height: calc(100% - (54.6px + 55px));
       overflow: auto;
     }
+
     .ant-steps-item-title {
       font-size: 14px;
     }
+
     .ant-steps {
       width: 95%;
       margin-left: 14px;
     }
+
     .ant-steps-icon {
       background: $black;
     }
+
     .ant-steps-icon-dot {
       background: $black;
       margin-left: -10px;
     }
+
     .ant-steps-icon-dot::after {
       width: 70px;
       height: 42px;
     }
+
     .ant-steps-item-tail {
       margin: 0 0 0 60.5px;
     }
+
     .ant-steps-item-tail::after {
       background-color: $black;
       height: 2px;
     }
-    font-size: 16px;
-    margin: 7% 0 5% 0;
+
     .DayPicker {
       display: inline-block;
       font-size: 1.2rem;
@@ -49,6 +60,7 @@
       .DayPicker-Month {
         width: 100%;
         height: auto;
+
         .DayPicker-Body {
           .DayPicker-Day--selected {
             background-color: $black;
@@ -155,6 +167,7 @@
 
     .ant-modal-footer {
       padding: 0 0;
+      bottom: 0;
       border: none;
       .nextBtnInStepOne {
         background: $black;
