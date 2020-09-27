@@ -163,6 +163,7 @@ export default function DesignerProfileTop(props) {
                 title="Edit Profile"
                 onOk={onOk}
                 onCancel={handleCancel}
+                // width={window.innerWidth * 0.8}
                 destroyOnClose={true}
                 footer={
                   <Button className="saveBtnInEditProfile" key="submit" onClick={onOk}>

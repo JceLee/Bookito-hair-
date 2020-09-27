@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, InputNumber, Button, Space, Tabs, Divider } from "antd";
+import { Form, Input, InputNumber, Button, Tabs, Divider } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 const { TabPane } = Tabs;
 const { TextArea } = Input;
@@ -20,44 +20,47 @@ export default function ServiceNPriceForm(props) {
                       {fields.map((field, index) => {
                         return (
                           <div key={index} className="servicePriceDescription">
-                            <Form.Item
-                              name={[field.name, "serviceName"]}
-                              className="serviceNameInput"
-                              fieldKey={[field.fieldKey, "serviceName"]}
-                              hasFeedback
-                              rules={[
-                                {
-                                  required: true,
-                                },
-                              ]}
-                            >
-                              <Input placeholder="Service Name" />
-                            </Form.Item>
-                            <Form.Item
-                              name={[field.name, "price"]}
-                              className="servicePriceInput"
-                              fieldKey={[field.fieldKey, "price"]}
-                              hasFeedback
-                              rules={[
-                                {
-                                  required: true,
-                                  type: "number",
-                                  min: 1,
-                                  max: 1000,
-                                },
-                              ]}
-                            >
-                              <InputNumber
-                                placeholder="Price"
-                                // formatter={(value) => `$ ${value}`}
+                            <div className="servicePriceMinusButton">
+                              <Form.Item
+                                name={[field.name, "serviceName"]}
+                                className="serviceNameInput"
+                                fieldKey={[field.fieldKey, "serviceName"]}
+                                hasFeedback
+                                rules={[
+                                  {
+                                    required: true,
+                                  },
+                                ]}
+                              >
+                                <Input placeholder="Service Name" />
+                              </Form.Item>
+                              <Form.Item
+                                name={[field.name, "price"]}
+                                className="servicePriceInput"
+                                fieldKey={[field.fieldKey, "price"]}
+                                hasFeedback
+                                rules={[
+                                  {
+                                    required: true,
+                                    type: "number",
+                                    min: 1,
+                                    max: 1000,
+                                  },
+                                ]}
+                              >
+                                <InputNumber
+                                  placeholder="Price"
+                                  // formatter={(value) => `$ ${value}`}
+                                />
+                              </Form.Item>
+                              <MinusCircleOutlined
+                                className="removeServicePriceBtn"
+                                onClick={() => {
+                                  remove(field.name);
+                                }}
                               />
-                            </Form.Item>
-                            <MinusCircleOutlined
-                              className="removeServicePriceBtn"
-                              onClick={() => {
-                                remove(field.name);
-                              }}
-                            />
+                            </div>
+
                             <Form.Item
                               name={[field.name, "description"]}
                               className="serviceDescriptionInput"

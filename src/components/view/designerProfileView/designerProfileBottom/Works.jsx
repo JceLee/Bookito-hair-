@@ -84,6 +84,7 @@ export default function Works(props) {
         <Modal
           className="workImgModal"
           visible={ModalVisible}
+          width="1024px"
           onCancel={() => onCloseModalHandler(CurrentImgIndex)}
           destroyOnClose={true}
           footer={null}

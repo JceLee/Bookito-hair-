@@ -119,9 +119,14 @@
       width: 75vw;
       display: flex;
       flex-wrap: wrap;
-      justify-content: left;
+      justify-content: space-between;
+      @include tabletP {
+        justify-content: left;
+      }
       .designerNavItem {
-        padding: 0 10px;
+        @include tabletP {
+          padding: 0 10px;
+        }
         margin: 0 0.2rem 0 0;
         a {
           color: $white;
@@ -151,7 +156,7 @@
         margin: 0 0.2rem 0 0;
         padding: 0.2rem;
         @include tabletP {
-          margin-left: 0.5rem;
+          width: 100px;
         }
       }
       .buttonInProfileLayoutTab:active,
@@ -351,6 +356,13 @@
 
 .workImgModal {
   max-width: 100%;
+  @include tabletP {
+    top: 25%;
+  }
+  // background-color: blue;
+  @include desktop {
+    width: 100px;
+  }
   .ant-modal-content {
     margin: 0 auto;
     width: 100vw;
@@ -359,9 +371,9 @@
       width: 50vw;
       height: calc(50vw + 32px);
     }
-    @include desktop {
-      width: 35vw;
-      height: calc(35vw + 32px);
+    @include tabletL {
+      width: 40vw;
+      height: calc(40vw + 32px);
     }
   }
 
@@ -392,9 +404,9 @@
           width: calc(50vw - 20px);
           height: calc(50vw - 20px);
         }
-        @include desktop {
-          width: calc(35vw - 20px);
-          height: calc(35vw - 20px);
+        @include tabletL {
+          width: calc(40vw - 20px);
+          height: calc(40vw - 20px);
         }
       }
     }

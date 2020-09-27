@@ -1,6 +1,10 @@
 @import "../../../Mixin.scss";
 @import "../../../Mixin.scss";
 
+$headerHeight: 55px;
+$footerHeight: 55px;
+$paddingOfworkImgInModal: 10px;
+
 .editProfileModal {
   top: 0;
   max-width: 100%;
@@ -13,14 +17,21 @@
   .ant-tabs-top > .ant-tabs-nav::before {
     border-bottom: none;
   }
-  .ant-tabs-tab-btn {
-    color: $black;
-  }
+  .ant-tabs-tab-btn,
   .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
     color: $black;
   }
   .ant-tabs-card.ant-tabs-top > .ant-tabs-nav .ant-tabs-tab:not(:last-of-type) {
     margin: 0;
+  }
+
+  .ant-tabs > .ant-tabs-nav .ant-tabs-nav-list {
+    @include tabletP {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 5px;
+    }
   }
   .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab {
     padding: 0.5rem;
@@ -37,16 +48,14 @@
   }
   .ant-modal-content {
     height: 100%;
+    margin: 0 auto;
     @include tabletP {
       top: 15vh;
       height: 75vh;
     }
-    @include desktop {
-      width: 35vw;
-      height: 35vw;
-    }
+
     .ant-modal-body {
-      height: calc(100% - 110px);
+      height: calc(100% - #{$headerHeight + $footerHeight});
       overflow: auto;
       padding: 0;
       .ant-input-affix-wrapper,
@@ -72,27 +81,31 @@
       .ant-collapse-header {
         font-weight: 500;
       }
-      .servicePriceDescription {
-        width: 90vw;
+      .servicePriceMinusButton {
+        width: 100%;
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
         margin: 16px 0 0 0;
         align-items: baseline;
+        justify-content: space-between;
         .serviceNameInput {
           width: 57.5%;
           margin-right: 2.5vw;
           @include tabletP {
-            width: 50%;
+            width: 70%;
           }
-          @include tabletL {
-            width: 37.5%;
+          @include desktop {
+            width: 65%;
           }
         }
         .servicePriceInput {
           margin-right: 2.5vw;
           @include tabletP {
             margin-right: 1.25vw;
+          }
+          @include desktop {
+            margin-right: 1vw;
           }
         }
         .serviceDescriptionInput {
@@ -102,6 +115,9 @@
           }
           @include tabletL {
             width: 52.5%;
+          }
+          @include desktop {
+            width: 30%;
           }
         }
         .ant-form-item .ant-input-number-handler-wrap {
@@ -197,6 +213,7 @@
         }
         .hoursCheckbox {
           position: absolute;
+          top: 6px;
           right: 4px;
         }
         .ant-slider-rail {
@@ -249,9 +266,14 @@
             height: 0.75 * 40.625vw;
           }
           @include tabletL {
-            margin: 0.5rem calc((100% - 45vw) / 4);
+            margin: 0.5rem calc((100% - 2 * 22.5vw) / 4);
             width: 22.5vw;
             height: 22.5vw;
+          }
+          @include desktop {
+            margin: 1rem calc((100% - 2 * 15vw) / 4);
+            width: 15vw;
+            height: 15vw;
           }
         }
         .ant-upload-list-picture .ant-upload-list-item,
@@ -267,6 +289,10 @@
             width: 22.5vw;
             height: 22.5vw;
           }
+          @include desktop {
+            width: 15vw;
+            height: 15vw;
+          }
         }
 
         .ant-upload.ant-upload-select-picture-card {
@@ -274,14 +300,19 @@
           width: 40.625vw;
           height: 40.625vw;
           @include tabletP {
-            margin: 0.5rem calc((100% - 0.75 * 81.25vw) / 4);
+            margin: 0.5rem calc((100% - 0.75 * 2 * 40.625vw) / 4);
             width: 0.75 * 40.625vw;
             height: 0.75 * 40.625vw;
           }
           @include tabletL {
-            margin: 0.5rem calc((100% - 45vw) / 4);
+            margin: 0.5rem calc((100% - 2 * 22.5vw) / 4);
             width: 22.5vw;
             height: 22.5vw;
+          }
+          @include desktop {
+            margin: 1rem calc((100% - 2 * 15vw) / 4);
+            width: 15vw;
+            height: 15vw;
           }
         }
       }
@@ -312,17 +343,24 @@
 
 .workModalInEditProfile {
   max-width: 100%;
+  @include tabletP {
+    top: 25%;
+  }
   .ant-modal-content {
     margin: 0 auto;
     width: 100vw;
     height: 100vw;
     @include tabletP {
-      width: 50vw;
-      height: 50vw;
+      width: 60vw;
+      height: 60vw;
+    }
+    @include tabletL {
+      width: 45vw;
+      height: 45vw;
     }
     @include desktop {
-      width: 35vw;
-      height: 35vw;
+      width: 32.5vw;
+      height: 32.5vw;
     }
   }
   .ant-modal-body {
@@ -330,15 +368,19 @@
     height: inherit;
     padding: 10px;
     .workImgInModal {
-      width: calc(100vw - 20px);
-      height: calc(100vw - 20px);
+      width: calc(100vw - #{$paddingOfworkImgInModal}* 2);
+      height: calc(100vw - #{$paddingOfworkImgInModal}* 2);
       @include tabletP {
-        width: calc(50vw - 20px);
-        height: calc(50vw - 20px);
+        width: calc(60vw - #{$paddingOfworkImgInModal}* 2);
+        height: calc(60vw - #{$paddingOfworkImgInModal}* 2);
+      }
+      @include tabletL {
+        width: calc(45vw - #{$paddingOfworkImgInModal}* 2);
+        height: calc(45vw - #{$paddingOfworkImgInModal}* 2);
       }
       @include desktop {
-        width: calc(35vw - 20px);
-        height: calc(35vw - 20px);
+        width: calc(32.5vw - #{$paddingOfworkImgInModal}* 2);
+        height: calc(32.5vw - #{$paddingOfworkImgInModal}* 2);
       }
     }
   }
