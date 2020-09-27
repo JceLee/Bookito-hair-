@@ -9,10 +9,10 @@ export default function NewDesignersDesktopSection(props) {
   return (
     <div className="newDesignersDesktopSection">
       <div className="headerSection">
-        <div className="topLine">New Designers</div>
+        <div className="topLine">Designers' Works</div>
         <div className="bottomLine">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+          ut labore et dolore magna aliqua.
         </div>
       </div>
       {/* <div className="newDesignersHeaderSmallDesktopSection">New Designers</div> */}
@@ -21,11 +21,7 @@ export default function NewDesignersDesktopSection(props) {
           {firstHalfNewDesigners.map((image, inx) => {
             return (
               <Card key={inx} className="newDesignerCard" hoverable>
-                <img
-                  src={image}
-                  alt="New Designers"
-                  className="designerImage"
-                />
+                <img src={image} alt="New Designers" className="designerImage" />
               </Card>
             );
           })}
@@ -34,11 +30,7 @@ export default function NewDesignersDesktopSection(props) {
           {secondHalfNewDesigners.map((image, inx) => {
             return (
               <Card key={inx} className="newDesignerCard" hoverable>
-                <img
-                  src={image}
-                  alt="New Designers"
-                  className="designerImage"
-                />
+                <img src={image} alt="New Designers" className="designerImage" />
               </Card>
             );
           })}

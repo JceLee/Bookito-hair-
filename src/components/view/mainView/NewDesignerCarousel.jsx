@@ -14,9 +14,7 @@ export default function NewDesignerCarousel() {
     swipeToSlide: true,
     variableWidth: true,
     afterChange: function (index) {
-      console.log(
-        `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
-      );
+      console.log(`Slider Changed to: ${index + 1}, background: #222; color: #bada55`);
     },
   };
 
@@ -29,7 +27,7 @@ export default function NewDesignerCarousel() {
   return (
     <div className="newDesignersMobileSection">
       <div className="newDesignersHeading">
-        <h2>New Designers</h2>
+        <h2>Designers' Works</h2>
       </div>
       <Slider {...settings}>
         {mockCards.map((card, inx) => {
