@@ -14,11 +14,16 @@ $modalBodyMargin: 110px;
 
   .ant-modal-content {
     font-size: 16px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 
     .ant-modal-body {
       height: calc(100vh - #{$modalBodyMargin});
       padding: 0;
       overflow: auto;
+      #stepToTopId {
+        margin-top: 10%;
+      }
     }
 
     .steps {
@@ -137,6 +142,16 @@ $modalBodyMargin: 110px;
             margin-top: 30px;
             .ant-checkbox-wrapper {
               margin-left: 20px;
+            }
+            .ant-checkbox-input:focus + .ant-checkbox-inner {
+              border-color: $black;
+            }
+            .ant-checkbox-checked .ant-checkbox-inner {
+              background-color: $black;
+              border-color: $black;
+            }
+            .ant-checkbox-checked::after {
+              border: none;
             }
             .serviceMenu {
               margin: 0 0 30px 43px;
