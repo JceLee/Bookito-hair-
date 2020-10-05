@@ -1,9 +1,24 @@
 import React, { useState } from "react";
-import { Card, Row, Col, Button, Divider, Form, Input, Rate } from "antd";
-import DesignerCardLeft from "../view/designerListView/designerCardComponent/designerCardTop/DesignerCardTopLeft";
+import {Card, Row, Col, Button, Divider, Form, Input, Rate, notification} from "antd";
+import {firebaseStore} from "../../config/fbConfig";
 
 export default function ScheduleCardRequest(props) {
-  const { newRequest } = props;
+  const { newRequest, close, forceUpdate } = props;
+
+  const changeState = (state) => {
+    firebaseStore.collection("appointments").doc(newRequest.id).update({
+      state: state
+    }).then(function() {
+      close();
+      forceUpdate();
+      return notification.success({
+        className: "notificationSaved",
+        style: {top: "550px"},
+        message: "Saved",
+        duration: "2",
+      });
+    });
+  };
 
   return (
     <>
@@ -11,10 +26,10 @@ export default function ScheduleCardRequest(props) {
         className="scheduleCard"
         actions={[
           <>
-            <Button type="text" className="scheduleCardReviewBtn">
+            <Button type="text" className="scheduleCardReviewBtn" onClick={()=> {changeState("conformed")}}>
               Accept
             </Button>
-            <Button type="text" className="scheduleCardRebookBtn">
+            <Button type="text" className="scheduleCardRebookBtn" onClick={()=> {changeState("declined")}}>
               Decline
             </Button>
           </>,

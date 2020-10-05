@@ -191,6 +191,9 @@ export default function BookNowModal(props) {
       .add(newAppointment)
       .then(function (docRef) {
         console.log("create appointment :" + docRef.id);
+        firebaseStore.collection("appointments").doc(docRef.id).update({
+          aid: docRef.id,
+        })
       })
       .catch(function (error) {
         console.log("error :" + error);

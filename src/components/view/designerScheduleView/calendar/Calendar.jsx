@@ -29,7 +29,7 @@ import { fade } from "@material-ui/core/styles/colorManipulator";
 export default function Calendar(props) {
   const currentDate = new Date();
 
-  const { newRequests, appointmentArray } = props;
+  const { newRequests, appointmentArray, forceUpdate } = props;
 
   const [newRequestState, setNewRequestState] = useState(false);
   const [addAppointmentModalState, setAddAppointmentModal] = useState(false);
@@ -135,7 +135,7 @@ export default function Calendar(props) {
             />
             <Toolbar flexibleSpaceComponent={customToolbar} />
             <Drawer anchor="right" open={newRequestState} onClose={displayNewRequests}>
-              <NewRequests newRequests={newRequests} onClick={displayNewRequests} />
+              <NewRequests newRequests={newRequests} onClick={displayNewRequests} forceUpdate={forceUpdate}/>
             </Drawer>
             <TodayButton className="todayBtn" />
             <DateNavigator />

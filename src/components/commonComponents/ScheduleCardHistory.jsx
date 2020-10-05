@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { Card, Row, Col, Button, Divider, Form, Input, Rate } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import DesignerCardLeft from "../view/designerListView/designerCardComponent/designerCardTop/DesignerCardTopLeft";
-import BlackBtn from "./BlackBtn";
 
 export default function ScheduleCardHistory(props) {
-  const { appointment } = props;
+  const { date, name, time, types } = props;
   const [visible, setVisible] = useState(false);
   const modalHandler = () => {
     setVisible(!visible);
@@ -32,20 +31,20 @@ export default function ScheduleCardHistory(props) {
       >
         <Row>
           <Col span={4} className="scheduleCardDate">
-            {appointment.date}
+            {date}
           </Col>
           <Col span={2}>
             <Divider type="vertical" className="scheduleCardDivider" />
           </Col>
           <Col span={18}>
-            <div>Designer: {appointment.designerName}</div>
+            <div>Designer: {name}</div>
             <div>
-              Time: {appointment.timeStart}-{appointment.timeEnd}
+              Time: {time}
             </div>
             <div>
               Type:{" "}
-              {appointment.types.map((type, index) => (
-                <span key={index}>{type} </span>
+              {types.map((type, index) => (
+                  <span key={index}>{type} </span>
               ))}
             </div>
           </Col>
@@ -61,7 +60,7 @@ export default function ScheduleCardHistory(props) {
         width={800}
       >
         <div>
-          <DesignerCardLeft fname={appointment.designerName} />
+          <DesignerCardLeft fname={name} />
         </div>
         <Form>
           <Form.Item>
