@@ -119,9 +119,9 @@ export default function DesignerListView(props) {
                   // Object.values(designers)
                   [{
                     uid: 0,
-                    name: "Joshua Shin",
+                    name: "Joshuaa Shin",
                     rate: 4,
-                    services: ["men's cut", "women's cut", "color", "perm", "men's cut", "women's cut", "color", "perm",],
+                    services: ["Clinic", "Color", "Cut", "Perms", "Promo", "Style"],
                     latLng: {lat: 49.2505955, lng: -123.1012059}
                   },{
                     uid: 1,
@@ -131,7 +131,7 @@ export default function DesignerListView(props) {
                     latLng: {lat: 49.2505955, lng: -123.1012059}
                   },{
                     uid: 3,
-                    name: "Kangmin",
+                    name: "Kangmin Leeeeee",
                     rate: 3,
                     services: ["cut", "color", "perm"],
                     latLng: {lat: 49.2505955, lng: -123.1012059}
@@ -145,7 +145,7 @@ export default function DesignerListView(props) {
                     uid: 5,
                     name: "Something Something Longnameguy",
                     rate: 2,
-                    services: ["men's cut", "women's cut", "color", "perm", ],
+                    services: ["Clinic", "Color", "Cut", "Perms", "Promo", "Style"],
                     latLng: {lat: 49.2505955, lng: -123.1012059}
                   },{
                     uid: 6,
@@ -180,9 +180,9 @@ export default function DesignerListView(props) {
                   // Object.values(designers)
                   [{
                     uid: 0,
-                    name: "Joshua Shin",
+                    name: "Joshuaa Shin",
                     rate: 4,
-                    services: ["men's cut", "women's cut", "color", "perm", "men's cut", "women's cut", "color", "perm",],
+                    services: ["Clinic", "Color", "Cut", "Perms", "Promo", "Style"],
                     latLng: {lat: 49.2505955, lng: -123.1012059}
                   },{
                     uid: 1,
@@ -192,7 +192,7 @@ export default function DesignerListView(props) {
                     latLng: {lat: 49.2505955, lng: -123.1012059}
                   },{
                     uid: 3,
-                    name: "Kangmin",
+                    name: "Kangmin Leeeeee",
                     rate: 3,
                     services: ["cut", "color", "perm"],
                     latLng: {lat: 49.2505955, lng: -123.1012059}
@@ -206,7 +206,7 @@ export default function DesignerListView(props) {
                     uid: 5,
                     name: "Something Something Longnameguy",
                     rate: 2,
-                    services: ["men's cut", "women's cut", "color", "perm", ],
+                    services: ["Clinic", "Color", "Cut", "Perms", "Promo", "Style"],
                     latLng: {lat: 49.2505955, lng: -123.1012059}
                   },{
                     uid: 6,

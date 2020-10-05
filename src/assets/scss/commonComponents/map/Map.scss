@@ -38,8 +38,6 @@
     left: 50%;
     user-select: none;
     transform: translate(-50%, -50%);
-    z-index: 50;
-
 }
 
 .mapBaseDiv {
@@ -74,7 +72,7 @@
 }
 
 .designerPopover {
-    padding-bottom: 0;
+    padding-bottom: 0 !important;
 
     @include tabletP {
         padding-bottom: 10;
@@ -82,6 +80,10 @@
 
     .popoverContent {
         background: whitesmoke;
+        @include tabletP {
+            z-index: 10;
+        }
+
         .markerSlider {
             width: 135px;
             height: 135px;
@@ -143,12 +145,12 @@
     }
 }
 .slick-arrow.slick-prev {
-    visibility: hidden;
+    // visibility: hidden;
     left: 0px;
-    z-index: 100;
+    z-index: 1;
 }
 .slick-arrow.slick-next {
-    visibility: hidden;
+    // visibility: hidden;
     right: 0px;
-    z-index: 100;
+    z-index: 1;
 }

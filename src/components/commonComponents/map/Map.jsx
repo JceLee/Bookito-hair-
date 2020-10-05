@@ -22,10 +22,11 @@ export default function Map(props) {
     />
     const DesignerMarkers = designers && designers.map(designer => (
         <Marker
-            key = {`map-marker-${designer.uid}`}
-            lat = {defaultLocation.lat + (Math.random()-0.5) * 0.2}
-            lng = {defaultLocation.lng + (Math.random()-0.5) * 0.1}
-            userLocation = {userLocation}
+            isDesktop={isDesktop}
+            key={`map-marker-${designer.uid}`}
+            lat={defaultLocation.lat + (Math.random()-0.5) * 0.2}
+            lng={defaultLocation.lng + (Math.random()-0.5) * 0.1}
+            userLocation={userLocation}
             designer={designer}
         />
     ))
