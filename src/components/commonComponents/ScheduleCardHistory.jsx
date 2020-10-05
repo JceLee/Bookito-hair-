@@ -1,11 +1,26 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { Card, Row, Col, Button, Divider, Form, Input, Rate } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import DesignerCardLeft from "../view/designerListView/designerCardComponent/designerCardTop/DesignerCardTopLeft";
+import {firebaseStore} from "../../config/fbConfig";
 
 export default function ScheduleCardHistory(props) {
-  const { date, name, time, types } = props;
+  const { date, name, time, types, appointmentId, designerId } = props;
   const [visible, setVisible] = useState(false);
+  const [designer, setDesigner] = useState(null);
+
+  useEffect(() => {
+    firebaseStore
+        .collection("users")
+        .doc(designerId)
+        .get()
+        .then(function(doc) {
+          setDesigner(doc.data());
+        });
+  }, []);
+
+  console.log(designer);
+
   const modalHandler = () => {
     setVisible(!visible);
   };
@@ -60,7 +75,7 @@ export default function ScheduleCardHistory(props) {
         width={800}
       >
         <div>
-          <DesignerCardLeft fname={name} />
+          {designer !== null && <DesignerCardLeft fname={designer.fname} profile={designer.photoURL} rate={designer.rate}/>}
         </div>
         <Form>
           <Form.Item>

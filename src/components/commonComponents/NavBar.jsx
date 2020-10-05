@@ -4,16 +4,13 @@ import { Link } from "react-router-dom";
 import { UserOutlined, BarsOutlined } from "@ant-design/icons";
 import SignUpModal from "../view/authView/SignUpModal";
 import SignInModal from "../view/authView/SignInModal";
-import { firebaseAuth } from "../../config/fbConfig";
-import { useDispatch, useSelector } from "react-redux";
-import { sign_out } from "../../actions/signIn";
+import { useSelector } from "react-redux";
 import SignOut from "../view/authView/SignOut";
 
 const { Title } = Typography;
 
 export default function Navbar() {
   const signedInUser = useSelector((state) => state.signIn.currentUser);
-  const dispatch = useDispatch();
 
   const menuItems = [
     { name: "Listing page", link: "/designer_list" },

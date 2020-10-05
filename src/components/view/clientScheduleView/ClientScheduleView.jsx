@@ -4,6 +4,7 @@ import ScheduleCard from "../../commonComponents/ScheduleCard";
 import ScheduleCardHistory from "../../commonComponents/ScheduleCardHistory";
 import {useSelector} from "react-redux";
 import {firebaseStore} from "../../../config/fbConfig";
+import { useHistory } from "react-router-dom";
 
 const { TabPane } = Tabs;
 
@@ -12,6 +13,15 @@ export default function ClientSchedule() {
   const [conformedAppointment, setConformedAppointments] = useState([]);
   const [pendingAppointment, setPendingAppointments] = useState([]);
   const [completedAndDeclinedAppointment, completedAndDeclinedAppointments] = useState([]);
+
+  const history = useHistory();
+
+  const sendToMainViewWhenCurrentUserIsNull = (user) => {
+    if(user === null) {
+      const route = "/";
+      history.push(route);
+    }
+  };
 
   const loadAppointment = () => {
     const conformed = [];
@@ -40,6 +50,7 @@ export default function ClientSchedule() {
   };
 
   useEffect(() => {
+    sendToMainViewWhenCurrentUserIsNull(currentUser);
     loadAppointment();
   }, []);
 
@@ -54,6 +65,8 @@ export default function ClientSchedule() {
                     name={appointment.designerName}
                     date={appointment.date}
                     time={appointment.time}
+                    appointmentId={appointment.aid}
+                    designerId={appointment.designerId}
                     types={["cut", "perm"]}
                 />
             ))}
@@ -66,6 +79,8 @@ export default function ClientSchedule() {
                     name={appointment.designerName}
                     date={appointment.date}
                     time={appointment.time}
+                    appointmentId={appointment.aid}
+                    designerId={appointment.designerId}
                     types={["cut", "perm"]}
                 />
             ))}
@@ -78,6 +93,8 @@ export default function ClientSchedule() {
                     name={appointment.designerName}
                     date={appointment.date}
                     time={appointment.time}
+                    appointmentId={appointment.aid}
+                    designerId={appointment.designerId}
                     types={["cut", "perm"]}
                 />
             ))}
