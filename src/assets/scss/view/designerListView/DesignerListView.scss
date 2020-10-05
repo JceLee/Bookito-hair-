@@ -3,19 +3,30 @@
 .listingContainer {
   // border: 1px black solid;
   // height: 91.3vh;
-  min-height: 100vh;
+  
+  // min-height: 100vh;
+  height: 90vh;
+  width: 100%;
+  overflow-y: scroll;
 
   .designerContainer {
+
+
     // border: 1px red solid;
     // height: 91.3vh;
     // position: relative; // makes drawer inside div or not
-    min-height: 100vh;
+  
+    // min-height: 100vh;
+    height: 100%;
+    // overflow-y: auto;
   
     @include mobileOnly{
       width: 100% !important;
     }
 
     @include tabletP{
+      display: flex;
+      flex-direction: row;
       position: relative;
       width: 100%;
       float: left;
@@ -68,12 +79,22 @@
   .mapCloseButton {
     position: absolute;
     margin: 1em;
-    z-index: 50;
+    z-index: 1;
   }
 
   .mapContainer {
+    width: 100%;
     @include tabletP{
-      width: 38.5vw;
+      position: sticky;
+      top: 0;
+      width: 39.1vw; // -0.9vw to accomodate for scrollbar
     }
   }
+
+  .listContainer {
+    @include tabletP{
+      width: 100%;
+    }
+  }
+
 }

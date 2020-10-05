@@ -7,6 +7,7 @@ import "../../../assets/scss/commonComponents/map/Map.scss";
 
 export default function Map(props) {
     const {
+        isDesktop,
         initialLocationString,
         designers,
     } = props;
@@ -43,14 +44,14 @@ export default function Map(props) {
 
     return (
         <>
-        {userLocation && <div style={{ height: "100vh", width: "100%", zIndex: 10 }}>
+        {userLocation && <div className="mapBaseDiv">
             <GoogleMapReact
                 className="mapComponent"
                 bootstrapURLKeys={{ key: "AIzaSyDUz5tzN9Fm76pLUherzsDE-jG0LKBEhIc" }}
                 // center={location}
                 defaultCenter={userLocation}
                 defaultZoom={15}
-                options={{ /*gestureHandling: "greedy",*/ scrollwheel: false }}
+                options={{ gestureHandling: "greedy", scrollwheel: true }}
             >
                 {HomeMarker}
                 {DesignerMarkers}
