@@ -1,9 +1,7 @@
 import React, { useState, useEffect} from "react";
 import GoogleMapReact from "google-map-react";
-import { geocode } from "../../../helpers/geocode";
 import Marker from './Marker.jsx';
-// import { designerType } from '../../constants/designerType.js';
-import "../../../assets/scss/commonComponents/map/Map.scss";
+import { geocode } from "../../../helpers/geocode";
 
 export default function Map(props) {
     const {
@@ -20,11 +18,12 @@ export default function Map(props) {
         lat={userLocation.lat}
         lng={userLocation.lng}
     />
+    
     const DesignerMarkers = designers && designers.map(designer => (
         <Marker
             isDesktop={isDesktop}
             key={`map-marker-${designer.uid}`}
-            lat={defaultLocation.lat + (Math.random()-0.5) * 0.2}
+            lat={defaultLocation.lat + (Math.random()-0.5) * 0.2} // TODO: random location for testing only!
             lng={defaultLocation.lng + (Math.random()-0.5) * 0.1}
             userLocation={userLocation}
             designer={designer}
@@ -38,26 +37,25 @@ export default function Map(props) {
                 setUserLocation(latLng);
             } else {
                 setUserLocation(defaultLocation);
-                console.log("Unable to get user location.");
+                console.log("Unable to get location!");
             }
         });
     }, [defaultLocation, initialLocationString, props.designers]);
 
     return (
         <>
-        {userLocation && <div className="mapBaseDiv">
-            <GoogleMapReact
-                className="mapComponent"
-                bootstrapURLKeys={{ key: "AIzaSyDUz5tzN9Fm76pLUherzsDE-jG0LKBEhIc" }}
-                // center={location}
-                defaultCenter={userLocation}
-                defaultZoom={15}
-                options={{ gestureHandling: "greedy", scrollwheel: true }}
-            >
-                {HomeMarker}
-                {DesignerMarkers}
-            </GoogleMapReact>
-        </div>}
+            {userLocation && <div className="mapComponent">
+                <GoogleMapReact
+                    bootstrapURLKeys={{ key: "AIzaSyDUz5tzN9Fm76pLUherzsDE-jG0LKBEhIc" }} // TODO: extract!
+                    // center={location}
+                    defaultCenter={userLocation}
+                    defaultZoom={15}
+                    options={{ gestureHandling: "greedy", scrollwheel: true }} // Controls how the map can be navigated
+                >
+                    {HomeMarker}
+                    {DesignerMarkers}
+                </GoogleMapReact>
+            </div>}
         </>
     );
 }

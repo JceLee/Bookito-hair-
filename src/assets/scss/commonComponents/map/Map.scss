@@ -1,26 +1,5 @@
 @import "../../Mixin.scss";
 
-.desktopOnly {
-    display: none;
-    @include tabletP{
-        display: block;
-    }
-}
-
-.mobileOnly {
-    display: block;
-    @include tabletP{
-        display: none;
-    }
-}
-
-// Do not dismiss marker modal when area outside is clicked
-// .ant-modal-wrap  {
-//     @include mobileOnly{
-//         pointer-events: none !important;
-//     }
-// }
-
 // Google map hide unnecessary components
 .gm-fullscreen-control {
     visibility: hidden !important;
@@ -32,15 +11,7 @@
     top: 0 !important;
 }
 
-.marker {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    user-select: none;
-    transform: translate(-50%, -50%);
-}
-
-.mapBaseDiv {
+.mapComponent {
     height: 100vh;
     width: 100%;
     z-index: 10;
@@ -49,42 +20,45 @@
     }
 }
 
-.mapComponent {
-    // margin: 1em;
-
-    // visibility: hidden !important;
-
-    // position: absolute !important;
-}
-
-
-
-.markerButton {
-    background: #5e5546 !important;
-    border-color: transparent !important;
-    &:focus {
-        // background: #5e5546 !important;
-        background: #332C1E !important;
-    }
-    .ant-btn-background-ghost {
-        border: none !important;
+.marker {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    user-select: none;
+    transform: translate(-50%, -50%);
+    
+    .markerButton {
+        background: #5e5546 !important;
+        border-color: transparent !important;
+        &:focus {
+            // background: #5e5546 !important;
+            background: #332C1E !important;
+        }
+        .ant-btn-background-ghost {
+            border: none !important;
+        }
     }
 }
 
 .designerPopover {
-    padding-bottom: 0 !important;
+    padding-bottom: 0 !important;   // Elimiates bottom padding, and in part hides bottom arrow on marker Popover
+    top: 69.5vh !important;         // Determines the location of the modal in mobile
 
     @include tabletP {
         padding-bottom: 10;
     }
 
     .popoverContent {
+        display: flex;
+        flex-direction: row;
+        padding: 10px;
         background: whitesmoke;
+
         @include tabletP {
             z-index: 10;
         }
 
-        .markerSlider {
+        .markerCarousel {
             width: 135px;
             height: 135px;
             @mixin mobileM {
@@ -92,65 +66,53 @@
                 height: 170px;
             }
             img {
+                object-fit: cover;
                 width: 135px;
                 height: 135px;
-                object-fit: cover;
                 @mixin mobileM {
                     width: 170px;
                     height: 170px;
                 }
-                // @mixin tabletP {
-                //     width: 170px;
-                //     height: 170px;
-                // }
             }
         }
     }
-    // .ant-popover-arrow {
-    //     visibility: hidden;
-    // }
+    
+    // Popover (desktop)
+    .ant-popover-arrow {
+        visibility: hidden; // Hides bottom arrow on marker Popover
+    }
     .ant-popover-inner-content {
         border-radius: 15px !important;
         padding: 0 !important;
     }
-    .popoverContent {
-        display: flex;
-        flex-direction: row;
-        padding: 10px;
 
-    }
+    // Modal (mobile)
     .ant-modal-close-x {
         width: 40px;
         height: 40px;
         line-height: 40px;
     }
-
     .ant-modal-body {
         padding: 0;
     }
 
-
-}
-
-
-
-.slick-dots  {
-    bottom: 0px;
-
-    li button:before {
-        color: whitesmoke;
+    // Carousel
+    .slick-dots  {
+        bottom: 0px;
+    
+        li button:before {
+            color: whitesmoke;
+        }
+        li.slick-active button:before {
+            color:white ;
+        }
     }
-    li.slick-active button:before {
-        color:white ;
+    .slick-arrow.slick-prev {
+        left: 0px;
+        z-index: 1;
     }
-}
-.slick-arrow.slick-prev {
-    // visibility: hidden;
-    left: 0px;
-    z-index: 1;
-}
-.slick-arrow.slick-next {
-    // visibility: hidden;
-    right: 0px;
-    z-index: 1;
+    .slick-arrow.slick-next {
+        right: 0px;
+        z-index: 1;
+    }
 }

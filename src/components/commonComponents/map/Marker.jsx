@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Popover, Tag, Divider, Modal} from 'antd';
+import React, { useState } from 'react';
+import { Button, Popover, Tag, Modal} from 'antd';
 import { Link } from "react-router-dom";
-import ReadOnlyStar from "../ReadOnlyStar";
-import Slider from "react-slick";
+import { StarRead } from "../StarRate";
 import { HomeTwoTone, ScissorOutlined } from '@ant-design/icons';
-import "../../../assets/scss/commonComponents/map/Map.scss";
-import { StarRate, StarRead } from "../StarRate";
+import Slider from "react-slick";
+import { getDistanceFromLatLonInKm } from "../../../helpers/geocode";
 
+// Marker can be initialized without "designer" prop to create a Home location marker.
+// Prop "isDesktop" is used to indicate whether a desktop marker or mobile marker should be created.
 export default function Marker(props) {
     const { 
         isDesktop,
@@ -19,16 +20,15 @@ export default function Marker(props) {
 
     const [visible, setVisible] = useState(false);
 
+    const tagColors = ["#332C1E"];
     const carouselSettings = {
+        // arrows: false, // Can hide arrows on image carousel.
         dots: true,
-        // arrows: false,
         infinite: true,
         speed: 400,
         slidesToShow: 1,
         slidesToScroll: 1
     };
-
-    const tagColors = ["#332C1E"];
 
     const hide = () => {
         setVisible(false);
@@ -42,25 +42,11 @@ export default function Marker(props) {
         setVisible(visible);
     };
 
-    const getDistanceFromLatLonInKm = (lat1, lng1, lat2, lng2) => {
-        const degToRad = (deg) => {
-            return deg * (Math.PI/180)
-        }
-        let R = 6371; // Radius of the earth in km
-        let dLat = degToRad(lat2-lat1); // deg2rad below
-        let dLon = degToRad(lng2-lng1);
-        let a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(degToRad(lat1)) 
-                * Math.cos(degToRad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
-        let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-        let d = R * c; // Distance in km
-        let format_distance = d < 1 ? "Less than 1" : Math.round(d)
-        return format_distance;
-    }
-
     return designer ?
-        <div className="marker">
-            {isDesktop ?
-            <Popover
+        <div key={key} className="marker">
+
+            {/* Desktop version of marker using Popover */}
+            {isDesktop ? <Popover 
                 overlayClassName="designerPopover"
                 content={
                     <div className="popoverContent">
@@ -90,22 +76,22 @@ export default function Marker(props) {
                 onVisibleChange={handleVisibleChange}
             >
                 <Button className="markerButton" type="primary" shape="circle" icon={<ScissorOutlined />} />
-            </Popover>:
+            </Popover>
 
-            <div>
+            // Mobile version of marker using Modal
+            : <div>
                 <Button className="markerButton" type="primary" shape="circle" onClick={display} icon={<ScissorOutlined />}/>
                 <Modal
                     className="designerPopover"
                     visible={visible}
                     footer={null}
                     onCancel={hide}
-                    // maskClosable={false}
                     mask={false}
-                    style={{ top: "69.5vh" }} // This determines the location of the modal in mobile.
+                    // maskClosable={false}     // Determines whether clicking outside the modal closes the modal
                 >
                         <div className="popoverContent">
                             <Link to={`/designer_profile?uid=${designer.uid}`}>
-                                <Slider {...carouselSettings} className="markerSlider">
+                                <Slider {...carouselSettings} className="markerCarousel">
                                     <div><img src="https://www.cuded.com/wp-content/uploads/2017/08/hair-styles-for-men-31.jpg" alt=""/></div>
                                     <div><img src="https://www.menshairstyletrends.com/wp-content/uploads/2017/03/mokumbarbers-messy-styles-for-men-2017-trends-texture.jpg" alt=""/></div>
                                 </Slider>
@@ -127,7 +113,5 @@ export default function Marker(props) {
                 </Modal>
             </div>}
         </div>
-    : 
-        <HomeTwoTone key={key} style={{fontSize: 20, transform: "translate(-50%, -50%)"}} />
-    ;
+    : <HomeTwoTone key={key} style={{fontSize: 20, transform: "translate(-50%, -50%)"}} />
 };
