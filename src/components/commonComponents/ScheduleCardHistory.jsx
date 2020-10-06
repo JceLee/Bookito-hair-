@@ -25,6 +25,10 @@ export default function ScheduleCardHistory(props) {
     setVisible(!visible);
   };
 
+  const onFinish = (values) => {
+    console.log('Success:', values);
+  };
+
   return (
     <>
       <Card
@@ -71,18 +75,24 @@ export default function ScheduleCardHistory(props) {
         title="Review"
         visible={visible}
         onCancel={modalHandler}
+        onOk={onFinish}
         destroyOnClose={true}
         width={800}
       >
         <div>
           {designer !== null && <DesignerCardLeft fname={designer.fname} profile={designer.photoURL} rate={designer.rate}/>}
         </div>
-        <Form>
-          <Form.Item>
+        <Form
+        >
+          <Form.Item
+            name="rate"
+          >
             <div>How was the service?</div>
             <Rate />
           </Form.Item>
-          <Form.Item>
+          <Form.Item
+             name="comment"
+          >
             <Input.TextArea />
           </Form.Item>
         </Form>
