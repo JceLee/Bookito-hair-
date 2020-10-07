@@ -8,7 +8,6 @@ export default function InfoCard(props) {
     <Card
       className="infoCard"
       hoverable
-      bordered={false}
       cover={<img alt="example" src={src} />}
     >
       <Meta title={header} description={context} />
