@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Divider, Button } from "antd";
+import { Modal, Divider, Button, Layout } from "antd";
 import firebase from "firebase/app";
 import { useHistory } from "react-router-dom";
 import { firebaseAuth, firebaseStore } from "../../../config/fbConfig";
@@ -237,31 +237,6 @@ export default function SignInModal() {
     }
   };
 
-  // const testAppointment = () => {
-  //   const appointment = {
-  //     customerId: currentUser.uid,
-  //     designerId: currentUser.uid,
-  //     dateExample: firebase.firestore.Timestamp.fromDate(
-  //       new Date("October 30, 2020")
-  //     ),
-  //     services: {
-  //       Cut: [
-  //         { serviceName: "female cut", price: 35, description: "sample data" },
-  //       ],
-  //     },
-  //     review: { rate: 4.5, content: "very good" },
-  //   };
-  //   firebaseStore
-  //     .collection("appointments")
-  //     .add(appointment)
-  //     .then(function (docRef) {
-  //       console.log("Document written with ID: ", docRef.id);
-  //     })
-  //     .catch(function (error) {
-  //       console.error("Error adding document: ", error);
-  //     });
-  // };
-
   const history = useHistory();
 
   const directProfile = () => {
@@ -276,14 +251,12 @@ export default function SignInModal() {
     setIsLoginShowing(!isLoginShowing);
   };
 
-  // Sample accounts
-
   const testAccount = (name) => {
     const user = {
       email: "",
       displayName: name,
-      photoURL : "",
-      uid : name,
+      photoURL: "",
+      uid: name,
     };
     generateUserDocument(user).then(function (result) {
       dispatch(sign_in_with_facebook(result));
@@ -291,22 +264,25 @@ export default function SignInModal() {
   };
 
   return (
-    <div>
+    <div className="signInModalWrapper">
       <p onClick={showLoginModal}>Sign In</p>
       <Modal
-        className="loginModal"
+        className="signInModal"
         visible={isLoginShowing}
+        footer={null}
+        title={"Sign In"}
         closable={false}
         onCancel={handleLoginCancel}
         okButtonProps={{ style: { display: "none" } }}
         cancelButtonProps={{ style: { display: "none" } }}
       >
-        <div className="loginModalContent">
-          <p id="logoFont">Bookito</p>
+        <div className="signUpBody">
+          <h4 className="signUpTitle">Welcome back</h4>
+          <label>Sign in with your Google account or Facebook account</label>
           <div>
             <button
               onClick={signInWithGoogle}
-              className="loginBtn loginBtn--google"
+              className="loginBtn googleButton"
             >
               Sign in with Google
             </button>
@@ -314,59 +290,155 @@ export default function SignInModal() {
           <div>
             <button
               onClick={signInWithFaceBook}
-              className="loginBtn loginBtn--facebook"
+              className="loginBtn facebookButton"
             >
               Sign in with Facebook
             </button>
           </div>
-          <div>
-            <button
-                onClick={() => testAccount("joshua")}
-            >
-              Log in with Joshua
-            </button>
-          </div>
-          <div>
-            <button
-                onClick={() => testAccount("Gina")}
-            >
-              Log in with Gina
-            </button>
-          </div>
-          <div>
-            <button
-                onClick={() => testAccount("KangMin")}
-            >
-              Log in with KangMin
-            </button>
-          </div>
-          <div>
-            <button
-                onClick={() => testAccount("Yongju")}
-            >
-              Log in with Yongju
-            </button>
-          </div>
-          <div>
-            <button
-                onClick={() => testAccount("JW")}
-            >
-              Login with JW
-            </button>
-          </div>
-          <div>
-            <button
-                onClick={() => testAccount("Erica")}
-            >
-              Login with Erica
-            </button>
-          </div>
+          <p className="loginOptionInfo">
+            Bookito don't provide other methods to sign in for this moment.
+          </p>
           <Divider> OR </Divider>
           <div>
             <p> Don't have an account? </p>
           </div>
         </div>
+        <div>
+          <button onClick={() => testAccount("Gina")}>Log in with Gina</button>
+        </div>
+        <div>
+          <button onClick={() => testAccount("KangMin")}>
+            Log in with KangMin
+          </button>
+        </div>
       </Modal>
     </div>
   );
+}
+
+{
+  /*<div>*/
+}
+{
+  /*  <button*/
+}
+{
+  /*      onClick={() => testAccount("joshua")}*/
+}
+{
+  /*  >*/
+}
+{
+  /*    Log in with Joshua*/
+}
+{
+  /*  </button>*/
+}
+{
+  /*</div>*/
+}
+{
+  /*<div>*/
+}
+{
+  /*  <button*/
+}
+{
+  /*      onClick={() => testAccount("Gina")}*/
+}
+{
+  /*  >*/
+}
+{
+  /*    Log in with Gina*/
+}
+{
+  /*  </button>*/
+}
+{
+  /*</div>*/
+}
+{
+  /*<div>*/
+}
+{
+  /*  <button*/
+}
+{
+  /*      onClick={() => testAccount("KangMin")}*/
+}
+{
+  /*  >*/
+}
+{
+  /*    Log in with KangMin*/
+}
+{
+  /*  </button>*/
+}
+{
+  /*</div>*/
+}
+{
+  /*<div>*/
+}
+{
+  /*  <button*/
+}
+{
+  /*      onClick={() => testAccount("Yongju")}*/
+}
+{
+  /*  >*/
+}
+{
+  /*    Log in with Yongju*/
+}
+{
+  /*  </button>*/
+}
+{
+  /*</div>*/
+}
+{
+  /*<div>*/
+}
+{
+  /*  <button*/
+}
+{
+  /*      onClick={() => testAccount("JW")}*/
+}
+{
+  /*  >*/
+}
+{
+  /*    Login with JW*/
+}
+{
+  /*  </button>*/
+}
+{
+  /*</div>*/
+}
+{
+  /*<div>*/
+}
+{
+  /*  <button*/
+}
+{
+  /*      onClick={() => testAccount("Erica")}*/
+}
+{
+  /*  >*/
+}
+{
+  /*    Login with Erica*/
+}
+{
+  /*  </button>*/
+}
+{
+  /*</div>*/
 }
