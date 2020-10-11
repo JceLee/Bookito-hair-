@@ -4,18 +4,33 @@ $modalBodyMargin: 110px;
 
 .ant-modal-wrap {
   background-color: $white;
+  @include tabletP {
+    background-color: transparent;
+  }
 }
 
 .bookNowModal {
   top: 0;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   max-width: 100%;
+  // height: 100%;
+  // outline: none;
+  @include tabletP {
+    top: 100px;
+    right: 65px;
+    height: 789px;
+  }
 
   .ant-modal-content {
     font-size: 16px;
     -webkit-box-shadow: none;
     box-shadow: none;
+    margin: 0;
+    height: 100%;
+    @include tabletP {
+      width: 650px;
+    }
 
     .ant-modal-body {
       height: calc(100vh - #{$modalBodyMargin});
@@ -24,16 +39,38 @@ $modalBodyMargin: 110px;
       #stepToTopId {
         margin-top: 10%;
       }
+      @include tabletP {
+        overflow: none;
+        height: 680px;
+      }
     }
 
     .steps {
+      .ant-steps-item-content {
+        width: 48px;
+        // width: 80px;
+        margin: 10px 20px 10px 16px;
+        text-align: center;
+        @include mobileM {
+          margin: 10px 25px 10px 20px;
+        }
+      }
       .ant-steps-item-title {
-        font-size: 14px;
+        font-size: 13px;
+        // font-size: 9px;
+        @include mobileMtoL {
+          font-size: 15px;
+        }
       }
 
-      .ant-steps {
-        width: 95%;
-        margin-left: 14px;
+      .ant-steps-item-icon {
+        margin-left: 44px;
+        @include mobileM {
+          margin-left: 50px;
+        }
+        @include mobileMtoL {
+          margin-left: 52px;
+        }
       }
 
       .ant-steps-icon {
@@ -51,7 +88,13 @@ $modalBodyMargin: 110px;
       }
 
       .ant-steps-item-tail {
-        margin: 0 0 0 60.5px;
+        margin-left: 37px;
+        @include mobileM {
+          margin-left: 42.5px;
+        }
+        @include mobileMtoL {
+          margin-left: 44px;
+        }
       }
 
       .ant-steps-item-tail::after {
@@ -61,21 +104,45 @@ $modalBodyMargin: 110px;
     }
 
     .stepOne {
+      @include tabletP {
+        width: 100%;
+        display: flex;
+        // justify-content: space-between;
+        // padding: 0 5px;
+      }
       .DayPicker {
         display: inline-block;
-        font-size: 1.2rem;
+        font-size: 1.125rem;
+        width: 100%;
+
+        @include mobileM {
+          font-size: 1.2rem;
+          width: 100%;
+        }
+
+        @include tabletP {
+          margin-top: 6%;
+        }
+
         .DayPicker-NavButton {
           top: 5.5%;
           right: 8%;
         }
+
         .DayPicker-Month {
           width: 100%;
           height: auto;
+
+          @include tabletP {
+            width: 200px;
+            height: 200px;
+          }
 
           .DayPicker-Body {
             .DayPicker-Day--selected {
               background-color: $black;
             }
+
             .DayPicker-Day:not(.DayPicker-Day--selected):hover {
               background-color: $white;
             }
@@ -83,49 +150,101 @@ $modalBodyMargin: 110px;
         }
       }
 
-      #selectTimePtag {
+      #selectTime {
         text-align: center;
         font-size: 15px;
         font-weight: bolder;
-        margin-bottom: 8%;
+        margin: 0 0 8% 0;
+        @include tabletP {
+          margin: 6% 10% 8% 0;
+        }
+      }
+
+      .ant-radio-group {
+        margin: 0 0 5px 15px;
+        // width: 300px;
       }
 
       .ant-radio-button-wrapper {
-        border-left-width: 1px;
-        border-left-color: $black;
-        margin: 0 1% 2% 5.5%;
+        // border-left-width: none;
+        // border-left-color: none;
+        margin: 0px 0px 5px 5.7px;
         color: $black;
         border-color: $black;
-        .hourRadioBtn:focus {
-          content: none;
+        // background-color: pink;
+        width: 65px;
+        font-size: 13px;
+        text-align: center;
+        padding: 0;
+
+        @include mobileM {
+          margin: 0px 12px 15px 9px;
         }
+        @include mobileMtoL {
+          font-size: 14px;
+          margin: 0px 21px 15px 14px;
+        }
+
+        @include tabletP {
+          margin: 0px 5px 15px -2px;
+        }
+
+        .ant-radio-button {
+          width: 100%;
+        }
+
+        // .hourRadioBtn:focus {
+        //   content: none;
+        // }
       }
+
       .ant-radio-button-wrapper:not(:first-child)::before {
         background-color: $black;
       }
-      .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled),
-      .ant-radio-button-wrapper-checked:not([class*=" ant-radio-button-wrapper-disabled"]).ant-radio-button-wrapper {
-        border: 2px solid $black;
-        color: $black;
-      }
+      // .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled),
+      // .ant-radio-button-wrapper-checked:not([class*=" ant-radio-button-wrapper-disabled"]).ant-radio-button-wrapper {
+      //   // border: 2px solid $black;
+      //   color: $black;
+      // }
       .ant-radio-button-wrapper:hover {
-        color: $black;
-        border: 2px solid $black;
+        color: $white;
+        background-color: $black;
+        // border: 1px solid $black;
       }
     }
 
     .stepTwo {
+      @include tabletP {
+        width: 100%;
+        display: flex;
+        // justify-content: space-between;
+        // padding: 0 5px;
+      }
+      .genderService {
+        @include tabletP {
+          width: 54%;
+        }
+      }
       .checkboxOption {
         width: 87%;
-        margin: 14% 0 15% 6.5%;
+        margin: 8% 0 15% 6.5%;
+        // @include tabletP {
+        //   width: 75%;
+        //   height: 400px;
+        //   margin: 10px 0 50px 6.5%;
+        // }
         .ant-card-head {
-          // padding: 0 13px;
+          margin-bottom: 0;
           .ant-tabs-top {
             // flex-direction: row;
             .ant-tabs-tab {
-              margin: 0 16px 0 0;
+              margin: 0 14px 0 0;
+              @include mobileMtoL {
+                margin: 0 17px 0 0;
+              }
               .ant-tabs-tab-btn {
                 color: $black;
+                font-size: 15px;
               }
             }
             .ant-tabs-tab:hover {
@@ -162,26 +281,39 @@ $modalBodyMargin: 110px;
           }
         }
       }
-      .estimatedPrice {
-        .estimatedPricePtag {
-          text-align: center;
-          font-size: 15px;
-          font-weight: bolder;
-          margin-bottom: 8%;
+    }
+    .estimatedPrice {
+      @include tabletP {
+        width: 45%;
+      }
+      .estimatedPricePtag {
+        text-align: center;
+        font-size: 15px;
+        font-weight: bolder;
+        margin-bottom: 8%;
+        @include tabletP {
+          margin: 5% 0 8% 0;
         }
-        .servicePriceTag {
-          margin: 0 0 0 25px;
-          .removeButton {
-            float: right;
-            margin-right: 14px;
-            color: $red;
+      }
+      .servicePriceTag {
+        margin-left: 25px;
+        @include tabletP {
+          margin: 0 15px 0 10px;
+        }
+        .removeButton {
+          float: right;
+          margin-right: 14px;
+          color: $red;
+          @include tabletP {
+            margin: -8px -2px 0 0;
           }
         }
       }
-      .totalCost {
-        text-align: center;
-        margin: 0 0 40px -10px;
-      }
+    }
+
+    .totalCost {
+      text-align: center;
+      margin: 0 0 40px -10px;
     }
 
     .stepThree {
@@ -225,9 +357,6 @@ $modalBodyMargin: 110px;
       margin-left: 0;
     }
   }
-}
-
-@include mobileL {
 }
 
 @include tabletP {

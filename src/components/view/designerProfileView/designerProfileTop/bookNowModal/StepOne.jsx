@@ -12,6 +12,7 @@ export default function StepOne(props) {
 
   const renderTime = () => (
     <div id="selectTimePosition">
+      <p id="selectTime">Please select time</p>
       <Radio.Group>
         {timeSelection.map((hour, index) => {
           const { time, value, disabled } = hour;
@@ -34,7 +35,6 @@ export default function StepOne(props) {
   return (
     <div className="stepOne">
       {renderCalendar()}
-      <p id="selectTime">Please select time</p>
       {renderTime()}
     </div>
   );
