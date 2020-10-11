@@ -1,6 +1,7 @@
 import React from "react";
 import { Rate } from "antd";
 
+// DEPRECATED: Use StarRate.jsx
 export default function ReadOnlyStar(props) {
   const { rate } = props;
 
