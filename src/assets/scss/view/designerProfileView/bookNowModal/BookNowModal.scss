@@ -16,10 +16,17 @@ $modalBodyMargin: 110px;
   max-width: 100%;
   // height: 100%;
   // outline: none;
+
+  // @include tabletP {
+  //   top: 100px;
+  //   right: 65px;
+  //   height: 789px;
+  // }
+
   @include tabletP {
     top: 100px;
     right: 65px;
-    height: 789px;
+    height: 670px;
   }
 
   .ant-modal-content {
@@ -28,6 +35,7 @@ $modalBodyMargin: 110px;
     box-shadow: none;
     margin: 0;
     height: 100%;
+
     @include tabletP {
       width: 650px;
     }
@@ -39,25 +47,39 @@ $modalBodyMargin: 110px;
       #stepToTopId {
         margin-top: 10%;
       }
+
       @include tabletP {
         overflow: none;
         height: 680px;
+      }
+
+      @include tabletP {
+        // overflow: none;
+        height: 561px;
       }
     }
 
     .steps {
       .ant-steps-item-content {
         width: 48px;
-        // width: 80px;
+        // width: 87px;
         margin: 10px 20px 10px 16px;
         text-align: center;
+
         @include mobileM {
           margin: 10px 25px 10px 20px;
         }
+
+        @include tabletP {
+          margin: 10px 0 10px 10px;
+          width: 170px;
+        }
       }
+
       .ant-steps-item-title {
         font-size: 13px;
-        // font-size: 9px;
+        // font-size: 10px;
+
         @include mobileMtoL {
           font-size: 15px;
         }
@@ -65,11 +87,16 @@ $modalBodyMargin: 110px;
 
       .ant-steps-item-icon {
         margin-left: 44px;
+
         @include mobileM {
           margin-left: 50px;
         }
+
         @include mobileMtoL {
           margin-left: 52px;
+        }
+        @include tabletP {
+          margin-left: 110px;
         }
       }
 
@@ -92,8 +119,13 @@ $modalBodyMargin: 110px;
         @include mobileM {
           margin-left: 42.5px;
         }
+
         @include mobileMtoL {
           margin-left: 44px;
+        }
+
+        @include tabletP {
+          margin-left: 102.5px;
         }
       }
 
@@ -220,11 +252,13 @@ $modalBodyMargin: 110px;
         // justify-content: space-between;
         // padding: 0 5px;
       }
+
       .genderService {
         @include tabletP {
           width: 54%;
         }
       }
+
       .checkboxOption {
         width: 87%;
         margin: 8% 0 15% 6.5%;
@@ -233,92 +267,112 @@ $modalBodyMargin: 110px;
         //   height: 400px;
         //   margin: 10px 0 50px 6.5%;
         // }
+
         .ant-card-head {
           margin-bottom: 0;
-          .ant-tabs-top {
-            // flex-direction: row;
-            .ant-tabs-tab {
-              margin: 0 14px 0 0;
-              @include mobileMtoL {
-                margin: 0 17px 0 0;
-              }
-              .ant-tabs-tab-btn {
-                color: $black;
-                font-size: 15px;
-              }
+
+          .ant-tabs-tab {
+            margin: 0 14px 0 0;
+
+            @include mobileMtoL {
+              margin: 0 17px 0 0;
             }
-            .ant-tabs-tab:hover {
+
+            .ant-tabs-tab-btn {
               color: $black;
-            }
-            .ant-tabs-ink-bar {
-              background: $black;
+              font-size: 15px;
             }
           }
+
+          .ant-tabs-tab:hover {
+            color: $black;
+          }
+
+          .ant-tabs-ink-bar {
+            background: $black;
+          }
         }
+
         .ant-card-body {
           padding: 0;
+
           .servicesContent {
             margin-top: 30px;
+
             .ant-checkbox-wrapper {
               margin-left: 20px;
             }
+
             .ant-checkbox-input:focus + .ant-checkbox-inner {
               border-color: $black;
             }
+
             .ant-checkbox-checked .ant-checkbox-inner {
               background-color: $black;
               border-color: $black;
             }
+
             .ant-checkbox-checked::after {
               border: none;
             }
+
             .serviceMenu {
               margin: 0 0 30px 43px;
             }
+
             .ant-divider-horizontal {
               margin: 0 0;
             }
           }
         }
       }
-    }
-    .estimatedPrice {
-      @include tabletP {
-        width: 45%;
-      }
-      .estimatedPricePtag {
-        text-align: center;
-        font-size: 15px;
-        font-weight: bolder;
-        margin-bottom: 8%;
+
+      .estimatedPrice {
         @include tabletP {
-          margin: 5% 0 8% 0;
+          width: 45%;
         }
-      }
-      .servicePriceTag {
-        margin-left: 25px;
-        @include tabletP {
-          margin: 0 15px 0 10px;
-        }
-        .removeButton {
-          float: right;
-          margin-right: 14px;
-          color: $red;
+
+        .estimatedPricePtag {
+          text-align: center;
+          font-size: 15px;
+          font-weight: bolder;
+          margin-bottom: 8%;
+
           @include tabletP {
-            margin: -8px -2px 0 0;
+            margin: 5% 0 8% 0;
+          }
+        }
+
+        .servicePriceTag {
+          margin-left: 25px;
+
+          @include tabletP {
+            margin: 0 15px 0 10px;
+          }
+
+          .removeButton {
+            float: right;
+            margin-right: 14px;
+            color: $red;
+
+            @include tabletP {
+              margin: -8px -2px 0 0;
+            }
           }
         }
       }
-    }
-
-    .totalCost {
-      text-align: center;
-      margin: 0 0 40px -10px;
+      .totalCost {
+        text-align: center;
+        margin: 0 0 40px -10px;
+      }
     }
 
     .stepThree {
       .ant-list-items {
         margin: 10% 3.5% 0 7%;
+        @include tabletP {
+          margin: 10% 3% 0 5%;
+        }
       }
     }
 
