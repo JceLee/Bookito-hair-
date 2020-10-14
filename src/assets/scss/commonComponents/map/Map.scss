@@ -8,7 +8,7 @@
     visibility: hidden !important;
 }
 .gm-bundled-control-on-bottom {
-    top: 0 !important;
+    top: 0px !important;
 }
 
 .mapComponent {
@@ -20,7 +20,7 @@
     }
 }
 
-.marker {
+.markerOuter {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -40,41 +40,11 @@
     }
 }
 
-.designerPopover {
-    padding-bottom: 0 !important;   // Elimiates bottom padding, and in part hides bottom arrow on marker Popover
-    top: 69.5vh !important;         // Determines the location of the modal in mobile
+.markerInner {
+    padding-bottom: 0px;   // Elimiates bottom padding, and in part hides bottom arrow on marker Popover
 
     @include tabletP {
-        padding-bottom: 10;
-    }
-
-    .popoverContent {
-        display: flex;
-        flex-direction: row;
-        padding: 10px;
-        background: whitesmoke;
-
-        @include tabletP {
-            z-index: 10;
-        }
-
-        .markerCarousel {
-            width: 135px;
-            height: 135px;
-            @mixin mobileM {
-                width: 170px;
-                height: 170px;
-            }
-            img {
-                object-fit: cover;
-                width: 135px;
-                height: 135px;
-                @mixin mobileM {
-                    width: 170px;
-                    height: 170px;
-                }
-            }
-        }
+        padding-bottom: 10px;
     }
     
     // Popover (desktop)
@@ -83,7 +53,7 @@
     }
     .ant-popover-inner-content {
         border-radius: 15px !important;
-        padding: 0 !important;
+        padding: 0px !important;
     }
 
     // Modal (mobile)
@@ -93,7 +63,7 @@
         line-height: 40px;
     }
     .ant-modal-body {
-        padding: 0;
+        padding: 0px;
     }
 
     // Carousel
@@ -114,5 +84,76 @@
     .slick-arrow.slick-next {
         right: 0px;
         z-index: 1;
+    }
+}
+
+.markerContent {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    background: whitesmoke;
+
+    .markerCarousel {
+        width: 135px;
+        height: 135px;
+        @include mobileM {
+            width: 170px;
+            height: 170px;
+        }
+        @include tabletP {
+            width: 180px;
+            height: 180px;
+        }
+        img {
+            object-fit: cover;
+            width: 135px;
+            height: 135px;
+            @include mobileM {
+                width: 170px;
+                height: 170px;
+            }
+            @include tabletP {
+                width: 180px;
+                height: 180px;
+            }
+        }
+    }
+
+    .markerDescription {
+        margin-left: 10px;
+
+        .markerDescriptionUpper {
+            overflow: auto;
+            height: 80px;
+
+            @include tabletP {
+                height: 100px;
+                width: 180px;
+            }
+
+            .markerDescriptionName {
+                color: #332C1E;
+                margin-bottom: 3px;
+            }
+            .markerDescriptionDistance {
+                color: #332C1E;
+                margin-bottom: 7px;
+            }
+        }
+
+        .markerDescriptionLower {
+            overflow: auto;
+            height: 54px;
+
+            @include tabletP {
+                height: 81px;
+                width: 180px;
+            }
+            .serviceTag {
+                margin-right: 6px;
+                margin-bottom: 4px;
+                border-radius: 20px;
+            }
+        }
     }
 }

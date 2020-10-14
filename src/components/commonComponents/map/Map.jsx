@@ -23,8 +23,14 @@ export default function Map(props) {
         <Marker
             isDesktop={isDesktop}
             key={`map-marker-${designer.uid}`}
+
+            // TODO: DISABLE THIS CODE WHEN LATLNG IS SUPPORTED
             lat={defaultLocation.lat + (Math.random()-0.5) * 0.2} // TODO: random location for testing only!
             lng={defaultLocation.lng + (Math.random()-0.5) * 0.1}
+            // TODO: ENABLE THIS CODE WHEN LATLNG IS SUPPORTED
+            // lat={designer.latLng.lat}
+            // lng={designer.latLng.lng}
+
             userLocation={userLocation}
             designer={designer}
         />

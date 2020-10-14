@@ -5,6 +5,7 @@ import { StarRead } from "../StarRate";
 import { HomeTwoTone, ScissorOutlined } from '@ant-design/icons';
 import Slider from "react-slick";
 import { getDistanceFromLatLonInKm } from "../../../helpers/geocode";
+import placeholder from "../../../assets/images/placeholder.png";
 
 // Marker can be initialized without "designer" prop to create a Home location marker.
 // Prop "isDesktop" is used to indicate whether a desktop marker or mobile marker should be created.
@@ -20,14 +21,12 @@ export default function Marker(props) {
 
     const [visible, setVisible] = useState(false);
 
-    const tagColors = ["#332C1E"];
     const carouselSettings = {
         // arrows: false, // Can hide arrows on image carousel.
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 400,
         slidesToShow: 1,
-        slidesToScroll: 1
     };
 
     const hide = () => {
@@ -43,29 +42,32 @@ export default function Marker(props) {
     };
 
     return designer ?
-        <div key={key} className="marker">
+        <div key={key} className="markerOuter">
 
             {/* Desktop version of marker using Popover */}
             {isDesktop ? <Popover 
-                overlayClassName="designerPopover"
+                overlayClassName="markerInner"
                 content={
-                    <div className="popoverContent">
+                    <div className="markerContent">
                         <Link to={`/designer_profile?uid=${designer.uid}`}>
-                            <Slider {...carouselSettings} style={{width: "180px", height: "180px"}}>
-                                <div><img src="https://www.cuded.com/wp-content/uploads/2017/08/hair-styles-for-men-31.jpg" alt="" width="180px" height="180px"/></div>
-                                <div><img src="https://www.menshairstyletrends.com/wp-content/uploads/2017/03/mokumbarbers-messy-styles-for-men-2017-trends-texture.jpg" alt="" width="180px" height="180px"/></div>
+                            <Slider {...carouselSettings} className="markerCarousel">
+                                {designer.works && designer.works.length ? designer.works.map((imgSrc, index) => (
+                                    <div><img src={imgSrc} alt={`Gallery img${index}`} /></div>
+                                ))
+                                : <div><img src={placeholder} alt={`Gallery placeholder`} /></div>}
                             </Slider>
                         </Link>
-                        <div style = {{marginLeft: 10}}>
-                            <div style={{height: 100, width: 180, overflow: "auto"}}>
-                                <Link to={`/designer_profile?uid=${designer.uid}`}><h4 style={{color: "#332C1E", marginBottom: 3}}>{designer.name}</h4></Link>
-                                <StarRead rateScore={4.32} rateCount={32}/>
-                                <p style={{color: "#332C1E", marginBottom: 7}}>{`${getDistanceFromLatLonInKm(lat, lng, userLocation && userLocation.lat, userLocation && userLocation.lng)}km from you`}</p>
+                        <div className="markerDescription">
+                            <div className="markerDescriptionUpper">
+                                <Link to={`/designer_profile?uid=${designer.uid}`}><h4 className="markerDescriptionName">{designer.displayName}</h4></Link>
+                                <StarRead rateScore={designer.rateScore || 0} rateCount={designer.rateCount || 0}/>
+                                <p className="markerDescriptionDistance">{`${getDistanceFromLatLonInKm(lat, lng, userLocation && userLocation.lat, userLocation && userLocation.lng)}km from you`}</p>
                             </div>
 
-                            <div style={{height: 81, width: 180, overflow: "auto"}}>
-                                {designer.services && designer.services.map((service, index) => (
-                                    <Tag shape="rounded" style={{marginBottom: 4, borderRadius: 20}} color={tagColors[index%tagColors.length]}>{service}</Tag>
+                            <div className="markerDescriptionLower">
+                                {designer.services && Object.keys(designer.services).map(serviceKey => (
+                                    designer.services[serviceKey] !== [] && 
+                                    <Tag className="serviceTag" color="#332C1E">{serviceKey}</Tag>
                                 ))}
                             </div>
                         </div>
@@ -82,30 +84,34 @@ export default function Marker(props) {
             : <div>
                 <Button className="markerButton" type="primary" shape="circle" onClick={display} icon={<ScissorOutlined />}/>
                 <Modal
-                    className="designerPopover"
+                    className="markerInner"
                     visible={visible}
                     footer={null}
                     onCancel={hide}
                     mask={false}
-                    // maskClosable={false}     // Determines whether clicking outside the modal closes the modal
+                    style={{top: "69.5vh"}} // Determines the location of the modal in mobile // TODO: THIS SHOULD BE FROM BOTTOM, BUT BOTTOM DOESNT WORK!!!
+                    // maskClosable={false} // Determines whether clicking outside the modal closes the modal
                 >
-                        <div className="popoverContent">
+                        <div className="markerContent">
                             <Link to={`/designer_profile?uid=${designer.uid}`}>
                                 <Slider {...carouselSettings} className="markerCarousel">
-                                    <div><img src="https://www.cuded.com/wp-content/uploads/2017/08/hair-styles-for-men-31.jpg" alt=""/></div>
-                                    <div><img src="https://www.menshairstyletrends.com/wp-content/uploads/2017/03/mokumbarbers-messy-styles-for-men-2017-trends-texture.jpg" alt=""/></div>
+                                    {designer.works && designer.works.length ? designer.works.map((imgSrc, index) => (
+                                        <div><img src={imgSrc} alt={`Gallery img${index}`} /></div>
+                                    ))
+                                    : <div><img src={placeholder} alt={`Gallery placeholder`} /></div>}
                                 </Slider>
                             </Link>
-                            <div style = {{ marginLeft: 10 }}>
-                                <div style={{height: 80, overflow: "auto"}}>
-                                    <Link to={`/designer_profile?uid=${designer.uid}`}><h4 style={{color: "#332C1E", marginBottom: 3}}>{designer.name}</h4></Link>
-                                    <StarRead rateScore={4.32} rateCount={32}/>
-                                    <p style={{color: "#332C1E", marginBottom: 0}}>{`${getDistanceFromLatLonInKm(lat, lng, userLocation && userLocation.lat, userLocation && userLocation.lng)}km from you`}</p>
+                            <div className="markerDescription">
+                                <div className="markerDescriptionUpper">
+                                    <Link to={`/designer_profile?uid=${designer.uid}`}><h4 className="markerDescriptionName">{designer.displayName}</h4></Link>
+                                    <StarRead rateScore={designer.rateScore || 0} rateCount={designer.rateCount || 0}/>
+                                    <p className="markerDescriptionDistance">{`${getDistanceFromLatLonInKm(lat, lng, userLocation && userLocation.lat, userLocation && userLocation.lng)}km from you`}</p>
                                 </div>
 
-                                <div style={{height: 54, overflow: "auto"}}>
-                                    {designer.services && designer.services.map((service, index) => (
-                                        <Tag shape="rounded" style={{marginBottom: 4, borderRadius: 20}} color={tagColors[index%tagColors.length]}>{service}</Tag>
+                                <div className="markerDescriptionLower">
+                                    {designer.services && Object.keys(designer.services).map(serviceKey => (
+                                        designer.services[serviceKey] !== [] && 
+                                        <Tag className="serviceTag" color="#332C1E">{serviceKey}</Tag>
                                     ))}
                                 </div>
                             </div>

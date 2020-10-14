@@ -54,44 +54,6 @@ export default function DesignerListView(props) {
     setMapVisibleMobile(false);
   };
 
-  const testDesignerList = [{
-    uid: 0,
-    name: "Joshuaa Shin",
-    rate: 4,
-    services: ["Clinic", "Color", "Cut", "Perms", "Promo", "Style"],
-    latLng: {lat: 49.2505955, lng: -123.1012059}
-  },{
-    uid: 1,
-    name: "Yongju Babo",
-    rate: 1,
-    services: ["cut"],
-    latLng: {lat: 49.2505955, lng: -123.1012059}
-  },{
-    uid: 3,
-    name: "Kangmin Leeeeee",
-    rate: 3,
-    services: ["cut", "color", "perm"],
-    latLng: {lat: 49.2505955, lng: -123.1012059}
-  },{
-    uid: 4,
-    name: "Gina",
-    rate: 5,
-    services: ["cut", "color", "perm"],
-    latLng: {lat: 49.2505955, lng: -123.1012059}
-  },{
-    uid: 5,
-    name: "Something Something Longnameguy",
-    rate: 2,
-    services: ["Clinic", "Color", "Cut", "Perms", "Promo", "Style"],
-    latLng: {lat: 49.2505955, lng: -123.1012059}
-  },{
-    uid: 6,
-    name: "Jaewhee",
-    rate: 3,
-    services: ["cut", "color", "perm"],
-    latLng: {lat: 49.2505955, lng: -123.1012059}
-  }];
-
   return (
     <>
       <div className="listingContainer">
@@ -122,7 +84,6 @@ export default function DesignerListView(props) {
               <div key={index} className="designerList">
                 {console.log(designer)}
                 <DesignerCardComponent designer={designer} handleSearch={handleSearch} />
-                <DesignerCardComponent designer={designer} handleSearch={handleSearch} />
               </div>
             ))}
           </div>
@@ -149,7 +110,7 @@ export default function DesignerListView(props) {
               <Map
                 isDesktop={false}
                 initialLocationString={props.location.search} 
-                designers={testDesignerList /*Object.values(designers)*/ } 
+                designers={Object.values(designers)} 
               />
             </div>
           </Drawer>
@@ -170,7 +131,7 @@ export default function DesignerListView(props) {
             <Map
               isDesktop={true}
               initialLocationString={props.location.search}
-              designers={testDesignerList /*Object.values(designers)*/ }
+              designers={Object.values(designers)}
             />
           </div>
         </div>}
