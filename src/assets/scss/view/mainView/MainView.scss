@@ -1,20 +1,36 @@
-@import "../../Mixin.scss";
+.searchBarSectionDesktopImg {
+  display: none;
+
+  @include tabletP {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 700px;
+    object-fit: cover;
+  }
+}
 
 // search bar section
 .searchBarSection {
   width: 100%;
   height: 600px;
-  position: relative;
-}
+  @include tabletP {
+    height: 700px;
+  }
+  .searchBarSectionImg {
+    object-fit: cover;
+    position: absolute;
+    width: 100%;
+    height: 600px;
+    @include tabletP {
+      display: none;
+    }
+  }
 
-.searchBarSectionImg {
-  object-fit: cover;
-  position: absolute;
-}
-
-#searchBarForm {
-  border: 1px solid #fdfdfd;
-  z-index: 2;
+  #searchBarForm {
+    border: 1px solid #fdfdfd;
+    z-index: 2;
+  }
 }
 
 .stickedSearchBarOnNav {
@@ -25,61 +41,142 @@
   z-index: 2;
 }
 
-// annoucement section
-.announcementSection {
-  padding-top: 20px;
-  height: 370px;
-
-  .announcements {
-    width: 100%;
-    height: 300px;
-    line-height: 300px;
-    text-align: center;
-  }
-}
-
 // info card section
 .infoCardsSection {
-  height: 700px;
-  max-height: 700px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  background-color: #11264f;
+  margin: 10%;
+  @include tabletP {
+    display: flex;
+    justify-content: center;
+  }
 
   .infoCard {
-    margin: 5px 0;
+    margin: 15px;
     object-fit: scale-down;
-    width: 95%;
-    max-width: 350px;
+    max-width: 334px;
     max-height: 335px;
 
-    .img {
-      object-fit: scale-down;
+    @include tabletL {
+      margin: 15px 60px;
+    }
+    .ant-card-cover {
+      max-width: 334px;
+      max-height: 216px;
+      overflow: hidden;
     }
   }
 }
 
-// new designer section
-.newDesignersSection {
-  padding: 20px 0;
-  height: 470px;
+.newDesignerMobileSection {
+  @include tabletP {
+    display: none;
+  }
+}
 
-  .newDesignerText {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 20px;
+// new designer desktop section
+.newDesignersDesktopSection {
+  padding: 0 5%;
+  margin-bottom: 5vh;
+
+  @include tabletP {
+    display: block;
+  }
+  @include mainPageNewDesigners1090 {
+    display: flex;
   }
 
-  .slick-slide {
-    margin: 0 20px;
+  @include desktop {
+    padding: 0 10%;
+  }
+
+  .newDesignersHeading {
+    padding: 0 50px;
+  }
+
+  .headerSection {
+    text-align: center;
+    margin-bottom: 5vh;
+    @include mainPageNewDesigners1090 {
+      text-align: left;
+      display: block;
+      width: 30%;
+    }
+    .topLine {
+      font-size: 30pt;
+      font-weight: 500;
+    }
+    .bottomLine {
+      font-weight: 300;
+      margin: 0 auto;
+      @include tabletP {
+        width: 660px;
+      }
+
+      @include mainPageNewDesigners1090 {
+        width: 100%;
+      }
+    }
+  }
+  .newDesignersHeaderSmallDesktopSection {
+    font-size: 30pt;
+    font-weight: 500;
+    @include mainPageNewDesigners1090 {
+      display: none;
+    }
+  }
+  .imagesSection {
+    width: 100%;
+    @include mainPageNewDesigners1090 {
+      width: 70%;
+    }
+
+    .designerImagesRow {
+      width: 100%;
+      display: flex;
+      margin-top: 20px;
+      justify-content: center;
+      @include mainPageNewDesigners1090 {
+        justify-content: flex-end;
+      }
+
+      .newDesignerCard {
+        margin-right: 20px;
+        width: 150px;
+        height: 150px;
+        padding: 0;
+
+        + div:nth-last-child(-n + 2) {
+          display: none;
+          @include mainPageNewDesigners1090 {
+            display: unset;
+          }
+        }
+
+        + div:nth-child(2) {
+          margin-right: 0px;
+          @include mainPageNewDesigners1090 {
+            margin-right: 20px;
+          }
+        }
+
+        + div:last-child {
+          margin-right: 0px;
+        }
+
+        .designerImage {
+          width: 150px;
+          height: 150px;
+        }
+        .ant-card-body {
+          padding: 0;
+        }
+      }
+    }
   }
 }
 
 // footer
 .footer {
-  background-color: #000;
+  background-color: #1b1b1b;
   color: #fff;
   text-align: center;
 }

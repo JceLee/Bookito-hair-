@@ -56,7 +56,7 @@ export default function Navbar() {
   return (
     <>
       <div id="logo">
-        <Link to="/">LookUp</Link>
+        <Link to="/">Bookito</Link>
       </div>
 
       {/* < tablet */}
