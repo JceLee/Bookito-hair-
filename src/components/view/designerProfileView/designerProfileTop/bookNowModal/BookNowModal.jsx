@@ -74,17 +74,11 @@ export default function BookNowModal(props) {
 
     Object.values(temp).forEach((timeSlot) => {
       Object.values(appointmentArray).forEach((appointment) => {
-        if (
-          appointment.date === dayAndDate &&
-          appointment.time === timeSlot.time
-        ) {
+        if (appointment.date === dayAndDate && appointment.time === timeSlot.time) {
           timeSlot.disabled = true;
-          // console.log("appointment: ", appointment.time);
-          // console.log("matched timeSlot: ", timeSlot.time);
         }
       });
     });
-    // console.log(temp);
     setTimeSelect(temp);
     return timeSelect;
   };
@@ -146,7 +140,6 @@ export default function BookNowModal(props) {
   }, [displayedDay]);
 
   const onRadioChange = (hour) => {
-    // console.log(hour.target.value);
     setBookingTime(hour.target.value);
   };
 
@@ -159,9 +152,7 @@ export default function BookNowModal(props) {
 
     for (let [key, value] of Object.entries(newCalculationBox)) {
       if (serviceToRemove === value) {
-        // console.log(newCalculationBox[key]);
         newCalculationBox[key] = null;
-        // console.log(newCalculationBox[key]);
       }
     }
 
@@ -297,10 +288,8 @@ export default function BookNowModal(props) {
         className="bookNowModal"
         title="Book Now"
         visible={visible}
-        width="100vw"
-        bodyStyle={{ height: "100vh" }}
         footer={
-          <div className="stepAction">
+          <div>
             {current > 0 && (
               <Button className="previousBtn" onClick={() => prev()}>
                 Previous
@@ -317,11 +306,7 @@ export default function BookNowModal(props) {
               </Button>
             )}
             {current === steps.length - 1 && (
-              <Button
-                className="doneBtn"
-                type="primary"
-                onClick={() => requestNewAppointment()}
-              >
+              <Button className="doneBtn" type="primary" onClick={() => requestNewAppointment()}>
                 Done
               </Button>
             )}
@@ -330,14 +315,14 @@ export default function BookNowModal(props) {
         onCancel={handleCancel}
         cancelButtonProps={{ style: { display: "none" } }}
       >
-        <div className="stepsClass" id="stepToTopId">
-          <Steps current={current} onChange={onChange} progressDot>
+        <div id="stepToTopId">
+          <Steps className="steps" current={current} onChange={onChange} progressDot>
             {steps.map((item) => (
               <Step key={item.title} title={item.title} />
             ))}
           </Steps>
         </div>
-        <div className="stepsContent">{steps[current].content}</div>
+        {steps[current].content}
       </Modal>
     </div>
   );
