@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useReducer, useState} from "react";
 import "react-day-picker/lib/style.css";
 import { Steps, Modal, Button, message } from "antd";
 import StepOne from "./StepOne";
@@ -191,6 +191,9 @@ export default function BookNowModal(props) {
       .add(newAppointment)
       .then(function (docRef) {
         console.log("create appointment :" + docRef.id);
+        firebaseStore.collection("appointments").doc(docRef.id).update({
+          aid: docRef.id,
+        })
       })
       .catch(function (error) {
         console.log("error :" + error);
