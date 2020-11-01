@@ -189,6 +189,17 @@ export default function BookNowModal(props) {
       .catch(function (error) {
         console.log("error :" + error);
       });
+    firebaseStore
+        .collection("mail")
+        .add({
+          to: "lkm4351@gmail.com",
+          message: {
+            subject: "A REQUEST ARRIVE!",
+            text: "Customer A requests a new appointment.",
+            html: "Testing <code>Bookito</code> emailing service.",
+          },
+        })
+        .then(() => console.log("Queued email for delivery!"));
   };
 
   const getServiceContent = () => {
