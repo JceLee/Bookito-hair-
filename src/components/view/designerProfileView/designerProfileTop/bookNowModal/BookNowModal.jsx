@@ -196,7 +196,12 @@ export default function BookNowModal(props) {
           message: {
             subject: "A REQUEST ARRIVE!",
             text: "Customer A requests a new appointment.",
-            html: "Testing <code>Bookito</code> emailing service.",
+            html: `
+                    <code>
+                        <h1>Hello, ${designer.fname}! You got an appointment request from ${customer.fname}!<h1>
+                        <a href="https://www.google.com">Go to Appointment Manager</a>
+                    </code>
+                  `,
           },
         })
         .then(() => console.log("Queued email for delivery!"));
