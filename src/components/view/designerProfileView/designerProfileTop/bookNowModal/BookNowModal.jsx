@@ -5,6 +5,7 @@ import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
 import { firebaseStore } from "../../../../../config/fbConfig";
+import { notificationForm } from "../../../../../helpers/notificationForm";
 
 export default function BookNowModal(props) {
   const { hours, customer, designer } = props;
@@ -196,12 +197,7 @@ export default function BookNowModal(props) {
           message: {
             subject: "A REQUEST ARRIVE!",
             text: "Customer A requests a new appointment.",
-            html: `
-                    <code>
-                        <h1>Hello, ${designer.fname}! You got an appointment request from ${customer.fname}!<h1>
-                        <a href="https://www.google.com">Go to Appointment Manager</a>
-                    </code>
-                  `,
+            html: notificationForm(designer, customer),
           },
         })
         .then(() => console.log("Queued email for delivery!"));

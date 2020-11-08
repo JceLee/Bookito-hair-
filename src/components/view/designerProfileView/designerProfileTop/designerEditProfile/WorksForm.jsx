@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { Upload, Modal } from "antd";
+import { Upload, Modal, Form } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
 const maxNumberOfWorkImages = 8;
 
-// To set file.preview
-// https://ant.design/components/upload/#components-upload-demo-picture-card
 const getBase64 = (file) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -25,7 +23,6 @@ export default function WorksForm(props) {
     url: null,
   };
 
-  // In order to add keys(uid, name, status, url) and values
   const worksImgFormatter = (works) => {
     works.forEach((workImgSrc, index) => {
       objectTemplate = {
@@ -71,17 +68,23 @@ export default function WorksForm(props) {
     </div>
   );
 
+  const dummyRequest = ({ file, onSuccess }) => {
+    setTimeout(() => {
+      onSuccess("ok");
+    }, 0);
+  };
+
   return (
     <div className="clearfix">
-      <Upload
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-        listType="picture-card"
-        fileList={fileList}
-        onPreview={handlePreview}
-        onChange={handleChange}
-      >
-        {fileList.length >= maxNumberOfWorkImages ? null : uploadButton}
-      </Upload>
+        <Upload
+            customRequest={dummyRequest}
+            listType="picture-card"
+            fileList={fileList}
+            onPreview={handlePreview}
+            onChange={handleChange}
+        >
+          {fileList.length >= maxNumberOfWorkImages ? null : uploadButton}
+        </Upload>
       <Modal
         className="workModal"
         visible={previewVisible}
