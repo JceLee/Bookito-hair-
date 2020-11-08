@@ -9,6 +9,8 @@ import DesignerProfileView from "./components/view/designerProfileView/DesignerP
 import ClientScheduleView from "./components/view/clientScheduleView/ClientScheduleView";
 import ClientProfileView from "./components/view/clientProfileView/ClientProfileView";
 import SignUpModal from "./components/view/authView/SignUpModal";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import "antd/dist/antd.css";
 import "./assets/scss/App.scss";
 

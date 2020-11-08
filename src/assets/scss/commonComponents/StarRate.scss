@@ -3,18 +3,11 @@
 }
 
 .starReadContainer {
-    display: "flex";
+    display: flex;
     margin-bottom: "2px";
 
-    .starReadStar {
-        font-size: "14px";
-        margin-top: 3;
-        margin-bottom: 0;
-    }
     .starReadScore {
         font-weight: 580;
-        padding-left: 2;
-        padding-right: 2;
         margin-bottom: 0;
     }
     .starReadCount {

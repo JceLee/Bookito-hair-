@@ -37,3 +37,19 @@ export const geocode = (address) => {
     }
   );
 };
+
+// Rough calculation of distance between two LatLng in KM.
+export const getDistanceFromLatLonInKm = (lat1, lng1, lat2, lng2) => {
+  const degToRad = (deg) => {
+      return deg * (Math.PI/180)
+  }
+  let R = 6371;
+  let dLat = degToRad(lat2-lat1);
+  let dLon = degToRad(lng2-lng1);
+  let a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(degToRad(lat1)) 
+          * Math.cos(degToRad(lat2)) * Math.sin(dLon/2) * Math.sin(dLon/2);
+  let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  let d = R * c;
+  let format_distance = d < 1 ? "Less than 1" : Math.round(d)
+  return format_distance;
+}

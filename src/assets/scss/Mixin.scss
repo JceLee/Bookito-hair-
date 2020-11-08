@@ -50,6 +50,12 @@ $lightGrey: #c6c6c6;
   }
 }
 
+@mixin mobileOnly {
+  @media only screen and (max-width: 768px) {
+    @content;
+  }
+}
+
 // for making DesignerCardComponent responsive
 @mixin designerCard {
   @media only screen and (min-width: 571px) {
