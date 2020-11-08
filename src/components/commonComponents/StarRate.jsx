@@ -18,8 +18,8 @@ export function StarRead(props) {
  
     return (
         <span className="starReadContainer">
-            <StarFilled className="starReadStar" />
-            <p className="starReadScore">{rateScore.toFixed(2)}</p>
+            <StarFilled className="starReadStar" style={{ fontSize: "14px", marginBottom: 0, marginTop: 3 }} />
+            <p className="starReadScore" style={{ paddingLeft: 2, paddingRight: 2, }}>{rateScore.toFixed(2)}</p>
             <p className="starReadCount">{`(${rateCount})`}</p>
         </span>
     );
