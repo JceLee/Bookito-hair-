@@ -1,15 +1,29 @@
 @import "../../Mixin.scss";
 
 .listingContainer {
-  border: 1px black solid;
   height: 90vh;
+  width: 100%;
+  overflow-y: scroll;
 
   .designerContainer {
-    border: 1px red solid;
+    height: 100%;
 
-    @include tabletP {
-      width: 50%;
+    @include tabletP{
+      display: flex;
+      flex-direction: row;
+      position: relative;
+      width: 100%;
       float: left;
+    }
+
+    .listingBase {
+      @include tabletP{
+        width: 100%;
+      }
+    }
+
+    .ant-drawer-content-wrapper {
+      width: 100vw !important; // Makes drawer full screen
     }
 
     .listNavBar {
@@ -20,12 +34,6 @@
         height: 30%;
         border: 1px saddlebrown solid;
       }
-      //.sorter {
-      //  height: 30%;
-      //  width: 50%;
-      //  border: 1px saddlebrown solid;
-      //  float: right;
-      //}
     }
 
     .designerList {
@@ -33,14 +41,43 @@
     }
   }
 
-  .mapContainer {
-    display: none;
+  .designerContainerMapVisible {
+    @include tabletP{
+      width: 60vw;
+      float: left;
+    }
+  }
+  .mapBase {
+    position: absolute;
+    left: 60vw;
+    
+    .mapContainer {
+      width: 100%;
+      @include tabletP{
+        position: sticky;
+        top: 0;
+        width: 39.1vw; // 40VW - 0.9vw to accomodate for scrollbar
+      }
+    }
+  }
 
-    @include tabletP {
-      border: 1px green solid;
-      display: flex;
-      width: 50%;
-      float: right;
+  .mapCloseButton {
+    position: absolute;
+    margin: 1em;
+    z-index: 1;
+  }
+
+  .desktopOnly {
+    display: none;
+    @include tabletP{
+      display: block;
+    }
+  }
+
+  .mobileOnly {
+    display: block;
+    @include tabletP{
+      display: none;
     }
   }
 }

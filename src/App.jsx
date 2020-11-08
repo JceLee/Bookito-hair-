@@ -10,6 +10,8 @@ import ClientScheduleView from "./components/view/clientScheduleView/ClientSched
 import ClientProfileView from "./components/view/clientProfileView/ClientProfileView";
 import SignUpModal from "./components/view/authView/SignUpModal";
 import EmailNotificationFromDesigner from "./components/commonComponents/loadingView/EmailNotificationFromDesigner";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import "antd/dist/antd.css";
 import "./assets/scss/App.scss";
 
