@@ -9,6 +9,7 @@ import DesignerProfileView from "./components/view/designerProfileView/DesignerP
 import ClientScheduleView from "./components/view/clientScheduleView/ClientScheduleView";
 import ClientProfileView from "./components/view/clientProfileView/ClientProfileView";
 import SignUpModal from "./components/view/authView/SignUpModal";
+import EmailNotificationFromDesigner from "./components/commonComponents/loadingView/EmailNotificationFromDesigner";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "antd/dist/antd.css";
@@ -31,6 +32,7 @@ export default function App() {
           <Route path="/client_profile" component={ClientProfileView} />
           <Route path="/designer_profile" component={DesignerProfileView} />
           <Route path="/sign_up" component={SignUpModal} />
+          <Route path="/loading" component={EmailNotificationFromDesigner} />
         </Content>
         <Footer id="footer">LookUp WIP July 2020</Footer>
       </Layout>

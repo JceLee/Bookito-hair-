@@ -8,6 +8,9 @@ export default function DesignerSchedule() {
   const [conformedAppointments, setConformedAppointments] = useState([]);
   const [newRequests, setNewRequests] = useState([]);
 
+
+  console.log("Calendar!!")
+
   const loadAppointment = () => {
     const conformed = [];
     const requests = [];
