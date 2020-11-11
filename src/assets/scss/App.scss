@@ -40,6 +40,9 @@
 @import "./view/authView/SignInModal.scss";
 @import "./view/authView/SignUpModal.scss";
 
+// Messenger components
+@import "./view/messengerView/MessengerView.scss";
+
 body {
   font-family: "Montserrat", sans-serif;
 }
