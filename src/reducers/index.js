@@ -1,8 +1,19 @@
 import { combineReducers } from "redux";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage/session";
+
 import firestore from "./firestore";
 import signIn from "./signIn";
 
-export default combineReducers({
-  firestore: firestore,
-  signIn: signIn,
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["signIn", "firestore"]
+};
+
+const rootReducer = combineReducers({
+  firestore,
+  signIn,
 });
+
+export default persistReducer(persistConfig, rootReducer);

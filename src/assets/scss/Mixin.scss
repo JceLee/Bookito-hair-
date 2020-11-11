@@ -14,6 +14,18 @@ $lightGrey: #c6c6c6;
   }
 }
 
+@mixin mobileMtoL {
+  @media only screen and (min-width: 425px) {
+    @content;
+  }
+}
+
+@mixin mobileL {
+  @media only screen and (min-width: 480px) {
+    @content;
+  }
+}
+
 @mixin mobileL {
   @media only screen and (min-width: 480px) {
     @content;
@@ -34,6 +46,12 @@ $lightGrey: #c6c6c6;
 
 @mixin desktop {
   @media only screen and (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin mobileOnly {
+  @media only screen and (max-width: 768px) {
     @content;
   }
 }
@@ -60,6 +78,13 @@ $lightGrey: #c6c6c6;
 // for making client profile form responsive
 @mixin clientProfile576 {
   @media only screen and (min-width: 576px) {
+    @content;
+  }
+}
+
+// for main page's new designer secion
+@mixin mainPageNewDesigners1090 {
+  @media only screen and (min-width: 1090px) {
     @content;
   }
 }

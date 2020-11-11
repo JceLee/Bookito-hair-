@@ -1,14 +1,32 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { Card, Row, Col, Button, Divider, Form, Input, Rate } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import DesignerCardLeft from "../view/designerListView/designerCardComponent/designerCardTop/DesignerCardTopLeft";
-import BlackBtn from "./BlackBtn";
+import {firebaseStore} from "../../config/fbConfig";
 
 export default function ScheduleCardHistory(props) {
-  const { appointment } = props;
+  const { date, name, time, types, appointmentId, designerId } = props;
   const [visible, setVisible] = useState(false);
+  const [designer, setDesigner] = useState(null);
+
+  useEffect(() => {
+    firebaseStore
+        .collection("users")
+        .doc(designerId)
+        .get()
+        .then(function(doc) {
+          setDesigner(doc.data());
+        });
+  }, []);
+
+  console.log(designer);
+
   const modalHandler = () => {
     setVisible(!visible);
+  };
+
+  const onFinish = (values) => {
+    console.log('Success:', values);
   };
 
   return (
@@ -32,20 +50,20 @@ export default function ScheduleCardHistory(props) {
       >
         <Row>
           <Col span={4} className="scheduleCardDate">
-            {appointment.date}
+            {date}
           </Col>
           <Col span={2}>
             <Divider type="vertical" className="scheduleCardDivider" />
           </Col>
           <Col span={18}>
-            <div>Designer: {appointment.designerName}</div>
+            <div>Designer: {name}</div>
             <div>
-              Time: {appointment.timeStart}-{appointment.timeEnd}
+              Time: {time}
             </div>
             <div>
               Type:{" "}
-              {appointment.types.map((type, index) => (
-                <span key={index}>{type} </span>
+              {types.map((type, index) => (
+                  <span key={index}>{type} </span>
               ))}
             </div>
           </Col>
@@ -57,18 +75,24 @@ export default function ScheduleCardHistory(props) {
         title="Review"
         visible={visible}
         onCancel={modalHandler}
+        onOk={onFinish}
         destroyOnClose={true}
         width={800}
       >
         <div>
-          <DesignerCardLeft fname={appointment.designerName} />
+          {designer !== null && <DesignerCardLeft fname={designer.fname} profile={designer.photoURL} rate={designer.rate}/>}
         </div>
-        <Form>
-          <Form.Item>
+        <Form
+        >
+          <Form.Item
+            name="rate"
+          >
             <div>How was the service?</div>
             <Rate />
           </Form.Item>
-          <Form.Item>
+          <Form.Item
+             name="comment"
+          >
             <Input.TextArea />
           </Form.Item>
         </Form>

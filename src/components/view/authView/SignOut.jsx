@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {firebaseAuth, firebaseStore} from "../../../config/fbConfig";
 import { sign_out } from "../../../actions/signIn";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function SignOut() {
   const [loggedIn, setLoggedIn] = useState(true);
@@ -29,7 +30,7 @@ export default function SignOut() {
 
   return (
     <>
-      <p onClick={signOut}> SignOut </p>
+      <Link onClick={signOut} to={"/"}> SignOut </Link>
     </>
   );
 }

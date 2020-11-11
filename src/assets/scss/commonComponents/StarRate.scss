@@ -1,0 +1,16 @@
+.starRate {
+
+}
+
+.starReadContainer {
+    display: flex;
+    margin-bottom: "2px";
+
+    .starReadScore {
+        font-weight: 580;
+        margin-bottom: 0;
+    }
+    .starReadCount {
+        margin-bottom: 0;
+    }
+}

@@ -102,6 +102,7 @@ export default function DesignerProfileTop(props) {
       services: values.services,
       hours: values.hours,
       addressPhone: values.addressPhone,
+      photos: values.fileList,
     };
     console.log(
       firebaseStore
