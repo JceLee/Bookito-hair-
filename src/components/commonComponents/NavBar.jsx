@@ -13,14 +13,13 @@ export default function Navbar() {
   const signedInUser = useSelector((state) => state.signIn.currentUser);
 
   const menuItems = [
-    { name: "Listing page", link: "/designer_list" },
     { name: "Schedule (Designer)", link: "/designer_schedule" },
     { name: "Schedule (Client)", link: "/client_schedule" },
     { name: "Profile (Designer)", link: "/designer_profile" },
     { name: "Profile (Client)", link: "/client_profile" },
     { name: "Divider", link: "" },
+    { name: "Message", link: "/messenger" },
     { name: "Log In", link: "" },
-    { name: "Sign up", link: "" },
   ];
 
   const menu = (
@@ -32,12 +31,6 @@ export default function Navbar() {
           return (
             <Menu.Item key={inx}>
               {signedInUser == null ? <SignInModal /> : <SignOut />}
-            </Menu.Item>
-          );
-        } else if (menu.name == "Sign up") {
-          return (
-            <Menu.Item key={inx}>
-              <SignUpModal />
             </Menu.Item>
           );
         } else {

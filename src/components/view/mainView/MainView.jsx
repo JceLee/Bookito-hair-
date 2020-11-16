@@ -2,8 +2,12 @@ import React from "react";
 import SearchBarSection from "./SearchBarSection";
 import InfoCard from "./InfoCard";
 import NewDesignersDesktopSection from "./NewDesignersDesktopSection";
+import {Layout} from "antd";
 
 export default function MainView() {
+
+  const { Footer } = Layout;
+
   const newDesignerImages = [
     "https://i.pinimg.com/474x/60/87/58/608758f6be3e3e3200cc0fc13b6bb4e4.jpg",
     "https://i.pinimg.com/474x/d7/1a/ee/d71aee9cbedb8a37754d64b531fcec28.jpg",
@@ -33,6 +37,8 @@ export default function MainView() {
       <NewDesignersDesktopSection newDesignerImages={newDesignerImages} />
 
       <div className="newDesignerMobileSection"></div>
+
+        <Footer id="footer">LookUp WIP July 2020</Footer>
     </>
   );
 }

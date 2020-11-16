@@ -3,6 +3,7 @@ import { Card, Row, Col, Button, Divider, Form, Input, Rate } from "antd";
 import Modal from "antd/lib/modal/Modal";
 import DesignerCardLeft from "../view/designerListView/designerCardComponent/designerCardTop/DesignerCardTopLeft";
 import {firebaseStore} from "../../config/fbConfig";
+import {useSelector} from "react-redux";
 
 export default function ScheduleCardHistory(props) {
   const { date, name, time, types, appointmentId, designerId } = props;
