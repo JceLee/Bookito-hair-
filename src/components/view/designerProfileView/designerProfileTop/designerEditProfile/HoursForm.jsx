@@ -1,20 +1,13 @@
 import React, { useState } from "react";
 import { Checkbox, Form, Space, Slider } from "antd";
-import formatTime, {
-  destructureTimeRange,
-} from "../../../../../helpers/timeFunctions";
+import formatTime, { destructureTimeRange } from "../../../../../helpers/timeFunctions";
 
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const minValueInSlider = 0; // "00:00"
 const maxValueInSlider = 47; // "23:30"
 const timeConvertingFactor = 30;
-let sliderDisplay;
+let sliderVisibility;
 let checkboxOffset;
-
-const formatter = (minutes) => {
-  const formattedValue = formatTime(minutes * timeConvertingFactor);
-  return `${formattedValue}`;
-};
 
 export default function HoursForm(props) {
   const { defaultTradingHours } = props;
@@ -28,6 +21,11 @@ export default function HoursForm(props) {
     Sat: false,
     Sun: false,
   });
+
+  const formatter = (minutes) => {
+    const formattedValue = formatTime(minutes * timeConvertingFactor);
+    return `${formattedValue}`;
+  };
 
   const [FormattedTimes, setFormattedTimes] = useState({
     Mon: [formatter(defaultStartTime), formatter(defaultEndTime)],
@@ -65,51 +63,24 @@ export default function HoursForm(props) {
               {(fields) => {
                 return (
                   <div>
-                    {fields.map((field) => {
-                      DayChecked[day]
-                        ? (sliderDisplay = "none") && (checkboxOffset = "-29px")
-                        : (sliderDisplay = "block") &&
-                          (checkboxOffset = "-48px");
+                    {fields.map((field, index) => {
+                      {
+                        /* window.innerWidth < 768
+                        ? DayChecked[day]
+                          ? (sliderDisplay = "none") && (checkboxOffset = "-29px")
+                          : (sliderDisplay = "block") && (checkboxOffset = "-48px")
+                        : DayChecked[day]
+                        ? (sliderDisplay = "none") && (checkboxOffset = "-24px")
+                        : (sliderDisplay = "block") && (checkboxOffset = "-24px"); */
+                      }
+                      {
+                        DayChecked[day]
+                          ? (sliderVisibility = "hidden")
+                          : (sliderVisibility = "visible");
+                      }
                       return (
-                        <Space
-                          key={field.key}
-                          style={{
-                            position: "relative",
-                            display: "block",
-                            alignItems: "center",
-                            margin: "10px 2px",
-                          }}
-                          align="start"
-                        >
+                        <div key={index} className="singleDaySliderCheckbox">
                           <Form.Item
-                            {...field}
-                            name={[field.name, "tradingHours"]}
-                            className="hoursFormItem"
-                            fieldKey={[field.fieldKey, "tradingHours"]}
-                            valuePropName="value"
-                            label={day}
-                          >
-                            <Slider
-                              allowCross={false}
-                              range
-                              min={minValueInSlider}
-                              max={maxValueInSlider}
-                              disabled={DayChecked[day]}
-                              onChange={(minutes) =>
-                                onChangeSliderHandler(day, minutes)
-                              }
-                              tooltipPlacement="bottom"
-                              tipFormatter={formatter}
-                              style={{ display: `${sliderDisplay}` }}
-                            />
-                          </Form.Item>
-                          <span className="formattedTimesInSpan">
-                            {DayChecked[day]
-                              ? "Holiday"
-                              : `${startTime} - ${endTime}`}
-                          </span>
-                          <Form.Item
-                            {...field}
                             name={[field.name, "closed"]}
                             className="hoursFormItem"
                             fieldKey={[field.fieldKey, "closed"]}
@@ -125,7 +96,30 @@ export default function HoursForm(props) {
                               Closed
                             </Checkbox>
                           </Form.Item>
-                        </Space>
+                          <Form.Item
+                            name={[field.name, "tradingHours"]}
+                            className="hoursFormItem"
+                            fieldKey={[field.fieldKey, "tradingHours"]}
+                            valuePropName="value"
+                            label={day}
+                            colon={false}
+                          >
+                            <Slider
+                              allowCross={false}
+                              range
+                              min={minValueInSlider}
+                              max={maxValueInSlider}
+                              disabled={DayChecked[day]}
+                              onChange={(minutes) => onChangeSliderHandler(day, minutes)}
+                              tooltipPlacement="bottom"
+                              tipFormatter={formatter}
+                              style={{ visibility: `${sliderVisibility}` }}
+                            />
+                          </Form.Item>
+                          <span className="formattedTimesInSpan">
+                            {DayChecked[day] ? "Holiday" : `${startTime} - ${endTime}`}
+                          </span>
+                        </div>
                       );
                     })}
                   </div>

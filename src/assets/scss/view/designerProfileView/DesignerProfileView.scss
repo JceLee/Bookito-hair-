@@ -8,6 +8,7 @@
   -o-animation: fadeIn ease 1s;
   -ms-animation: fadeIn ease 1s;
 }
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -16,6 +17,7 @@
     opacity: 1;
   }
 }
+
 @-moz-keyframes fadeIn {
   0% {
     opacity: 0;
@@ -24,6 +26,7 @@
     opacity: 1;
   }
 }
+
 @-webkit-keyframes fadeIn {
   0% {
     opacity: 0;
@@ -32,6 +35,7 @@
     opacity: 1;
   }
 }
+
 @-o-keyframes fadeIn {
   0% {
     opacity: 0;
@@ -40,6 +44,7 @@
     opacity: 1;
   }
 }
+
 @-ms-keyframes fadeIn {
   0% {
     opacity: 0;
@@ -77,6 +82,9 @@
       display: flex;
       align-items: center;
       padding: 0.5rem 0 0 0.5rem;
+      @include tabletP {
+        padding: 10px;
+      }
       .designerNameRateLocation {
         margin: 0 0 0 16px;
         .ant-rate {
@@ -117,7 +125,13 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
+      @include tabletP {
+        justify-content: left;
+      }
       .designerNavItem {
+        @include tabletP {
+          padding: 0 10px;
+        }
         margin: 0 0.2rem 0 0;
         a {
           color: $white;
@@ -131,6 +145,7 @@
         }
       }
     }
+
     #tabWithButton {
       margin: 0;
       padding: 0.5rem 0;
@@ -139,13 +154,18 @@
       align-items: center;
       justify-content: space-around;
       background-color: $black;
+
       .buttonInProfileLayoutTab {
         font-size: 12px;
         background-color: $white;
         color: $black;
         margin: 0 0.2rem 0 0;
         padding: 0.2rem;
+        @include tabletP {
+          width: 100px;
+        }
       }
+
       .buttonInProfileLayoutTab:active,
       .buttonInProfileLayoutTab:hover,
       .buttonInProfileLayoutTab:focus {
@@ -158,10 +178,12 @@
   .designerBottom {
     margin-top: 0.5rem;
     border: 0;
+
     .profileDivider {
       background-color: $lightGrey;
       height: 1px;
     }
+
     // Designer Bottom - Works
     .works {
       width: 95%;
@@ -169,11 +191,13 @@
       @include tabletP {
         width: 100%;
       }
+
       .workGalleryContainer {
         display: flex;
         flex-wrap: wrap;
         margin: 0;
         padding: 0;
+
         .workImgDiv {
           display: inline-block;
           box-sizing: border-box;
@@ -222,6 +246,7 @@
         display: none;
       }
     }
+
     .serviceNPriceGrid,
     .hoursGrid {
       width: 100%;
@@ -299,6 +324,7 @@
         }
       }
     }
+
     .reviewContent {
       display: inline-flex;
     }
@@ -314,6 +340,7 @@
           height: 60vh;
         }
       }
+
       .marker {
         color: $white;
         background-color: $black;
@@ -343,6 +370,13 @@
 
 .workImgModal {
   max-width: 100%;
+  @include tabletP {
+    top: 25%;
+  }
+  @include desktop {
+    width: 100px;
+  }
+
   .ant-modal-content {
     margin: 0 auto;
     width: 100vw;
@@ -351,9 +385,9 @@
       width: 50vw;
       height: calc(50vw + 32px);
     }
-    @include desktop {
-      width: 35vw;
-      height: calc(35vw + 32px);
+    @include tabletL {
+      width: 40vw;
+      height: calc(40vw + 32px);
     }
   }
 
@@ -384,9 +418,9 @@
           width: calc(50vw - 20px);
           height: calc(50vw - 20px);
         }
-        @include desktop {
-          width: calc(35vw - 20px);
-          height: calc(35vw - 20px);
+        @include tabletL {
+          width: calc(40vw - 20px);
+          height: calc(40vw - 20px);
         }
       }
     }
