@@ -75,6 +75,7 @@ export default function DesignerProfileTop(props) {
   const [height, setHeight] = useState(0);
   const [visible, setVisible] = useState(false);
   const [form] = Form.useForm();
+  const [files, setFiles] = useState([])
   const editProfilePanels = [
     {
       header: "Service & Price",
@@ -85,7 +86,7 @@ export default function DesignerProfileTop(props) {
       content: <HoursForm defaultTradingHours={defaultTradingHours} />,
     },
     { header: "Address & Phone", content: <AddressPhoneForm /> },
-    { header: "Works", content: <WorksForm works={works} /> },
+    { header: "Works", content: <WorksForm files={files} setFiles={setFiles}/> },
   ];
 
   const showModal = () => {

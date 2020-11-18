@@ -1,116 +1,139 @@
 import { Upload, Modal } from "antd";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
+import { firebaseOrigin } from "../../../../../config/fbConfig";
 
 const maxNumberOfWorkImages = 8;
 
+function getBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+}
+
 export default function WorksForm(props) {
-  const { works } = props;
-  let formattedWorks = [];
-  let objectTemplate = {
-    uid: null,
-    name: null,
-    status: "done",
-    url: null,
-  };
-
-  // To set file.preview
-  // https://ant.design/components/upload/#components-upload-demo-picture-card
-  const getBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-  };
-
-  // In order to add keys(uid, name, status, url) and values
-  const worksImgFormatter = (works) => {
-    works.forEach((workImgSrc, index) => {
-      objectTemplate = {
-        ...objectTemplate,
-        uid: -index,
-        name: "Work Image " + index,
-        url: workImgSrc,
-      };
-      formattedWorks.push(objectTemplate);
-    });
-    return formattedWorks;
-  };
-
-  const moveUploadPictureCardIntoPictureCardContainer = () => {
-    const fragment = document.createDocumentFragment();
-    const pictureCardContainer = document.querySelector(
-      ".ant-upload-list.ant-upload-list-picture-card"
-    );
-    const uploadPictureCard = document.querySelector(
-      ".ant-upload.ant-upload-select.ant-upload-select-picture-card"
-    );
-    fragment.appendChild(uploadPictureCard);
-    pictureCardContainer.appendChild(fragment);
-  };
-
-  const [state, setState] = useState({
+  const [files, setFiles] = useState([])
+  const [preview, setPreview] = useState({
     previewVisible: false,
-    previewImage: "",
-    previewTitle: "",
-    fileList: worksImgFormatter(works),
+    previewImage: '',
+    previewTitle: '',
+    fileList: [
+      {
+        uid: '-1',
+        name: 'image.png',
+        status: 'done',
+        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      },
+    ],
   });
 
-  useEffect(() => {
-    moveUploadPictureCardIntoPictureCardContainer();
-  }, [moveUploadPictureCardIntoPictureCardContainer]);
+  const handleCancel = () => setPreview({ ...preview, previewVisible: false });
 
-  const handleCancel = () => setState({ ...state, previewVisible: false });
-
-  const handlePreview = async (file) => {
+  const handlePreview = async file => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
     }
-    setState({
-      ...state,
+
+    setPreview({
       previewImage: file.url || file.preview,
       previewVisible: true,
-      previewTitle: file.name || file.url.substring(file.url.lastIndexOf("/") + 1),
+      previewTitle: file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
     });
   };
 
-  // https://stackoverflow.com/questions/1279957/how-to-move-an-element-into-another-element#:~:text=append(%24(%22%23source,%24(%22%23source%22))%3B
-  // To use 'display:flex', modify the existing Ant Design'Upload' component.
-  // Move uploadPictureCard into pictureCardContainer.
   const handleChange = ({ fileList }) => {
-    setState({ ...state, fileList });
-    moveUploadPictureCardIntoPictureCardContainer();
+    console.log(fileList);
+    setPreview({ ...preview, fileList });
+  }
+
+  const onFileChange = e => {
+    for (let i = 0; i < e.target.files.length; i++) {
+      const newFile = e.target.files[i];
+      newFile["id"] = Math.random();
+      // add an "id" property to each File object
+      setFiles(prevState => [...prevState, newFile]);
+      console.log(newFile);
+    }
   };
 
-  const { previewVisible, previewImage, fileList, previewTitle } = state;
+  const onUploadSubmission = e => {
+    e.preventDefault(); // prevent page refreshing
+    console.log(fileList);
+    const promises = [];
+    fileList.forEach(file => {
+          const uploadTask =
+              firebaseOrigin.storage().ref().child(`images/${file.name}`).put(file.originFileObj);
+          promises.push(uploadTask);
+          uploadTask.on(
+              firebaseOrigin.storage.TaskEvent.STATE_CHANGED,
+              snapshot => {
+                const progress =
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          if (snapshot.state === firebaseOrigin.storage.TaskState.RUNNING) {
+            console.log(`Progress: ${progress}%`);
+          }
+        },
+        error => console.log(error),
+        async () => {
+          const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+          console.log(downloadURL);
+          // do something with the url
+        }
+    );
+  });
+  Promise.all(promises)
+      .then(() => console.log("completed!"))
+      .catch(err => console.log(err.code));
+}
+
+  const { previewVisible, previewImage, fileList, previewTitle } = preview;
+
+  const dummyRequest = ({ file, onSuccess }) => {
+    setTimeout(() => {
+      onSuccess("ok");
+    }, 0);
+  };
+
   const uploadButton = (
-    <div>
-      <PlusOutlined />
-      <div className="ant-upload-text">Upload</div>
-    </div>
+      <div>
+        <PlusOutlined />
+        <div style={{ marginTop: 8 }}>Upload</div>
+      </div>
   );
 
   return (
     <div className="worksForm">
       <Upload
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-        listType="picture-card"
-        fileList={fileList}
-        onPreview={handlePreview}
-        onChange={handleChange}
+          customRequest={dummyRequest}
+          listType="picture-card"
+          fileList={fileList}
+          onPreview={handlePreview}
+          onChange={handleChange}
       >
-        {fileList.length >= maxNumberOfWorkImages ? null : uploadButton}
+        {fileList.length >= 8 ? null : uploadButton}
       </Upload>
+
       <Modal
-        className="workModalInEditProfile"
-        visible={previewVisible}
-        footer={null}
-        onCancel={handleCancel}
+          visible={previewVisible}
+          title={previewTitle}
+          footer={null}
+          onCancel={handleCancel}
       >
-        <img className="workImgInModal" alt={previewTitle} src={previewImage} />
+        <img alt="example" style={{ width: '100%' }} src={previewImage} />
       </Modal>
+
+      <form>
+        <label>Select Files
+          <input type="file" multiple onChange={onFileChange} />
+        </label>
+        <button onClick={onUploadSubmission}>Upload</button>
+      </form>
+
     </div>
+
+
   );
 }
