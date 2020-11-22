@@ -21,7 +21,7 @@ export default function MessengerListView() {
   useEffect(() => {
     const fetchData = async () => {
       setNickname(currentUser.fname);
-      firebaseDate.ref("rooms/").on(s"value", (resp) => {
+      firebaseDate.ref("rooms/").on("value", (resp) => {
         setRoom([]);
         const rooms = snapshotToArray(resp);
         setRoom(

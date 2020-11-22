@@ -68,7 +68,6 @@ function ChatRoom(props) {
     console.log(chat);
     newMessage.set(chat);
     console.log(chat);
-    s;
     setNewChat({ roomID: "", nickname: "", message: "", date: "", type: "" });
   };
 

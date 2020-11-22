@@ -19,4 +19,3 @@ export default function NewRequests(props) {
     </div>
   );
 }
-s;
