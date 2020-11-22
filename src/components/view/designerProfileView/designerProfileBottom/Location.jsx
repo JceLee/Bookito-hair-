@@ -4,17 +4,17 @@ import GoogleMapReact from "google-map-react";
 import Marker from "./Marker.jsx";
 
 export default function Location(props) {
-  const [position, setPosition] = useState({ lat: null, lng: null });
+  const { id, location, latLng } = props;
+  const [position, setPosition] = useState(latLng);
   const [loading, setLoading] = useState(true);
-  const { id, location } = props;
 
-  Geocode.setApiKey("AIzaSyC8CafSu5IPQErCTSwj0YpRPWQUeniuyg8");
+  Geocode.setApiKey("AIzaSyDUz5tzN9Fm76pLUherzsDE-jG0LKBEhIc");
   Geocode.setLanguage("en");
   Geocode.enableDebug();
   useEffect(() => {
     Geocode.fromAddress(location).then(
       (response) => {
-        setPosition(response.results[0].geometry.location);
+        setPosition(latLng);
         setLoading(false);
         return position;
       },

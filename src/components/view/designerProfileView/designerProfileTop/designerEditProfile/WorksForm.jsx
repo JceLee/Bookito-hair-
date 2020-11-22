@@ -1,116 +1,103 @@
-import { Upload, Modal } from "antd";
-import React, { useState, useEffect } from "react";
-import { PlusOutlined } from "@ant-design/icons";
-
-const maxNumberOfWorkImages = 8;
+import { Upload, Modal, message } from "antd";
+import ImgCrop from "antd-img-crop";
+import React, { useState } from "react";
+import { firebaseOrigin, firebaseStore } from "../../../../../config/fbConfig";
 
 export default function WorksForm(props) {
-  const { works } = props;
-  let formattedWorks = [];
-  let objectTemplate = {
-    uid: null,
-    name: null,
-    status: "done",
-    url: null,
-  };
+  const { customerUid, works } = props;
+  const photoURLs = [];
 
-  // To set file.preview
-  // https://ant.design/components/upload/#components-upload-demo-picture-card
-  const getBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
+  const [fileList, setFileList] = useState(works);
+
+  const onUploadSubmission = (e) => {
+    e.preventDefault(); // prevent page refreshing
+    const promises = [];
+    console.log(fileList);
+    fileList.forEach((file) => {
+      if (file["originFileObj"] !== undefined) {
+        const uploadTask = firebaseOrigin
+          .storage()
+          .ref()
+          .child(`images/${file.name}`)
+          .put(file.originFileObj);
+        promises.push(uploadTask);
+        uploadTask.on(
+          firebaseOrigin.storage.TaskEvent.STATE_CHANGED,
+          (snapshot) => {
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            if (snapshot.state === firebaseOrigin.storage.TaskState.RUNNING) {
+              console.log(`Progress: ${progress}%`);
+            }
+          },
+          (error) => console.log(error),
+          async () => {
+            const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+            photoURLs.push({
+              uid: file.uid,
+              name: file.name,
+              status: "done",
+              url: downloadURL,
+            });
+            if (photoURLs.length === promises.length) {
+              const newWorks = [...works, ...photoURLs];
+              firebaseStore
+                .collection("users")
+                .doc(customerUid)
+                .update({ works: newWorks })
+                .then(function () {
+                  return message.success({
+                    content: "Saved",
+                    duration: "2",
+                    className: "onFinishMessage",
+                  });
+                });
+            }
+          }
+        );
+      } else {
+        console.log("pass");
+      }
     });
+    Promise.all(promises)
+      .then(() => console.log("completed!"))
+      .catch((err) => console.log(err.code));
   };
 
-  // In order to add keys(uid, name, status, url) and values
-  const worksImgFormatter = (works) => {
-    works.forEach((workImgSrc, index) => {
-      objectTemplate = {
-        ...objectTemplate,
-        uid: -index,
-        name: "Work Image " + index,
-        url: workImgSrc,
-      };
-      formattedWorks.push(objectTemplate);
-    });
-    return formattedWorks;
+  const onChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+    console.log(fileList);
   };
 
-  const moveUploadPictureCardIntoPictureCardContainer = () => {
-    const fragment = document.createDocumentFragment();
-    const pictureCardContainer = document.querySelector(
-      ".ant-upload-list.ant-upload-list-picture-card"
-    );
-    const uploadPictureCard = document.querySelector(
-      ".ant-upload.ant-upload-select.ant-upload-select-picture-card"
-    );
-    fragment.appendChild(uploadPictureCard);
-    pictureCardContainer.appendChild(fragment);
-  };
-
-  const [state, setState] = useState({
-    previewVisible: false,
-    previewImage: "",
-    previewTitle: "",
-    fileList: worksImgFormatter(works),
-  });
-
-  useEffect(() => {
-    moveUploadPictureCardIntoPictureCardContainer();
-  }, [moveUploadPictureCardIntoPictureCardContainer]);
-
-  const handleCancel = () => setState({ ...state, previewVisible: false });
-
-  const handlePreview = async (file) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj);
+  const onPreview = async (file) => {
+    let src = file.url;
+    if (!src) {
+      src = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file.originFileObj);
+        reader.onload = () => resolve(reader.result);
+      });
     }
-    setState({
-      ...state,
-      previewImage: file.url || file.preview,
-      previewVisible: true,
-      previewTitle: file.name || file.url.substring(file.url.lastIndexOf("/") + 1),
-    });
+    const image = new Image();
+    image.src = src;
+    const imgWindow = window.open(src);
+    imgWindow.document.write(image.outerHTML);
   };
-
-  // https://stackoverflow.com/questions/1279957/how-to-move-an-element-into-another-element#:~:text=append(%24(%22%23source,%24(%22%23source%22))%3B
-  // To use 'display:flex', modify the existing Ant Design'Upload' component.
-  // Move uploadPictureCard into pictureCardContainer.
-  const handleChange = ({ fileList }) => {
-    setState({ ...state, fileList });
-    moveUploadPictureCardIntoPictureCardContainer();
-  };
-
-  const { previewVisible, previewImage, fileList, previewTitle } = state;
-  const uploadButton = (
-    <div>
-      <PlusOutlined />
-      <div className="ant-upload-text">Upload</div>
-    </div>
-  );
 
   return (
-    <div className="worksForm">
-      <Upload
-        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-        listType="picture-card"
-        fileList={fileList}
-        onPreview={handlePreview}
-        onChange={handleChange}
-      >
-        {fileList.length >= maxNumberOfWorkImages ? null : uploadButton}
-      </Upload>
-      <Modal
-        className="workModalInEditProfile"
-        visible={previewVisible}
-        footer={null}
-        onCancel={handleCancel}
-      >
-        <img className="workImgInModal" alt={previewTitle} src={previewImage} />
-      </Modal>
+    <div>
+      <ImgCrop rotate>
+        <Upload
+          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          listType="picture-card"
+          fileList={fileList}
+          onChange={onChange}
+          onPreview={onPreview}
+        >
+          {fileList.length < 5 && "+ Upload"}
+        </Upload>
+      </ImgCrop>
+      <button onClick={onUploadSubmission}>Upload</button>
     </div>
   );
 }

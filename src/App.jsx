@@ -39,6 +39,6 @@ export default function App() {
           <Route path="/loading" component={EmailNotificationFromDesigner} />
         </Content>
       </Layout>
-    </Router>
+    </Router>s
   );
 }

@@ -77,8 +77,8 @@ export default function SignInModal() {
     const user = {
       email: "",
       displayName: name,
-      photoURL : "",
-      uid : name,
+      photoURL: "",
+      uid: name,
     };
     generateUserDocument(user).then(function (result) {
       dispatch(sign_in_with_facebook(result));
@@ -115,44 +115,30 @@ export default function SignInModal() {
             </button>
           </div>
           <div>
-            <button
-                onClick={() => testAccount("joshua")}
-            >
+            <button onClick={() => testAccount("joshua")}>
               Log in with Joshua
             </button>
           </div>
           <div>
-            <button
-                onClick={() => testAccount("Gina")}
-            >
+            <button onClick={() => testAccount("Gina")}>
               Log in with Gina
             </button>
           </div>
           <div>
-            <button
-                onClick={() => testAccount("KangMin")}
-            >
+            <button onClick={() => testAccount("KangMin")}>
               Log in with KangMin
             </button>
           </div>
           <div>
-            <button
-                onClick={() => testAccount("Yongju")}
-            >
+            <button onClick={() => testAccount("Yongju")}>
               Log in with Yongju
             </button>
           </div>
           <div>
-            <button
-                onClick={() => testAccount("JW")}
-            >
-              Login with JW
-            </button>
+            <button onClick={() => testAccount("JW")}>Login with JW</button>
           </div>
           <div>
-            <button
-                onClick={() => testAccount("Erica")}
-            >
+            <button onClick={() => testAccount("Erica")}>
               Login with Erica
             </button>
           </div>

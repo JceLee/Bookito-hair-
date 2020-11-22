@@ -38,7 +38,10 @@ export default function StepTwo(props) {
                 <Checkbox
                   key={menu.id}
                   id={menu.id}
-                  checked={calculationBox[serviceKey] && calculationBox[serviceKey].id === menu.id}
+                  checked={
+                    calculationBox[serviceKey] &&
+                    calculationBox[serviceKey].id === menu.id
+                  }
                   onChange={() => {
                     navigateTo("Estimated Price");
 
@@ -46,7 +49,8 @@ export default function StepTwo(props) {
 
                     switch (serviceKey) {
                       case "Cut":
-                        newCalculationBox["Cut"] = newCalculationBox["Cut"] === menu ? null : menu;
+                        newCalculationBox["Cut"] =
+                          newCalculationBox["Cut"] === menu ? null : menu;
                         break;
                       case "Style":
                         newCalculationBox["Style"] =

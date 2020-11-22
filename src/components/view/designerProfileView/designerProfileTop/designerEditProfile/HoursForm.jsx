@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Checkbox, Form, Space, Slider } from "antd";
-import formatTime, { destructureTimeRange } from "../../../../../helpers/timeFunctions";
+import formatTime, {
+  destructureTimeRange,
+} from "../../../../../helpers/timeFunctions";
 
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const minValueInSlider = 0; // "00:00"
@@ -110,14 +112,18 @@ export default function HoursForm(props) {
                               min={minValueInSlider}
                               max={maxValueInSlider}
                               disabled={DayChecked[day]}
-                              onChange={(minutes) => onChangeSliderHandler(day, minutes)}
+                              onChange={(minutes) =>
+                                onChangeSliderHandler(day, minutes)
+                              }
                               tooltipPlacement="bottom"
                               tipFormatter={formatter}
                               style={{ visibility: `${sliderVisibility}` }}
                             />
                           </Form.Item>
                           <span className="formattedTimesInSpan">
-                            {DayChecked[day] ? "Holiday" : `${startTime} - ${endTime}`}
+                            {DayChecked[day]
+                              ? "Holiday"
+                              : `${startTime} - ${endTime}`}
                           </span>
                         </div>
                       );

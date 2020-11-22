@@ -2,10 +2,9 @@ import React from "react";
 import SearchBarSection from "./SearchBarSection";
 import InfoCard from "./InfoCard";
 import NewDesignersDesktopSection from "./NewDesignersDesktopSection";
-import {Layout} from "antd";
+import { Layout } from "antd";
 
 export default function MainView() {
-
   const { Footer } = Layout;
 
   const newDesignerImages = [
@@ -13,7 +12,7 @@ export default function MainView() {
     "https://i.pinimg.com/474x/d7/1a/ee/d71aee9cbedb8a37754d64b531fcec28.jpg",
     "https://i.pinimg.com/474x/1c/53/3d/1c533dd48de3268335e4cf9937064ffa.jpg",
     "https://i.pinimg.com/474x/7e/dd/a5/7edda5894b55e9ac97bab155ee9a6a81.jpg",
-    "https://i.pinimg.com/474x/2d/d4/fd/2dd4fd029832eba729a518b90f0b0d9b.jpg",
+    "https://i.pinimg.com/474sx/2d/d4/fd/2dd4fd029832eba729a518b90f0b0d9b.jpg",
     "https://i.pinimg.com/474x/95/65/ba/9565baa039b100f2e5921a7786ce5b38.jpg",
     "https://i.pinimg.com/474x/42/65/1c/42651cb45931a16714948ff1610da3b6.jpg",
     "https://i.pinimg.com/474x/3b/78/db/3b78db4f25a7f3ba5d89c2575a41339f.jpg",
@@ -38,7 +37,7 @@ export default function MainView() {
 
       <div className="newDesignerMobileSection"></div>
 
-        <Footer id="footer">LookUp WIP July 2020</Footer>
+      <Footer id="footer">LookUp WIP July 2020</Footer>
     </>
   );
 }

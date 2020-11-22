@@ -15,35 +15,35 @@ export default function DesignerSchedule() {
     const conformed = [];
     const requests = [];
     firebaseStore
-        .collection("appointments")
-        .where("designerId", "==", currentUser.uid)
-        .get()
-        .then((querySnapshot) => {
-          querySnapshot.docs.forEach((doc) => {
-            let {startDate, endDate, monthAndDate } = formatDate(doc.data().date, doc.data().time);
-            if(doc.data().state === "conformed") {
-              conformed.push({
-                id: doc.data().aid,
-                title: doc.data().customerName,
-                startDate: startDate,
-                endDate: endDate,
-                serviceName: "Men Haircut",
-                price: doc.data().totalPrice,
-                phoneNumber: "7781231234",
-              });
-            } else if (doc.data().state === "pending") {
-              requests.push({
-                id: doc.data().aid,
-                clientName: doc.data().customerName,
-                date: monthAndDate,
-                timeStart: doc.data().time,
-                timeEnd: doc.data().time,
-                types: ["cut", "perm"],
-              });
-            }
-          });
-          return {conformed, requests};
-        }).then((data)=> {
+      .collection("appointments")
+      .where("designerId", "==", currentUser.uid)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.docs.forEach((doc) => {
+          let {startDate, endDate, monthAndDate} = formatDate(doc.data().date, doc.data().time);
+          if (doc.data().state === "conformed") {
+            conformed.push({
+              id: doc.data().aid,
+              title: doc.data().customerName,
+              startDate: startDate,
+              endDate: endDate,
+              serviceName: "Men Haircut",
+              price: doc.data().totalPrice,
+              phoneNumber: "7781231234",
+            });
+          } else if (doc.data().state === "pending") {
+            requests.push({
+              id: doc.data().aid,
+              clientName: doc.data().customerName,
+              date: monthAndDate,
+              timeStart: doc.data().time,
+              timeEnd: doc.data().time,
+              types: ["cut", "perm"],
+            });
+          }
+        });
+        return {conformed, requests};
+      }).then((data) => {
       setConformedAppointments(data.conformed);
       setNewRequests(data.requests);
     });
@@ -55,7 +55,7 @@ export default function DesignerSchedule() {
 
   function formatDate(data, time) {
     const [day, month, date, year] = data.split(" ");
-    const timeEnd = time.split(":")[0] + ":" + (parseInt(time.split(":")[1])+29);
+    const timeEnd = time.split(":")[0] + ":" + (parseInt(time.split(":")[1]) + 29);
     const dateHash = {
       Jan: '01',
       Feb: '02',
@@ -78,7 +78,7 @@ export default function DesignerSchedule() {
 
   return (
     <div className="designerScheduleView">
-      <Calendar newRequests={newRequests} appointmentArray={conformedAppointments} forceUpdate={loadAppointment} />
+      <Calendar newRequests={newRequests} appointmentArray={conformedAppointments} forceUpdate={loadAppointment}/>
     </div>
   );
 }

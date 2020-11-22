@@ -8,7 +8,7 @@ import signIn from "./signIn";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["signIn", "firestore"]
+  whitelist: ["signIn", "firestore"],
 };
 
 const rootReducer = combineReducers({

@@ -7,7 +7,7 @@ export default function InfoCard(props) {
   return (
     <Card
       className="infoCard"
-      hoverable
+      hoverables
       cover={<img alt="example" src={src} />}
     >
       <Meta title={header} description={context} />

@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Input, InputNumber, Button, Tabs, Divider } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+
 const { TabPane } = Tabs;
 const { TextArea } = Input;
 const tapNames = ["Cut", "Style", "Perm", "Color", "Clinic", "Promo"];
@@ -11,7 +12,12 @@ export default function ServiceNPriceForm(props) {
     <Tabs type="card">
       {tapNames.map((tap) => {
         return (
-          <TabPane classname="editProfileTabPane" tab={tap} key={tap} animated={false}>
+          <TabPane
+            classname="editProfileTabPane"
+            tab={tap}
+            key={tap}
+            animated={false}
+          >
             <Form.List name={["services", `${tap}`]}>
               {(fields, { add, remove }) => {
                 return (

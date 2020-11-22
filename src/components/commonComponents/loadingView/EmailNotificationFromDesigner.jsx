@@ -1,29 +1,25 @@
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import queryString from "query-string";
-import {getUserDocument} from "../../../helpers/getUserDocument";
-import {sign_in_with_facebook} from "../../../actions/signIn";
+import { getUserDocument } from "../../../helpers/getUserDocument";
+import { sign_in_with_facebook } from "../../../actions/signIn";
 import React from "react";
 import { useHistory } from "react-router-dom";
 
 export default function EmailNotificationFromDesigner(props) {
-    const dispatch = useDispatch();
-    const parsed = queryString.parse(props.location.search);
-    getUserDocument(parsed.uid).then(function (result) {
-        dispatch(sign_in_with_facebook(result));
-        directProfile();
-    });
+  const dispatch = useDispatch();
+  const parsed = queryString.parse(props.location.search);
+  getUserDocument(parsed.uid).then(function (result) {
+    dispatch(sign_in_with_facebook(result));
+    directProfile();
+  });
 
-    const history = useHistory();
+  const history = useHistory();
 
-    const directProfile = () => {
-        history.push("/designer_schedule");
-    };
+  const directProfile = () => {
+    history.push("/designer_schedule");
+  };
 
-    console.log("Loading Page!")
+  console.log("Loading Page!");
 
-    return (
-        <div>
-            Please wait...
-        </div>
-    );
+  return <div>Please wait...</div>;
 }

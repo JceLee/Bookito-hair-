@@ -33,7 +33,9 @@ export default function Calendar(props) {
 
   const [newRequestState, setNewRequestState] = useState(false);
   const [addAppointmentModalState, setAddAppointmentModal] = useState(false);
-  const [deleteAppointmentModalState, setDeleteAppointmentModal] = useState(false);
+  const [deleteAppointmentModalState, setDeleteAppointmentModal] = useState(
+    false
+  );
 
   const displayNewRequests = () => {
     setNewRequestState(!newRequestState);
@@ -65,7 +67,12 @@ export default function Calendar(props) {
   };
 
   const getTooltipContent = ({ appointmentData, formatDate, ...restProps }) => {
-    return <TooltipContent appointmentData={appointmentData} formatDate={formatDate} />;
+    return (
+      <TooltipContent
+        appointmentData={appointmentData}
+        formatDate={formatDate}
+      />
+    );
   };
 
   const getTooltipHeader = ({ appointmentData, ...restProps }) => {
@@ -82,7 +89,12 @@ export default function Calendar(props) {
     const { startDate } = restProps;
     const date = new Date(startDate);
     if (designer.holidays.includes(date.getDay())) {
-      return <WeekView.TimeTableCell {...restProps} className={classes.weekendCell} />;
+      return (
+        <WeekView.TimeTableCell
+          {...restProps}
+          className={classes.weekendCell}
+        />
+      );
     }
     return <WeekView.TimeTableCell {...restProps} />;
   };
@@ -91,7 +103,12 @@ export default function Calendar(props) {
     const { startDate } = restProps;
     const date = new Date(startDate);
     if (designer.holidays.includes(date.getDay())) {
-      return <MonthView.TimeTableCell {...restProps} className={classes.weekendCell} />;
+      return (
+        <MonthView.TimeTableCell
+          {...restProps}
+          className={classes.weekendCell}
+        />
+      );
     }
     return <MonthView.TimeTableCell {...restProps} />;
   };
@@ -134,8 +151,16 @@ export default function Calendar(props) {
               timeTableCellComponent={grayWeekTimeTableCell}
             />
             <Toolbar flexibleSpaceComponent={customToolbar} />
-            <Drawer anchor="right" open={newRequestState} onClose={displayNewRequests}>
-              <NewRequests newRequests={newRequests} onClick={displayNewRequests} forceUpdate={forceUpdate}/>
+            <Drawer
+              anchor="right"
+              open={newRequestState}
+              onClose={displayNewRequests}
+            >
+              <NewRequests
+                newRequests={newRequests}
+                onClick={displayNewRequests}
+                forceUpdate={forceUpdate}
+              />
             </Drawer>
             <TodayButton className="todayBtn" />
             <DateNavigator />
@@ -146,7 +171,11 @@ export default function Calendar(props) {
               contentComponent={getTooltipContent}
               showCloseButton
             />{" "}
-            <Fab color="secondary" className="addButton" onClick={displayAddAppointmentModal}>
+            <Fab
+              color="secondary"
+              className="addButton"
+              onClick={displayAddAppointmentModal}
+            >
               <AddIcon />
             </Fab>
           </Scheduler>
