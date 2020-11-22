@@ -3,10 +3,11 @@ import Home from "./Home.jsx";
 import Works from "./Works.jsx";
 import Hours from "./Hours.jsx";
 import Location from "./Location.jsx";
+import ServiceNPrice from "./ServiceNPrice";
 import { Divider } from "antd";
 
 export default function DesignerProfileBottom(props) {
-  const { location, works, hours } = props;
+  const { location, works, hours, serviceNPrices, latLng } = props;
   return (
     <div className="designerBottom">
       <Home id="Home" />
@@ -18,8 +19,14 @@ export default function DesignerProfileBottom(props) {
         </div>
       </div>
       <Divider className="profileDivider" />
+      <div className="serviceNPriceHoursGrid">
+          <div className="hoursGrid">
+              <ServiceNPrice id="Price" serviceNPrices={serviceNPrices} />
+          </div>
+      </div>
       <Divider className="profileDivider" />
-      <Location id="Location" location={location} />
+      <Divider className="profileDivider" />
+      <Location id="Location" location={location} latLng={latLng}/>
     </div>
   );
 }

@@ -302,6 +302,11 @@ export default function BookNowModal(props) {
         visible={visible}
         footer={
           <div>
+            {current === 0 && (
+                <Button className="mockData" >
+                  MockData
+                </Button>
+            )}
             {current > 0 && (
               <Button className="previousBtn" onClick={() => prev()}>
                 Previous

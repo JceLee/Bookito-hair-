@@ -30,6 +30,7 @@ export default function DesignerProfileView() {
     services,
     hours,
     reviews,
+    latLng,
   } = found;
 
   return (
@@ -57,6 +58,7 @@ export default function DesignerProfileView() {
           serviceNPrices={services}
           hours={hours}
           reviews={reviews}
+          latLng={latLng}
         />
 
         <BackTop visibilityHeight={0}>

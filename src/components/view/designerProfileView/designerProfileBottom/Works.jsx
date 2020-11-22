@@ -72,7 +72,7 @@ export default function Works(props) {
           ) : (
             <li key={index} className="workImgDiv">
               <img
-                src={work}
+                src={work.url}
                 alt={`workImg${index}`}
                 onClick={() => onOpenModalHandler(index)}
                 onLoad={imageLoaded}
@@ -97,7 +97,7 @@ export default function Works(props) {
                 <div key={index}>
                   <img
                     className="workImgInSlider"
-                    src={work}
+                    src={work.url}
                     alt={`workImg${index}`}
                     onLoad={imageCarouselLoaded}
                   />

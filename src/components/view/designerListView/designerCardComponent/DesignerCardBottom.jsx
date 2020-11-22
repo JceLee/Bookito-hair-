@@ -16,7 +16,7 @@ export default function DesignerCardBottom(props) {
           works.map((work, index) => (
             <div key={index} className="workImageDiv">
               <img
-                src={work}
+                src={work.url}
                 alt={`reviewImgDiv${index}`}
                 width="75"
                 height="75"
