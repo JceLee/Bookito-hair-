@@ -8,7 +8,7 @@ export default function DesignerCardTop(props) {
   return (
     <Row className="designerCardTop">
       <DesignerCardTopLeft rate={rate} fname={fname} profile={profile} />
-      <DesignesrCardTopRight services={services} />
+      <DesignerCardTopRight services={services} />
     </Row>
   );
 }

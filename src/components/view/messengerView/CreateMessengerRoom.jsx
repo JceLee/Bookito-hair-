@@ -17,4 +17,3 @@ export function CreateMessengerRoom(customer, designer) {
       newRoom.set(room);
     });
 }
-s;

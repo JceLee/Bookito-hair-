@@ -20,6 +20,6 @@ export default function MessengerListCard(props) {
         </Col>
       </Row>
       <Divider />
-    </div>s
+    </div>
   );
 }
