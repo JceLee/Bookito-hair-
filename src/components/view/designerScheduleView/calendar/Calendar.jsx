@@ -135,7 +135,11 @@ export default function Calendar(props) {
             />
             <Toolbar flexibleSpaceComponent={customToolbar} />
             <Drawer anchor="right" open={newRequestState} onClose={displayNewRequests}>
-              <NewRequests newRequests={newRequests} onClick={displayNewRequests} forceUpdate={forceUpdate}/>
+              <NewRequests
+                newRequests={newRequests}
+                onClick={displayNewRequests}
+                forceUpdate={forceUpdate}
+              />
             </Drawer>
             <TodayButton className="todayBtn" />
             <DateNavigator />
