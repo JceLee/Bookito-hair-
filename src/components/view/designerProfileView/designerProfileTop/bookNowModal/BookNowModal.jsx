@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer, useState} from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import "react-day-picker/lib/style.css";
 import { Steps, Modal, Button, message } from "antd";
 import StepOne from "./StepOne";
@@ -75,7 +75,10 @@ export default function BookNowModal(props) {
 
     Object.values(temp).forEach((timeSlot) => {
       Object.values(appointmentArray).forEach((appointment) => {
-        if (appointment.date === dayAndDate && appointment.time === timeSlot.time) {
+        if (
+          appointment.date === dayAndDate &&
+          appointment.time === timeSlot.time
+        ) {
           timeSlot.disabled = true;
         }
       });
@@ -185,22 +188,22 @@ export default function BookNowModal(props) {
         console.log("create appointment :" + docRef.id);
         firebaseStore.collection("appointments").doc(docRef.id).update({
           aid: docRef.id,
-        })
+        });
       })
       .catch(function (error) {
         console.log("error :" + error);
       });
     firebaseStore
-        .collection("mail")
-        .add({
-          to: "lkm4351@gmail.com",
-          message: {
-            subject: "A REQUEST ARRIVE!",
-            text: "Customer A requests a new appointment.",
-            html: notificationForm(designer, customer),
-          },
-        })
-        .then(() => console.log("Queued email for delivery!"));
+      .collection("mail")
+      .add({
+        to: "lkm4351@gmail.com",
+        message: {
+          subject: "A REQUEST ARRIVE!",
+          text: "Customer A requests a new appointment.",
+          html: notificationForm(designer, customer),
+        },
+      })
+      .then(() => console.log("Queued email for delivery!"));
   };
 
   const getServiceContent = () => {
@@ -302,11 +305,7 @@ export default function BookNowModal(props) {
         visible={visible}
         footer={
           <div>
-            {current === 0 && (
-                <Button className="mockData" >
-                  MockData
-                </Button>
-            )}
+            {current === 0 && <Button className="mockData">MockData</Button>}
             {current > 0 && (
               <Button className="previousBtn" onClick={() => prev()}>
                 Previous
@@ -323,7 +322,11 @@ export default function BookNowModal(props) {
               </Button>
             )}
             {current === steps.length - 1 && (
-              <Button className="doneBtn" type="primary" onClick={() => requestNewAppointment()}>
+              <Button
+                className="doneBtn"
+                type="primary"
+                onClick={() => requestNewAppointment()}
+              >
                 Done
               </Button>
             )}
@@ -333,7 +336,12 @@ export default function BookNowModal(props) {
         cancelButtonProps={{ style: { display: "none" } }}
       >
         <div id="stepToTopId">
-          <Steps className="steps" current={current} onChange={onChange} progressDot>
+          <Steps
+            className="steps"
+            current={current}
+            onChange={onChange}
+            progressDot
+          >
             {steps.map((item) => (
               <Step key={item.title} title={item.title} />
             ))}

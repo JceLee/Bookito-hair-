@@ -4,7 +4,7 @@ export default function ServiceNPrice(props) {
   const { id, serviceNPrices } = props;
   const serviceList = [];
   Object.keys(serviceNPrices).forEach(function (item) {
-      serviceList.push(serviceNPrices[item])
+    serviceList.push(serviceNPrices[item]);
   });
   const mergedArray = [].concat(...serviceList);
   return (

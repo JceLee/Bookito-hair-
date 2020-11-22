@@ -9,12 +9,14 @@ export default function NewDesignerCarousel() {
     // centerMode: true,
     // centerPadding: "50px",
     // slidesToShow: 4,
-    // think about displaying dots
+    // think about dissplaying dots
 
     swipeToSlide: true,
     variableWidth: true,
     afterChange: function (index) {
-      console.log(`Slider Changed to: ${index + 1}, background: #222; color: #bada55`);
+      console.log(
+        `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
+      );
     },
   };
 

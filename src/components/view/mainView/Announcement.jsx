@@ -16,7 +16,7 @@ export default function Announcement(props) {
   return (
     <Slider {...settings}>
       <div className="announcements">
-        <img
+        <imgs
           src="https://images.unsplash.com/photo-1588774198473-71712354c232?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=801&q=80"
           alt=""
           width="100%"

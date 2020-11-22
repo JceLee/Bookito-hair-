@@ -9,7 +9,9 @@ export default function DesignerProfileView() {
   const designers = useSelector((state) => state.firestore.designers);
   const currentUser = useSelector((state) => state.signIn.currentUser);
   const urlParams = new URLSearchParams(window.location.search);
-  const found = designers.find((element) => element.uid === urlParams.get("uid"));
+  const found = designers.find(
+    (element) => element.uid === urlParams.get("uid")
+  );
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {

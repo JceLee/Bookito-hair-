@@ -9,8 +9,14 @@ export default function NewRequests(props) {
     <div className="newRequestDiv">
       <CloseOutlined onClick={onClick} />
       {newRequests.map((request, index) => (
-        <ScheduleCardRequest key={index} newRequest={request} close={onClick} forceUpdate = {forceUpdate}/>
+        <ScheduleCardRequest
+          key={index}
+          newRequest={request}
+          close={onClick}
+          forceUpdate={forceUpdate}
+        />
       ))}
     </div>
   );
 }
+s;

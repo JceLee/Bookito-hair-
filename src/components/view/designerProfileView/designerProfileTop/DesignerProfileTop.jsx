@@ -85,7 +85,10 @@ export default function DesignerProfileTop(props) {
       content: <HoursForm defaultTradingHours={defaultTradingHours} />,
     },
     { header: "Address & Phone", content: <AddressPhoneForm /> },
-    { header: "Works", content: <WorksForm works={works} customerUid={customer.uid}/> },
+    {
+      header: "Works",
+      content: <WorksForm works={works} customerUid={customer.uid} />,
+    },
   ];
 
   const showModal = () => {
@@ -167,7 +170,11 @@ export default function DesignerProfileTop(props) {
                 // width={window.innerWidth * 0.8}
                 destroyOnClose={true}
                 footer={
-                  <Button className="saveBtnInEditProfile" key="submit" onClick={onOk}>
+                  <Button
+                    className="saveBtnInEditProfile"
+                    key="submit"
+                    onClick={onOk}
+                  >
                     Save
                   </Button>
                 }
@@ -189,7 +196,11 @@ export default function DesignerProfileTop(props) {
                   >
                     {editProfilePanels.map((panel, index) => {
                       return (
-                        <Panel className="editProfilePanel" header={panel.header} key={index + 1}>
+                        <Panel
+                          className="editProfilePanel"
+                          header={panel.header}
+                          key={index + 1}
+                        >
                           {panel.content}
                         </Panel>
                       );
@@ -199,7 +210,11 @@ export default function DesignerProfileTop(props) {
               </Modal>
             </>
           ) : (
-            <BookNowModal hours={hours} customer={customer} designer={designer} />
+            <BookNowModal
+              hours={hours}
+              customer={customer}
+              designer={designer}
+            />
           )}
         </div>
       </Affix>

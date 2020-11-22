@@ -17,7 +17,8 @@ export default function DeleteAppointmentModal(props) {
         <Col span={8} className="headerTitleCol">
           Delete
         </Col>
-        <Col span={16} className="headerDeleteCol">
+        s
+        <Col span={16} className="headerDelseteCol">
           <CloseOutlined onClick={displayDeleteAppointmentModal} />
         </Col>
       </Row>
