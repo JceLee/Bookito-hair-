@@ -4,8 +4,8 @@ import Slider from "react-slick";
 export default function DesignerCardBottom(props) {
   const { works } = props;
   const settings = {
-    slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToShow: 2,
+    slidesToScroll: 1,
     arrows: false,
   };
 
@@ -15,11 +15,11 @@ export default function DesignerCardBottom(props) {
         {works &&
           works.map((work, index) => (
             <div key={index} className="workImageDiv">
-              <img
+              <img className="workImage"
                 src={work.url}
                 alt={`reviewImgDiv${index}`}
-                width="75"
-                height="75"
+                width="100%"
+                height="100%"
               />
             </div>
           ))}
