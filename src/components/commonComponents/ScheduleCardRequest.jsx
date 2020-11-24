@@ -26,7 +26,7 @@ export default function ScheduleCardRequest(props) {
         className="scheduleCard"
         actions={[
           <>
-            <Button type="text" className="scheduleCardReviewBtn" onClick={()=> {changeState("conformed")}}>
+            <Button type="text" className="scheduleCardReviewBtn" onClick={()=> {changeState("confirmed")}}>
               Accept
             </Button>
             <Button type="text" className="scheduleCardRebookBtn" onClick={()=> {changeState("declined")}}>

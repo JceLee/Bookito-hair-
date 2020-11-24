@@ -1,8 +1,15 @@
+@import "../Mixin.scss";
+
 .ant-card.scheduleCard {
   width: 100%;
   border-style: solid;
   border-color: rgb(165, 165, 165);
   border-width: 1.5px;
+  margin: 0 5px 5px;
+
+  .ant-card-body {
+    padding: 15px;
+  }
 
   @include mobileL {
     width: 320px;
@@ -45,6 +52,7 @@
 
   .scheduleCardDate {
     text-align: center;
+    white-space: pre-line;
     margin: auto;
   }
 }
@@ -59,4 +67,33 @@
       font-size: 50px;
     }
   }
+}
+
+.scheduleDetailModal {
+  .ant-modal-footer {
+    padding: 0;
+  }
+}
+
+#messageIconWrapper {
+  font-size: 0.7rem;
+  text-align: right;
+  margin-bottom: 10px;
+
+  #messageIcon {
+    margin-left: 10px;
+    font-size: 1.5rem;
+  }
+}
+
+#scheduleDetailFooterBtn {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  background-color: $black;
+  color: $white;
+}
+
+#footer {
+  display: none;
 }

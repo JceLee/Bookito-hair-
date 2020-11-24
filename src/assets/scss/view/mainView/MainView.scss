@@ -146,14 +146,16 @@
 
         + div:nth-last-child(-n + 2) {
           display: none;
-          @include mainPageNewDesigners1090 {
+          // @include mainPageNewDesigners1090 {
+          @include tabletP {
             display: unset;
           }
         }
 
         + div:nth-child(2) {
           margin-right: 0px;
-          @include mainPageNewDesigners1090 {
+          // @include mainPageNewDesigners1090 {
+          @include tabletP {
             margin-right: 20px;
           }
         }
@@ -175,7 +177,7 @@
 }
 
 // footer
-.footer {
+#footer {
   background-color: #1b1b1b;
   color: #fff;
   text-align: center;

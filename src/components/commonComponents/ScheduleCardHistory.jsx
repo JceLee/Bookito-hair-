@@ -5,7 +5,7 @@ import DesignerCardLeft from "../view/designerListView/designerCardComponent/des
 import {firebaseStore} from "../../config/fbConfig";
 
 export default function ScheduleCardHistory(props) {
-  const { date, name, time, types, appointmentId, designerId } = props;
+  const { date, name, time, types, designerId } = props;
   const [visible, setVisible] = useState(false);
   const [designer, setDesigner] = useState(null);
 
@@ -29,6 +29,13 @@ export default function ScheduleCardHistory(props) {
     console.log('Success:', values);
   };
 
+  const convertDate = (date) => {
+    let sDate = date.split(" ");
+    let newDate = sDate[0] + "\n" + sDate[1] + " " + sDate[2] + "\n" + sDate[3];
+    
+    return newDate;
+  }
+
   return (
     <>
       <Card
@@ -49,13 +56,13 @@ export default function ScheduleCardHistory(props) {
         ]}
       >
         <Row>
-          <Col span={4} className="scheduleCardDate">
-            {date}
+          <Col span={6} className="scheduleCardDate">
+            {convertDate(date)}
           </Col>
           <Col span={2}>
             <Divider type="vertical" className="scheduleCardDivider" />
           </Col>
-          <Col span={18}>
+          <Col span={16}>
             <div>Designer: {name}</div>
             <div>
               Time: {time}
@@ -74,10 +81,15 @@ export default function ScheduleCardHistory(props) {
       <Modal
         title="Review"
         visible={visible}
-        onCancel={modalHandler}
-        onOk={onFinish}
+        closable={false}
         destroyOnClose={true}
         width={800}
+        footer={[
+          <>
+            <Button>Cancel</Button>
+            <Button>OK</Button>
+          </>
+        ]}
       >
         <div>
           {designer !== null && <DesignerCardLeft fname={designer.fname} profile={designer.photoURL} rate={designer.rate}/>}

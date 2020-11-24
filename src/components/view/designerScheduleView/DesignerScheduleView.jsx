@@ -18,7 +18,7 @@ export default function DesignerSchedule() {
         .then((querySnapshot) => {
           querySnapshot.docs.forEach((doc) => {
             let {startDate, endDate, monthAndDate } = formatDate(doc.data().date, doc.data().time);
-            if(doc.data().state === "conformed") {
+            if(doc.data().state === "confirmed") {
               conformed.push({
                 id: doc.data().aid,
                 title: doc.data().customerName,

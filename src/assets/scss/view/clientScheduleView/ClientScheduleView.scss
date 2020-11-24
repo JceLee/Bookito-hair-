@@ -1,31 +1,29 @@
 .clientSchedule {
+  .yourAppointments {
+    font-size: 2rem;
+    text-align: center;
+  }
 
-    .yourAppointments {
-        font-size: 30pt;
+  .clientScheduleTabs {
+    align-items: center;
+
+    .ant-tabs-nav {
+      .ant-tabs-tab {
+        font-size: 15pt;
+      }
+
+      .ant-tabs-tab-active .ant-tabs-tab-btn {
+        color: black;
+      }
+
+      .ant-tabs-nav-list .ant-tabs-ink-bar {
+        background: black;
+      }
     }
 
-    .clientScheduleTabs  {
-    
-        .ant-tabs-nav {
-            .ant-tabs-tab {
-                font-size: 15pt;
-            }
-        
-            .ant-tabs-tab-active .ant-tabs-tab-btn {
-                color: black;
-            }
-        
-            .ant-tabs-nav-list .ant-tabs-ink-bar {
-                background: black;
-            }
-        }
-
-        .ant-tabs-content-holder .clientScheduleViewRow {
-                column-gap: 30px;
-                row-gap: 30px;
-        }
+    .ant-tabs-content-holder .clientScheduleViewRow {
+      column-gap: 30px;
+      row-gap: 30px;
     }
+  }
 }
-
-
-
