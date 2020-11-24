@@ -1,5 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
+import placeholder from "../../../../assets/images/placeholder.png";
 
 export default function DesignerCardBottom(props) {
   const { works } = props;

@@ -1,9 +1,27 @@
 .designerListFilter{
-    .filterBtn {
-        border-radius: 20px;
-        margin: 5px;
+    .designerListFilterInner {
+        padding: 10px 5%;
+
+        .filterBtn {
+            border-radius: 20px;
+            margin-top: 4px;
+            margin-right: 5px;
+            max-width: 32vw;
+        }
+        .ant-btn:hover, .ant-btn:focus {
+            color: lightgray;
+        }
+        .numberOfDesigners {
+            font-size: 18px;
+            margin-left: 4px;
+            margin-top: 6px;
+        }
     }
-    .ant-btn:hover, .ant-btn:focus {
-        color: lightgray;
+    .designerCardComponentDividerTop {
+        margin: 0;
+    }
+    .designerCardComponentDividerBottom {
+        margin: 0;
+        margin-bottom: 14px;
     }
 }

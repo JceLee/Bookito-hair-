@@ -9,10 +9,13 @@ import DesignerListFilter from "./DesignerListFilter";
 import Map from "../../commonComponents/map/Map";
 import { CloseOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
+import { designerTags } from "../../../constants/designerTags";
+
 
 export default function DesignerListView(props) {
   const [mapVisibleMobile, setMapVisibleMobile] = useState(false);
   const [mapVisibleDesktop, setMapVisibleDesktop] = useState(true);
+  const [filterTags, setFilterTags] = useState([]);
 
   const designers = useSelector((state) => state.firestore.designers);
   const dispatch = useDispatch();
@@ -25,6 +28,7 @@ export default function DesignerListView(props) {
 
   useEffect(() => {
     const params = queryString.parse(props.location.search);
+    setFilterTags(designerTags[params["type"]]);
     const newDesigners = [];
     firebaseStore
       .collection("users")
@@ -68,9 +72,9 @@ export default function DesignerListView(props) {
           <div className="listingBase">
             {/* Controls above the designer listing */}
             <div className="listNavBar">
-              listNavBar
               <div className="filter">
                 <DesignerListFilter
+                  tags={filterTags || []}
                   numberOfDesigners={Object.keys(designers).length}
                   location="Vancouver"
                 />
@@ -86,14 +90,8 @@ export default function DesignerListView(props) {
                 </span>
               </Button>
               {/* Mobile map toggle button - used to open map drawer */}
-              <Button
-                className="mobileOnly"
-                onClick={openMapMobile}
-                shape="circle"
-              >
-                <span role="img" aria-label="map">
-                  🗺️
-                </span>
+              <Button className="mobileOnly designerListOpenMapMobile" onClick={openMapMobile}> {/*shape="circle"*/}
+                <span role="img" aria-label="map">🗺️ Map</span>
               </Button>
             </div>
             {/* Designer listing */}
@@ -109,13 +107,13 @@ export default function DesignerListView(props) {
           </div>
 
           <Drawer
-            className="mobileOnly"
-            placement="right"
-            closable={false}
-            onClose={closeMapMobile}
-            visible={mapVisibleMobile}
-            getContainer={false}
-          >
+              className="mobileOnly"
+              // placement="bottom"
+              closable={false}
+              onClose={closeMapMobile}
+              visible={mapVisibleMobile}
+              getContainer={false}
+            >
             {/* Map close button (top left of the map) */}
             <Button
               className="mapCloseButton mobileOnly"

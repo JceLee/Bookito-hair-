@@ -32,7 +32,18 @@
 
       .filter {
         height: 30%;
-        border: 1px saddlebrown solid;
+        // border: 1px saddlebrown solid;
+      }
+      .designerListOpenMapMobile {
+        position: absolute;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+        bottom: 5vh;
+        z-index: 10;
+
+        height: 38px;
+        border-radius: 20px;
       }
     }
 
