@@ -23,7 +23,7 @@ export default function StepOne(props) {
   const renderTime = () => (
     <div id="selectTimePosition">
       <p id="selectTime">Please select time</p>
-      <Radio.Gsroup>
+      <Radio.Group>
         {timeSelection.map((hour, index) => {
           const { time, value, disabled } = hour;
           return (
@@ -38,7 +38,7 @@ export default function StepOne(props) {
             </Radio.Button>
           );
         })}
-      </Radio.Gsroup>
+      </Radio.Group>
     </div>
   );
 

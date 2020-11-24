@@ -135,6 +135,7 @@ export default function DesignerProfileTop(props) {
 
   const onOk = () => {
     form.submit();
+    setVisible(false);
   };
 
   useEffect(() => {

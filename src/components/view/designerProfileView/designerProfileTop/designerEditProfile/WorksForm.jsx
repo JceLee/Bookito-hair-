@@ -6,12 +6,14 @@ import { firebaseOrigin, firebaseStore } from "../../../../../config/fbConfig";
 export default function WorksForm(props) {
   const { customerUid, works } = props;
   const photoURLs = [];
+  const [update, setUpdate] = useState(false);
 
   const [fileList, setFileList] = useState(works);
 
   const onUploadSubmission = (e) => {
     e.preventDefault(); // prevent page refreshing
     const promises = [];
+    console.log("Test!");
     console.log(fileList);
     fileList.forEach((file) => {
       if (file["originFileObj"] !== undefined) {
@@ -39,26 +41,33 @@ export default function WorksForm(props) {
               status: "done",
               url: downloadURL,
             });
-            if (photoURLs.length === promises.length) {
-              const newWorks = [...works, ...photoURLs];
-              firebaseStore
-                .collection("users")
-                .doc(customerUid)
-                .update({ works: newWorks })
-                .then(function () {
-                  return message.success({
-                    content: "Saved",
-                    duration: "2",
-                    className: "onFinishMessage",
-                  });
-                });
-            }
+            console.log(photoURLs.length);
+            console.log(promises.length);
           }
         );
       } else {
         console.log("pass");
       }
     });
+    if (update) {
+      console.log(fileList);
+      const updatedList = fileList.filter(
+        (work) => work["originFileObj"] === undefined
+      );
+      console.log(updatedList);
+      const newWorks = [...updatedList, ...photoURLs];
+      firebaseStore
+        .collection("users")
+        .doc(customerUid)
+        .update({ works: newWorks })
+        .then(function () {
+          return message.success({
+            content: "Saved",
+            duration: "2",
+            className: "onFinishMessage",
+          });
+        });
+    }
     Promise.all(promises)
       .then(() => console.log("completed!"))
       .catch((err) => console.log(err.code));
@@ -66,7 +75,7 @@ export default function WorksForm(props) {
 
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
-    console.log(fileList);
+    setUpdate(true);
   };
 
   const onPreview = async (file) => {
@@ -94,7 +103,7 @@ export default function WorksForm(props) {
           onChange={onChange}
           onPreview={onPreview}
         >
-          {fileList.length < 5 && "+ Upload"}
+          {fileList.length < 8 && "+ Upload"}
         </Upload>
       </ImgCrop>
       <button onClick={onUploadSubmission}>Upload</button>
