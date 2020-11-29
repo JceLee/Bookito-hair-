@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Affix, Button, Modal, Form, Collapse, notification } from "antd";
+import { Affix, Button, Modal, Form, Collapse, message } from "antd";
 import DesignerNav from "./designerNav/DesignerNav.jsx";
 import ReadOnlyStar from "../../../commonComponents/ReadOnlyStar";
 import ServiceNPriceForm from "./designerEditProfile/ServiceNPriceForm";
@@ -8,7 +8,7 @@ import AddressPhoneForm from "./designerEditProfile/AddressPhoneForm";
 import WorksForm from "./designerEditProfile/WorksForm";
 import BookNowModal from "../designerProfileTop/bookNowModal/BookNowModal";
 import Avatar from "antd/lib/avatar/avatar";
-import {firebaseStore} from "../../../../config/fbConfig";
+import { firebaseStore } from "../../../../config/fbConfig";
 
 const defaultStartTime = 16; // 08:00
 const defaultEndTime = 42; // 21:00
@@ -17,8 +17,8 @@ const searchBarHeight = 64;
 const avatarSize = 64;
 const { Panel } = Collapse;
 const layout = {
-  labelCol: { span: 4 },
-  wrapperCol: { span: 14 },
+  labelCol: { span: 6 },
+  wrapperCol: { span: 24 },
 };
 const validateMessages = {
   required: "Required",
@@ -85,7 +85,10 @@ export default function DesignerProfileTop(props) {
       content: <HoursForm defaultTradingHours={defaultTradingHours} />,
     },
     { header: "Address & Phone", content: <AddressPhoneForm /> },
-    { header: "Works", content: <WorksForm works={works} /> },
+    {
+      header: "Works",
+      content: <WorksForm works={works} customerUid={customer.uid} />,
+    },
   ];
 
   const showModal = () => {
@@ -104,18 +107,26 @@ export default function DesignerProfileTop(props) {
       addressPhone: values.addressPhone,
       photos: values.fileList,
     };
-    console.log(firebaseStore.collection("users").doc(customer.uid).get()
+    console.log(
+      firebaseStore
+        .collection("users")
+        .doc(customer.uid)
+        .get()
         .then(function (doc) {
           return doc.data();
-        }));
-    firebaseStore.collection("users").doc(customer.uid).set(updatedProfile).then(function() {
-      return notification.success({
-        className: "notificationSaved",
-        style: {top: "550px"},
-        message: "Saved",
-        duration: "2",
+        })
+    );
+    firebaseStore
+      .collection("users")
+      .doc(customer.uid)
+      .set(updatedProfile)
+      .then(function () {
+        return message.success({
+          content: "Saved",
+          duration: "2",
+          className: "onFinishMessage",
+        });
       });
-    });
   };
 
   const onFinishFailed = (errors) => {
@@ -124,6 +135,7 @@ export default function DesignerProfileTop(props) {
 
   const onOk = () => {
     form.submit();
+    setVisible(false);
   };
 
   useEffect(() => {
@@ -156,6 +168,7 @@ export default function DesignerProfileTop(props) {
                 title="Edit Profile"
                 onOk={onOk}
                 onCancel={handleCancel}
+                // width={window.innerWidth * 0.8}
                 destroyOnClose={true}
                 footer={
                   <Button
@@ -177,10 +190,18 @@ export default function DesignerProfileTop(props) {
                   validateMessages={validateMessages}
                   scrollToFirstError
                 >
-                  <Collapse bordered={false} defaultActiveKey={["1"]}>
+                  <Collapse
+                    className="editProfileCollapse"
+                    bordered={false}
+                    defaultActiveKey={["1"]}
+                  >
                     {editProfilePanels.map((panel, index) => {
                       return (
-                        <Panel header={panel.header} key={index + 1}>
+                        <Panel
+                          className="editProfilePanel"
+                          header={panel.header}
+                          key={index + 1}
+                        >
                           {panel.content}
                         </Panel>
                       );
@@ -190,9 +211,10 @@ export default function DesignerProfileTop(props) {
               </Modal>
             </>
           ) : (
-            <BookNowModal hours={hours}
-                          customer={customer}
-                          designer={designer}
+            <BookNowModal
+              hours={hours}
+              customer={customer}
+              designer={designer}
             />
           )}
         </div>

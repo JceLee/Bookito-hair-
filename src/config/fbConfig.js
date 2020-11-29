@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 import "firebase/storage";
+import "firebase/database";
 
 firebase.initializeApp({
   apiKey: "AIzaSyB12lo5h6HnQVSeRqpUdsQDVIjrk7XblFM",
@@ -47,5 +48,8 @@ firebase.initializeApp({
 //     measurementId: "G-88P5D89FHK",
 //   });
 
+export const firebaseOrigin = firebase;
 export const firebaseStore = firebase.firestore();
 export const firebaseAuth = firebase.auth();
+export const firebaseDate = firebase.database();
+export const firebaseStorage = firebase.storage();

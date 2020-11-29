@@ -5,6 +5,7 @@ export default function NoRequests() {
     <div className="noRequestsContainer" style={{ width: "320px" }}>
       <img
         className="noRequestIcon"
+        alt="no request"
         src="https://www.flaticon.com/svg/static/icons/svg/1437/1437185.svg"
       />
       <h2>NO REQUESTS</h2>

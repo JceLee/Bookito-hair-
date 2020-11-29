@@ -2,12 +2,13 @@
 
 $modalBodyMargin: 110px;
 
-.ant-modal-wrap {
-  background-color: $white;
-  @include tabletP {
-    background-color: transparent;
-  }
-}
+//.ant-modal-wrap {
+//  background-color: $white;
+//  @include tabletP {
+//    background-color: transparent;
+//  }
+//}
+
 
 .bookNowModal {
   top: 0;
@@ -380,6 +381,13 @@ $modalBodyMargin: 110px;
       padding: 0 0;
       bottom: 0;
       border: none;
+      .mockData{
+        color: $white;
+        border-color: $white;
+        float: left;
+        width: 50%;
+        height: 55px;
+      }
       .nextBtnInStepOne {
         background: $black;
         border-color: $black;

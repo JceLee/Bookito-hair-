@@ -9,7 +9,9 @@ export default function DesignerProfileView() {
   const designers = useSelector((state) => state.firestore.designers);
   const currentUser = useSelector((state) => state.signIn.currentUser);
   const urlParams = new URLSearchParams(window.location.search);
-  const found = designers.find((element) => element.uid === urlParams.get("uid"));
+  const found = designers.find(
+    (element) => element.uid === urlParams.get("uid")
+  );
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
@@ -30,6 +32,7 @@ export default function DesignerProfileView() {
     services,
     hours,
     reviews,
+    latLng,
   } = found;
 
   return (
@@ -57,6 +60,7 @@ export default function DesignerProfileView() {
           serviceNPrices={services}
           hours={hours}
           reviews={reviews}
+          latLng={latLng}
         />
 
         <BackTop visibilityHeight={0}>

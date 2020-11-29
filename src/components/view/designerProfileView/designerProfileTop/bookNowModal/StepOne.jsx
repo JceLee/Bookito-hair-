@@ -4,10 +4,20 @@ import DayPicker from "react-day-picker";
 import "react-day-picker/lib/style.css";
 
 export default function StepOne(props) {
-  const { timeSelection, displayedDay, handleDay, radioChange, bookingTime } = props;
+  const {
+    timeSelection,
+    displayedDay,
+    handleDay,
+    radioChange,
+    bookingTime,
+  } = props;
 
   const renderCalendar = () => (
-    <DayPicker format={"MM/dd/yyyy"} selectedDays={displayedDay} onDayClick={handleDay} />
+    <DayPicker
+      format={"MM/dd/yyyy"}
+      selectedDays={displayedDay}
+      onDayClick={handleDay}
+    />
   );
 
   const renderTime = () => (

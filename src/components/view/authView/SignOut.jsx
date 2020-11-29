@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {firebaseAuth, firebaseStore} from "../../../config/fbConfig";
+import { firebaseAuth, firebaseStore } from "../../../config/fbConfig";
 import { sign_out } from "../../../actions/signIn";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -20,8 +20,7 @@ export default function SignOut() {
       .catch(function (error) {
         // An error happened.
       })
-      .then(function () {
-      });
+      .then(function () {});
   };
 
   const handleSignOut = () => {
@@ -30,7 +29,10 @@ export default function SignOut() {
 
   return (
     <>
-      <Link onClick={signOut} to={"/"}> SignOut </Link>
+      <Link onClick={signOut} to={"/"}>
+        {" "}
+        SignOut{" "}
+      </Link>
     </>
   );
 }

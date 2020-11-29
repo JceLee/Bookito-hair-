@@ -1,0 +1,133 @@
+.messengerCardComponent {
+  margin: 20px;
+
+  .rightSide {
+    margin-left: 10px;
+  }
+}
+
+.chatRoom{
+  display: flex;
+  padding: 10px;
+
+  .chatContent {
+    overflow-y: scroll;
+    height: 75vh;
+    width: 100%;
+
+    .chatMessage {
+      width: 80%;
+      min-height: 40px;
+      margin-top: 7px;
+
+      .leftBubble:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 13px;
+        width: 0;
+        height: 0;
+        border: 27px solid transparent;
+        border-right-color: lightblue;
+        border-left: 0;
+        border-top: 0;
+        margin-top: -13.5px;
+        margin-left: -27px;
+      }
+
+      .rightBubble:after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 13px;
+        width: 0;
+        height: 0;
+        border: 27px solid transparent;
+        border-left-color: #dcf8c6;
+        border-right: 0;
+        border-top: 0;
+        margin-top: -13.5px;
+        margin-right: -27px;
+      }
+
+      .rightBubble {
+        position: relative;
+        background: #dcf8c6;
+        border-top-left-radius: .4em;
+        border-bottom-left-radius: .4em;
+        border-bottom-right-radius: .4em;
+        padding: 5px 10px 10px;
+        left: 15%;
+        text-align: right;
+
+        .msgName {
+          font-size: 12px;
+          font-weight: bold;
+          color: green;
+        }
+
+        .msgDate {
+          font-size: 10px;
+        }
+      }
+
+      .leftBubble {
+        position: relative;
+        background: lightblue;
+        border-top-right-radius: .4em;
+        border-bottom-left-radius: .4em;
+        border-bottom-right-radius: .4em;
+        padding: 5px 10px 10px;
+        left: 5%;
+
+        .msgName {
+          font-size: 12px;
+          font-weight: bold;
+          color: green;
+        }
+
+        .msgDate {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+
+  .stickyFooter {
+    position: fixed;
+    height: 10vh;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    border-top: solid 1px #efefef;
+
+    .messageForm {
+      height: 10vh;
+
+      .inputWrapper {
+        width: 100%;
+        height: 100%;
+        display: flex;
+
+        .messageInput {
+          width: 85%;
+          height: 100%;
+          border: 1px solid rgba(0, 0, 0, 0.23);
+        }
+        .submitWrapper{
+          width: 15%;
+          .sendMessage {
+            width: 100%;
+            height: 100%;
+            font-size: 12px;
+            background-color: #fdfdfd;
+            color: #1b1b1b;
+            border: 1px solid rgba(0, 0, 0, 0.23)
+          }
+        }
+
+      }
+    }
+  }
+}
