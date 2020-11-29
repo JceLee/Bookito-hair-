@@ -49,6 +49,9 @@ export default function WorksForm(props) {
         console.log("pass");
       }
     });
+    Promise.all(promises)
+      .then(() => console.log("completed!"))
+      .catch((err) => console.log(err.code));
     if (update) {
       console.log(fileList);
       const updatedList = fileList.filter(
@@ -68,14 +71,12 @@ export default function WorksForm(props) {
           });
         });
     }
-    Promise.all(promises)
-      .then(() => console.log("completed!"))
-      .catch((err) => console.log(err.code));
   };
 
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
     setUpdate(true);
+    console.log(setUpdate);
   };
 
   const onPreview = async (file) => {
