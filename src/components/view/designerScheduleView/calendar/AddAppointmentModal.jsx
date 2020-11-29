@@ -77,6 +77,7 @@ export default function AddAppointmentModal(props) {
             fullWidth
           />
         </MuiPickersUtilsProvider>
+        {/* Time input another option */}
         {/* <TextField
           margin="normal"
           label="Select Time"
