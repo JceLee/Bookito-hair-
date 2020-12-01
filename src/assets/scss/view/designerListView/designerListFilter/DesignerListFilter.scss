@@ -5,12 +5,32 @@
         .filterBtn {
             border-radius: 20px;
             margin-top: 4px;
-            margin-right: 5px;
+            margin-right: 4px;
             max-width: 32vw;
+            padding-left: 13px;
+            padding-right: 13px;
         }
         .ant-btn:hover, .ant-btn:focus {
-            color: lightgray;
+            color: black;
+            // border-color: lightgrey;
         }
+        .sortBtn {
+            margin-right: 0;
+            float: right;
+            padding-left: 11px;
+            padding-right: 11px;
+        }
+        // .ant-select-selector {
+        //     border-radius: 20px;
+        // }
+        // .ant-select {
+        //     width: 50px;
+        // }
+        // .ant-select-selection-item {
+        //     padding-left: 2px;
+        //     padding-right: 0;
+        // }
+        
         .numberOfDesigners {
             font-size: 18px;
             margin-left: 4px;
