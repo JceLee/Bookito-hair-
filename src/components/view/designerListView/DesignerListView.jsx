@@ -97,7 +97,6 @@ export default function DesignerListView(props) {
             {/* Designer listing */}
             {designers.map((designer, index) => (
               <div key={index} className="designerList">
-                {console.log(designer)}
                 <DesignerCardComponent
                   designer={designer}
                   handleSearch={handleSearch}

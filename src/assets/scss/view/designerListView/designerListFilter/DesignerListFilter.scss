@@ -1,4 +1,4 @@
-.designerListFilter{
+.designerListFilter {
     .designerListFilterInner {
         padding: 10px 5%;
 
@@ -15,6 +15,16 @@
             font-size: 18px;
             margin-left: 4px;
             margin-top: 6px;
+        }
+        .ant-collapse-header {
+            visibility: hidden !important;
+            padding: 0;
+        }
+        .ant-collapse-content-box {
+            padding: 0 !important;
+        }
+        .designerListFilterConfirm {
+            border-radius: 20px;
         }
     }
     .designerCardComponentDividerTop {
