@@ -4,11 +4,11 @@ import LocationInput from "../LocationInput";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { reverseGeocode } from "../../../helpers/geocode";
 import { useHistory } from "react-router-dom";
+import { designerTypes } from "../../../constants/designerTypes";
 
 export default function DesignerTypeModal(props) {
   const { visible, onCancel, showNavBarElements } = props;
 
-  const designerTypes = ["Hair Designer", "Nail Artist", "MakeUp Artist"];
   const [designerType, setDesignerType] = useState("");
   const [address, setAddress] = useState("");
   const [form] = Form.useForm();
@@ -60,7 +60,9 @@ export default function DesignerTypeModal(props) {
       showNavBarElements("logo");
       showNavBarElements("menuBtn");
     }
-    const route = `/designer_list?type=${designerType}${
+    const selectedDesignerType = Object.keys(designerTypes)
+      .find(key => designerTypes[key] === designerType);
+    const route = `/designer_list?type=${selectedDesignerType}${
       location ? `&location=${location}` : ""
     }`;
     console.log(route);
@@ -104,7 +106,7 @@ export default function DesignerTypeModal(props) {
         <Radio.Group
           size="large"
           buttonStyle="outlined"
-          options={designerTypes}
+          options={Object.values(designerTypes)}
           onChange={onSelected}
           optionType="button"
         ></Radio.Group>

@@ -1,10 +1,10 @@
 import React from "react";
 import { Row, Col, Avatar } from "antd";
-import ReadOnlyStar from "../../../../commonComponents/ReadOnlyStar";
+import { StarRead } from "../../../../commonComponents/StarRate";
 import { UserOutlined } from "@ant-design/icons";
 
 export default function DesignerCardTopLeft(props) {
-  const { rate, fname, profile } = props;
+  const { rateScore, rateCount, fname, profile } = props; // TODO: add rateCount
 
   return (
     <Row className="designerCardTopLeft">
@@ -14,7 +14,8 @@ export default function DesignerCardTopLeft(props) {
       <Col className="topLeftSecondCol">
         <div>{fname}</div>
         <div className="topLeftSecondColRating">
-          <ReadOnlyStar rate={rate} />
+          {/* TODO: add rateCount */}
+          <StarRead rateScore={rateScore || 0} rateCount={rateCount || 0} />
         </div>
       </Col>
     </Row>

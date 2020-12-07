@@ -1,9 +1,57 @@
-.designerListFilter{
-    .filterBtn {
-        border-radius: 20px;
-        margin: 5px;
+.designerListFilter {
+    .designerListFilterInner {
+        padding: 10px 5%;
+
+        .filterBtn {
+            border-radius: 20px;
+            margin-top: 4px;
+            margin-right: 4px;
+            max-width: 32vw;
+            padding-left: 13px;
+            padding-right: 13px;
+        }
+        .ant-btn:hover, .ant-btn:focus {
+            color: black;
+            // border-color: lightgrey;
+        }
+        .sortBtn {
+            margin-right: 0;
+            float: right;
+            padding-left: 11px;
+            padding-right: 11px;
+        }
+        // .ant-select-selector {
+        //     border-radius: 20px;
+        // }
+        // .ant-select {
+        //     width: 50px;
+        // }
+        // .ant-select-selection-item {
+        //     padding-left: 2px;
+        //     padding-right: 0;
+        // }
+        
+        .numberOfDesigners {
+            font-size: 18px;
+            margin-left: 4px;
+            margin-top: 6px;
+        }
+        .ant-collapse-header {
+            visibility: hidden !important;
+            padding: 0;
+        }
+        .ant-collapse-content-box {
+            padding: 0 !important;
+        }
+        .designerListFilterConfirm {
+            border-radius: 20px;
+        }
     }
-    .ant-btn:hover, .ant-btn:focus {
-        color: lightgray;
+    .designerCardComponentDividerTop {
+        margin: 0;
+    }
+    .designerCardComponentDividerBottom {
+        margin: 0;
+        margin-bottom: 14px;
     }
 }
