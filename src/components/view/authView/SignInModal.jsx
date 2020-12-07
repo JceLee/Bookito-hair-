@@ -4,11 +4,10 @@ import firebase from "firebase/app";
 import { useHistory } from "react-router-dom";
 import { firebaseAuth, firebaseStore } from "../../../config/fbConfig";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  sign_in_with_facebook,
-  sign_in_with_google,
-} from "../../../actions/signIn";
+import { sign_in_with_facebook, sign_in_with_google } from "../../../actions/signIn";
 import { generateUserDocument } from "../../../helpers/getUserDocument";
+import googleLogo from "../../../assets/images/googleLogo.png";
+import facebookLogo from "../../../assets/images/facebookLogo.png";
 
 export default function SignInModal() {
   const [isLoginShowing, setIsLoginShowing] = useState(false);
@@ -91,61 +90,49 @@ export default function SignInModal() {
       <Modal
         className="loginModal"
         visible={isLoginShowing}
-        closable={false}
         onCancel={handleLoginCancel}
         okButtonProps={{ style: { display: "none" } }}
         cancelButtonProps={{ style: { display: "none" } }}
       >
-        <div className="loginModalContent">
-          <p id="logoFont">Bookito</p>
-          <div>
-            <button
-              onClick={signInWithGoogle}
-              className="loginBtn loginBtn--google"
-            >
-              Sign in with Google
-            </button>
+        <div className="loginModalContainer">
+          <div className="loginModalContent">
+            <p id="logoFont">Bookito</p>
+            <Divider />
+            <div className="loginMessageContainer">
+              <p id="loginMessageHeader">Sign In / Sign Up</p>
+              <p id="loginMessage">
+                No sign up required. Start using our app in less than a minute.
+              </p>
+            </div>
+            <div className="loginBtnContainer">
+              <button onClick={signInWithGoogle} className="loginBtn loginBtn--google">
+                <img src={googleLogo} className="loginBtnLogo" alt="Google Logo" />
+                <div className="loginBtnText">Sign in with Google</div>
+              </button>
+              <button onClick={signInWithFaceBook} className="loginBtn loginBtn--facebook">
+                <img src={facebookLogo} className="loginBtnLogo" alt="Facebook Logo" />
+                <div className="loginBtnText">Sign in with Facebook</div>
+              </button>
+            </div>
           </div>
-          <div>
-            <button
-              onClick={signInWithFaceBook}
-              className="loginBtn loginBtn--facebook"
-            >
-              Sign in with Facebook
-            </button>
-          </div>
-          <div>
-            <button onClick={() => testAccount("joshua")}>
-              Log in with Joshua
-            </button>
-          </div>
-          <div>
-            <button onClick={() => testAccount("Gina")}>
-              Log in with Gina
-            </button>
-          </div>
-          <div>
-            <button onClick={() => testAccount("KangMin")}>
-              Log in with KangMin
-            </button>
-          </div>
-          <div>
-            <button onClick={() => testAccount("Yongju")}>
-              Log in with Yongju
-            </button>
-          </div>
-          <div>
-            <button onClick={() => testAccount("JW")}>Login with JW</button>
-          </div>
-          <div>
-            <button onClick={() => testAccount("Erica")}>
-              Login with Erica
-            </button>
-          </div>
-          <Divider> OR </Divider>
-          <div>
-            <p> Don't have an account? </p>
-          </div>
+        </div>
+        <div>
+          <button onClick={() => testAccount("joshua")}>Log in with Joshua</button>
+        </div>
+        <div>
+          <button onClick={() => testAccount("Gina")}>Log in with Gina</button>
+        </div>
+        <div>
+          <button onClick={() => testAccount("KangMin")}>Log in with KangMin</button>
+        </div>
+        <div>
+          <button onClick={() => testAccount("Yongju")}>Log in with Yongju</button>
+        </div>
+        <div>
+          <button onClick={() => testAccount("JW")}>Login with JW</button>
+        </div>
+        <div>
+          <button onClick={() => testAccount("Erica")}>Login with Erica</button>
         </div>
       </Modal>
     </div>

@@ -53,3 +53,22 @@
     z-index: 1;
   }
 }
+
+.newRequestDiv {
+  .closeIconDiv {
+    text-align: right;
+    .closeIcon svg {
+      font-size: 15pt;
+      margin: 5px;
+    }
+  }
+}
+.noRequestsContainer {
+  width: 320px;
+  text-align: center;
+  margin-top: 50px;
+  .noRequestIcon {
+    width: 100px;
+    height: 100px;
+  }
+}
