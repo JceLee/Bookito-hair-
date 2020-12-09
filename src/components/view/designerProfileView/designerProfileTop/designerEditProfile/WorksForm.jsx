@@ -14,8 +14,6 @@ export default function WorksForm(props) {
   const designers = useSelector((state) => state.firestore.designers);
   const dispatch = useDispatch();
 
-  console.log(fileList);
-
   const onUploadSubmission = (e) => {
     e.preventDefault(); // prevent page refreshing
     const promises = [];
@@ -39,7 +37,6 @@ export default function WorksForm(props) {
           (error) => console.log(error),
           async () => {
             const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
-            console.log(downloadURL);
             photoURLs.push({
               uid: file.uid,
               name: file.name,
