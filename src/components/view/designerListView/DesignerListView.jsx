@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { Button, Drawer } from "antd";
+import React, {useState, useEffect} from "react";
+import {Button, Drawer} from "antd";
 import queryString from "query-string";
-import { load_database } from "../../../actions/firebaseAction";
-import { firebaseStore } from "../../../config/fbConfig";
-import { useDispatch, useSelector } from "react-redux";
+import {load_database} from "../../../actions/firebaseAction";
+import {firebaseStore} from "../../../config/fbConfig";
+import {useDispatch, useSelector} from "react-redux";
 import DesignerCardComponent from "./designerCardComponent/DesignerCardComponent";
 import DesignerListFilter from "./DesignerListFilter";
 import Map from "../../commonComponents/map/Map";
-import { CloseOutlined } from "@ant-design/icons";
-import { useHistory } from "react-router-dom";
-import { designerTags } from "../../../constants/designerTags";
+import {CloseOutlined} from "@ant-design/icons";
+import {useHistory} from "react-router-dom";
+import {designerTags} from "../../../constants/designerTags";
+import {designerTypes} from "../../../constants/designerTypes";
 
 
 export default function DesignerListView(props) {
@@ -33,6 +34,7 @@ export default function DesignerListView(props) {
     firebaseStore
       .collection("users")
       .where("location", "==", params["location"])
+      .where("accountTypes", "==", designerTypes.hair)
       .get()
       .then((querySnapshot) => {
         querySnapshot.docs.forEach((doc) => {
@@ -106,13 +108,13 @@ export default function DesignerListView(props) {
           </div>
 
           <Drawer
-              className="mobileOnly"
-              // placement="bottom"
-              closable={false}
-              onClose={closeMapMobile}
-              visible={mapVisibleMobile}
-              getContainer={false}
-            >
+            className="mobileOnly"
+            // placement="bottom"
+            closable={false}
+            onClose={closeMapMobile}
+            visible={mapVisibleMobile}
+            getContainer={false}
+          >
             {/* Map close button (top left of the map) */}
             <Button
               className="mapCloseButton mobileOnly"
@@ -120,7 +122,7 @@ export default function DesignerListView(props) {
               shape="circle"
               onClick={closeMapMobile}
             >
-              <CloseOutlined />
+              <CloseOutlined/>
             </Button>
             {/* Map inside drawer */}
             <div className="mapContainer">
@@ -142,7 +144,7 @@ export default function DesignerListView(props) {
               shape="circle"
               onClick={closeMapDesktop}
             >
-              <CloseOutlined />
+              <CloseOutlined/>
             </Button>
             {/* Map on the right of designer list view */}
             <div className="mapContainer">

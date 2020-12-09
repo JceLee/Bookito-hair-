@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import queryString from "query-string";
 import { getUserDocument } from "../../../helpers/getUserDocument";
-import { sign_in_with_facebook } from "../../../actions/signIn";
+import { sign_in_with_facebook } from "../../../actions/currentUser";
 import React from "react";
 import { useHistory } from "react-router-dom";
 

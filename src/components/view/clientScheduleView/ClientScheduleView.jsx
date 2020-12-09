@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 const { TabPane } = Tabs;
 
 export default function ClientSchedule() {
-  const currentUser = useSelector((state) => state.signIn.currentUser);
+  const currentUser = useSelector((state) => state.currentUser.currentUser);
   const [conformedAppointment, setConformedAppointments] = useState([]);
   const [pendingAppointment, setPendingAppointments] = useState([]);
   const [
