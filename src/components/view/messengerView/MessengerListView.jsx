@@ -9,7 +9,7 @@ import MessengerListCard from "./MessengerListCard";
 
 export default function MessengerListView() {
   const [currentUser, setCurrentUser] = useState(
-    useSelector((state) => state.signIn.currentUser)
+    useSelector((state) => state.currentUser.currentUser)
   );
   console.log(currentUser);
   // CreateMessengerRoom(currentUser, currentUser);

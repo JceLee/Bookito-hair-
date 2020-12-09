@@ -4,12 +4,9 @@ import {useSelector} from "react-redux";
 import {firebaseStore} from "../../../config/fbConfig";
 
 export default function DesignerSchedule() {
-  const currentUser = useSelector((state) => state.signIn.currentUser);
+  const currentUser = useSelector((state) => state.currentUser.currentUser);
   const [conformedAppointments, setConformedAppointments] = useState([]);
   const [newRequests, setNewRequests] = useState([]);
-
-
-  console.log("Calendar!!")
 
   const loadAppointment = () => {
     const conformed = [];

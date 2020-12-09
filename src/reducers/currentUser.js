@@ -2,7 +2,7 @@ const initialState = {
   currentUser: null,
 };
 
-export default function signIn(state = initialState, action) {
+export default function currentUser(state = initialState, action) {
   switch (action.type) {
     case "SIGN_IN_WITH_GOOGLE": {
       return {
@@ -15,6 +15,11 @@ export default function signIn(state = initialState, action) {
       };
     }
     case "SIGN_IN_WITH_APPLE": {
+      return {
+        currentUser: action.signedInUser,
+      };
+    }
+    case "REFRESH": {
       return {
         currentUser: action.signedInUser,
       };

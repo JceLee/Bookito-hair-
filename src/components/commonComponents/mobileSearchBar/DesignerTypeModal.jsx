@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Modal, Form, Radio } from "antd";
+import React, {useState, useEffect} from "react";
+import {Modal, Form, Radio} from "antd";
 import LocationInput from "../LocationInput";
-import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
-import { reverseGeocode } from "../../../helpers/geocode";
-import { useHistory } from "react-router-dom";
-import { designerTypes } from "../../../constants/designerTypes";
+import {geocodeByAddress, getLatLng} from "react-places-autocomplete";
+import {reverseGeocode} from "../../../helpers/geocode";
+import {useHistory} from "react-router-dom";
+import {designerTypes} from "../../../constants/designerTypes";
 
 export default function DesignerTypeModal(props) {
-  const { visible, onCancel, showNavBarElements } = props;
-
+  const {visible, onCancel, showNavBarElements} = props;
   const [designerType, setDesignerType] = useState("");
   const [address, setAddress] = useState("");
   const [form] = Form.useForm();
+
 
   useEffect(() => {
     // TODO: is setFieldsValue working as intended?
@@ -96,7 +96,7 @@ export default function DesignerTypeModal(props) {
       visible={visible}
       footer={null}
       width="100vw"
-      bodyStyle={{ height: "100vh" }}
+      bodyStyle={{height: "100vh"}}
       className="mobileSearchBarModal"
     >
       <div id="designerTypeBtnContainerInMobileSearchBar">
@@ -106,19 +106,19 @@ export default function DesignerTypeModal(props) {
         <Radio.Group
           size="large"
           buttonStyle="outlined"
-          options={Object.values(designerTypes)}
+          options={Object.values(designerTypes).filter(type => type !== "client")}
           onChange={onSelected}
           optionType="button"
         ></Radio.Group>
       </div>
-      <hr />
+      <hr/>
       <div id="locationInputContainerInMobileSearchBar">
         <div id="locationTextInMobileSearchBar">2. Find your location</div>
         <Form form={form}>
           <Form.Item
             name="addressInput"
             initialValue=""
-            rules={[{ required: true }]}
+            rules={[{required: true}]}
           >
             <LocationInput
               address={address}

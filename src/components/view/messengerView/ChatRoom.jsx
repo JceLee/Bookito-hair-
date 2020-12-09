@@ -15,7 +15,7 @@ import ScrollToBottom from "react-scroll-to-bottom";
 import { useSelector } from "react-redux";
 
 function ChatRoom(props) {
-  const currentUser = useSelector((state) => state.signIn.currentUser);
+  const currentUser = useSelector((state) => state.currentUser.currentUser);
   const parsed = queryString.parse(props.location.search);
   const [chats, setChats] = useState([]);
   const [nickname, setNickname] = useState("");

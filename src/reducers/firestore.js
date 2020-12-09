@@ -15,6 +15,11 @@ export default function firestore(state = initialState, action) {
         designers: action.database,
       };
     }
+    case "UPDATE_DESIGNERS": {
+      return {
+        designers: action.database,
+      };
+    }
     default: {
       return state;
     }

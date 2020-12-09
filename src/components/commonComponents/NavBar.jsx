@@ -1,26 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Menu, Dropdown, Button, Typography, Drawer } from "antd";
 import { Link } from "react-router-dom";
 import { UserOutlined, BarsOutlined } from "@ant-design/icons";
-import SignUpModal from "../view/authView/SignUpModal";
 import SignInModal from "../view/authView/SignInModal";
 import { useSelector } from "react-redux";
 import SignOut from "../view/authView/SignOut";
 
-const { Title } = Typography;
-
 export default function Navbar() {
-  const signedInUser = useSelector((state) => state.signIn.currentUser);
+  const signedInUser = useSelector((state) => state.currentUser.currentUser);
 
-  const menuItems = [
+  const menuItems = signedInUser !== null ? [
     { name: "Schedule (Designer)", link: "/designer_schedule" },
     { name: "Schedule (Client)", link: "/client_schedule" },
-    { name: "Profile (Designer)", link: "/designer_profile" },
+    { name: "Profile (Designer)", link: `/designer_profile?uid=${signedInUser.uid}` },
     { name: "Profile (Client)", link: "/client_profile" },
     { name: "Divider", link: "" },
     { name: "Message", link: "/messenger" },
     { name: "Log In", link: "" },
-  ];
+  ] : [
+    { name: "Become a designer", link: "" },
+    { name: "Log In", link: "" },
+  ]
+  ;
 
   const menu = (
     <Menu>
@@ -49,7 +50,6 @@ export default function Navbar() {
         <Link to="/">Bookito</Link>
       </div>
 
-      {/* < tablet */}
       <div id="menuBtn">
         <Dropdown overlay={menu} placement="bottomRight" trigger={["click"]}>
           <Button shape="round" icon={<UserOutlined />}>

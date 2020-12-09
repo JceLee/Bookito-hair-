@@ -18,7 +18,7 @@ export default function Map(props) {
         lat={userLocation.lat}
         lng={userLocation.lng}
     />
-    
+
     const DesignerMarkers = designers && designers.map(designer => (
         <Marker
             isDesktop={isDesktop}
@@ -39,7 +39,6 @@ export default function Map(props) {
     useEffect(() => {
         geocode(initialLocationString).then(latLng => {
             if (latLng) {
-                console.log(latLng);
                 setUserLocation(latLng);
             } else {
                 setUserLocation(defaultLocation);

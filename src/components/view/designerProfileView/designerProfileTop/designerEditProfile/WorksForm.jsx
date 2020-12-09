@@ -1,26 +1,30 @@
-import { Upload, Modal, message } from "antd";
+import {Upload, message} from "antd";
 import ImgCrop from "antd-img-crop";
-import React, { useState } from "react";
-import { firebaseOrigin, firebaseStore } from "../../../../../config/fbConfig";
+import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {firebaseOrigin, firebaseStore} from "../../../../../config/fbConfig";
+import {update_database} from "../../../../../actions/firebaseAction";
+import {refresh} from "../../../../../actions/currentUser";
 
 export default function WorksForm(props) {
-  const { customerUid, works } = props;
+  const {works, client, setClient} = props;
   const photoURLs = [];
   const [update, setUpdate] = useState(false);
-
   const [fileList, setFileList] = useState(works);
+  const designers = useSelector((state) => state.firestore.designers);
+  const dispatch = useDispatch();
+
+  console.log(fileList);
 
   const onUploadSubmission = (e) => {
     e.preventDefault(); // prevent page refreshing
     const promises = [];
-    console.log("Test!");
-    console.log(fileList);
     fileList.forEach((file) => {
       if (file["originFileObj"] !== undefined) {
         const uploadTask = firebaseOrigin
           .storage()
           .ref()
-          .child(`images/${file.name}`)
+          .child(`images/${client.uid}/${file.name}`)
           .put(file.originFileObj);
         promises.push(uploadTask);
         uploadTask.on(
@@ -35,34 +39,42 @@ export default function WorksForm(props) {
           (error) => console.log(error),
           async () => {
             const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+            console.log(downloadURL);
             photoURLs.push({
               uid: file.uid,
               name: file.name,
               status: "done",
               url: downloadURL,
             });
-            console.log(photoURLs.length);
-            console.log(promises.length);
+            if (photoURLs.length === promises.length) {
+              updateFireStorage();
+            }
           }
         );
       } else {
         console.log("pass");
       }
     });
+    if (promises.length === 0) {
+      updateFireStorage();
+    }
     Promise.all(promises)
-      .then(() => console.log("completed!"))
+      .then(function() {
+        console.log("complete");
+      })
       .catch((err) => console.log(err.code));
+  };
+
+  const updateFireStorage = () => {
     if (update) {
-      console.log(fileList);
       const updatedList = fileList.filter(
         (work) => work["originFileObj"] === undefined
       );
-      console.log(updatedList);
       const newWorks = [...updatedList, ...photoURLs];
       firebaseStore
         .collection("users")
-        .doc(customerUid)
-        .update({ works: newWorks })
+        .doc(client.uid)
+        .update({works: newWorks})
         .then(function () {
           return message.success({
             content: "Saved",
@@ -70,13 +82,28 @@ export default function WorksForm(props) {
             className: "onFinishMessage",
           });
         });
+      updateRedux(newWorks);
     }
+  }
+
+  const updateRedux = (newWorks) => {
+    const updatedInfo = {
+      ...client,
+      works: newWorks,
+    };
+    setClient(updatedInfo);
+    dispatch(refresh(updatedInfo));
+    designers.forEach(designer => {
+      if (designer.uid === client.uid) {
+        designer.works = newWorks;
+        dispatch(update_database(designers));
+      }
+    })
   };
 
-  const onChange = ({ fileList: newFileList }) => {
+  const onChange = ({fileList: newFileList}) => {
     setFileList(newFileList);
     setUpdate(true);
-    console.log(setUpdate);
   };
 
   const onPreview = async (file) => {

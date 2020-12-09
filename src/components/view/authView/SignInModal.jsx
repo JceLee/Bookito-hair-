@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { Modal, Divider, Button } from "antd";
+import React, {useState} from "react";
+import {Modal, Divider, Button} from "antd";
 import firebase from "firebase/app";
-import { useHistory } from "react-router-dom";
-import { firebaseAuth, firebaseStore } from "../../../config/fbConfig";
-import { useDispatch, useSelector } from "react-redux";
-import { sign_in_with_facebook, sign_in_with_google } from "../../../actions/signIn";
-import { generateUserDocument } from "../../../helpers/getUserDocument";
+import {useHistory} from "react-router-dom";
+import {firebaseAuth, firebaseStore} from "../../../config/fbConfig";
+import {useDispatch, useSelector} from "react-redux";
+import {sign_in_with_facebook, sign_in_with_google} from "../../../actions/currentUser";
+import {generateUserDocument} from "../../../helpers/getUserDocument";
 import googleLogo from "../../../assets/images/googleLogo.png";
 import facebookLogo from "../../../assets/images/facebookLogo.png";
 
@@ -20,6 +20,8 @@ export default function SignInModal() {
       .signInWithPopup(googleProvider)
       .then(function (result) {
         const user = result.user;
+        console.log("from google");
+        console.log(user);
         generateUserDocument(user).then(function (result) {
           dispatch(sign_in_with_google(result));
         });
@@ -86,18 +88,18 @@ export default function SignInModal() {
 
   return (
     <div>
-      <p onClick={showLoginModal}>Sign In</p>
+      <span onClick={showLoginModal}>Sign In</span>
       <Modal
         className="loginModal"
         visible={isLoginShowing}
         onCancel={handleLoginCancel}
-        okButtonProps={{ style: { display: "none" } }}
-        cancelButtonProps={{ style: { display: "none" } }}
+        okButtonProps={{style: {display: "none"}}}
+        cancelButtonProps={{style: {display: "none"}}}
       >
         <div className="loginModalContainer">
           <div className="loginModalContent">
             <p id="logoFont">Bookito</p>
-            <Divider />
+            <Divider/>
             <div className="loginMessageContainer">
               <p id="loginMessageHeader">Sign In / Sign Up</p>
               <p id="loginMessage">
@@ -106,11 +108,11 @@ export default function SignInModal() {
             </div>
             <div className="loginBtnContainer">
               <button onClick={signInWithGoogle} className="loginBtn loginBtn--google">
-                <img src={googleLogo} className="loginBtnLogo" alt="Google Logo" />
+                <img src={googleLogo} className="loginBtnLogo" alt="Google Logo"/>
                 <div className="loginBtnText">Sign in with Google</div>
               </button>
               <button onClick={signInWithFaceBook} className="loginBtn loginBtn--facebook">
-                <img src={facebookLogo} className="loginBtnLogo" alt="Facebook Logo" />
+                <img src={facebookLogo} className="loginBtnLogo" alt="Facebook Logo"/>
                 <div className="loginBtnText">Sign in with Facebook</div>
               </button>
             </div>

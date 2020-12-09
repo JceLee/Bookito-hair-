@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import {Card, Row, Col, Button, Divider, Form, Input, Rate, notification} from "antd";
+import React  from "react";
+import {Card, Row, Col, Button, Divider, notification} from "antd";
 import {firebaseStore} from "../../config/fbConfig";
 
 export default function ScheduleCardRequest(props) {

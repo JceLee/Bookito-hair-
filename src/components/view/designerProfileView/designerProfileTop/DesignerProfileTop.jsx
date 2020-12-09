@@ -9,6 +9,7 @@ import WorksForm from "./designerEditProfile/WorksForm";
 import BookNowModal from "../designerProfileTop/bookNowModal/BookNowModal";
 import Avatar from "antd/lib/avatar/avatar";
 import { firebaseStore } from "../../../../config/fbConfig";
+import {useSelector} from "react-redux";
 
 const defaultStartTime = 16; // 08:00
 const defaultEndTime = 42; // 21:00
@@ -62,7 +63,6 @@ export default function DesignerProfileTop(props) {
     isAuthenticated,
     fname,
     lname,
-    img,
     totalRate,
     works,
     hours,
@@ -70,11 +70,13 @@ export default function DesignerProfileTop(props) {
     services,
     customer,
     designer,
+    photoURL,
   } = props;
   const [stickyNavPositionFromTop] = useState(searchBarHeight);
   const [height, setHeight] = useState(0);
   const [visible, setVisible] = useState(false);
   const [form] = Form.useForm();
+  const [client, setClient]= useState(customer);
   const editProfilePanels = [
     {
       header: "Service & Price",
@@ -87,7 +89,7 @@ export default function DesignerProfileTop(props) {
     { header: "Address & Phone", content: <AddressPhoneForm /> },
     {
       header: "Works",
-      content: <WorksForm works={works} customerUid={customer.uid} />,
+      content: <WorksForm works={works} client={client} setClient={setClient} />,
     },
   ];
 
@@ -100,33 +102,33 @@ export default function DesignerProfileTop(props) {
   };
 
   const onFinish = (values) => {
-    setVisible(false);
-    const updatedProfile = {
-      services: values.services,
-      hours: values.hours,
-      addressPhone: values.addressPhone,
-      photos: values.fileList,
-    };
-    console.log(
-      firebaseStore
-        .collection("users")
-        .doc(customer.uid)
-        .get()
-        .then(function (doc) {
-          return doc.data();
-        })
-    );
-    firebaseStore
-      .collection("users")
-      .doc(customer.uid)
-      .set(updatedProfile)
-      .then(function () {
-        return message.success({
-          content: "Saved",
-          duration: "2",
-          className: "onFinishMessage",
-        });
-      });
+     setVisible(false);
+    // const updatedProfile = {
+    //   services: values.services,
+    //   hours: values.hours,
+    //   addressPhone: values.addressPhone,
+    //   photos: values.fileList,
+    // };
+    // console.log(
+    //   firebaseStore
+    //     .collection("users")
+    //     .doc(customer.uid)
+    //     .get()
+    //     .then(function (doc) {
+    //       return doc.data();
+    //     })
+    // );
+    // firebaseStore
+    //   .collection("users")
+    //   .doc(customer.uid)
+    //   .set(updatedProfile)
+    //   .then(function () {
+    //     return message.success({
+    //       content: "Saved",
+    //       duration: "2",
+    //       className: "onFinishMessage",
+    //     });
+    //   });
   };
 
   const onFinishFailed = (errors) => {
@@ -145,7 +147,7 @@ export default function DesignerProfileTop(props) {
   return (
     <div className="designerTop">
       <div className="designerProfile">
-        <Avatar className="designerProfileImage" size={avatarSize} src={img} />
+        <Avatar className="designerProfileImage" size={avatarSize} src={photoURL} />
         <div className="designerNameRateLocation">
           <h2>
             {fname} {lname}

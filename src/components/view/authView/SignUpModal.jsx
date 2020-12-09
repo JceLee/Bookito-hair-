@@ -1,27 +1,27 @@
-import React, { useState } from "react";
-import { Divider, Form, Input, Modal, Button, Select } from "antd";
-import { firebaseAuth, firebaseStore } from "../../../config/fbConfig";
+import React, {useState} from "react";
+import {Divider, Form, Input, Modal, Button, Select} from "antd";
+import {firebaseAuth, firebaseStore} from "../../../config/fbConfig";
 import {
   sign_in_with_facebook,
   sign_in_with_google,
-} from "../../../actions/signIn";
-import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+} from "../../../actions/currentUser";
+import {useHistory} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
 import firebase from "firebase/app";
 
 export default function SignUpModal(props) {
-  const { title } = props;
+  const {title} = props;
   const [isSignUpShowing, setIsSignUpShowing] = useState(false);
   const dispatch = useDispatch();
   const googleProvider = new firebase.auth.GoogleAuthProvider();
   const faceBookProvider = new firebase.auth.FacebookAuthProvider();
-  const { Option } = Select;
+  const {Option} = Select;
   const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 16 },
+    labelCol: {span: 8},
+    wrapperCol: {span: 16},
   };
   const tailLayout = {
-    wrapperCol: { offset: 8, span: 16 },
+    wrapperCol: {offset: 8, span: 16},
   };
 
   const [form] = Form.useForm();
@@ -29,16 +29,16 @@ export default function SignUpModal(props) {
   const onUserTypeChange = (value) => {
     switch (value) {
       case "customer":
-        form.setFieldsValue({ note: "Hi, man!" });
+        form.setFieldsValue({note: "Hi, man!"});
         return;
       case "hairDesigner":
-        form.setFieldsValue({ note: "Hi, lady!" });
+        form.setFieldsValue({note: "Hi, lady!"});
         return;
       case "nailDesigner":
-        form.setFieldsValue({ note: "Hi there!" });
+        form.setFieldsValue({note: "Hi there!"});
         return;
       case "lashDesigner":
-        form.setFieldsValue({ note: "Hi there!" });
+        form.setFieldsValue({note: "Hi there!"});
         return;
     }
   };
@@ -46,13 +46,13 @@ export default function SignUpModal(props) {
   const onGenderChange = (value) => {
     switch (value) {
       case "male":
-        form.setFieldsValue({ note: "Hi, man!" });
+        form.setFieldsValue({note: "Hi, man!"});
         return;
       case "female":
-        form.setFieldsValue({ note: "Hi, lady!" });
+        form.setFieldsValue({note: "Hi, lady!"});
         return;
       case "other":
-        form.setFieldsValue({ note: "Hi there!" });
+        form.setFieldsValue({note: "Hi there!"});
         return;
     }
   };
@@ -113,7 +113,7 @@ export default function SignUpModal(props) {
     const userRef = firebaseStore.doc(`users/${user.uid}`);
     const snapshot = await userRef.get();
     if (!snapshot.exists) {
-      const { email, displayName, photoURL, uid } = user;
+      const {email, displayName, photoURL, uid} = user;
       const isDesigner = false;
       const fname = "";
       const lname = "";
@@ -121,23 +121,23 @@ export default function SignUpModal(props) {
       const phone = "";
       const gender = "";
       const hours = {
-        Mon: [{ tradingHours: [16, 42], closed: false }],
-        Tue: [{ tradingHours: [16, 42], closed: false }],
-        Wed: [{ tradingHours: [16, 42], closed: false }],
-        Thu: [{ tradingHours: [16, 42], closed: false }],
-        Fri: [{ tradingHours: [16, 42], closed: false }],
-        Sat: [{ tradingHours: [16, 42], closed: false }],
-        Sun: [{ tradingHours: [16, 42], closed: false }],
+        // Mon: [{ tradingHours: [16, 42], closed: false }],
+        // Tue: [{ tradingHours: [16, 42], closed: false }],
+        // Wed: [{ tradingHours: [16, 42], closed: false }],
+        // Thu: [{ tradingHours: [16, 42], closed: false }],
+        // Fri: [{ tradingHours: [16, 42], closed: false }],
+        // Sat: [{ tradingHours: [16, 42], closed: false }],
+        // Sun: [{ tradingHours: [16, 42], closed: false }],
       };
       const services = {
-        Cut: [
-          { serviceName: "female cut", price: 35, description: "sample data" },
-        ],
-        Style: [],
-        Perm: [],
-        Color: [],
-        Clinic: [],
-        Promo: [],
+        // Cut: [
+        //   { serviceName: "female cut", price: 35, description: "sample data" },
+        // ],
+        // Style: [],
+        // Perm: [],
+        // Color: [],
+        // Clinic: [],
+        // Promo: [],
       };
       try {
         await userRef.set({
@@ -188,7 +188,7 @@ export default function SignUpModal(props) {
           title="Sign Up"
           visible={isSignUpShowing}
           onCancel={handleSignUpCancel}
-          cancelButtonProps={{ style: { display: "none" } }}
+          cancelButtonProps={{style: {display: "none"}}}
         >
           <Form
             {...layout}
@@ -199,7 +199,7 @@ export default function SignUpModal(props) {
             <Form.Item
               name="type"
               label="Choose your account type"
-              rules={[{ required: true }]}
+              rules={[{required: true}]}
             >
               <Select
                 placeholder="Choose your account type"
@@ -215,7 +215,7 @@ export default function SignUpModal(props) {
             <Form.Item
               name="gender"
               label="Gender"
-              rules={[{ required: true }]}
+              rules={[{required: true}]}
             >
               <Select
                 placeholder="Select a option and change input text above"
@@ -230,16 +230,16 @@ export default function SignUpModal(props) {
             <Form.Item
               name="phoneNumber"
               label="Phone"
-              rules={[{ required: true }]}
+              rules={[{required: true}]}
             >
-              <Input />
+              <Input/>
             </Form.Item>
             <Form.Item
               name="address"
               label="Address"
-              rules={[{ required: true }]}
+              rules={[{required: true}]}
             >
-              <Input />
+              <Input/>
             </Form.Item>
             <Form.Item
               noStyle
@@ -247,14 +247,14 @@ export default function SignUpModal(props) {
                 prevValues.gender !== currentValues.gender
               }
             >
-              {({ getFieldValue }) => {
+              {({getFieldValue}) => {
                 return getFieldValue("type") === "other" ? (
                   <Form.Item
                     name="customerType"
                     label="Customize Gender"
-                    rules={[{ required: true }]}
+                    rules={[{required: true}]}
                   >
-                    <Input />
+                    <Input/>
                   </Form.Item>
                 ) : null;
               }}
