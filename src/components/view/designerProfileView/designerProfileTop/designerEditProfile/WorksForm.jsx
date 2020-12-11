@@ -1,6 +1,6 @@
 import {Upload, message} from "antd";
 import ImgCrop from "antd-img-crop";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {firebaseOrigin, firebaseStore} from "../../../../../config/fbConfig";
 import {update_database} from "../../../../../actions/firebaseAction";
@@ -9,7 +9,7 @@ import {refresh} from "../../../../../actions/currentUser";
 export default function WorksForm(props) {
   const {works, client, setClient} = props;
   const photoURLs = [];
-  const [update, setUpdate] = useState(false);
+  const [testState, setTestState] = useState(false);
   const [fileList, setFileList] = useState(works);
   const designers = useSelector((state) => state.firestore.designers);
   const dispatch = useDispatch();
@@ -52,18 +52,18 @@ export default function WorksForm(props) {
         console.log("pass");
       }
     });
-    if (promises.length === 0) {
+    if (testState) {
       updateFireStorage();
     }
     Promise.all(promises)
-      .then(function() {
+      .then(function () {
         console.log("complete");
       })
       .catch((err) => console.log(err.code));
   };
 
   const updateFireStorage = () => {
-    if (update) {
+    if (testState) {
       const updatedList = fileList.filter(
         (work) => work["originFileObj"] === undefined
       );
@@ -100,7 +100,7 @@ export default function WorksForm(props) {
 
   const onChange = ({fileList: newFileList}) => {
     setFileList(newFileList);
-    setUpdate(true);
+    setTestState(true);
   };
 
   const onPreview = async (file) => {

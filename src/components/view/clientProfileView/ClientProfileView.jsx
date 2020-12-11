@@ -27,10 +27,8 @@ export default function ClientProfileView() {
         console.log(info.file, info.fileList);
       }
       if (status === 'done') {
-        console.log("babo2");
         setProfile({...profile, preview: URL.createObjectURL(info.file.originFileObj)})
         console.log(URL.createObjectURL(info.file.originFileObj))
-        console.log("babo3");
         message.success(`${info.file.name} file uploaded successfully.`);
       } else if (status === 'error') {
         message.error(`${info.file.name} file upload failed.`);

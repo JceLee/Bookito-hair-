@@ -12,18 +12,22 @@ export default function MessengerListView() {
     useSelector((state) => state.currentUser.currentUser)
   );
   console.log(currentUser);
-  // CreateMessengerRoom(currentUser, currentUser);
 
   const [room, setRoom] = useState([]);
   const [nickname, setNickname] = useState("");
   const history = useHistory();
 
+  console.log("haha");
+  console.log(room);
+
   useEffect(() => {
+    console.log("babo");
     const fetchData = async () => {
       setNickname(currentUser.fname);
       firebaseDate.ref("rooms/").on("value", (resp) => {
         setRoom([]);
         const rooms = snapshotToArray(resp);
+        console.log(rooms);
         setRoom(
           rooms.filter(
             (room) =>
@@ -33,7 +37,6 @@ export default function MessengerListView() {
         );
       });
     };
-
     fetchData();
   }, []);
 

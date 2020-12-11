@@ -4,6 +4,7 @@ import {BackTop} from "antd";
 import DesignerProfileTop from "./designerProfileTop/DesignerProfileTop";
 import DesignerProfileBottom from "./designerProfileBottom/DesignerProfileBottom.jsx";
 import {useSelector} from "react-redux";
+import {CreateMessengerRoom} from "../messengerView/CreateMessengerRoom";
 
 export default function DesignerProfileView() {
   const designers = useSelector((state) => state.firestore.designers);
@@ -49,6 +50,7 @@ export default function DesignerProfileView() {
           customer={currentUser}
           designer={selected}
           photoURL={photoURL}
+          services={services}
         />
 
         <DesignerProfileBottom

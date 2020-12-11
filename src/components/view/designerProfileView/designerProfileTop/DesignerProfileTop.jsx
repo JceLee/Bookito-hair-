@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Affix, Button, Modal, Form, Collapse, message } from "antd";
+import React, {useState, useEffect} from "react";
+import {Affix, Button, Modal, Form, Collapse, message} from "antd";
 import DesignerNav from "./designerNav/DesignerNav.jsx";
 import ReadOnlyStar from "../../../commonComponents/ReadOnlyStar";
 import ServiceNPriceForm from "./designerEditProfile/ServiceNPriceForm";
@@ -8,7 +8,7 @@ import AddressPhoneForm from "./designerEditProfile/AddressPhoneForm";
 import WorksForm from "./designerEditProfile/WorksForm";
 import BookNowModal from "../designerProfileTop/bookNowModal/BookNowModal";
 import Avatar from "antd/lib/avatar/avatar";
-import { firebaseStore } from "../../../../config/fbConfig";
+import {firebaseStore} from "../../../../config/fbConfig";
 import {useSelector} from "react-redux";
 
 const defaultStartTime = 16; // 08:00
@@ -16,10 +16,10 @@ const defaultEndTime = 42; // 21:00
 const defaultTradingHours = [defaultStartTime, defaultEndTime];
 const searchBarHeight = 64;
 const avatarSize = 64;
-const { Panel } = Collapse;
+const {Panel} = Collapse;
 const layout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 24 },
+  labelCol: {span: 6},
+  wrapperCol: {span: 24},
 };
 const validateMessages = {
   required: "Required",
@@ -40,13 +40,13 @@ const formInitialValues = {
     Promo: [],
   },
   hours: {
-    Mon: [{ tradingHours: defaultTradingHours, closed: false }],
-    Tue: [{ tradingHours: defaultTradingHours, closed: false }],
-    Wed: [{ tradingHours: defaultTradingHours, closed: false }],
-    Thu: [{ tradingHours: defaultTradingHours, closed: false }],
-    Fri: [{ tradingHours: defaultTradingHours, closed: false }],
-    Sat: [{ tradingHours: defaultTradingHours, closed: false }],
-    Sun: [{ tradingHours: defaultTradingHours, closed: false }],
+    Mon: [{tradingHours: defaultTradingHours, closed: false}],
+    Tue: [{tradingHours: defaultTradingHours, closed: false}],
+    Wed: [{tradingHours: defaultTradingHours, closed: false}],
+    Thu: [{tradingHours: defaultTradingHours, closed: false}],
+    Fri: [{tradingHours: defaultTradingHours, closed: false}],
+    Sat: [{tradingHours: defaultTradingHours, closed: false}],
+    Sun: [{tradingHours: defaultTradingHours, closed: false}],
   },
   addressPhone: {
     street: "",
@@ -76,20 +76,23 @@ export default function DesignerProfileTop(props) {
   const [height, setHeight] = useState(0);
   const [visible, setVisible] = useState(false);
   const [form] = Form.useForm();
-  const [client, setClient]= useState(customer);
+  const [client, setClient] = useState(customer);
+
+  console.log(services);
+
   const editProfilePanels = [
     {
       header: "Service & Price",
-      content: <ServiceNPriceForm services={services} />,
+      content: <ServiceNPriceForm services={services}/>,
     },
     {
       header: "Hours",
-      content: <HoursForm defaultTradingHours={defaultTradingHours} />,
+      content: <HoursForm defaultTradingHours={defaultTradingHours}/>,
     },
-    { header: "Address & Phone", content: <AddressPhoneForm /> },
+    {header: "Address & Phone", content: <AddressPhoneForm/>},
     {
       header: "Works",
-      content: <WorksForm works={works} client={client} setClient={setClient} />,
+      content: <WorksForm works={works} client={client} setClient={setClient}/>,
     },
   ];
 
@@ -102,13 +105,14 @@ export default function DesignerProfileTop(props) {
   };
 
   const onFinish = (values) => {
-     setVisible(false);
-    // const updatedProfile = {
-    //   services: values.services,
-    //   hours: values.hours,
-    //   addressPhone: values.addressPhone,
-    //   photos: values.fileList,
-    // };
+    setVisible(false);
+    const updatedProfile = {
+      services: values.services,
+      hours: values.hours,
+      addressPhone: values.addressPhone,
+      photos: values.fileList,
+    };
+    console.log(updatedProfile);
     // console.log(
     //   firebaseStore
     //     .collection("users")
@@ -137,6 +141,7 @@ export default function DesignerProfileTop(props) {
 
   const onOk = () => {
     form.submit();
+    console.log(form.submit);
     setVisible(false);
   };
 
@@ -147,18 +152,18 @@ export default function DesignerProfileTop(props) {
   return (
     <div className="designerTop">
       <div className="designerProfile">
-        <Avatar className="designerProfileImage" size={avatarSize} src={photoURL} />
+        <Avatar className="designerProfileImage" size={avatarSize} src={photoURL}/>
         <div className="designerNameRateLocation">
           <h2>
             {fname} {lname}
           </h2>
-          <ReadOnlyStar rate={totalRate} />
+          <ReadOnlyStar rate={totalRate}/>
           <p>{location}</p>
         </div>
       </div>
       <Affix offsetTop={stickyNavPositionFromTop}>
         <div id="tabWithButton">
-          <DesignerNav searchBarHeight={searchBarHeight} height={height} />
+          <DesignerNav searchBarHeight={searchBarHeight} height={height}/>
           {isAuthenticated ? (
             <>
               <Button className="buttonInProfileLayoutTab" onClick={showModal}>
