@@ -7,7 +7,7 @@ export default function NewDesignersDesktopSection(props) {
   const secondHalfNewDesigners = newDesignerImages.slice(4, 8);
 
   return (
-    <div className="newDesignsersDesktopSection">
+    <div className="newDesignersDesktopSection">
       <div className="headerSection">
         <div className="topLine">Designers' Works</div>
         <div className="bottomLine">
