@@ -1,7 +1,9 @@
 import React from "react";
-import { Input, Form } from "antd";
+import {Input, Form, Modal} from "antd";
 
-export default function AddressPhoneForm() {
+export default function AddressPhoneForm(props) {
+  const {formInitialValues, layout} = props;
+  const [form] = Form.useForm();
   const formFields = [
     { label: "Street", fieldName: "street", required: true },
     { label: "Unit", fieldName: "unit", required: false },
@@ -11,6 +13,12 @@ export default function AddressPhoneForm() {
     { label: "Phone", fieldName: "phone", required: false },
   ];
   return (
+    <Form
+      {...layout}
+      form={form}
+      name="editProfile"
+      scrollToFirstError
+    >
     <div className="addressPhoneForm">
       {formFields.map((formField) => {
         return (
@@ -26,5 +34,6 @@ export default function AddressPhoneForm() {
         );
       })}
     </div>
+    </Form>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Checkbox, Form, Space, Slider } from "antd";
+import {Checkbox, Form, Space, Slider, Modal} from "antd";
 import formatTime, {
   destructureTimeRange,
 } from "../../../../../helpers/timeFunctions";
@@ -12,8 +12,9 @@ let sliderVisibility;
 let checkboxOffset;
 
 export default function HoursForm(props) {
-  const { defaultTradingHours } = props;
+  const { defaultTradingHours, formInitialValues, layout } = props;
   const [defaultStartTime, defaultEndTime] = defaultTradingHours;
+  const [form] = Form.useForm();
   const [DayChecked, setDayChecked] = useState({
     Mon: false,
     Tue: false,
@@ -56,6 +57,13 @@ export default function HoursForm(props) {
   };
 
   return (
+    <Form
+      {...layout}
+      form={form}
+      name="editProfile"
+      initialValues={formInitialValues}
+      scrollToFirstError
+    >
     <div className="editHours">
       {days.map((day) => {
         const [startTime, endTime] = FormattedTimes[day];
@@ -136,5 +144,6 @@ export default function HoursForm(props) {
         );
       })}
     </div>
+    </Form>
   );
 }

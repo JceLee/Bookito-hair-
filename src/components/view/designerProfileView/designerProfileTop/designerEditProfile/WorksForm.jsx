@@ -1,4 +1,4 @@
-import {Upload, message} from "antd";
+import {Upload, message, Form, Modal} from "antd";
 import ImgCrop from "antd-img-crop";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
@@ -7,7 +7,8 @@ import {update_database} from "../../../../../actions/firebaseAction";
 import {refresh} from "../../../../../actions/currentUser";
 
 export default function WorksForm(props) {
-  const {works, client, setClient} = props;
+  const {works, client, setClient, layout} = props;
+  const [form] = Form.useForm();
   const photoURLs = [];
   const [testState, setTestState] = useState(false);
   const [fileList, setFileList] = useState(works);
@@ -119,7 +120,11 @@ export default function WorksForm(props) {
   };
 
   return (
-    <div>
+    <Form
+      {...layout}
+      name="editProfile"
+      form={form}
+    >
       <ImgCrop rotate>
         <Upload
           action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
@@ -132,6 +137,6 @@ export default function WorksForm(props) {
         </Upload>
       </ImgCrop>
       <button onClick={onUploadSubmission}>Upload</button>
-    </div>
+    </Form>
   );
 }

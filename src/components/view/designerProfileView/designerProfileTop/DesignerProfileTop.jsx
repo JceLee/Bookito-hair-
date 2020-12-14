@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {Affix, Button, Modal, Form, Collapse, message} from "antd";
+import {Affix, Button, Modal, Form, Collapse} from "antd";
 import DesignerNav from "./designerNav/DesignerNav.jsx";
 import ReadOnlyStar from "../../../commonComponents/ReadOnlyStar";
 import ServiceNPriceForm from "./designerEditProfile/ServiceNPriceForm";
@@ -8,8 +8,6 @@ import AddressPhoneForm from "./designerEditProfile/AddressPhoneForm";
 import WorksForm from "./designerEditProfile/WorksForm";
 import BookNowModal from "../designerProfileTop/bookNowModal/BookNowModal";
 import Avatar from "antd/lib/avatar/avatar";
-import {firebaseStore} from "../../../../config/fbConfig";
-import {useSelector} from "react-redux";
 
 const defaultStartTime = 16; // 08:00
 const defaultEndTime = 42; // 21:00
@@ -32,12 +30,12 @@ const validateMessages = {
 };
 const formInitialValues = {
   services: {
-    Cut: [],
-    Style: [],
-    Perm: [],
-    Color: [],
-    Clinic: [],
-    Promo: [],
+    Menu1: [],
+    Menu2: [],
+    Menu3: [],
+    Menu4: [],
+    Menu5: [],
+    Menu6: [],
   },
   hours: {
     Mon: [{tradingHours: defaultTradingHours, closed: false}],
@@ -78,21 +76,20 @@ export default function DesignerProfileTop(props) {
   const [form] = Form.useForm();
   const [client, setClient] = useState(customer);
 
-  console.log(services);
-
   const editProfilePanels = [
     {
       header: "Service & Price",
-      content: <ServiceNPriceForm services={services}/>,
+      content: <ServiceNPriceForm services={services} formInitialValues={formInitialValues} layout={layout}/>,
     },
     {
       header: "Hours",
-      content: <HoursForm defaultTradingHours={defaultTradingHours}/>,
+      content: <HoursForm defaultTradingHours={defaultTradingHours} formInitialValues={formInitialValues} layout={layout}/>,
     },
-    {header: "Address & Phone", content: <AddressPhoneForm/>},
+    {header: "Address & Phone",
+      content: <AddressPhoneForm formInitialValues={formInitialValues} layout={layout}/>},
     {
       header: "Works",
-      content: <WorksForm works={works} client={client} setClient={setClient}/>,
+      content: <WorksForm works={works} client={client} setClient={setClient} layout={layout}/>,
     },
   ];
 
@@ -187,34 +184,23 @@ export default function DesignerProfileTop(props) {
                   </Button>
                 }
               >
-                <Form
-                  {...layout}
-                  form={form}
-                  name="editProfile"
-                  onFinish={onFinish}
-                  onFinishFailed={onFinishFailed}
-                  initialValues={formInitialValues}
-                  validateMessages={validateMessages}
-                  scrollToFirstError
+                <Collapse
+                  className="editProfileCollapse"
+                  bordered={false}
+                  defaultActiveKey={["1"]}
                 >
-                  <Collapse
-                    className="editProfileCollapse"
-                    bordered={false}
-                    defaultActiveKey={["1"]}
-                  >
-                    {editProfilePanels.map((panel, index) => {
-                      return (
-                        <Panel
-                          className="editProfilePanel"
-                          header={panel.header}
-                          key={index + 1}
-                        >
-                          {panel.content}
-                        </Panel>
-                      );
-                    })}
-                  </Collapse>
-                </Form>
+                  {editProfilePanels.map((panel, index) => {
+                    return (
+                      <Panel
+                        className="editProfilePanel"
+                        header={panel.header}
+                        key={index + 1}
+                      >
+                        {panel.content}
+                      </Panel>
+                    );
+                  })}
+                </Collapse>
               </Modal>
             </>
           ) : (
