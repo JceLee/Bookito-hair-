@@ -1,33 +1,36 @@
-import React, {useEffect, useState} from "react";
-import { Card, Row, Col, Button, Divider, Form, Input, Rate } from "antd";
-import Modal from "antd/lib/modal/Modal";
-import DesignerCardLeft from "../view/designerListView/designerCardComponent/designerCardTop/DesignerCardTopLeft";
-import {firebaseStore} from "../../config/fbConfig";
-import {useSelector} from "react-redux";
+import React, { useEffect, useState } from "react";
+import { Card, Row, Col, Button, Divider } from "antd";
+import ReviewModal from "../view/clientScheduleView/ReviewModal";
+import { firebaseStore } from "../../config/fbConfig";
 
 export default function ScheduleCardHistory(props) {
-  const { date, name, time, types, appointmentId, designerId } = props;
-  const [visible, setVisible] = useState(false);
+  const { appointment } = props;
+  const { date, time, designerName, designerId, bookedServices } = appointment;
   const [designer, setDesigner] = useState(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     firebaseStore
-        .collection("users")
-        .doc(designerId)
-        .get()
-        .then(function(doc) {
-          setDesigner(doc.data());
-        });
+      .collection("users")
+      .doc(designerId)
+      .get()
+      .then(function (doc) {
+        setDesigner(doc.data());
+      });
   }, []);
-
-  console.log(designer);
 
   const modalHandler = () => {
     setVisible(!visible);
   };
 
-  const onFinish = (values) => {
-    console.log('Success:', values);
+  const printServices = () => {
+    var services = "";
+    Object.entries(bookedServices).map((type) => {
+      console.log("type: " + type);
+      services += type[1].service;
+    });
+
+    return services;
   };
 
   return (
@@ -36,11 +39,7 @@ export default function ScheduleCardHistory(props) {
         className="scheduleCard"
         actions={[
           <>
-            <Button
-              type="text"
-              className="scheduleCardReviewBtn"
-              onClick={modalHandler}
-            >
+            <Button type="text" className="scheduleCardReviewBtn" onClick={modalHandler}>
               Review
             </Button>
             <Button type="text" className="scheduleCardRebookBtn">
@@ -57,47 +56,13 @@ export default function ScheduleCardHistory(props) {
             <Divider type="vertical" className="scheduleCardDivider" />
           </Col>
           <Col span={18}>
-            <div>Designer: {name}</div>
-            <div>
-              Time: {time}
-            </div>
-            <div>
-              Type:{" "}
-              {types.map((type, index) => (
-                  <span key={index}>{type} </span>
-              ))}
-            </div>
+            <div>Designer: {designerName}</div>
+            <div>Time: {time}</div>
+            <div>Service(s): {printServices()}</div>
           </Col>
         </Row>
       </Card>
-
-      {/* modal */}
-      <Modal
-        title="Review"
-        visible={visible}
-        onCancel={modalHandler}
-        onOk={onFinish}
-        destroyOnClose={true}
-        width={800}
-      >
-        <div>
-          {designer !== null && <DesignerCardLeft fname={designer.fname} profile={designer.photoURL} rate={designer.rate}/>}
-        </div>
-        <Form
-        >
-          <Form.Item
-            name="rate"
-          >
-            <div>How was the service?</div>
-            <Rate />
-          </Form.Item>
-          <Form.Item
-             name="comment"
-          >
-            <Input.TextArea />
-          </Form.Item>
-        </Form>
-      </Modal>
+      <ReviewModal modalHandler={modalHandler} visible={visible} designer={designer} />
     </>
   );
 }

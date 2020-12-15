@@ -12,10 +12,7 @@ export default function ClientSchedule() {
   const currentUser = useSelector((state) => state.currentUser.currentUser);
   const [conformedAppointment, setConformedAppointments] = useState([]);
   const [pendingAppointment, setPendingAppointments] = useState([]);
-  const [
-    completedAndDeclinedAppointment,
-    completedAndDeclinedAppointments,
-  ] = useState([]);
+  const [completedAndDeclinedAppointment, completedAndDeclinedAppointments] = useState([]);
 
   const history = useHistory();
 
@@ -60,7 +57,7 @@ export default function ClientSchedule() {
 
   return (
     <div className="clientSchedule">
-      <div className="yourAppointments">Your Appointments</div>
+      <div className="clientProfileTitle">Your Appointments</div>
       <Tabs className="clientScheduleTabs" defaultActiveKey="1">
         <TabPane className="upcomingTab" tab="Upcoming" key="1">
           <Row className="clientScheduleViewRow">
@@ -93,14 +90,7 @@ export default function ClientSchedule() {
         <TabPane className="historyTab" tab="History" key="3">
           <Row className="clientScheduleViewRow">
             {completedAndDeclinedAppointment.map((appointment) => (
-              <ScheduleCardHistory
-                name={appointment.designerName}
-                date={appointment.date}
-                time={appointment.time}
-                appointmentId={appointment.aid}
-                designerId={appointment.designerId}
-                types={["cut", "perm"]}
-              />
+              <ScheduleCardHistory appointment={appointment} />
             ))}
           </Row>
         </TabPane>

@@ -1,31 +1,80 @@
 .clientSchedule {
+  .clientProfileTitle {
+    font-size: 30pt;
+  }
 
-    .yourAppointments {
-        font-size: 30pt;
+  .clientScheduleTabs {
+    .ant-tabs-nav {
+      .ant-tabs-tab {
+        font-size: 15pt;
+      }
+
+      .ant-tabs-tab-active .ant-tabs-tab-btn {
+        color: black;
+      }
+
+      .ant-tabs-nav-list .ant-tabs-ink-bar {
+        background: black;
+      }
     }
 
-    .clientScheduleTabs  {
-    
-        .ant-tabs-nav {
-            .ant-tabs-tab {
-                font-size: 15pt;
-            }
-        
-            .ant-tabs-tab-active .ant-tabs-tab-btn {
-                color: black;
-            }
-        
-            .ant-tabs-nav-list .ant-tabs-ink-bar {
-                background: black;
-            }
-        }
-
-        .ant-tabs-content-holder .clientScheduleViewRow {
-                column-gap: 30px;
-                row-gap: 30px;
-        }
+    .ant-tabs-content-holder .clientScheduleViewRow {
+      column-gap: 30px;
+      row-gap: 30px;
     }
+  }
 }
 
+.reviewModal {
+  #reviewForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
 
+    .reviewRateItem {
+      align-self: flex-end;
+    }
 
+    .reviewCommentItem {
+      width: 100%;
+    }
+  }
+
+  #reviewComment {
+    height: 150px;
+  }
+
+  .designerCardTopLeft {
+    display: flex;
+    align-items: baseline;
+
+    .topLeftSecondCol {
+      margin-left: 20px;
+    }
+  }
+  .ant-modal-footer {
+    padding: 0 0;
+    bottom: 0;
+    border: none;
+
+    #reviewModalSubmitBtn {
+      background: $black;
+      border-color: $black;
+      color: $white;
+      width: 50%;
+      height: 55px;
+    }
+
+    #reviewModalCancelBtn {
+      color: $black;
+      float: left;
+      width: 50%;
+      height: 55px;
+    }
+
+    .ant-btn {
+      margin: 0;
+    }
+  }
+}
