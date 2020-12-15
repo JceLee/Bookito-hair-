@@ -75,11 +75,13 @@ export default function DesignerProfileTop(props) {
   const [visible, setVisible] = useState(false);
   const [form] = Form.useForm();
   const [client, setClient] = useState(customer);
+  const [test, setTest] = useState({});
 
   const editProfilePanels = [
     {
       header: "Service & Price",
-      content: <ServiceNPriceForm services={services} formInitialValues={formInitialValues} layout={layout}/>,
+      content:
+        <ServiceNPriceForm setTest={setTest} services={services} formInitialValues={formInitialValues} layout={layout}/>,
     },
     {
       header: "Hours",
@@ -110,26 +112,6 @@ export default function DesignerProfileTop(props) {
       photos: values.fileList,
     };
     console.log(updatedProfile);
-    // console.log(
-    //   firebaseStore
-    //     .collection("users")
-    //     .doc(customer.uid)
-    //     .get()
-    //     .then(function (doc) {
-    //       return doc.data();
-    //     })
-    // );
-    // firebaseStore
-    //   .collection("users")
-    //   .doc(customer.uid)
-    //   .set(updatedProfile)
-    //   .then(function () {
-    //     return message.success({
-    //       content: "Saved",
-    //       duration: "2",
-    //       className: "onFinishMessage",
-    //     });
-    //   });
   };
 
   const onFinishFailed = (errors) => {
@@ -137,8 +119,8 @@ export default function DesignerProfileTop(props) {
   };
 
   const onOk = () => {
+    console.log(test);
     form.submit();
-    console.log(form.submit);
     setVisible(false);
   };
 

@@ -6,27 +6,25 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 
 const { TabPane } = Tabs;
 const { TextArea } = Input;
-const initialValue = ["Menu1", "Menu2", "Menu3", "Menu4", "Menu5", "Menu6"];
 
 export default function ServiceNPriceForm(props) {
-  const [mounted, setMounted] = useState(false);
-  const { services, formInitialValues, layout } = props;
-  const [ tapNames, setTapNames ] = useState(initialValue);
+  // const [mounted, setMounted] = useState(false);
+  const { services, formInitialValues, setTest, layout } = props;
+  const [ tapNames, setTapNames ] = useState(Object.keys(services));
   const [form] = Form.useForm();
   let newTabIndex = 0;
 
-  if (!mounted) {
-    setTapNames(Object.keys(services));
-    setMounted(true);
-  }
-
-  console.log(services);
-  console.log(tapNames);
-
-  const [order, setOrder] = useState([]);
+  // if (!mounted) {
+  //   setMounted(true);
+  // }
 
   const yes = (values) => {
     console.log(values);
+  };
+
+  const onValuesChange = (e) => {
+    console.log(e);
+    setTest(e);
   };
 
   return (
@@ -34,6 +32,7 @@ export default function ServiceNPriceForm(props) {
       {...layout}
       initialValues={formInitialValues}
       form={form}
+      onValuesChange={onValuesChange}
       name="editProfile"
       onFinish={yes}
     >

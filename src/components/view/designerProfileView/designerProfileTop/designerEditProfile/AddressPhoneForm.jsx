@@ -16,6 +16,7 @@ export default function AddressPhoneForm(props) {
     <Form
       {...layout}
       form={form}
+      initialValues={formInitialValues}
       name="editProfile"
       scrollToFirstError
     >
