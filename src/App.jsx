@@ -16,6 +16,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "antd/dist/antd.css";
 import "./assets/scss/App.scss";
+import BecomeDesignerView from "./components/view/becomeDesignerView/BecomeDesignerView";
 
 const { Header, Content } = Layout;
 
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/chatroom" component={ChatRoom} />
           <Route path="/sign_up" component={SignUpModal} />
           <Route path="/loading" component={EmailNotificationFromDesigner} />
+          <Route path="/becomeDesigner" component={BecomeDesignerView} />
         </Content>
       </Layout>
     </Router>
