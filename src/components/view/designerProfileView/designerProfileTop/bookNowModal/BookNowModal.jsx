@@ -33,7 +33,7 @@ export default function BookNowModal(props) {
         });
         setAppointments(loadingAppointment);
       });
-  }, [appointments]);
+  }, []);
 
   let timeSlotTemplate = {
     time: null,
@@ -52,15 +52,6 @@ export default function BookNowModal(props) {
 
   const createTimeSelect = (dayAndDate) => {
     const day = dayAndDate.substring(0, 3);
-    const appointmentArray = [
-      { date: "Thu Sep 03 2020", time: "08:00" },
-      { date: "Wed Sep 02 2020", time: "08:30" },
-      { date: "Wed Sep 09 2020", time: "09:00" },
-      { date: "Wed Sep 16 2020", time: "11:00" },
-      { date: "Wed Sep 23 2020", time: "12:00" },
-      { date: "Wed Sep 30 2020", time: "12:30" },
-      { date: "Wed Sep 02 2020", time: "15:00" },
-    ];
     const [starRawTime, endRawTime] = hours[day][0].tradingHours;
     const closed = hours[day][0].closed;
     const temp = [];
@@ -74,7 +65,7 @@ export default function BookNowModal(props) {
     }
 
     Object.values(temp).forEach((timeSlot) => {
-      Object.values(appointmentArray).forEach((appointment) => {
+      Object.values(appointments).forEach((appointment) => {
         if (
           appointment.date === dayAndDate &&
           appointment.time === timeSlot.time
@@ -159,7 +150,6 @@ export default function BookNowModal(props) {
         newCalculationBox[key] = null;
       }
     }
-
     setCalculationBox(newCalculationBox);
   };
 
@@ -178,6 +168,7 @@ export default function BookNowModal(props) {
     console.log(newAppointment);
     message.success("Successfully booked!");
     writeAppointmentIntoDB(newAppointment);
+    handleCancel();
   };
 
   const writeAppointmentIntoDB = async (newAppointment) => {
