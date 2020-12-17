@@ -52,6 +52,19 @@ export default function MessengerListView() {
     return returnArr;
   };
 
+  const loadLastMsg = async roomID => {
+    let lastMsg = await firebaseDate.ref("chats/")
+    .orderByChild("roomID")
+    .equalTo(roomID).limitToLast(1)
+    .once("value").then((resp) => {
+      console.log(snapshotToArray(resp)[0].message);
+      return snapshotToArray(resp)[0].message;
+    })
+    return lastMsg;
+  }
+
+  console.log(loadLastMsg("1233"));
+
   const enterChatRoom = (roomID) => {
     // console.log(roomID);
     // const chat = { roomID: '', nickname: '', message: '', date: '', type: '' };
@@ -76,9 +89,10 @@ export default function MessengerListView() {
               ? item.customerID
               : item.designerID
           }
-          photoURL={null}
+          photoURL={currentUser.photoURL}
           enterChatRoom={enterChatRoom}
           roomID={item.roomID}
+          lastMsg={"test message"}
         />
       ))}
     </div>
