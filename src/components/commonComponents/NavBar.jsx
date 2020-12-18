@@ -9,20 +9,21 @@ import SignOut from "../view/authView/SignOut";
 export default function Navbar() {
   const signedInUser = useSelector((state) => state.currentUser.currentUser);
 
-  const menuItems = signedInUser !== null ? [
-    { name: "Schedule (Designer)", link: "/designer_schedule" },
-    { name: "Schedule (Client)", link: "/client_schedule" },
-    { name: "Profile (Designer)", link: `/designer_profile?uid=${signedInUser.uid}` },
-    { name: "Profile (Client)", link: "/client_profile" },
-    { name: "Divider", link: "" },
-    { name: "Message", link: "/messenger" },
-    { name: "Log In", link: "" },
-  ] : [
-    { name: "Become a designer", link: "" },
-    { name: "Log In", link: "" },
-  ]
-  ;
-
+  const menuItems =
+    signedInUser !== null
+      ? [
+          { name: "Schedule (Designer)", link: "/designer_schedule" },
+          { name: "Schedule (Client)", link: "/client_schedule" },
+          { name: "Profile (Designer)", link: `/designer_profile?uid=${signedInUser.uid}` },
+          { name: "Profile (Client)", link: "/client_profile" },
+          { name: "Divider", link: "" },
+          { name: "Message", link: "/messenger" },
+          { name: "Log In", link: "" },
+        ]
+      : [
+          { name: "Become a designer", link: "/becomeDesigner" },
+          { name: "Log In", link: "" },
+        ];
   const menu = (
     <Menu>
       {menuItems.map((menu, inx) => {
@@ -30,9 +31,7 @@ export default function Navbar() {
           return <Menu.Divider key={inx} />;
         } else if (menu.name == "Log In") {
           return (
-            <Menu.Item key={inx}>
-              {signedInUser == null ? <SignInModal /> : <SignOut />}
-            </Menu.Item>
+            <Menu.Item key={inx}>{signedInUser == null ? <SignInModal /> : <SignOut />}</Menu.Item>
           );
         } else {
           return (

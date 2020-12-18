@@ -1,0 +1,49 @@
+@import "../../Mixin.scss";
+
+.becomeDesignerView {
+  padding: 0 5%;
+  margin-top: 40px;
+  @include desktop {
+    height: 5vh;
+    padding: 0 10%;
+  }
+  .mainHeading {
+    font-size: 32px;
+    font-weight: 600;
+  }
+  .subHeading {
+    font-size: 18px;
+    margin-top: 16px;
+    margin-bottom: 24px;
+  }
+  .getStartedBtn {
+    padding: 8px 20px;
+    background-color: black;
+    color: white;
+    margin: 0;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-bottom: 10vh;
+  }
+  .getStartedBtn:hover {
+    background-color: white;
+    color: black;
+    border-color: black;
+    transition: background-color 0.3s;
+    cursor: pointer;
+  }
+  .infoCardsSection {
+    text-align: center;
+    margin: 0 auto;
+    .infoCard {
+      margin: 0 auto;
+      margin-bottom: 24px;
+      img {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+        padding-top: 24px;
+      }
+    }
+  }
+}

@@ -3,18 +3,35 @@
 
   .profileForm {
     margin-top: 3vh;
-
+    label {
+      font-weight: 700;
+    }
+    .formItems {
+      margin-bottom: 10px;
+    }
+    hr {
+      height: 1px;
+      border: none;
+      background-color: #dbdbdb;
+    }
+    .ant-form-item-label {
+      padding: 0;
+    }
     .saveBtn {
       width: 100%;
       background-color: black;
       color: white;
-      margin: 0;
+      margin-top: 25px;
       border: 1px solid black;
       height: 32px;
+    }
+    .blackBtn {
+      margin-top: 25px;
     }
 
     .profilePhoto {
       text-align: center;
+      margin-bottom: 12px;
 
       .editIcon {
         position: absolute;
@@ -23,6 +40,15 @@
 
     .clientName {
       text-align: center;
+      font-weight: 600;
+      font-size: 18px;
+      margin: 0;
+    }
+    .formTopMargin {
+      margin-top: 45px;
+    }
+    .formBottomMargin {
+      margin-bottom: 30px;
     }
   }
 
