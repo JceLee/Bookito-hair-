@@ -62,7 +62,12 @@ export default function ScheduleCardHistory(props) {
           </Col>
         </Row>
       </Card>
-      <ReviewModal modalHandler={modalHandler} visible={visible} designer={designer} />
+      <ReviewModal
+        modalHandler={modalHandler}
+        visible={visible}
+        appointment={appointment}
+        designer={designer}
+      />
     </>
   );
 }

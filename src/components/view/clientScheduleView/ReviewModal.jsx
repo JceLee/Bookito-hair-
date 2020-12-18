@@ -1,26 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import DesignerCardLeft from "../designerListView/designerCardComponent/designerCardTop/DesignerCardTopLeft";
-import { Modal, Form, Input, Rate, Button } from "antd";
+import { Modal, Form, Input, Button } from "antd";
+import { StarRate } from "../../commonComponents/StarRate";
+import { firebaseStore } from "../../../config/fbConfig";
 
 export default function ReviewModal(props) {
-  const { modalHandler, visible, designer } = props;
-
-  const onFinish = (values) => {
-    console.log("designer: " + designer.email);
-    // console.log("Success:", values);
-  };
+  const { modalHandler, visible, appointment, designer } = props;
+  const [rate, setRate] = useState(0);
+  const [reviewContext, setReviewContext] = useState("asdfas");
 
   const createFooter = () => {
     return (
       <>
-        <Button key="back" id="reviewModalCancelBtn" onClick={modalHandler}>
+        <Button on key="back" id="reviewModalCancelBtn" onClick={modalHandler}>
           Cancel
         </Button>
-        <Button key="submit" id="reviewModalSubmitBtn" onClick={onFinish}>
+        <Button key="submit" id="reviewModalSubmitBtn" onClick={addReviewToDB}>
           Submit
         </Button>
       </>
     );
+  };
+
+  const getRateValue = (rateValue) => {
+    setRate(rateValue);
+  };
+
+  const getReviewContext = (e) => {
+    setReviewContext(e.target.value);
+  };
+
+  const constructReview = () => {
+    const review = {
+      rate: rate,
+      review: reviewContext,
+    };
+    // reset data
+    setReviewContext("");
+    setRate(0);
+    return review;
+  };
+
+  const addReviewToDB = async () => {
+    const appointmentRef = firebaseStore.collection("appointments").doc(appointment.aid);
+    appointmentRef.get().then((res) => {
+      if (res.exists) {
+        appointmentRef.update({
+          review: constructReview(),
+        });
+      }
+    });
   };
 
   return (
@@ -30,6 +59,7 @@ export default function ReviewModal(props) {
       visible={visible}
       destroyOnClose={true}
       bodyStyle={{ padding: "15px" }}
+      onCancel={modalHandler}
       footer={[createFooter()]}
     >
       {designer !== null && (
@@ -39,10 +69,14 @@ export default function ReviewModal(props) {
       <Form id="reviewForm">
         <Form.Item name="rate" className="reviewRateItem">
           <div>Rate Services</div>
-          <Rate />
+          <StarRate onRate={getRateValue} />
         </Form.Item>
         <Form.Item name="comment" className="reviewCommentItem">
-          <Input.TextArea id="reviewComment" placeholder="How did you like the service?" />
+          <Input.TextArea
+            id="reviewComment"
+            placeholder="How did you like the service?"
+            onChange={getReviewContext}
+          />
         </Form.Item>
       </Form>
     </Modal>
