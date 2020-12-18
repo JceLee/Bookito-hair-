@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import DesignerCardLeft from "../designerListView/designerCardComponent/designerCardTop/DesignerCardTopLeft";
 import { Modal, Form, Input, Button } from "antd";
+import { useSelector } from "react-redux";
 import { StarRate } from "../../commonComponents/StarRate";
 import { firebaseStore } from "../../../config/fbConfig";
 
 export default function ReviewModal(props) {
-  const { modalHandler, visible, appointment, designer } = props;
+  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
+  const { modalHandler, visible, appointment } = props;
   const [rate, setRate] = useState(0);
   const [reviewContext, setReviewContext] = useState("asdfas");
 

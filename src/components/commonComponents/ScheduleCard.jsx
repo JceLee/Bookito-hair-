@@ -13,10 +13,10 @@ export default function ScheduleCard(props) {
       ]}
     >
       <Row>
-        <Col span={4} className="scheduleCardDate">
+        <Col span={5} className="scheduleCardDate">
           {date}
         </Col>
-        <Col span={2}>
+        <Col span={1}>
           <Divider type="vertical" className="scheduleCardDivider" />
         </Col>
         <Col span={18}>

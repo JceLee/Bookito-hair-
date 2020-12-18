@@ -1,39 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { Card, Row, Col, Button, Divider } from "antd";
 import { firebaseStore } from "../../config/fbConfig";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import ReviewModal from "../view/clientScheduleView/ReviewModal";
 import BookNowModal from "../view/designerProfileView/designerProfileTop/bookNowModal/BookNowModal";
+import { select_designer } from "../../actions/selectedDesignerAction";
 
 export default function ScheduleCardHistory(props) {
-  const currentUser = useSelector((state) => state.currentUser.currentUser);
+  const dispatch = useDispatch();
   const { appointment } = props;
   const { date, time, designerName, bookedServices, designerId } = appointment;
-  const [hours, setHours] = useState(null);
-  const [designer, setDesigner] = useState(null);
   const [visibleReviewModal, setVisibleReviewModal] = useState(false);
   const [visibleBookNowModal, setVisibleBookNowModal] = useState(false);
 
-  useEffect(() => {
+  const getDesigner = async () => {
     firebaseStore
       .collection("users")
       .doc(designerId)
       .get()
-      .then(function (doc) {
-        setDesigner(doc.data());
+      .then((res) => {
+        dispatch(select_designer(res));
       });
-  }, [designerId]);
+  };
 
-  const modalHandler = () => {
+  const reviewModalHandler = () => {
     setVisibleReviewModal(!visibleReviewModal);
   };
 
-  const openBookNowModal = () => {
-    for (const [k, v] of Object.entries(designer)) {
-      console.log(`${k} - ${v}`);
-      if (k === "hours") setHours(v);
-    }
+  const bookModalHandler = () => {
     setVisibleBookNowModal(!visibleBookNowModal);
+  };
+
+  const openBookNowModal = () => {
+    getDesigner();
+    bookModalHandler();
   };
 
   const printServices = () => {
@@ -50,7 +50,7 @@ export default function ScheduleCardHistory(props) {
         className="scheduleCard"
         actions={[
           <>
-            <Button type="text" className="scheduleCardReviewBtn" onClick={modalHandler}>
+            <Button type="text" className="scheduleCardReviewBtn" onClick={reviewModalHandler}>
               Review
             </Button>
             <Button type="text" className="scheduleCardRebookBtn" onClick={openBookNowModal}>
@@ -61,10 +61,10 @@ export default function ScheduleCardHistory(props) {
         ]}
       >
         <Row>
-          <Col span={4} className="scheduleCardDate">
+          <Col span={5} className="scheduleCardDate">
             {date}
           </Col>
-          <Col span={2}>
+          <Col span={1}>
             <Divider type="vertical" className="scheduleCardDivider" />
           </Col>
           <Col span={18}>
@@ -75,17 +75,11 @@ export default function ScheduleCardHistory(props) {
         </Row>
       </Card>
       <ReviewModal
-        modalHandler={modalHandler}
+        modalHandler={reviewModalHandler}
         visible={visibleReviewModal}
         appointment={appointment}
-        designer={designer}
       />
-      <BookNowModal
-        visible={visibleBookNowModal}
-        hours={hours}
-        customer={currentUser}
-        designer={designer}
-      />
+      <BookNowModal visible={visibleBookNowModal} modalHandler={bookModalHandler} />
     </>
   );
 }

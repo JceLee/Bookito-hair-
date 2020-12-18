@@ -6,9 +6,11 @@ import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
 import { firebaseStore } from "../../../../../config/fbConfig";
 import { notificationForm } from "../../../../../helpers/notificationForm";
+import { useSelector } from "react-redux";
 
 export default function BookNowModal(props) {
-  const { hours, customer, designer } = props;
+  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
+  const currentUser = useSelector((state) => state.currentUser.currentUser);
   const { Step } = Steps;
   const [displayedDay, setDisplayedDay] = useState(null);
   const [key, setKey] = useState("Cut");
@@ -55,17 +57,8 @@ export default function BookNowModal(props) {
 
   const createTimeSelect = (dayAndDate) => {
     const day = dayAndDate.substring(0, 3);
-    const appointmentArray = [
-      { date: "Thu Sep 03 2020", time: "08:00" },
-      { date: "Wed Sep 02 2020", time: "08:30" },
-      { date: "Wed Sep 09 2020", time: "09:00" },
-      { date: "Wed Sep 16 2020", time: "11:00" },
-      { date: "Wed Sep 23 2020", time: "12:00" },
-      { date: "Wed Sep 30 2020", time: "12:30" },
-      { date: "Wed Sep 02 2020", time: "15:00" },
-    ];
-    const [starRawTime, endRawTime] = hours[day][0].tradingHours;
-    const closed = hours[day][0].closed;
+    const [starRawTime, endRawTime] = designer.hours[day][0].tradingHours;
+    const closed = designer.hours[day][0].closed;
     const temp = [];
     for (let i = starRawTime * 30; i <= endRawTime * 30; i += 30) {
       timeSlotTemplate = {
@@ -77,7 +70,7 @@ export default function BookNowModal(props) {
     }
 
     Object.values(temp).forEach((timeSlot) => {
-      Object.values(appointmentArray).forEach((appointment) => {
+      Object.values(appointments).forEach((appointment) => {
         if (appointment.date === dayAndDate && appointment.time === timeSlot.time) {
           timeSlot.disabled = true;
         }
@@ -159,15 +152,14 @@ export default function BookNowModal(props) {
         newCalculationBox[key] = null;
       }
     }
-
     setCalculationBox(newCalculationBox);
   };
 
   const requestNewAppointment = () => {
     const newAppointment = {
-      customerId: customer.uid,
+      customerId: currentUser.uid,
       designerId: designer.uid,
-      customerName: customer.fname + " " + customer.lname,
+      customerName: currentUser.fname + " " + currentUser.lname,
       designerName: designer.fname + " " + designer.lname,
       state: "pending",
       date: displayedDay.toDateString(),
@@ -178,6 +170,7 @@ export default function BookNowModal(props) {
     console.log(newAppointment);
     message.success("Successfully booked!");
     writeAppointmentIntoDB(newAppointment);
+    modalHandler();
   };
 
   const writeAppointmentIntoDB = async (newAppointment) => {
@@ -200,7 +193,7 @@ export default function BookNowModal(props) {
         message: {
           subject: "A REQUEST ARRIVE!",
           text: "Customer A requests a new appointment.",
-          html: notificationForm(designer, customer),
+          html: notificationForm(designer, currentUser),
         },
       })
       .then(() => console.log("Queued email for delivery!"));
@@ -283,22 +276,10 @@ export default function BookNowModal(props) {
     },
   ];
 
-  const [visible, setVisible] = useState(false);
-
-  const showModal = () => {
-    setVisible(true);
-  };
-
-  const handleCancel = () => {
-    setVisible(false);
-  };
+  const { visible, modalHandler } = props;
 
   return (
     <div className="bookNow">
-      <Button className="buttonInProfileLayoutTab" onClick={showModal}>
-        Book Now
-      </Button>
-
       <Modal
         className="bookNowModal"
         title="Book Now"
@@ -328,7 +309,7 @@ export default function BookNowModal(props) {
             )}
           </div>
         }
-        onCancel={handleCancel}
+        onCancel={modalHandler}
         cancelButtonProps={{ style: { display: "none" } }}
       >
         <div id="stepToTopId">

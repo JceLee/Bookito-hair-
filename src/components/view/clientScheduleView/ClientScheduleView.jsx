@@ -53,7 +53,7 @@ export default function ClientSchedule() {
   useEffect(() => {
     sendToMainViewWhenCurrentUserIsNull(currentUser);
     loadAppointment();
-  }, []);
+  }, [currentUser]);
 
   return (
     <div className="clientSchedule">
@@ -61,9 +61,9 @@ export default function ClientSchedule() {
       <Tabs className="clientScheduleTabs" defaultActiveKey="1">
         <TabPane className="upcomingTab" tab="Upcoming" key="1">
           <Row className="clientScheduleViewRow">
-            {conformedAppointment.map((appointment, inx) => (
+            {conformedAppointment.map((appointment) => (
               <ScheduleCard
-                key={inx}
+                key={appointment.aid}
                 name={appointment.designerName}
                 date={appointment.date}
                 time={appointment.time}
@@ -76,9 +76,9 @@ export default function ClientSchedule() {
         </TabPane>
         <TabPane className="pendingTab" tab="Pending" key="2">
           <Row className="clientScheduleViewRow">
-            {pendingAppointment.map((appointment, inx) => (
+            {pendingAppointment.map((appointment) => (
               <ScheduleCard
-                key={inx}
+                key={appointment.aid}
                 name={appointment.designerName}
                 date={appointment.date}
                 time={appointment.time}
@@ -91,8 +91,8 @@ export default function ClientSchedule() {
         </TabPane>
         <TabPane className="historyTab" tab="History" key="3">
           <Row className="clientScheduleViewRow">
-            {completedAndDeclinedAppointment.map((appointment, inx) => (
-              <ScheduleCardHistory key={inx} appointment={appointment} />
+            {completedAndDeclinedAppointment.map((appointment) => (
+              <ScheduleCardHistory key={appointment.aid} appointment={appointment} />
             ))}
           </Row>
         </TabPane>

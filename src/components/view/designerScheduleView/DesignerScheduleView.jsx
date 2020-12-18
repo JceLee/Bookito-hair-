@@ -8,49 +8,80 @@ export default function DesignerSchedule() {
   const [conformedAppointments, setConformedAppointments] = useState([]);
   const [newRequests, setNewRequests] = useState([]);
 
+  useEffect(() => {
+    loadAppointment();
+  }, []);
+
+  useEffect(() => {
+    loadRequests();
+  }, []);
+
   const loadAppointment = () => {
     const conformed = [];
-    const requests = [];
     firebaseStore
       .collection("appointments")
       .where("designerId", "==", currentUser.uid)
+      .where("state", "==", "conformed")
       .get()
       .then((querySnapshot) => {
         querySnapshot.docs.forEach((doc) => {
           let {startDate, endDate, monthAndDate} = formatDate(doc.data().date, doc.data().time);
-          if (doc.data().state === "conformed") {
-            conformed.push({
-              id: doc.data().aid,
-              title: doc.data().customerName,
-              startDate: startDate,
-              endDate: endDate,
-              serviceName: "Men Haircut",
-              price: doc.data().totalPrice,
-              phoneNumber: "7781231234",
-            });
-          } else if (doc.data().state === "pending") {
+          conformed.push({
+            id: doc.data().aid,
+            title: doc.data().customerName,
+            startDate: startDate,
+            endDate: endDate,
+            serviceName: createTag(doc.data().bookedServices).serviceName,
+            price: doc.data().totalPrice,
+            phoneNumber: "7781231234",
+          });
+        });
+        return conformed;
+      }).then((data) => {
+      setConformedAppointments(conformed);
+    });
+  };
+
+  const loadRequests = () => {
+    const requests = [];
+    firebaseStore
+      .collection("appointments")
+      .where("designerId", "==", currentUser.uid)
+      .where("state", "==", "pending")
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.docs.forEach((doc) => {
+          let {monthAndDate} = formatDate(doc.data().date, doc.data().time);
             requests.push({
               id: doc.data().aid,
               clientName: doc.data().customerName,
               date: monthAndDate,
               timeStart: doc.data().time,
               timeEnd: doc.data().time,
-              types: ["cut", "perm"],
+              types: createTag(doc.data().bookedServices).types,
+              price: doc.data().totalPrice,
             });
-          }
         });
-        return {conformed, requests};
+        return requests;
       }).then((data) => {
-      setConformedAppointments(data.conformed);
-      setNewRequests(data.requests);
+      setNewRequests(requests);
     });
   };
 
-  useEffect(() => {
-    loadAppointment();
-  }, []);
+  const createTag = (services) => {
+    const returnValue = {
+      serviceName : "",
+      types: [],
+    };
+    const tags = Object.keys(services);
+    tags.forEach(e => {
+      returnValue.serviceName += services[e].service + " ";
+      returnValue.types.push(services[e].service);
+    });
+    return returnValue;
+  }
 
-  function formatDate(data, time) {
+  const formatDate = (data, time) => {
     const [day, month, date, year] = data.split(" ");
     const timeEnd = time.split(":")[0] + ":" + (parseInt(time.split(":")[1]) + 29);
     const dateHash = {
