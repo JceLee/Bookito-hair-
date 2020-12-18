@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Card, Row, Col, Button, Divider } from "antd";
 import { firebaseStore } from "../../config/fbConfig";
 import { useDispatch } from "react-redux";
@@ -8,18 +8,22 @@ import { select_designer } from "../../actions/selectedDesignerAction";
 
 export default function ScheduleCardHistory(props) {
   const dispatch = useDispatch();
+  // const fetched = useRef(false);
   const { appointment } = props;
   const { date, time, designerName, bookedServices, designerId } = appointment;
   const [visibleReviewModal, setVisibleReviewModal] = useState(false);
   const [visibleBookNowModal, setVisibleBookNowModal] = useState(false);
 
-  const getDesigner = async () => {
+  const getDesigner = () => {
     firebaseStore
       .collection("users")
       .doc(designerId)
       .get()
-      .then((res) => {
-        dispatch(select_designer(res));
+      .then((snapshot) => {
+        // if (!fetched.current) {
+        dispatch(select_designer(snapshot.data()));
+        // fetched.current = true;
+        // }
       });
   };
 
