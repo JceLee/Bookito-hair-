@@ -3,7 +3,7 @@ import { Row, Col, Avatar, Tag } from "antd";
 import { StarRead } from "../../../../commonComponents/StarRate";
 
 export default function DesignerCardTop(props) {
-  const { fname, rateScore, rateCount, services, profile } = props;
+  const { fname, rateScore, rateCount, distance, services, profile } = props;
   return (
     <Row className="designerCardTop">
       <Col>
@@ -16,7 +16,7 @@ export default function DesignerCardTop(props) {
           <Col><StarRead rateScore={rateScore || 0} rateCount={rateCount || 0} /></Col>
         </Row>
         <Row>
-          <p className="designerCardDistance">5km from you</p>
+          {distance && <p className="designerCardDistance">{`${distance}km from you`}</p>}
         </Row>
         <Row>
           <div className="designerCardServices">

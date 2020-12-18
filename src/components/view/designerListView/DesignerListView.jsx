@@ -12,6 +12,7 @@ import {useHistory} from "react-router-dom";
 import {designerTags} from "../../../constants/designerTags";
 import {designerTypes} from "../../../constants/designerTypes";
 import { geocode } from "../../../helpers/geocode";
+import { getDistanceFromLatLonInKm } from "../../../helpers/geocode";
 
 
 export default function DesignerListView(props) {
@@ -60,12 +61,24 @@ export default function DesignerListView(props) {
     geocode(props.location.search).then(latLng => {
       if (latLng) {
           setUserLocation(latLng);
-          console.log(latLng);
-      } else {
+
+          // Calculate and set distance of designers from user location
+          designers.forEach(designer => {
+            if (designer.latLng) {
+              designer.distance = getDistanceFromLatLonInKm(
+                designer.latLng.lat, 
+                designer.latLng.lng, 
+                latLng.lat, 
+                latLng.lng);
+            }
+          });
+        } else {
           setUserLocation(defaultLocation);
           console.log("Unable to get location!");
       }
     });
+
+
   }, [dispatch, props.location.search]);
 
   // Desktop map controls
