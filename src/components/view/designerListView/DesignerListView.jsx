@@ -35,10 +35,31 @@ export default function DesignerListView(props) {
     history.push(route);
   };
 
+  const updateSortBy = (sortByKey) => {
+    switch (sortByKey) {
+      case "distance":
+        console.log("distance");
+        setDesignersCurrent([...designersCurrent].sort((a, b) => {return a.distance - b.distance}));
+        break;
+      case "review":
+        console.log("review");
+        break;
+      case "priceLow":
+        break;
+      case "priceHigh":
+        break;
+      case "new":
+        console.log("distance");
+        break;
+      default:
+        break;
+    }
+  };
+
   const updateCheckedFilterTags = (checkedTags) => {
     setCheckedFilterTags(checkedTags);
     setDesignersCurrent(designers.filter(designer => Object.keys(designer.services).some(tag => checkedTags.includes(tag))));
-  }
+  };
 
   useEffect(() => {
     const params = queryString.parse(props.location.search);
@@ -117,6 +138,7 @@ export default function DesignerListView(props) {
                   updateCheckedFilterTags={updateCheckedFilterTags}
                   numberOfDesigners={Object.keys(designersCurrent).length}
                   location="Vancouver"
+                  updateSortBy={updateSortBy}
                 />
               </div>
               {/* Desktop map toggle button - used to show map if closed by the user */}

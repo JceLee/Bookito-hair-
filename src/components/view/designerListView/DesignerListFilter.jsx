@@ -4,7 +4,7 @@ import { TagOutlined, CalendarOutlined, ClockCircleOutlined, DownOutlined, Check
 import DesignerListFilterTags from "./DesignerListFilterTags";
 
 export default function DesignerListFilter(props) {
-  const { filterTags, updateCheckedFilterTags, numberOfDesigners, location } = props;
+  const { filterTags, updateCheckedFilterTags, numberOfDesigners, location, updateSortBy } = props;
   const { Panel } = Collapse;
 
   const [activeKey, setActiveKey] = useState([0]);
@@ -21,6 +21,7 @@ export default function DesignerListFilter(props) {
 
   const handleSortBy = (e) => {
     setSortBy(e.key);
+    updateSortBy(e.key);
   }
 
   const onShowResultsPress = () => {
