@@ -5,7 +5,9 @@ import { Row, Col } from "antd";
 import BlackBtn from "../../../commonComponents/BlackBtn";
 
 export default function DeleteAppointmentModal(props) {
-  const { deleteAppointmentModalState, displayDeleteAppointmentModal } = props;
+  const { deleteAppointmentModalState, displayDeleteAppointmentModal, appointmentID } = props;
+
+  console.log(appointmentID);
 
   return (
     <Dialog
