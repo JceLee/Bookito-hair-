@@ -11,6 +11,7 @@ import {CloseOutlined} from "@ant-design/icons";
 import {useHistory} from "react-router-dom";
 import {designerTags} from "../../../constants/designerTags";
 import {designerTypes} from "../../../constants/designerTypes";
+import { geocode } from "../../../helpers/geocode";
 
 
 export default function DesignerListView(props) {
@@ -23,6 +24,10 @@ export default function DesignerListView(props) {
   const [mapVisibleDesktop, setMapVisibleDesktop] = useState(true);
   const [filterTags, setFilterTags] = useState([]);
   const [checkedFilterTags, setCheckedFilterTags] = useState([]);
+
+  // User location variables
+  const [userLocation, setUserLocation] = useState();
+  const [defaultLocation] = useState({lat: 34.0522, lng: 118.2437 });
 
   const handleSearch = (designer) => {
     const route = `/designer_profile?uid=${designer.uid}`;
@@ -50,6 +55,17 @@ export default function DesignerListView(props) {
         });
         dispatch(load_database(newDesigners));
       });
+
+    // Get and set user location
+    geocode(props.location.search).then(latLng => {
+      if (latLng) {
+          setUserLocation(latLng);
+          console.log(latLng);
+      } else {
+          setUserLocation(defaultLocation);
+          console.log("Unable to get location!");
+      }
+    });
   }, [dispatch, props.location.search]);
 
   // Desktop map controls
@@ -139,7 +155,7 @@ export default function DesignerListView(props) {
             <div className="mapContainer">
               <Map
                 isDesktop={false}
-                initialLocationString={props.location.search}
+                userLocation={userLocation}
                 designers={Object.values(designersCurrent)}
               />
             </div>
@@ -161,7 +177,7 @@ export default function DesignerListView(props) {
             <div className="mapContainer">
               <Map
                 isDesktop={true}
-                initialLocationString={props.location.search}
+                userLocation={userLocation}
                 designers={Object.values(designersCurrent)}
               />
             </div>
