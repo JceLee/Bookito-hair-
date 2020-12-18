@@ -14,29 +14,37 @@ import {designerTypes} from "../../../constants/designerTypes";
 
 
 export default function DesignerListView(props) {
-  const [mapVisibleMobile, setMapVisibleMobile] = useState(false);
-  const [mapVisibleDesktop, setMapVisibleDesktop] = useState(true);
-  const [filterTags, setFilterTags] = useState([]);
-
   const designers = useSelector((state) => state.firestore.designers);
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const handleSearch = (designer) => () => {
+  const [designersCurrent, setDesignersCurrent] = useState([...designers]);
+  const [mapVisibleMobile, setMapVisibleMobile] = useState(false);
+  const [mapVisibleDesktop, setMapVisibleDesktop] = useState(true);
+  const [filterTags, setFilterTags] = useState([]);
+  const [checkedFilterTags, setCheckedFilterTags] = useState([]);
+
+  const handleSearch = (designer) => {
     const route = `/designer_profile?uid=${designer.uid}`;
     history.push(route);
   };
 
+  const updateCheckedFilterTags = (checkedTags) => {
+    setCheckedFilterTags(checkedTags);
+    setDesignersCurrent(designers.filter(designer => Object.keys(designer.services).some(tag => checkedTags.includes(tag))));
+  }
+
   useEffect(() => {
     const params = queryString.parse(props.location.search);
     setFilterTags(designerTags[params["type"]]);
-    const newDesigners = [];
+    setCheckedFilterTags(checkedFilterTags);
     firebaseStore
       .collection("users")
       .where("location", "==", params["location"])
       .where("accountTypes", "==", designerTypes.hair)
       .get()
       .then((querySnapshot) => {
+        const newDesigners = [];
         querySnapshot.docs.forEach((doc) => {
           newDesigners.push(doc.data());
         });
@@ -76,8 +84,9 @@ export default function DesignerListView(props) {
             <div className="listNavBar">
               <div className="filter">
                 <DesignerListFilter
-                  tags={filterTags || []}
-                  numberOfDesigners={Object.keys(designers).length}
+                  filterTags={filterTags}
+                  updateCheckedFilterTags={updateCheckedFilterTags}
+                  numberOfDesigners={Object.keys(designersCurrent).length}
                   location="Vancouver"
                 />
               </div>
@@ -97,7 +106,9 @@ export default function DesignerListView(props) {
               </Button>
             </div>
             {/* Designer listing */}
-            {designers.map((designer, index) => (
+            {
+            // console.log(designers) &&
+            designersCurrent.map((designer, index) => (
               <div key={index} className="designerList">
                 <DesignerCardComponent
                   designer={designer}
@@ -129,7 +140,7 @@ export default function DesignerListView(props) {
               <Map
                 isDesktop={false}
                 initialLocationString={props.location.search}
-                designers={Object.values(designers)}
+                designers={Object.values(designersCurrent)}
               />
             </div>
           </Drawer>
@@ -151,7 +162,7 @@ export default function DesignerListView(props) {
               <Map
                 isDesktop={true}
                 initialLocationString={props.location.search}
-                designers={Object.values(designers)}
+                designers={Object.values(designersCurrent)}
               />
             </div>
           </div>

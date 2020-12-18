@@ -20,9 +20,9 @@ export default function DesignerCardTop(props) {
         </Row>
         <Row>
           <div className="designerCardServices">
-            {services && Object.keys(services).map(serviceKey => (
+            {services && Object.keys(services).map((serviceKey, i) => (
               services[serviceKey] !== [] && 
-              <Tag className="serviceTag" /*color="#332C1E"*/>{serviceKey}</Tag>
+              <Tag key={`designerCardService${i}`} className="serviceTag" /*color="#332C1E"*/>{serviceKey}</Tag>
             ))}
           </div>
         </Row>

@@ -8,7 +8,7 @@ export default function DesignerCardComponent(props) {
   const { designer, handleSearch } = props;
 
   return (
-    <div className="designerCardComponent" onClick={handleSearch(designer)}>
+    <div className="designerCardComponent" onClick={() => handleSearch(designer)}>
       <DesignerCardTop
         fname={designer.fname}
         rateScore={designer.rate}
