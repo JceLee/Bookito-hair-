@@ -1,23 +1,27 @@
-import React  from "react";
-import {Card, Row, Col, Button, Divider, notification} from "antd";
-import {firebaseStore} from "../../config/fbConfig";
+import React from "react";
+import { Card, Row, Col, Button, Divider, notification } from "antd";
+import { firebaseStore } from "../../config/fbConfig";
 
 export default function ScheduleCardRequest(props) {
   const { newRequest, close, forceUpdate } = props;
 
   const changeState = (state) => {
-    firebaseStore.collection("appointments").doc(newRequest.id).update({
-      state: state
-    }).then(function() {
-      close();
-      forceUpdate();
-      return notification.success({
-        className: "notificationSaved",
-        style: {top: "550px"},
-        message: "Saved",
-        duration: "2",
+    firebaseStore
+      .collection("appointments")
+      .doc(newRequest.id)
+      .update({
+        state: state,
+      })
+      .then(function () {
+        close();
+        forceUpdate();
+        return notification.success({
+          className: "notificationSaved",
+          style: { top: "550px" },
+          message: "Saved",
+          duration: "2",
+        });
       });
-    });
   };
 
   return (
@@ -26,20 +30,32 @@ export default function ScheduleCardRequest(props) {
         className="scheduleCard"
         actions={[
           <>
-            <Button type="text" className="scheduleCardReviewBtn" onClick={()=> {changeState("conformed")}}>
+            <Button
+              type="text"
+              className="scheduleCardReviewBtn"
+              onClick={() => {
+                changeState("conformed");
+              }}
+            >
               Accept
             </Button>
-            <Button type="text" className="scheduleCardRebookBtn" onClick={()=> {changeState("declined")}}>
+            <Button
+              type="text"
+              className="scheduleCardRebookBtn"
+              onClick={() => {
+                changeState("declined");
+              }}
+            >
               Decline
             </Button>
           </>,
         ]}
       >
         <Row>
-          <Col span={4} className="scheduleCardDate">
+          <Col span={5} className="scheduleCardDate">
             {newRequest.date}
           </Col>
-          <Col span={2}>
+          <Col span={1}>
             <Divider type="vertical" className="scheduleCardDivider" />
           </Col>
           <Col span={18}>
