@@ -38,7 +38,7 @@ export default function BookNowModal(props) {
         });
         setAppointments(loadingAppointment);
       });
-  }, []);
+  }, [designer.uid]);
 
   let timeSlotTemplate = {
     time: null,
@@ -216,7 +216,7 @@ export default function BookNowModal(props) {
       document.getElementById("selectTimePosition").scrollIntoView();
     }
     setBackToTimePosition(false);
-  });
+  }, [backToTimePosition]);
 
   const stepChoice = (item) => {
     if (item.id === 1) {
@@ -279,48 +279,46 @@ export default function BookNowModal(props) {
   const { visible, modalHandler } = props;
 
   return (
-    <div className="bookNow">
-      <Modal
-        className="bookNowModal"
-        title="Book Now"
-        visible={visible}
-        footer={
-          <div>
-            {current === 0 && <Button className="mockData">MockData</Button>}
-            {current > 0 && (
-              <Button className="previousBtn" onClick={() => prev()}>
-                Previous
-              </Button>
-            )}
-            {current < steps.length - 1 && (
-              <Button
-                className="nextBtnInStepOne"
-                type="primary"
-                style={{ position: "absolute", right: 0 }}
-                onClick={() => next()}
-              >
-                Next
-              </Button>
-            )}
-            {current === steps.length - 1 && (
-              <Button className="doneBtn" type="primary" onClick={() => requestNewAppointment()}>
-                Done
-              </Button>
-            )}
-          </div>
-        }
-        onCancel={modalHandler}
-        cancelButtonProps={{ style: { display: "none" } }}
-      >
-        <div id="stepToTopId">
-          <Steps className="steps" current={current} onChange={onChange} progressDot>
-            {steps.map((item) => (
-              <Step key={item.title} title={item.title} />
-            ))}
-          </Steps>
+    <Modal
+      className="bookNowModal"
+      title="Book Now"
+      visible={visible}
+      footer={
+        <div>
+          {current === 0 && <Button className="mockData">MockData</Button>}
+          {current > 0 && (
+            <Button className="previousBtn" onClick={() => prev()}>
+              Previous
+            </Button>
+          )}
+          {current < steps.length - 1 && (
+            <Button
+              className="nextBtnInStepOne"
+              type="primary"
+              style={{ position: "absolute", right: 0 }}
+              onClick={() => next()}
+            >
+              Next
+            </Button>
+          )}
+          {current === steps.length - 1 && (
+            <Button className="doneBtn" type="primary" onClick={() => requestNewAppointment()}>
+              Done
+            </Button>
+          )}
         </div>
-        {steps[current].content}
-      </Modal>
-    </div>
+      }
+      onCancel={modalHandler}
+      cancelButtonProps={{ style: { display: "none" } }}
+    >
+      <div id="stepToTopId">
+        <Steps className="steps" current={current} onChange={onChange} progressDot>
+          {steps.map((item) => (
+            <Step key={item.title} title={item.title} />
+          ))}
+        </Steps>
+      </div>
+      {steps[current].content}
+    </Modal>
   );
 }
