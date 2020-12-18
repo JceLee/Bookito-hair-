@@ -159,6 +159,7 @@ export default function Calendar(props) {
           deleteAppointmentModalState={deleteAppointmentModalState}
           displayDeleteAppointmentModal={displayDeleteAppointmentModal}
           appointmentID = {appointmentID.current}
+          forceUpdate = {forceUpdate}
         />
         <AddAppointmentModal
           addAppointmentModalState={addAppointmentModalState}

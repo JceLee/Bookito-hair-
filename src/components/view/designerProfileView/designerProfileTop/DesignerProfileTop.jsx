@@ -59,31 +59,17 @@ const formInitialValues = {
 };
 
 export default function DesignerProfileTop(props) {
-  const {
-    isAuthenticated,
-    fname,
-    lname,
-    totalRate,
-    works,
-    hours,
-    location,
-    services,
-    customer,
-    designer,
-    photoURL,
-  } = props;
+  const currentUser = useSelector((state) => state.currentUser.currentUser);
+  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
   const [stickyNavPositionFromTop] = useState(searchBarHeight);
   const [height, setHeight] = useState(0);
   const [visible, setVisible] = useState(false);
   const [form] = Form.useForm();
-  const [client, setClient] = useState(customer);
-
-  console.log(services);
 
   const editProfilePanels = [
     {
       header: "Service & Price",
-      content: <ServiceNPriceForm services={services}/>,
+      content: <ServiceNPriceForm />,
     },
     {
       header: "Hours",
@@ -92,7 +78,7 @@ export default function DesignerProfileTop(props) {
     {header: "Address & Phone", content: <AddressPhoneForm/>},
     {
       header: "Works",
-      content: <WorksForm works={works} client={client} setClient={setClient}/>,
+      content: <WorksForm />,
     },
   ];
 
@@ -113,26 +99,6 @@ export default function DesignerProfileTop(props) {
       photos: values.fileList,
     };
     console.log(updatedProfile);
-    // console.log(
-    //   firebaseStore
-    //     .collection("users")
-    //     .doc(customer.uid)
-    //     .get()
-    //     .then(function (doc) {
-    //       return doc.data();
-    //     })
-    // );
-    // firebaseStore
-    //   .collection("users")
-    //   .doc(customer.uid)
-    //   .set(updatedProfile)
-    //   .then(function () {
-    //     return message.success({
-    //       content: "Saved",
-    //       duration: "2",
-    //       className: "onFinishMessage",
-    //     });
-    //   });
   };
 
   const onFinishFailed = (errors) => {
@@ -152,19 +118,19 @@ export default function DesignerProfileTop(props) {
   return (
     <div className="designerTop">
       <div className="designerProfile">
-        <Avatar className="designerProfileImage" size={avatarSize} src={photoURL}/>
+        <Avatar className="designerProfileImage" size={avatarSize} src={designer.photoURL}/>
         <div className="designerNameRateLocation">
           <h2>
-            {fname} {lname}
+            {designer.fname} {designer.lname}
           </h2>
-          <ReadOnlyStar rate={totalRate}/>
-          <p>{location}</p>
+          <ReadOnlyStar rate={designer.rate}/>
+          <p>{designer.location}</p>
         </div>
       </div>
       <Affix offsetTop={stickyNavPositionFromTop}>
         <div id="tabWithButton">
           <DesignerNav searchBarHeight={searchBarHeight} height={height}/>
-          {isAuthenticated ? (
+          {props.authentication ? (
             <>
               <Button className="buttonInProfileLayoutTab" onClick={showModal}>
                 Edit Profile
@@ -219,9 +185,6 @@ export default function DesignerProfileTop(props) {
             </>
           ) : (
             <BookNowModal
-              hours={hours}
-              customer={customer}
-              designer={designer}
             />
           )}
         </div>

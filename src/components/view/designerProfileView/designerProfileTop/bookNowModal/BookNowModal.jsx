@@ -6,9 +6,11 @@ import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
 import { firebaseStore } from "../../../../../config/fbConfig";
 import { notificationForm } from "../../../../../helpers/notificationForm";
+import {useSelector} from "react-redux";
 
-export default function BookNowModal(props) {
-  const { hours, customer, designer } = props;
+export default function BookNowModal() {
+  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
+  const currentUser = useSelector((state) => state.currentUser.currentUser);
   const { Step } = Steps;
   const [displayedDay, setDisplayedDay] = useState(null);
   const [key, setKey] = useState("Cut");
@@ -52,8 +54,8 @@ export default function BookNowModal(props) {
 
   const createTimeSelect = (dayAndDate) => {
     const day = dayAndDate.substring(0, 3);
-    const [starRawTime, endRawTime] = hours[day][0].tradingHours;
-    const closed = hours[day][0].closed;
+    const [starRawTime, endRawTime] = designer.hours[day][0].tradingHours;
+    const closed = designer.hours[day][0].closed;
     const temp = [];
     for (let i = starRawTime * 30; i <= endRawTime * 30; i += 30) {
       timeSlotTemplate = {
@@ -155,9 +157,9 @@ export default function BookNowModal(props) {
 
   const requestNewAppointment = () => {
     const newAppointment = {
-      customerId: customer.uid,
+      customerId: currentUser.uid,
       designerId: designer.uid,
-      customerName: customer.fname + " " + customer.lname,
+      customerName: currentUser.fname + " " + currentUser.lname,
       designerName: designer.fname + " " + designer.lname,
       state: "pending",
       date: displayedDay.toDateString(),
@@ -191,7 +193,7 @@ export default function BookNowModal(props) {
         message: {
           subject: "A REQUEST ARRIVE!",
           text: "Customer A requests a new appointment.",
-          html: notificationForm(designer, customer),
+          html: notificationForm(designer, currentUser),
         },
       })
       .then(() => console.log("Queued email for delivery!"));

@@ -31,7 +31,7 @@ export default function MessengerListView() {
       });
     };
     fetchData();
-  }, []);
+  }, [currentUser]);
 
   const snapshotToArray = (snapshot) => {
     const returnArr = [];
