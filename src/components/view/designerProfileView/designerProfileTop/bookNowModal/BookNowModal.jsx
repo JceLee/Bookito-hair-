@@ -12,6 +12,7 @@ export default function BookNowModal(props) {
   const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
   const currentUser = useSelector((state) => state.currentUser.currentUser);
   const { Step } = Steps;
+  const { visible, modalHandler } = props;
   const [displayedDay, setDisplayedDay] = useState(null);
   const [key, setKey] = useState("Cut");
   const [calculationBox, setCalculationBox] = useState([]);
@@ -276,38 +277,40 @@ export default function BookNowModal(props) {
     },
   ];
 
-  const { visible, modalHandler } = props;
+  const createFooter = () => {
+    return (
+      <>
+        {current === 0 && <Button className="mockData">MockData</Button>}
+        {current > 0 && (
+          <Button className="previousBtn" onClick={() => prev()}>
+            Previous
+          </Button>
+        )}
+        {current < steps.length - 1 && (
+          <Button
+            className="nextBtnInStepOne"
+            type="primary"
+            style={{ position: "absolute", right: 0 }}
+            onClick={() => next()}
+          >
+            Next
+          </Button>
+        )}
+        {current === steps.length - 1 && (
+          <Button className="doneBtn" type="primary" onClick={() => requestNewAppointment()}>
+            Done
+          </Button>
+        )}
+      </>
+    );
+  };
 
   return (
     <Modal
       className="bookNowModal"
       title="Book Now"
       visible={visible}
-      footer={
-        <div>
-          {current === 0 && <Button className="mockData">MockData</Button>}
-          {current > 0 && (
-            <Button className="previousBtn" onClick={() => prev()}>
-              Previous
-            </Button>
-          )}
-          {current < steps.length - 1 && (
-            <Button
-              className="nextBtnInStepOne"
-              type="primary"
-              style={{ position: "absolute", right: 0 }}
-              onClick={() => next()}
-            >
-              Next
-            </Button>
-          )}
-          {current === steps.length - 1 && (
-            <Button className="doneBtn" type="primary" onClick={() => requestNewAppointment()}>
-              Done
-            </Button>
-          )}
-        </div>
-      }
+      footer={[createFooter()]}
       onCancel={modalHandler}
       cancelButtonProps={{ style: { display: "none" } }}
     >

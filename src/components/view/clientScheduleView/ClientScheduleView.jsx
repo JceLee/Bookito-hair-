@@ -76,9 +76,9 @@ export default function ClientSchedule() {
         </TabPane>
         <TabPane className="pendingTab" tab="Pending" key="2">
           <Row className="clientScheduleViewRow">
-            {pendingAppointment.map((appointment) => (
+            {pendingAppointment.map((appointment, inx) => (
               <ScheduleCard
-                key={appointment.aid}
+                key={inx}
                 name={appointment.designerName}
                 date={appointment.date}
                 time={appointment.time}

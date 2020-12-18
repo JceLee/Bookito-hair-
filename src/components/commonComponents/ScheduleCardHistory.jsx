@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Row, Col, Button, Divider } from "antd";
 import { firebaseStore } from "../../config/fbConfig";
 import { useDispatch } from "react-redux";
@@ -8,24 +8,20 @@ import { select_designer } from "../../actions/selectedDesignerAction";
 
 export default function ScheduleCardHistory(props) {
   const dispatch = useDispatch();
-  // const fetched = useRef(false);
   const { appointment } = props;
   const { date, time, designerName, bookedServices, designerId } = appointment;
   const [visibleReviewModal, setVisibleReviewModal] = useState(false);
   const [visibleBookNowModal, setVisibleBookNowModal] = useState(false);
 
-  const getDesigner = () => {
+  useEffect(() => {
     firebaseStore
       .collection("users")
       .doc(designerId)
       .get()
       .then((snapshot) => {
-        // if (!fetched.current) {
         dispatch(select_designer(snapshot.data()));
-        // fetched.current = true;
-        // }
       });
-  };
+  }, [designerId]);
 
   const reviewModalHandler = () => {
     setVisibleReviewModal(!visibleReviewModal);
@@ -36,7 +32,6 @@ export default function ScheduleCardHistory(props) {
   };
 
   const openBookNowModal = () => {
-    getDesigner();
     bookModalHandler();
   };
 
@@ -58,7 +53,6 @@ export default function ScheduleCardHistory(props) {
               Review
             </Button>
             <Button type="text" className="scheduleCardRebookBtn" onClick={openBookNowModal}>
-              {/* <Button type="text" className="scheduleCardRebookBtn"> */}
               Rebook
             </Button>
           </>,
@@ -78,12 +72,20 @@ export default function ScheduleCardHistory(props) {
           </Col>
         </Row>
       </Card>
-      <ReviewModal
-        modalHandler={reviewModalHandler}
-        visible={visibleReviewModal}
-        appointment={appointment}
-      />
-      <BookNowModal visible={visibleBookNowModal} modalHandler={bookModalHandler} />
+
+      {/* Review modal */}
+      {visibleReviewModal ? (
+        <ReviewModal
+          modalHandler={reviewModalHandler}
+          visible={visibleReviewModal}
+          appointment={appointment}
+        />
+      ) : null}
+
+      {/* Book modal */}
+      {visibleBookNowModal ? (
+        <BookNowModal visible={visibleBookNowModal} modalHandler={bookModalHandler} />
+      ) : null}
     </>
   );
 }
