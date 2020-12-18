@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Card, Row, Col, Button, Divider } from "antd";
-import ReviewModal from "../view/clientScheduleView/ReviewModal";
 import { firebaseStore } from "../../config/fbConfig";
+import { useSelector } from "react-redux";
+import ReviewModal from "../view/clientScheduleView/ReviewModal";
+import BookNowModal from "../view/designerProfileView/designerProfileTop/bookNowModal/BookNowModal";
 
 export default function ScheduleCardHistory(props) {
+  const currentUser = useSelector((state) => state.currentUser.currentUser);
   const { appointment } = props;
-  const { date, time, designerName, designerId, bookedServices } = appointment;
+  const { date, time, designerName, bookedServices, designerId } = appointment;
+  const [hours, setHours] = useState(null);
   const [designer, setDesigner] = useState(null);
-  const [visible, setVisible] = useState(false);
+  const [visibleReviewModal, setVisibleReviewModal] = useState(false);
+  const [visibleBookNowModal, setVisibleBookNowModal] = useState(false);
 
   useEffect(() => {
     firebaseStore
@@ -17,19 +22,25 @@ export default function ScheduleCardHistory(props) {
       .then(function (doc) {
         setDesigner(doc.data());
       });
-  }, []);
+  }, [designerId]);
 
   const modalHandler = () => {
-    setVisible(!visible);
+    setVisibleReviewModal(!visibleReviewModal);
+  };
+
+  const openBookNowModal = () => {
+    for (const [k, v] of Object.entries(designer)) {
+      console.log(`${k} - ${v}`);
+      if (k === "hours") setHours(v);
+    }
+    setVisibleBookNowModal(!visibleBookNowModal);
   };
 
   const printServices = () => {
     var services = "";
     Object.entries(bookedServices).map((type) => {
-      console.log("type: " + type);
       services += type[1].service;
     });
-
     return services;
   };
 
@@ -42,7 +53,8 @@ export default function ScheduleCardHistory(props) {
             <Button type="text" className="scheduleCardReviewBtn" onClick={modalHandler}>
               Review
             </Button>
-            <Button type="text" className="scheduleCardRebookBtn">
+            <Button type="text" className="scheduleCardRebookBtn" onClick={openBookNowModal}>
+              {/* <Button type="text" className="scheduleCardRebookBtn"> */}
               Rebook
             </Button>
           </>,
@@ -64,8 +76,14 @@ export default function ScheduleCardHistory(props) {
       </Card>
       <ReviewModal
         modalHandler={modalHandler}
-        visible={visible}
+        visible={visibleReviewModal}
         appointment={appointment}
+        designer={designer}
+      />
+      <BookNowModal
+        visible={visibleBookNowModal}
+        hours={hours}
+        customer={currentUser}
         designer={designer}
       />
     </>

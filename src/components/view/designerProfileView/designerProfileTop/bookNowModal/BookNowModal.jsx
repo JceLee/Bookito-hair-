@@ -22,7 +22,10 @@ export default function BookNowModal(props) {
   const [appointments, setAppointments] = useState([]);
   const loadingAppointment = [];
 
+  console.log("d.uid: " + designer.uid);
+
   useEffect(() => {
+    console.log("In booknow modal");
     firebaseStore
       .collection("appointments")
       .where("designerId", "==", designer.uid)
@@ -33,7 +36,7 @@ export default function BookNowModal(props) {
         });
         setAppointments(loadingAppointment);
       });
-  }, [appointments]);
+  }, []);
 
   let timeSlotTemplate = {
     time: null,
@@ -75,10 +78,7 @@ export default function BookNowModal(props) {
 
     Object.values(temp).forEach((timeSlot) => {
       Object.values(appointmentArray).forEach((appointment) => {
-        if (
-          appointment.date === dayAndDate &&
-          appointment.time === timeSlot.time
-        ) {
+        if (appointment.date === dayAndDate && appointment.time === timeSlot.time) {
           timeSlot.disabled = true;
         }
       });
@@ -322,11 +322,7 @@ export default function BookNowModal(props) {
               </Button>
             )}
             {current === steps.length - 1 && (
-              <Button
-                className="doneBtn"
-                type="primary"
-                onClick={() => requestNewAppointment()}
-              >
+              <Button className="doneBtn" type="primary" onClick={() => requestNewAppointment()}>
                 Done
               </Button>
             )}
@@ -336,12 +332,7 @@ export default function BookNowModal(props) {
         cancelButtonProps={{ style: { display: "none" } }}
       >
         <div id="stepToTopId">
-          <Steps
-            className="steps"
-            current={current}
-            onChange={onChange}
-            progressDot
-          >
+          <Steps className="steps" current={current} onChange={onChange} progressDot>
             {steps.map((item) => (
               <Step key={item.title} title={item.title} />
             ))}

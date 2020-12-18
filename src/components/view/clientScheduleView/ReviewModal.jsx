@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DesignerCardLeft from "../designerListView/designerCardComponent/designerCardTop/DesignerCardTopLeft";
 import { Modal, Form, Input, Button } from "antd";
 import { StarRate } from "../../commonComponents/StarRate";
@@ -33,7 +33,7 @@ export default function ReviewModal(props) {
   const constructReview = () => {
     const review = {
       rate: rate,
-      review: reviewContext,
+      reviewContext: reviewContext,
     };
     // reset data
     setReviewContext("");
@@ -50,6 +50,7 @@ export default function ReviewModal(props) {
         });
       }
     });
+    modalHandler();
   };
 
   return (
