@@ -1,12 +1,40 @@
 .messengerCardComponent {
-  margin: 20px;
+  margin: 0 20px 0 20px;
+  display: flex;
+
+  // .photoImage {
+  //   margin-top: 6px;
+  //   margin-bottom: 10px;
+  // }
+  // .msgListImage {
+  //   margin: 5px 0;
+  // }
+  .NameAndDate {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 4% 4% 0;
+
+    @include tabletP {
+      margin: 0 4% 2% 0;
+    }
+  }
+
+  .textMsg {
+    font-size: 12px;
+    height: 20px;
+    overflow: hidden;
+  }
 
   .rightSide {
     margin-left: 10px;
+
+    @include tabletP {
+      width: 100%;
+    }
   }
 }
 
-.chatRoom{
+.chatRoom {
   display: flex;
   padding: 10px;
 
@@ -21,7 +49,7 @@
       margin-top: 7px;
 
       .leftBubble:after {
-        content: '';
+        content: "";
         position: absolute;
         left: 0;
         top: 13px;
@@ -36,7 +64,7 @@
       }
 
       .rightBubble:after {
-        content: '';
+        content: "";
         position: absolute;
         right: 0;
         top: 13px;
@@ -53,9 +81,9 @@
       .rightBubble {
         position: relative;
         background: #dcf8c6;
-        border-top-left-radius: .4em;
-        border-bottom-left-radius: .4em;
-        border-bottom-right-radius: .4em;
+        border-top-left-radius: 0.4em;
+        border-bottom-left-radius: 0.4em;
+        border-bottom-right-radius: 0.4em;
         padding: 5px 10px 10px;
         left: 15%;
         text-align: right;
@@ -74,9 +102,9 @@
       .leftBubble {
         position: relative;
         background: lightblue;
-        border-top-right-radius: .4em;
-        border-bottom-left-radius: .4em;
-        border-bottom-right-radius: .4em;
+        border-top-right-radius: 0.4em;
+        border-bottom-left-radius: 0.4em;
+        border-bottom-right-radius: 0.4em;
         padding: 5px 10px 10px;
         left: 5%;
 
@@ -115,7 +143,7 @@
           height: 100%;
           border: 1px solid rgba(0, 0, 0, 0.23);
         }
-        .submitWrapper{
+        .submitWrapper {
           width: 15%;
           .sendMessage {
             width: 100%;
@@ -123,10 +151,9 @@
             font-size: 12px;
             background-color: #fdfdfd;
             color: #1b1b1b;
-            border: 1px solid rgba(0, 0, 0, 0.23)
+            border: 1px solid rgba(0, 0, 0, 0.23);
           }
         }
-
       }
     }
   }

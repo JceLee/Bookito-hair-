@@ -16,6 +16,7 @@ export default function MessengerListView() {
   const [room, setRoom] = useState([]);
   const [nickname, setNickname] = useState("");
   const history = useHistory();
+  const [exampleText, setExampleText] = useState("Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words");
 
   console.log("haha");
   console.log(room);
@@ -51,6 +52,19 @@ export default function MessengerListView() {
 
     return returnArr;
   };
+
+  const oneLineTextMsg = (text) => {
+    // let firstLine = text.substr(0, text.indexOf("\n"));
+    // return firstLine;
+    // if (text.length > 60) {
+    //   const exceededCharacters = text.length - 60;
+    //   // let oneLineText = text.substring(0, text.length - exceededCharacters);
+    //   oneLineText += '...';
+    //   return oneLineText;
+    // } else {
+      return text;
+    // }
+  }
 
   const loadLastMsg = async roomID => {
     let lastMsg = await firebaseDate.ref("chats/")
@@ -92,7 +106,8 @@ export default function MessengerListView() {
           photoURL={currentUser.photoURL}
           enterChatRoom={enterChatRoom}
           roomID={item.roomID}
-          lastMsg={"test message"}
+          msgDate={"2020.12.17"}
+          lastMsg={oneLineTextMsg(exampleText)}
         />
       ))}
     </div>

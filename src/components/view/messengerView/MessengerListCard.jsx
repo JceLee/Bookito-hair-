@@ -1,8 +1,8 @@
 import React from "react";
-import { Row, Avatar, Divider, Button } from "antd";
+import { Row, Col, Avatar, Divider, Button } from "antd";
 
 export default function MessengerListCard(props) {
-  const { fname, photoURL, roomID, enterChatRoom, lastMsg } = props;
+  const { fname, photoURL, roomID, enterChatRoom, msgDate, lastMsg } = props;
 
   return (
     <div
@@ -11,15 +11,17 @@ export default function MessengerListCard(props) {
         enterChatRoom(roomID);
       }}
     >
-      <Row className="photoImage">
-          <Avatar size={64} src={photoURL} />
-          <div className="rightSide">
-            {fname}
-            <br />
-            {lastMsg}
+      <div className="photoImage">
+          <Avatar className="msgListImage" size={64} src={photoURL} />
           </div>
-      </Row>
-      <Divider />
+          <div className="rightSide">
+          <Row className="NameAndDate">
+            <Col>{fname}</Col>
+            <Col>{msgDate}</Col>
+          </Row>
+          <Row className="textMsg">{lastMsg}</Row>
+          <Divider className="msgListDivider" />
+          </div>
     </div>
   );
 }
