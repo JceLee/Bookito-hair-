@@ -12,10 +12,7 @@ export default function ClientSchedule() {
   const currentUser = useSelector((state) => state.currentUser.currentUser);
   const [conformedAppointment, setConformedAppointments] = useState([]);
   const [pendingAppointment, setPendingAppointments] = useState([]);
-  const [
-    completedAndDeclinedAppointment,
-    completedAndDeclinedAppointments,
-  ] = useState([]);
+  const [completedAndDeclinedAppointment, completedAndDeclinedAppointments] = useState([]);
 
   const history = useHistory();
 
@@ -66,6 +63,7 @@ export default function ClientSchedule() {
           <Row className="clientScheduleViewRow">
             {conformedAppointment.map((appointment) => (
               <ScheduleCard
+                key={appointment.aid}
                 name={appointment.designerName}
                 date={appointment.date}
                 time={appointment.time}
@@ -80,6 +78,7 @@ export default function ClientSchedule() {
           <Row className="clientScheduleViewRow">
             {pendingAppointment.map((appointment) => (
               <ScheduleCard
+                key={appointment.aid}
                 name={appointment.designerName}
                 date={appointment.date}
                 time={appointment.time}
@@ -94,6 +93,7 @@ export default function ClientSchedule() {
           <Row className="clientScheduleViewRow">
             {completedAndDeclinedAppointment.map((appointment) => (
               <ScheduleCardHistory
+                key={appointment.aid}
                 name={appointment.designerName}
                 date={appointment.date}
                 time={appointment.time}
