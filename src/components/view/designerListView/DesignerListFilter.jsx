@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Menu, Dropdown, Button, Divider, Collapse } from "antd/lib/index";
-import { TagOutlined, CalendarOutlined, ClockCircleOutlined, DownOutlined, CheckOutlined } from '@ant-design/icons';
+import { TagOutlined, CalendarOutlined, ClockCircleOutlined, DownOutlined } from '@ant-design/icons';
 import DesignerListFilterTags from "./DesignerListFilterTags";
 
 export default function DesignerListFilter(props) {
@@ -32,11 +32,11 @@ export default function DesignerListFilter(props) {
   const sortMenu = (
     <Menu onClick={(e) => handleSortBy(e)}>
       {/* <Menu.Item key="featured">Featured</Menu.Item> */}
-      <Menu.Item key="distance">{sortBy === "distance" && <CheckOutlined />}Distance</Menu.Item>
-      <Menu.Item key="review">{sortBy === "review" && <CheckOutlined />}Avg. Review</Menu.Item>
-      <Menu.Item key="priceLow">{sortBy === "priceLow" && <CheckOutlined />}Price Low</Menu.Item>
-      <Menu.Item key="priceHigh">{sortBy === "priceHigh" && <CheckOutlined />}Price High</Menu.Item>
-      <Menu.Item key="new">{sortBy === "new" && <CheckOutlined />}New</Menu.Item>
+      <Menu.Item key="distance" className={sortBy === "distance" && "designerListSortByButtonBold"}>Distance</Menu.Item>
+      <Menu.Item key="review" className={sortBy === "review" && "designerListSortByButtonBold"}>Avg. Review</Menu.Item>
+      <Menu.Item key="priceLow" className={sortBy === "priceLow" && "designerListSortByButtonBold"}>Price Low</Menu.Item>
+      <Menu.Item key="priceHigh" className={sortBy === "priceHigh" && "designerListSortByButtonBold"}>Price High</Menu.Item>
+      <Menu.Item key="new" className={sortBy === "new" && "designerListSortByButtonBold"}>New</Menu.Item>
     </Menu>
   );
 
