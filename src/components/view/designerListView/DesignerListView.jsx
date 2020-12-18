@@ -38,18 +38,16 @@ export default function DesignerListView(props) {
   const updateSortBy = (sortByKey) => {
     switch (sortByKey) {
       case "distance":
-        console.log("distance");
-        setDesignersCurrent([...designersCurrent].sort((a, b) => {return a.distance - b.distance}));
+        setDesignersCurrent([...designersCurrent].sort((a, b) => (a.distance && b.distance) ? a.distance - b.distance : a.distance ? -1 : 1));
         break;
-      case "review":
-        console.log("review");
+      case "reviewScore":
+        setDesignersCurrent([...designersCurrent].sort((a, b) => {return a.reviewScore - b.reviewScore}));
         break;
-      case "priceLow":
-        break;
-      case "priceHigh":
+      case "reviewCount":
+        setDesignersCurrent([...designersCurrent].sort((a, b) => {return a.reviewCount - b.reviewCount}));
         break;
       case "new":
-        console.log("distance");
+        setDesignersCurrent([...designersCurrent].sort((a, b) => {return a.createdOn - b.createdOn}));
         break;
       default:
         break;
@@ -98,8 +96,6 @@ export default function DesignerListView(props) {
           console.log("Unable to get location!");
       }
     });
-
-
   }, [dispatch, props.location.search]);
 
   // Desktop map controls
@@ -158,7 +154,7 @@ export default function DesignerListView(props) {
             </div>
             {/* Designer listing */}
             {
-            // console.log(designers) &&
+            // console.log(designers) ||
             designersCurrent.map((designer, index) => (
               <div key={index} className="designerList">
                 <DesignerCardComponent

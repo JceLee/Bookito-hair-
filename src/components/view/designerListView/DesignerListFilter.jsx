@@ -8,7 +8,7 @@ export default function DesignerListFilter(props) {
   const { Panel } = Collapse;
 
   const [activeKey, setActiveKey] = useState([0]);
-  const [sortBy, setSortBy] = useState("distance");
+  const [sortBy, setSortBy] = useState("");
   const [currentCheckedTags, setCurrentCheckedTags] = useState([]);
   
   useEffect(() => {
@@ -33,9 +33,8 @@ export default function DesignerListFilter(props) {
     <Menu onClick={(e) => handleSortBy(e)}>
       {/* <Menu.Item key="featured">Featured</Menu.Item> */}
       <Menu.Item key="distance" className={sortBy === "distance" && "designerListSortByButtonBold"}>Distance</Menu.Item>
-      <Menu.Item key="review" className={sortBy === "review" && "designerListSortByButtonBold"}>Avg. Review</Menu.Item>
-      <Menu.Item key="priceLow" className={sortBy === "priceLow" && "designerListSortByButtonBold"}>Price Low</Menu.Item>
-      <Menu.Item key="priceHigh" className={sortBy === "priceHigh" && "designerListSortByButtonBold"}>Price High</Menu.Item>
+      <Menu.Item key="reviewScore" className={sortBy === "reviewScore" && "designerListSortByButtonBold"}>Review Score</Menu.Item>
+      <Menu.Item key="reviewCount" className={sortBy === "reviewCount" && "designerListSortByButtonBold"}>Review Count</Menu.Item>
       <Menu.Item key="new" className={sortBy === "new" && "designerListSortByButtonBold"}>New</Menu.Item>
     </Menu>
   );

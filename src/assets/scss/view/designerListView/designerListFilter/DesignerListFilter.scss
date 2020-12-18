@@ -2,7 +2,6 @@
 .designerListSortByButtonBold {
     font-weight: bold;
 }
-
 .designerListFilter {
     .designerListFilterInner {
         padding: 10px 5%;
@@ -16,7 +15,8 @@
             padding-right: 13px;
         }
         .ant-btn:hover, .ant-btn:focus {
-            color: black;
+            border-color: gray !important;
+            color: black !important;
         }
         .sortBtn {
             margin-right: 0;
@@ -37,6 +37,8 @@
             padding: 0 !important;
         }
         .designerListFilterConfirm {
+            background: black;
+            border-color: black;
             border-radius: 20px;
         }
         .designerListFilterTags {
@@ -50,7 +52,10 @@
             //     margin-bottom: 10px;
             // }
         }
-
+        .ant-checkbox-checked .ant-checkbox-inner {
+            background-color: black;
+            border-color: black;
+        }
     }
     .designerCardComponentDividerTop {
         margin: 0;
