@@ -42,7 +42,7 @@ export default function DeleteAppointmentModal(props) {
       </Row>
       <Row className="modalContent">Are you sure you want to delete?</Row>
       <Row className="modalFooter">
-        <BlackBtn btnName="Delete" onclick={() => changeState(appointmentID)}/>
+        <BlackBtn btnName="Delete"/>
       </Row>
     </Dialog>
   );

@@ -6,6 +6,7 @@ export default function ScheduleCardRequest(props) {
   const { newRequest, close, forceUpdate } = props;
 
   const changeState = (state) => {
+
     firebaseStore
       .collection("appointments")
       .doc(newRequest.id)
