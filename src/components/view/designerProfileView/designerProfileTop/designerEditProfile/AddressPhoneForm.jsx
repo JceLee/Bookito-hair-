@@ -1,8 +1,8 @@
 import React from "react";
-import {Input, Form, Modal} from "antd";
+import { Input, Form, Modal } from "antd";
 
 export default function AddressPhoneForm(props) {
-  const {formInitialValues, layout} = props;
+  const { formInitialValues, layout } = props;
   const [form] = Form.useForm();
   const formFields = [
     { label: "Street", fieldName: "street", required: true },
@@ -12,29 +12,38 @@ export default function AddressPhoneForm(props) {
     { label: "Postal Code", fieldName: "postalCode", required: false },
     { label: "Phone", fieldName: "phone", required: false },
   ];
+
+  const yes = (values) => {
+    console.log(values);
+  };
+
   return (
     <Form
       {...layout}
       form={form}
       initialValues={formInitialValues}
       name="editProfile"
+      onFinish={yes}
       scrollToFirstError
     >
-    <div className="addressPhoneForm">
-      {formFields.map((formField) => {
-        return (
-          <Form.Item
-            key={formField.fieldName}
-            name={["addressPhone", formField.fieldName]}
-            className="addressPhoneFormItem"
-            label={formField.label}
-            rules={[{ required: formField.required }]}
-          >
-            <Input allowClear placeholder={formField.label} />
-          </Form.Item>
-        );
-      })}
-    </div>
+      <div className="addressPhoneForm">
+        {formFields.map((formField) => {
+          return (
+            <Form.Item
+              key={formField.fieldName}
+              name={["addressPhone", formField.fieldName]}
+              className="addressPhoneFormItem"
+              label={formField.label}
+              rules={[{ required: formField.required }]}
+            >
+              <Input allowClear placeholder={formField.label} />
+            </Form.Item>
+          );
+        })}
+      </div>
+      <button className="uploadButtonInEditProfile" onClick={yes}>
+        Upload
+      </button>
     </Form>
   );
 }
