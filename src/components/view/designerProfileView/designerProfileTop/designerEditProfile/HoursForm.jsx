@@ -1,27 +1,94 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Checkbox, Form, Space, Slider, Modal } from "antd";
 import formatTime, { destructureTimeRange } from "../../../../../helpers/timeFunctions";
 
+const defaultStartTime = 16; // 08:00
+
+const defaultEndTime = 42; // 21:00
+
+const defaultTradingHours = [defaultStartTime, defaultEndTime];
+
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
 const minValueInSlider = 0; // "00:00"
+
 const maxValueInSlider = 47; // "23:30"
+
 const timeConvertingFactor = 30;
+
+const layout = {
+  labelCol: { span: 6 },
+  wrapperCol: { span: 24 },
+  labelCol: { span: 6 },
+  wrapperCol: { span: 24 },
+};
+
 let sliderVisibility;
+
 let checkboxOffset;
 
-export default function HoursForm(props) {
-  const { defaultTradingHours, formInitialValues, layout } = props;
-  const [defaultStartTime, defaultEndTime] = defaultTradingHours;
+export default function HoursForm() {
+  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
+
   const [form] = Form.useForm();
+
   const [DayChecked, setDayChecked] = useState({
-    Mon: false,
-    Tue: false,
-    Wed: false,
-    Thu: false,
-    Fri: false,
-    Sat: false,
-    Sun: false,
+    Mon: designer.hours["Mon"][0]["closed"],
+    Tue: designer.hours["Tue"][0]["closed"],
+    Wed: designer.hours["Wed"][0]["closed"],
+    Thu: designer.hours["Thu"][0]["closed"],
+    Fri: designer.hours["Fri"][0]["closed"],
+    Sat: designer.hours["Sat"][0]["closed"],
+    Sun: designer.hours["Sun"][0]["closed"],
   });
+
+  let formInitialValues = {
+    hours: {
+      Mon: [
+        {
+          tradingHours: designer.hours["Mon"][0]["tradingHours"],
+          closed: designer.hours["Mon"][0]["closed"],
+        },
+      ],
+      Tue: [
+        {
+          tradingHours: designer.hours["Tue"][0]["tradingHours"],
+          closed: designer.hours["Tue"][0]["closed"],
+        },
+      ],
+      Wed: [
+        {
+          tradingHours: designer.hours["Wed"][0]["tradingHours"],
+          closed: designer.hours["Wed"][0]["closed"],
+        },
+      ],
+      Thu: [
+        {
+          tradingHours: designer.hours["Thu"][0]["tradingHours"],
+          closed: designer.hours["Thu"][0]["closed"],
+        },
+      ],
+      Fri: [
+        {
+          tradingHours: designer.hours["Fri"][0]["tradingHours"],
+          closed: designer.hours["Fri"][0]["closed"],
+        },
+      ],
+      Sat: [
+        {
+          tradingHours: designer.hours["Sat"][0]["tradingHours"],
+          closed: designer.hours["Sat"][0]["closed"],
+        },
+      ],
+      Sun: [
+        {
+          tradingHours: designer.hours["Sun"][0]["tradingHours"],
+          closed: designer.hours["Sun"][0]["closed"],
+        },
+      ],
+    },
+  };
 
   const formatter = (minutes) => {
     const formattedValue = formatTime(minutes * timeConvertingFactor);
@@ -29,13 +96,34 @@ export default function HoursForm(props) {
   };
 
   const [FormattedTimes, setFormattedTimes] = useState({
-    Mon: [formatter(defaultStartTime), formatter(defaultEndTime)],
-    Tue: [formatter(defaultStartTime), formatter(defaultEndTime)],
-    Wed: [formatter(defaultStartTime), formatter(defaultEndTime)],
-    Thu: [formatter(defaultStartTime), formatter(defaultEndTime)],
-    Fri: [formatter(defaultStartTime), formatter(defaultEndTime)],
-    Sat: [formatter(defaultStartTime), formatter(defaultEndTime)],
-    Sun: [formatter(defaultStartTime), formatter(defaultEndTime)],
+    Mon: [
+      formatter(designer.hours["Mon"][0]["tradingHours"][0]),
+      formatter(designer.hours["Mon"][0]["tradingHours"][1]),
+    ],
+    Tue: [
+      formatter(designer.hours["Tue"][0]["tradingHours"][0]),
+      formatter(designer.hours["Tue"][0]["tradingHours"][1]),
+    ],
+    Wed: [
+      formatter(designer.hours["Wed"][0]["tradingHours"][0]),
+      formatter(designer.hours["Wed"][0]["tradingHours"][1]),
+    ],
+    Thu: [
+      formatter(designer.hours["Thu"][0]["tradingHours"][0]),
+      formatter(designer.hours["Thu"][0]["tradingHours"][1]),
+    ],
+    Fri: [
+      formatter(designer.hours["Fri"][0]["tradingHours"][0]),
+      formatter(designer.hours["Fri"][0]["tradingHours"][1]),
+    ],
+    Sat: [
+      formatter(designer.hours["Sat"][0]["tradingHours"][0]),
+      formatter(designer.hours["Sat"][0]["tradingHours"][1]),
+    ],
+    Sun: [
+      formatter(designer.hours["Sun"][0]["tradingHours"][0]),
+      formatter(designer.hours["Sun"][0]["tradingHours"][1]),
+    ],
   });
 
   const onChangeSliderHandler = (day, minutes) => {
@@ -77,15 +165,6 @@ export default function HoursForm(props) {
                   return (
                     <div>
                       {fields.map((field, index) => {
-                        {
-                          /* window.innerWidth < 768
-                        ? DayChecked[day]
-                          ? (sliderDisplay = "none") && (checkboxOffset = "-29px")
-                          : (sliderDisplay = "block") && (checkboxOffset = "-48px")
-                        : DayChecked[day]
-                        ? (sliderDisplay = "none") && (checkboxOffset = "-24px")
-                        : (sliderDisplay = "block") && (checkboxOffset = "-24px"); */
-                        }
                         {
                           DayChecked[day]
                             ? (sliderVisibility = "hidden")

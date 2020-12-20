@@ -1,4 +1,5 @@
-import React, { useRef, useState, useEffect, useMemo } from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Form, Input, InputNumber, Button, Tabs, Divider, Popconfirm, message } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
@@ -7,20 +8,28 @@ const { TextArea } = Input;
 
 let newTabIndex = 0;
 
-export default function ServiceNPriceForm(props) {
-  const { services, formInitialValues, setTest, layout } = props;
-  const [tabNames, setTabNames] = useState(Object.keys(services));
+const layout = {
+  labelCol: { span: 6 },
+  wrapperCol: { span: 24 },
+  labelCol: { span: 6 },
+  wrapperCol: { span: 24 },
+};
 
+const formInitialValues = {
+  services: {
+    Menu1: [],
+    Menu2: [],
+    Menu3: [],
+    Menu4: [],
+    Menu5: [],
+    Menu6: [],
+  },
+};
+
+export default function ServiceNPriceForm() {
+  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
+  const [tabNames, setTabNames] = useState(Object.keys(designer.services));
   const [form] = Form.useForm();
-
-  // let initialPanes = [
-  //   { title: `${tabNames[0]}`, key: `${tabNames[0]}` },
-  //   { title: `${tabNames[1]}`, key: `${tabNames[1]}` },
-  //   { title: `${tabNames[2]}`, key: `${tabNames[2]}` },
-  //   { title: `${tabNames[3]}`, key: `${tabNames[3]}` },
-  //   { title: `${tabNames[4]}`, key: `${tabNames[4]}` },
-  //   { title: `${tabNames[5]}`, key: `${tabNames[5]}` },
-  // ];
 
   let initialPanes = tabNames.map((tabName) => {
     return { title: `${tabName}`, key: `${tabName}` };
@@ -86,7 +95,7 @@ export default function ServiceNPriceForm(props) {
   };
 
   const onValuesChange = (e) => {
-    setTest(e);
+    // setTest(e);
   };
 
   const changeTabName = (e) => {
