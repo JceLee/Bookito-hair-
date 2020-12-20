@@ -6,10 +6,13 @@ import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
 import { firebaseStore } from "../../../../../config/fbConfig";
 import { notificationForm } from "../../../../../helpers/notificationForm";
+import { useSelector } from "react-redux";
 
 export default function BookNowModal(props) {
-  const { hours, customer, designer } = props;
+  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
+  const currentUser = useSelector((state) => state.currentUser.currentUser);
   const { Step } = Steps;
+  const { visible, modalHandler } = props;
   const [displayedDay, setDisplayedDay] = useState(null);
   const [key, setKey] = useState("Cut");
   const [calculationBox, setCalculationBox] = useState([]);
@@ -22,7 +25,10 @@ export default function BookNowModal(props) {
   const [appointments, setAppointments] = useState([]);
   const loadingAppointment = [];
 
+  console.log("d.uid: " + designer.uid);
+
   useEffect(() => {
+    console.log("In booknow modal");
     firebaseStore
       .collection("appointments")
       .where("designerId", "==", designer.uid)
@@ -33,7 +39,7 @@ export default function BookNowModal(props) {
         });
         setAppointments(loadingAppointment);
       });
-  }, [appointments]);
+  }, [designer.uid]);
 
   let timeSlotTemplate = {
     time: null,
@@ -52,17 +58,8 @@ export default function BookNowModal(props) {
 
   const createTimeSelect = (dayAndDate) => {
     const day = dayAndDate.substring(0, 3);
-    const appointmentArray = [
-      { date: "Thu Sep 03 2020", time: "08:00" },
-      { date: "Wed Sep 02 2020", time: "08:30" },
-      { date: "Wed Sep 09 2020", time: "09:00" },
-      { date: "Wed Sep 16 2020", time: "11:00" },
-      { date: "Wed Sep 23 2020", time: "12:00" },
-      { date: "Wed Sep 30 2020", time: "12:30" },
-      { date: "Wed Sep 02 2020", time: "15:00" },
-    ];
-    const [starRawTime, endRawTime] = hours[day][0].tradingHours;
-    const closed = hours[day][0].closed;
+    const [starRawTime, endRawTime] = designer.hours[day][0].tradingHours;
+    const closed = designer.hours[day][0].closed;
     const temp = [];
     for (let i = starRawTime * 30; i <= endRawTime * 30; i += 30) {
       timeSlotTemplate = {
@@ -74,11 +71,8 @@ export default function BookNowModal(props) {
     }
 
     Object.values(temp).forEach((timeSlot) => {
-      Object.values(appointmentArray).forEach((appointment) => {
-        if (
-          appointment.date === dayAndDate &&
-          appointment.time === timeSlot.time
-        ) {
+      Object.values(appointments).forEach((appointment) => {
+        if (appointment.date === dayAndDate && appointment.time === timeSlot.time) {
           timeSlot.disabled = true;
         }
       });
@@ -159,15 +153,14 @@ export default function BookNowModal(props) {
         newCalculationBox[key] = null;
       }
     }
-
     setCalculationBox(newCalculationBox);
   };
 
   const requestNewAppointment = () => {
     const newAppointment = {
-      customerId: customer.uid,
+      customerId: currentUser.uid,
       designerId: designer.uid,
-      customerName: customer.fname + " " + customer.lname,
+      customerName: currentUser.fname + " " + currentUser.lname,
       designerName: designer.fname + " " + designer.lname,
       state: "pending",
       date: displayedDay.toDateString(),
@@ -178,6 +171,7 @@ export default function BookNowModal(props) {
     console.log(newAppointment);
     message.success("Successfully booked!");
     writeAppointmentIntoDB(newAppointment);
+    modalHandler();
   };
 
   const writeAppointmentIntoDB = async (newAppointment) => {
@@ -200,7 +194,7 @@ export default function BookNowModal(props) {
         message: {
           subject: "A REQUEST ARRIVE!",
           text: "Customer A requests a new appointment.",
-          html: notificationForm(designer, customer),
+          html: notificationForm(designer, currentUser),
         },
       })
       .then(() => console.log("Queued email for delivery!"));
@@ -223,7 +217,7 @@ export default function BookNowModal(props) {
       document.getElementById("selectTimePosition").scrollIntoView();
     }
     setBackToTimePosition(false);
-  });
+  }, [backToTimePosition]);
 
   const stepChoice = (item) => {
     if (item.id === 1) {
@@ -283,72 +277,51 @@ export default function BookNowModal(props) {
     },
   ];
 
-  const [visible, setVisible] = useState(false);
-
-  const showModal = () => {
-    setVisible(true);
-  };
-
-  const handleCancel = () => {
-    setVisible(false);
+  const createFooter = () => {
+    return (
+      <>
+        {current === 0 && <Button className="mockData">MockData</Button>}
+        {current > 0 && (
+          <Button className="previousBtn" onClick={() => prev()}>
+            Previous
+          </Button>
+        )}
+        {current < steps.length - 1 && (
+          <Button
+            className="nextBtnInStepOne"
+            type="primary"
+            style={{ position: "absolute", right: 0 }}
+            onClick={() => next()}
+          >
+            Next
+          </Button>
+        )}
+        {current === steps.length - 1 && (
+          <Button className="doneBtn" type="primary" onClick={() => requestNewAppointment()}>
+            Done
+          </Button>
+        )}
+      </>
+    );
   };
 
   return (
-    <div className="bookNow">
-      <Button className="buttonInProfileLayoutTab" onClick={showModal}>
-        Book Now
-      </Button>
-
-      <Modal
-        className="bookNowModal"
-        title="Book Now"
-        visible={visible}
-        footer={
-          <div>
-            {current === 0 && <Button className="mockData">MockData</Button>}
-            {current > 0 && (
-              <Button className="previousBtn" onClick={() => prev()}>
-                Previous
-              </Button>
-            )}
-            {current < steps.length - 1 && (
-              <Button
-                className="nextBtnInStepOne"
-                type="primary"
-                style={{ position: "absolute", right: 0 }}
-                onClick={() => next()}
-              >
-                Next
-              </Button>
-            )}
-            {current === steps.length - 1 && (
-              <Button
-                className="doneBtn"
-                type="primary"
-                onClick={() => requestNewAppointment()}
-              >
-                Done
-              </Button>
-            )}
-          </div>
-        }
-        onCancel={handleCancel}
-        cancelButtonProps={{ style: { display: "none" } }}
-      >
-        <div id="stepToTopId">
-          <Steps
-            className="steps"
-            current={current}
-            onChange={onChange}
-            progressDot
-          >
-            {steps.map((item) => (
-              <Step key={item.title} title={item.title} />
-            ))}
-          </Steps>
-        </div>
-        {steps[current].content}
-      </Modal>
-    </div>
+    <Modal
+      className="bookNowModal"
+      title="Book Now"
+      visible={visible}
+      footer={[createFooter()]}
+      onCancel={modalHandler}
+      cancelButtonProps={{ style: { display: "none" } }}
+    >
+      <div id="stepToTopId">
+        <Steps className="steps" current={current} onChange={onChange} progressDot>
+          {steps.map((item) => (
+            <Step key={item.title} title={item.title} />
+          ))}
+        </Steps>
+      </div>
+      {steps[current].content}
+    </Modal>
   );
 }

@@ -1,34 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { CreateMessengerRoom } from "./CreateMessengerRoom";
-import { useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import { firebaseDate } from "../../../config/fbConfig";
-import { Divider } from "antd";
-import Moment from "moment";
+import React, {useEffect, useState} from "react";
+import {useSelector} from "react-redux";
+import {useHistory} from "react-router-dom";
+import {firebaseDate} from "../../../config/fbConfig";
+import {Divider} from "antd";
 import MessengerListCard from "./MessengerListCard";
 
 export default function MessengerListView() {
   const [currentUser, setCurrentUser] = useState(
     useSelector((state) => state.currentUser.currentUser)
   );
-  console.log(currentUser);
 
-  const [room, setRoom] = useState([]);
+  const [rooms, setRooms] = useState([]);
   const [nickname, setNickname] = useState("");
   const history = useHistory();
-
-  console.log("haha");
-  console.log(room);
+  const lastMsgs = {};
 
   useEffect(() => {
-    console.log("babo");
     const fetchData = async () => {
       setNickname(currentUser.fname);
       firebaseDate.ref("rooms/").on("value", (resp) => {
-        setRoom([]);
+        setRooms([]);
         const rooms = snapshotToArray(resp);
-        console.log(rooms);
-        setRoom(
+        setRooms(
           rooms.filter(
             (room) =>
               room.customerID === currentUser.uid ||
@@ -38,7 +31,7 @@ export default function MessengerListView() {
       });
     };
     fetchData();
-  }, []);
+  }, [currentUser]);
 
   const snapshotToArray = (snapshot) => {
     const returnArr = [];
@@ -50,6 +43,17 @@ export default function MessengerListView() {
     });
 
     return returnArr;
+  };
+
+  const loadLastMsg = async roomID => {
+    return await firebaseDate.ref("chats/")
+      .orderByChild("roomID")
+      .equalTo(roomID).limitToLast(1)
+      .once("value").then((resp) => {
+        if (snapshotToArray(resp)[0] !== undefined) {
+          lastMsgs[roomID] = snapshotToArray(resp)[0].message;
+        }
+      });
   };
 
   const enterChatRoom = (roomID) => {
@@ -69,18 +73,25 @@ export default function MessengerListView() {
   return (
     <div>
       <Divider />
-      {room.map((item, idx) => (
-        <MessengerListCard
-          fname={
-            item.designerID === currentUser.uid
-              ? item.customerID
-              : item.designerID
+      {rooms.map((room) => {
+        loadLastMsg(room.roomID).then(()=> {
+            console.log(lastMsgs[room.roomID]);
           }
-          photoURL={null}
-          enterChatRoom={enterChatRoom}
-          roomID={item.roomID}
-        />
-      ))}
+        );
+        return (
+          <MessengerListCard
+            fname={
+              room.designerID === currentUser.uid
+                ? room.customerID
+                : room.designerID
+            }
+            photoURL={null}
+            enterChatRoom={enterChatRoom}
+            roomID={room.roomID}
+            lastMsg={lastMsgs[room.roomID]}
+          />
+        )
+      })}
     </div>
   );
 }
