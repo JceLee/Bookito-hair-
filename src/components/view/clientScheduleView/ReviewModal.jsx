@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import DesignerCardLeft from "../designerListView/designerCardComponent/designerCardTop/DesignerCardTopLeft";
 import { Modal, Form, Input, Button } from "antd";
 import { useSelector } from "react-redux";
@@ -7,7 +7,7 @@ import { firebaseStore } from "../../../config/fbConfig";
 
 export default function ReviewModal(props) {
   const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
-  const { modalHandler, visible, appointment } = props;
+  const { modalHandler, visible, appointment, disableReviewBtn } = props;
   const [rate, setRate] = useState(0);
   const [reviewContext, setReviewContext] = useState("asdfas");
 
@@ -17,7 +17,14 @@ export default function ReviewModal(props) {
         <Button on key="back" id="reviewModalCancelBtn" onClick={modalHandler}>
           Cancel
         </Button>
-        <Button key="submit" id="reviewModalSubmitBtn" onClick={addReviewToDB}>
+        <Button
+          key="submit"
+          id="reviewModalSubmitBtn"
+          onClick={() => {
+            addReviewToDB();
+            disableReviewBtn();
+          }}
+        >
           Submit
         </Button>
       </>
@@ -61,7 +68,6 @@ export default function ReviewModal(props) {
       title="Review"
       visible={visible}
       destroyOnClose={true}
-      bodyStyle={{ padding: "15px" }}
       onCancel={modalHandler}
       footer={[createFooter()]}
     >
@@ -79,6 +85,7 @@ export default function ReviewModal(props) {
             id="reviewComment"
             placeholder="How did you like the service?"
             onChange={getReviewContext}
+            autoSize={true}
           />
         </Form.Item>
       </Form>

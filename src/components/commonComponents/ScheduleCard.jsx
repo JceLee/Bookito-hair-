@@ -2,7 +2,9 @@ import React from "react";
 import { Card, Row, Col, Button, Divider } from "antd";
 
 export default function ScheduleCard(props) {
-  const { date, name, time, types } = props;
+  const { appointment, printServices } = props;
+  const { designerName, date, time, bookedServices } = appointment;
+
   return (
     <Card
       className="scheduleCard"
@@ -20,14 +22,9 @@ export default function ScheduleCard(props) {
           <Divider type="vertical" className="scheduleCardDivider" />
         </Col>
         <Col span={18}>
-          <div>Designer: {name}</div>
+          <div>Designer: {designerName}</div>
           <div>Time: {time}</div>
-          <div>
-            Type:{" "}
-            {types.map((type, index) => (
-              <span key={index}>{type} </span>
-            ))}
-          </div>
+          <div>Type: {printServices(bookedServices)}</div>
         </Col>
       </Row>
     </Card>

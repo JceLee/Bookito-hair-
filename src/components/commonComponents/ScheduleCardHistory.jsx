@@ -8,20 +8,37 @@ import { select_designer } from "../../actions/selectedDesignerAction";
 
 export default function ScheduleCardHistory(props) {
   const dispatch = useDispatch();
-  const { appointment } = props;
+  const { appointment, cardInx, printServices } = props;
   const { date, time, designerName, bookedServices, designerId } = appointment;
   const [visibleReviewModal, setVisibleReviewModal] = useState(false);
   const [visibleBookNowModal, setVisibleBookNowModal] = useState(false);
 
   useEffect(() => {
-    firebaseStore
-      .collection("users")
-      .doc(designerId)
-      .get()
-      .then((snapshot) => {
-        dispatch(select_designer(snapshot.data()));
-      });
+    function dispatchDesigner() {
+      firebaseStore
+        .collection("users")
+        .doc(designerId)
+        .get()
+        .then((snapshot) => {
+          dispatch(select_designer(snapshot.data()));
+        });
+    }
+
+    dispatchDesigner();
   }, [designerId]);
+
+  useEffect(() => {
+    function manageReviews() {
+      firebaseStore
+        .collection("appointments")
+        .doc(appointment.aid)
+        .get()
+        .then((snapshot) => {
+          if ("review" in snapshot.data()) disableReviewBtn();
+        });
+    }
+    manageReviews();
+  }, [appointment.aid]);
 
   const reviewModalHandler = () => {
     setVisibleReviewModal(!visibleReviewModal);
@@ -35,12 +52,10 @@ export default function ScheduleCardHistory(props) {
     bookModalHandler();
   };
 
-  const printServices = () => {
-    var services = "";
-    Object.entries(bookedServices).map((type) => {
-      services += type[1].service;
-    });
-    return services;
+  const disableReviewBtn = () => {
+    document.getElementsByClassName("scheduleCardReviewBtn")[cardInx].style.background = "#a1a1a1";
+    document.getElementsByClassName("scheduleCardReviewBtn")[cardInx].style.color = "#fff";
+    document.getElementsByClassName("scheduleCardReviewBtn")[cardInx].disabled = true;
   };
 
   return (
@@ -68,7 +83,7 @@ export default function ScheduleCardHistory(props) {
           <Col span={18}>
             <div>Designer: {designerName}</div>
             <div>Time: {time}</div>
-            <div>Service(s): {printServices()}</div>
+            <div>Service(s): {printServices(bookedServices)}</div>
           </Col>
         </Row>
       </Card>
@@ -79,6 +94,8 @@ export default function ScheduleCardHistory(props) {
           modalHandler={reviewModalHandler}
           visible={visibleReviewModal}
           appointment={appointment}
+          disableReviewBtn={disableReviewBtn}
+          cardInx={cardInx}
         />
       ) : null}
 
