@@ -5,14 +5,13 @@ import DesignerTypeModal from "./DesignerTypeModal";
 import { useScrollPosition } from "@n8tb1t/use-scroll-position";
 
 export default function MobileSearchBar() {
-  var heightToShowSearchBarOnNav = null;
+  const [heightToShowSearchBarOnNav, setHeightToShowSearchBarOnNav] = useState(0);
 
   useEffect(() => {
-    heightToShowSearchBarOnNav =
-      (window.pageYOffset +
-        document.getElementById("searchBarForm").clientHeight) *
-      -1;
-  });
+    setHeightToShowSearchBarOnNav(
+      (window.pageYOffset + document.getElementById("searchBarForm").clientHeight) * -1
+    );
+  }, []);
 
   const [visible, setVisible] = useState(false);
 
@@ -33,26 +32,19 @@ export default function MobileSearchBar() {
   };
 
   const stickSearchBarOnNavBar = () => {
-    var searchBarHeight = document.getElementById("mobileSearchBar")
-      .clientHeight;
+    var searchBarHeight = document.getElementById("mobileSearchBar").clientHeight;
     var navBarHeight = document.getElementById("header").clientHeight;
     var searchBarMarginOnNavBar = (navBarHeight - searchBarHeight) / 2 + "px";
 
-    document
-      .getElementById("searchBarForm")
-      .classList.add("stickedSearchBarOnNav");
-    document.getElementById(
-      "searchBarForm"
-    ).style.top = searchBarMarginOnNavBar;
+    document.getElementById("searchBarForm").classList.add("stickedSearchBarOnNav");
+    document.getElementById("searchBarForm").style.top = searchBarMarginOnNavBar;
 
     document.getElementById("mobileSearchBar").style.marginTop = 0;
     document.getElementById("mainHeader").style.display = "none";
   };
 
   const takeSearchBarOffFromNavBar = () => {
-    document
-      .getElementById("searchBarForm")
-      .classList.remove("stickedSearchBarOnNav");
+    document.getElementById("searchBarForm").classList.remove("stickedSearchBarOnNav");
     document.getElementById("searchBarForm").style.top = "unset";
     document.getElementById("mobileSearchBar").style.marginTop = "100px";
     document.getElementById("mainHeader").style.display = "unset";
@@ -80,11 +72,7 @@ export default function MobileSearchBar() {
         onClick={showModal}
       />
 
-      <DesignerTypeModal
-        visible={visible}
-        onCancel={handleCancel}
-        showNavBarElements={show}
-      />
+      <DesignerTypeModal visible={visible} onCancel={handleCancel} showNavBarElements={show} />
     </div>
   );
 }

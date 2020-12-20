@@ -13,7 +13,6 @@ export default function AddAppointmentModal(props) {
   const { addAppointmentModalState, displayAddAppointmentModal } = props;
   const date = new Date();
   const [selectedDate, setSelectedDate] = useState(date);
-  const [selectedTime, setSelectedTime] = useState(date.getHours() + ":" + date.getMinutes());
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
