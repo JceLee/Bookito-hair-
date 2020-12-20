@@ -2,8 +2,9 @@ import React from "react";
 import { Row, Col, Avatar, Divider, Button } from "antd";
 
 export default function MessengerListCard(props) {
-  const { fname, photoURL, roomID, enterChatRoom } = props;
+  const { fname, photoURL, roomID, enterChatRoom, lastMsg } = props;
 
+  console.log(lastMsg);
   return (
     <div
       className="messengerCardComponent"
