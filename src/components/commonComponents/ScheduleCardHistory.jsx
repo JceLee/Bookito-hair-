@@ -1,33 +1,60 @@
 import React, { useEffect, useState } from "react";
-import { Card, Row, Col, Button, Divider, Form, Input, Rate } from "antd";
-import Modal from "antd/lib/modal/Modal";
-import DesignerCardLeft from "../view/designerListView/designerCardComponent/designerCardTop/DesignerCardTopLeft";
+import { Card, Row, Col, Button, Divider } from "antd";
 import { firebaseStore } from "../../config/fbConfig";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import ReviewModal from "../view/clientScheduleView/ReviewModal";
+import BookNowModal from "../view/designerProfileView/designerProfileTop/bookNowModal/BookNowModal";
+import { select_designer } from "../../actions/selectedDesignerAction";
 
 export default function ScheduleCardHistory(props) {
-  const { date, name, time, types, appointmentId, designerId } = props;
-  const [visible, setVisible] = useState(false);
-  const [designer, setDesigner] = useState(null);
+  const dispatch = useDispatch();
+  const { appointment, cardInx, printServices } = props;
+  const { date, time, designerName, bookedServices, designerId } = appointment;
+  const [visibleReviewModal, setVisibleReviewModal] = useState(false);
+  const [visibleBookNowModal, setVisibleBookNowModal] = useState(false);
 
   useEffect(() => {
-    firebaseStore
-      .collection("users")
-      .doc(designerId)
-      .get()
-      .then(function (doc) {
-        setDesigner(doc.data());
-      });
-  }, []);
+    function dispatchDesigner() {
+      firebaseStore
+        .collection("users")
+        .doc(designerId)
+        .get()
+        .then((snapshot) => {
+          dispatch(select_designer(snapshot.data()));
+        });
+    }
+    dispatchDesigner();
+  }, [designerId]);
 
-  console.log(designer);
+  useEffect(() => {
+    function manageReviews() {
+      firebaseStore
+        .collection("appointments")
+        .doc(appointment.aid)
+        .get()
+        .then((snapshot) => {
+          if ("review" in snapshot.data()) disableReviewBtn();
+        });
+    }
+    manageReviews();
+  }, [appointment.aid]);
 
-  const modalHandler = () => {
-    setVisible(!visible);
+  const reviewModalHandler = () => {
+    setVisibleReviewModal(!visibleReviewModal);
   };
 
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const bookModalHandler = () => {
+    setVisibleBookNowModal(!visibleBookNowModal);
+  };
+
+  const openBookNowModal = () => {
+    bookModalHandler();
+  };
+
+  const disableReviewBtn = () => {
+    document.getElementsByClassName("scheduleCardReviewBtn")[cardInx].style.background = "#a1a1a1";
+    document.getElementsByClassName("scheduleCardReviewBtn")[cardInx].style.color = "#fff";
+    document.getElementsByClassName("scheduleCardReviewBtn")[cardInx].disabled = true;
   };
 
   return (
@@ -36,10 +63,10 @@ export default function ScheduleCardHistory(props) {
         className="scheduleCard"
         actions={[
           <>
-            <Button type="text" className="scheduleCardReviewBtn" onClick={modalHandler}>
+            <Button type="text" className="scheduleCardReviewBtn" onClick={reviewModalHandler}>
               Review
             </Button>
-            <Button type="text" className="scheduleCardRebookBtn">
+            <Button type="text" className="scheduleCardRebookBtn" onClick={openBookNowModal}>
               Rebook
             </Button>
           </>,
@@ -53,46 +80,27 @@ export default function ScheduleCardHistory(props) {
             <Divider type="vertical" className="scheduleCardDivider" />
           </Col>
           <Col span={18}>
-            <div>Designer: {name}</div>
+            <div>Designer: {designerName}</div>
             <div>Time: {time}</div>
-            <div>
-              Type:{" "}
-              {types.map((type, index) => (
-                <span key={index}>{type} </span>
-              ))}
-            </div>
+            <div>Service(s): {printServices(bookedServices)}</div>
           </Col>
         </Row>
       </Card>
+      {/* Review modal */}
+      {visibleReviewModal ? (
+        <ReviewModal
+          modalHandler={reviewModalHandler}
+          visible={visibleReviewModal}
+          appointment={appointment}
+          disableReviewBtn={disableReviewBtn}
+          cardInx={cardInx}
+        />
+      ) : null}
 
-      {/* modal */}
-      <Modal
-        title="Review"
-        visible={visible}
-        onCancel={modalHandler}
-        onOk={onFinish}
-        destroyOnClose={true}
-        width={800}
-      >
-        <div>
-          {designer !== null && (
-            <DesignerCardLeft
-              fname={designer.fname}
-              profile={designer.photoURL}
-              rate={designer.rate}
-            />
-          )}
-        </div>
-        <Form>
-          <Form.Item name="rate">
-            <div>How was the service?</div>
-            <Rate />
-          </Form.Item>
-          <Form.Item name="comment">
-            <Input.TextArea />
-          </Form.Item>
-        </Form>
-      </Modal>
+      {/* Book modal */}
+      {visibleBookNowModal ? (
+        <BookNowModal visible={visibleBookNowModal} modalHandler={bookModalHandler} />
+      ) : null}
     </>
   );
 }
