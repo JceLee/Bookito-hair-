@@ -1,14 +1,14 @@
 import React from "react";
 import { Form, Input, InputNumber, Button, Tabs, Divider } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import {useSelector} from "react-redux";
 
 const { TabPane } = Tabs;
 const { TextArea } = Input;
 const tapNames = ["Cut", "Style", "Perm", "Color", "Clinic", "Promo"];
 
-export default function ServiceNPriceForm(props) {
-  const { services } = props;
-  console.log(services);
+export default function ServiceNPriceForm() {
+  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
   return (
     <Tabs type="card">
       {tapNames.map((tap) => {

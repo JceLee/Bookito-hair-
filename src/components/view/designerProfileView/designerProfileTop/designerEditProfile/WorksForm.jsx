@@ -7,7 +7,8 @@ import {update_database} from "../../../../../actions/firebaseAction";
 import {refresh} from "../../../../../actions/currentUser";
 
 export default function WorksForm(props) {
-  const {works, client, setClient} = props;
+  const [client, setClient] = useState(useSelector((state) => state.selectedDesigner.selectedDesigner));
+  const works = client.works;
   const photoURLs = [];
   const [testState, setTestState] = useState(false);
   const [fileList, setFileList] = useState(works);

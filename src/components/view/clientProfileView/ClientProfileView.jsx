@@ -11,7 +11,6 @@ import { refresh } from "../../../actions/currentUser";
 export default function ClientProfileView() {
   const [client, setClient] = useState(useSelector((state) => state.currentUser.currentUser));
   const [edit, setEdit] = useState(false);
-  // const { Dragger } = Upload;
   const [profile, setProfile] = useState(client);
   const dispatch = useDispatch();
 
@@ -46,7 +45,6 @@ export default function ClientProfileView() {
     };
     setClient(updatedInfo);
     dispatch(refresh(updatedInfo));
-    // window.location.reload(false);
     firebaseStore
       .collection("users")
       .doc(client.uid)

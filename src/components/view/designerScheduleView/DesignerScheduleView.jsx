@@ -70,6 +70,11 @@ export default function DesignerSchedule() {
       });
   };
 
+  const forceUpdate = () => {
+    loadAppointment();
+    loadRequests();
+  }
+
   const createTag = (services) => {
     const returnValue = {
       serviceName: "",
@@ -111,7 +116,7 @@ export default function DesignerSchedule() {
       <Calendar
         newRequests={newRequests}
         appointmentArray={conformedAppointments}
-        forceUpdate={loadAppointment}
+        forceUpdate={forceUpdate}
       />
     </div>
   );
