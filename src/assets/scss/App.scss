@@ -22,7 +22,9 @@
 
 // Client Schedule view
 @import "./view/clientScheduleView/ClientScheduleView.scss";
-@import "./view/MainView/MainView.scss";
+@import "./view/clientScheduleView/ReviewModal.scss";
+
+// Client Profile view
 @import "./view/clientProfileView/ClientProfileView.scss";
 
 // Designer Schedule view(Calendar)
@@ -42,6 +44,9 @@
 
 // Messenger components
 @import "./view/messengerView/MessengerView.scss";
+
+// Become a Designer View
+@import "./view/becomeDesignerView/BecomeDesignerView.scss";
 
 body {
   font-family: "Montserrat", sans-serif;

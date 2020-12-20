@@ -10,14 +10,16 @@ const { TabPane } = Tabs;
 
 export default function ClientSchedule() {
   const currentUser = useSelector((state) => state.currentUser.currentUser);
-  const [conformedAppointment, setConformedAppointments] = useState([]);
+  const [confirmedAppointment, setConfirmedAppointments] = useState([]);
   const [pendingAppointment, setPendingAppointments] = useState([]);
-  const [
-    completedAndDeclinedAppointment,
-    completedAndDeclinedAppointments,
-  ] = useState([]);
+  const [completedAndDeclinedAppointment, completedAndDeclinedAppointments] = useState([]);
 
   const history = useHistory();
+
+  useEffect(() => {
+    sendToMainViewWhenCurrentUserIsNull(currentUser);
+    loadAppointment();
+  }, [currentUser]);
 
   const sendToMainViewWhenCurrentUserIsNull = (user) => {
     if (user === null) {
@@ -27,7 +29,7 @@ export default function ClientSchedule() {
   };
 
   const loadAppointment = () => {
-    const conformed = [];
+    const confirmed = [];
     const pending = [];
     const completedAndDeclined = [];
     firebaseStore
@@ -36,70 +38,59 @@ export default function ClientSchedule() {
       .get()
       .then((querySnapshot) => {
         querySnapshot.docs.forEach((doc) => {
-          if (doc.data().state === "conformed") {
-            conformed.push(doc.data());
+          if (doc.data().state === "confirmed") {
+            confirmed.push(doc.data());
           } else if (doc.data().state === "pending") {
             pending.push(doc.data());
           } else {
             completedAndDeclined.push(doc.data());
           }
         });
-        return { conformed, pending, completedAndDeclined };
+        return { confirmed, pending, completedAndDeclined };
       })
       .then((data) => {
-        setConformedAppointments(data.conformed);
+        setConfirmedAppointments(data.confirmed);
         setPendingAppointments(data.pending);
         completedAndDeclinedAppointments(data.completedAndDeclined);
       });
   };
 
-  useEffect(() => {
-    sendToMainViewWhenCurrentUserIsNull(currentUser);
-    loadAppointment();
-  }, []);
+  const printServices = (bookedServices) => {
+    var services = "";
+    var count = 1;
+    for (const [category, subCategory] of Object.entries(bookedServices)) {
+      services += subCategory.service;
+      if (count++ !== Object.keys(bookedServices).length) services += ", ";
+    }
+    return services;
+  };
 
   return (
     <div className="clientSchedule">
-      <div className="yourAppointments">Your Appointments</div>
+      <div className="clientProfileTitle">Your Appointments</div>
       <Tabs className="clientScheduleTabs" defaultActiveKey="1">
         <TabPane className="upcomingTab" tab="Upcoming" key="1">
           <Row className="clientScheduleViewRow">
-            {conformedAppointment.map((appointment) => (
-              <ScheduleCard
-                name={appointment.designerName}
-                date={appointment.date}
-                time={appointment.time}
-                appointmentId={appointment.aid}
-                designerId={appointment.designerId}
-                types={["cut", "perm"]}
-              />
+            {confirmedAppointment.map((appointment, inx) => (
+              <ScheduleCard key={inx} appointment={appointment} printServices={printServices} />
             ))}
           </Row>
         </TabPane>
         <TabPane className="pendingTab" tab="Pending" key="2">
           <Row className="clientScheduleViewRow">
-            {pendingAppointment.map((appointment) => (
-              <ScheduleCard
-                name={appointment.designerName}
-                date={appointment.date}
-                time={appointment.time}
-                appointmentId={appointment.aid}
-                designerId={appointment.designerId}
-                types={["cut", "perm"]}
-              />
+            {pendingAppointment.map((appointment, inx) => (
+              <ScheduleCard key={inx} appointment={appointment} printServices={printServices} />
             ))}
           </Row>
         </TabPane>
         <TabPane className="historyTab" tab="History" key="3">
           <Row className="clientScheduleViewRow">
-            {completedAndDeclinedAppointment.map((appointment) => (
+            {completedAndDeclinedAppointment.map((appointment, inx) => (
               <ScheduleCardHistory
-                name={appointment.designerName}
-                date={appointment.date}
-                time={appointment.time}
-                appointmentId={appointment.aid}
-                designerId={appointment.designerId}
-                types={["cut", "perm"]}
+                key={inx}
+                appointment={appointment}
+                cardInx={inx}
+                printServices={printServices}
               />
             ))}
           </Row>

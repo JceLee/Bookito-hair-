@@ -11,6 +11,7 @@ export default function Location(props) {
   Geocode.setApiKey("AIzaSyDUz5tzN9Fm76pLUherzsDE-jG0LKBEhIc");
   Geocode.setLanguage("en");
   Geocode.enableDebug();
+
   useEffect(() => {
     Geocode.fromAddress(location).then(
       (response) => {
@@ -22,7 +23,7 @@ export default function Location(props) {
         console.error(error);
       }
     );
-  }, []);
+  }, [location, latLng, position]);
 
   if (loading) return null;
 
