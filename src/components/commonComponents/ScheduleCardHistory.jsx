@@ -23,7 +23,6 @@ export default function ScheduleCardHistory(props) {
           dispatch(select_designer(snapshot.data()));
         });
     }
-
     dispatchDesigner();
   }, [designerId]);
 
@@ -87,7 +86,6 @@ export default function ScheduleCardHistory(props) {
           </Col>
         </Row>
       </Card>
-
       {/* Review modal */}
       {visibleReviewModal ? (
         <ReviewModal
