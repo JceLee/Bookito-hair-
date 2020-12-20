@@ -6,7 +6,7 @@ export default function Hours(props) {
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   return (
     <div className="hours" id={id}>
-      <h2>Hours</h2>
+      <h2 id="hour">Hours</h2>
       <table>
         <tbody>
           {days.map((day) => {
@@ -15,7 +15,7 @@ export default function Hours(props) {
             );
             return (
               <tr key={day}>
-                <td>{day}</td>
+                <td id="day">{day}</td>
                 {hours[day][0].closed ? (
                   <td>Closed</td>
                 ) : (
