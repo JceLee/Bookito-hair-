@@ -23,8 +23,6 @@ export default function ScheduleCardHistory(props) {
           dispatch(select_designer(snapshot.data()));
         });
     }
-  }, []);
-
     dispatchDesigner();
   }, [designerId]);
 
