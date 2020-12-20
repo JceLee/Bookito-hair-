@@ -24,45 +24,18 @@ export default function DesignerListView(props) {
   const [mapVisibleMobile, setMapVisibleMobile] = useState(false);
   const [mapVisibleDesktop, setMapVisibleDesktop] = useState(true);
   const [filterTags, setFilterTags] = useState([]);
-  const [checkedFilterTags, setCheckedFilterTags] = useState([]);
+  const [filterCheckedTags, setFilterCheckedTags] = useState([]);
+  const [filterDate, setFilterDate] = useState(null);
+  const [sortBy, setSortBy] = useState("");
 
   // User location variables
   const [userLocation, setUserLocation] = useState();
-  const [defaultLocation] = useState({lat: 34.0522, lng: 118.2437 });
-
-  const handleSearch = (designer) => {
-    const route = `/designer_profile?uid=${designer.uid}`;
-    history.push(route);
-  };
-
-  const updateSortBy = (sortByKey) => {
-    switch (sortByKey) {
-      case "distance":
-        setDesignersCurrent([...designersCurrent].sort((a, b) => (a.distance && b.distance) ? a.distance - b.distance : a.distance ? -1 : 1));
-        break;
-      case "reviewScore":
-        setDesignersCurrent([...designersCurrent].sort((a, b) => {return a.reviewScore - b.reviewScore}));
-        break;
-      case "reviewCount":
-        setDesignersCurrent([...designersCurrent].sort((a, b) => {return a.reviewCount - b.reviewCount}));
-        break;
-      case "new":
-        setDesignersCurrent([...designersCurrent].sort((a, b) => {return a.createdOn - b.createdOn}));
-        break;
-      default:
-        break;
-    }
-  };
-
-  const updateCheckedFilterTags = (checkedTags) => {
-    setCheckedFilterTags(checkedTags);
-    setDesignersCurrent(designers.filter(designer => Object.keys(designer.services).some(tag => checkedTags.includes(tag))));
-  };
+  const [defaultLocation] = useState({ lat: 34.0522, lng: 118.2437 });
 
   useEffect(() => {
     const params = queryString.parse(props.location.search);
     setFilterTags(designerTags[params["type"]]);
-    setCheckedFilterTags(checkedFilterTags);
+    setFilterCheckedTags(designerTags[params["type"]]);
     firebaseStore
       .collection("users")
       .where("location", "==", params["location"])
@@ -98,6 +71,70 @@ export default function DesignerListView(props) {
     });
   }, [dispatch, props.location.search]);
 
+  const handleSearch = (designer) => {
+    const route = `/designer_profile?uid=${designer.uid}`;
+    history.push(route);
+  };
+
+  const updateSortBy = (sortByKey) => {
+    setSortBy(sortByKey);
+    switch (sortByKey) {
+      case "distance":
+        setDesignersCurrent([...designersCurrent].sort((a, b) => (a.distance && b.distance) ? a.distance - b.distance : a.distance ? -1 : 1));
+        break;
+      case "reviewScore":
+        setDesignersCurrent([...designersCurrent].sort((a, b) => {return a.reviewScore - b.reviewScore}));
+        break;
+      case "reviewCount":
+        setDesignersCurrent([...designersCurrent].sort((a, b) => {return a.reviewCount - b.reviewCount}));
+        break;
+      case "new":
+        setDesignersCurrent([...designersCurrent].sort((a, b) => {return a.createdOn - b.createdOn}));
+        break;
+      default:
+        break;
+    }
+  };
+
+  // const updateFilterCheckedTags = (checkedTags) => {
+  //   setFilterCheckedTags(checkedTags);
+  //   setDesignersCurrent(designers.filter(designer => Object.keys(designer.services).some(service => checkedTags.includes(service))));
+  // };
+
+  // const updateFilterDate = (date) => {
+  //   setFilterDate(date);
+
+  //   if (date) {
+  //     const dayOfWeek = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][date.getDay()];
+  //     setDesignersCurrent(designers.filter(designer => designer.hours[dayOfWeek] && !designer.hours[dayOfWeek][0].closed));
+  //   } else {
+  //     // Reset date filter and apply only the checked tags filter. // This is probably not the most optimum way to do this.
+  //     setDesignersCurrent(designers.filter(designer => Object.keys(designer.services).some(service => checkedTags.includes(service))));
+  //   }
+  // };
+
+  const updateFilter = (checkedTags=filterCheckedTags, date=filterDate) => {
+    let filteredDesigners = [...designers];
+
+    // Filter by Tags
+    setFilterCheckedTags(checkedTags);
+    if (checkedTags && checkedTags.length > 0) {
+      filteredDesigners = filteredDesigners.filter(designer => Object.keys(designer.services).some(service => checkedTags.includes(service)));
+    }
+    // Filter by Date
+    setFilterDate(date);
+    if (date) {
+      const dayOfWeek = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][date.getDay()];
+      filteredDesigners = filteredDesigners.filter(designer => designer.hours[dayOfWeek] && !designer.hours[dayOfWeek][0].closed);
+    }
+
+    // Apply all filter
+    setDesignersCurrent(filteredDesigners);
+
+    // Reapply sort byc
+    updateSortBy(sortBy);
+  };
+
   // Desktop map controls
   const openMapDesktop = () => {
     setMapVisibleDesktop(true);
@@ -131,7 +168,7 @@ export default function DesignerListView(props) {
               <div className="filter">
                 <DesignerListFilter
                   filterTags={filterTags}
-                  updateCheckedFilterTags={updateCheckedFilterTags}
+                  updateFilter={updateFilter}
                   numberOfDesigners={Object.keys(designersCurrent).length}
                   location="Vancouver"
                   updateSortBy={updateSortBy}

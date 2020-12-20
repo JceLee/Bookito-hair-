@@ -2,17 +2,20 @@ import React, { useState, useEffect } from "react";
 import { Menu, Dropdown, Button, Divider, Collapse } from "antd/lib/index";
 import { TagOutlined, CalendarOutlined, ClockCircleOutlined, DownOutlined } from '@ant-design/icons';
 import DesignerListFilterTags from "./DesignerListFilterTags";
+import DayPicker from "react-day-picker";
+import "react-day-picker/lib/style.css";
 
 export default function DesignerListFilter(props) {
-  const { filterTags, updateCheckedFilterTags, numberOfDesigners, location, updateSortBy } = props;
+  const { filterTags, updateFilter, numberOfDesigners, location, updateSortBy } = props;
   const { Panel } = Collapse;
 
   const [activeKey, setActiveKey] = useState([0]);
   const [sortBy, setSortBy] = useState("");
   const [currentCheckedTags, setCurrentCheckedTags] = useState([]);
+  const [filterDate, setFilterDate] = useState(null);
   
   useEffect(() => {
-    setCurrentCheckedTags([...filterTags]);
+
   }, []);
 
   const toggleFilterSetting = (i) => {
@@ -24,10 +27,24 @@ export default function DesignerListFilter(props) {
     updateSortBy(e.key);
   }
 
-  const onShowResultsPress = () => {
+  const onShowResultsTags = () => {
     toggleFilterSetting(0);
-    updateCheckedFilterTags(currentCheckedTags);
+    updateFilter(currentCheckedTags, undefined);
   }
+
+  const onShowResultsDate = () => {
+    toggleFilterSetting(0);
+    updateFilter(undefined, filterDate);
+  }
+
+  // const onShowResultsTime = () => {
+  //   toggleFilterSetting(0);
+  // }
+  
+  const handleFilterDate = (day, { selected }) => {
+    setFilterDate(selected ? undefined : day);
+    console.log(filterDate);
+  };
 
   const sortMenu = (
     <Menu onClick={(e) => handleSortBy(e)}>
@@ -39,8 +56,8 @@ export default function DesignerListFilter(props) {
     </Menu>
   );
 
-  const confirmFilterSetting = (
-    <Button className="designerListFilterConfirm" type="primary" block onClick={onShowResultsPress}>
+  const confirmFilterSettingButton = (onShowResults) => (
+    <Button className="designerListFilterConfirm" type="primary" block onClick={onShowResults}>
       Show results
     </Button>
   );
@@ -56,7 +73,7 @@ export default function DesignerListFilter(props) {
 
           <Button className="filterBtn" onClick={() => toggleFilterSetting(1)}><span><TagOutlined /> Tag</span></Button>
           <Button className="filterBtn" onClick={() => toggleFilterSetting(2)}><span><CalendarOutlined /> Date</span></Button>
-          <Button className="filterBtn" onClick={() => toggleFilterSetting(3)}><span><ClockCircleOutlined /> Time</span></Button>
+          {/* <Button className="filterBtn" onClick={() => toggleFilterSetting(3)}><span><ClockCircleOutlined /> Time</span></Button> */}
 
           <Collapse ghost activeKey={activeKey}>
             <Panel key="0" header={null} showArrow={false}>
@@ -70,16 +87,20 @@ export default function DesignerListFilter(props) {
                 filterTags={filterTags}
                 currentCheckedTags={currentCheckedTags}
                 setCurrentCheckedTags={setCurrentCheckedTags}/>
-              {confirmFilterSetting}
+              {confirmFilterSettingButton(onShowResultsTags)}
             </Panel>
             <Panel key="2" header={null} showArrow={false}>
-              2
-              {confirmFilterSetting}
+              <DayPicker
+                format={"MM/dd/yyyy"}
+                selectedDays={filterDate}
+                onDayClick={handleFilterDate}
+              />
+              {confirmFilterSettingButton(onShowResultsDate)}
             </Panel>
-            <Panel key="3" header={null} showArrow={false}>
+            {/* <Panel key="3" header={null} showArrow={false}>
               3
-              {confirmFilterSetting}
-            </Panel>
+              {confirmFilterSettingButton(onShowResultsTime)}
+            </Panel> */}
           </Collapse>
         </div>
       <Divider className="designerCardComponentDividerBottom"/>

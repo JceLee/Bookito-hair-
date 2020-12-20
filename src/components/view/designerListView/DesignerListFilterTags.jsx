@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Checkbox, Divider, Row, Col } from "antd";
 
 export default function DesignerListFilterTags(props) {
-    const { filterTags, currentCheckedTags, setCurrentCheckedTags } = props;
+    const { filterTags, setCurrentCheckedTags } = props;
 
     useEffect(() => {
+        setCurrentCheckedTags(filterTags);
     }, []);
 
     const onChange = list => {
