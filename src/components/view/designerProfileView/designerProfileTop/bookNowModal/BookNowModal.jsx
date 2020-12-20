@@ -13,6 +13,8 @@ export default function BookNowModal(props) {
   const currentUser = useSelector((state) => state.currentUser.currentUser);
   const { Step } = Steps;
   const { visible, modalHandler } = props;
+  const elementForScrollingTopInModal = document.getElementById("stepToTopId");
+
   const [displayedDay, setDisplayedDay] = useState(null);
   const [key, setKey] = useState("Cut");
   const [calculationBox, setCalculationBox] = useState([]);
@@ -21,14 +23,13 @@ export default function BookNowModal(props) {
   const [bookingTime, setBookingTime] = useState("");
   const [backToTimePosition, setBackToTimePosition] = useState(false);
   const [timeSelect, setTimeSelect] = useState([]);
-  const elementForScrollingTopInModal = document.getElementById("stepToTopId");
   const [appointments, setAppointments] = useState([]);
+
   const loadingAppointment = [];
 
   console.log("d.uid: " + designer.uid);
 
   useEffect(() => {
-    console.log("In booknow modal");
     firebaseStore
       .collection("appointments")
       .where("designerId", "==", designer.uid)
@@ -40,6 +41,19 @@ export default function BookNowModal(props) {
         setAppointments(loadingAppointment);
       });
   }, [designer.uid]);
+
+  useEffect(() => {
+    if (displayedDay != null) {
+      createTimeSelect(displayedDay.toDateString());
+    }
+  }, [displayedDay]);
+
+  useEffect(() => {
+    if (backToTimePosition) {
+      document.getElementById("selectTimePosition").scrollIntoView();
+    }
+    setBackToTimePosition(false);
+  }, [backToTimePosition]);
 
   let timeSlotTemplate = {
     time: null,
@@ -131,12 +145,6 @@ export default function BookNowModal(props) {
     setDisplayedDay(selected ? undefined : day);
   };
 
-  useEffect(() => {
-    if (displayedDay != null) {
-      createTimeSelect(displayedDay.toDateString());
-    }
-  }, [displayedDay]);
-
   const onRadioChange = (hour) => {
     setBookingTime(hour.target.value);
   };
@@ -212,13 +220,6 @@ export default function BookNowModal(props) {
     return contentString;
   };
 
-  useEffect(() => {
-    if (backToTimePosition) {
-      document.getElementById("selectTimePosition").scrollIntoView();
-    }
-    setBackToTimePosition(false);
-  }, [backToTimePosition]);
-
   const stepChoice = (item) => {
     if (item.id === 1) {
       setCurrent(current - 2);
@@ -282,7 +283,7 @@ export default function BookNowModal(props) {
       <>
         {current === 0 && <Button className="mockData">MockData</Button>}
         {current > 0 && (
-          <Button className="previousBtn" onClick={() => prev()}>
+          <Button className="previousBtn" onClick={prev}>
             Previous
           </Button>
         )}
@@ -291,13 +292,13 @@ export default function BookNowModal(props) {
             className="nextBtnInStepOne"
             type="primary"
             style={{ position: "absolute", right: 0 }}
-            onClick={() => next()}
+            onClick={next}
           >
             Next
           </Button>
         )}
         {current === steps.length - 1 && (
-          <Button className="doneBtn" type="primary" onClick={() => requestNewAppointment()}>
+          <Button className="doneBtn" type="primary" onClick={requestNewAppointment}>
             Done
           </Button>
         )}
