@@ -2,7 +2,8 @@ import React from "react";
 import SearchBarSection from "./SearchBarSection";
 import InfoCard from "./InfoCard";
 import NewDesignersDesktopSection from "./NewDesignersDesktopSection";
-import { Layout } from "antd";
+import DesignerTypeSlider from "./DesignerTypeSlider";
+import { Layout, Divider } from "antd";
 
 export default function MainView() {
   const { Footer } = Layout;
@@ -10,6 +11,11 @@ export default function MainView() {
   return (
     <>
       <SearchBarSection />
+
+      <DesignerTypeSlider />
+
+      <Divider />
+
       <div align="middle" className="infoCardsSection">
         <InfoCard
           header="Become our partner!"

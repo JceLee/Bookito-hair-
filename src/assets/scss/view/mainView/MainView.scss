@@ -43,6 +43,34 @@
   z-index: 2;
 }
 
+.desigerTypeSlider {
+  padding: 16px 0 0 16px;
+
+  .designerTypeSliderHeader {
+    margin-top: 16px;
+    font-weight: bold;
+    font-size: medium;
+  }
+
+  .slick-slider {
+    padding: 16px 32px;
+    .slick-list {
+      margin-left: -72px;
+    }
+  }
+
+  .designerTypeImgInSlider {
+    border-radius: 5%;
+    margin: 8px;
+  }
+
+  .designerTypeCaption {
+    padding-left: 16px;
+    font-weight: bold;
+    font-size: medium;
+  }
+}
+
 // info card section
 .infoCardsSection {
   margin: 10%;
