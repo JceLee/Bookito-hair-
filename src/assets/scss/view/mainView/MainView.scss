@@ -16,14 +16,17 @@
 // search bar section
 .searchBarSection {
   width: 100%;
-  height: 600px;
+  height: 450px;
+
+
   @include tabletP {
     height: 700px;
   }
+
   .searchBarSectionImg {
     object-fit: cover;
     position: absolute;
-    height: 600px;
+    height: 450px;
     @include tabletP {
       display: none;
     }
@@ -32,6 +35,15 @@
   #searchBarForm {
     border: 1px solid #fdfdfd;
     z-index: 2;
+
+    #mobileSearchBar {
+      margin-top: 10%;
+      z-index: 2;
+
+      .ant-input-affix-wrapper {
+        z-index: 2;
+      }
+    }
   }
 }
 
@@ -60,6 +72,7 @@
     @include tabletL {
       margin: 15px 60px;
     }
+
     .ant-card-cover {
       max-width: 334px;
       max-height: 216px;
@@ -102,10 +115,12 @@
       display: block;
       width: 30%;
     }
+
     .topLine {
       font-size: 30pt;
       font-weight: 500;
     }
+
     .bottomLine {
       font-weight: 300;
       margin: 0 auto;
@@ -118,6 +133,7 @@
       }
     }
   }
+
   .newDesignersHeaderSmallDesktopSection {
     font-size: 30pt;
     font-weight: 500;
@@ -125,6 +141,7 @@
       display: none;
     }
   }
+
   .imagesSection {
     width: 100%;
     @include mainPageNewDesigners1090 {
@@ -168,6 +185,7 @@
           width: 150px;
           height: 150px;
         }
+
         .ant-card-body {
           padding: 0;
         }

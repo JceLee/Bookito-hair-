@@ -157,7 +157,7 @@ export default function MainSearchBar() {
 
   return (
     <div id="mainSearchBar">
-      <div id="mainHeader">Find your favourite beautician</div>
+      {/*<div id="mainHeader">Find your favourite beautician</div>*/}
       <Input.Group compact>
         <Select
           onChange={setSelectedType}

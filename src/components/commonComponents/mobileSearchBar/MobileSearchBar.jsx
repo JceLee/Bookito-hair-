@@ -36,18 +36,27 @@ export default function MobileSearchBar() {
     var navBarHeight = document.getElementById("header").clientHeight;
     var searchBarMarginOnNavBar = (navBarHeight - searchBarHeight) / 2 + "px";
 
-    document.getElementById("searchBarForm").classList.add("stickedSearchBarOnNav");
-    document.getElementById("searchBarForm").style.top = searchBarMarginOnNavBar;
+    try {
+      document.getElementById("searchBarForm").classList.add("stickedSearchBarOnNav");
+      document.getElementById("searchBarForm").style.top = searchBarMarginOnNavBar;
 
-    document.getElementById("mobileSearchBar").style.marginTop = 0;
-    document.getElementById("mainHeader").style.display = "none";
+      document.getElementById("mobileSearchBar").style.marginTop = 0;
+      document.getElementById("mainHeader").style.display = "none";
+    } catch (e) {
+
+    }
   };
 
   const takeSearchBarOffFromNavBar = () => {
-    document.getElementById("searchBarForm").classList.remove("stickedSearchBarOnNav");
-    document.getElementById("searchBarForm").style.top = "unset";
-    document.getElementById("mobileSearchBar").style.marginTop = "100px";
-    document.getElementById("mainHeader").style.display = "unset";
+    try {
+      document.getElementById("searchBarForm").classList.remove("stickedSearchBarOnNav");
+      document.getElementById("searchBarForm").style.top = "unset";
+      document.getElementById("mobileSearchBar").style.marginTop = "10%";
+      document.getElementById("mainHeader").style.display = "unset";
+    } catch (e) {
+
+    }
+
   };
 
   useScrollPosition(({ prevPos, currPos }) => {
@@ -64,7 +73,7 @@ export default function MobileSearchBar() {
 
   return (
     <div id="mobileSearchBar">
-      <div id="mainHeader">Find your favourite beautician</div>
+      {/*<div id="mainHeader">Find your favourite beautician</div>*/}
       <Input
         size="large"
         placeholder="Find your Beauticians" // TODO: Extract string to string file
