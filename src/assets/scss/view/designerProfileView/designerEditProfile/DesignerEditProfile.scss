@@ -274,6 +274,15 @@ $paddingOfworkImgInModal: 10px;
         .ant-form-item .ant-form-item-label {
           padding: 0;
         }
+        .autocompleteDropdownContainer {
+          padding: 4px;
+          border:1px solid lightgrey;
+          border-top: 0px;
+        }
+      
+        .autocompleteDropdownContainer:empty {
+          display: none;
+        }
       }
 
       // WorksForm in Edit Profile

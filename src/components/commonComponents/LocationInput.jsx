@@ -10,6 +10,7 @@ export default function LocationInput(props) {
     handleAddressSelect,
     handleSearch,
     handleGeolocation,
+    allowClear,
   } = props;
 
   return (
@@ -21,14 +22,23 @@ export default function LocationInput(props) {
       >
         {({ getInputProps, getSuggestionItemProps, suggestions, loading }) => (
           <React.Fragment>
-            <Input.Search
-              {...getInputProps({
-                id: "address-input",
-              })}
-              size="large"
-              placeholder="Type where you are looking for" // TODO: Extract string to string file
-              onSearch={handleSearch}
-            />
+            {!!handleSearch ? 
+              <Input.Search
+                {...getInputProps({
+                  id: "address-input",
+                })}
+                size="large"
+                placeholder="Type where you are looking for" // TODO: Extract string to string file
+                onSearch={handleSearch}
+              />
+              :<Input
+                {...getInputProps({
+                  id: "address-input",
+                })}
+                placeholder="Address"
+                allowClear={allowClear}
+              />
+            }
             <div className="autocompleteDropdownContainer">
               {loading ? <div>Loading...</div> : null}
               {suggestions.map((suggestion, index) => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useRef} from "react";
 import { Affix, Button, Modal, Form, Collapse, message } from "antd";
 import DesignerNav from "./designerNav/DesignerNav.jsx";
 import ReadOnlyStar from "../../../commonComponents/ReadOnlyStar";
@@ -10,6 +10,7 @@ import BookNowModal from "../designerProfileTop/bookNowModal/BookNowModal";
 import Avatar from "antd/lib/avatar/avatar";
 import { firebaseStore } from "../../../../config/fbConfig";
 import { useSelector } from "react-redux";
+import { geocode } from "../../../../helpers/geocode";
 
 const defaultStartTime = 16; // 08:00
 const defaultEndTime = 42; // 21:00
@@ -49,13 +50,10 @@ const formInitialValues = {
     Sun: [{ tradingHours: defaultTradingHours, closed: false }],
   },
   addressPhone: {
-    street: "",
-    unit: "",
-    city: "",
-    postalCode: "",
-    province: "",
+    address: "",
     phone: "",
   },
+  coordinate: ""
 };
 
 export default function DesignerProfileTop(props) {
@@ -66,6 +64,7 @@ export default function DesignerProfileTop(props) {
   const [visibleEditProfileModal, setVisibleEditProfileModal] = useState(false);
   const [visibleBookNowModal, setVisibleBookNowModal] = useState(false);
   const [form] = Form.useForm();
+  const addressLatLng = useRef({ lat: null, lng: null });
 
   const editProfilePanels = [
     {
@@ -76,7 +75,7 @@ export default function DesignerProfileTop(props) {
       header: "Hours",
       content: <HoursForm defaultTradingHours={defaultTradingHours} />,
     },
-    { header: "Address & Phone", content: <AddressPhoneForm /> },
+    { header: "Address & Phone", content: <AddressPhoneForm form={form} /> },
     {
       header: "Works",
       content: <WorksForm />,
@@ -111,9 +110,20 @@ export default function DesignerProfileTop(props) {
   };
 
   const onOk = () => {
-    form.submit();
-    console.log(form.submit);
-    setVisibleEditProfileModal(false);
+    geocode(form.getFieldValue().addressPhone.address).then(latLng => {
+      if (latLng) {
+        addressLatLng.current.lat = latLng.lat;
+        addressLatLng.current.lng = latLng.lng;
+
+        form.submit();
+        console.log(form.submit);
+        setVisibleEditProfileModal(false);
+
+        console.log(addressLatLng);
+      } else {
+        // console.log("Unable to get location!");
+      }
+    });
   };
 
   useEffect(() => {
