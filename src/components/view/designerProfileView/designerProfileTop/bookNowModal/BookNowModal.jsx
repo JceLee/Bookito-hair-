@@ -27,8 +27,6 @@ export default function BookNowModal(props) {
 
   const loadingAppointment = [];
 
-  console.log("d.uid: " + designer.uid);
-
   useEffect(() => {
     firebaseStore
       .collection("appointments")
@@ -248,7 +246,7 @@ export default function BookNowModal(props) {
       title: "Service and Price",
       content: (
         <StepTwo
-          services={serviceTabData(designer.services)}
+          services={serviceTabData()}
           servicesContent={designer.services}
           serviceKey={key}
           calculationBox={calculationBox}

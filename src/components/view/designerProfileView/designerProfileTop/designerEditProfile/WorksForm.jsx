@@ -1,14 +1,14 @@
-import {Upload, message} from "antd";
+import { Upload, message, Form, Modal } from "antd";
 import ImgCrop from "antd-img-crop";
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {firebaseOrigin, firebaseStore} from "../../../../../config/fbConfig";
-import {update_database} from "../../../../../actions/firebaseAction";
-import {refresh} from "../../../../../actions/currentUser";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { firebaseOrigin, firebaseStore } from "../../../../../config/fbConfig";
+import { update_database } from "../../../../../actions/firebaseAction";
+import { refresh } from "../../../../../actions/currentUser";
 
 export default function WorksForm(props) {
-  const [client, setClient] = useState(useSelector((state) => state.selectedDesigner.selectedDesigner));
-  const works = client.works;
+  const { works, client, setClient, layout } = props;
+  const [form] = Form.useForm();
   const photoURLs = [];
   const [testState, setTestState] = useState(false);
   const [fileList, setFileList] = useState(works);
@@ -29,8 +29,7 @@ export default function WorksForm(props) {
         uploadTask.on(
           firebaseOrigin.storage.TaskEvent.STATE_CHANGED,
           (snapshot) => {
-            const progress =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             if (snapshot.state === firebaseOrigin.storage.TaskState.RUNNING) {
               console.log(`Progress: ${progress}%`);
             }
@@ -65,14 +64,12 @@ export default function WorksForm(props) {
 
   const updateFireStorage = () => {
     if (testState) {
-      const updatedList = fileList.filter(
-        (work) => work["originFileObj"] === undefined
-      );
+      const updatedList = fileList.filter((work) => work["originFileObj"] === undefined);
       const newWorks = [...updatedList, ...photoURLs];
       firebaseStore
         .collection("users")
         .doc(client.uid)
-        .update({works: newWorks})
+        .update({ works: newWorks })
         .then(function () {
           return message.success({
             content: "Saved",
@@ -82,7 +79,7 @@ export default function WorksForm(props) {
         });
       updateRedux(newWorks);
     }
-  }
+  };
 
   const updateRedux = (newWorks) => {
     const updatedInfo = {
@@ -91,15 +88,15 @@ export default function WorksForm(props) {
     };
     setClient(updatedInfo);
     dispatch(refresh(updatedInfo));
-    designers.forEach(designer => {
+    designers.forEach((designer) => {
       if (designer.uid === client.uid) {
         designer.works = newWorks;
         dispatch(update_database(designers));
       }
-    })
+    });
   };
 
-  const onChange = ({fileList: newFileList}) => {
+  const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
     setTestState(true);
   };
@@ -120,7 +117,7 @@ export default function WorksForm(props) {
   };
 
   return (
-    <div>
+    <Form {...layout} name="editProfile" form={form}>
       <ImgCrop rotate>
         <Upload
           action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
@@ -132,7 +129,9 @@ export default function WorksForm(props) {
           {fileList.length < 8 && "+ Upload"}
         </Upload>
       </ImgCrop>
-      <button onClick={onUploadSubmission}>Upload</button>
-    </div>
+      <button className="uploadButtonInEditProfile" onClick={onUploadSubmission}>
+        Upload
+      </button>
+    </Form>
   );
 }

@@ -6,8 +6,10 @@ import mobile1 from "../../../assets/backgrounds/mobile1.jpg";
 import mobile2 from "../../../assets/backgrounds/mobile2.jpg";
 import mobile3 from "../../../assets/backgrounds/mobile3.jpg";
 import mobile4 from "../../../assets/backgrounds/mobile4.jpg";
+import mobile5 from "../../../assets/backgrounds/mobile5.jpg";
+import mobile6 from "../../../assets/backgrounds/mobile6.jpg";
 
-const mobiles = [mobile1, mobile2, mobile3, mobile4]
+const mobiles = [mobile5, mobile6, mobile1, mobile2, mobile3, mobile4]
 const tmpCss = {
   backgroundColor: "#fdfdfd",
   height: "6px",
@@ -25,7 +27,7 @@ export default function MobileSearchBarSlideBackground() {
         <AutoplaySlider
           play={true}
           cancelOnInteraction={false}
-          interval={8000}
+          interval={4000}
           bullets={false}
           fillParent={true}
           buttons={false}

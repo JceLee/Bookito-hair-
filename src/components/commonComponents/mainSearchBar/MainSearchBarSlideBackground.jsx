@@ -12,7 +12,7 @@ import image6 from "../../../assets/backgrounds/background6.jpg";
 const desktops = [image1, image2, image3, image4, image5, image6]
 const tmpCss = {
   backgroundColor: "#fdfdfd",
-  height: "6px",
+  height: "8px",
   width: "100%",
   objectFit: "cover",
   position: "absolute",
@@ -21,18 +21,20 @@ const tmpCss = {
 
 export default function MainSearchBarSlideBackground() {
   const AutoplaySlider = withAutoplay(AwesomeSlider);
+
   return (
     <div className="searchBarSectionDesktopImg" style={{width:"100%", height:"550px"}}>
       <div style={tmpCss}/>
       <AutoplaySlider
         play={true}
         cancelOnInteraction={false}
-        interval={2500}
+        interval={4000}
         bullets={false}
         fillParent={true}
         buttons={false}
         cssModule={sliderScss}
       >
+
         {desktops.map((img, inx) => (
           <div data-src={img} />
         ))}

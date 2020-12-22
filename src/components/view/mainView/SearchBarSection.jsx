@@ -33,8 +33,6 @@ export default function SearchBarSection() {
   const tabletLWidth = 768;
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-  const AutoplaySlider = withAutoplay(AwesomeSlider);
-
   const reportWindowSize = () => {
     setScreenWidth(window.innerWidth);
   };
@@ -43,63 +41,6 @@ export default function SearchBarSection() {
 
   return (
     <div className="searchBarSection">
-      {/*<img*/}
-      {/*  className="searchBarSectionImg"*/}
-      {/*  src={mobiles[activeIndex]}*/}
-      {/*  alt="searchBarSectionImg"*/}
-      {/*/>*/}
-      {/*<div className="searchBarSectionImg" style={{width:"100%", height:"450px"}}>*/}
-      {/*  <div style={tmpCss}/>*/}
-      {/*  <AutoplaySlider*/}
-      {/*    play={true}*/}
-      {/*    cancelOnInteraction={false}*/}
-      {/*    interval={2500}*/}
-      {/*    bullets={false}*/}
-      {/*    fillParent={true}*/}
-      {/*    buttons={false}*/}
-      {/*    cssModule={sliderScss}*/}
-      {/*  >*/}
-      {/*    {mobiles.map((img, inx) => (*/}
-      {/*      <div data-src={img} />*/}
-      {/*    ))}*/}
-      {/*  </AutoplaySlider>*/}
-      {/*</div>*/}
-      {/*<img*/}
-      {/*  className="searchBarSectionDesktopImg"*/}
-      {/*  src={desktops[1]}*/}
-      {/*  alt="searchBarSectionDesktopImg"*/}
-      {/*/>*/}
-      {/*{screenWidth < tabletLWidth ? <div className="searchBarSectionImg" style={{width:"100%", height:"550px"}}>*/}
-      {/*  <div style={tmpCss}/>*/}
-      {/*  <AutoplaySlider*/}
-      {/*    play={true}*/}
-      {/*    cancelOnInteraction={false}*/}
-      {/*    interval={2500}*/}
-      {/*    bullets={false}*/}
-      {/*    fillParent={true}*/}
-      {/*    buttons={false}*/}
-      {/*    cssModule={sliderScss}*/}
-      {/*  >*/}
-      {/*    {mobiles.map((img, inx) => (*/}
-      {/*      <div data-src={img} />*/}
-      {/*    ))}*/}
-      {/*  </AutoplaySlider>*/}
-      {/*</div> : <div className="searchBarSectionDesktopImg" style={{width:"100%", height:"600px"}}>*/}
-      {/*  <div style={tmpCss}/>*/}
-      {/*  <AutoplaySlider*/}
-      {/*    play={true}*/}
-      {/*    cancelOnInteraction={false}*/}
-      {/*    interval={2500}*/}
-      {/*    bullets={false}*/}
-      {/*    fillParent={true}*/}
-      {/*    buttons={false}*/}
-      {/*    cssModule={sliderScss}*/}
-      {/*  >*/}
-      {/*    {desktops.map((img, inx) => (*/}
-      {/*      <div data-src={img} />*/}
-      {/*    ))}*/}
-      {/*  </AutoplaySlider>*/}
-      {/*</div>}*/}
       {screenWidth < tabletLWidth ? <MobileSearchBarSlideBackground /> : <MainSearchBarSlideBackground />}
       <div id="searchBarForm">
         {screenWidth < tabletLWidth ? <MobileSearchBar /> : <MainSearchBar />}
