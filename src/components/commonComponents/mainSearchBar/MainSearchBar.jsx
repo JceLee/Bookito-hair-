@@ -74,16 +74,19 @@ export default function MainSearchBar() {
     // if (width <= tabletLWidth) {
     document.getElementById("mainSearchBar").style.marginTop = "300px";
     // } else {
-    // document.getElementById("mainSearchBar").style.marginTop = "15%";
+    document.getElementById("mainSearchBar").style.marginTop = "20%";
     // }
     document.getElementById("mainHeader").style.display = "unset";
   };
 
   useScrollPosition(({ prevPos, currPos }) => {
-    if (currPos.y < heightToShowSearchBarOnNav) {
-      stickSearchBarOnNavBar(window.innerWidth);
-    } else {
-      takeSearchBarOffFromNavBar(window.innerWidth);
+    try {
+      if (currPos.y < heightToShowSearchBarOnNav) {
+        stickSearchBarOnNavBar(window.innerWidth);
+      } else {
+        takeSearchBarOffFromNavBar(window.innerWidth);
+      }
+    } catch {
     }
   });
   //#endregion
@@ -157,7 +160,7 @@ export default function MainSearchBar() {
 
   return (
     <div id="mainSearchBar">
-      <div id="mainHeader">Find your favourite beautician</div>
+      {/*<div id="mainHeader">Find your favourite beautician</div>*/}
       <Input.Group compact>
         <Select
           onChange={setSelectedType}

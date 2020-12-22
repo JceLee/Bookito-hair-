@@ -1,99 +1,56 @@
 import React, { useState, useEffect } from "react";
-import { Button, Space } from "antd";
-import { Link } from "react-scroll";
+import { useSelector } from "react-redux";
 import Review from "./Review";
+import { firebaseStore } from "../../../../config/fbConfig";
 
-const reviewsPerClick = 2;
-let reviewsArray = [];
-
-export default function ReviewContainer(props) {
-  let { id, reviews } = props;
-  const [arrayReviewsToShow, setarrayReviewsToShow] = useState([]);
-  const [next, setNext] = useState(reviewsPerClick);
-  const [collapsed, setCollapsed] = useState({
-    collapsedAllReviews: true,
-    collapsedComment: true,
-  });
-
-  const loopWithSlice = (start, end) => {
-    const slicedReviews = props.reviews.slice(start, end);
-    reviewsArray = reviewsArray.concat(slicedReviews);
-    setarrayReviewsToShow(reviewsArray);
-  };
-
-  const displayInitialReviews = () => {
-    reviewsArray.splice(reviewsPerClick);
-    setarrayReviewsToShow(reviewsArray);
-  };
+export default function ReviewContainer() {
+  const reviews = [];
+  const [appointments, setAppointments] = useState([]);
+  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
 
   useEffect(() => {
-    loopWithSlice(0, reviewsPerClick);
+    loadAppointments();
   }, []);
 
-  const handleShowMoreReviews = () => {
-    loopWithSlice(next, next + reviewsPerClick);
-    setNext(next + reviewsPerClick);
-    setCollapsed({ collapsedAllReviews: false, collapsedComment: true });
+  const loadAppointments = () => {
+    const fbData = [];
+    firebaseStore
+      .collection("appointments")
+      .where("designerId", "==", designer.uid)
+      .get()
+      .then((querySnapshot) => {
+        for (const [k, v] of Object.entries(querySnapshot.docs)) {
+          fbData.push(v.data());
+        }
+        return fbData;
+      })
+      .then((data) => {
+        setAppointments(data);
+      });
   };
 
-  const handleShowLessReviews = () => {
-    displayInitialReviews();
-    setNext(reviewsPerClick);
-    setCollapsed({ collapsedAllReviews: true, collapsedComment: true });
+  const getReviews = () => {
+    appointments.forEach((a) => {
+      if (a.review != null) {
+        let review = {
+          rate: a.review.rate,
+          reviewContext: a.review.reviewContext,
+        };
+        reviews.push(review);
+      }
+    });
   };
 
   return (
-    <div className="reviews" id={id}>
-      <h2>Reviews ({reviews.length})</h2>
-      {reviews.length === 0 ? (
-        <h3>No reviews yet...</h3>
-      ) : (
-        arrayReviewsToShow.map((review, customerId) => {
-          const { customerName, photos, rate, comment, date } = review;
-          return (
-            <Review
-              key={customerId}
-              customerName={customerName}
-              photos={photos}
-              rate={rate}
-              comment={comment}
-              date={date}
-              collapsed={collapsed}
-            />
-          );
-        })
-      )}
-
-      <Space>
-        {reviews.length >= next && (
-          <Button
-            className="Button"
-            type="primary"
-            onClick={handleShowMoreReviews}
-          >
-            Load More
-          </Button>
-        )}
-
-        {arrayReviewsToShow.length > reviewsPerClick && (
-          <Link
-            activeClass="active"
-            to="reviews"
-            spy={true}
-            smooth={true}
-            duration={500}
-            offset={-48 * 2.25}
-          >
-            <Button
-              className="Button"
-              type="primary"
-              onClick={handleShowLessReviews}
-            >
-              Load Less
-            </Button>
-          </Link>
-        )}
-      </Space>
-    </div>
+    <>
+      <h2>Reviews</h2>
+      {appointments.length == 0 ? "There is no review" : getReviews()}
+      {reviews.map((r, inx) => (
+        <>
+          <div>rate: {r.rate}</div>
+          <div>context: {r.reviewContext}</div>
+        </>
+      ))}
+    </>
   );
 }

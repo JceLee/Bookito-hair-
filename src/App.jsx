@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Layout } from "antd";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import NavBar from "./components/commonComponents/NavBar";
@@ -21,6 +21,7 @@ import BecomeDesignerView from "./components/view/becomeDesignerView/BecomeDesig
 const { Header, Content } = Layout;
 
 export default function App() {
+
   return (
     <Router>
       <Layout id="layout">

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Form, Input, Avatar, Modal, Upload, message, Button } from "antd";
+import { Form, Input, Avatar, Modal, message, Button } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import { useDropzone } from "react-dropzone";
 import BlackBtn from "../../commonComponents/BlackBtn";
@@ -8,10 +8,16 @@ import { useSelector } from "react-redux";
 import { firebaseOrigin, firebaseStore } from "../../../config/fbConfig";
 import { refresh } from "../../../actions/currentUser";
 
+const validateMessages = {
+  required: "${label} is required!",
+  types: {
+    email: "${label} is not a valid email!",
+  },
+};
+
 export default function ClientProfileView() {
   const [client, setClient] = useState(useSelector((state) => state.currentUser.currentUser));
   const [edit, setEdit] = useState(false);
-  // const { Dragger } = Upload;
   const [profile, setProfile] = useState(client);
   const dispatch = useDispatch();
 
@@ -46,7 +52,6 @@ export default function ClientProfileView() {
     };
     setClient(updatedInfo);
     dispatch(refresh(updatedInfo));
-    // window.location.reload(false);
     firebaseStore
       .collection("users")
       .doc(client.uid)
@@ -161,28 +166,64 @@ export default function ClientProfileView() {
           phone: client.phone,
           address: client.location,
         }}
+        validateMessages={validateMessages}
       >
         <Form.Item className="profilePhoto">
           <Avatar size={128} src={client.photoURL} />
           {edit ? <EditOutlined className="editIcon" onClick={modalHandler} /> : null}
         </Form.Item>
         {edit ? (
-          <Form.Item label="Name" name="nickName" className="formItems formTopMargin">
-            <Input type="text" />
+          <Form.Item
+            label="Name"
+            name="nickName"
+            className="formItems formTopMargin"
+            rules={[{ required: true }]}
+          >
+            <Input type="text" required={true} />
           </Form.Item>
         ) : (
           <Form.Item className="clientName">
             <div className="formBottomMargin">{client.displayName}</div>
           </Form.Item>
         )}
-        <Form.Item label="Email" name="email" className="formItems">
-          {edit ? <Input type="text" /> : <div>{client.email}</div>}
-        </Form.Item>
+
+        {edit ? (
+          <Form.Item
+            label="Email"
+            name="email"
+            className="formItems"
+            rules={[{ required: true, type: "email" }]}
+          >
+            <Input type="email" required={true} />
+          </Form.Item>
+        ) : (
+          <Form.Item className="formItems" label="Email">
+            <div>{client.email}</div>
+          </Form.Item>
+        )}
+
         {edit ? null : <hr />}
-        <Form.Item label="Phone" name="phone" className="formItems">
-          {edit ? <Input type="text" /> : <div>{client.phone}</div>}
+        <Form.Item
+          label="Phone"
+          name="phone"
+          className="formItems"
+          rules={[
+            {
+              validator(rule, value) {
+                if (!value || value.length === 10) {
+                  console.log(value);
+                  return Promise.resolve();
+                }
+                return Promise.reject("Your input is not a valid phone number!");
+              },
+            },
+          ]}
+        >
+          {edit ? <Input type="number" /> : <div>{client.phone}</div>}
         </Form.Item>
+
         {edit ? null : <hr />}
+
         <Form.Item label="Address" name="address" className="formItems">
           {edit ? <Input type="text" /> : <div>{client.location}</div>}
         </Form.Item>
