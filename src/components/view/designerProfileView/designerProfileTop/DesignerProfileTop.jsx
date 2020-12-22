@@ -1,14 +1,13 @@
-import React, {useState, useEffect, useRef} from "react";
-import { Affix, Button, Modal, Form, Collapse, message } from "antd";
+import React, { useState, useEffect, useRef } from "react";
+import { Affix, Button, Modal, Form, Collapse } from "antd";
 import DesignerNav from "./designerNav/DesignerNav.jsx";
 import ReadOnlyStar from "../../../commonComponents/ReadOnlyStar";
+import ClientProfileView from "../../../view/clientProfileView/ClientProfileView";
 import ServiceNPriceForm from "./designerEditProfile/ServiceNPriceForm";
 import HoursForm from "./designerEditProfile/HoursForm";
-import AddressPhoneForm from "./designerEditProfile/AddressPhoneForm";
 import WorksForm from "./designerEditProfile/WorksForm";
 import BookNowModal from "../designerProfileTop/bookNowModal/BookNowModal";
 import Avatar from "antd/lib/avatar/avatar";
-import { firebaseStore } from "../../../../config/fbConfig";
 import { useSelector } from "react-redux";
 import { geocode } from "../../../../helpers/geocode";
 
@@ -18,46 +17,8 @@ const defaultTradingHours = [defaultStartTime, defaultEndTime];
 const searchBarHeight = 64;
 const avatarSize = 64;
 const { Panel } = Collapse;
-const layout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 24 },
-};
-const validateMessages = {
-  required: "Required",
-  types: {
-    number: "Invalid",
-  },
-  number: {
-    range: "Invalid",
-  },
-};
-const formInitialValues = {
-  services: {
-    Cut: [],
-    Style: [],
-    Perm: [],
-    Color: [],
-    Clinic: [],
-    Promo: [],
-  },
-  hours: {
-    Mon: [{ tradingHours: defaultTradingHours, closed: false }],
-    Tue: [{ tradingHours: defaultTradingHours, closed: false }],
-    Wed: [{ tradingHours: defaultTradingHours, closed: false }],
-    Thu: [{ tradingHours: defaultTradingHours, closed: false }],
-    Fri: [{ tradingHours: defaultTradingHours, closed: false }],
-    Sat: [{ tradingHours: defaultTradingHours, closed: false }],
-    Sun: [{ tradingHours: defaultTradingHours, closed: false }],
-  },
-  addressPhone: {
-    address: "",
-    phone: "",
-  },
-  coordinate: ""
-};
 
 export default function DesignerProfileTop(props) {
-  const currentUser = useSelector((state) => state.currentUser.currentUser);
   const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
   const [stickyNavPositionFromTop] = useState(searchBarHeight);
   const [height, setHeight] = useState(0);
@@ -75,7 +36,7 @@ export default function DesignerProfileTop(props) {
       header: "Hours",
       content: <HoursForm defaultTradingHours={defaultTradingHours} />,
     },
-    { header: "Address & Phone", content: <AddressPhoneForm form={form} /> },
+    { header: "Address & Phone", content: <ClientProfileView form={form} /> },
     {
       header: "Works",
       content: <WorksForm />,
@@ -92,21 +53,6 @@ export default function DesignerProfileTop(props) {
 
   const bookNowModalHandler = () => {
     setVisibleBookNowModal(!visibleBookNowModal);
-  };
-
-  const onFinish = (values) => {
-    setVisibleEditProfileModal(false);
-    const updatedProfile = {
-      services: values.services,
-      hours: values.hours,
-      addressPhone: values.addressPhone,
-      photos: values.fileList,
-    };
-    console.log(updatedProfile);
-  };
-
-  const onFinishFailed = (errors) => {
-    console.log(errors);
   };
 
   const onOk = () => {
@@ -158,36 +104,22 @@ export default function DesignerProfileTop(props) {
                 onCancel={handleCancelEditProfileModal}
                 // width={window.innerWidth * 0.8}
                 destroyOnClose={true}
-                footer={
-                  <Button className="saveBtnInEditProfile" key="submit" onClick={onOk}>
-                    Save
-                  </Button>
-                }
+                footer={null}
+                // footer={
+                //   <Button className="saveBtnInEditProfile" key="submit" onClick={onOk}>
+                //     Save
+                //   </Button>
+                // }
               >
-                <Form
-                  {...layout}
-                  form={form}
-                  name="editProfile"
-                  onFinish={onFinish}
-                  onFinishFailed={onFinishFailed}
-                  initialValues={formInitialValues}
-                  validateMessages={validateMessages}
-                  scrollToFirstError
-                >
-                  <Collapse
-                    className="editProfileCollapse"
-                    bordered={false}
-                    defaultActiveKey={["1"]}
-                  >
-                    {editProfilePanels.map((panel, index) => {
-                      return (
-                        <Panel className="editProfilePanel" header={panel.header} key={index + 1}>
-                          {panel.content}
-                        </Panel>
-                      );
-                    })}
-                  </Collapse>
-                </Form>
+                <Collapse className="editProfileCollapse" bordered={false} defaultActiveKey={["1"]}>
+                  {editProfilePanels.map((panel, index) => {
+                    return (
+                      <Panel className="editProfilePanel" header={panel.header} key={index + 1}>
+                        {panel.content}
+                      </Panel>
+                    );
+                  })}
+                </Collapse>
               </Modal>
             </>
           ) : (

@@ -22,6 +22,9 @@ export default function StepTwo(props) {
     }
   }, []);
 
+  console.log(services);
+  console.log(servicesContent);
+
   const renderService = () => (
     <div className="checkboxOption">
       <Card
