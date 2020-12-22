@@ -35,39 +35,33 @@ export default function MobileSearchBar() {
     var searchBarHeight = document.getElementById("mobileSearchBar").clientHeight;
     var navBarHeight = document.getElementById("header").clientHeight;
     var searchBarMarginOnNavBar = (navBarHeight - searchBarHeight) / 2 + "px";
+    document.getElementById("searchBarForm").classList.add("stickedSearchBarOnNav");
+    document.getElementById("searchBarForm").style.top = searchBarMarginOnNavBar;
 
-    try {
-      document.getElementById("searchBarForm").classList.add("stickedSearchBarOnNav");
-      document.getElementById("searchBarForm").style.top = searchBarMarginOnNavBar;
-
-      document.getElementById("mobileSearchBar").style.marginTop = 0;
-      document.getElementById("mainHeader").style.display = "none";
-    } catch (e) {
-
-    }
+    document.getElementById("mobileSearchBar").style.marginTop = 0;
+    document.getElementById("mainHeader").style.display = "none";
   };
 
   const takeSearchBarOffFromNavBar = () => {
-    try {
-      document.getElementById("searchBarForm").classList.remove("stickedSearchBarOnNav");
-      document.getElementById("searchBarForm").style.top = "unset";
-      document.getElementById("mobileSearchBar").style.marginTop = "10%";
-      document.getElementById("mainHeader").style.display = "unset";
-    } catch (e) {
-
-    }
-
+    document.getElementById("searchBarForm").classList.remove("stickedSearchBarOnNav");
+    document.getElementById("searchBarForm").style.top = "unset";
+    document.getElementById("mobileSearchBar").style.marginTop = "10%";
+    document.getElementById("mainHeader").style.display = "unset";
   };
 
   useScrollPosition(({ prevPos, currPos }) => {
-    if (currPos.y < heightToShowSearchBarOnNav) {
-      hide("logo");
-      hide("menuBtn");
-      stickSearchBarOnNavBar();
-    } else {
-      show("logo");
-      show("menuBtn");
-      takeSearchBarOffFromNavBar();
+    try {
+      if (currPos.y < heightToShowSearchBarOnNav) {
+        hide("logo");
+        hide("menuBtn");
+        stickSearchBarOnNavBar();
+      } else {
+        show("logo");
+        show("menuBtn");
+        takeSearchBarOffFromNavBar();
+      }
+    } catch {
+
     }
   });
 

@@ -25,7 +25,7 @@ export default function MainView() {
 
       <NewDesignersDesktopSection />
 
-      <div className="newDesignerMobileSection"></div>
+      <div className="newDesignerMobileSection"/>
 
       <Footer id="footer">LookUp WIP July 2020</Footer>
     </>

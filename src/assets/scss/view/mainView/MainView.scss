@@ -37,11 +37,22 @@
     z-index: 2;
 
     #mobileSearchBar {
-      margin-top: 10%;
       z-index: 2;
 
       .ant-input-affix-wrapper {
         z-index: 2;
+      }
+    }
+
+    #mainSearchBar {
+      z-index: 3;
+
+      .ant-select-selector {
+        z-index: 4;
+      }
+
+      .ant-input-affix-wrapper {
+        z-index: 3;
       }
     }
   }

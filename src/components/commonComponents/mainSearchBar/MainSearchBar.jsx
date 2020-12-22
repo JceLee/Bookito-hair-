@@ -74,16 +74,19 @@ export default function MainSearchBar() {
     // if (width <= tabletLWidth) {
     document.getElementById("mainSearchBar").style.marginTop = "300px";
     // } else {
-    // document.getElementById("mainSearchBar").style.marginTop = "15%";
+    document.getElementById("mainSearchBar").style.marginTop = "20%";
     // }
     document.getElementById("mainHeader").style.display = "unset";
   };
 
   useScrollPosition(({ prevPos, currPos }) => {
-    if (currPos.y < heightToShowSearchBarOnNav) {
-      stickSearchBarOnNavBar(window.innerWidth);
-    } else {
-      takeSearchBarOffFromNavBar(window.innerWidth);
+    try {
+      if (currPos.y < heightToShowSearchBarOnNav) {
+        stickSearchBarOnNavBar(window.innerWidth);
+      } else {
+        takeSearchBarOffFromNavBar(window.innerWidth);
+      }
+    } catch {
     }
   });
   //#endregion
