@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Affix, Button, Modal, Form, Collapse, message } from "antd";
+import { Affix, Button, Modal, Form, Collapse } from "antd";
 import DesignerNav from "./designerNav/DesignerNav.jsx";
 import ReadOnlyStar from "../../../commonComponents/ReadOnlyStar";
 import ServiceNPriceForm from "./designerEditProfile/ServiceNPriceForm";
@@ -8,7 +8,6 @@ import AddressPhoneForm from "./designerEditProfile/AddressPhoneForm";
 import WorksForm from "./designerEditProfile/WorksForm";
 import BookNowModal from "../designerProfileTop/bookNowModal/BookNowModal";
 import Avatar from "antd/lib/avatar/avatar";
-import { firebaseStore } from "../../../../config/fbConfig";
 import { useSelector } from "react-redux";
 
 const defaultStartTime = 16; // 08:00
@@ -17,49 +16,8 @@ const defaultTradingHours = [defaultStartTime, defaultEndTime];
 const searchBarHeight = 64;
 const avatarSize = 64;
 const { Panel } = Collapse;
-const layout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 24 },
-};
-const validateMessages = {
-  required: "Required",
-  types: {
-    number: "Invalid",
-  },
-  number: {
-    range: "Invalid",
-  },
-};
-const formInitialValues = {
-  services: {
-    Menu1: [],
-    Menu2: [],
-    Menu3: [],
-    Menu4: [],
-    Menu5: [],
-    Menu6: [],
-  },
-  hours: {
-    Mon: [{ tradingHours: defaultTradingHours, closed: false }],
-    Tue: [{ tradingHours: defaultTradingHours, closed: false }],
-    Wed: [{ tradingHours: defaultTradingHours, closed: false }],
-    Thu: [{ tradingHours: defaultTradingHours, closed: false }],
-    Fri: [{ tradingHours: defaultTradingHours, closed: false }],
-    Sat: [{ tradingHours: defaultTradingHours, closed: false }],
-    Sun: [{ tradingHours: defaultTradingHours, closed: false }],
-  },
-  addressPhone: {
-    street: "",
-    unit: "",
-    city: "",
-    postalCode: "",
-    province: "",
-    phone: "",
-  },
-};
 
 export default function DesignerProfileTop(props) {
-  const currentUser = useSelector((state) => state.currentUser.currentUser);
   const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
   const [stickyNavPositionFromTop] = useState(searchBarHeight);
   const [height, setHeight] = useState(0);
@@ -93,21 +51,6 @@ export default function DesignerProfileTop(props) {
 
   const bookNowModalHandler = () => {
     setVisibleBookNowModal(!visibleBookNowModal);
-  };
-
-  const onFinish = (values) => {
-    setVisibleEditProfileModal(false);
-    const updatedProfile = {
-      services: values.services,
-      hours: values.hours,
-      addressPhone: values.addressPhone,
-      photos: values.fileList,
-    };
-    console.log(updatedProfile);
-  };
-
-  const onFinishFailed = (errors) => {
-    console.log(errors);
   };
 
   const onOk = () => {
@@ -149,11 +92,12 @@ export default function DesignerProfileTop(props) {
                 onCancel={handleCancelEditProfileModal}
                 // width={window.innerWidth * 0.8}
                 destroyOnClose={true}
-                footer={
-                  <Button className="saveBtnInEditProfile" key="submit" onClick={onOk}>
-                    Save
-                  </Button>
-                }
+                footer={null}
+                // footer={
+                //   <Button className="saveBtnInEditProfile" key="submit" onClick={onOk}>
+                //     Save
+                //   </Button>
+                // }
               >
                 <Collapse className="editProfileCollapse" bordered={false} defaultActiveKey={["1"]}>
                   {editProfilePanels.map((panel, index) => {

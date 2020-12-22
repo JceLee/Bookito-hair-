@@ -1,19 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { Form, Input, InputNumber, Button, Tabs, Divider, Popconfirm, message } from "antd";
+import { Button, Divider, Form, Input, InputNumber, message, Modal, Popconfirm, Tabs } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import BlackBtn from "../../../../commonComponents/BlackBtn";
 
 const { TabPane } = Tabs;
 const { TextArea } = Input;
-
-let newTabIndex = 0;
-
-const layout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 24 },
-  labelCol: { span: 6 },
-  wrapperCol: { span: 24 },
-};
 
 const formInitialValues = {
   services: {
@@ -28,8 +20,12 @@ const formInitialValues = {
 
 export default function ServiceNPriceForm() {
   const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
-  const [tabNames, setTabNames] = useState(Object.keys(designer.services));
+  const [tabNames] = useState(Object.keys(designer.services));
   const [form] = Form.useForm();
+  const [addTabModal, setAddTabModal] = useState(false);
+  const [removeTabModal, setRemoveTabModal] = useState(false);
+  const promiseFunction = useRef(() => {});
+  const newTabName = useRef("New tab");
 
   let initialPanes = tabNames.map((tabName) => {
     return { title: `${tabName}`, key: `${tabName}` };
@@ -40,7 +36,7 @@ export default function ServiceNPriceForm() {
     panes: initialPanes,
   });
 
-  const [isNewTab, setIsNewTab] = useState(false);
+  const [] = useState(false);
 
   const onChange = (activeKey) => {
     setState({ activeKey, panes: [...panes] });
@@ -48,26 +44,51 @@ export default function ServiceNPriceForm() {
 
   const onEdit = (targetKey, action) => {
     if (action === "add") {
-      console.log("add");
       add();
     } else {
-      console.log("remove");
       remove(targetKey);
     }
   };
 
-  const add = () => {
+  const add = async () => {
+    await nameTabPromise();
     const { panes } = state;
-    const activeKey = `newTab${++newTabIndex}`;
+    const activeKey = `${newTabName.current}`;
     const newPanes = [...panes];
-    newPanes.push({ title: "New Tab", key: activeKey });
+    newPanes.push({ title: `${newTabName.current}`, key: activeKey });
     setState({
       panes: newPanes,
       activeKey,
     });
   };
 
-  const remove = (targetKey) => {
+  const updateInput = (e) => {
+    newTabName.current = e.target.value;
+    console.log(newTabName.current);
+  };
+
+  const nameTabPromise = () => {
+    return new Promise((resolve) => {
+      setAddTabModal(true);
+      promiseFunction.current = () => {
+        setAddTabModal(false);
+        resolve();
+      };
+    });
+  };
+
+  const removeTabPromise = () => {
+    return new Promise((resolve) => {
+      setRemoveTabModal(true);
+      promiseFunction.current = () => {
+        setRemoveTabModal(false);
+        resolve();
+      };
+    });
+  };
+
+  const remove = async (targetKey) => {
+    await removeTabPromise();
     const { panes, activeKey } = state;
     let newActiveKey = activeKey;
     let lastIndex;
@@ -94,7 +115,7 @@ export default function ServiceNPriceForm() {
     console.log(values);
   };
 
-  const onValuesChange = (e) => {
+  const onValuesChange = () => {
     // setTest(e);
   };
 
@@ -103,7 +124,7 @@ export default function ServiceNPriceForm() {
     console.log("clicked");
   };
 
-  const confirm = (e) => {
+  const confirm = () => {
     message.success("Click on Yes");
     remove();
   };
@@ -117,7 +138,6 @@ export default function ServiceNPriceForm() {
 
   return (
     <Form
-      {...layout}
       initialValues={formInitialValues}
       form={form}
       onValuesChange={onValuesChange}
@@ -132,7 +152,6 @@ export default function ServiceNPriceForm() {
               tab={tab.title}
               key={tab.key}
               animated={false}
-              closable={tab.closable}
               onClick={changeTabName}
             >
               <Popconfirm
@@ -147,9 +166,7 @@ export default function ServiceNPriceForm() {
                   aria-label="remove"
                   tabIndex="0"
                   className="ant-tabs-tab-remove"
-                >
-                  {tab.title}
-                </button>
+                ></button>
               </Popconfirm>
               <Form.List name={["services", `${tab.title}`]}>
                 {(fields, { add, remove }) => {
@@ -229,13 +246,44 @@ export default function ServiceNPriceForm() {
                   );
                 }}
               </Form.List>
-              <button className="uploadButtonInEditProfile" onClick={yes}>
-                Upload
-              </button>
+              <BlackBtn btnName="Save" onClick={yes} />
             </TabPane>
           );
         })}
       </Tabs>
+      <Modal
+        className="tabNameModal"
+        title="Add a tab"
+        visible={addTabModal}
+        onCancel={() => setAddTabModal(!addTabModal)}
+        centered={true}
+        footer={null}
+      >
+        <Input
+          className="newTabInput"
+          placeholder="Please type a name for new tab"
+          maxLength={8}
+          onChange={updateInput}
+        />
+        <Divider />
+        <BlackBtn
+          className="saveButtonInEditProfile"
+          btnName="Save"
+          onClick={promiseFunction.current}
+        />
+      </Modal>
+      <Modal
+        className="removeTabModal"
+        title="Remove the tab"
+        visible={removeTabModal}
+        onCancel={() => setRemoveTabModal(!removeTabModal)}
+        centered={true}
+        footer={null}
+      >
+        <div style={{ textAlign: "center" }}>Are you sure you want to delete?</div>
+        <Divider />
+        <BlackBtn btnName="Delete" onClick={promiseFunction.current} />
+      </Modal>
     </Form>
   );
 }

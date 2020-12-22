@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Checkbox, Form, Space, Slider, Modal } from "antd";
+import { Checkbox, Form, Slider } from "antd";
 import formatTime, { destructureTimeRange } from "../../../../../helpers/timeFunctions";
-
-const defaultStartTime = 16; // 08:00
-
-const defaultEndTime = 42; // 21:00
-
-const defaultTradingHours = [defaultStartTime, defaultEndTime];
+import BlackBtn from "../../../../commonComponents/BlackBtn";
 
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -18,8 +13,6 @@ const maxValueInSlider = 47; // "23:30"
 const timeConvertingFactor = 30;
 
 const layout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 24 },
   labelCol: { span: 6 },
   wrapperCol: { span: 24 },
 };
@@ -222,9 +215,7 @@ export default function HoursForm() {
           );
         })}
       </div>
-      <button className="uploadButtonInEditProfile" onClick={yes}>
-        Upload
-      </button>
+      <BlackBtn btnName="Save" onClick={yes} />
     </Form>
   );
 }
