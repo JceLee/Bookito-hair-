@@ -22,7 +22,9 @@
 
 // Client Schedule view
 @import "./view/clientScheduleView/ClientScheduleView.scss";
-@import "./view/MainView/MainView.scss";
+@import "./view/clientScheduleView/ReviewModal.scss";
+
+// Client Profile view
 @import "./view/clientProfileView/ClientProfileView.scss";
 
 // Designer Schedule view(Calendar)
@@ -48,6 +50,11 @@
 
 body {
   font-family: "Montserrat", sans-serif;
+  margin: 0 auto;
+
+  @include desktop {
+    width: 1130px;
+  }
 }
 
 #layout {

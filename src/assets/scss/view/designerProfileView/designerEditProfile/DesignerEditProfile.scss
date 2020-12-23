@@ -152,7 +152,6 @@ $paddingOfworkImgInModal: 10px;
           margin: 18px 0 8px;
           color: $black;
           border-color: $black;
-          width: 90vw;
           @include tabletP {
             width: 100%;
           }
@@ -269,12 +268,21 @@ $paddingOfworkImgInModal: 10px;
         }
       }
 
-      // AddressPhoneForm in Edit Profile
-      .addressPhoneForm {
-        .ant-form-item .ant-form-item-label {
-          padding: 0;
-        }
-      }
+      // AddressPhoneForm in Edit Profile // Component deleted // Remove if no ill effect
+      // .addressPhoneForm {
+      //   .ant-form-item .ant-form-item-label {
+      //     padding: 0;
+      //   }
+      //   .autocompleteDropdownContainer {
+      //     padding: 4px;
+      //     border:1px solid lightgrey;
+      //     border-top: 0px;
+      //   }
+
+      //   .autocompleteDropdownContainer:empty {
+      //     display: none;
+      //   }
+      // }
 
       // WorksForm in Edit Profile
       .worksForm {
@@ -355,6 +363,10 @@ $paddingOfworkImgInModal: 10px;
           }
         }
       }
+
+      .uploadButtonInEditProfile {
+        float: right;
+      }
     }
 
     .ant-modal-footer {
@@ -379,6 +391,10 @@ $paddingOfworkImgInModal: 10px;
       top: 18px;
       right: 16px;
     }
+  }
+
+  .blackBtn {
+    margin: 12px auto;
   }
 }
 
@@ -439,3 +455,17 @@ $paddingOfworkImgInModal: 10px;
     right: 10px;
   }
 }
+
+// .tabNameModal {
+//   .ant-modal-content {
+//     .ant-modal-body {
+//       padding: 24px 12px;
+//       .ant-divider-horizontal {
+//         margin: 24px 0;
+//       }
+//       .newTabInput {
+//         // width: 10%;
+//       }
+//     }
+//   }
+// }

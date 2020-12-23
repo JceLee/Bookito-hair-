@@ -4,9 +4,12 @@
   @include tabletP {
     display: block;
     position: absolute;
-    width: 100%;
     height: 700px;
     object-fit: cover;
+  }
+
+  @include desktop {
+    width: 1130px;
   }
 }
 
@@ -20,7 +23,6 @@
   .searchBarSectionImg {
     object-fit: cover;
     position: absolute;
-    width: 100%;
     height: 600px;
     @include tabletP {
       display: none;
