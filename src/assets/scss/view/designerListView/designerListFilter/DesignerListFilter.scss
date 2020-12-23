@@ -1,3 +1,7 @@
+// Styling for sort by dropdown menu
+.designerListSortByButtonBold {
+    font-weight: bold;
+}
 .designerListFilter {
     .designerListFilterInner {
         padding: 10px 5%;
@@ -10,9 +14,13 @@
             padding-left: 13px;
             padding-right: 13px;
         }
+        .searchBtn {
+            padding-left: 9px;
+            width: 34px;
+        }
         .ant-btn:hover, .ant-btn:focus {
-            color: black;
-            // border-color: lightgrey;
+            border-color: gray !important;
+            color: black !important;
         }
         .sortBtn {
             margin-right: 0;
@@ -20,17 +28,6 @@
             padding-left: 11px;
             padding-right: 11px;
         }
-        // .ant-select-selector {
-        //     border-radius: 20px;
-        // }
-        // .ant-select {
-        //     width: 50px;
-        // }
-        // .ant-select-selection-item {
-        //     padding-left: 2px;
-        //     padding-right: 0;
-        // }
-        
         .numberOfDesigners {
             font-size: 18px;
             margin-left: 4px;
@@ -44,7 +41,67 @@
             padding: 0 !important;
         }
         .designerListFilterConfirm {
+            background: $black;
+            border-color: $black;
             border-radius: 20px;
+            margin-bottom: 5px;
+        }
+        .designerListFilterTags {
+            padding: 4px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+            // .designerListFilterTagsDivider {
+            //     margin: 0;
+            //     margin-top: 10px;
+            //     margin-bottom: 10px;
+            // }
+        }
+        .ant-checkbox-checked .ant-checkbox-inner {
+            background-color: $black;
+            border-color: $black;
+        }
+        .DayPicker {
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            height: 50%;
+            padding-top: 6px;
+    
+            @include mobileM {
+                font-size: 1.0rem;
+                width: 100%;
+            }
+            @include tabletP {
+                margin-top: 6%;
+            }
+            .DayPicker-NavButton {
+                top: 5.5%;
+                right: 8%;
+            }
+            .DayPicker-Month {
+                width: 100%;
+                height: auto;
+
+                @include tabletP {
+                    width: 200px;
+                    height: 200px;
+                }
+                .DayPicker-Caption {
+                    font-size: 1.0rem;
+                }
+                .DayPicker-Body {
+                    .DayPicker-Day--selected {
+                        background-color: $black;
+                    }
+                    .DayPicker-Day:not(.DayPicker-Day--selected):hover {
+                        background-color: $white;
+                    }
+                }
+            }
+            .DayPicker-Day {
+                width: 41px; // Helps the highlight circle be more circular.
+            }
         }
     }
     .designerCardComponentDividerTop {

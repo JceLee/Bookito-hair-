@@ -128,6 +128,9 @@
       @include tabletP {
         justify-content: left;
       }
+      @include desktop {
+        width: 70vw;
+      }
       .designerNavItem {
         @include tabletP {
           padding: 0 10px;
@@ -183,6 +186,11 @@
       background-color: $lightGrey;
       height: 1px;
     }
+    // #dividerBetwnHrsPrices {
+    //   @include tabletP {
+    //     display: none;
+    //   }
+    // }
 
     // Designer Bottom - Works
     .works {
@@ -190,6 +198,28 @@
       margin: 0 auto;
       @include tabletP {
         width: 100%;
+      }
+
+      @include desktop {
+        width: 90%;
+      }
+
+      #worksTitle {
+        font-size: 20px;
+        font-weight: 600;
+        margin-top: 6%;
+
+        @include tabletP {
+          margin-top: 3%;
+        }
+
+        @include tabletL {
+          margin-top: 2%;
+        }
+
+        @include desktop {
+          font-size: 25px;
+        }
       }
 
       .workGalleryContainer {
@@ -237,28 +267,154 @@
     }
 
     // Designer Bottom - Price & Hours Grid
-    .serviceNPriceHoursGrid {
-      display: flex;
-      flex-wrap: wrap;
-      padding: 0;
-      margin: 0 auto;
-      .profileDivider {
-        display: none;
+    .hrsAndReviews {
+      @include tabletP {
+        display: flex;
+      }
+
+      .serviceNPriceHoursGrid {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0;
+        margin: 0 auto;
+        @include tabletP {
+          margin-left: 0;
+        }
+        .profileDivider {
+          display: none;
+        }
+      }
+      #HrsReviewDivider {
+        background-color: $lightGrey;
+        height: 1px;
+        @include tabletP {
+          display: none;
+        }
       }
     }
-
     .serviceNPriceGrid,
     .hoursGrid {
       width: 100%;
+
+      #hour {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 7%;
+
+        @include desktop {
+          margin-top: 2%;
+          font-size: 25px;
+        }
+      }
+    }
+    .serviceGrid {
+      #serviceAndPrice {
+        font-size: 20px;
+        font-weight: 600;
+        margin-top: 2%;
+        margin-bottom: 8%;
+
+        @include tabletP {
+          width: 100%;
+          margin-top: 4%;
+          margin-bottom: 5%;
+        }
+
+        @include tabletL {
+          margin-top: 3%;
+          margin-bottom: 3.5%;
+        }
+
+        @include desktop {
+          margin-top: 3.5%;
+          font-size: 25px;
+        }
+      }
+
+      .serviceAndPriceLists {
+        @include tabletP {
+          column-count: 2;
+        }
+
+        @include tabletL {
+          column-count: 3;
+        }
+
+        @include desktop {
+          column-count: 3;
+        }
+      }
     }
 
     .serviceNPrice,
     .hours {
       table,
+      tbody,
       th,
       td {
-        padding: 1rem;
-        margin: 0 auto;
+        #day {
+          text-align: left;
+          padding-right: 7.3rem;
+          // padding-right: 40%;
+          @include mobileM {
+            padding-right: 10.7rem;
+          }
+          @include mobileIphonePlus {
+            padding-right: 13rem;
+          }
+          @include mobileMtoL {
+            padding-right: 13.6rem;
+          }
+          @include mobileLtoTabletP {
+            padding-right: 21rem;
+          }
+          @include tabletP {
+            padding-right: 9rem;
+          }
+          @include tabletL {
+            padding-right: 15.3rem;
+          }
+          @include desktop {
+            padding-right: 17rem;
+          }
+        }
+        #service {
+          text-align: left;
+          padding-right: 6.7rem;
+          // padding-right: 50%;
+          padding-bottom: 8%;
+          @include mobileM {
+            padding-right: 10.2rem;
+          }
+          @include mobileIphonePlus {
+            padding-right: 12.5rem;
+          }
+          @include mobileMtoL {
+            padding-right: 13.1rem;
+          }
+          @include mobileLtoTabletP {
+            padding-right: 20.5rem;
+          }
+          @include tabletP {
+            padding-right: 8.5rem;
+          }
+          @include tabletL {
+            padding-right: 6rem;
+          }
+          @include desktop {
+            padding-right: 5rem;
+          }
+        }
+        font-size: 15px;
+        font-weight: 500;
+        text-align: right;
+        padding-top: 1%;
+        padding-left: 1.5rem;
+        padding-bottom: 6%;
+
+        @include desktop {
+          font-size: 20px;
+        }
       }
     }
 
@@ -331,13 +487,38 @@
 
     // Designer Bottom - Location
     .location {
+      #locationTitle {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 9%;
+
+        @include tabletP {
+          margin-top: 3%;
+        }
+
+        @include tabletL {
+          margin-top: 2%;
+        }
+
+        @include desktop {
+          font-size: 25px;
+          margin-top: 4%;
+          margin-bottom: 4%;
+        }
+      }
+
       .googleMap {
         width: 100vw;
         height: 50vh;
         margin: 1rem auto;
+
         @include tabletP {
           width: 90vw;
           height: 60vh;
+        }
+
+        @include desktop {
+          width: 70vw;
         }
       }
 

@@ -16,18 +16,24 @@ export default function DesignerProfileBottom() {
       <Works id="Works" works={designer.works} />
       <Divider className="profileDivider" />
       <div className="serviceNPriceHoursGrid">
+          <div className="serviceGrid">
+              <ServiceNPrice id="Price" serviceNPrices={designer.services} />
+          </div>
+      </div>
+      <Divider className="profileDivider" />
+      <div className="hrsAndReviews">
+      <div className="serviceNPriceHoursGrid">
         <div className="hoursGrid">
           <Hours id="Hours" hours={designer.hours} />
         </div>
       </div>
-      <Divider className="profileDivider" />
+      <Divider id="HrsReviewDivider" />
       <div className="serviceNPriceHoursGrid">
         <div className="hoursGrid">
-          <ServiceNPrice id="Price" serviceNPrices={designer.services} />
+        <ReviewContainer />
         </div>
       </div>
-      <Divider className="profileDivider" />
-      <ReviewContainer />
+      </div>
       <Divider className="profileDivider" />
       <Location id="Location" location={designer.location} latLng={designer.latLng} />
     </div>

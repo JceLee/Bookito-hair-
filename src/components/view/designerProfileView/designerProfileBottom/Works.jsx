@@ -63,7 +63,7 @@ export default function Works(props) {
 
   return (
     <div className="works" id={id}>
-      <h2>Works</h2>
+      <h2 id="worksTitle">Works</h2>
       {works.length !== 0 && ImgLoading ? <Spinner /> : null}
       <ul className="workGalleryContainer">
         {works.map((work, index) => {

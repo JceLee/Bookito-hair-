@@ -1,48 +1,165 @@
-import React, {useState, useEffect} from "react";
-import {Button, Drawer} from "antd";
+import React, { useState, useEffect } from "react";
+import { Button, Drawer } from "antd";
 import queryString from "query-string";
-import {load_database} from "../../../actions/firebaseAction";
-import {firebaseStore} from "../../../config/fbConfig";
-import {useDispatch, useSelector} from "react-redux";
+import { load_database } from "../../../actions/firebaseAction";
+import { firebaseStore } from "../../../config/fbConfig";
+import { useDispatch, useSelector } from "react-redux";
 import DesignerCardComponent from "./designerCardComponent/DesignerCardComponent";
 import DesignerListFilter from "./DesignerListFilter";
 import Map from "../../commonComponents/map/Map";
-import {CloseOutlined} from "@ant-design/icons";
-import {useHistory} from "react-router-dom";
-import {designerTags} from "../../../constants/designerTags";
-import {designerTypes} from "../../../constants/designerTypes";
-
+import { CloseOutlined } from "@ant-design/icons";
+import { useHistory } from "react-router-dom";
+import { designerTags } from "../../../constants/designerTags";
+import { designerTypes } from "../../../constants/designerTypes";
+import { geocode } from "../../../helpers/geocode";
+import { getDistanceFromLatLonInKm } from "../../../helpers/geocode";
 
 export default function DesignerListView(props) {
-  const [mapVisibleMobile, setMapVisibleMobile] = useState(false);
-  const [mapVisibleDesktop, setMapVisibleDesktop] = useState(true);
-  const [filterTags, setFilterTags] = useState([]);
-
   const designers = useSelector((state) => state.firestore.designers);
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const handleSearch = (designer) => () => {
-    const route = `/designer_profile?uid=${designer.uid}`;
-    history.push(route);
-  };
+  const [designersCurrent, setDesignersCurrent] = useState([...designers]);
+  const [mapVisibleMobile, setMapVisibleMobile] = useState(false);
+  const [mapVisibleDesktop, setMapVisibleDesktop] = useState(true);
+  const [filterTags, setFilterTags] = useState([]);
+  const [filterCheckedTags, setFilterCheckedTags] = useState([]);
+  const [filterDate, setFilterDate] = useState(null);
+  const [sortBy, setSortBy] = useState("");
+
+  // User location variables
+  const [userLocation, setUserLocation] = useState();
+  const [defaultLocation] = useState({ lat: 34.0522, lng: 118.2437 });
 
   useEffect(() => {
     const params = queryString.parse(props.location.search);
     setFilterTags(designerTags[params["type"]]);
-    const newDesigners = [];
+    setFilterCheckedTags(designerTags[params["type"]]);
     firebaseStore
       .collection("users")
       .where("location", "==", params["location"])
       .where("accountTypes", "==", designerTypes.hair)
       .get()
       .then((querySnapshot) => {
+        const newDesigners = [];
         querySnapshot.docs.forEach((doc) => {
           newDesigners.push(doc.data());
         });
         dispatch(load_database(newDesigners));
       });
+
+    // Get and set user location
+    geocode(props.location.search).then((latLng) => {
+      if (latLng) {
+        setUserLocation(latLng);
+
+        // Calculate and set distance of designers from user location
+        designers.forEach((designer) => {
+          if (designer.latLng) {
+            designer.distance = getDistanceFromLatLonInKm(
+              designer.latLng.lat,
+              designer.latLng.lng,
+              latLng.lat,
+              latLng.lng
+            );
+          }
+        });
+      } else {
+        setUserLocation(defaultLocation);
+        console.log("Unable to get location!");
+      }
+    });
   }, [dispatch, props.location.search]);
+
+  const handleSearch = (designer) => {
+    const route = `/designer_profile?uid=${designer.uid}`;
+    history.push(route);
+  };
+
+  const updateSortBy = (sortByKey) => {
+    setSortBy(sortByKey);
+    switch (sortByKey) {
+      case "distance":
+        setDesignersCurrent(
+          [...designersCurrent].sort((a, b) => {
+            if (a.distance && b.distance) {
+              return a.distance - b.distance;
+            } else if (a.distance) {
+              return -1;
+            } else {
+              return 1;
+            }
+          })
+        );
+        break;
+      case "reviewScore":
+        setDesignersCurrent(
+          [...designersCurrent].sort((a, b) => {
+            if (a.rate.average && b.rate.average) {
+              return b.rate.average - a.rate.average;
+            } else if (b.rate.average) {
+              return -1;
+            } else {
+              return 1;
+            }
+          })
+        );
+        break;
+      case "reviewCount":
+        setDesignersCurrent(
+          [...designersCurrent].sort((a, b) => {
+            if (a.rate.count && b.rate.count) {
+              return b.rate.count - a.rate.count;
+            } else if (b.rate.count) {
+              return -1;
+            } else {
+              return 1;
+            }
+          })
+        );
+        break;
+      case "new":
+        setDesignersCurrent(
+          [...designersCurrent].sort((a, b) => {
+            return a.createdOn - b.createdOn;
+          })
+        );
+        break;
+      default:
+        break;
+    }
+  };
+
+  const updateFilter = (checkedTags = filterCheckedTags, date = filterDate) => {
+    let filteredDesigners = [...designers];
+
+    // Filter by Tags
+    setFilterCheckedTags(checkedTags);
+    if (checkedTags && checkedTags.length > 0) {
+      filteredDesigners = filteredDesigners.filter((designer) =>
+        Object.keys(designer.services).some((service) =>
+          checkedTags.includes(service)
+        )
+      );
+    }
+    // Filter by Date
+    setFilterDate(date);
+    if (date) {
+      const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][
+        date.getDay()
+      ];
+      filteredDesigners = filteredDesigners.filter(
+        (designer) =>
+          designer.hours[dayOfWeek] && !designer.hours[dayOfWeek][0].closed
+      );
+    }
+
+    // Apply all filter
+    setDesignersCurrent(filteredDesigners);
+
+    // Reapply sort byc
+    updateSortBy(sortBy);
+  };
 
   // Desktop map controls
   const openMapDesktop = () => {
@@ -76,9 +193,11 @@ export default function DesignerListView(props) {
             <div className="listNavBar">
               <div className="filter">
                 <DesignerListFilter
-                  tags={filterTags || []}
-                  numberOfDesigners={Object.keys(designers).length}
+                  filterTags={filterTags}
+                  updateFilter={updateFilter}
+                  numberOfDesigners={Object.keys(designersCurrent).length}
                   location="Vancouver"
+                  updateSortBy={updateSortBy}
                 />
               </div>
               {/* Desktop map toggle button - used to show map if closed by the user */}
@@ -92,19 +211,27 @@ export default function DesignerListView(props) {
                 </span>
               </Button>
               {/* Mobile map toggle button - used to open map drawer */}
-              <Button className="mobileOnly designerListOpenMapMobile" onClick={openMapMobile}> {/*shape="circle"*/}
-                <span role="img" aria-label="map">🗺️ Map</span>
+              <Button
+                className="mobileOnly designerListOpenMapMobile"
+                onClick={openMapMobile}
+              >
+                {" "}
+                {/*shape="circle"*/}
+                <span role="img" aria-label="map">
+                  🗺️ Map
+                </span>
               </Button>
             </div>
             {/* Designer listing */}
-            {designers.map((designer, index) => (
-              <div key={index} className="designerList">
-                <DesignerCardComponent
-                  designer={designer}
-                  handleSearch={handleSearch}
-                />
-              </div>
-            ))}
+            {console.log(designers) ||
+              designersCurrent.map((designer, index) => (
+                <div key={index} className="designerList">
+                  <DesignerCardComponent
+                    designer={designer}
+                    handleSearch={handleSearch}
+                  />
+                </div>
+              ))}
           </div>
 
           <Drawer
@@ -122,14 +249,14 @@ export default function DesignerListView(props) {
               shape="circle"
               onClick={closeMapMobile}
             >
-              <CloseOutlined/>
+              <CloseOutlined />
             </Button>
             {/* Map inside drawer */}
             <div className="mapContainer">
               <Map
                 isDesktop={false}
-                initialLocationString={props.location.search}
-                designers={Object.values(designers)}
+                userLocation={userLocation}
+                designers={Object.values(designersCurrent)}
               />
             </div>
           </Drawer>
@@ -144,14 +271,14 @@ export default function DesignerListView(props) {
               shape="circle"
               onClick={closeMapDesktop}
             >
-              <CloseOutlined/>
+              <CloseOutlined />
             </Button>
             {/* Map on the right of designer list view */}
             <div className="mapContainer">
               <Map
                 isDesktop={true}
-                initialLocationString={props.location.search}
-                designers={Object.values(designers)}
+                userLocation={userLocation}
+                designers={Object.values(designersCurrent)}
               />
             </div>
           </div>

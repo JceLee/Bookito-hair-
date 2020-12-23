@@ -10,20 +10,22 @@ export default function ServiceNPrice(props) {
   const mergedArray = [].concat(...serviceList);
   return (
     <div className="serviceNPrice" id={id}>
-      <h2>Service & Price</h2>
+      <h2 id="serviceAndPrice">Service & Price</h2>
+      <div className="serviceAndPriceLists">
       <table>
         <tbody>
           {mergedArray.map((element, index) => {
             const { service, price } = element;
             return (
               <tr key={index}>
-                <td>{service}</td>
+                <td id="service">{service}</td>
                 <td>{price}</td>
               </tr>
             );
           })}
         </tbody>
       </table>
+      </div>
     </div>
   );
 }
