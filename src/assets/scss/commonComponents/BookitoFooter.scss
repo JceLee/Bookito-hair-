@@ -1,0 +1,18 @@
+.bookitoFooter {
+  background-color: #F7F7F7;
+  border-top: 1px solid #DDDDDD;
+
+  .footerContents {
+    padding: 7% 5%;
+  }
+
+  @include desktop {
+    width: 100vw;
+    margin-left: calc((1130px - 100vw)/2);
+
+    .footerContents {
+      padding: 2% 5%;
+    }
+  }
+
+}
