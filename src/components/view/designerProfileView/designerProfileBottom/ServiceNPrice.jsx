@@ -11,6 +11,7 @@ export default function ServiceNPrice(props) {
   return (
     <div className="serviceNPrice" id={id}>
       <h2 id="serviceAndPrice">Service & Price</h2>
+      <div className="serviceAndPriceLists">
       <table>
         <tbody>
           {mergedArray.map((element, index) => {
@@ -24,6 +25,7 @@ export default function ServiceNPrice(props) {
           })}
         </tbody>
       </table>
+      </div>
     </div>
   );
 }

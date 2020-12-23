@@ -11,7 +11,7 @@ export default function DesignerCardComponent(props) {
     <div className="designerCardComponent" onClick={handleSearch(designer)}>
       <DesignerCardTop
         fname={designer.fname}
-        rateScore={designer.rate}
+        rateScore={designer.rate.average}
         services={designer.services}
         profile={designer.photoURL}
       />
