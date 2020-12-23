@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { Form, Input, Avatar, Modal, message, Button } from "antd";
 import { EditOutlined } from "@ant-design/icons";
@@ -7,6 +7,8 @@ import BlackBtn from "../../commonComponents/BlackBtn";
 import { useSelector } from "react-redux";
 import { firebaseOrigin, firebaseStore } from "../../../config/fbConfig";
 import { refresh } from "../../../actions/currentUser";
+import LocationInput from "../../commonComponents/LocationInput";
+import { geocode } from "../../../helpers/geocode";
 
 const validateMessages = {
   required: "${label} is required!",
@@ -15,31 +17,37 @@ const validateMessages = {
   },
 };
 
-export default function ClientProfileView() {
-  const [client, setClient] = useState(useSelector((state) => state.currentUser.currentUser));
-  const [edit, setEdit] = useState(false);
+export default function ClientProfileView(props) {
+  const { form, editMode } = props;
+  const [client, setClient] = useState(
+    useSelector((state) => state.currentUser.currentUser)
+  );
+  const [edit, setEdit] = useState(editMode);
   // const { Dragger } = Upload;
   const [profile, setProfile] = useState(client);
+  const [currentAddress, setCurrentAddress] = useState(client.location);
+  const [validatedAddress, setValidatedAddress] = useState(client.location);
+  const [addressLatLng, setAddressLatLng] = useState(client.latLng);
   const dispatch = useDispatch();
 
-  const props = {
-    name: "file",
-    multiple: true,
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-    onChange(info) {
-      const { status } = info.file;
-      if (status !== "uploading") {
-        console.log(info.file, info.fileList);
-      }
-      if (status === "done") {
-        setProfile({ ...profile, preview: URL.createObjectURL(info.file.originFileObj) });
-        console.log(URL.createObjectURL(info.file.originFileObj));
-        message.success(`${info.file.name} file uploaded successfully.`);
-      } else if (status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
-  };
+  // const imgCropConfig = {
+  //   name: "file",
+  //   multiple: true,
+  //   action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+  //   onChange(info) {
+  //     const { status } = info.file;
+  //     if (status !== "uploading") {
+  //       console.log(info.file, info.fileList);
+  //     }
+  //     if (status === "done") {
+  //       setProfile({ ...profile, preview: URL.createObjectURL(info.file.originFileObj) });
+  //       console.log(URL.createObjectURL(info.file.originFileObj));
+  //       message.success(`${info.file.name} file uploaded successfully.`);
+  //     } else if (status === "error") {
+  //       message.error(`${info.file.name} file upload failed.`);
+  //     }
+  //   },
+  // };
 
   // save profile to db and reload page
   const saveProfile = (values) => {
@@ -48,8 +56,9 @@ export default function ClientProfileView() {
       ...client,
       email: values.email,
       phone: values.phone,
-      location: values.address,
+      location: validatedAddress,
       displayName: values.nickName,
+      latLng: addressLatLng,
     };
     setClient(updatedInfo);
     dispatch(refresh(updatedInfo));
@@ -60,8 +69,9 @@ export default function ClientProfileView() {
       .update({
         email: values.email,
         phone: values.phone,
-        location: values.address,
+        location: validatedAddress,
         displayName: values.nickName,
+        latLng: addressLatLng,
       })
       .then(function () {
         return message.success({
@@ -119,7 +129,8 @@ export default function ClientProfileView() {
     uploadTask.on(
       firebaseOrigin.storage.TaskEvent.STATE_CHANGED,
       (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         if (snapshot.state === firebaseOrigin.storage.TaskState.RUNNING) {
           console.log(`Progress: ${progress}%`);
         }
@@ -151,6 +162,25 @@ export default function ClientProfileView() {
       .catch((err) => console.log(err.code));
   };
 
+  const handleAddressChange = (address) => {
+    setCurrentAddress(address);
+    if (address === "") {
+      setValidatedAddress("");
+    }
+  };
+
+  const handleAddressSelect = (address, placeID) => {
+    handleAddressChange(address);
+    geocode(address).then((latLng) => {
+      if (latLng) {
+        setValidatedAddress(address);
+        setAddressLatLng(latLng);
+      } else {
+        console.log("Unable to get location!");
+      }
+    });
+  };
+
   // display preview after dropping image
   // const preview = (<Avatar size={128} src={files[files.length -1].preview}/>);
 
@@ -172,7 +202,9 @@ export default function ClientProfileView() {
       >
         <Form.Item className="profilePhoto">
           <Avatar size={128} src={client.photoURL} />
-          {edit ? <EditOutlined className="editIcon" onClick={modalHandler} /> : null}
+          {edit ? (
+            <EditOutlined className="editIcon" onClick={modalHandler} />
+          ) : null}
         </Form.Item>
         {edit ? (
           <Form.Item
@@ -213,12 +245,14 @@ export default function ClientProfileView() {
             {
               validator(rule, value) {
                 if (!value || value.length === 10) {
-                  console.log(value);
                   return Promise.resolve();
                 }
-                return Promise.reject("Your input is not a valid phone number!");
+                return Promise.reject(
+                  "Your input is not a valid phone number!"
+                );
               },
             },
+            { required: editMode },
           ]}
         >
           {edit ? <Input type="number" /> : <div>{client.phone}</div>}
@@ -226,8 +260,40 @@ export default function ClientProfileView() {
 
         {edit ? null : <hr />}
 
-        <Form.Item label="Address" name="address" className="formItems">
+        {/* <Form.Item
+          label="Address"
+          name="address"
+          className="formItems"
+        >
           {edit ? <Input type="text" /> : <div>{client.location}</div>}
+        </Form.Item> */}
+
+        <Form.Item
+          label="Address"
+          name="address"
+          className="formItems"
+          rules={[
+            {
+              validator(rule, value) {
+                if (currentAddress === validatedAddress) {
+                  return Promise.resolve();
+                }
+                return Promise.reject("Cannot validate address!");
+              },
+            },
+            { required: editMode },
+          ]}
+        >
+          {edit ? (
+            <LocationInput
+              address={currentAddress}
+              handleAddressChange={handleAddressChange}
+              handleAddressSelect={handleAddressSelect}
+              // allowClear={true}
+            />
+          ) : (
+            <div>{client.location}</div>
+          )}
         </Form.Item>
 
         <Form.Item {...layout} className="formItems">
@@ -262,7 +328,10 @@ export default function ClientProfileView() {
             <Avatar size={128} src={files[0].preview} />
           )}
         </div>
-        <div {...getRootProps({ className: "dropzone" })} className="dragDropContainer">
+        <div
+          {...getRootProps({ className: "dropzone" })}
+          className="dragDropContainer"
+        >
           <input {...getInputProps()} />
           {isDragActive ? (
             <p>Drop the files here...</p>
@@ -271,7 +340,7 @@ export default function ClientProfileView() {
           )}
         </div>
         {/*<ImgCrop rotate shape={"round"}>*/}
-        {/*  <Dragger {...props}>*/}
+        {/*  <Dragger {...imgCropConfig}>*/}
         {/*    <p className="ant-upload-drag-icon">*/}
         {/*      <InboxOutlined />*/}
         {/*    </p>*/}
