@@ -15,8 +15,8 @@ export default function DesignerCardComponent(props) {
       <DesignerCardTop
         fname={designer.fname}
         distance={designer.distance}
-        rateScore={designer.rate.average}
-        rateCount={designer.rate.count}
+        rateScore={designer.rate && designer.rate.average}
+        rateCount={designer.rate && designer.rate.count}
         services={designer.services}
         profile={designer.photoURL}
       />

@@ -1,19 +1,18 @@
-import React, {useState, useEffect} from "react";
-import {Button, Drawer} from "antd";
+import React, { useState, useEffect } from "react";
+import { Button, Drawer } from "antd";
 import queryString from "query-string";
-import {load_database} from "../../../actions/firebaseAction";
-import {firebaseStore} from "../../../config/fbConfig";
-import {useDispatch, useSelector} from "react-redux";
+import { load_database } from "../../../actions/firebaseAction";
+import { firebaseStore } from "../../../config/fbConfig";
+import { useDispatch, useSelector } from "react-redux";
 import DesignerCardComponent from "./designerCardComponent/DesignerCardComponent";
 import DesignerListFilter from "./DesignerListFilter";
 import Map from "../../commonComponents/map/Map";
-import {CloseOutlined} from "@ant-design/icons";
-import {useHistory} from "react-router-dom";
-import {designerTags} from "../../../constants/designerTags";
-import {designerTypes} from "../../../constants/designerTypes";
+import { CloseOutlined } from "@ant-design/icons";
+import { useHistory } from "react-router-dom";
+import { designerTags } from "../../../constants/designerTags";
+import { designerTypes } from "../../../constants/designerTypes";
 import { geocode } from "../../../helpers/geocode";
 import { getDistanceFromLatLonInKm } from "../../../helpers/geocode";
-
 
 export default function DesignerListView(props) {
   const designers = useSelector((state) => state.firestore.designers);
@@ -50,23 +49,24 @@ export default function DesignerListView(props) {
       });
 
     // Get and set user location
-    geocode(props.location.search).then(latLng => {
+    geocode(props.location.search).then((latLng) => {
       if (latLng) {
-          setUserLocation(latLng);
+        setUserLocation(latLng);
 
-          // Calculate and set distance of designers from user location
-          designers.forEach(designer => {
-            if (designer.latLng) {
-              designer.distance = getDistanceFromLatLonInKm(
-                designer.latLng.lat, 
-                designer.latLng.lng, 
-                latLng.lat, 
-                latLng.lng);
-            }
-          });
-        } else {
-          setUserLocation(defaultLocation);
-          console.log("Unable to get location!");
+        // Calculate and set distance of designers from user location
+        designers.forEach((designer) => {
+          if (designer.latLng) {
+            designer.distance = getDistanceFromLatLonInKm(
+              designer.latLng.lat,
+              designer.latLng.lng,
+              latLng.lat,
+              latLng.lng
+            );
+          }
+        });
+      } else {
+        setUserLocation(defaultLocation);
+        console.log("Unable to get location!");
       }
     });
   }, [dispatch, props.location.search]);
@@ -80,52 +80,78 @@ export default function DesignerListView(props) {
     setSortBy(sortByKey);
     switch (sortByKey) {
       case "distance":
-        setDesignersCurrent([...designersCurrent].sort((a, b) => (a.distance && b.distance) ? a.distance - b.distance : a.distance ? -1 : 1));
+        setDesignersCurrent(
+          [...designersCurrent].sort((a, b) => {
+            if (a.distance && b.distance) {
+              return a.distance - b.distance;
+            } else if (a.distance) {
+              return -1;
+            } else {
+              return 1;
+            }
+          })
+        );
         break;
       case "reviewScore":
-        setDesignersCurrent([...designersCurrent].sort((a, b) => {return a.reviewScore - b.reviewScore}));
+        setDesignersCurrent(
+          [...designersCurrent].sort((a, b) => {
+            if (a.rate.average && b.rate.average) {
+              return b.rate.average - a.rate.average;
+            } else if (b.rate.average) {
+              return -1;
+            } else {
+              return 1;
+            }
+          })
+        );
         break;
       case "reviewCount":
-        setDesignersCurrent([...designersCurrent].sort((a, b) => {return a.reviewCount - b.reviewCount}));
+        setDesignersCurrent(
+          [...designersCurrent].sort((a, b) => {
+            if (a.rate.count && b.rate.count) {
+              return b.rate.count - a.rate.count;
+            } else if (b.rate.count) {
+              return -1;
+            } else {
+              return 1;
+            }
+          })
+        );
         break;
       case "new":
-        setDesignersCurrent([...designersCurrent].sort((a, b) => {return a.createdOn - b.createdOn}));
+        setDesignersCurrent(
+          [...designersCurrent].sort((a, b) => {
+            return a.createdOn - b.createdOn;
+          })
+        );
         break;
       default:
         break;
     }
   };
 
-  // const updateFilterCheckedTags = (checkedTags) => {
-  //   setFilterCheckedTags(checkedTags);
-  //   setDesignersCurrent(designers.filter(designer => Object.keys(designer.services).some(service => checkedTags.includes(service))));
-  // };
-
-  // const updateFilterDate = (date) => {
-  //   setFilterDate(date);
-
-  //   if (date) {
-  //     const dayOfWeek = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][date.getDay()];
-  //     setDesignersCurrent(designers.filter(designer => designer.hours[dayOfWeek] && !designer.hours[dayOfWeek][0].closed));
-  //   } else {
-  //     // Reset date filter and apply only the checked tags filter. // This is probably not the most optimum way to do this.
-  //     setDesignersCurrent(designers.filter(designer => Object.keys(designer.services).some(service => checkedTags.includes(service))));
-  //   }
-  // };
-
-  const updateFilter = (checkedTags=filterCheckedTags, date=filterDate) => {
+  const updateFilter = (checkedTags = filterCheckedTags, date = filterDate) => {
     let filteredDesigners = [...designers];
 
     // Filter by Tags
     setFilterCheckedTags(checkedTags);
     if (checkedTags && checkedTags.length > 0) {
-      filteredDesigners = filteredDesigners.filter(designer => Object.keys(designer.services).some(service => checkedTags.includes(service)));
+      filteredDesigners = filteredDesigners.filter((designer) =>
+        Object.keys(designer.services).some((service) =>
+          checkedTags.includes(service)
+        )
+      );
     }
     // Filter by Date
     setFilterDate(date);
     if (date) {
-      const dayOfWeek = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][date.getDay()];
-      filteredDesigners = filteredDesigners.filter(designer => designer.hours[dayOfWeek] && !designer.hours[dayOfWeek][0].closed);
+      const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][
+        date.getDay()
+      ];
+      filteredDesigners = filteredDesigners.filter(
+        (designer) =>
+          designer.hours[dayOfWeek] && !designer.hours[dayOfWeek][0].closed
+      );
     }
 
     // Apply all filter
@@ -185,21 +211,27 @@ export default function DesignerListView(props) {
                 </span>
               </Button>
               {/* Mobile map toggle button - used to open map drawer */}
-              <Button className="mobileOnly designerListOpenMapMobile" onClick={openMapMobile}> {/*shape="circle"*/}
-                <span role="img" aria-label="map">🗺️ Map</span>
+              <Button
+                className="mobileOnly designerListOpenMapMobile"
+                onClick={openMapMobile}
+              >
+                {" "}
+                {/*shape="circle"*/}
+                <span role="img" aria-label="map">
+                  🗺️ Map
+                </span>
               </Button>
             </div>
             {/* Designer listing */}
-            {
-            // console.log(designers) ||
-            designersCurrent.map((designer, index) => (
-              <div key={index} className="designerList">
-                <DesignerCardComponent
-                  designer={designer}
-                  handleSearch={handleSearch}
-                />
-              </div>
-            ))}
+            {console.log(designers) ||
+              designersCurrent.map((designer, index) => (
+                <div key={index} className="designerList">
+                  <DesignerCardComponent
+                    designer={designer}
+                    handleSearch={handleSearch}
+                  />
+                </div>
+              ))}
           </div>
 
           <Drawer
@@ -217,7 +249,7 @@ export default function DesignerListView(props) {
               shape="circle"
               onClick={closeMapMobile}
             >
-              <CloseOutlined/>
+              <CloseOutlined />
             </Button>
             {/* Map inside drawer */}
             <div className="mapContainer">
@@ -239,7 +271,7 @@ export default function DesignerListView(props) {
               shape="circle"
               onClick={closeMapDesktop}
             >
-              <CloseOutlined/>
+              <CloseOutlined />
             </Button>
             {/* Map on the right of designer list view */}
             <div className="mapContainer">
