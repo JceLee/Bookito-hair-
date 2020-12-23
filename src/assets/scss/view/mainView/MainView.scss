@@ -35,7 +35,7 @@
   }
 
   #searchBarForm {
-    border-top: 1px solid #fdfdfd;
+    border-top: 1px solid transparent;
     top: 0;
 
     @include desktop {
@@ -198,10 +198,6 @@
     display: flex;
   }
 
-  @include desktop {
-    padding: 0 10%;
-  }
-
   .newDesignersHeading {
     padding: 0 50px;
   }
@@ -213,6 +209,7 @@
       text-align: left;
       display: block;
       width: 30%;
+      margin-right: 10%;
     }
 
     .topLine {
@@ -251,7 +248,7 @@
     .designerImagesRow {
       width: 100%;
       display: flex;
-      margin-top: 20px;
+      margin-bottom: 20px;
       justify-content: center;
       @include mainPageNewDesigners1090 {
         justify-content: flex-end;

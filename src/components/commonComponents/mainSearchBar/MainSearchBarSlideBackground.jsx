@@ -13,7 +13,8 @@ import image7 from "../../../assets/images/backgrounds/background7.jpg";
 const desktops = [image1, image2, image3, image4, image5, image6, image7]
 const tmpCss = {
   backgroundColor: "#fdfdfd",
-  height: "8px",
+  height: "10px",
+  marginTop: "-1px",
   width: "100%",
   objectFit: "cover",
   position: "absolute",
