@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import MobileSearchBar from "../../commonComponents/mobileSearchBar/MobileSearchBar";
-import desktopMainPageBackground from "../../../assets/images/desktopMainPageBackground.jpeg";
-import mobileMainPageBackground from "../../../assets/images/mobile.png";
 import MainSearchBar from "../../commonComponents/mainSearchBar/MainSearchBar";
+import MobileSearchBarSlideBackground from "../../commonComponents/mobileSearchBar/MobileSearchBarSlideBackground";
+import MainSearchBarSlideBackground from "../../commonComponents/mainSearchBar/MainSearchBarSlideBackground";
 
 export default function SearchBarSection() {
   const tabletLWidth = 768;
@@ -16,16 +16,7 @@ export default function SearchBarSection() {
 
   return (
     <div className="searchBarSection">
-      <img
-        className="searchBarSectionImg"
-        src={mobileMainPageBackground}
-        alt="searchBarSectionImg"
-      />
-      <img
-        className="searchBarSectionDesktopImg"
-        src={desktopMainPageBackground}
-        alt="searchBarSectionDesktopImg"
-      />
+      {screenWidth < tabletLWidth ? <MobileSearchBarSlideBackground /> : <MainSearchBarSlideBackground />}
       <div id="searchBarForm">
         {screenWidth < tabletLWidth ? <MobileSearchBar /> : <MainSearchBar />}
       </div>
