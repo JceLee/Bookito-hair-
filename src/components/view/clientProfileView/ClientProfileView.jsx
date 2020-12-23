@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Form, Input, Avatar, Modal, message, Button } from "antd";
 import { EditOutlined } from "@ant-design/icons";
@@ -23,31 +23,11 @@ export default function ClientProfileView(props) {
     useSelector((state) => state.currentUser.currentUser)
   );
   const [edit, setEdit] = useState(editMode);
-  // const { Dragger } = Upload;
   const [profile, setProfile] = useState(client);
   const [currentAddress, setCurrentAddress] = useState(client.location);
   const [validatedAddress, setValidatedAddress] = useState(client.location);
   const [addressLatLng, setAddressLatLng] = useState(client.latLng);
   const dispatch = useDispatch();
-
-  // const imgCropConfig = {
-  //   name: "file",
-  //   multiple: true,
-  //   action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-  //   onChange(info) {
-  //     const { status } = info.file;
-  //     if (status !== "uploading") {
-  //       console.log(info.file, info.fileList);
-  //     }
-  //     if (status === "done") {
-  //       setProfile({ ...profile, preview: URL.createObjectURL(info.file.originFileObj) });
-  //       console.log(URL.createObjectURL(info.file.originFileObj));
-  //       message.success(`${info.file.name} file uploaded successfully.`);
-  //     } else if (status === "error") {
-  //       message.error(`${info.file.name} file upload failed.`);
-  //     }
-  //   },
-  // };
 
   // save profile to db and reload page
   const saveProfile = (values) => {
@@ -241,19 +221,6 @@ export default function ClientProfileView(props) {
           label="Phone"
           name="phone"
           className="formItems"
-          rules={[
-            {
-              validator(rule, value) {
-                if (!value || value.length === 10) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(
-                  "Your input is not a valid phone number!"
-                );
-              },
-            },
-            { required: editMode },
-          ]}
         >
           {edit ? <Input type="number" /> : <div>{client.phone}</div>}
         </Form.Item>
@@ -339,14 +306,6 @@ export default function ClientProfileView(props) {
             <p>Drag and drop your photo here, or click to select a file</p>
           )}
         </div>
-        {/*<ImgCrop rotate shape={"round"}>*/}
-        {/*  <Dragger {...imgCropConfig}>*/}
-        {/*    <p className="ant-upload-drag-icon">*/}
-        {/*      <InboxOutlined />*/}
-        {/*    </p>*/}
-        {/*    <p>Drag and drop your photo here, or click to select files</p>*/}
-        {/*  </Dragger>,*/}
-        {/*</ImgCrop>*/}
         <BlackBtn btnName="Save" onClick={onUploadSubmission} />
       </Modal>
     </div>

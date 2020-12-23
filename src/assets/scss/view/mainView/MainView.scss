@@ -1,5 +1,6 @@
 .searchBarSectionDesktopImg {
   display: none;
+  z-index: 1;
 
   @include tabletP {
     display: block;
@@ -34,39 +35,33 @@
   }
 
   #searchBarForm {
-    border: 1px solid lightgray;
-    z-index: 2;
+    border-top: 1px solid #fdfdfd;
+    top: 0;
 
     @include desktop {
       width: 1130px;
     }
 
     #mobileSearchBar {
-      z-index: 2;
       margin-top: 10%;
-      box-shadow: 0 0 0 0 white;
+      box-shadow: 0 1px 3px 0 #1b1b1b;
       border-radius: 20px;
 
       .ant-input-affix-wrapper {
-        z-index: 2;
         border: 0 lightgrey;
-        box-shadow: 0 0 0 0 white;
+        box-shadow: 0 1px 3px 0 #1b1b1b;
         border-radius: 20px;
+        z-index: 3;
       }
     }
 
     #mainSearchBar {
-      z-index: 3;
 
       @include desktop {
         width: 1130px;
       }
 
-      .ant-select-selector {
-        z-index: 4;
-      }
-
-      .ant-input-affix-wrapper {
+      .ant-input-group{
         z-index: 3;
       }
     }

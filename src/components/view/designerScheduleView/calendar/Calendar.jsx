@@ -34,9 +34,6 @@ export default function Calendar(props) {
   const [deleteAppointmentModalState, setDeleteAppointmentModal] = useState(false);
   const appointmentID = useRef("");
 
-  console.log(newRequests);
-  console.log(appointmentArray);
-
   const displayNewRequests = () => {
     setNewRequestState(!newRequestState);
   };

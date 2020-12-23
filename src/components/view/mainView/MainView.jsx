@@ -41,11 +41,10 @@ export default function MainView() {
       <NewDesignersDesktopSection />
 
       <div className="newDesignerMobileSection"/>
-
-      <Footer id="footer">
-        LookUp WIP July 2020
-      </Footer>
-      {/*<BookitoFooter />*/}
+      {/*<Footer id="footer">*/}
+      {/*  LookUp WIP July 2020*/}
+      {/*</Footer>*/}
+      <BookitoFooter />
     </>
   );
 }

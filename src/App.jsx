@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { Layout } from "antd";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import NavBar from "./components/commonComponents/NavBar";
@@ -17,6 +17,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "antd/dist/antd.css";
 import "./assets/scss/App.scss";
 import BecomeDesignerView from "./components/view/becomeDesignerView/BecomeDesignerView";
+import BookitoFooter from "./components/commonComponents/BookitoFooter";
 
 const { Header, Content } = Layout;
 

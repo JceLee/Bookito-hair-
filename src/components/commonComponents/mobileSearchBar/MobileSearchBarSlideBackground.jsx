@@ -22,6 +22,7 @@ const tmpCss = {
 
 export default function MobileSearchBarSlideBackground() {
   const AutoplaySlider = withAutoplay(AwesomeSlider);
+
   return (
       <div className="searchBarSectionImg" style={{width:"100%", height:"450px"}}>
         <div style={tmpCss}/>
