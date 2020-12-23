@@ -3,10 +3,11 @@ import SearchBarSection from "./SearchBarSection";
 import InfoCard from "./InfoCard";
 import NewDesignersDesktopSection from "./NewDesignersDesktopSection";
 import { Layout } from "antd";
-import JoinUs from "./JoinUs";
+import JoinUsMobile from "./JoinUsMobile";
 import MobileSearchBarSlideBackground from "../../commonComponents/mobileSearchBar/MobileSearchBarSlideBackground";
 import MainSearchBarSlideBackground from "../../commonComponents/mainSearchBar/MainSearchBarSlideBackground";
 import BookitoFooter from "../../commonComponents/BookitoFooter";
+import JoinUs from "./JoinUs";
 
 export default function MainView() {
   const { Footer } = Layout;
@@ -22,7 +23,7 @@ export default function MainView() {
     <>
       <SearchBarSection />
 
-      {screenWidth < tabletLWidth ? <JoinUs /> : <JoinUs /> }
+      {screenWidth < tabletLWidth ? <JoinUsMobile /> : <JoinUsMobile />}
 
       {/*<div align="middle" className="infoCardsSection">*/}
       {/*  <InfoCard*/}

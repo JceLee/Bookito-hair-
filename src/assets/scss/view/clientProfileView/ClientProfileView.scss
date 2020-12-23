@@ -50,6 +50,16 @@
     .formBottomMargin {
       margin-bottom: 30px;
     }
+
+    .autocompleteDropdownContainer {
+      padding: 4px;
+      border: 1px solid lightgrey;
+      border-top: 0px;
+    }
+
+    .autocompleteDropdownContainer:empty {
+      display: none;
+    }
   }
 
   @include clientProfile576 {
