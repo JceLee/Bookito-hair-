@@ -13,6 +13,8 @@ export default function MessengerListView() {
   const [rooms, setRooms] = useState([]);
   const [nickname, setNickname] = useState("");
   const history = useHistory();
+  const [exampleText, setExampleText] = useState("Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words");
+
   const lastMsgs = {};
 
   useEffect(() => {
@@ -55,16 +57,6 @@ export default function MessengerListView() {
   };
 
   const enterChatRoom = (roomID) => {
-    // console.log(roomID);
-    // const chat = { roomID: '', nickname: '', message: '', date: '', type: '' };
-    // chat.roomID = roomID;
-    // chat.nickname = nickname;
-    // chat.date = Moment(new Date()).format('DD/MM/YYYY HH:mm:ss');
-    // chat.message = `${nickname} enter the room`;
-    // chat.type = 'join';
-    // const newMessage = firebaseDate.ref('chats/').push();
-    // newMessage.set(chat);
-
     history.push(`/chatroom?roomID=${roomID}`);
   };
 
@@ -83,10 +75,11 @@ export default function MessengerListView() {
                 ? room.customerID
                 : room.designerID
             }
-            photoURL={null}
+            photoURL={currentUser.photoURL}
             enterChatRoom={enterChatRoom}
             roomID={room.roomID}
-            lastMsg={lastMsgs[room.roomID]}
+            msgDate={"2020.12.17"}
+            lastMsg={exampleText}
           />
         )
       })}

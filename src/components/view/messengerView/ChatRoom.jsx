@@ -34,7 +34,7 @@ function ChatRoom(props) {
       setNickname(currentUser.uid);
       firebaseDate
         .ref("chats/")
-        .orderByChild("roomID")
+        .orderByChild("roomID") //sorting
         .equalTo(roomID)
         .on("value", (resp) => {
           setChats([]);

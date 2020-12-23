@@ -14,6 +14,12 @@ $lightGrey: #c6c6c6;
   }
 }
 
+@mixin mobileIphonePlus {
+  @media only screen and (min-width: 414px) {
+    @content;
+  }
+}
+
 @mixin mobileMtoL {
   @media only screen and (min-width: 425px) {
     @content;
@@ -26,8 +32,8 @@ $lightGrey: #c6c6c6;
   }
 }
 
-@mixin mobileL {
-  @media only screen and (min-width: 480px) {
+@mixin mobileLtoTabletP {
+  @media only screen and (min-width: 540px) {
     @content;
   }
 }

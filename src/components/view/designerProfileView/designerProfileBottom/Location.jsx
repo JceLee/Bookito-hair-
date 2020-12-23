@@ -29,7 +29,7 @@ export default function Location(props) {
 
   let googleMap = (
     <div className="location" id={id}>
-      <h2>Location</h2>
+      <h2 id="locationTitle">Location</h2>
       <div className="googleMap">
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyC8CafSu5IPQErCTSwj0YpRPWQUeniuyg8" }}
