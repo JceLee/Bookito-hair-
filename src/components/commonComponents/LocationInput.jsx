@@ -36,6 +36,7 @@ export default function LocationInput(props) {
                   id: "address-input",
                 })}
                 placeholder="Address"
+                autoComplete="dontshow"
                 allowClear={allowClear}
               />
             }
