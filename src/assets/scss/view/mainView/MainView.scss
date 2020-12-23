@@ -4,7 +4,8 @@
   @include tabletP {
     display: block;
     position: absolute;
-    height: 700px;
+    width: 100%;
+    height: 600px;
     object-fit: cover;
   }
 
@@ -20,7 +21,7 @@
 
 
   @include tabletP {
-    height: 700px;
+    height: 600px;
   }
 
   .searchBarSectionImg {
@@ -33,8 +34,12 @@
   }
 
   #searchBarForm {
-    border: 0.2px solid white;
+    border: 1px solid lightgray;
     z-index: 2;
+
+    @include desktop {
+      width: 1130px;
+    }
 
     #mobileSearchBar {
       z-index: 2;
@@ -44,6 +49,7 @@
 
       .ant-input-affix-wrapper {
         z-index: 2;
+        border: 0 lightgrey;
         box-shadow: 0 0 0 0 white;
         border-radius: 20px;
       }
@@ -51,6 +57,10 @@
 
     #mainSearchBar {
       z-index: 3;
+
+      @include desktop {
+        width: 1130px;
+      }
 
       .ant-select-selector {
         z-index: 4;
@@ -78,6 +88,11 @@
   margin-top: 10%;
   background: #000000;
 
+  @include desktop {
+    width: 1130px;
+    margin-top: 5%;
+  }
+
   .joinUsTopLine {
     padding-top: 20px;
     padding-left: 20px;
@@ -94,6 +109,7 @@
     font-weight: 300;
     color: white;
   }
+
   .joinUsBottom {
     padding-left: 20px;
     padding-bottom: 20px;
@@ -112,12 +128,33 @@
     }
   }
 
-
   .joinUsImg {
     padding: 20px;
     width: 100%;
     display: flex;
     justify-content: center;
+  }
+
+  .joinUsImgGroup {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .imgWrapper {
+      padding: 2%;
+      width: 33.3%;
+      .joinUsImgS {
+        width: 100%;
+      }
+      .imgDescription {
+        margin-top: 10px;
+        color: white;
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 600;
+        text-align: center;
+      }
+    }
   }
 }
 
