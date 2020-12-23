@@ -35,7 +35,6 @@ export default function MobileSearchBar() {
     var searchBarHeight = document.getElementById("mobileSearchBar").clientHeight;
     var navBarHeight = document.getElementById("header").clientHeight;
     var searchBarMarginOnNavBar = (navBarHeight - searchBarHeight) / 2 + "px";
-
     document.getElementById("searchBarForm").classList.add("stickedSearchBarOnNav");
     document.getElementById("searchBarForm").style.top = searchBarMarginOnNavBar;
 
@@ -46,25 +45,29 @@ export default function MobileSearchBar() {
   const takeSearchBarOffFromNavBar = () => {
     document.getElementById("searchBarForm").classList.remove("stickedSearchBarOnNav");
     document.getElementById("searchBarForm").style.top = "unset";
-    document.getElementById("mobileSearchBar").style.marginTop = "100px";
+    document.getElementById("mobileSearchBar").style.marginTop = "10%";
     document.getElementById("mainHeader").style.display = "unset";
   };
 
   useScrollPosition(({ prevPos, currPos }) => {
-    if (currPos.y < heightToShowSearchBarOnNav) {
-      hide("logo");
-      hide("menuBtn");
-      stickSearchBarOnNavBar();
-    } else {
-      show("logo");
-      show("menuBtn");
-      takeSearchBarOffFromNavBar();
+    try {
+      if (currPos.y < heightToShowSearchBarOnNav) {
+        hide("logo");
+        hide("menuBtn");
+        stickSearchBarOnNavBar();
+      } else {
+        show("logo");
+        show("menuBtn");
+        takeSearchBarOffFromNavBar();
+      }
+    } catch {
+
     }
   });
 
   return (
     <div id="mobileSearchBar">
-      <div id="mainHeader">Find your favourite beautician</div>
+      {/*<div id="mainHeader">Find your favourite beautician</div>*/}
       <Input
         size="large"
         placeholder="Find your Beauticians" // TODO: Extract string to string file

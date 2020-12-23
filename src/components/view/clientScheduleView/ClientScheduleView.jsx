@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Tabs, Row } from "antd";
+import React, {useEffect, useState} from "react";
+import {Tabs, Row} from "antd";
 import ScheduleCard from "../../commonComponents/ScheduleCard";
 import ScheduleCardHistory from "../../commonComponents/ScheduleCardHistory";
-import { useSelector } from "react-redux";
-import { firebaseStore } from "../../../config/fbConfig";
-import { useHistory } from "react-router-dom";
+import {useSelector} from "react-redux";
+import {firebaseStore} from "../../../config/fbConfig";
+import {useHistory} from "react-router-dom";
 
-const { TabPane } = Tabs;
+const {TabPane} = Tabs;
 
 export default function ClientSchedule() {
   const currentUser = useSelector((state) => state.currentUser.currentUser);
@@ -46,7 +46,7 @@ export default function ClientSchedule() {
             completedAndDeclined.push(doc.data());
           }
         });
-        return { confirmed, pending, completedAndDeclined };
+        return {confirmed, pending, completedAndDeclined};
       })
       .then((data) => {
         setConfirmedAppointments(data.confirmed);
@@ -72,16 +72,17 @@ export default function ClientSchedule() {
         <TabPane className="upcomingTab" tab="Upcoming" key="1">
           <Row className="clientScheduleViewRow">
             {confirmedAppointment.map((appointment, inx) => (
-              <ScheduleCard key={inx} appointment={appointment} printServices={printServices} />
+              <ScheduleCard key={inx} appointment={appointment} printServices={printServices}/>
             ))}
           </Row>
         </TabPane>
         <TabPane className="pendingTab" tab="Pending" key="2">
           <Row className="clientScheduleViewRow">
             {pendingAppointment.map((appointment, inx) => (
-              <ScheduleCard key={inx} appointment={appointment} printServices={printServices} />
+              <ScheduleCard key={inx} appointment={appointment} printServices={printServices}/>
             ))}
           </Row>
+
         </TabPane>
         <TabPane className="historyTab" tab="History" key="3">
           <Row className="clientScheduleViewRow">

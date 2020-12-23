@@ -12,6 +12,7 @@ export default function DesignerCardComponent(props) {
       <DesignerCardTop
         fname={designer.fname}
         rateScore={designer.rate.average}
+        rateCount={designer.rate.count}
         services={designer.services}
         profile={designer.photoURL}
       />

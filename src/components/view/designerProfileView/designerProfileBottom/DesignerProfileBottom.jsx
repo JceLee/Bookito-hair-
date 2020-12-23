@@ -3,9 +3,10 @@ import Home from "./Home.jsx";
 import Works from "./Works.jsx";
 import Hours from "./Hours.jsx";
 import Location from "./Location.jsx";
+import ReviewContainer from "./ReviewContainer";
 import ServiceNPrice from "./ServiceNPrice";
 import { Divider } from "antd";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function DesignerProfileBottom() {
   const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
@@ -29,12 +30,12 @@ export default function DesignerProfileBottom() {
       <Divider id="HrsReviewDivider" />
       <div className="serviceNPriceHoursGrid">
         <div className="hoursGrid">
-          {"Reviews"}
+        <ReviewContainer />
         </div>
       </div>
       </div>
       <Divider className="profileDivider" />
-      <Location id="Location" location={designer.location} latLng={designer.latLng}/>
+      <Location id="Location" location={designer.location} latLng={designer.latLng} />
     </div>
   );
 }

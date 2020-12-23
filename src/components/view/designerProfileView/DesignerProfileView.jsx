@@ -14,7 +14,6 @@ export default function DesignerProfileView() {
   const selected = designers.find((element) => element.uid === urlParams.get("uid"));
   const currentUser = useSelector((state) => state.currentUser.currentUser);
   const dispatch = useDispatch();
-  console.log(selected);
   dispatch(select_designer(selected !== undefined ? selected : currentUser));
   const authentication = currentUser.uid === designer.uid;
 
