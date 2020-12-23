@@ -4,7 +4,8 @@
   @include tabletP {
     display: block;
     position: absolute;
-    height: 700px;
+    width: 100%;
+    height: 600px;
     object-fit: cover;
   }
 
@@ -16,22 +17,59 @@
 // search bar section
 .searchBarSection {
   width: 100%;
-  height: 600px;
+  height: 450px;
+
+
   @include tabletP {
-    height: 700px;
+    height: 600px;
   }
+
   .searchBarSectionImg {
     object-fit: cover;
     position: absolute;
-    height: 600px;
+    height: 450px;
     @include tabletP {
       display: none;
     }
   }
 
   #searchBarForm {
-    border: 1px solid #fdfdfd;
+    border: 1px solid lightgray;
     z-index: 2;
+
+    @include desktop {
+      width: 1130px;
+    }
+
+    #mobileSearchBar {
+      z-index: 2;
+      margin-top: 10%;
+      box-shadow: 0 0 0 0 white;
+      border-radius: 20px;
+
+      .ant-input-affix-wrapper {
+        z-index: 2;
+        border: 0 lightgrey;
+        box-shadow: 0 0 0 0 white;
+        border-radius: 20px;
+      }
+    }
+
+    #mainSearchBar {
+      z-index: 3;
+
+      @include desktop {
+        width: 1130px;
+      }
+
+      .ant-select-selector {
+        z-index: 4;
+      }
+
+      .ant-input-affix-wrapper {
+        z-index: 3;
+      }
+    }
   }
 }
 
@@ -41,6 +79,83 @@
   left: 0;
   right: 0;
   z-index: 2;
+}
+
+// joinUs section
+
+.joinUs {
+  width: 100vw;
+  margin-top: 10%;
+  background: #000000;
+
+  @include desktop {
+    width: 1130px;
+    margin-top: 5%;
+  }
+
+  .joinUsTopLine {
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 16px;
+    font-weight: bold;
+    font-size: 22px;
+    color: white;
+  }
+
+  .joinUsBottomLine {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: 300;
+    color: white;
+  }
+
+  .joinUsBottom {
+    padding-left: 20px;
+    padding-bottom: 20px;
+
+    .joinUsBtn {
+      text-align: center;
+      width: auto;
+      background-color: transparent;
+      border: 1px solid white;
+      border-radius: 8px;
+      padding: 7px 15px;
+      font-size: 14px;
+      line-height: 18px;
+      font-weight: 600;
+      color: white;
+    }
+  }
+
+  .joinUsImg {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .joinUsImgGroup {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .imgWrapper {
+      padding: 2%;
+      width: 33.3%;
+      .joinUsImgS {
+        width: 100%;
+      }
+      .imgDescription {
+        margin-top: 10px;
+        color: white;
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 600;
+        text-align: center;
+      }
+    }
+  }
 }
 
 // info card section
@@ -60,6 +175,7 @@
     @include tabletL {
       margin: 15px 60px;
     }
+
     .ant-card-cover {
       max-width: 334px;
       max-height: 216px;
@@ -78,6 +194,7 @@
 .newDesignersDesktopSection {
   padding: 0 5%;
   margin-bottom: 5vh;
+  margin-top: 10%;
 
   @include tabletP {
     display: block;
@@ -102,10 +219,13 @@
       display: block;
       width: 30%;
     }
+
     .topLine {
-      font-size: 30pt;
+      font-size: 25pt;
       font-weight: 500;
+      margin-bottom: 2%;
     }
+
     .bottomLine {
       font-weight: 300;
       margin: 0 auto;
@@ -118,6 +238,7 @@
       }
     }
   }
+
   .newDesignersHeaderSmallDesktopSection {
     font-size: 30pt;
     font-weight: 500;
@@ -125,6 +246,7 @@
       display: none;
     }
   }
+
   .imagesSection {
     width: 100%;
     @include mainPageNewDesigners1090 {
@@ -168,6 +290,7 @@
           width: 150px;
           height: 150px;
         }
+
         .ant-card-body {
           padding: 0;
         }
@@ -175,6 +298,19 @@
     }
   }
 }
+
+// footer
+
+//.bookitoFooter {
+//  background-color: #d9d9d9;
+//  color: #484848;
+//  .footerTitle {
+//    color: #222222;
+//    font-size: 12px;
+//    margin-bottom: 0;
+//    text-transform: uppercase;
+//  }
+//}
 
 // footer
 .footer {
