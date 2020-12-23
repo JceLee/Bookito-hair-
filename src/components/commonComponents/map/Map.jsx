@@ -6,12 +6,9 @@ import { geocode } from "../../../helpers/geocode";
 export default function Map(props) {
     const {
         isDesktop,
-        initialLocationString,
+        userLocation,
         designers,
     } = props;
-
-    const [userLocation, setUserLocation] = useState();
-    const [defaultLocation] = useState({lat: 49.2377817, lng: -123.0410276 });
 
     const HomeMarker = userLocation && <Marker
         key={`map-marker-home`}
@@ -20,32 +17,15 @@ export default function Map(props) {
     />
 
     const DesignerMarkers = designers && designers.map(designer => (
-        <Marker
+        designer.latLng && <Marker
             isDesktop={isDesktop}
             key={`map-marker-${designer.uid}`}
-
-            // TODO: DISABLE THIS CODE WHEN LATLNG IS SUPPORTED
-            lat={defaultLocation.lat + (Math.random()-0.5) * 0.2} // TODO: random location for testing only!
-            lng={defaultLocation.lng + (Math.random()-0.5) * 0.1}
-            // TODO: ENABLE THIS CODE WHEN LATLNG IS SUPPORTED
-            // lat={designer.latLng.lat}
-            // lng={designer.latLng.lng}
-
+            lat={designer.latLng.lat}
+            lng={designer.latLng.lng}
             userLocation={userLocation}
             designer={designer}
         />
-    ))
-
-    useEffect(() => {
-        geocode(initialLocationString).then(latLng => {
-            if (latLng) {
-                setUserLocation(latLng);
-            } else {
-                setUserLocation(defaultLocation);
-                console.log("Unable to get location!");
-            }
-        });
-    }, [defaultLocation, initialLocationString, props.designers]);
+    ));
 
     return (
         <>

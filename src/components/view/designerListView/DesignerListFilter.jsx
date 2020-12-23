@@ -1,73 +1,185 @@
 import React, { useState } from "react";
 import { Menu, Dropdown, Button, Divider, Collapse } from "antd/lib/index";
-import { TagOutlined, CalendarOutlined, ClockCircleOutlined, DownOutlined, CheckOutlined } from '@ant-design/icons';
+import {
+  SearchOutlined,
+  TagOutlined,
+  CalendarOutlined,
+  // ClockCircleOutlined,
+  DownOutlined,
+} from "@ant-design/icons";
+import DesignerListFilterTags from "./DesignerListFilterTags";
+import DayPicker from "react-day-picker";
+import DesignerTypeModal from "../../commonComponents/mobileSearchBar/DesignerTypeModal";
+import "react-day-picker/lib/style.css";
 
 export default function DesignerListFilter(props) {
-  const { numberOfDesigners, location } = props;
+  const {
+    filterTags,
+    updateFilter,
+    numberOfDesigners,
+    location,
+    updateSortBy,
+  } = props;
   const { Panel } = Collapse;
 
   const [activeKey, setActiveKey] = useState([0]);
-  const [sortBy, setSortBy] = useState("distance");
+  const [sortBy, setSortBy] = useState("");
+  const [currentCheckedTags, setCurrentCheckedTags] = useState([]);
+  const [filterDate, setFilterDate] = useState(null);
+  const [designerTypeModalVisible, setDesignerTypeModalVisible] = useState(
+    false
+  );
 
-  const toggleFilterSetting = (i) => () => {
-    setActiveKey(activeKey[0] === i ? [0] : [i])
+  const showModal = () => {
+    setDesignerTypeModalVisible(true);
   };
 
-  function handleSortBy(e) {
+  const handleCancel = (e) => {
+    setDesignerTypeModalVisible(false);
+  };
+
+  const show = (element) => {
+    document.getElementById(element).style.display = "flex";
+  };
+
+  const toggleFilterSetting = (i) => {
+    setActiveKey(activeKey[0] === i ? [0] : [i]);
+  };
+
+  const handleSortBy = (e) => {
     setSortBy(e.key);
-  }
+    updateSortBy(e.key);
+  };
+
+  const onShowResultsTags = () => {
+    toggleFilterSetting(0);
+    updateFilter(currentCheckedTags, undefined);
+  };
+
+  const onShowResultsDate = () => {
+    toggleFilterSetting(0);
+    updateFilter(undefined, filterDate);
+  };
+
+  // const onShowResultsTime = () => {
+  //   toggleFilterSetting(0);
+  // }
+
+  const handleFilterDate = (day, { selected }) => {
+    setFilterDate(selected ? undefined : day);
+    console.log(filterDate);
+  };
 
   const sortMenu = (
-    <Menu onClick={handleSortBy}>
+    <Menu onClick={(e) => handleSortBy(e)}>
       {/* <Menu.Item key="featured">Featured</Menu.Item> */}
-      <Menu.Item key="distance">{sortBy === "distance" && <CheckOutlined />}Distance</Menu.Item>
-      <Menu.Item key="review">{sortBy === "review" && <CheckOutlined />}Avg. Review</Menu.Item>
-      <Menu.Item key="priceLow">{sortBy === "priceLow" && <CheckOutlined />}Price Low</Menu.Item>
-      <Menu.Item key="priceHigh">{sortBy === "priceHigh" && <CheckOutlined />}Price High</Menu.Item>
-      <Menu.Item key="new">{sortBy === "new" && <CheckOutlined />}New</Menu.Item>
+      <Menu.Item
+        key="distance"
+        className={sortBy === "distance" && "designerListSortByButtonBold"}
+      >
+        Distance
+      </Menu.Item>
+      <Menu.Item
+        key="reviewScore"
+        className={sortBy === "reviewScore" && "designerListSortByButtonBold"}
+      >
+        Review Score
+      </Menu.Item>
+      <Menu.Item
+        key="reviewCount"
+        className={sortBy === "reviewCount" && "designerListSortByButtonBold"}
+      >
+        Review Count
+      </Menu.Item>
+      <Menu.Item
+        key="new"
+        className={sortBy === "new" && "designerListSortByButtonBold"}
+      >
+        New
+      </Menu.Item>
     </Menu>
   );
 
-  const confirmFilterSetting = (
-    <Button className="designerListFilterConfirm" type="primary" block onClick={toggleFilterSetting(0)}>
+  const confirmFilterSettingButton = (onShowResults) => (
+    <Button
+      className="designerListFilterConfirm"
+      type="primary"
+      block
+      onClick={onShowResults}
+    >
       Show results
     </Button>
   );
 
   return (
     <div className="designerListFilter">
+      <DesignerTypeModal
+        visible={designerTypeModalVisible}
+        onCancel={handleCancel}
+        showNavBarElements={show}
+      />
+
       <Divider className="designerCardComponentDividerTop" />
-        <div className="designerListFilterInner">
+      <div className="designerListFilterInner">
+        <Dropdown
+          overlay={sortMenu}
+          trigger={["click"]}
+          placement="bottomRight"
+          onClick={() => toggleFilterSetting(0)}
+        >
+          <Button className="filterBtn sortBtn">
+            Sort
+            <DownOutlined />
+          </Button>
+        </Dropdown>
 
-          <Dropdown overlay={sortMenu} trigger={["click"]} placement="bottomRight" onClick={toggleFilterSetting(0)}>
-            <Button className="filterBtn sortBtn">Sort<DownOutlined /></Button>
-          </Dropdown>
+        <Button className="searchBtn filterBtn" onClick={showModal}>
+          <span>
+            <SearchOutlined />
+          </span>
+        </Button>
+        <Button className="filterBtn" onClick={() => toggleFilterSetting(1)}>
+          <span>
+            <TagOutlined /> Tag
+          </span>
+        </Button>
+        <Button className="filterBtn" onClick={() => toggleFilterSetting(2)}>
+          <span>
+            <CalendarOutlined /> Date
+          </span>
+        </Button>
+        {/* <Button className="filterBtn" onClick={() => toggleFilterSetting(3)}><span><ClockCircleOutlined /> Time</span></Button> */}
 
-          <Button className="filterBtn" onClick={toggleFilterSetting(1)}><span><TagOutlined /> Tag</span></Button>
-          <Button className="filterBtn" onClick={toggleFilterSetting(2)}><span><CalendarOutlined /> Date</span></Button>
-          <Button className="filterBtn" onClick={toggleFilterSetting(3)}><span><ClockCircleOutlined /> Time</span></Button>
-
-          <Collapse ghost activeKey={activeKey}>
-            <Panel className="flexChild" key="0" header={null} showArrow={false}>
-              <div className="numberOfDesigners">
-                {numberOfDesigners} matches in {location}
-              </div>
-            </Panel>
-            <Panel className="flexChild" key="1" header={null} showArrow={false}>
-              1
-              {confirmFilterSetting}
-            </Panel>
-            <Panel className="flexChild" key="2" header={null} showArrow={false}>
-              2
-              {confirmFilterSetting}
-            </Panel>
-            <Panel className="flexChild" key="3" header={null} showArrow={false}>
+        <Collapse ghost activeKey={activeKey}>
+          <Panel key="0" header={null} showArrow={false}>
+            <div className="numberOfDesigners">
+              {numberOfDesigners} matches in {location}
+            </div>
+          </Panel>
+          <Panel key="1" header={null} showArrow={false}>
+            {/* {() => resetCurrentFilterTags} */}
+            <DesignerListFilterTags
+              filterTags={filterTags}
+              currentCheckedTags={currentCheckedTags}
+              setCurrentCheckedTags={setCurrentCheckedTags}
+            />
+            {confirmFilterSettingButton(onShowResultsTags)}
+          </Panel>
+          <Panel key="2" header={null} showArrow={false}>
+            <DayPicker
+              format={"MM/dd/yyyy"}
+              selectedDays={filterDate}
+              onDayClick={handleFilterDate}
+            />
+            {confirmFilterSettingButton(onShowResultsDate)}
+          </Panel>
+          {/* <Panel key="3" header={null} showArrow={false}>
               3
-              {confirmFilterSetting}
-            </Panel>
-          </Collapse>
-        </div>
-      <Divider className="designerCardComponentDividerBottom"/>
+              {confirmFilterSettingButton(onShowResultsTime)}
+            </Panel> */}
+        </Collapse>
+      </div>
+      <Divider className="designerCardComponentDividerBottom" />
     </div>
   );
 }

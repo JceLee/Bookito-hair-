@@ -52,7 +52,7 @@ export default function Marker(props) {
                         <Link to={`/designer_profile?uid=${designer.uid}`}>
                             <Slider {...carouselSettings} className="markerCarousel">
                                 {designer.works && designer.works.length ? designer.works.map((imgSrc, index) => (
-                                    <div><img src={imgSrc} alt={`Gallery img${index}`} /></div>
+                                    <div key={`galleryImg${index}`}><img src={imgSrc} alt={`Gallery img${index}`} /></div>
                                 ))
                                 : <div><img src={placeholder} alt={`Gallery placeholder`} /></div>}
                             </Slider>
@@ -65,9 +65,9 @@ export default function Marker(props) {
                             </div>
 
                             <div className="markerDescriptionLower">
-                                {designer.services && Object.keys(designer.services).map(serviceKey => (
+                                {designer.services && Object.keys(designer.services).map((serviceKey, index) => (
                                     designer.services[serviceKey] !== [] && 
-                                    <Tag className="serviceTag" color="#332C1E">{serviceKey}</Tag>
+                                    <Tag key={`serviceTag${index}`} className="serviceTag" color="#332C1E">{serviceKey}</Tag>
                                 ))}
                             </div>
                         </div>
@@ -96,7 +96,7 @@ export default function Marker(props) {
                             <Link to={`/designer_profile?uid=${designer.uid}`}>
                                 <Slider {...carouselSettings} className="markerCarousel">
                                     {designer.works && designer.works.length ? designer.works.map((imgSrc, index) => (
-                                        <div><img src={imgSrc} alt={`Gallery img${index}`} /></div>
+                                        <div key={`galleryImg${index}`}><img src={imgSrc} alt={`Gallery img${index}`} /></div>
                                     ))
                                     : <div><img src={placeholder} alt={`Gallery placeholder`} /></div>}
                                 </Slider>
@@ -109,9 +109,9 @@ export default function Marker(props) {
                                 </div>
 
                                 <div className="markerDescriptionLower">
-                                    {designer.services && Object.keys(designer.services).map(serviceKey => (
+                                    {designer.services && Object.keys(designer.services).map((serviceKey, index) => (
                                         designer.services[serviceKey] !== [] && 
-                                        <Tag className="serviceTag" color="#332C1E">{serviceKey}</Tag>
+                                        <Tag key={`serviceTag${index}`} className="serviceTag" color="#332C1E">{serviceKey}</Tag>
                                     ))}
                                 </div>
                             </div>
