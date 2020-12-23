@@ -27,8 +27,6 @@ export default function BookNowModal(props) {
 
   const loadingAppointment = [];
 
-  console.log("d.uid: " + designer.uid);
-
   useEffect(() => {
     firebaseStore
       .collection("appointments")
