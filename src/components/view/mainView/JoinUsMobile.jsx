@@ -3,6 +3,7 @@ import joinUs from "../../../assets/images/backgrounds/signUp.jpg"
 import hair from "../../../assets/images/backgrounds/joinUsHair.jpg"
 import lash from "../../../assets/images/backgrounds/joinUsLash.jpg"
 import nail from "../../../assets/images/backgrounds/joinUsNail.jpg"
+import {Link} from "react-router-dom";
 
 export default function JoinUsMobile() {
   const mobileLWidth = 480;
@@ -37,7 +38,8 @@ export default function JoinUsMobile() {
       }
 
       <div className="joinUsBottom">
-        <button className="joinUsBtn"> Join  Us </button>
+        <Link className="joinUsBtn" to={"/becomeDesigner"}>Join  Us</Link>
+        {/*<button className="joinUsBtn"> Join  Us </button>*/}
       </div>
     </div>
   );

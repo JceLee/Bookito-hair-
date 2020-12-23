@@ -21,7 +21,7 @@ export default function Navbar() {
           { name: "Log In", link: "" },
         ]
       : [
-          { name: "Become a designer", link: "/becomeDesigner" },
+          // { name: "Become a designer", link: "/becomeDesigner" },
           { name: "Log In", link: "" },
         ];
   const menu = (
