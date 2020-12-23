@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Affix, Button, Modal, Form, Collapse } from "antd";
 import DesignerNav from "./designerNav/DesignerNav.jsx";
 import ReadOnlyStar from "../../../commonComponents/ReadOnlyStar";
+import ClientProfileView from "../../../view/clientProfileView/ClientProfileView";
 import ServiceNPriceForm from "./designerEditProfile/ServiceNPriceForm";
 import HoursForm from "./designerEditProfile/HoursForm";
-import AddressPhoneForm from "./designerEditProfile/AddressPhoneForm";
 import WorksForm from "./designerEditProfile/WorksForm";
 import BookNowModal from "../designerProfileTop/bookNowModal/BookNowModal";
 import Avatar from "antd/lib/avatar/avatar";
@@ -18,7 +18,9 @@ const avatarSize = 64;
 const { Panel } = Collapse;
 
 export default function DesignerProfileTop(props) {
-  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
+  const designer = useSelector(
+    (state) => state.selectedDesigner.selectedDesigner
+  );
   const [stickyNavPositionFromTop] = useState(searchBarHeight);
   const [height, setHeight] = useState(0);
   const [visibleEditProfileModal, setVisibleEditProfileModal] = useState(false);
@@ -34,7 +36,10 @@ export default function DesignerProfileTop(props) {
       header: "Hours",
       content: <HoursForm defaultTradingHours={defaultTradingHours} />,
     },
-    { header: "Address & Phone", content: <AddressPhoneForm /> },
+    {
+      header: "Address & Phone",
+      content: <ClientProfileView form={form} editMode={true} />,
+    },
     {
       header: "Works",
       content: <WorksForm />,
@@ -54,7 +59,6 @@ export default function DesignerProfileTop(props) {
   };
 
   const onOk = () => {
-    console.log(test);
     form.submit();
     console.log(form.submit);
     setVisibleEditProfileModal(false);
@@ -67,7 +71,11 @@ export default function DesignerProfileTop(props) {
   return (
     <div className="designerTop">
       <div className="designerProfile">
-        <Avatar className="designerProfileImage" size={avatarSize} src={designer.photoURL} />
+        <Avatar
+          className="designerProfileImage"
+          size={avatarSize}
+          src={designer.photoURL}
+        />
         <div className="designerNameRateLocation">
           <h2>
             {designer.fname} {designer.lname}
@@ -81,7 +89,10 @@ export default function DesignerProfileTop(props) {
           <DesignerNav searchBarHeight={searchBarHeight} height={height} />
           {props.authentication ? (
             <>
-              <Button className="buttonInProfileLayoutTab" onClick={showEditProfileModal}>
+              <Button
+                className="buttonInProfileLayoutTab"
+                onClick={showEditProfileModal}
+              >
                 Edit Profile
               </Button>
               <Modal
@@ -99,10 +110,18 @@ export default function DesignerProfileTop(props) {
                 //   </Button>
                 // }
               >
-                <Collapse className="editProfileCollapse" bordered={false} defaultActiveKey={["1"]}>
+                <Collapse
+                  className="editProfileCollapse"
+                  bordered={false}
+                  defaultActiveKey={["1"]}
+                >
                   {editProfilePanels.map((panel, index) => {
                     return (
-                      <Panel className="editProfilePanel" header={panel.header} key={index + 1}>
+                      <Panel
+                        className="editProfilePanel"
+                        header={panel.header}
+                        key={index + 1}
+                      >
                         {panel.content}
                       </Panel>
                     );
@@ -111,13 +130,19 @@ export default function DesignerProfileTop(props) {
               </Modal>
             </>
           ) : (
-            <Button className="buttonInProfileLayoutTab" onClick={bookNowModalHandler}>
+            <Button
+              className="buttonInProfileLayoutTab"
+              onClick={bookNowModalHandler}
+            >
               Book Now
             </Button>
           )}
         </div>
       </Affix>
-      <BookNowModal visible={visibleBookNowModal} modalHandler={bookNowModalHandler} />
+      <BookNowModal
+        visible={visibleBookNowModal}
+        modalHandler={bookNowModalHandler}
+      />
     </div>
   );
 }
