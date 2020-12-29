@@ -22,6 +22,9 @@ export default function DesignerListView(props) {
 
   const defaultInitialDisplayCount = 10;
 
+  let lastScrollTop = 0;
+  const [hideFilterBar, setHideFilterBar] = useState(false);
+
   // User location variables
   const [userLocation, setUserLocation] = useState();
   const [defaultLocation] = useState({ lat: 34.0522, lng: 118.2437 });
@@ -77,6 +80,11 @@ export default function DesignerListView(props) {
         console.log("Unable to get location!");
       }
     });
+    
+    document.getElementById('scrollableDiv').addEventListener('scroll', handleFilterDisplayOnScroll, { passive: true });
+    return () => {
+      document.getElementById('scrollableDiv').removeEventListener('scroll', handleFilterDisplayOnScroll)
+    }
   }, [dispatch, props.location.search]);
 
   const handleSearch = (designer) => {
@@ -176,6 +184,12 @@ export default function DesignerListView(props) {
     );
   };
 
+  const handleFilterDisplayOnScroll = () => {
+    let scrollTop = window.pageYOffset || document.getElementById('scrollableDiv').scrollTop;
+    setHideFilterBar(scrollTop > lastScrollTop);
+    lastScrollTop = scrollTop;
+  };
+
   const displayLoadingAnimation = () => {
     const loadTimeMin = 250;
     const loadTimeMax = 350;
@@ -205,123 +219,122 @@ export default function DesignerListView(props) {
   };
 
   return (
-    <>
-      <div className="listingContainer">
-        {/* Designer listing shrinks using the class "designerContainerMapVisible" when map is open on desktop */}
-        <div
-          className={
-            mapVisibleDesktop
-              ? "designerContainerMapVisible designerContainer"
-              : "designerContainer"
-          }
-        >
-          <div className="listingBase" id="scrollableDiv">
-            {/* Controls above the designer listing */}
-            <div className="listNavBar">
-              <div className="filter">
-                <DesignerListFilter
-                  filterTags={filterTags}
-                  updateFilter={updateFilter}
-                  numberOfDesigners={Object.keys(designersCurrent).length}
-                  location="Vancouver"
-                  updateSortBy={updateSortBy}
-                />
-              </div>
-              {/* Desktop map toggle button - used to show map if closed by the user */}
-              <Button
-                className="desktopOnly"
-                onClick={openMapDesktop}
-                hidden={mapVisibleDesktop}
-              >
-                <span role="img" aria-label="map">
-                  🗺️ Show map
-                </span>
-              </Button>
-              {/* Mobile map toggle button - used to open map drawer */}
-              <Button
-                className="mobileOnly designerListOpenMapMobile"
-                onClick={openMapMobile}
-              >
-                {" "}
-                {/*shape="circle"*/}
-                <span role="img" aria-label="map">
-                  🗺️ Map
-                </span>
-              </Button>
-            </div>
-            {/* Designer listing */}
-            <Spin spinning={loadingDesigners} size="large" >
-              <InfiniteScroll
-                scrollableTarget="listingBase"
-                dataLength={designersCurrentDisplayed.length}
-                next={displayMoreResults}
-                hasMore={true}
-                loader={<></>}
-                scrollableTarget="scrollableDiv"
-              >
-                {/* console.log(designers) || */}
-                {designersCurrentDisplayed.map((designer, index) => (
-                  <div key={index} className="designerList">
-                    <DesignerCardComponent
-                      designer={designer}
-                      handleSearch={handleSearch}
-                    />
-                  </div>
-                ))}
-              </InfiniteScroll>
-            </Spin>
-          </div>
-
-          <Drawer
-            className="mobileOnly"
-            // placement="bottom"
-            closable={false}
-            onClose={closeMapMobile}
-            visible={mapVisibleMobile}
-            getContainer={false}
-          >
-            {/* Map close button (top left of the map) */}
-            <Button
-              className="mapCloseButton mobileOnly"
-              type="primary"
-              shape="circle"
-              onClick={closeMapMobile}
-            >
-              <CloseOutlined />
-            </Button>
-            {/* Map inside drawer */}
-            <div className="mapContainer">
-              <Map
-                isDesktop={false}
-                userLocation={userLocation}
-                designers={Object.values(designersCurrent)}
+    <div className="listingContainer">
+      {/* Designer listing shrinks using the class "designerContainerMapVisible" when map is open on desktop */}
+      <div
+        className={
+          mapVisibleDesktop
+            ? "designerContainerMapVisible designerContainer"
+            : "designerContainer"
+        }
+      >
+        <div className="listingBase" id="scrollableDiv">
+          {/* Controls above the designer listing */}
+          <div className="listNavBar">
+            <div className="filter" style={hideFilterBar ? { top: -40 } : {}}>
+              <DesignerListFilter
+                filterTags={filterTags}
+                updateFilter={updateFilter}
+                numberOfDesigners={Object.keys(designersCurrent).length}
+                location="Vancouver"
+                updateSortBy={updateSortBy}
               />
             </div>
-          </Drawer>
+            {/* Desktop map toggle button - used to show map if closed by the user */}
+            <Button
+              className="desktopOnly"
+              onClick={openMapDesktop}
+              hidden={mapVisibleDesktop}
+            >
+              <span role="img" aria-label="map">
+                🗺️ Show map
+              </span>
+            </Button>
+            {/* Mobile map toggle button - used to open map drawer */}
+            <Button
+              className="mobileOnly designerListOpenMapMobile"
+              onClick={openMapMobile}
+              style={hideFilterBar ? { bottom: -40, visible: "hidden" } : {}}
+            >
+              {" "}
+              {/*shape="circle"*/}
+              <span role="img" aria-label="map">
+                🗺️ Map
+              </span>
+            </Button>
+          </div>
+          {/* Designer listing */}
+          <Spin spinning={loadingDesigners} size="large" >
+            <InfiniteScroll
+              scrollableTarget="listingBase"
+              dataLength={designersCurrentDisplayed.length}
+              next={displayMoreResults}
+              hasMore={true}
+              loader={<></>}
+              scrollableTarget="scrollableDiv"
+            >
+              {/* console.log(designers) || */}
+              {designersCurrentDisplayed.map((designer, index) => (
+                <div key={index} className="designerList">
+                  <DesignerCardComponent
+                    designer={designer}
+                    handleSearch={handleSearch}
+                  />
+                </div>
+              ))}
+            </InfiniteScroll>
+          </Spin>
         </div>
 
-        {mapVisibleDesktop && (
-          <div className="mapBase desktopOnly">
-            {/* Map close button (top left of the map) */}
-            <Button
-              className="mapCloseButton desktopOnly"
-              type="primary"
-              shape="circle"
-              onClick={closeMapDesktop}
-            >
-              <CloseOutlined />
-            </Button>
-            {/* Map on the right of designer list view */}
-            <div className="mapContainer">
-              <Map
-                isDesktop={true}
-                userLocation={userLocation}
-                designers={Object.values(designersCurrent)}
-              />
-            </div>
+        <Drawer
+          className="mobileOnly"
+          // placement="bottom"
+          closable={false}
+          onClose={closeMapMobile}
+          visible={mapVisibleMobile}
+          getContainer={false}
+        >
+          {/* Map close button (top left of the map) */}
+          <Button
+            className="mapCloseButton mobileOnly"
+            type="primary"
+            shape="circle"
+            onClick={closeMapMobile}
+          >
+            <CloseOutlined />
+          </Button>
+          {/* Map inside drawer */}
+          <div className="mapContainer">
+            <Map
+              isDesktop={false}
+              userLocation={userLocation}
+              designers={Object.values(designersCurrent)}
+            />
           </div>
-        )}
+        </Drawer>
       </div>
-    </>
+
+      {mapVisibleDesktop && (
+        <div className="mapBase desktopOnly">
+          {/* Map close button (top left of the map) */}
+          <Button
+            className="mapCloseButton desktopOnly"
+            type="primary"
+            shape="circle"
+            onClick={closeMapDesktop}
+          >
+            <CloseOutlined />
+          </Button>
+          {/* Map on the right of designer list view */}
+          <div className="mapContainer">
+            <Map
+              isDesktop={true}
+              userLocation={userLocation}
+              designers={Object.values(designersCurrent)}
+            />
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

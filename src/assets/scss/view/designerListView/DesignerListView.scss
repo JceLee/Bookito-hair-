@@ -19,6 +19,7 @@
     .listingBase {
       height: 99.99%; // required for infinite scrolling
       overflow: auto; // required for infinite scrolling
+      padding-top: 95px;
 
       @include tabletP{
         width: 100%;
@@ -38,19 +39,30 @@
       // border: 1px blue solid;
 
       .filter {
-        height: 30%;
-        // border: 1px saddlebrown solid;
+        position: fixed;
+        top: 55px;
+        height: 95px;
+        width: 100%;
+        transition: 1s;
+        background: $white;
+        z-index: 1;
+      
+        @include tabletP{
+          top: 0;
+        }
       }
       .designerListOpenMapMobile {
-        position: absolute;
+        // position: absolute;
         left: 50%;
         -webkit-transform: translateX(-50%);
         transform: translateX(-50%);
-        bottom: 24px;
+        bottom: 20px;
         z-index: 10;
 
+        position: fixed;
         height: 36px;
         border-radius: 20px;
+        transition: 1s;
       }
     }
 
