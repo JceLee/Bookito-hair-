@@ -13,23 +13,27 @@ import { designerTags } from "../../../constants/designerTags";
 import { designerTypes } from "../../../constants/designerTypes";
 import { geocode } from "../../../helpers/geocode";
 import { getDistanceFromLatLonInKm } from "../../../helpers/geocode";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function DesignerListView(props) {
   const designers = useSelector((state) => state.firestore.designers);
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const defaultInitialDisplayCount = 10;
+  
+  // User location variables
+  const [userLocation, setUserLocation] = useState();
+  const [defaultLocation] = useState({ lat: 34.0522, lng: 118.2437 });
+
   const [designersCurrent, setDesignersCurrent] = useState([...designers]);
+  const [designersCurrentDisplayed, setDesignersCurrentDisplayed] = useState(designersCurrent.slice(0, defaultInitialDisplayCount));
   const [mapVisibleMobile, setMapVisibleMobile] = useState(false);
   const [mapVisibleDesktop, setMapVisibleDesktop] = useState(true);
   const [filterTags, setFilterTags] = useState([]);
   const [filterCheckedTags, setFilterCheckedTags] = useState([]);
   const [filterDate, setFilterDate] = useState(null);
   const [sortBy, setSortBy] = useState("");
-
-  // User location variables
-  const [userLocation, setUserLocation] = useState();
-  const [defaultLocation] = useState({ lat: 34.0522, lng: 118.2437 });
 
   useEffect(() => {
     const params = queryString.parse(props.location.search);
@@ -77,57 +81,53 @@ export default function DesignerListView(props) {
   };
 
   const updateSortBy = (sortByKey) => {
+    let sortedDesigners = [...designersCurrent];
     setSortBy(sortByKey);
+    
     switch (sortByKey) {
       case "distance":
-        setDesignersCurrent(
-          [...designersCurrent].sort((a, b) => {
-            if (a.distance && b.distance) {
-              return a.distance - b.distance;
-            } else if (a.distance) {
-              return -1;
-            } else {
-              return 1;
-            }
-          })
-        );
+        sortedDesigners.sort((a, b) => {
+          if (a.distance && b.distance) {
+            return a.distance - b.distance;
+          } else if (a.distance) {
+            return -1;
+          } else {
+            return 1;
+          }
+        });
         break;
       case "reviewScore":
-        setDesignersCurrent(
-          [...designersCurrent].sort((a, b) => {
-            if (a.rate.average && b.rate.average) {
-              return b.rate.average - a.rate.average;
-            } else if (b.rate.average) {
-              return -1;
-            } else {
-              return 1;
-            }
-          })
-        );
+        sortedDesigners.sort((a, b) => {
+          if (a.rate.average && b.rate.average) {
+            return b.rate.average - a.rate.average;
+          } else if (b.rate.average) {
+            return -1;
+          } else {
+            return 1;
+          }
+        });
         break;
       case "reviewCount":
-        setDesignersCurrent(
-          [...designersCurrent].sort((a, b) => {
-            if (a.rate.count && b.rate.count) {
-              return b.rate.count - a.rate.count;
-            } else if (b.rate.count) {
-              return -1;
-            } else {
-              return 1;
-            }
-          })
-        );
+        sortedDesigners.sort((a, b) => {
+          if (a.rate.count && b.rate.count) {
+            return b.rate.count - a.rate.count;
+          } else if (b.rate.count) {
+            return -1;
+          } else {
+            return 1;
+          }
+        });
         break;
       case "new":
-        setDesignersCurrent(
-          [...designersCurrent].sort((a, b) => {
-            return a.createdOn - b.createdOn;
-          })
-        );
+        sortedDesigners.sort((a, b) => {
+          return a.createdOn - b.createdOn;
+        });
         break;
       default:
         break;
     }
+    setDesignersCurrent(sortedDesigners);
+    setDesignersCurrentDisplayed(sortedDesigners.slice(0, defaultInitialDisplayCount));
   };
 
   const updateFilter = (checkedTags = filterCheckedTags, date = filterDate) => {
@@ -161,6 +161,11 @@ export default function DesignerListView(props) {
     updateSortBy(sortBy);
   };
 
+  const displayMoreResults = () => {
+    setDesignersCurrentDisplayed(designersCurrent.slice(0, ++designersCurrentDisplayed.length));
+    console.log(designersCurrentDisplayed.length);
+  };
+
   // Desktop map controls
   const openMapDesktop = () => {
     setMapVisibleDesktop(true);
@@ -188,7 +193,7 @@ export default function DesignerListView(props) {
               : "designerContainer"
           }
         >
-          <div className="listingBase">
+          <div className="listingBase" id="scrollableDiv">
             {/* Controls above the designer listing */}
             <div className="listNavBar">
               <div className="filter">
@@ -223,8 +228,16 @@ export default function DesignerListView(props) {
               </Button>
             </div>
             {/* Designer listing */}
-            {console.log(designers) ||
-              designersCurrent.map((designer, index) => (
+            <InfiniteScroll
+              scrollableTarget="listingBase"
+              dataLength={designersCurrentDisplayed.length}
+              next={displayMoreResults}
+              hasMore={true}
+              loader={<></>}
+              scrollableTarget="scrollableDiv"
+            >
+              {/* console.log(designers) || */}
+              {designersCurrentDisplayed.map((designer, index) => (
                 <div key={index} className="designerList">
                   <DesignerCardComponent
                     designer={designer}
@@ -232,6 +245,7 @@ export default function DesignerListView(props) {
                   />
                 </div>
               ))}
+            </InfiniteScroll>
           </div>
 
           <Drawer

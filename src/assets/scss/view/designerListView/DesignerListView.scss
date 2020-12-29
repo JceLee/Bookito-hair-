@@ -17,6 +17,9 @@
     }
 
     .listingBase {
+      height: 99.99%; // required for infinite scrolling
+      overflow: auto; // required for infinite scrolling
+
       @include tabletP{
         width: 100%;
       }
