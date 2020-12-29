@@ -23,6 +23,10 @@
       @include tabletP{
         width: 100%;
       }
+
+      .ant-spin-dot-item {
+        background-color: $black;
+      }
     }
 
     .ant-drawer-content-wrapper {

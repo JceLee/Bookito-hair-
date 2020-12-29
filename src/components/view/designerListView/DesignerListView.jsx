@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Drawer } from "antd";
+import { Button, Drawer, Spin } from "antd";
 import queryString from "query-string";
 import { load_database } from "../../../actions/firebaseAction";
 import { firebaseStore } from "../../../config/fbConfig";
@@ -21,13 +21,17 @@ export default function DesignerListView(props) {
   const history = useHistory();
 
   const defaultInitialDisplayCount = 10;
-  
+
   // User location variables
   const [userLocation, setUserLocation] = useState();
   const [defaultLocation] = useState({ lat: 34.0522, lng: 118.2437 });
 
+  const [loadingDesigners, setLoadingDesigners] = useState(false);
   const [designersCurrent, setDesignersCurrent] = useState([...designers]);
-  const [designersCurrentDisplayed, setDesignersCurrentDisplayed] = useState(designersCurrent.slice(0, defaultInitialDisplayCount));
+  const [designersCurrentDisplayed, setDesignersCurrentDisplayed] = useState(
+    designersCurrent.slice(0, defaultInitialDisplayCount)
+  );
+
   const [mapVisibleMobile, setMapVisibleMobile] = useState(false);
   const [mapVisibleDesktop, setMapVisibleDesktop] = useState(true);
   const [filterTags, setFilterTags] = useState([]);
@@ -80,10 +84,13 @@ export default function DesignerListView(props) {
     history.push(route);
   };
 
-  const updateSortBy = (sortByKey) => {
+  const updateSortBy = async (sortByKey) => {
+    // play faux loading animation and delay
+    await displayLoadingAnimation();
+
     let sortedDesigners = [...designersCurrent];
     setSortBy(sortByKey);
-    
+
     switch (sortByKey) {
       case "distance":
         sortedDesigners.sort((a, b) => {
@@ -127,7 +134,9 @@ export default function DesignerListView(props) {
         break;
     }
     setDesignersCurrent(sortedDesigners);
-    setDesignersCurrentDisplayed(sortedDesigners.slice(0, defaultInitialDisplayCount));
+    setDesignersCurrentDisplayed(
+      sortedDesigners.slice(0, defaultInitialDisplayCount)
+    );
   };
 
   const updateFilter = (checkedTags = filterCheckedTags, date = filterDate) => {
@@ -162,8 +171,21 @@ export default function DesignerListView(props) {
   };
 
   const displayMoreResults = () => {
-    setDesignersCurrentDisplayed(designersCurrent.slice(0, ++designersCurrentDisplayed.length));
-    console.log(designersCurrentDisplayed.length);
+    setDesignersCurrentDisplayed(
+      designersCurrent.slice(0, ++designersCurrentDisplayed.length)
+    );
+  };
+
+  const displayLoadingAnimation = () => {
+    const loadTimeMin = 250;
+    const loadTimeMax = 350;
+    return new Promise(resolve => {
+      setLoadingDesigners(true);
+      setTimeout(() => {
+        setLoadingDesigners(false);
+        resolve();
+      }, Math.random() * (loadTimeMax - loadTimeMin) + loadTimeMin);
+    });
   };
 
   // Desktop map controls
@@ -228,24 +250,26 @@ export default function DesignerListView(props) {
               </Button>
             </div>
             {/* Designer listing */}
-            <InfiniteScroll
-              scrollableTarget="listingBase"
-              dataLength={designersCurrentDisplayed.length}
-              next={displayMoreResults}
-              hasMore={true}
-              loader={<></>}
-              scrollableTarget="scrollableDiv"
-            >
-              {/* console.log(designers) || */}
-              {designersCurrentDisplayed.map((designer, index) => (
-                <div key={index} className="designerList">
-                  <DesignerCardComponent
-                    designer={designer}
-                    handleSearch={handleSearch}
-                  />
-                </div>
-              ))}
-            </InfiniteScroll>
+            <Spin spinning={loadingDesigners} size="large" >
+              <InfiniteScroll
+                scrollableTarget="listingBase"
+                dataLength={designersCurrentDisplayed.length}
+                next={displayMoreResults}
+                hasMore={true}
+                loader={<></>}
+                scrollableTarget="scrollableDiv"
+              >
+                {/* console.log(designers) || */}
+                {designersCurrentDisplayed.map((designer, index) => (
+                  <div key={index} className="designerList">
+                    <DesignerCardComponent
+                      designer={designer}
+                      handleSearch={handleSearch}
+                    />
+                  </div>
+                ))}
+              </InfiniteScroll>
+            </Spin>
           </div>
 
           <Drawer
