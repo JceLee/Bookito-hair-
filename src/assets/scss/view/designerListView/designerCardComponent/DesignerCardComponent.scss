@@ -2,6 +2,11 @@
 .designerCardComponent {
     padding: 10px 5%;
     padding-top: 0px;
+
+    @include desktop {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
 // DesignerCardTop.jsx
@@ -85,6 +90,10 @@
         .workImage {
             width: 37vw;
             height: 37vw;
+            @include tabletP {
+                width: 200px;
+                height: 200px;
+            }
         }
     }
 }

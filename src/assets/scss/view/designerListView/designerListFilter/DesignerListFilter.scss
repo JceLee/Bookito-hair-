@@ -6,6 +6,16 @@
     .designerListFilterInner {
         padding: 10px 5%;
 
+        @include tabletP {
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+
+        @include desktop {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
         .filterBtn {
             border-radius: 20px;
             margin-top: 4px;

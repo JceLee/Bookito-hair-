@@ -47,8 +47,9 @@
         background: $white;
         z-index: 1;
       
-        @include tabletP{
-          top: 0;
+        @include desktop{
+          top: 65.5px;
+          width: 1130px;
         }
       }
       .designerListOpenMapMobile {
