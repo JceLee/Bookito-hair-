@@ -20,7 +20,7 @@ export default function DesignerListView(props) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const defaultInitialDisplayCount = 10;
+  const defaultInitialDisplayCount = 3;
   const defaultBookitoWidth = ""
 
   let lastScrollTop = 0;

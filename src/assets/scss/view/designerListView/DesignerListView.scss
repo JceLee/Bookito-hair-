@@ -1,9 +1,12 @@
 @import "../../Mixin.scss";
 
 .listingContainer {
-  height: 90vh;
+  height: calc(100vh - 55px);
   width: 100%;
-  // overflow-y: scroll;
+
+  @include desktop{
+    height: calc(100vh - 65px);
+  }
 
   .designerContainer {
     height: 100%;
@@ -17,7 +20,7 @@
     }
 
     .listingBase {
-      height: 99.5%; // required for infinite scrolling
+      height: 100%;   // required for infinite scrolling
       overflow: auto; // required for infinite scrolling
       padding-top: 95px;
 
@@ -49,7 +52,7 @@
       
         @include desktop {
           top: 65px;
-          width: 1130px;
+          width: 55%;
         }
       }
       .designerListOpenMapMobile {
@@ -74,20 +77,23 @@
 
   .designerContainerMapVisible {
     @include desktop {
-      width: 50%;
+      // width: 50%;
       // float: left;
     }
   }
   .mapBase {
-    position: absolute;
-    left: 60vw;
+    position: fixed;
+    right: 0vw;
+    height: calc(100vh - 55px);
     
     .mapContainer {
       width: 100%;
       @include tabletP{
+        height: calc(100vh - 65px);
         position: sticky;
         top: 0;
-        width: 39.1vw; // 40VW - 0.9vw to accomodate for scrollbar
+        width: 40vw;
+        // width: 39.1vw; // 40VW - 0.9vw to accomodate for scrollbar
       }
     }
   }
