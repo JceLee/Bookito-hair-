@@ -20,16 +20,23 @@
     }
 
     .listingBase {
-      height: 100%;   // required for infinite scrolling
-      overflow: auto; // required for infinite scrolling
+      height: 99%;        // required for infinite scrolling
+      overflow-y: auto; // required for infinite scrolling
       padding-top: 95px;
 
       @include tabletP{
         width: 100%;
       }
 
+      // Spinner
       .ant-spin-dot-item {
         background-color: $black;
+      }
+
+      .desktopMapOpenWidthListing {
+        @include desktop {
+          width: 40.5vw;
+        }
       }
     }
 
@@ -39,24 +46,31 @@
 
     .listNavBar {
       width: 100%;
-      // border: 1px blue solid;
+
+      .desktopMapOpenWidthFilter {
+        @include desktop {
+          width: 40.5vw !important;
+        }
+      }
 
       .filter {
         position: fixed;
         top: 55px;
         height: 95px;
         width: 100%;
-        transition: 1s;
         background: $white;
         z-index: 1;
+        transition: 1s;
       
         @include desktop {
           top: 65px;
-          width: 55%;
+          width: 1130px;
+          transition: 0s;
         }
       }
+
       .designerListOpenMapMobile {
-        // position: absolute;
+        position: absolute;
         left: 50%;
         -webkit-transform: translateX(-50%);
         transform: translateX(-50%);
@@ -83,7 +97,7 @@
   }
   .mapBase {
     position: fixed;
-    right: 0vw;
+    right: 2%;
     height: calc(100vh - 55px);
     
     .mapContainer {
@@ -92,7 +106,7 @@
         height: calc(100vh - 65px);
         position: sticky;
         top: 0;
-        width: 40vw;
+        width: 55vw;
         // width: 39.1vw; // 40VW - 0.9vw to accomodate for scrollbar
       }
     }

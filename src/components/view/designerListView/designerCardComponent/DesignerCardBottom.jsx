@@ -4,8 +4,17 @@ import placeholder from "../../../../assets/images/placeholder.png";
 
 export default function DesignerCardBottom(props) {
   const { works } = props;
+
+  const calculateSlidesCount = () => {
+    if (window.innerWidth < 768 || (1200 <= window.innerWidth && window.innerWidth < 1920)) {
+      return 2;
+    } else {
+      return 4;
+    }
+  };
+
   const settings = {
-    slidesToShow: window.innerWidth > 500 ? 4 : 2,
+    slidesToShow: calculateSlidesCount(),
     slidesToScroll: 1,
     arrows: false,
   };

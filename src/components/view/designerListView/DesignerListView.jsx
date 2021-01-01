@@ -20,7 +20,7 @@ export default function DesignerListView(props) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const defaultInitialDisplayCount = 3;
+  const defaultInitialDisplayCount = 4;
   const defaultBookitoWidth = ""
 
   let lastScrollTop = 0;
@@ -82,15 +82,13 @@ export default function DesignerListView(props) {
       }
     });
 
-    if (window.innerWidth >= 1200) { // Laptop/TabletL
+    if (window.innerWidth >= 1200) { // Screen size greater than or equal to desktop
       document.getElementsByTagName("body")[0].style.width = "96%"
-      document.getElementsByTagName("body")[0].style.background = "red"
     }
     document.getElementById('scrollableDiv').addEventListener('scroll', handleFilterDisplayOnScroll, { passive: true });
     return () => {
       if (window.innerWidth >= 1200) {
         document.getElementsByTagName("body")[0].style.width = "1130px"
-        document.getElementsByTagName("body")[0].style.background = "white"
       }
       document.getElementById('scrollableDiv').removeEventListener('scroll', handleFilterDisplayOnScroll)
     }
@@ -194,9 +192,10 @@ export default function DesignerListView(props) {
   };
 
   const handleFilterDisplayOnScroll = () => {
-    let scrollTop = window.pageYOffset || document.getElementById('scrollableDiv').scrollTop;
-    setHideFilterBar(scrollTop > lastScrollTop);
-    lastScrollTop = scrollTop;
+    if (window.innerWidth < 1200) { // Screen size less than desktop
+      let scrollTop = window.pageYOffset || document.getElementById('scrollableDiv').scrollTop;
+      setHideFilterBar(scrollTop > lastScrollTop);
+      lastScrollTop = scrollTop;    }
   };
 
   const displayLoadingAnimation = () => {
@@ -215,12 +214,10 @@ export default function DesignerListView(props) {
   const openMapDesktop = () => {
     setMapVisibleDesktop(true);
     document.getElementsByTagName("body")[0].style.width = "96%"
-    document.getElementsByTagName("body")[0].style.background = "red"
   };
   const closeMapDesktop = () => {
     setMapVisibleDesktop(false);
     document.getElementsByTagName("body")[0].style.width = "1130px"
-    document.getElementsByTagName("body")[0].style.background = "white"
   };
 
   // Mobile map controls
@@ -244,7 +241,7 @@ export default function DesignerListView(props) {
         <div className="listingBase" id="scrollableDiv">
           {/* Controls above the designer listing */}
           <div className="listNavBar">
-            <div className="filter" style={hideFilterBar ? { top: -40 } : {}}>
+            <div className={mapVisibleDesktop ? "filter desktopMapOpenWidthFilter" : "filter"} style={hideFilterBar ? { top: -40 } : {}}>
               <DesignerListFilter
                 filterTags={filterTags}
                 updateFilter={updateFilter}
@@ -279,6 +276,7 @@ export default function DesignerListView(props) {
           {/* Designer listing */}
           <Spin spinning={loadingDesigners} size="large" >
             <InfiniteScroll
+              className={mapVisibleDesktop ? "desktopMapOpenWidthListing" : ""}
               scrollableTarget="listingBase"
               dataLength={designersCurrentDisplayed.length}
               next={displayMoreResults}
