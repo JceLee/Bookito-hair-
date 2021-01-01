@@ -20,8 +20,9 @@ export default function DesignerListView(props) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const defaultInitialDisplayCount = 4;
-  const defaultBookitoWidth = ""
+  const defaultInitialDisplayCount = 10;
+  const defaultBookitoWidth = "1130px";
+  const defaultDesignerListingWidth = "96%";
 
   let lastScrollTop = 0;
   const [hideFilterBar, setHideFilterBar] = useState(false);
@@ -82,13 +83,13 @@ export default function DesignerListView(props) {
       }
     });
 
-    if (window.innerWidth >= 1200) { // Screen size greater than or equal to desktop
-      document.getElementsByTagName("body")[0].style.width = "96%"
+    if (window.innerWidth >= 1200) { // Mixin.scss desktop
+      document.getElementsByTagName("body")[0].style.width = defaultDesignerListingWidth;
     }
     document.getElementById('scrollableDiv').addEventListener('scroll', handleFilterDisplayOnScroll, { passive: true });
     return () => {
-      if (window.innerWidth >= 1200) {
-        document.getElementsByTagName("body")[0].style.width = "1130px"
+      if (window.innerWidth >= 1200) { // Mixin.scss desktop
+        document.getElementsByTagName("body")[0].style.width = defaultBookitoWidth;
       }
       document.getElementById('scrollableDiv').removeEventListener('scroll', handleFilterDisplayOnScroll)
     }
@@ -213,11 +214,11 @@ export default function DesignerListView(props) {
   // Desktop map controls
   const openMapDesktop = () => {
     setMapVisibleDesktop(true);
-    document.getElementsByTagName("body")[0].style.width = "96%"
+    document.getElementsByTagName("body")[0].style.width = defaultDesignerListingWidth;
   };
   const closeMapDesktop = () => {
     setMapVisibleDesktop(false);
-    document.getElementsByTagName("body")[0].style.width = "1130px"
+    document.getElementsByTagName("body")[0].style.width = defaultBookitoWidth;
   };
 
   // Mobile map controls
@@ -265,16 +266,16 @@ export default function DesignerListView(props) {
             </Button>
           </div>
           {/* Designer listing */}
-          <Spin spinning={loadingDesigners} size="large" >
-            <InfiniteScroll
-              className={mapVisibleDesktop ? "desktopMapOpenWidthListing" : ""}
-              scrollableTarget="listingBase"
-              dataLength={designersCurrentDisplayed.length}
-              next={displayMoreResults}
-              hasMore={true}
-              loader={<></>}
-              scrollableTarget="scrollableDiv"
-            >
+          <InfiniteScroll
+            className={mapVisibleDesktop ? "desktopMapOpenWidthListing" : ""}
+            scrollableTarget="listingBase"
+            dataLength={designersCurrentDisplayed.length}
+            next={displayMoreResults}
+            hasMore={true}
+            loader={<></>}
+            scrollableTarget="scrollableDiv"
+          >
+            <Spin spinning={loadingDesigners} size="large">
               {/* console.log(designers) || */}
               {designersCurrentDisplayed.map((designer, index) => (
                 <div key={index} className="designerList">
@@ -285,8 +286,8 @@ export default function DesignerListView(props) {
                   />
                 </div>
               ))}
-            </InfiniteScroll>
-          </Spin>
+            </Spin>
+          </InfiniteScroll>
         </div>
 
         <Drawer
