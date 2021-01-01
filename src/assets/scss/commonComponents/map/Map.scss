@@ -12,8 +12,8 @@
 }
 
 .mapComponent {
-    height: 100%;
-    width: 100%;
+    height: 100vh; // NECESSARY TO DISPLAY MAP
+    width: 100%;   // NECESSARY TO DISPLAY MAP
     z-index: 10;
 }
 
