@@ -20,12 +20,18 @@
     }
 
     .listingBase {
-      height: 99%;        // required for infinite scrolling
+      height: 99%;      // required for infinite scrolling
       overflow-y: auto; // required for infinite scrolling
       padding-top: 95px;
 
-      @include tabletP{
+      @include tabletP {
         width: 100%;
+      }
+
+      @include desktop {
+        height: calc(99% - 95px);
+        padding-top: 8px;
+        margin-top: 95px;
       }
 
       // Spinner

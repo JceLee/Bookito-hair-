@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useLayoutEffect, useState } from 'react';
 import Slider from "react-slick";
 import placeholder from "../../../../assets/images/placeholder.png";
 
 export default function DesignerCardBottom(props) {
   const { works, mapVisibleDesktop } = props;
+  const [size, setSize] = useState([0, 0]);
+
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize([window.innerWidth, window.innerHeight]);
+    }
+    window.addEventListener('resize', updateSize);
+    updateSize();
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
 
   const calculateSlidesCount = () => {
     if (window.innerWidth < 768 || (mapVisibleDesktop && 1200 <= window.innerWidth && window.innerWidth < 1920)) {

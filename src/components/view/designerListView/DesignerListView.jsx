@@ -248,18 +248,9 @@ export default function DesignerListView(props) {
                 numberOfDesigners={Object.keys(designersCurrent).length}
                 location="Vancouver"
                 updateSortBy={updateSortBy}
+                openMapDesktop={mapVisibleDesktop ? null : openMapDesktop}
               />
             </div>
-            {/* Desktop map toggle button - used to show map if closed by the user */}
-            <Button
-              className="desktopOnly"
-              onClick={openMapDesktop}
-              hidden={mapVisibleDesktop}
-            >
-              <span role="img" aria-label="map">
-                🗺️ Show map
-              </span>
-            </Button>
             {/* Mobile map toggle button - used to open map drawer */}
             <Button
               className="mobileOnly designerListOpenMapMobile"

@@ -19,6 +19,7 @@ export default function DesignerListFilter(props) {
     numberOfDesigners,
     location,
     updateSortBy,
+    openMapDesktop
   } = props;
   const { Panel } = Collapse;
 
@@ -143,6 +144,15 @@ export default function DesignerListFilter(props) {
             <DownOutlined />
           </Button>
         </Dropdown>
+
+        {openMapDesktop && <Button
+          className="mapBtn filterBtn"
+          onClick={openMapDesktop}
+        >
+          <span role="img" aria-label="map">
+            🗺️ Show map
+          </span>
+        </Button>}
 
         <Button className="searchBtn filterBtn" onClick={showModal}>
           <span>
