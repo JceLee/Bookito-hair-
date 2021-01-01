@@ -17,7 +17,7 @@
     }
 
     .listingBase {
-      height: 99.99%; // required for infinite scrolling
+      height: 100%; // required for infinite scrolling
       overflow: auto; // required for infinite scrolling
       padding-top: 95px;
 
@@ -74,8 +74,8 @@
 
   .designerContainerMapVisible {
     @include tabletP{
-      width: 60vw;
-      float: left;
+      width: 50%;
+      // float: left;
     }
   }
   .mapBase {
@@ -100,14 +100,14 @@
 
   .desktopOnly {
     display: none;
-    @include tabletP{
+    @include tabletL{
       display: block;
     }
   }
 
   .mobileOnly {
     display: block;
-    @include tabletP{
+    @include tabletL{
       display: none;
     }
   }

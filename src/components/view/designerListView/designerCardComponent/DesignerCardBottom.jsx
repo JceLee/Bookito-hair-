@@ -5,7 +5,7 @@ import placeholder from "../../../../assets/images/placeholder.png";
 export default function DesignerCardBottom(props) {
   const { works } = props;
   const settings = {
-    slidesToShow: 4,
+    slidesToShow: window.innerWidth > 500 ? 4 : 2,
     slidesToScroll: 1,
     arrows: false,
   };

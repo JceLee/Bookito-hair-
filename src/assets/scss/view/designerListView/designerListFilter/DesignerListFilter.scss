@@ -5,6 +5,7 @@
 .designerListFilter {
     .designerListFilterInner {
         padding: 10px 5%;
+        background: $white;
 
         @include tabletP {
             padding-left: 5%;
@@ -48,6 +49,7 @@
             padding: 0;
         }
         .ant-collapse-content-box {
+            // background: $white;
             padding: 0 !important;
         }
         .designerListFilterConfirm {
