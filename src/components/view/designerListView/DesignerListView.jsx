@@ -21,6 +21,7 @@ export default function DesignerListView(props) {
   const history = useHistory();
 
   const defaultInitialDisplayCount = 10;
+  const defaultBookitoWidth = ""
 
   let lastScrollTop = 0;
   const [hideFilterBar, setHideFilterBar] = useState(false);
@@ -80,9 +81,17 @@ export default function DesignerListView(props) {
         console.log("Unable to get location!");
       }
     });
-    
+
+    if (window.innerWidth >= 1200) { // Laptop/TabletL
+      document.getElementsByTagName("body")[0].style.width = "96%"
+      document.getElementsByTagName("body")[0].style.background = "red"
+    }
     document.getElementById('scrollableDiv').addEventListener('scroll', handleFilterDisplayOnScroll, { passive: true });
     return () => {
+      if (window.innerWidth >= 1200) {
+        document.getElementsByTagName("body")[0].style.width = "1130px"
+        document.getElementsByTagName("body")[0].style.background = "white"
+      }
       document.getElementById('scrollableDiv').removeEventListener('scroll', handleFilterDisplayOnScroll)
     }
   }, [dispatch, props.location.search]);
@@ -205,9 +214,13 @@ export default function DesignerListView(props) {
   // Desktop map controls
   const openMapDesktop = () => {
     setMapVisibleDesktop(true);
+    document.getElementsByTagName("body")[0].style.width = "96%"
+    document.getElementsByTagName("body")[0].style.background = "red"
   };
   const closeMapDesktop = () => {
     setMapVisibleDesktop(false);
+    document.getElementsByTagName("body")[0].style.width = "1130px"
+    document.getElementsByTagName("body")[0].style.background = "white"
   };
 
   // Mobile map controls

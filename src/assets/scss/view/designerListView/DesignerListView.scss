@@ -3,7 +3,7 @@
 .listingContainer {
   height: 90vh;
   width: 100%;
-  overflow-y: scroll;
+  // overflow-y: scroll;
 
   .designerContainer {
     height: 100%;
@@ -17,7 +17,7 @@
     }
 
     .listingBase {
-      height: 100%; // required for infinite scrolling
+      height: 99.5%; // required for infinite scrolling
       overflow: auto; // required for infinite scrolling
       padding-top: 95px;
 
@@ -47,8 +47,8 @@
         background: $white;
         z-index: 1;
       
-        @include desktop{
-          top: 65.5px;
+        @include desktop {
+          top: 65px;
           width: 1130px;
         }
       }
@@ -73,7 +73,7 @@
   }
 
   .designerContainerMapVisible {
-    @include tabletP{
+    @include desktop {
       width: 50%;
       // float: left;
     }
@@ -100,14 +100,14 @@
 
   .desktopOnly {
     display: none;
-    @include tabletL{
+    @include desktop {
       display: block;
     }
   }
 
   .mobileOnly {
     display: block;
-    @include tabletL{
+    @include desktop {
       display: none;
     }
   }
