@@ -3,10 +3,10 @@ import Slider from "react-slick";
 import placeholder from "../../../../assets/images/placeholder.png";
 
 export default function DesignerCardBottom(props) {
-  const { works } = props;
+  const { works, mapVisibleDesktop } = props;
 
   const calculateSlidesCount = () => {
-    if (window.innerWidth < 768 || (1200 <= window.innerWidth && window.innerWidth < 1920)) {
+    if (window.innerWidth < 768 || (mapVisibleDesktop && 1200 <= window.innerWidth && window.innerWidth < 1920)) {
       return 2;
     } else {
       return 4;
@@ -25,7 +25,7 @@ export default function DesignerCardBottom(props) {
         {works &&
           works.map((work, index) => (
             <div key={index} className="workImageDiv">
-              <img className="workImage"
+              <img className={mapVisibleDesktop ? "workImage workImageMapVisibleDesktop" : "workImage"}
                 src={work.url}
                 alt={`reviewImgDiv${index}`}
                 width="100%"

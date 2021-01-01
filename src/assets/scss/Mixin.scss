@@ -56,8 +56,14 @@ $lightGrey: #c6c6c6;
   }
 }
 
-@mixin desktopL {
+@mixin desktopL { //+1920p
   @media only screen and (min-width: 1920px) {
+    @content;
+  }
+}
+
+@mixin desktopXL { //+4k
+  @media only screen and (min-width: 2560px) {
     @content;
   }
 }

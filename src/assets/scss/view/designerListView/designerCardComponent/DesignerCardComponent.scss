@@ -68,8 +68,8 @@
                 margin-right: 6px;
                 margin-bottom: 4px;
                 border-radius: 20px;
-                border-color: lightgray;
-                // background-color: #332C1E;
+                border-color: $lightGrey;
+                background-color: $white;
             }
         }
     }
@@ -99,6 +99,22 @@
                 height: 200px;
             }
 
+            @include desktop {
+                width: 17vw;
+                height: 17vw;
+            }
+
+            @include desktopL {
+                width: 13vw;
+                height: 13vw;
+            }
+
+            @include desktopXL {
+                width: 10vw;
+                height: 10vw;
+            }
+        }
+        .workImageMapVisibleDesktop {
             @include desktop {
                 width: 18.5vw;
                 height: 18.5vw;

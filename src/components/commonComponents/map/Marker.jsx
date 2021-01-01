@@ -67,7 +67,7 @@ export default function Marker(props) {
                             <div className="markerDescriptionLower">
                                 {designer.services && Object.keys(designer.services).map((serviceKey, index) => (
                                     designer.services[serviceKey] !== [] && 
-                                    <Tag key={`serviceTag${index}`} className="serviceTag" color="#332C1E">{serviceKey}</Tag>
+                                    <Tag key={`serviceTag${index}`} className="serviceTag">{serviceKey}</Tag>
                                 ))}
                             </div>
                         </div>

@@ -290,6 +290,7 @@ export default function DesignerListView(props) {
                   <DesignerCardComponent
                     designer={designer}
                     handleSearch={handleSearch}
+                    mapVisibleDesktop={mapVisibleDesktop}
                   />
                 </div>
               ))}
