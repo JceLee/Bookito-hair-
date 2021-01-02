@@ -51,8 +51,8 @@ export default function Marker(props) {
                     <div className="markerContent">
                         <Link to={`/designer_profile?uid=${designer.uid}`}>
                             <Slider {...carouselSettings} className="markerCarousel">
-                                {designer.works && designer.works.length ? designer.works.map((imgSrc, index) => (
-                                    <div key={`galleryImg${index}`}><img src={imgSrc} alt={`Gallery img${index}`} /></div>
+                                {designer.works && designer.works.length ? designer.works.map((work, index) => (
+                                    <div key={`galleryImg${index}`}><img src={work.url} alt={`Gallery img${index}`} /></div>
                                 ))
                                 : <div><img src={placeholder} alt={`Gallery placeholder`} /></div>}
                             </Slider>
@@ -67,7 +67,7 @@ export default function Marker(props) {
                             <div className="markerDescriptionLower">
                                 {designer.services && Object.keys(designer.services).map((serviceKey, index) => (
                                     designer.services[serviceKey] !== [] && 
-                                    <Tag key={`serviceTag${index}`} className="serviceTag" color="#332C1E">{serviceKey}</Tag>
+                                    <Tag key={`serviceTag${index}`} className="serviceTag">{serviceKey}</Tag>
                                 ))}
                             </div>
                         </div>

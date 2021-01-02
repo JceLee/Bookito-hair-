@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { Divider } from "antd";
 
 export default function DesignerCardComponent(props) {
-  const { designer, handleSearch } = props;
+  const { designer, handleSearch, mapVisibleDesktop } = props;
 
   return (
     <div
@@ -21,7 +21,10 @@ export default function DesignerCardComponent(props) {
         profile={designer.photoURL}
       />
       {designer.works?.length > 0 && (
-        <DesignerCardBottom works={designer.works} />
+        <DesignerCardBottom
+          works={designer.works}
+          mapVisibleDesktop={mapVisibleDesktop}
+        />
       )}
       <Divider className="designerCardComponentDivider" />
     </div>

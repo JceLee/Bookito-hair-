@@ -3,7 +3,6 @@ import React from "react";
 export default function ServiceNPrice(props) {
   const { id, serviceNPrices } = props;
   const serviceList = [];
-  console.log("babo");
   Object.keys(serviceNPrices).forEach(function (item) {
     serviceList.push(serviceNPrices[item]);
   });

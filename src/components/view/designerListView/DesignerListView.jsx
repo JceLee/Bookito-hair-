@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Drawer } from "antd";
+import { Button, Drawer, Spin } from "antd";
 import queryString from "query-string";
 import { load_database } from "../../../actions/firebaseAction";
 import { firebaseStore } from "../../../config/fbConfig";
@@ -13,23 +13,35 @@ import { designerTags } from "../../../constants/designerTags";
 import { designerTypes } from "../../../constants/designerTypes";
 import { geocode } from "../../../helpers/geocode";
 import { getDistanceFromLatLonInKm } from "../../../helpers/geocode";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function DesignerListView(props) {
   const designers = useSelector((state) => state.firestore.designers);
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const defaultInitialDisplayCount = 4;
+  const defaultBookitoWidth = ""
+
+  let lastScrollTop = 0;
+  const [hideFilterBar, setHideFilterBar] = useState(false);
+
+  // User location variables
+  const [userLocation, setUserLocation] = useState();
+  const [defaultLocation] = useState({ lat: 34.0522, lng: 118.2437 });
+
+  const [loadingDesigners, setLoadingDesigners] = useState(false);
   const [designersCurrent, setDesignersCurrent] = useState([...designers]);
+  const [designersCurrentDisplayed, setDesignersCurrentDisplayed] = useState(
+    designersCurrent.slice(0, defaultInitialDisplayCount)
+  );
+
   const [mapVisibleMobile, setMapVisibleMobile] = useState(false);
   const [mapVisibleDesktop, setMapVisibleDesktop] = useState(true);
   const [filterTags, setFilterTags] = useState([]);
   const [filterCheckedTags, setFilterCheckedTags] = useState([]);
   const [filterDate, setFilterDate] = useState(null);
   const [sortBy, setSortBy] = useState("");
-
-  // User location variables
-  const [userLocation, setUserLocation] = useState();
-  const [defaultLocation] = useState({ lat: 34.0522, lng: 118.2437 });
 
   useEffect(() => {
     const params = queryString.parse(props.location.search);
@@ -69,6 +81,17 @@ export default function DesignerListView(props) {
         console.log("Unable to get location!");
       }
     });
+
+    if (window.innerWidth >= 1200) { // Screen size greater than or equal to desktop
+      document.getElementsByTagName("body")[0].style.width = "96%"
+    }
+    document.getElementById('scrollableDiv').addEventListener('scroll', handleFilterDisplayOnScroll, { passive: true });
+    return () => {
+      if (window.innerWidth >= 1200) {
+        document.getElementsByTagName("body")[0].style.width = "1130px"
+      }
+      document.getElementById('scrollableDiv').removeEventListener('scroll', handleFilterDisplayOnScroll)
+    }
   }, [dispatch, props.location.search]);
 
   const handleSearch = (designer) => {
@@ -76,58 +99,59 @@ export default function DesignerListView(props) {
     history.push(route);
   };
 
-  const updateSortBy = (sortByKey) => {
+  const updateSortBy = async (sortByKey) => {
+    // play faux loading animation and delay
+    await displayLoadingAnimation();
+
+    let sortedDesigners = [...designersCurrent];
     setSortBy(sortByKey);
+
     switch (sortByKey) {
       case "distance":
-        setDesignersCurrent(
-          [...designersCurrent].sort((a, b) => {
-            if (a.distance && b.distance) {
-              return a.distance - b.distance;
-            } else if (a.distance) {
-              return -1;
-            } else {
-              return 1;
-            }
-          })
-        );
+        sortedDesigners.sort((a, b) => {
+          if (a.distance && b.distance) {
+            return a.distance - b.distance;
+          } else if (a.distance) {
+            return -1;
+          } else {
+            return 1;
+          }
+        });
         break;
       case "reviewScore":
-        setDesignersCurrent(
-          [...designersCurrent].sort((a, b) => {
-            if (a.rate.average && b.rate.average) {
-              return b.rate.average - a.rate.average;
-            } else if (b.rate.average) {
-              return -1;
-            } else {
-              return 1;
-            }
-          })
-        );
+        sortedDesigners.sort((a, b) => {
+          if (a.rate.average && b.rate.average) {
+            return b.rate.average - a.rate.average;
+          } else if (b.rate.average) {
+            return -1;
+          } else {
+            return 1;
+          }
+        });
         break;
       case "reviewCount":
-        setDesignersCurrent(
-          [...designersCurrent].sort((a, b) => {
-            if (a.rate.count && b.rate.count) {
-              return b.rate.count - a.rate.count;
-            } else if (b.rate.count) {
-              return -1;
-            } else {
-              return 1;
-            }
-          })
-        );
+        sortedDesigners.sort((a, b) => {
+          if (a.rate.count && b.rate.count) {
+            return b.rate.count - a.rate.count;
+          } else if (b.rate.count) {
+            return -1;
+          } else {
+            return 1;
+          }
+        });
         break;
       case "new":
-        setDesignersCurrent(
-          [...designersCurrent].sort((a, b) => {
-            return a.createdOn - b.createdOn;
-          })
-        );
+        sortedDesigners.sort((a, b) => {
+          return a.createdOn - b.createdOn;
+        });
         break;
       default:
         break;
     }
+    setDesignersCurrent(sortedDesigners);
+    setDesignersCurrentDisplayed(
+      sortedDesigners.slice(0, defaultInitialDisplayCount)
+    );
   };
 
   const updateFilter = (checkedTags = filterCheckedTags, date = filterDate) => {
@@ -161,12 +185,39 @@ export default function DesignerListView(props) {
     updateSortBy(sortBy);
   };
 
+  const displayMoreResults = () => {
+    setDesignersCurrentDisplayed(
+      designersCurrent.slice(0, ++designersCurrentDisplayed.length)
+    );
+  };
+
+  const handleFilterDisplayOnScroll = () => {
+    if (window.innerWidth < 1200) { // Screen size less than desktop
+      let scrollTop = window.pageYOffset || document.getElementById('scrollableDiv').scrollTop;
+      setHideFilterBar(scrollTop > lastScrollTop);
+      lastScrollTop = scrollTop;    }
+  };
+
+  const displayLoadingAnimation = () => {
+    const loadTimeMin = 250;
+    const loadTimeMax = 350;
+    return new Promise(resolve => {
+      setLoadingDesigners(true);
+      setTimeout(() => {
+        setLoadingDesigners(false);
+        resolve();
+      }, Math.random() * (loadTimeMax - loadTimeMin) + loadTimeMin);
+    });
+  };
+
   // Desktop map controls
   const openMapDesktop = () => {
     setMapVisibleDesktop(true);
+    document.getElementsByTagName("body")[0].style.width = "96%"
   };
   const closeMapDesktop = () => {
     setMapVisibleDesktop(false);
+    document.getElementsByTagName("body")[0].style.width = "1130px"
   };
 
   // Mobile map controls
@@ -178,112 +229,115 @@ export default function DesignerListView(props) {
   };
 
   return (
-    <>
-      <div className="listingContainer">
-        {/* Designer listing shrinks using the class "designerContainerMapVisible" when map is open on desktop */}
-        <div
-          className={
-            mapVisibleDesktop
-              ? "designerContainerMapVisible designerContainer"
-              : "designerContainer"
-          }
-        >
-          <div className="listingBase">
-            {/* Controls above the designer listing */}
-            <div className="listNavBar">
-              <div className="filter">
-                <DesignerListFilter
-                  filterTags={filterTags}
-                  updateFilter={updateFilter}
-                  numberOfDesigners={Object.keys(designersCurrent).length}
-                  location="Vancouver"
-                  updateSortBy={updateSortBy}
-                />
-              </div>
-              {/* Desktop map toggle button - used to show map if closed by the user */}
-              <Button
-                className="desktopOnly"
-                onClick={openMapDesktop}
-                hidden={mapVisibleDesktop}
-              >
-                <span role="img" aria-label="map">
-                  🗺️ Show map
-                </span>
-              </Button>
-              {/* Mobile map toggle button - used to open map drawer */}
-              <Button
-                className="mobileOnly designerListOpenMapMobile"
-                onClick={openMapMobile}
-              >
-                {" "}
-                {/*shape="circle"*/}
-                <span role="img" aria-label="map">
-                  🗺️ Map
-                </span>
-              </Button>
+    <div className="listingContainer">
+      {/* Designer listing shrinks using the class "designerContainerMapVisible" when map is open on desktop */}
+      <div
+        className={
+          mapVisibleDesktop
+            ? "designerContainerMapVisible designerContainer"
+            : "designerContainer"
+        }
+      >
+        <div className="listingBase" id="scrollableDiv">
+          {/* Controls above the designer listing */}
+          <div className="listNavBar">
+            <div className={mapVisibleDesktop ? "filter desktopMapOpenWidthFilter" : "filter"} style={hideFilterBar ? { top: -40 } : {}}>
+              <DesignerListFilter
+                filterTags={filterTags}
+                updateFilter={updateFilter}
+                numberOfDesigners={Object.keys(designersCurrent).length}
+                location="Vancouver"
+                updateSortBy={updateSortBy}
+                openMapDesktop={mapVisibleDesktop ? null : openMapDesktop}
+              />
             </div>
-            {/* Designer listing */}
-            {console.log(designers) ||
-              designersCurrent.map((designer, index) => (
+            {/* Mobile map toggle button - used to open map drawer */}
+            <Button
+              className="mobileOnly designerListOpenMapMobile"
+              onClick={openMapMobile}
+              style={hideFilterBar ? { bottom: -40, visible: "hidden" } : {}}
+            >
+              {" "}
+              {/*shape="circle"*/}
+              <span role="img" aria-label="map">
+                🗺️ Map
+              </span>
+            </Button>
+          </div>
+          {/* Designer listing */}
+          <Spin spinning={loadingDesigners} size="large" >
+            <InfiniteScroll
+              className={mapVisibleDesktop ? "desktopMapOpenWidthListing" : ""}
+              scrollableTarget="listingBase"
+              dataLength={designersCurrentDisplayed.length}
+              next={displayMoreResults}
+              hasMore={true}
+              loader={<></>}
+              scrollableTarget="scrollableDiv"
+            >
+              {/* console.log(designers) || */}
+              {designersCurrentDisplayed.map((designer, index) => (
                 <div key={index} className="designerList">
                   <DesignerCardComponent
                     designer={designer}
                     handleSearch={handleSearch}
+                    mapVisibleDesktop={mapVisibleDesktop}
                   />
                 </div>
               ))}
-          </div>
-
-          <Drawer
-            className="mobileOnly"
-            // placement="bottom"
-            closable={false}
-            onClose={closeMapMobile}
-            visible={mapVisibleMobile}
-            getContainer={false}
-          >
-            {/* Map close button (top left of the map) */}
-            <Button
-              className="mapCloseButton mobileOnly"
-              type="primary"
-              shape="circle"
-              onClick={closeMapMobile}
-            >
-              <CloseOutlined />
-            </Button>
-            {/* Map inside drawer */}
-            <div className="mapContainer">
-              <Map
-                isDesktop={false}
-                userLocation={userLocation}
-                designers={Object.values(designersCurrent)}
-              />
-            </div>
-          </Drawer>
+            </InfiniteScroll>
+          </Spin>
         </div>
 
-        {mapVisibleDesktop && (
-          <div className="mapBase desktopOnly">
-            {/* Map close button (top left of the map) */}
-            <Button
-              className="mapCloseButton desktopOnly"
-              type="primary"
-              shape="circle"
-              onClick={closeMapDesktop}
-            >
-              <CloseOutlined />
-            </Button>
-            {/* Map on the right of designer list view */}
-            <div className="mapContainer">
-              <Map
-                isDesktop={true}
-                userLocation={userLocation}
-                designers={Object.values(designersCurrent)}
-              />
-            </div>
+        <Drawer
+          className="mobileOnly"
+          // placement="bottom"
+          closable={false}
+          onClose={closeMapMobile}
+          visible={mapVisibleMobile}
+          getContainer={false}
+        >
+          {/* Map close button (top left of the map) */}
+          <Button
+            className="mapCloseButton mobileOnly"
+            type="primary"
+            shape="circle"
+            onClick={closeMapMobile}
+          >
+            <CloseOutlined />
+          </Button>
+          {/* Map inside drawer */}
+          <div className="mapContainer">
+            <Map
+              isDesktop={false}
+              userLocation={userLocation}
+              designers={Object.values(designersCurrent)}
+            />
           </div>
-        )}
+        </Drawer>
       </div>
-    </>
+
+      {mapVisibleDesktop && (
+        <div className="mapBase desktopOnly">
+          {/* Map close button (top left of the map) */}
+          <Button
+            className="mapCloseButton desktopOnly"
+            type="primary"
+            shape="circle"
+            onClick={closeMapDesktop}
+          >
+            <CloseOutlined />
+          </Button>
+          {/* Map on the right of designer list view */}
+          <div className="mapContainer">
+            <Map
+              isDesktop={true}
+              userLocation={userLocation}
+              designers={Object.values(designersCurrent)}
+            />
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

@@ -12,12 +12,9 @@
 }
 
 .mapComponent {
-    height: 100vh;
-    width: 100%;
+    height: 100vh; // NECESSARY TO DISPLAY MAP
+    width: 100%;   // NECESSARY TO DISPLAY MAP
     z-index: 10;
-    @include desktop {
-        height: 95vh;
-    }
 }
 
 .markerOuter {
@@ -153,7 +150,8 @@
                 margin-right: 6px;
                 margin-bottom: 4px;
                 border-radius: 20px;
-                border-color: lightgray;
+                border-color: $lightGrey;
+                background-color: $white;
             }
         }
     }
