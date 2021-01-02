@@ -4,6 +4,7 @@ import {useHistory} from "react-router-dom";
 import {firebaseDate} from "../../../config/fbConfig";
 import {Divider} from "antd";
 import MessengerListCard from "./MessengerListCard";
+import {resolve} from "@reach/router/lib/utils";
 
 export default function MessengerListView() {
   const [currentUser, setCurrentUser] = useState(
@@ -13,7 +14,6 @@ export default function MessengerListView() {
   const [rooms, setRooms] = useState([]);
   const [nickname, setNickname] = useState("");
   const history = useHistory();
-  const [exampleText, setExampleText] = useState("Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words");
 
   const lastMsgs = {};
 
@@ -32,6 +32,7 @@ export default function MessengerListView() {
         );
       });
     };
+    loadLastMsg();
     fetchData();
   }, [currentUser]);
 
@@ -45,16 +46,20 @@ export default function MessengerListView() {
     return returnArr;
   };
 
-  const loadLastMsg = async roomID => {
-    return await firebaseDate.ref("chats/")
-      .orderByChild("roomID")
-      .equalTo(roomID).limitToLast(1)
-      .once("value").then((resp) => {
-        if (snapshotToArray(resp)[0] !== undefined) {
-          lastMsgs[roomID] = snapshotToArray(resp)[0].message;
-        }
-      });
+  const loadLastMsg = () => {
+    rooms.map((room) => {
+      const resp = firebaseDate.ref("chats/")
+        .orderByChild("roomID")
+        .equalTo(room.id).limitToLast(1)
+        .once("value");
+      if (snapshotToArray(resp)[0] !== undefined) {
+        lastMsgs[room.id] = snapshotToArray(resp)[0].message;
+        return snapshotToArray(resp)[0].message;
+      }
+    })
   };
+
+  console.log(loadLastMsg());
 
   const enterChatRoom = (roomID) => {
     history.push(`/chatroom?roomID=${roomID}`);
@@ -62,27 +67,22 @@ export default function MessengerListView() {
 
   return (
     <div>
-      <Divider />
+      <Divider/>
       {rooms.map((room) => {
-        loadLastMsg(room.roomID).then(()=> {
-            console.log(lastMsgs[room.roomID]);
+        return (<MessengerListCard
+          key={room.roomID}
+          fname={
+            room.designerID === currentUser.uid
+              ? room.customerID
+              : room.designerID
           }
-        );
-        return (
-          <MessengerListCard
-            fname={
-              room.designerID === currentUser.uid
-                ? room.customerID
-                : room.designerID
-            }
-            photoURL={currentUser.photoURL}
-            enterChatRoom={enterChatRoom}
-            roomID={room.roomID}
-            msgDate={"2020.12.17"}
-            lastMsg={exampleText}
-          />
-        )
+          photoURL={currentUser.photoURL}
+          enterChatRoom={enterChatRoom}
+          roomID={room.roomID}
+          msgDate={"2020.12.17"}
+          lastMsg={lastMsgs[room.id]}
+        />)
       })}
     </div>
   );
-}
+};

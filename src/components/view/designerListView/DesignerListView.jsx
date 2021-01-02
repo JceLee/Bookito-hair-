@@ -46,7 +46,7 @@ export default function DesignerListView(props) {
           newDesigners.push(doc.data());
         });
         dispatch(load_database(newDesigners));
-      });
+      }, []);
 
     // Get and set user location
     geocode(props.location.search).then((latLng) => {
