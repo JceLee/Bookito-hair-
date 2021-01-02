@@ -1,9 +1,10 @@
 import React, { useLayoutEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import placeholder from "../../../../assets/images/placeholder.png";
 
 export default function DesignerCardBottom(props) {
-  const { works, mapVisibleDesktop } = props;
+  const { works, mapVisibleDesktop, uid } = props;
   const [size, setSize] = useState([0, 0]);
 
   useLayoutEffect(() => {
@@ -31,19 +32,21 @@ export default function DesignerCardBottom(props) {
 
   return (
     <div className="designerCardBottom">
-      <Slider {...settings}>
-        {works &&
-          works.map((work, index) => (
-            <div key={index} className="workImageDiv">
-              <img className={mapVisibleDesktop ? "workImage workImageMapVisibleDesktop" : "workImage"}
-                src={work.url}
-                alt={`reviewImgDiv${index}`}
-                width="100%"
-                height="100%"
-              />
-            </div>
-          ))}
-      </Slider>
+      <Link to={`/designer_profile?uid=${uid}`}>
+        <Slider {...settings}>
+          {works &&
+            works.map((work, index) => (
+              <div key={index} className="workImageDiv">
+                <img className={mapVisibleDesktop ? "workImage workImageMapVisibleDesktop" : "workImage"}
+                  src={work.url}
+                  alt={`reviewImgDiv${index}`}
+                  width="100%"
+                  height="100%"
+                />
+              </div>
+            ))}
+        </Slider>
+      </Link>
     </div>
   );
 }
