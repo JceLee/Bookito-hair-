@@ -28,6 +28,9 @@
         .searchBtn {
             padding-left: 9px;
             width: 34px;
+            @include desktop {
+              display: none;
+            }
         }
         .ant-btn:hover, .ant-btn:focus {
             border-color: $lightGrey !important;

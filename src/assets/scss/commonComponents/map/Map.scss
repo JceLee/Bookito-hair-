@@ -71,7 +71,7 @@
             color: whitesmoke;
         }
         li.slick-active button:before {
-            color:white ;
+            color: $white ;
         }
     }
     .slick-arrow.slick-prev {
@@ -129,11 +129,11 @@
             }
 
             .markerDescriptionName {
-                color: #332C1E;
+                color: $black;
                 margin-bottom: 3px;
             }
             .markerDescriptionDistance {
-                color: #332C1E;
+                color: $black;
                 margin-bottom: 7px;
             }
         }

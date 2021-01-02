@@ -8,6 +8,22 @@
     height: calc(100vh - 65px);
   }
 
+  // Search bar
+  #mainSearchBar {
+    display: none;
+    @include desktop {
+      display: block;
+      position: absolute;
+      width: auto;
+      z-index: 2;
+      margin-top: 0 !important;
+      padding: 0;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+
   .designerContainer {
     height: 100%;
 

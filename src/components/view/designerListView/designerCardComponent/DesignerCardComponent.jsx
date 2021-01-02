@@ -10,7 +10,7 @@ export default function DesignerCardComponent(props) {
   return (
     <div
       className="designerCardComponent"
-      onClick={() => handleSearch(designer)}
+      // onClick={() => handleSearch(designer)}
     >
       <DesignerCardTop
         fname={designer.fname}
@@ -19,11 +19,13 @@ export default function DesignerCardComponent(props) {
         rateCount={designer.rate && designer.rate.count}
         services={designer.services}
         profile={designer.photoURL}
+        uid={designer.uid}
       />
       {designer.works?.length > 0 && (
         <DesignerCardBottom
           works={designer.works}
           mapVisibleDesktop={mapVisibleDesktop}
+          uid={designer.uid}
         />
       )}
       <Divider className="designerCardComponentDivider" />

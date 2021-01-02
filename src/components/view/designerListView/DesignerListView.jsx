@@ -14,21 +14,30 @@ import { designerTypes } from "../../../constants/designerTypes";
 import { geocode } from "../../../helpers/geocode";
 import { getDistanceFromLatLonInKm } from "../../../helpers/geocode";
 import InfiniteScroll from "react-infinite-scroll-component";
+import MainSearchBar from "../../commonComponents/mainSearchBar/MainSearchBar";
 
 export default function DesignerListView(props) {
-  const designers = useSelector((state) => state.firestore.designers);
+  // window.location.reload();
+
+  const designerState = useSelector((state) => state.firestore.designers);
+  const [designers, setDesigners] = useState(designerState);
+
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const defaultInitialDisplayCount = 4;
-  const defaultBookitoWidth = ""
+  const defaultInitialDisplayCount = 10;
+  const defaultBookitoWidth = "1130px";
+  const defaultDesignerListingWidth = "96%";
 
   let lastScrollTop = 0;
   const [hideFilterBar, setHideFilterBar] = useState(false);
 
   // User location variables
+  const [searchParams, setSearchParams] = useState();
   const [userLocation, setUserLocation] = useState();
   const [defaultLocation] = useState({ lat: 34.0522, lng: 118.2437 });
+  const locationAddress = queryString.parse(props.location.search)["location"];
+  const designerType = queryString.parse(props.location.search)["type"];
 
   const [loadingDesigners, setLoadingDesigners] = useState(false);
   const [designersCurrent, setDesignersCurrent] = useState([...designers]);
@@ -38,57 +47,33 @@ export default function DesignerListView(props) {
 
   const [mapVisibleMobile, setMapVisibleMobile] = useState(false);
   const [mapVisibleDesktop, setMapVisibleDesktop] = useState(true);
-  const [filterTags, setFilterTags] = useState([]);
-  const [filterCheckedTags, setFilterCheckedTags] = useState([]);
+  const [filterTags, setFilterTags] = useState(designerTags[designerType]);
+  const [filterCheckedTags, setFilterCheckedTags] = useState(designerTags[designerType]);
   const [filterDate, setFilterDate] = useState(null);
   const [sortBy, setSortBy] = useState("");
 
   useEffect(() => {
-    const params = queryString.parse(props.location.search);
-    setFilterTags(designerTags[params["type"]]);
-    setFilterCheckedTags(designerTags[params["type"]]);
     firebaseStore
       .collection("users")
-      .where("location", "==", params["location"])
-      .where("accountTypes", "==", designerTypes.hair)
+      .where("location", "==", locationAddress)
+      .where("accountTypes", "==", designerType)
       .get()
       .then((querySnapshot) => {
         const newDesigners = [];
         querySnapshot.docs.forEach((doc) => {
           newDesigners.push(doc.data());
         });
+        refreshSearchResults(newDesigners);
         dispatch(load_database(newDesigners));
       });
 
-    // Get and set user location
-    geocode(props.location.search).then((latLng) => {
-      if (latLng) {
-        setUserLocation(latLng);
-
-        // Calculate and set distance of designers from user location
-        designers.forEach((designer) => {
-          if (designer.latLng) {
-            designer.distance = getDistanceFromLatLonInKm(
-              designer.latLng.lat,
-              designer.latLng.lng,
-              latLng.lat,
-              latLng.lng
-            );
-          }
-        });
-      } else {
-        setUserLocation(defaultLocation);
-        console.log("Unable to get location!");
-      }
-    });
-
-    if (window.innerWidth >= 1200) { // Screen size greater than or equal to desktop
-      document.getElementsByTagName("body")[0].style.width = "96%"
+    if (window.innerWidth >= 1200) { // Mixin.scss desktop
+      document.getElementsByTagName("body")[0].style.width = defaultDesignerListingWidth;
     }
     document.getElementById('scrollableDiv').addEventListener('scroll', handleFilterDisplayOnScroll, { passive: true });
     return () => {
-      if (window.innerWidth >= 1200) {
-        document.getElementsByTagName("body")[0].style.width = "1130px"
+      if (window.innerWidth >= 1200) { // Mixin.scss desktop
+        document.getElementsByTagName("body")[0].style.width = defaultBookitoWidth;
       }
       document.getElementById('scrollableDiv').removeEventListener('scroll', handleFilterDisplayOnScroll)
     }
@@ -185,6 +170,38 @@ export default function DesignerListView(props) {
     updateSortBy(sortBy);
   };
 
+  const assignLatLngToDesigners = (designers) => {
+    // Get and set user location
+    geocode(props.location.search).then((latLng) => {
+      if (latLng) {
+        setUserLocation(latLng);
+
+        // Calculate and set distance of designers from user location
+        designers.forEach((designer) => {
+          if (designer.latLng) {
+            designer.distance = getDistanceFromLatLonInKm(
+              designer.latLng.lat,
+              designer.latLng.lng,
+              latLng.lat,
+              latLng.lng
+            );
+          }
+        });
+      } else {
+        setUserLocation(defaultLocation);
+        console.log("Unable to get location!");
+      }
+    });
+  }
+
+  const refreshSearchResults = async (newDesigners) => {
+    assignLatLngToDesigners(newDesigners);
+    await displayLoadingAnimation();
+    setDesigners(newDesigners);
+    setDesignersCurrent(newDesigners);
+    setDesignersCurrentDisplayed(newDesigners);
+  };
+
   const displayMoreResults = () => {
     setDesignersCurrentDisplayed(
       designersCurrent.slice(0, ++designersCurrentDisplayed.length)
@@ -213,11 +230,11 @@ export default function DesignerListView(props) {
   // Desktop map controls
   const openMapDesktop = () => {
     setMapVisibleDesktop(true);
-    document.getElementsByTagName("body")[0].style.width = "96%"
+    document.getElementsByTagName("body")[0].style.width = defaultDesignerListingWidth;
   };
   const closeMapDesktop = () => {
     setMapVisibleDesktop(false);
-    document.getElementsByTagName("body")[0].style.width = "1130px"
+    document.getElementsByTagName("body")[0].style.width = defaultBookitoWidth;
   };
 
   // Mobile map controls
@@ -230,6 +247,11 @@ export default function DesignerListView(props) {
 
   return (
     <div className="listingContainer">
+      <MainSearchBar
+        defaultDesignerType={designerType}
+        defaultAddress={locationAddress}
+        disableMovement={true}
+      />
       {/* Designer listing shrinks using the class "designerContainerMapVisible" when map is open on desktop */}
       <div
         className={
@@ -246,7 +268,7 @@ export default function DesignerListView(props) {
                 filterTags={filterTags}
                 updateFilter={updateFilter}
                 numberOfDesigners={Object.keys(designersCurrent).length}
-                location="Vancouver"
+                location={locationAddress}
                 updateSortBy={updateSortBy}
                 openMapDesktop={mapVisibleDesktop ? null : openMapDesktop}
               />
@@ -265,16 +287,16 @@ export default function DesignerListView(props) {
             </Button>
           </div>
           {/* Designer listing */}
-          <Spin spinning={loadingDesigners} size="large" >
-            <InfiniteScroll
-              className={mapVisibleDesktop ? "desktopMapOpenWidthListing" : ""}
-              scrollableTarget="listingBase"
-              dataLength={designersCurrentDisplayed.length}
-              next={displayMoreResults}
-              hasMore={true}
-              loader={<></>}
-              scrollableTarget="scrollableDiv"
-            >
+          <InfiniteScroll
+            className={mapVisibleDesktop ? "desktopMapOpenWidthListing" : ""}
+            scrollableTarget="listingBase"
+            dataLength={designersCurrentDisplayed.length}
+            next={displayMoreResults}
+            hasMore={true}
+            loader={<></>}
+            scrollableTarget="scrollableDiv"
+          >
+            <Spin spinning={loadingDesigners} size="large">
               {/* console.log(designers) || */}
               {designersCurrentDisplayed.map((designer, index) => (
                 <div key={index} className="designerList">
@@ -285,8 +307,8 @@ export default function DesignerListView(props) {
                   />
                 </div>
               ))}
-            </InfiniteScroll>
-          </Spin>
+            </Spin>
+          </InfiniteScroll>
         </div>
 
         <Drawer
