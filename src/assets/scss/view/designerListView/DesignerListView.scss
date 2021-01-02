@@ -14,7 +14,7 @@
     @include desktop {
       display: block;
       position: absolute;
-      width: auto;
+      width: 680px; // Must be updated if searchbar size changes
       z-index: 2;
       margin-top: 0 !important;
       padding: 0;
@@ -36,8 +36,8 @@
     }
 
     .listingBase {
-      height: 99%;      // required for infinite scrolling
-      overflow-y: auto; // required for infinite scrolling
+      height: 99%;      // Required for infinite scrolling
+      overflow-y: auto; // Required for infinite scrolling
       padding-top: 95px;
 
       @include tabletP {
