@@ -6,6 +6,7 @@ import ClientProfileView from "../../../view/clientProfileView/ClientProfileView
 import ServiceNPriceForm from "./designerEditProfile/ServiceNPriceForm";
 import HoursForm from "./designerEditProfile/HoursForm";
 import WorksForm from "./designerEditProfile/WorksForm";
+import SelfIntroForm from "./designerEditProfile/SelfIntroForm";
 import BookNowModal from "../designerProfileTop/bookNowModal/BookNowModal";
 import Avatar from "antd/lib/avatar/avatar";
 import { useSelector } from "react-redux";
@@ -43,6 +44,10 @@ export default function DesignerProfileTop(props) {
     {
       header: "Works",
       content: <WorksForm />,
+    },
+    {
+      header: "Self-introduction",
+      content: <SelfIntroForm />,
     },
   ];
 
