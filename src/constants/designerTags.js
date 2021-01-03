@@ -1,5 +1,5 @@
 export const designerTags = {
-    "hair": ["Clinic", "Color", "Cut", "Perm", "Promo", "Style"],
-    "nail": [],
-    "lash": [],
+    "Hair Designer": ["Clinic", "Color", "Cut", "Perm", "Promo", "Style"],
+    "Nail Artist": [],
+    "Makeup Artist": [],
 };

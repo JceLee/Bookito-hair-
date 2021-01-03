@@ -51,7 +51,6 @@ export default function DesignerTypeModal(props) {
   const history = useHistory();
 
   const onSelected = (e) => {
-    console.log(e.target.value + " selected");
     setDesignerType(e.target.value);
   };
 
@@ -60,12 +59,9 @@ export default function DesignerTypeModal(props) {
       showNavBarElements("logo");
       showNavBarElements("menuBtn");
     }
-    const selectedDesignerType = Object.keys(designerTypes)
-      .find(key => designerTypes[key] === designerType);
-    const route = `/designer_list?type=${selectedDesignerType}${
+    const route = `/designer_list?type=${designerType}${
       location ? `&location=${location}` : ""
     }`;
-    console.log(route);
     window.scrollTo(0, 0);
     history.push(route);
   };

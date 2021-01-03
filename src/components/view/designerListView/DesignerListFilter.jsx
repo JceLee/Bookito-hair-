@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu, Dropdown, Button, Divider, Collapse } from "antd/lib/index";
 import {
   SearchOutlined,
@@ -19,6 +19,7 @@ export default function DesignerListFilter(props) {
     numberOfDesigners,
     location,
     updateSortBy,
+    openMapDesktop
   } = props;
   const { Panel } = Collapse;
 
@@ -30,12 +31,23 @@ export default function DesignerListFilter(props) {
     false
   );
 
+  useEffect(() => {
+    document.getElementById('scrollableDiv').addEventListener('scroll', toggleFilterCollapse, { passive: true });
+    return () => {
+      document.getElementById('scrollableDiv').removeEventListener('scroll', toggleFilterCollapse)
+    }
+  }, []);
+
   const showModal = () => {
     setDesignerTypeModalVisible(true);
   };
 
   const handleCancel = (e) => {
     setDesignerTypeModalVisible(false);
+  };
+
+  const toggleFilterCollapse = () => {
+    toggleFilterSetting(0);
   };
 
   const show = (element) => {
@@ -132,6 +144,15 @@ export default function DesignerListFilter(props) {
             <DownOutlined />
           </Button>
         </Dropdown>
+
+        {openMapDesktop && <Button
+          className="mapBtn filterBtn"
+          onClick={openMapDesktop}
+        >
+          <span role="img" aria-label="map">
+            🗺️ Show map
+          </span>
+        </Button>}
 
         <Button className="searchBtn filterBtn" onClick={showModal}>
           <span>

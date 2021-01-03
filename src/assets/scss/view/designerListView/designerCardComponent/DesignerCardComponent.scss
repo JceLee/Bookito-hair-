@@ -2,6 +2,11 @@
 .designerCardComponent {
     padding: 10px 5%;
     padding-top: 0px;
+
+    @include desktop {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
 // DesignerCardTop.jsx
@@ -36,6 +41,7 @@
         // } 
 
         .designerCardName {
+            color: $black;
             margin-right: 8px;
         }
     
@@ -44,7 +50,7 @@
         }
     
         .designerCardServices {
-            overflow: scroll;
+            overflow: auto;
             overflow-y: hidden;
             white-space: nowrap;
             height: 30px;
@@ -63,8 +69,8 @@
                 margin-right: 6px;
                 margin-bottom: 4px;
                 border-radius: 20px;
-                border-color: lightgray;
-                // background-color: #332C1E;
+                border-color: $lightGrey;
+                background-color: $white;
             }
         }
     }
@@ -72,19 +78,53 @@
 
 // DesignerCardBottom.jsx
 .designerCardBottom {
-    margin-left: 5vw;
+    margin-left: 4vw;
     margin-bottom: 20px;
 
+    @include tabletP {
+        margin-left: 0;
+    }
+
     .workImageDiv {
-        // width: 100%;
-            //    border: 1px solid gray;
-            //    padding-top: 100%; // 1:1 aspect ratio
-            
-        // width: 95vw;
-        // height: 95vw;
         .workImage {
             width: 37vw;
             height: 37vw;
+
+            @include tabletP {
+                width: 160px;
+                height: 160px;
+            }
+
+            @include tabletL {
+                width: 200px;
+                height: 200px;
+            }
+
+            @include desktop {
+                width: 250px;
+                height: 250px;
+            }
+
+            @include desktopL {
+                width: 250px;
+                height: 250px;
+            }
+
+            @include desktopXL {
+                width: 10vw;
+                height: 10vw;
+            }
+        }
+        .workImageMapVisibleDesktop {
+            @include desktop {
+                width: 18.5vw;
+                height: 18.5vw;
+            }
+
+            @include desktopL {
+                width: 9vw;
+                height: 9vw;
+            }
         }
     }
 }

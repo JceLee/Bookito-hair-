@@ -1,18 +1,23 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Row, Col, Avatar, Tag } from "antd";
 import { StarRead } from "../../../../commonComponents/StarRate";
 
 export default function DesignerCardTop(props) {
-  const { fname, rateScore, rateCount, distance, services, profile } = props;
+  const { fname, rateScore, rateCount, distance, services, profile, uid } = props;
   return (
     <Row className="designerCardTop">
       <Col>
-        <Avatar className="designerCardIcon" size={64} src={profile} />
+        <Link to={`/designer_profile?uid=${uid}`}>
+          <Avatar className="designerCardIcon" size={64} src={profile} />
+        </Link>
       </Col>
 
       <Col className="designerCardTopRight">
         <Row>
-          <Col><span className="designerCardName">{fname}</span></Col>
+          <Link to={`/designer_profile?uid=${uid}`}>
+            <Col><span className="designerCardName">{fname}</span></Col>
+          </Link>
           <Col><StarRead rateScore={rateScore || 0} rateCount={rateCount || 0} /></Col>
         </Row>
         <Row>
