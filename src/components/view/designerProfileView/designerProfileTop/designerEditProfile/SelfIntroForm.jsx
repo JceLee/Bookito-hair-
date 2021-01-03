@@ -52,10 +52,10 @@ export default function SelfIntroForm() {
     <div className="SelfIntroForm">
       <Form {...layout} name="selfIntro" onFinish={onFinish}>
         <Form.Item name={['introduction']}>
-          <Input.TextArea/>
+          <Input.TextArea className="selfIntroInput" placeholder="(Promotion, discount, etc.)"/>
         </Form.Item>
         <Form.Item wrapperCol={{...layout.wrapperCol, offset: 6}}>
-          <Button type="primary" htmlType="submit">
+          <Button className="selfIntroSaveBtn" htmlType="submit">
             Save
           </Button>
         </Form.Item>
