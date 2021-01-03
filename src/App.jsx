@@ -22,7 +22,6 @@ import BookitoFooter from "./components/commonComponents/BookitoFooter";
 const { Header, Content } = Layout;
 
 export default function App() {
-
   return (
     <Router>
       <Layout id="layout">

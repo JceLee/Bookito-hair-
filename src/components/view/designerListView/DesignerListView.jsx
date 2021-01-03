@@ -65,7 +65,7 @@ export default function DesignerListView(props) {
         });
         refreshSearchResults(newDesigners);
         dispatch(load_database(newDesigners));
-      });
+      }, []);
 
     if (window.innerWidth >= 1200) { // Mixin.scss desktop
       document.getElementsByTagName("body")[0].style.width = defaultDesignerListingWidth;
