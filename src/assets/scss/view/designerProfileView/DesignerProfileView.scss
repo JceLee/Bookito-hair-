@@ -356,12 +356,22 @@
           text-align: left;
           padding-right: 7.3rem;
           // padding-right: 40%;
+
+          @include mobileS {
+            padding-right: 10rem;
+          }
+
           @include mobileM {
             padding-right: 10.7rem;
           }
-          @include mobileIphonePlus {
+
+          @include mobilePixel {
             padding-right: 13rem;
           }
+
+          // @include mobileIphonePlus {
+          //   padding-right: 13rem;
+          // }
           @include mobileMtoL {
             padding-right: 13.6rem;
           }
@@ -383,12 +393,22 @@
           padding-right: 6.7rem;
           // padding-right: 50%;
           padding-bottom: 8%;
+
+          @include mobileS {
+            padding-right: 9.4rem;
+          }
+
           @include mobileM {
             padding-right: 10.2rem;
           }
-          @include mobileIphonePlus {
+
+          @include mobilePixel {
             padding-right: 12.5rem;
           }
+
+          // @include mobileIphonePlus {
+          //   padding-right: 12.5rem;
+          // }
           @include mobileMtoL {
             padding-right: 13.1rem;
           }

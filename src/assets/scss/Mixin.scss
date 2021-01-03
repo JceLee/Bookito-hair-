@@ -8,8 +8,20 @@ $black: #1b1b1b;
 $grey: #a1a1a1;
 $lightGrey: #c6c6c6;
 
+@mixin mobileS {
+  @media only screen and (min-width: 360px) {
+    @content;
+  }
+}
+
 @mixin mobileM {
   @media only screen and (min-width: 375px) {
+    @content;
+  }
+}
+
+@mixin mobilePixel {
+  @media only screen and (min-width: 411px) {
     @content;
   }
 }

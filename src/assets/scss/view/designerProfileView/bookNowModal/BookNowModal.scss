@@ -9,7 +9,6 @@ $modalBodyMargin: 110px;
 //  }
 //}
 
-
 .bookNowModal {
   top: 0;
   margin: 0 auto;
@@ -199,27 +198,41 @@ $modalBodyMargin: 110px;
       }
 
       .ant-radio-button-wrapper {
-        // border-left-width: none;
-        // border-left-color: none;
-        margin: 0px 0px 5px 5.7px;
+        margin-right: 3vw;
+        margin-bottom: 1.5vh;
         color: $black;
         border-color: $black;
-        // background-color: pink;
         width: 65px;
         font-size: 13px;
         text-align: center;
         padding: 0;
 
-        @include mobileM {
-          margin: 0px 12px 15px 9px;
+        @include mobileS {
+          margin-left: 2.1vw;
+          margin-bottom: 2vh;
         }
+
+        @include mobileM {
+          margin-left: 2.8vw;
+        }
+
+        @include mobilePixel {
+          margin-left: 4.1vw;
+        }
+
+        @include mobileIphonePlus {
+          margin-left: 3.5vw;
+          margin-right: 4vw;
+        }
+
         @include mobileMtoL {
           font-size: 14px;
-          margin: 0px 21px 15px 14px;
+          margin-right: 6vw;
         }
 
         @include tabletP {
-          margin: 0px 5px 15px -2px;
+          margin-left: -0.2vw;
+          margin-right: 0.5vw;
         }
 
         .ant-radio-button {
@@ -381,7 +394,7 @@ $modalBodyMargin: 110px;
       padding: 0 0;
       bottom: 0;
       border: none;
-      .mockData{
+      .mockData {
         color: $white;
         border-color: $white;
         float: left;
