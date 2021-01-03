@@ -13,11 +13,10 @@ $marginFromTablet: 10%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  background-color: $white;
 
   @include desktop {
-    height: 7vh;
-    background-color: #fdfdfd;
+    height: 65px;
     padding: 0;
   }
 }

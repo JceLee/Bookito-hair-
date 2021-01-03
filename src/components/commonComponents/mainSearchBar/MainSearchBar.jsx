@@ -6,12 +6,19 @@ import LocationInput from "../LocationInput";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import { reverseGeocode } from "../../../helpers/geocode";
 import { useHistory } from "react-router-dom";
+import { designerTypes } from "../../../constants/designerTypes";
 
-export default function MainSearchBar() {
-  const [designerType, setDesignerType] = useState("");
-  const [address, setAddress] = useState("");
+export default function MainSearchBar(props) {
+  const {
+    defaultDesignerType,
+    defaultAddress,
+    disableMovement
+  } = props;
+ 
+  const [designerType, setDesignerType] = useState(defaultDesignerType ? defaultDesignerType : "");
+  const [address, setAddress] = useState(defaultAddress ? defaultAddress : "");
   const [form] = Form.useForm();
-  const designerTypes = ["Hair Designer", "Nail Artist", "MakeUp Artist"];
+  const designerTypeSelect = Object.values(designerTypes).filter(type => type !== "client");
   const tabletLWidth = 1024;
   const half = 2;
   var heightToShowSearchBarOnNav = null;
@@ -31,10 +38,12 @@ export default function MainSearchBar() {
   //#region Functions related SearchBar
   // calculate and set height to show search bar on nav bar
   useEffect(() => {
-    heightToShowSearchBarOnNav =
+    if (!disableMovement) {
+      heightToShowSearchBarOnNav =
       (window.pageYOffset +
         document.getElementById("searchBarForm").clientHeight) *
       -1;
+    }
   });
 
   // give css when search bar sticks on nav bar
@@ -133,7 +142,6 @@ export default function MainSearchBar() {
     const route = `/designer_list?type=${designerType}${
       location ? `&location=${location}` : ""
     }`;
-    console.log(route);
     window.scrollTo(0, 0);
     history.push(route);
   };
@@ -166,8 +174,9 @@ export default function MainSearchBar() {
           onChange={setSelectedType}
           placeholder="Choose Designer Type"
           suffixIcon={<CaretDownOutlined />}
+          defaultValue={defaultDesignerType}
         >
-          {designerTypes.map((type, inx) => {
+          {designerTypeSelect.map((type, inx) => {
             return (
               <Select.Option key={inx} value={type}>
                 {type}
