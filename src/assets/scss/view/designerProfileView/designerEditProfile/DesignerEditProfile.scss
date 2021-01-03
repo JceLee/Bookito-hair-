@@ -93,6 +93,27 @@ $paddingOfworkImgInModal: 10px;
         font-weight: 500;
       }
 
+      .SelfIntroForm {
+        .ant-form-item {
+          @include tabletP {
+            // width: 190vw;
+            width: 295%;
+            margin-left: 1%;
+          }
+        }
+
+        .selfIntroSaveBtn {
+          background-color: $black;
+          color: $white;
+          width: 100%;
+          border: none;
+          margin-left: -25%;
+          @include tabletP {
+            margin-left: -75%;
+          }
+        }
+      }
+
       .servicePriceMinusButton {
         width: 100%;
         display: flex;
