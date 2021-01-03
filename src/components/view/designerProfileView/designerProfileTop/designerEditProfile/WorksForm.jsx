@@ -11,7 +11,7 @@ const layout = {
   wrapperCol: {span: 24},
 };
 
-export default function WorksForm(props) {
+export default function WorksForm() {
   const designers = useSelector((state) => state.firestore.designers);
   const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
   const [client, setClient] = useState(designer)
