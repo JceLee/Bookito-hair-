@@ -227,7 +227,11 @@ $modalBodyMargin: 110px;
 
         @include mobileMtoL {
           font-size: 14px;
-          margin-right: 6vw;
+          margin-right: 4.7vw;
+        }
+
+        @include mobileLtoTabletP {
+          margin: 0 6vw 3vh 5vw;
         }
 
         @include tabletP {
