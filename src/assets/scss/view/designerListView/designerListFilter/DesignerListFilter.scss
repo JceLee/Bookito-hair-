@@ -1,3 +1,5 @@
+@import "../../../Mixin.scss";
+
 // Styling for sort by dropdown menu
 .designerListSortByButtonBold {
     font-weight: bold;
@@ -87,7 +89,7 @@
             justify-content: center;
             height: 50%;
             padding-top: 6px;
-    
+
             @include mobileM {
                 font-size: 1.0rem;
                 width: 100%;
