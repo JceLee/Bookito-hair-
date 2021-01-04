@@ -129,7 +129,7 @@
         justify-content: left;
       }
       @include desktop {
-        width: 70vw;
+        width: 60vw;
       }
       .designerNavItem {
         @include tabletP {
@@ -245,6 +245,11 @@
             width: 20vw;
             height: 20vw;
           }
+          @include desktop {
+            margin: 0.75rem calc((100% - 15vw * 4) / 8);
+            width: 15vw;
+            height: 15vw;
+          }
           img {
             padding: 0;
             width: 40.625vw;
@@ -256,6 +261,10 @@
             @include tabletL {
               width: 20vw;
               height: 20vw;
+            }
+            @include desktop {
+              width: 15vw;
+              height: 15vw;
             }
           }
           img:hover {
@@ -278,7 +287,7 @@
         padding: 0;
         margin: 0 auto;
         @include tabletP {
-          margin-left: 0;
+          // margin-left: 0;
         }
         .profileDivider {
           display: none;
@@ -419,12 +428,65 @@
     }
 
     // Designer Bottom - ReviewContainer
-    .reviews {
-      position: relative;
+    #reviewTitle {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 7%;
+
+      @include desktop {
+        margin-top: 2%;
+        font-size: 25px;
+      }
     }
 
     // Designer Bottom - Review
     .review {
+      margin-right: 0;
+      .ant-card-small {
+        .ant-card-body {
+          padding-bottom: 0;
+          @include desktop {
+            font-size: 20px;
+          }
+        }
+        margin: 0 auto;
+        width: 90vw;
+        @include tabletP {
+          width: 35vw;
+        }
+        @include desktop {
+          width: 30vw;
+        }
+      }
+      .reviewDate {
+        display: inline;
+        float: right;
+      }
+      .reviewContentContainter {
+        display: block;
+        .reviewContent {
+          margin-bottom: 0;
+        }
+      }
+
+      #reviewCustomerName {
+        font-weight: bold;
+      }
+      .ant-rate {
+        font-size: 1rem;
+        line-height: 1;
+        .ant-rate-star {
+          margin: 0 1px 0 0;
+        }
+        &-star {
+          > div {
+            &:hover {
+              transform: scale(1);
+            }
+          }
+        }
+      }
+
       margin: 1.5rem auto;
       padding: 0;
       text-align: left;
@@ -442,7 +504,6 @@
 
         .reviewCustomer {
           flex-shrink: 0;
-
           font-size: larger;
           font-weight: bold;
           width: fit-content;
