@@ -1,18 +1,25 @@
-import { Upload, message, Form, Modal } from "antd";
+import {Upload, message, Form, Modal} from "antd";
 import ImgCrop from "antd-img-crop";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { firebaseOrigin, firebaseStore } from "../../../../../config/fbConfig";
-import { update_database } from "../../../../../actions/firebaseAction";
-import { refresh } from "../../../../../actions/currentUser";
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {firebaseOrigin, firebaseStore} from "../../../../../config/fbConfig";
+import {update_database} from "../../../../../actions/firebaseAction";
+import {refresh} from "../../../../../actions/currentUser";
 
-export default function WorksForm(props) {
-  const { works, client, setClient, layout } = props;
+const layout = {
+  labelCol: {span: 6},
+  wrapperCol: {span: 24},
+};
+
+export default function WorksForm() {
+  const designers = useSelector((state) => state.firestore.designers);
+  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
+  const [client, setClient] = useState(designer)
   const [form] = Form.useForm();
   const photoURLs = [];
   const [testState, setTestState] = useState(false);
-  const [fileList, setFileList] = useState(works);
-  const designers = useSelector((state) => state.firestore.designers);
+  const [fileList, setFileList] = useState(designer.works);
+
   const dispatch = useDispatch();
 
   const onUploadSubmission = (e) => {
@@ -69,7 +76,7 @@ export default function WorksForm(props) {
       firebaseStore
         .collection("users")
         .doc(client.uid)
-        .update({ works: newWorks })
+        .update({works: newWorks})
         .then(function () {
           return message.success({
             content: "Saved",
@@ -96,7 +103,7 @@ export default function WorksForm(props) {
     });
   };
 
-  const onChange = ({ fileList: newFileList }) => {
+  const onChange = ({fileList: newFileList}) => {
     setFileList(newFileList);
     setTestState(true);
   };

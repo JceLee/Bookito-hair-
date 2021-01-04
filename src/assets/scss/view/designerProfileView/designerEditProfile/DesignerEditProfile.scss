@@ -1,5 +1,4 @@
 @import "../../../Mixin.scss";
-@import "../../../Mixin.scss";
 
 $headerHeight: 55px;
 $footerHeight: 55px;
@@ -91,6 +90,27 @@ $paddingOfworkImgInModal: 10px;
 
       .ant-collapse-header {
         font-weight: 500;
+      }
+
+      .SelfIntroForm {
+        .ant-form-item {
+          @include tabletP {
+            // width: 190vw;
+            width: 295%;
+            margin-left: 1%;
+          }
+        }
+
+        .selfIntroSaveBtn {
+          background-color: $black;
+          color: $white;
+          width: 100%;
+          border: none;
+          margin-left: -25%;
+          @include tabletP {
+            margin-left: -75%;
+          }
+        }
       }
 
       .servicePriceMinusButton {

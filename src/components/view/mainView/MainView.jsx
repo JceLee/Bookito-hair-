@@ -38,6 +38,7 @@ export default function MainView() {
       {/*  />*/}
       {/*</div>*/}
 
+
       <NewDesignersDesktopSection />
 
       <div className="newDesignerMobileSection"/>

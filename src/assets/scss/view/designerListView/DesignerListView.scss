@@ -1,9 +1,28 @@
 @import "../../Mixin.scss";
 
 .listingContainer {
-  height: 90vh;
+  height: calc(100vh - 55px);
   width: 100%;
-  overflow-y: scroll;
+
+  @include desktop{
+    height: calc(100vh - 65px);
+  }
+
+  // Search bar
+  #mainSearchBar {
+    display: none;
+    @include desktop {
+      display: block;
+      position: absolute;
+      width: 680px; // Must be updated if searchbar size changes
+      z-index: 2;
+      margin-top: 0 !important;
+      padding: 0;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
 
   .designerContainer {
     height: 100%;
@@ -17,8 +36,29 @@
     }
 
     .listingBase {
-      @include tabletP{
+      height: 99%;      // Required for infinite scrolling
+      overflow-y: auto; // Required for infinite scrolling
+      padding-top: 95px;
+
+      @include tabletP {
         width: 100%;
+      }
+
+      @include desktop {
+        height: calc(99% - 95px);
+        padding-top: 8px;
+        margin-top: 95px;
+      }
+
+      // Spinner
+      .ant-spin-dot-item {
+        background-color: $black;
+      }
+
+      .desktopMapOpenWidthListing {
+        @include desktop {
+          width: 40.5vw;
+        }
       }
     }
 
@@ -28,22 +68,41 @@
 
     .listNavBar {
       width: 100%;
-      // border: 1px blue solid;
+
+      .desktopMapOpenWidthFilter {
+        @include desktop {
+          width: 40.5vw !important;
+        }
+      }
 
       .filter {
-        height: 30%;
-        // border: 1px saddlebrown solid;
+        position: fixed;
+        top: 55px;
+        height: 95px;
+        width: 100%;
+        background: $white;
+        z-index: 1;
+        transition: 1s;
+      
+        @include desktop {
+          top: 65px;
+          width: 1130px;
+          transition: 0s;
+        }
       }
+
       .designerListOpenMapMobile {
         position: absolute;
         left: 50%;
         -webkit-transform: translateX(-50%);
         transform: translateX(-50%);
-        bottom: 24px;
+        bottom: 20px;
         z-index: 10;
 
+        position: fixed;
         height: 36px;
         border-radius: 20px;
+        transition: 1s;
       }
     }
 
@@ -53,41 +112,54 @@
   }
 
   .designerContainerMapVisible {
-    @include tabletP{
-      width: 60vw;
-      float: left;
+    @include desktop {
+      // width: 50%;
+      // float: left;
     }
   }
   .mapBase {
-    position: absolute;
-    left: 60vw;
+    position: fixed;
+    right: 2%;
+    height: calc(100vh - 55px);
     
     .mapContainer {
       width: 100%;
       @include tabletP{
+        height: calc(100vh - 65px);
         position: sticky;
         top: 0;
-        width: 39.1vw; // 40VW - 0.9vw to accomodate for scrollbar
+        width: 55vw;
+        // width: 39.1vw; // 40VW - 0.9vw to accomodate for scrollbar
       }
     }
   }
 
   .mapCloseButton {
     position: absolute;
-    margin: 1em;
+    margin-top: 1.1em;
+    margin-left: 0.7em;
     z-index: 1;
+    background: #5e5546;
+    border-color: transparent !important;
+    &:focus {
+        // background: #5e5546 !important;
+        background: #332C1E !important;
+    }
+    .ant-btn-background-ghost {
+        border: none !important;
+    }
   }
 
   .desktopOnly {
     display: none;
-    @include tabletP{
+    @include desktop {
       display: block;
     }
   }
 
   .mobileOnly {
     display: block;
-    @include tabletP{
+    @include desktop {
       display: none;
     }
   }

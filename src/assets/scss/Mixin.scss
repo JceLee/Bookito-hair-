@@ -8,8 +8,20 @@ $black: #1b1b1b;
 $grey: #a1a1a1;
 $lightGrey: #c6c6c6;
 
+@mixin mobileS {
+  @media only screen and (min-width: 360px) {
+    @content;
+  }
+}
+
 @mixin mobileM {
   @media only screen and (min-width: 375px) {
+    @content;
+  }
+}
+
+@mixin mobilePixel {
+  @media only screen and (min-width: 411px) {
     @content;
   }
 }
@@ -52,6 +64,18 @@ $lightGrey: #c6c6c6;
 
 @mixin desktop {
   @media only screen and (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin desktopL { //+1920p
+  @media only screen and (min-width: 1920px) {
+    @content;
+  }
+}
+
+@mixin desktopXL { //+4k
+  @media only screen and (min-width: 2560px) {
     @content;
   }
 }

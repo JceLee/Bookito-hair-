@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Form, Input, Avatar, Modal, message, Button } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import { useDropzone } from "react-dropzone";
 import BlackBtn from "../../commonComponents/BlackBtn";
-import { useSelector } from "react-redux";
 import { firebaseOrigin, firebaseStore } from "../../../config/fbConfig";
 import { refresh } from "../../../actions/currentUser";
 import LocationInput from "../../commonComponents/LocationInput";

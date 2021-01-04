@@ -1,3 +1,5 @@
+@import "../../../Mixin.scss";
+
 // Styling for sort by dropdown menu
 .designerListSortByButtonBold {
     font-weight: bold;
@@ -5,6 +7,17 @@
 .designerListFilter {
     .designerListFilterInner {
         padding: 10px 5%;
+        background: $white;
+
+        @include tabletP {
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+
+        @include desktop {
+            padding-left: 0;
+            padding-right: 0;
+        }
 
         .filterBtn {
             border-radius: 20px;
@@ -17,13 +30,21 @@
         .searchBtn {
             padding-left: 9px;
             width: 34px;
+            @include desktop {
+              display: none;
+            }
         }
         .ant-btn:hover, .ant-btn:focus {
-            border-color: gray !important;
-            color: black !important;
+            border-color: $lightGrey !important;
+            color: $black !important;
         }
         .sortBtn {
             margin-right: 0;
+            float: right;
+            padding-left: 11px;
+            padding-right: 11px;
+        }
+        .mapBtn {
             float: right;
             padding-left: 11px;
             padding-right: 11px;
@@ -38,6 +59,7 @@
             padding: 0;
         }
         .ant-collapse-content-box {
+            // background: $white;
             padding: 0 !important;
         }
         .designerListFilterConfirm {
@@ -67,13 +89,10 @@
             justify-content: center;
             height: 50%;
             padding-top: 6px;
-    
+
             @include mobileM {
                 font-size: 1.0rem;
                 width: 100%;
-            }
-            @include tabletP {
-                margin-top: 6%;
             }
             .DayPicker-NavButton {
                 top: 5.5%;

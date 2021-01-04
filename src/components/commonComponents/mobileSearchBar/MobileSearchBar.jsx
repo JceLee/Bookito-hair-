@@ -37,7 +37,6 @@ export default function MobileSearchBar() {
     var searchBarMarginOnNavBar = (navBarHeight - searchBarHeight) / 2 + "px";
     document.getElementById("searchBarForm").classList.add("stickedSearchBarOnNav");
     document.getElementById("searchBarForm").style.top = searchBarMarginOnNavBar;
-
     document.getElementById("mobileSearchBar").style.marginTop = "0px";
     document.getElementById("mainHeader").style.display = "none";
   };

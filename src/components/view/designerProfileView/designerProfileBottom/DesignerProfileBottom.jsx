@@ -7,6 +7,7 @@ import ReviewContainer from "./ReviewContainer";
 import ServiceNPrice from "./ServiceNPrice";
 import { Divider } from "antd";
 import { useSelector } from "react-redux";
+import SelfIntro from "./SelfIntro.jsx";
 
 export default function DesignerProfileBottom() {
   const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
@@ -14,6 +15,8 @@ export default function DesignerProfileBottom() {
     <div className="designerBottom">
       <Home id="Home" />
       <Works id="Works" works={designer.works} />
+      <Divider className="profileDivider" />
+      <SelfIntro id="SelfIntro" introduction={designer.introduction} />
       <Divider className="profileDivider" />
       <div className="serviceNPriceHoursGrid">
         <div className="serviceGrid">
