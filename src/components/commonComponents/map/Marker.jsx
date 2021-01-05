@@ -93,7 +93,7 @@ export default function Marker(props) {
                     onCancel={hide}
                     mask={false}
                     width={380}
-                    style={{top: "69.5vh"}} // Determines the location of the modal in mobile // TODO: THIS SHOULD BE FROM BOTTOM, BUT BOTTOM DOESNT WORK!!!
+                    style={{top: window.innerHeight > 800 ? "73vh" : "69.5vh"}} // Determines the location of the modal in mobile // TODO: THIS SHOULD BE FROM BOTTOM, BUT BOTTOM DOESNT WORK!!!
                     // maskClosable={false} // Determines whether clicking outside the modal closes the modal
                 >
                     {MarkerContent}

@@ -64,6 +64,7 @@ export default function DesignerTypeModal(props) {
     }`;
     window.scrollTo(0, 0);
     history.push(route);
+    onCancel();
   };
 
   const handleGeolocation = () => {
