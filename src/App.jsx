@@ -17,7 +17,6 @@ import "slick-carousel/slick/slick-theme.css";
 import "antd/dist/antd.css";
 import "./assets/scss/App.scss";
 import BecomeDesignerView from "./components/view/becomeDesignerView/BecomeDesignerView";
-import BookitoFooter from "./components/commonComponents/BookitoFooter";
 
 const { Header, Content } = Layout;
 
