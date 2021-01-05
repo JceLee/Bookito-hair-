@@ -1,7 +1,6 @@
 import React from "react";
 import { Row, Col, Avatar } from "antd";
 import { StarRead } from "../../../../commonComponents/StarRate";
-import { UserOutlined } from "@ant-design/icons";
 
 export default function DesignerCardTopLeft(props) {
   const { rateScore, rateCount, fname, profile } = props; // TODO: add rateCount

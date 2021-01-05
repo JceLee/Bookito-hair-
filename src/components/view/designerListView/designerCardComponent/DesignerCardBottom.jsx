@@ -1,7 +1,6 @@
 import React, { useLayoutEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
-import placeholder from "../../../../assets/images/placeholder.png";
 
 export default function DesignerCardBottom(props) {
   const { works, mapVisibleDesktop, uid } = props;

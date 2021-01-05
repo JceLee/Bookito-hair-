@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Avatar, Divider, Button } from "antd";
+import { Row, Col, Avatar, Divider } from "antd";
 
 export default function MessengerListCard(props) {
   const { fname, photoURL, roomID, enterChatRoom, msgDate, lastMsg } = props;

@@ -1,11 +1,10 @@
 import React from "react";
 import DesignerCardBottom from "./DesignerCardBottom";
 import DesignerCardTop from "./designerCardTop/DesignerCardTop";
-import { useHistory } from "react-router-dom";
 import { Divider } from "antd";
 
 export default function DesignerCardComponent(props) {
-  const { designer, handleSearch, mapVisibleDesktop } = props;
+  const { designer, mapVisibleDesktop } = props;
 
   return (
     <div
