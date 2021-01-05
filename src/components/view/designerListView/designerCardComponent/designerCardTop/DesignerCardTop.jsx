@@ -18,7 +18,7 @@ export default function DesignerCardTop(props) {
           <Link to={`/designer_profile?uid=${uid}`}>
             <Col><span className="designerCardName">{fname}</span></Col>
           </Link>
-          <Col><StarRead rateScore={rateScore || 0} rateCount={rateCount || 0} /></Col>
+          <Col><StarRead rateScore={rateScore} rateCount={rateCount} /></Col>
         </Row>
         <Row>
           {distance && <p className="designerCardDistance">{`${distance}km from you`}</p>}

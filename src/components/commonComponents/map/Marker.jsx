@@ -56,7 +56,7 @@ export default function Marker(props) {
                 <Link to={`/designer_profile?uid=${designer.uid}`}>
                     <h4 className="markerDescriptionName">{designer.displayName}</h4>
                 </Link>
-                <StarRead rateScore={designer.rateScore || 0} rateCount={designer.rateCount || 0}/>
+                <StarRead rateScore={designer?.rate?.average || 0} rateCount={designer?.rate?.count || 0}/>
                 <p className="markerDescriptionDistance">{`${getDistanceFromLatLonInKm(lat, lng, userLocation && userLocation.lat, userLocation && userLocation.lng)}km from you`}</p>
             </div>
 
