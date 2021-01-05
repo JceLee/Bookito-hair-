@@ -142,6 +142,10 @@
             overflow: auto;
             height: 54px;
 
+            @include mobileM {
+                height: auto;
+            }
+
             @include tabletP {
                 height: 81px;
                 width: 180px;
