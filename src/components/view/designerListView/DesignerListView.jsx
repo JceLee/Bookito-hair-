@@ -10,7 +10,6 @@ import Map from "../../commonComponents/map/Map";
 import { CloseOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
 import { designerTags } from "../../../constants/designerTags";
-import { designerTypes } from "../../../constants/designerTypes";
 import { geocode } from "../../../helpers/geocode";
 import { getDistanceFromLatLonInKm } from "../../../helpers/geocode";
 import InfiniteScroll from "react-infinite-scroll-component";

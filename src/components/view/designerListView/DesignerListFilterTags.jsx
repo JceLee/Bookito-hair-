@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Checkbox, Divider, Row, Col } from "antd";
+import React, {  useEffect } from "react";
+import { Checkbox,  Row, Col } from "antd";
 
 export default function DesignerListFilterTags(props) {
     const { filterTags, setCurrentCheckedTags } = props;

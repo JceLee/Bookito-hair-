@@ -1,7 +1,6 @@
-import React, { useState, useEffect} from "react";
+import React from "react";
 import GoogleMapReact from "google-map-react";
 import Marker from './Marker.jsx';
-import { geocode } from "../../../helpers/geocode";
 
 export default function Map(props) {
     const {

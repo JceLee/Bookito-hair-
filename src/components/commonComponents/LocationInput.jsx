@@ -5,11 +5,9 @@ import PlacesAutocomplete from "react-places-autocomplete";
 export default function LocationInput(props) {
   let {
     address,
-    clearAddress,
     handleAddressChange,
     handleAddressSelect,
     handleSearch,
-    handleGeolocation,
     allowClear,
   } = props;
 
@@ -22,7 +20,7 @@ export default function LocationInput(props) {
       >
         {({ getInputProps, getSuggestionItemProps, suggestions, loading }) => (
           <React.Fragment>
-            {!!handleSearch ? 
+            {!!handleSearch ?
               <Input.Search
                 {...getInputProps({
                   id: "address-input",

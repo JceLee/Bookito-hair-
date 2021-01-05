@@ -4,7 +4,6 @@ import { BackTop } from "antd";
 import DesignerProfileTop from "./designerProfileTop/DesignerProfileTop";
 import DesignerProfileBottom from "./designerProfileBottom/DesignerProfileBottom.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { CreateMessengerRoom } from "../messengerView/CreateMessengerRoom";
 import { select_designer } from "../../../actions/selectedDesignerAction";
 
 export default function DesignerProfileView() {

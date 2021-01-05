@@ -1,6 +1,6 @@
-import {Upload, message, Form, Modal} from "antd";
+import {Upload, message, Form} from "antd";
 import ImgCrop from "antd-img-crop";
-import React, {useEffect, useState} from "react";
+import React, { useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {firebaseOrigin, firebaseStore} from "../../../../../config/fbConfig";
 import {update_database} from "../../../../../actions/firebaseAction";

@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export default function Announcement(props) {
+export default function Announcement() {
   const settings = {
     dots: true,
     infinite: true,

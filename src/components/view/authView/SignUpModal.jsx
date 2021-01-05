@@ -3,7 +3,6 @@ import {Divider, Form, Input, Modal, Button, Select} from "antd";
 import {firebaseAuth, firebaseStore} from "../../../config/fbConfig";
 import {
   sign_in_with_facebook,
-  sign_in_with_google,
 } from "../../../actions/currentUser";
 import {useHistory} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";

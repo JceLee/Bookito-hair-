@@ -1,8 +1,8 @@
-import React, {useRef, useState} from "react";
+import React, { useState} from "react";
 import {Form, Input, Button, message} from 'antd';
 import {useDispatch, useSelector} from "react-redux";
 import {refresh} from "../../../../../actions/currentUser";
-import {firebaseOrigin, firebaseStore} from "../../../../../config/fbConfig";
+import { firebaseStore} from "../../../../../config/fbConfig";
 
 export default function SelfIntroForm() {
   const [client, setClient] = useState(

@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import {Modal, Divider, Button} from "antd";
+import {Modal, Divider} from "antd";
 import firebase from "firebase/app";
 import {useHistory} from "react-router-dom";
-import {firebaseAuth, firebaseStore} from "../../../config/fbConfig";
-import {useDispatch, useSelector} from "react-redux";
+import {firebaseAuth} from "../../../config/fbConfig";
+import {useDispatch} from "react-redux";
 import {sign_in_with_facebook, sign_in_with_google} from "../../../actions/currentUser";
 import {generateUserDocument} from "../../../helpers/getUserDocument";
 import googleLogo from "../../../assets/images/googleLogo.png";
