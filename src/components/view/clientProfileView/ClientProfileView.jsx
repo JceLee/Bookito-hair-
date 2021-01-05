@@ -18,9 +18,7 @@ const validateMessages = {
 
 export default function ClientProfileView(props) {
   const { form, editMode } = props;
-  const [client, setClient] = useState(
-    useSelector((state) => state.currentUser.currentUser)
-  );
+  const [client, setClient] = useState(useSelector((state) => state.currentUser.currentUser));
   const [edit, setEdit] = useState(editMode);
   const [profile, setProfile] = useState(client);
   const [currentAddress, setCurrentAddress] = useState(client.location);
@@ -108,8 +106,7 @@ export default function ClientProfileView(props) {
     uploadTask.on(
       firebaseOrigin.storage.TaskEvent.STATE_CHANGED,
       (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         if (snapshot.state === firebaseOrigin.storage.TaskState.RUNNING) {
           console.log(`Progress: ${progress}%`);
         }
@@ -181,9 +178,7 @@ export default function ClientProfileView(props) {
       >
         <Form.Item className="profilePhoto">
           <Avatar size={128} src={client.photoURL} />
-          {edit ? (
-            <EditOutlined className="editIcon" onClick={modalHandler} />
-          ) : null}
+          {edit ? <EditOutlined className="editIcon" onClick={modalHandler} /> : null}
         </Form.Item>
         {edit ? (
           <Form.Item
@@ -192,7 +187,7 @@ export default function ClientProfileView(props) {
             className="formItems formTopMargin"
             rules={[{ required: true }]}
           >
-            <Input type="text" required={true} />
+            <Input className="clientInput" type="text" required={true} />
           </Form.Item>
         ) : (
           <Form.Item className="clientName">
@@ -207,7 +202,7 @@ export default function ClientProfileView(props) {
             className="formItems"
             rules={[{ required: true, type: "email" }]}
           >
-            <Input type="email" required={true} />
+            <Input className="clientInput" type="email" required={true} />
           </Form.Item>
         ) : (
           <Form.Item className="formItems" label="Email">
@@ -216,12 +211,8 @@ export default function ClientProfileView(props) {
         )}
 
         {edit ? null : <hr />}
-        <Form.Item
-          label="Phone"
-          name="phone"
-          className="formItems"
-        >
-          {edit ? <Input type="number" /> : <div>{client.phone}</div>}
+        <Form.Item label="Phone" name="phone" className="formItems">
+          {edit ? <Input className="clientInput" type="number" /> : <div>{client.phone}</div>}
         </Form.Item>
 
         {edit ? null : <hr />}
@@ -255,6 +246,7 @@ export default function ClientProfileView(props) {
               address={currentAddress}
               handleAddressChange={handleAddressChange}
               handleAddressSelect={handleAddressSelect}
+              className="clientInput"
               // allowClear={true}
             />
           ) : (
@@ -294,10 +286,7 @@ export default function ClientProfileView(props) {
             <Avatar size={128} src={files[0].preview} />
           )}
         </div>
-        <div
-          {...getRootProps({ className: "dropzone" })}
-          className="dragDropContainer"
-        >
+        <div {...getRootProps({ className: "dropzone" })} className="dragDropContainer">
           <input {...getInputProps()} />
           {isDragActive ? (
             <p>Drop the files here...</p>
