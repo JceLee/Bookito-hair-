@@ -1,13 +1,15 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Form, Input, Avatar, Modal, message, Button } from "antd";
-import { EditOutlined } from "@ant-design/icons";
-import { useDropzone } from "react-dropzone";
+import React, {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {Form, Input, Avatar, Modal, message, Button} from "antd";
+import {EditOutlined} from "@ant-design/icons";
+import {useDropzone} from "react-dropzone";
 import BlackBtn from "../../commonComponents/BlackBtn";
-import { firebaseOrigin, firebaseStore } from "../../../config/fbConfig";
-import { refresh } from "../../../actions/currentUser";
+import {firebaseOrigin, firebaseStore} from "../../../config/fbConfig";
+import {refresh} from "../../../actions/currentUser";
 import LocationInput from "../../commonComponents/LocationInput";
-import { geocode } from "../../../helpers/geocode";
+import {geocode} from "../../../helpers/geocode";
+import {designerTypes} from "../../../constants/designerTypes";
+import {useHistory} from "react-router-dom";
 
 const validateMessages = {
   required: "${label} is required!",
@@ -17,8 +19,11 @@ const validateMessages = {
 };
 
 export default function ClientProfileView(props) {
-  const { form, editMode } = props;
+  let {form, editMode} = props;
   const [client, setClient] = useState(useSelector((state) => state.currentUser.currentUser));
+  if (client.accountTypes === designerTypes.newClient) {
+    editMode = true;
+  }
   const [edit, setEdit] = useState(editMode);
   const [profile, setProfile] = useState(client);
   const [currentAddress, setCurrentAddress] = useState(client.location);
@@ -31,32 +36,39 @@ export default function ClientProfileView(props) {
     setEdit(!edit);
     const updatedInfo = {
       ...client,
+      accountTypes: designerTypes.client,
       email: values.email,
       phone: values.phone,
       location: validatedAddress,
       displayName: values.nickName,
-      latLng: addressLatLng,
     };
-    setClient(updatedInfo);
     dispatch(refresh(updatedInfo));
+    setClient(updatedInfo);
     // window.location.reload(false);
     firebaseStore
       .collection("users")
       .doc(client.uid)
       .update({
+        accountTypes: designerTypes.client,
         email: values.email,
         phone: values.phone,
         location: validatedAddress,
         displayName: values.nickName,
-        latLng: addressLatLng,
       })
       .then(function () {
+        goHome();
         return message.success({
-          content: "Saved",
+          content: "Completed",
           duration: "2",
           className: "onFinishMessage",
         });
       });
+  };
+
+  const history = useHistory();
+
+  const goHome = () => {
+    history.push("/");
   };
 
   // save profile photo to db and close modal
@@ -67,7 +79,7 @@ export default function ClientProfileView(props) {
 
   // form layout
   const layout = {
-    labelCol: { span: 4 },
+    labelCol: {span: 4},
   };
 
   // for modal
@@ -79,7 +91,7 @@ export default function ClientProfileView(props) {
 
   // for dropzone
   const [files, setFiles] = useState([]);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const {getRootProps, getInputProps, isDragActive} = useDropzone({
     accept: "image/*",
     maxFiles: 1,
     multiple: false,
@@ -117,7 +129,7 @@ export default function ClientProfileView(props) {
         firebaseStore
           .collection("users")
           .doc(client.uid)
-          .update({ photoURL: downloadURL })
+          .update({photoURL: downloadURL})
           .then(function () {
             return message.success({
               content: "Saved",
@@ -177,17 +189,17 @@ export default function ClientProfileView(props) {
         validateMessages={validateMessages}
       >
         <Form.Item className="profilePhoto">
-          <Avatar size={128} src={client.photoURL} />
-          {edit ? <EditOutlined className="editIcon" onClick={modalHandler} /> : null}
+          <Avatar size={128} src={client.photoURL}/>
+          {edit ? <EditOutlined className="editIcon" onClick={modalHandler}/> : null}
         </Form.Item>
         {edit ? (
           <Form.Item
             label="Name"
             name="nickName"
             className="formItems formTopMargin"
-            rules={[{ required: true }]}
+            rules={[{required: true}]}
           >
-            <Input className="clientInput" type="text" required={true} />
+            <Input className="clientInput" type="text" required={true}/>
           </Form.Item>
         ) : (
           <Form.Item className="clientName">
@@ -200,9 +212,9 @@ export default function ClientProfileView(props) {
             label="Email"
             name="email"
             className="formItems"
-            rules={[{ required: true, type: "email" }]}
+            rules={[{required: true, type: "email"}]}
           >
-            <Input className="clientInput" type="email" required={true} />
+            <Input className="clientInput" type="email" required={true}/>
           </Form.Item>
         ) : (
           <Form.Item className="formItems" label="Email">
@@ -210,12 +222,12 @@ export default function ClientProfileView(props) {
           </Form.Item>
         )}
 
-        {edit ? null : <hr />}
+        {edit ? null : <hr/>}
         <Form.Item label="Phone" name="phone" className="formItems">
-          {edit ? <Input className="clientInput" type="number" /> : <div>{client.phone}</div>}
+          {edit ? <Input className="clientInput" type="number"/> : <div>{client.phone}</div>}
         </Form.Item>
 
-        {edit ? null : <hr />}
+        {edit ? null : <hr/>}
 
         {/* <Form.Item
           label="Address"
@@ -238,7 +250,7 @@ export default function ClientProfileView(props) {
                 return Promise.reject("Cannot validate address!");
               },
             },
-            { required: editMode },
+            {required: editMode},
           ]}
         >
           {edit ? (
@@ -255,10 +267,12 @@ export default function ClientProfileView(props) {
         </Form.Item>
 
         <Form.Item {...layout} className="formItems">
-          {edit ? (
-            <Button className="saveBtn" htmlType="submit">
-              Save
-            </Button>
+          {edit ? (client.accountTypes === designerTypes.newClient ?
+              <Button className="saveBtn" htmlType="submit">
+                Sign Up
+              </Button> : <Button className="saveBtn" htmlType="submit">
+                Save
+              </Button>
           ) : (
             // <BlackBtn
             //   className="saveBtn"
@@ -266,10 +280,11 @@ export default function ClientProfileView(props) {
             //   htmlType="submit"
             //   onClick={saveProfile}
             // />
-            <BlackBtn className="editBtn" btnName="Edit" onClick={setEdit} />
+            <BlackBtn className="editBtn" btnName="Edit" onClick={setEdit}/>
           )}
         </Form.Item>
       </Form>
+
       {/* modal */}
       <Modal
         title="Change Photo"
@@ -281,12 +296,12 @@ export default function ClientProfileView(props) {
       >
         <div className="modalProfilePhoto">
           {files.length === 0 ? (
-            <Avatar size={128} src={profile.photoURL} />
+            <Avatar size={128} src={profile.photoURL}/>
           ) : (
-            <Avatar size={128} src={files[0].preview} />
+            <Avatar size={128} src={files[0].preview}/>
           )}
         </div>
-        <div {...getRootProps({ className: "dropzone" })} className="dragDropContainer">
+        <div {...getRootProps({className: "dropzone"})} className="dragDropContainer">
           <input {...getInputProps()} />
           {isDragActive ? (
             <p>Drop the files here...</p>
@@ -294,7 +309,7 @@ export default function ClientProfileView(props) {
             <p>Drag and drop your photo here, or click to select a file</p>
           )}
         </div>
-        <BlackBtn btnName="Save" onClick={onUploadSubmission} />
+        <BlackBtn btnName="Save" onClick={onUploadSubmission}/>
       </Modal>
     </div>
   );

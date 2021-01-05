@@ -102,7 +102,7 @@ export default function DesignerTypeModal(props) {
         <Radio.Group
           size="large"
           buttonStyle="outlined"
-          options={Object.values(designerTypes).filter(type => type !== "client")}
+          options={Object.values(designerTypes).filter(type => type !== "client" && type !== "newClient")}
           onChange={onSelected}
           optionType="button"
         ></Radio.Group>
