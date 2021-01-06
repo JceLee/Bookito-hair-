@@ -123,6 +123,11 @@ export default function DesignerListFilter(props) {
     </Button>
   );
 
+  function truncate(str) {
+    const n = 6;
+    return (str.length > n) ? str.substr(0, n-1) + '&hellip;' : str;
+  };
+
   return (
     <div className="designerListFilter">
       <DesignerTypeModal
@@ -174,7 +179,7 @@ export default function DesignerListFilter(props) {
         <Collapse ghost activeKey={activeKey}>
           <Panel key="0" header={null} showArrow={false}>
             <div className="numberOfDesigners">
-              {numberOfDesigners} matches in {location}
+              {`${numberOfDesigners} matches in ${location}`}
             </div>
           </Panel>
           <Panel key="1" header={null} showArrow={false}>

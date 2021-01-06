@@ -52,6 +52,7 @@ export default function DesignerListView(props) {
   const [sortBy, setSortBy] = useState("");
 
   useEffect(() => {
+    setLoadingDesigners(true); // Start loading spin animation
     firebaseStore
       .collection("users")
       .where("location", "==", locationAddress)
@@ -62,10 +63,14 @@ export default function DesignerListView(props) {
         querySnapshot.docs.forEach((doc) => {
           newDesigners.push(doc.data());
         });
-        refreshSearchResults(newDesigners);
         dispatch(load_database(newDesigners));
+        (async ()=>{
+          await refreshSearchResults(newDesigners);
+          setLoadingDesigners(false); // End loading spin animation
+        })();
       }, []);
 
+    // This section of code is used to control the filter hiding and appearing on scrolling down and up respectively.
     if (window.innerWidth >= 1200) { // Mixin.scss desktop
       document.getElementsByTagName("body")[0].style.width = defaultDesignerListingWidth;
     }
@@ -77,6 +82,42 @@ export default function DesignerListView(props) {
       document.getElementById('scrollableDiv').removeEventListener('scroll', handleFilterDisplayOnScroll)
     }
   }, [dispatch, props.location.search]);
+
+  const getAndSetUserLocation = async () => {
+    const userLatLng = await geocode(props.location.search);
+    if (userLatLng) {
+      setUserLocation(userLatLng);
+    } else {
+      setUserLocation(defaultLocation);
+      console.log("Unable to get location!");
+    }
+    return userLatLng;
+  };
+
+  const assignDistanceToDesigners = async(designers, userLatLng) => {
+    // Calculate and set distance of designers from user location
+    if (!userLatLng) {
+      return;
+    }
+    designers.forEach((designer) => {
+      if (designer.latLng) {
+        designer.distance = getDistanceFromLatLonInKm(
+          designer.latLng.lat,
+          designer.latLng.lng,
+          userLatLng.lat,
+          userLatLng.lng
+        );
+      }
+    });
+  };
+
+  const refreshSearchResults = async (newDesigners) => {
+    let userLatLng = await getAndSetUserLocation();
+    assignDistanceToDesigners(newDesigners, userLatLng);
+    setDesigners(newDesigners);
+    setDesignersCurrent(newDesigners);
+    setDesignersCurrentDisplayed(newDesigners);
+  };
 
   const handleSearch = (designer) => {
     const route = `/designer_profile?uid=${designer.uid}`;
@@ -167,38 +208,6 @@ export default function DesignerListView(props) {
 
     // Reapply sort byc
     updateSortBy(sortBy);
-  };
-
-  const assignLatLngToDesigners = (designers) => {
-    // Get and set user location
-    geocode(props.location.search).then((latLng) => {
-      if (latLng) {
-        setUserLocation(latLng);
-
-        // Calculate and set distance of designers from user location
-        designers.forEach((designer) => {
-          if (designer.latLng) {
-            designer.distance = getDistanceFromLatLonInKm(
-              designer.latLng.lat,
-              designer.latLng.lng,
-              latLng.lat,
-              latLng.lng
-            );
-          }
-        });
-      } else {
-        setUserLocation(defaultLocation);
-        console.log("Unable to get location!");
-      }
-    });
-  }
-
-  const refreshSearchResults = async (newDesigners) => {
-    assignLatLngToDesigners(newDesigners);
-    await displayLoadingAnimation();
-    setDesigners(newDesigners);
-    setDesignersCurrent(newDesigners);
-    setDesignersCurrentDisplayed(newDesigners);
   };
 
   const displayMoreResults = () => {
@@ -298,7 +307,10 @@ export default function DesignerListView(props) {
             <Spin spinning={loadingDesigners} size="large">
               {/* console.log(designers) || */}
               {designersCurrentDisplayed.map((designer, index) => (
-                <div key={index} className="designerList">
+                <div
+                  key={index}
+                  className="designerList"
+                >
                   <DesignerCardComponent
                     designer={designer}
                     handleSearch={handleSearch}

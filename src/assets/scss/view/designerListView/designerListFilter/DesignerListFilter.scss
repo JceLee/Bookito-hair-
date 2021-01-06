@@ -53,6 +53,10 @@
             font-size: 18px;
             margin-left: 4px;
             margin-top: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: auto;
         }
         .ant-collapse-header {
             visibility: hidden !important;

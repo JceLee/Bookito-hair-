@@ -31,7 +31,7 @@ export default function Map(props) {
             {userLocation && <div className="mapComponent">
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: "AIzaSyDUz5tzN9Fm76pLUherzsDE-jG0LKBEhIc" }} // TODO: extract!
-                    // center={location}
+                    center={userLocation}
                     defaultCenter={userLocation}
                     defaultZoom={15}
                     options={{ gestureHandling: "greedy", scrollwheel: true }} // Controls how the map can be navigated
