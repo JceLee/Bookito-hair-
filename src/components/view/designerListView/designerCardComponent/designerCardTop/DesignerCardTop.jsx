@@ -21,7 +21,7 @@ export default function DesignerCardTop(props) {
           <Col><StarRead rateScore={rateScore} rateCount={rateCount} /></Col>
         </Row>
         <Row>
-          {distance && <p className="designerCardDistance">{`${distance}km from you`}</p>}
+          {!!distance && <p className="designerCardDistance">{`${distance}km from you`}</p>}
         </Row>
         <Row>
           <div className="designerCardServices">
