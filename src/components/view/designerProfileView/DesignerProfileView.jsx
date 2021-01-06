@@ -1,10 +1,10 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
-import { BackTop } from "antd";
+import {BrowserRouter} from "react-router-dom";
+import {BackTop} from "antd";
 import DesignerProfileTop from "./designerProfileTop/DesignerProfileTop";
 import DesignerProfileBottom from "./designerProfileBottom/DesignerProfileBottom.jsx";
-import { useDispatch, useSelector } from "react-redux";
-import { select_designer } from "../../../actions/selectedDesignerAction";
+import {useDispatch, useSelector} from "react-redux";
+import {select_designer} from "../../../actions/selectedDesignerAction";
 
 export default function DesignerProfileView() {
   const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
@@ -14,14 +14,14 @@ export default function DesignerProfileView() {
   const currentUser = useSelector((state) => state.currentUser.currentUser);
   const dispatch = useDispatch();
   dispatch(select_designer(selected !== undefined ? selected : currentUser));
-  const authentication = currentUser.uid === designer.uid;
+  const authentication = currentUser === null ? false : currentUser.uid === designer.uid;
 
   return (
     <BrowserRouter>
       <div className="designerProfileView">
-        <DesignerProfileTop authentication={authentication} />
+        <DesignerProfileTop authentication={authentication}/>
 
-        <DesignerProfileBottom />
+        <DesignerProfileBottom/>
 
         <BackTop visibilityHeight={0}>
           <div className="backTopButton">Top</div>

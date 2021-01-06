@@ -78,6 +78,7 @@
     background-color: $black;
     color: $white;
     text-align: left;
+
     .designerProfile {
       display: flex;
       align-items: center;
@@ -85,14 +86,18 @@
       @include tabletP {
         padding: 10px;
       }
+
       .designerNameRateLocation {
         margin: 0 0 0 16px;
+
         .ant-rate {
           font-size: 1rem;
           line-height: 1;
+
           .ant-rate-star {
             margin: 0 1px 0 0;
           }
+
           &-star {
             > div {
               &:hover {
@@ -102,14 +107,17 @@
           }
         }
       }
+
       h2 {
         color: $white;
         margin: 0;
       }
+
       p {
         padding: 0;
         margin: 0;
       }
+
       .designerProfileImage {
         border: 1px solid $white;
       }
@@ -131,14 +139,17 @@
       @include desktop {
         width: 60vw;
       }
+
       .designerNavItem {
         @include tabletP {
           padding: 0 10px;
         }
         margin: 0 0.2rem 0 0;
+
         a {
           color: $white;
         }
+
         a:hover,
         a:active,
         a.active {
@@ -186,6 +197,7 @@
       background-color: $lightGrey;
       height: 1px;
     }
+
     // #dividerBetwnHrsPrices {
     //   @include tabletP {
     //     display: none;
@@ -266,6 +278,7 @@
             width: 15vw;
             height: 15vw;
           }
+
           img {
             padding: 0;
             width: 40.625vw;
@@ -283,6 +296,7 @@
               height: 15vw;
             }
           }
+
           img:hover {
             cursor: pointer;
             opacity: 0.75;
@@ -305,10 +319,12 @@
         @include tabletP {
           // margin-left: 0;
         }
+
         .profileDivider {
           display: none;
         }
       }
+
       #HrsReviewDivider {
         background-color: $lightGrey;
         height: 1px;
@@ -317,6 +333,7 @@
         }
       }
     }
+
     .serviceNPriceGrid,
     .hoursGrid {
       width: 100%;
@@ -332,6 +349,7 @@
         }
       }
     }
+
     .serviceGrid {
       #serviceAndPrice {
         font-size: 20px;
@@ -413,6 +431,7 @@
             padding-right: 17rem;
           }
         }
+
         #service {
           text-align: left;
           padding-right: 6.7rem;
@@ -479,6 +498,7 @@
     // Designer Bottom - Review
     .review {
       margin-right: 0;
+
       .ant-card-small {
         .ant-card-body {
           padding-bottom: 0;
@@ -486,6 +506,7 @@
             font-size: 20px;
           }
         }
+
         margin: 0 auto;
         width: 90vw;
         @include tabletP {
@@ -495,12 +516,15 @@
           width: 30vw;
         }
       }
+
       .reviewDate {
         display: inline;
         float: right;
       }
+
       .reviewContentContainter {
         display: block;
+
         .reviewContent {
           margin-bottom: 0;
         }
@@ -509,12 +533,15 @@
       #reviewCustomerName {
         font-weight: bold;
       }
+
       .ant-rate {
         font-size: 1rem;
         line-height: 1;
+
         .ant-rate-star {
           margin: 0 1px 0 0;
         }
+
         &-star {
           > div {
             &:hover {
@@ -674,22 +701,27 @@
     padding: 12px 0 24px 0;
     width: inherit;
     height: inherit;
+
     .slick-slider {
       .slick-slide img {
         margin: auto;
       }
+
       .slick-next {
         right: 16px;
         z-index: 1;
       }
+
       .slick-prev {
         left: 16px;
         z-index: 1;
       }
+
       .slick-prev:before,
       .slick-next:before {
         color: $white;
       }
+
       .workImgInSlider {
         width: calc(100vw - 20px);
         height: calc(100vw - 20px);
@@ -720,6 +752,7 @@
 .onFinishMessage {
   width: 60vw;
   margin: 80vh auto 20vh;
+
   .ant-message-notice-content {
     width: 100%;
     margin: 0 auto;
