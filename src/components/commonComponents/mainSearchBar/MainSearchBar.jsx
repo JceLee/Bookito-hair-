@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from "react";
-import {Input, Select, Form} from "antd";
-import {CaretDownOutlined} from "@ant-design/icons";
-import {useScrollPosition} from "@n8tb1t/use-scroll-position";
+import React, { useEffect, useState } from "react";
+import { Input, Select, Form } from "antd";
+import { CaretDownOutlined } from "@ant-design/icons";
+import { useScrollPosition } from "@n8tb1t/use-scroll-position";
 import LocationInput from "../LocationInput";
-import {geocodeByAddress, getLatLng} from "react-places-autocomplete";
-import {reverseGeocode} from "../../../helpers/geocode";
-import {useHistory} from "react-router-dom";
-import {designerTypes} from "../../../constants/designerTypes";
+import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+import { reverseGeocode } from "../../../helpers/geocode";
+import { useHistory } from "react-router-dom";
+import { designerTypes } from "../../../constants/designerTypes";
 
 export default function MainSearchBar(props) {
   const {
@@ -88,7 +88,7 @@ export default function MainSearchBar(props) {
     document.getElementById("mainHeader").style.display = "unset";
   };
 
-  useScrollPosition(({prevPos, currPos}) => {
+  useScrollPosition(({ prevPos, currPos }) => {
     try {
       if (currPos.y < heightToShowSearchBarOnNav) {
         stickSearchBarOnNavBar(window.innerWidth);
@@ -172,8 +172,8 @@ export default function MainSearchBar(props) {
       <Input.Group compact>
         <Select
           onChange={setSelectedType}
-          placeholder="Choose Designer Type"
-          suffixIcon={<CaretDownOutlined/>}
+          placeholder="Choose Designer"
+          suffixIcon={<CaretDownOutlined style={{pointerEvents: "none"}} />}
           defaultValue={defaultDesignerType}
         >
           {designerTypeSelect.map((type, inx) => {
@@ -188,7 +188,7 @@ export default function MainSearchBar(props) {
           <Form.Item
             name="addressInput"
             initialValue=""
-            rules={[{required: true}]}
+            rules={[{ required: true }]}
           >
             <LocationInput
               address={address}
