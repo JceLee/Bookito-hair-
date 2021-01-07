@@ -101,12 +101,12 @@ export default function DesignerTypeModal(props) {
           1. Choose designer type
         </div>
         <Radio.Group
-          size="large"
-          buttonStyle="outlined"
-          options={Object.values(designerTypes).filter(type => type !== "client" && type !== "newClient")}
-          onChange={onSelected}
-          optionType="button"
-        ></Radio.Group>
+  size="large"
+  buttonStyle="outlined"
+  options={Object.values(designerTypes).filter(type => type !== "client" && type !== "newClient")}
+  onChange={onSelected}
+  optionType="button"
+  />
       </div>
       <hr/>
       <div id="locationInputContainerInMobileSearchBar">

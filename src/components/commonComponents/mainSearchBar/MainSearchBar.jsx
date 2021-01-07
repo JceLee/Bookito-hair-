@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Input, Select, Form } from "antd";
-import { CaretDownOutlined } from "@ant-design/icons";
-import { useScrollPosition } from "@n8tb1t/use-scroll-position";
+import React, {useEffect, useState} from "react";
+import {Input, Select, Form} from "antd";
+import {CaretDownOutlined} from "@ant-design/icons";
+import {useScrollPosition} from "@n8tb1t/use-scroll-position";
 import LocationInput from "../LocationInput";
-import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
-import { reverseGeocode } from "../../../helpers/geocode";
-import { useHistory } from "react-router-dom";
-import { designerTypes } from "../../../constants/designerTypes";
+import {geocodeByAddress, getLatLng} from "react-places-autocomplete";
+import {reverseGeocode} from "../../../helpers/geocode";
+import {useHistory} from "react-router-dom";
+import {designerTypes} from "../../../constants/designerTypes";
 
 export default function MainSearchBar(props) {
   const {
@@ -14,11 +14,11 @@ export default function MainSearchBar(props) {
     defaultAddress,
     disableMovement
   } = props;
- 
+
   const [designerType, setDesignerType] = useState(defaultDesignerType ? defaultDesignerType : "");
   const [address, setAddress] = useState(defaultAddress ? defaultAddress : "");
   const [form] = Form.useForm();
-  const designerTypeSelect = Object.values(designerTypes).filter(type => type !== "client");
+  const designerTypeSelect = Object.values(designerTypes).filter(type => type !== "client" && type !== "newClient");
   const tabletLWidth = 1024;
   const half = 2;
   var heightToShowSearchBarOnNav = null;
@@ -40,9 +40,9 @@ export default function MainSearchBar(props) {
   useEffect(() => {
     if (!disableMovement) {
       heightToShowSearchBarOnNav =
-      (window.pageYOffset +
-        document.getElementById("searchBarForm").clientHeight) *
-      -1;
+        (window.pageYOffset +
+          document.getElementById("searchBarForm").clientHeight) *
+        -1;
     }
   });
 
@@ -88,7 +88,7 @@ export default function MainSearchBar(props) {
     document.getElementById("mainHeader").style.display = "unset";
   };
 
-  useScrollPosition(({ prevPos, currPos }) => {
+  useScrollPosition(({prevPos, currPos}) => {
     try {
       if (currPos.y < heightToShowSearchBarOnNav) {
         stickSearchBarOnNavBar(window.innerWidth);
@@ -173,7 +173,7 @@ export default function MainSearchBar(props) {
         <Select
           onChange={setSelectedType}
           placeholder="Choose Designer Type"
-          suffixIcon={<CaretDownOutlined />}
+          suffixIcon={<CaretDownOutlined/>}
           defaultValue={defaultDesignerType}
         >
           {designerTypeSelect.map((type, inx) => {
@@ -188,7 +188,7 @@ export default function MainSearchBar(props) {
           <Form.Item
             name="addressInput"
             initialValue=""
-            rules={[{ required: true }]}
+            rules={[{required: true}]}
           >
             <LocationInput
               address={address}
