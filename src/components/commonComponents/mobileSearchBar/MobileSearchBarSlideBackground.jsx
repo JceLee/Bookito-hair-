@@ -11,21 +11,12 @@ import mobile6 from "../../../assets/images/backgrounds/mobile6.jpg";
 import mobile7 from "../../../assets/images/backgrounds/mobile7.jpg";
 
 const mobiles = [mobile5, mobile6, mobile1, mobile2, mobile4, mobile7, mobile3 ]
-const tmpCss = {
-  backgroundColor: "#fdfdfd",
-  height: "6px",
-  width: "100%",
-  objectFit: "cover",
-  position: "absolute",
-  zIndex: 3
-}
 
 export default function MobileSearchBarSlideBackground() {
   const AutoplaySlider = withAutoplay(AwesomeSlider);
 
   return (
       <div className="searchBarSectionImg" style={{width:"100%", height:"450px"}}>
-        <div style={tmpCss}/>
         <AutoplaySlider
           play={true}
           cancelOnInteraction={false}
@@ -33,6 +24,7 @@ export default function MobileSearchBarSlideBackground() {
           bullets={false}
           fillParent={true}
           buttons={false}
+          showTimer={false}
           cssModule={sliderScss}
         >
           {mobiles.map((img, inx) => (

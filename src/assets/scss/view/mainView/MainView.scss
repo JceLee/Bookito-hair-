@@ -34,8 +34,14 @@
     @include tabletP {
       display: none;
     }
-  }
 
+    // hide timer
+    .awssld__timer {
+      --timer-height: 0px;
+      opacity: 0;
+      pointer-events: none; /* prevent events (mouse clicking etc.) */
+    }
+  }
   #searchBarForm {
     border-top: 1px solid transparent;
     top: 0;
