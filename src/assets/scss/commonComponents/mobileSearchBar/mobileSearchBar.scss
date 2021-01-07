@@ -14,8 +14,11 @@
   .ant-input-affix-wrapper {
     height: 50px;
     border-radius: 25px;
-    border: 1px solid;
-    box-shadow: 0 1px 3px 0 $black;
+    // border: 1px solid;
+    // box-shadow: 0 1px 3px 0 $black;
+    border: 1px solid $white;
+    box-shadow: 0px 0px 0.25px 0.25px rgba(0, 0, 0, 0) !important;
+    z-index: 3;
 
     .ant-input {
       margin-left: 20px;
@@ -24,20 +27,27 @@
     .ant-input-suffix {
       margin-right: 10px;
       font-size: 20px;
-      font-weight: bolder;
+      // font-weight: bolder;
     }
   }
 }
 
 .mobileSearchBarModal {
   .autocompleteDropdownContainer {
-    box-shadow: 0 1px 3px 0 $black;
+    // box-shadow: 0 1px 3px 0 $black;
     padding: 10px;
     position: absolute;
     width: 100%;
+    border: 1px solid $lightGrey;
     border-radius: 20px;
-    margin-top: 10px;
+    margin-top: 4px;
     z-index: 1;
+    overflow-y: scroll;
+    max-height: 45vh;
+    
+    @include mobileM {
+      max-height: 50vh;
+    }
   }
 
   .autocompleteDropdownContainer:empty {

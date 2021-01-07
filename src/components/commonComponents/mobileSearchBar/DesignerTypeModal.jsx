@@ -88,7 +88,7 @@ export default function DesignerTypeModal(props) {
 
   return (
     <Modal
-      title="Untitlted"
+      // title=" "
       onCancel={onCancel}
       visible={visible}
       footer={null}

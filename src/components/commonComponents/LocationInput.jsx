@@ -26,7 +26,7 @@ export default function LocationInput(props) {
                   id: "address-input",
                 })}
                 size="large"
-                placeholder="Type where you are looking for" // TODO: Extract string to string file
+                placeholder="Where should we look?"
                 onSearch={handleSearch}
               />
               :<Input
@@ -39,7 +39,7 @@ export default function LocationInput(props) {
               />
             }
             <div className="autocompleteDropdownContainer">
-              {loading ? <div>Loading...</div> : null}
+              {loading ? <div className="autocompleteDropdownContainerLoading">Loading...</div> : null}
               {suggestions.map((suggestion, index) => {
                 const className = suggestion.active
                   ? "suggestion-item--active"

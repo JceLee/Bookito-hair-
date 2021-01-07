@@ -172,8 +172,8 @@ export default function MainSearchBar(props) {
       <Input.Group compact>
         <Select
           onChange={setSelectedType}
-          placeholder="Choose Designer Type"
-          suffixIcon={<CaretDownOutlined />}
+          placeholder="Choose Designer"
+          suffixIcon={<CaretDownOutlined style={{pointerEvents: "none"}} />}
           defaultValue={defaultDesignerType}
         >
           {designerTypeSelect.map((type, inx) => {
