@@ -13,16 +13,16 @@ export default function MessengerListCard(props) {
       }}
     >
       <div className="photoImage">
-          <Avatar className="msgListImage" size={64} src={photoURL} />
-          </div>
-          <div className="rightSide">
-          <Row className="NameAndDate">
-            <Col>{fname}</Col>
-            <Col>{msgDate}</Col>
-          </Row>
-          <Row className="textMsg">{lastMsg}</Row>
-          <Divider className="msgListDivider" />
-          </div>
+        <Avatar className="msgListImage" size={64} src={photoURL} />
+      </div>
+      <div className="rightSide">
+        <Row className="NameAndDate">
+          <Col>{fname}</Col>
+          <Col>{msgDate}</Col>
+        </Row>
+        <Row className="textMsg">{lastMsg}</Row>
+        <Divider className="msgListDivider" />
+      </div>
     </div>
   );
 }
