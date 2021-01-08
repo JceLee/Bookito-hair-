@@ -17,13 +17,13 @@ const validateMessages = {
 };
 
 export default function ClientProfileView(props) {
-  const { form, editMode } = props;
+  const { editMode } = props;
   const [client, setClient] = useState(useSelector((state) => state.currentUser.currentUser));
   const [edit, setEdit] = useState(editMode);
   const [profile, setProfile] = useState(client);
-  const [currentAddress, setCurrentAddress] = useState(client.location);
-  const [validatedAddress, setValidatedAddress] = useState(client.location);
-  const [addressLatLng, setAddressLatLng] = useState(client.latLng);
+  const [currentAddress, setCurrentAddress] = useState(client?.location || "");
+  const [validatedAddress, setValidatedAddress] = useState(client?.location || "");
+  const [addressLatLng, setAddressLatLng] = useState(client?.latLng || {});
   const dispatch = useDispatch();
 
   // save profile to db and reload page
@@ -169,15 +169,15 @@ export default function ClientProfileView(props) {
         {...layout}
         onFinish={saveProfile}
         initialValues={{
-          nickName: client.displayName,
-          email: client.email,
-          phone: client.phone,
-          address: client.location,
+          nickName: client?.displayName || "",
+          email: client?.email || "",
+          phone: client?.phone || "",
+          address: client?.location || "",
         }}
         validateMessages={validateMessages}
       >
         <Form.Item className="profilePhoto">
-          <Avatar size={128} src={client.photoURL} />
+          <Avatar size={128} src={client?.photoURL} />
           {edit ? <EditOutlined className="editIcon" onClick={modalHandler} /> : null}
         </Form.Item>
         {edit ? (
@@ -191,7 +191,7 @@ export default function ClientProfileView(props) {
           </Form.Item>
         ) : (
           <Form.Item className="clientName">
-            <div className="formBottomMargin">{client.displayName}</div>
+            <div className="formBottomMargin">{client?.displayName || ""}</div>
           </Form.Item>
         )}
 
@@ -206,13 +206,13 @@ export default function ClientProfileView(props) {
           </Form.Item>
         ) : (
           <Form.Item className="formItems" label="Email">
-            <div>{client.email}</div>
+            <div>{client?.email}</div>
           </Form.Item>
         )}
 
         {edit ? null : <hr />}
         <Form.Item label="Phone" name="phone" className="formItems">
-          {edit ? <Input className="clientInput" type="number" /> : <div>{client.phone}</div>}
+          {edit ? <Input className="clientInput" type="number" /> : <div>{client?.phone || ""}</div>}
         </Form.Item>
 
         {edit ? null : <hr />}
@@ -250,7 +250,7 @@ export default function ClientProfileView(props) {
               // allowClear={true}
             />
           ) : (
-            <div>{client.location}</div>
+            <div>{client?.location || ""}</div>
           )}
         </Form.Item>
 
@@ -281,7 +281,7 @@ export default function ClientProfileView(props) {
       >
         <div className="modalProfilePhoto">
           {files.length === 0 ? (
-            <Avatar size={128} src={profile.photoURL} />
+            <Avatar size={128} src={profile?.photoURL} />
           ) : (
             <Avatar size={128} src={files[0].preview} />
           )}

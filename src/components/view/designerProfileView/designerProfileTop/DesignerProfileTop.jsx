@@ -1,22 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Affix, Button, Modal, Form, Collapse } from "antd";
+import { Affix, Button, Modal, Form } from "antd";
 import DesignerNav from "./designerNav/DesignerNav.jsx";
 import ReadOnlyStar from "../../../commonComponents/ReadOnlyStar";
-import ClientProfileView from "../../../view/clientProfileView/ClientProfileView";
-import ServiceNPriceForm from "./designerEditProfile/ServiceNPriceForm";
-import HoursForm from "./designerEditProfile/HoursForm";
-import WorksForm from "./designerEditProfile/WorksForm";
-import SelfIntroForm from "./designerEditProfile/SelfIntroForm";
 import BookNowModal from "../designerProfileTop/bookNowModal/BookNowModal";
 import Avatar from "antd/lib/avatar/avatar";
 import { useSelector } from "react-redux";
+import DesignerProfileCreateEdit from "./DesignerProfileCreateEdit";
 
-const defaultStartTime = 16; // 08:00
-const defaultEndTime = 42; // 21:00
-const defaultTradingHours = [defaultStartTime, defaultEndTime];
 const searchBarHeight = 64;
 const avatarSize = 64;
-const { Panel } = Collapse;
 
 export default function DesignerProfileTop(props) {
   const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
@@ -25,29 +17,6 @@ export default function DesignerProfileTop(props) {
   const [visibleEditProfileModal, setVisibleEditProfileModal] = useState(false);
   const [visibleBookNowModal, setVisibleBookNowModal] = useState(false);
   const [form] = Form.useForm();
-
-  const editProfilePanels = [
-    {
-      header: "Service & Price",
-      content: <ServiceNPriceForm />,
-    },
-    {
-      header: "Hours",
-      content: <HoursForm defaultTradingHours={defaultTradingHours} />,
-    },
-    {
-      header: "Address & Phone",
-      content: <ClientProfileView form={form} editMode={true} />,
-    },
-    {
-      header: "Works",
-      content: <WorksForm />,
-    },
-    {
-      header: "Self-introduction",
-      content: <SelfIntroForm />,
-    },
-  ];
 
   const showEditProfileModal = () => {
     setVisibleEditProfileModal(true);
@@ -99,22 +68,14 @@ export default function DesignerProfileTop(props) {
                 onCancel={handleCancelEditProfileModal}
                 // width={window.innerWidth * 0.8}
                 destroyOnClose={true}
-                footer={null}
+                footer={[]}
                 // footer={
                 //   <Button className="saveBtnInEditProfile" key="submit" onClick={onOk}>
                 //     Save
                 //   </Button>
                 // }
               >
-                <Collapse className="editProfileCollapse" bordered={false} defaultActiveKey={["1"]}>
-                  {editProfilePanels.map((panel, index) => {
-                    return (
-                      <Panel className="editProfilePanel" header={panel.header} key={index + 1}>
-                        {panel.content}
-                      </Panel>
-                    );
-                  })}
-                </Collapse>
+                <DesignerProfileCreateEdit />
               </Modal>
             </>
           ) : (

@@ -19,8 +19,8 @@ const formInitialValues = {
 };
 
 export default function ServiceNPriceForm() {
-  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
-  const [tabNames] = useState(Object.keys(designer.services));
+  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner || state.currentUser.currentUser);
+  const [tabNames] = useState(designer.services ? Object.keys(designer.services) : []);
   const [form] = Form.useForm();
   const [addTabModal, setAddTabModal] = useState(false);
   const [removeTabModal, setRemoveTabModal] = useState(false);
@@ -32,7 +32,7 @@ export default function ServiceNPriceForm() {
   });
 
   const [state, setState] = useState({
-    activeKey: initialPanes[0].key,
+    activeKey: initialPanes[0]?.key,
     panes: initialPanes,
   });
 
@@ -134,7 +134,7 @@ export default function ServiceNPriceForm() {
     message.error("Click on No");
   };
 
-  const { panes, activeKey } = state;
+  const { activeKey, panes } = state;
 
   return (
     <Form
@@ -144,7 +144,13 @@ export default function ServiceNPriceForm() {
       name="editProfile"
       onFinish={yes}
     >
-      <Tabs type="editable-card" onChange={onChange} activeKey={activeKey} onEdit={onEdit}>
+      <Tabs
+        type="editable-card"
+        onChange={onChange}
+        activeKey={activeKey}
+        onEdit={onEdit} 
+        addIcon={<PlusOutlined style={{ height: 38, paddingTop: 11 }} />}
+      >
         {panes.map((tab) => {
           return (
             <TabPane

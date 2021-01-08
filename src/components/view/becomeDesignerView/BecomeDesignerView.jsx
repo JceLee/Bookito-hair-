@@ -1,5 +1,6 @@
 import React from "react";
 import InfoCard from "../mainView/InfoCard";
+import DesignerProfileCreateEdit from "../designerProfileView/designerProfileTop/DesignerProfileCreateEdit";
 
 export default function BecomeDesignerView() {
   return (
@@ -8,7 +9,6 @@ export default function BecomeDesignerView() {
       <div className="subHeading">
         Manage your schedule and let your clients book appointments online.
       </div>
-      <button className="getStartedBtn">Get Started</button>
       <div className="infoCardsSection">
         <InfoCard
           header="Manage your schedule"
@@ -23,6 +23,9 @@ export default function BecomeDesignerView() {
           src="https://www.flaticon.com/svg/static/icons/svg/1078/1078011.svg"
         />
       </div>
+      <button className="getStartedBtn">Get Started</button>
+      <DesignerProfileCreateEdit />
+
     </div>
   );
 }

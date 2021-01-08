@@ -35,6 +35,15 @@ $paddingOfworkImgInModal: 10px;
       justify-content: space-between;
       padding: 0 5px;
     }
+    .ant-tabs-nav-add {
+      padding: 0;
+      width: 38px;
+      height: 38px !important;
+    }
+  }
+
+  .ant-tabs-nav {
+    height: 38px !important;
   }
 
   .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab {

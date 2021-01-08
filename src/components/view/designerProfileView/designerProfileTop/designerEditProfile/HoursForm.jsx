@@ -22,7 +22,20 @@ let sliderVisibility;
 let checkboxOffset;
 
 export default function HoursForm() {
-  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
+  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner || state.currentUser.currentUser);
+
+  // Set up for new designer
+  if (!designer.hours) {
+    designer.hours = {
+      "Mon": [{ closed: false, tradingHours: [16, 42] }] ,
+      "Tue": [{ closed: false, tradingHours: [16, 42] }] ,
+      "Wed": [{ closed: false, tradingHours: [16, 42] }] ,
+      "Thu": [{ closed: false, tradingHours: [16, 42] }] ,
+      "Fri": [{ closed: false, tradingHours: [16, 42] }] ,
+      "Sat": [{ closed: false, tradingHours: [16, 42] }] ,
+      "Sun": [{ closed: false, tradingHours: [16, 42] }] ,
+    }
+  }
 
   const [form] = Form.useForm();
 

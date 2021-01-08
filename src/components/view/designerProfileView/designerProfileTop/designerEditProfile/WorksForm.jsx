@@ -13,12 +13,12 @@ const layout = {
 
 export default function WorksForm() {
   const designers = useSelector((state) => state.firestore.designers);
-  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
+  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner || state.currentUser.currentUser);
   const [client, setClient] = useState(designer)
   const [form] = Form.useForm();
   const photoURLs = [];
   const [testState, setTestState] = useState(false);
-  const [fileList, setFileList] = useState(designer.works);
+  const [fileList, setFileList] = useState(designer?.works || []);
 
   const dispatch = useDispatch();
 
@@ -89,18 +89,19 @@ export default function WorksForm() {
   };
 
   const updateRedux = (newWorks) => {
-    const updatedInfo = {
-      ...client,
-      works: newWorks,
-    };
-    setClient(updatedInfo);
-    dispatch(refresh(updatedInfo));
-    designers.forEach((designer) => {
-      if (designer.uid === client.uid) {
-        designer.works = newWorks;
-        dispatch(update_database(designers));
-      }
-    });
+    // TODO: Reactivate later - Kangmin
+    // const updatedInfo = {
+    //   ...client,
+    //   works: newWorks,
+    // };
+    // setClient(updatedInfo);
+    // dispatch(refresh(updatedInfo));
+    // designers.forEach((designer) => {
+    //   if (designer.uid === client.uid) {
+    //     designer.works = newWorks;
+    //     dispatch(update_database(designers));
+    //   }
+    // });
   };
 
   const onChange = ({fileList: newFileList}) => {
