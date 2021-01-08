@@ -50,11 +50,6 @@
         margin-top: 95px;
       }
 
-      // Spinner
-      .ant-spin-dot-item {
-        background-color: $black;
-      }
-
       .desktopMapOpenWidthListing {
         @include desktop {
           width: 40.5vw;

@@ -15,16 +15,16 @@ export default function DesignerProfileCreateEdit() {
 
   const editProfilePanels = [
     {
+      header: "Address & Phone",
+      content: <ClientProfileView editMode={true} />,
+    },
+    {
       header: "Service & Price",
       content: <ServiceNPriceForm />,
     },
     {
       header: "Hours",
       content: <HoursForm defaultTradingHours={defaultTradingHours} />,
-    },
-    {
-      header: "Address & Phone",
-      content: <ClientProfileView editMode={true} />,
     },
     {
       header: "Works",

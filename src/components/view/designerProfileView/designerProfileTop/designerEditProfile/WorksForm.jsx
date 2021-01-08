@@ -137,8 +137,8 @@ export default function WorksForm() {
           {fileList.length < 8 && "+ Upload"}
         </Upload>
       </ImgCrop>
-      <button className="uploadButtonInEditProfile" onClick={onUploadSubmission}>
-        Upload
+      <button className="blackBtn" onClick={onUploadSubmission}>
+        Save
       </button>
     </Form>
   );
