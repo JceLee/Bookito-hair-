@@ -19,13 +19,6 @@
       @include tabletL {
         padding: 6px 0;
       }
-      // display: flex;
-      // justify-content: space-between;
-
-      // #support {
-      //   visibility: hidden;
-      //   font-weight: bold;
-      // }
 
       .footerMenu {
         .footerPtag {
@@ -38,7 +31,6 @@
         }
 
         .ant-btn-link {
-          // padding: 2px 2px;
           font-size: 13.5px;
           font-weight: 405;
           color: darkslategrey;
@@ -47,17 +39,12 @@
         @include tabletP {
           display: flex;
           float: right;
-          // justify-content: space-evenly;
           margin-top: -2%;
           margin-right: 3%;
         }
 
         @include tabletL {
           margin-top: -4.2%;
-        }
-
-        @include desktopXL {
-          // margin-top: -9%;
         }
       }
     }
@@ -82,12 +69,10 @@
       font-size: 13px;
       margin-top: 5%;
       text-align: center;
-      // font-weight: bold;
       color: darkgray;
 
       @include tabletP {
         margin-top: 1%;
-        // font-size: 13px;
       }
 
       @include tabletL {
@@ -97,7 +82,6 @@
       #bktCopyright {
         margin-top: 5%;
         text-align: center;
-        // color: $black;
 
         @include tabletP {
           margin-top: 3%;

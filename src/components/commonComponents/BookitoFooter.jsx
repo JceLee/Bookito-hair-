@@ -93,9 +93,7 @@ export default function BookitoFooter() {
     <div className="bookitoFooter">
       <div className="footerContents">
         <div className="supportAndMenu">
-          {/* <p id="support">Support</p> */}
           <section className="footerMenu">
-            {/* <Space split={<Divider type={dividerType} style={{ visibility: "hidden" }} />}> */}
             <Button className="footerPtag" type="link" onClick={howBktWorks}>
               How Bookito works
             </Button>
@@ -111,7 +109,6 @@ export default function BookitoFooter() {
             <Button className="footerPtag" type="link" onClick={aboutUs}>
               About Us
             </Button>
-            {/* </Space> */}
           </section>
         </div>
         <Divider className="footerDivider" />
