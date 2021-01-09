@@ -18,9 +18,9 @@ const formInitialValues = {
   },
 };
 
-export default function ServiceNPriceForm() {
-  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
-  const [tabNames] = useState(Object.keys(designer.services));
+export default function ServiceNPriceForm(props) {
+  const { designer, createMode } = props;
+  const [tabNames] = useState(designer.services ? Object.keys(designer.services) : []);
   const [form] = Form.useForm();
   const [addTabModal, setAddTabModal] = useState(false);
   const [removeTabModal, setRemoveTabModal] = useState(false);
@@ -32,7 +32,7 @@ export default function ServiceNPriceForm() {
   });
 
   const [state, setState] = useState({
-    activeKey: initialPanes[0].key,
+    activeKey: initialPanes[0]?.key,
     panes: initialPanes,
   });
 
@@ -116,7 +116,22 @@ export default function ServiceNPriceForm() {
   };
 
   const onValuesChange = () => {
-    // setTest(e);
+    const { panes } = state;
+    if (createMode) {
+      const tabList = panes.map(tab => tab.title);
+      const servicesRawValue = form.getFieldValue().services;
+      const servicesList = {};
+      Object.keys(servicesRawValue).forEach(serviceValue => {
+        if (tabList.includes(serviceValue)) {
+          servicesList[serviceValue] = servicesRawValue[serviceValue].filter(subService => !!subService).map(subService => ({
+            service: subService?.serviceName || "",
+            description: subService?.description || "",
+            price: subService?.price || 0,
+          }));
+        }
+      });
+      designer.services = servicesList;
+    }
   };
 
   const changeTabName = (e) => {
@@ -134,7 +149,7 @@ export default function ServiceNPriceForm() {
     message.error("Click on No");
   };
 
-  const { panes, activeKey } = state;
+  const { activeKey, panes } = state;
 
   return (
     <Form
@@ -144,7 +159,13 @@ export default function ServiceNPriceForm() {
       name="editProfile"
       onFinish={yes}
     >
-      <Tabs type="editable-card" onChange={onChange} activeKey={activeKey} onEdit={onEdit}>
+      <Tabs
+        type="editable-card"
+        onChange={onChange}
+        activeKey={activeKey}
+        onEdit={onEdit} 
+        addIcon={<PlusOutlined style={{ height: 38, paddingTop: 11 }} />}
+      >
         {panes.map((tab) => {
           return (
             <TabPane
@@ -246,7 +267,7 @@ export default function ServiceNPriceForm() {
                   );
                 }}
               </Form.List>
-              <BlackBtn btnName="Save" onClick={yes} />
+              {!createMode && <BlackBtn btnName="Save" onClick={yes} />}
             </TabPane>
           );
         })}

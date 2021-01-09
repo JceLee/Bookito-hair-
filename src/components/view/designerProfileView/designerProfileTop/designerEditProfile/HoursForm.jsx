@@ -4,25 +4,36 @@ import { Checkbox, Form, Slider } from "antd";
 import formatTime, { destructureTimeRange } from "../../../../../helpers/timeFunctions";
 import BlackBtn from "../../../../commonComponents/BlackBtn";
 
+const defaultStartTime = 16; // 08:00
+const defaultEndTime = 42; // 21:00
+const defaultTradingHours = [defaultStartTime, defaultEndTime];
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-
 const minValueInSlider = 0; // "00:00"
-
 const maxValueInSlider = 47; // "23:30"
-
 const timeConvertingFactor = 30;
-
 const layout = {
   labelCol: { span: 6 },
   wrapperCol: { span: 24 },
 };
 
 let sliderVisibility;
-
 let checkboxOffset;
 
-export default function HoursForm() {
-  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
+export default function HoursForm(props) {
+  const { designer, createMode } = props;
+
+  // Set up for new designer
+  if (designer.accountType === "client") {
+    designer.hours = {
+      "Mon": [{ closed: false, tradingHours: defaultTradingHours }] ,
+      "Tue": [{ closed: false, tradingHours: defaultTradingHours }] ,
+      "Wed": [{ closed: false, tradingHours: defaultTradingHours }] ,
+      "Thu": [{ closed: false, tradingHours: defaultTradingHours }] ,
+      "Fri": [{ closed: false, tradingHours: defaultTradingHours }] ,
+      "Sat": [{ closed: false, tradingHours: defaultTradingHours }] ,
+      "Sun": [{ closed: false, tradingHours: defaultTradingHours }] ,
+    }
+  }
 
   const [form] = Form.useForm();
 
@@ -120,11 +131,16 @@ export default function HoursForm() {
   });
 
   const onChangeSliderHandler = (day, minutes) => {
+    console.log(minutes);
     const [from, to] = destructureTimeRange(minutes);
     setFormattedTimes((prevValue) => ({
       ...prevValue,
       [day]: [from, to],
     }));
+
+    if (createMode) {
+      designer.hours[day][0]["tradingHours"] = minutes;
+    }
   };
 
   const onChangeCheckboxHandler = (event) => {
@@ -133,6 +149,10 @@ export default function HoursForm() {
       ...prevValue,
       [name]: checked,
     }));
+    
+    if (createMode) {
+      designer.hours[name][0]["closed"] = checked;
+    }
   };
 
   const yes = (values) => {
@@ -215,7 +235,7 @@ export default function HoursForm() {
           );
         })}
       </div>
-      <BlackBtn btnName="Save" onClick={yes} />
+      {!createMode && <BlackBtn btnName="Save" onClick={yes} />}
     </Form>
   );
 }

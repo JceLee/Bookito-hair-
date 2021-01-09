@@ -3,8 +3,9 @@
 .becomeDesignerView {
   padding: 0 5%;
   margin-top: 40px;
+  overflow-x: hidden;
   @include desktop {
-    height: 5vh;
+    // height: 5vh;
     padding: 0 10%;
   }
   .mainHeading {
@@ -13,10 +14,21 @@
   }
   .subHeading {
     font-size: 18px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+  .subHeadingWideMargin {
+    font-size: 18px;
+    margin-top: 36px;
+    margin-bottom: 24px;
+  }
+  .description {
+    font-size: 16px;
     margin-top: 16px;
     margin-bottom: 24px;
   }
   .getStartedBtn {
+    height: 38px;
     padding: 8px 20px;
     background-color: black;
     color: white;
@@ -32,6 +44,12 @@
     transition: background-color 0.3s;
     cursor: pointer;
   }
+  .becomeDesignerBtn {
+    float: right;
+    height: 38px;
+    margin-right: 1%;
+    margin-top: 20px;
+  }
   .infoCardsSection {
     text-align: center;
     margin: 0 auto;
@@ -44,6 +62,54 @@
         margin: 0 auto;
         padding-top: 24px;
       }
+    }
+  }
+
+  // Stage 1 profession selection
+  // Duplicates from DesignerTypeModal.scss
+  .createProfileStage1 {
+    margin: 5px 0 20px 0;
+
+    .ant-radio-group {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .ant-radio-button-wrapper {
+      border-left-width: 1px;
+      border-radius: 20px;
+      width: 46%;
+      height: 40px;
+      margin: 2%;
+      text-align: center;
+      color: #858585;
+      white-space: nowrap;
+      font-size: 0.9rem;
+
+      @include mobileM {
+        font-size: 1rem;
+      }
+
+      @include tabletP {
+        margin-left: 1%;
+        margin-right: 1%;
+        width: 31.25%;
+      }
+    }
+
+    .ant-radio-button-wrapper:hover {
+      color: $black;
+      border: 2px solid $black;
+    }
+
+    .ant-radio-button-wrapper:not(:first-child)::before {
+      background-color: unset;
+    }
+
+    .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled),
+    .ant-radio-button-wrapper-checked:not([class*=" ant-radio-button-wrapper-disabled"]).ant-radio-button-wrapper {
+      border: 2px solid $black;
+      color: $black;
     }
   }
 }

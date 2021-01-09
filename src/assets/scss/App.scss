@@ -64,3 +64,8 @@ body {
 #layout {
   background-color: $white;
 }
+
+// Spinner color should be globally black
+.ant-spin-dot-item {
+  background-color: $black;
+}
