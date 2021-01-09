@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Radio, Spin, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { refresh } from "../../../actions/currentUser";
 import { firebaseStore } from "../../../config/fbConfig";
 import { designerTypes } from "../../../constants/designerTypes";
@@ -14,8 +15,7 @@ import SelfIntroForm from "../designerProfileView/designerProfileTop/designerEdi
 export default function BecomeDesignerView() {
   const designer = useSelector((state) => state.currentUser.currentUser);
   const dispatch = useDispatch();
-
-  console.log(designer);
+  const history = useHistory();
 
   const [createProfileStage, setCreateProfileStage] = useState(0);
   const [spinning, setSpinning] = useState(false);
@@ -32,13 +32,13 @@ export default function BecomeDesignerView() {
     }
   };
 
-  const completeProfileCreation = () => {
+  const completeProfileCreation = async () => {
     designer.accountType = designerType;
     console.log(designer);
     // Update redux client
     dispatch(refresh(designer));
     // Update firebase
-    firebaseStore
+    await firebaseStore
       .collection("users")
       .doc(designer.uid)
       .update(designer)
@@ -49,6 +49,12 @@ export default function BecomeDesignerView() {
           className: "onFinishMessage",
         });
       });
+    goToMyProfile();
+  };
+
+  const goToMyProfile = () => {
+    const route = `/designer_profile?uid=${designer.uid}`;
+    history.push(route);
   };
 
   const saveClientProfileView = () => {
@@ -96,7 +102,7 @@ export default function BecomeDesignerView() {
             <Button
               className="getStartedBtn"
               onClick={() => {
-                startProfileCreation();
+                goToMyProfile();
               }}
             >
               Go to my Profile
@@ -151,15 +157,6 @@ export default function BecomeDesignerView() {
               extraLogicOnSave={saveClientProfileView}
             />
           </div>
-
-          {/* <Button
-            className="getStartedBtn becomeDesignerBtn"
-            onClick={() => {
-              completeProfileCreation();
-            }}
-          >
-            Complete
-          </Button> */}
         </>
       )}
 
