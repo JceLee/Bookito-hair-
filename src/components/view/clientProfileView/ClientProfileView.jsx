@@ -17,8 +17,7 @@ const validateMessages = {
 };
 
 export default function ClientProfileView(props) {
-  const { editMode } = props;
-  const [client, setClient] = useState(useSelector((state) => state.currentUser.currentUser));
+  const { client, createMode, editMode } = props;
   const [edit, setEdit] = useState(editMode);
   const [profile, setProfile] = useState(client);
   const [currentAddress, setCurrentAddress] = useState(client?.location || "");
@@ -26,20 +25,19 @@ export default function ClientProfileView(props) {
   const [addressLatLng, setAddressLatLng] = useState(client?.latLng || {});
   const dispatch = useDispatch();
 
-  // save profile to db and reload page
+  // Save profile to db and reload page
   const saveProfile = (values) => {
     setEdit(!edit);
     const updatedInfo = {
-      ...client,
       email: values.email,
       phone: values.phone,
       location: validatedAddress,
       displayName: values.nickName,
       latLng: addressLatLng,
     };
-    setClient(updatedInfo);
-    dispatch(refresh(updatedInfo));
-    // window.location.reload(false);
+    Object.assign(client, updatedInfo); // Update local client
+    dispatch(refresh(client)); // Update redux client
+    // Update firebase
     firebaseStore
       .collection("users")
       .doc(client.uid)
@@ -126,11 +124,10 @@ export default function ClientProfileView(props) {
             });
           });
         const updatedInfo = {
-          ...client,
           photoURL: downloadURL,
         };
-        setClient(updatedInfo);
-        dispatch(refresh(updatedInfo));
+        Object.assign(client, updatedInfo); // Update local client
+        dispatch(refresh(client)); // Update redux client
       }
     );
     Promise.all(promises)
@@ -254,7 +251,7 @@ export default function ClientProfileView(props) {
           )}
         </Form.Item>
 
-        <Form.Item {...layout} className="formItems">
+        {!createMode && <Form.Item {...layout} className="formItems">
           {edit ? (
             <Button className="saveBtn" htmlType="submit">
               Save
@@ -268,7 +265,7 @@ export default function ClientProfileView(props) {
             // />
             <BlackBtn className="editBtn" btnName="Edit" onClick={setEdit} />
           )}
-        </Form.Item>
+        </Form.Item>}
       </Form>
       {/* modal */}
       <Modal

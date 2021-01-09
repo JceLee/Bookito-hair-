@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Button, Radio, Spin } from "antd";
 import { designerTypes } from "../../../constants/designerTypes";
 import InfoCard from "../mainView/InfoCard";
 import DesignerProfileCreateEdit from "../designerProfileView/designerProfileTop/DesignerProfileCreateEdit";
 
 export default function BecomeDesignerView() {
+  const designer = useSelector((state) => state.currentUser.currentUser);
+
   const [createProfileStage, setCreateProfileStage] = useState(0);
   const [spinning, setSpinning] = useState(false);
   const [designerType, setDesignerType] = useState("");
@@ -59,14 +62,25 @@ export default function BecomeDesignerView() {
               src="https://www.flaticon.com/svg/static/icons/svg/1078/1078011.svg"
             />
           </div>
-          <Button
-            className="getStartedBtn"
-            onClick={() => {
-              startProfileCreation();
-            }}
-          >
-            Get Started
-          </Button>
+          {designer.accountType === "client" ? (
+            <Button
+              className="getStartedBtn"
+              onClick={() => {
+                startProfileCreation();
+              }}
+            >
+              Get Started
+            </Button>
+          ) : (
+            <Button
+              className="getStartedBtn"
+              onClick={() => {
+                startProfileCreation();
+              }}
+            >
+              Go to my Profile
+            </Button>
+          )}
         </Spin>
       )}
 
@@ -101,17 +115,17 @@ export default function BecomeDesignerView() {
         <>
           <div className="subHeading">Tell us about your business!</div>
           <div className="editProfileModal">
-            <DesignerProfileCreateEdit />
+            <DesignerProfileCreateEdit designer={designer} createMode={true} />
           </div>
 
-          <Button
+          {/* <Button
             className="getStartedBtn becomeDesignerBtn"
             onClick={() => {
               completeProfileCreation();
             }}
           >
             Complete
-          </Button>
+          </Button> */}
         </>
       )}
     </div>

@@ -25,7 +25,8 @@ export default function HoursForm() {
   const designer = useSelector((state) => state.selectedDesigner.selectedDesigner || state.currentUser.currentUser);
 
   // Set up for new designer
-  if (!designer.hours) {
+  console.log(designer);
+  if (designer.accountType === "client") {
     designer.hours = {
       "Mon": [{ closed: false, tradingHours: [16, 42] }] ,
       "Tue": [{ closed: false, tradingHours: [16, 42] }] ,
@@ -36,6 +37,8 @@ export default function HoursForm() {
       "Sun": [{ closed: false, tradingHours: [16, 42] }] ,
     }
   }
+  console.log(1);
+  console.log(designer);
 
   const [form] = Form.useForm();
 

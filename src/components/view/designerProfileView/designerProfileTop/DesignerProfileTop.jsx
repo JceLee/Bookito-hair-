@@ -75,7 +75,7 @@ export default function DesignerProfileTop(props) {
                 //   </Button>
                 // }
               >
-                <DesignerProfileCreateEdit />
+                <DesignerProfileCreateEdit designer={designer} />
               </Modal>
             </>
           ) : (
