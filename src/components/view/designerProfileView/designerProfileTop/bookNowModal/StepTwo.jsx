@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import { Button, Row, Col, Divider, Card, Typography, Checkbox } from "antd";
+import React, {useEffect} from "react";
+import {Button, Row, Col, Divider, Card, Typography, Checkbox} from "antd";
 
 export default function StepTwo(props) {
-  const { Text } = Typography;
+  const {Text} = Typography;
   const {
     services,
     servicesContent,
@@ -22,9 +22,6 @@ export default function StepTwo(props) {
     }
   }, []);
 
-  console.log(services);
-  console.log(servicesContent);
-
   const renderService = () => (
     <div className="checkboxOption">
       <Card
@@ -35,6 +32,7 @@ export default function StepTwo(props) {
         }}
       >
         {servicesContent[serviceKey].map((menu, index) => {
+
           return (
             <div className="servicesContent" key={index}>
               <Row>
@@ -42,52 +40,55 @@ export default function StepTwo(props) {
                   key={menu.id}
                   id={menu.id}
                   checked={
-                    calculationBox[serviceKey] &&
-                    calculationBox[serviceKey].id === menu.id
+                    calculationBox.some(e => e.id === menu.id)
                   }
                   onChange={() => {
+
                     navigateTo("Estimated Price");
-
-                    let newCalculationBox = { ...calculationBox };
-
-                    switch (serviceKey) {
-                      case "Cut":
-                        newCalculationBox["Cut"] =
-                          newCalculationBox["Cut"] === menu ? null : menu;
-                        break;
-                      case "Style":
-                        newCalculationBox["Style"] =
-                          newCalculationBox["Style"] === menu ? null : menu;
-                        break;
-                      case "Perms":
-                        newCalculationBox["Perms"] =
-                          newCalculationBox["Perms"] === menu ? null : menu;
-                        break;
-                      case "Colors":
-                        newCalculationBox["Colors"] =
-                          newCalculationBox["Colors"] === menu ? null : menu;
-                        break;
-                      case "Clinic":
-                        newCalculationBox["Clinic"] =
-                          newCalculationBox["Clinic"] === menu ? null : menu;
-                        break;
-                      case "Promo":
-                        newCalculationBox["Promo"] =
-                          newCalculationBox["Promo"] === menu ? null : menu;
-                        break;
+                    if (calculationBox.some((e) => e.id === menu.id)) {
+                      setCalculationBox(calculationBox.filter(e => e.id !== menu.id));
+                    } else {
+                      setCalculationBox([...calculationBox, menu]);
                     }
 
-                    setCalculationBox(newCalculationBox);
+
+                    // switch (serviceKey) {
+                    //   case "Cut":
+                    //     newCalculationBox["Cut"] =
+                    //       newCalculationBox["Cut"] === menu ? null : menu;
+                    //     break;
+                    //   case "Style":
+                    //     newCalculationBox["Style"] =
+                    //       newCalculationBox["Style"] === menu ? null : menu;
+                    //     break;
+                    //   case "Perms":
+                    //     newCalculationBox["Perms"] =
+                    //       newCalculationBox["Perms"] === menu ? null : menu;
+                    //     break;
+                    //   case "Colors":
+                    //     newCalculationBox["Colors"] =
+                    //       newCalculationBox["Colors"] === menu ? null : menu;
+                    //     break;
+                    //   case "Clinic":
+                    //     newCalculationBox["Clinic"] =
+                    //       newCalculationBox["Clinic"] === menu ? null : menu;
+                    //     break;
+                    //   case "Promo":
+                    //     newCalculationBox["Promo"] =
+                    //       newCalculationBox["Promo"] === menu ? null : menu;
+                    //     break;
+                    // }
+
                   }}
                 >
                   <Text strong>{menu.service}</Text>
                 </Checkbox>
               </Row>
               <p className="serviceMenu">
-                ${menu.price} <br />
+                ${menu.price} <br/>
                 {menu.description}
               </p>
-              <Divider />
+              <Divider/>
             </div>
           );
         })}
@@ -102,28 +103,27 @@ export default function StepTwo(props) {
         <>
           <div className="estimatedPrice">
             <p className="estimatedPricePtag">Estimated price</p>
-            {calculationBox &&
-              Object.values(calculationBox).map((menu, index) => {
-                return (
-                  menu && (
-                    <div className="servicePriceTag" key={index}>
-                      <p>
-                        {menu.service} : ${menu.price}{" "}
-                        <Button
-                          className="removeButton"
-                          type="link"
-                          onClick={() => {
-                            removeFromBox(menu);
-                          }}
-                        >
-                          Remove
-                        </Button>
-                      </p>
-                    </div>
-                  )
-                );
-              })}
-            <Divider id="estPriceDivider" />
+            {calculationBox.map((menu, index) => {
+              return (
+                menu && (
+                  <div className="servicePriceTag" key={index}>
+                    <p>
+                      {menu.service} : ${menu.price}{" "}
+                      <Button
+                        className="removeButton"
+                        type="link"
+                        onClick={() => {
+                          removeFromBox(menu);
+                        }}
+                      >
+                        Remove
+                      </Button>
+                    </p>
+                  </div>
+                )
+              );
+            })}
+            <Divider id="estPriceDivider"/>
             <p className="totalCost">Estimated total: ${totalSum()}</p>
           </div>
         </>

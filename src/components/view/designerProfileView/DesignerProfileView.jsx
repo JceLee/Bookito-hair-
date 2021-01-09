@@ -20,9 +20,7 @@ export default function DesignerProfileView() {
     <BrowserRouter>
       <div className="designerProfileView">
         <DesignerProfileTop authentication={authentication}/>
-
         <DesignerProfileBottom/>
-
         <BackTop visibilityHeight={0}>
           <div className="backTopButton">Top</div>
         </BackTop>

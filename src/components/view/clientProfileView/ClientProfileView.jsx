@@ -34,9 +34,10 @@ export default function ClientProfileView(props) {
   // save profile to db and reload page
   const saveProfile = (values) => {
     setEdit(!edit);
+    const newType = client.accountTypes === designerTypes.newClient ? designerTypes.client : client.accountTypes;
     const updatedInfo = {
       ...client,
-      accountTypes: designerTypes.client,
+      accountTypes: newType,
       email: values.email,
       phone: values.phone,
       location: validatedAddress,
@@ -49,7 +50,7 @@ export default function ClientProfileView(props) {
       .collection("users")
       .doc(client.uid)
       .update({
-        accountTypes: designerTypes.client,
+        accountTypes: newType,
         email: values.email,
         phone: values.phone,
         location: validatedAddress,

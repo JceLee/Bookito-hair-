@@ -150,9 +150,9 @@ export default function Calendar(props) {
               contentComponent={getTooltipContent}
               showCloseButton
             />{" "}
-            <Fab color="secondary" className="addButton" onClick={displayAddAppointmentModal}>
-              <AddIcon />
-            </Fab>
+            {/*<Fab color="secondary" className="addButton" onClick={displayAddAppointmentModal}>*/}
+            {/*  <AddIcon />*/}
+            {/*</Fab>*/}
           </Scheduler>
         </Paper>
         <DeleteAppointmentModal

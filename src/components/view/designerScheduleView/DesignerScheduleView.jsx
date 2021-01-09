@@ -53,8 +53,6 @@ export default function DesignerSchedule() {
       .then((querySnapshot) => {
         querySnapshot.docs.forEach((doc) => {
           let { monthAndDate } = formatDate(doc.data().date, doc.data().time);
-          console.log(doc)
-          console.log(doc.data().bookedServices);
           requests.push({
             id: doc.data().aid,
             clientName: doc.data().customerName,
@@ -83,8 +81,6 @@ export default function DesignerSchedule() {
       types: [],
     };
     const tags = Object.keys(services);
-    console.log(tags);
-    console.log(services);
     tags.forEach((e) => {
       returnValue.serviceName += services[e].service + " ";
       returnValue.types.push(services[e].service);

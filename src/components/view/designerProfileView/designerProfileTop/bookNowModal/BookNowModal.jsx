@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "react-day-picker/lib/style.css";
 import { Steps, Modal, Button, message } from "antd";
 import StepOne from "./StepOne";
@@ -94,7 +94,7 @@ export default function BookNowModal(props) {
   };
 
   const totalSum = () => {
-    return Object.values(calculationBox).reduce((sum, service) => {
+    return calculationBox.reduce((sum, service) => {
       if (!service) {
         return sum;
       }
@@ -152,14 +152,8 @@ export default function BookNowModal(props) {
   };
 
   const removeFromBox = (serviceToRemove) => {
-    let newCalculationBox = { ...calculationBox };
+    setCalculationBox(calculationBox.filter(e => e.id !== serviceToRemove.id));
 
-    for (let [key, value] of Object.entries(newCalculationBox)) {
-      if (serviceToRemove === value) {
-        newCalculationBox[key] = null;
-      }
-    }
-    setCalculationBox(newCalculationBox);
   };
 
   const requestNewAppointment = () => {
@@ -196,7 +190,7 @@ export default function BookNowModal(props) {
     firebaseStore
       .collection("mail")
       .add({
-        to: "lkm4351@gmail.com",
+        to: designer.email,
         message: {
           subject: "A REQUEST ARRIVE!",
           text: "Customer A requests a new appointment.",
@@ -207,14 +201,19 @@ export default function BookNowModal(props) {
   };
 
   const getServiceContent = () => {
+    // let contentString = "";
+    // for (let [key, value] of Object.entries(calculationBox)) {
+    //   if (value === null) {
+    //     continue;
+    //   }
+    //   let { service } = value;
+    //   contentString += `[${service}]` + " ";
+    // }
+    // return contentString;
     let contentString = "";
-    for (let [key, value] of Object.entries(calculationBox)) {
-      if (value === null) {
-        continue;
-      }
-      let { service } = value;
-      contentString += `[${service}]` + " ";
-    }
+    calculationBox.forEach(e => {
+      contentString += `[${e.service}]` + " ";
+    })
     return contentString;
   };
 

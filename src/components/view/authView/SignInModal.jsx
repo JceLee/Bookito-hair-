@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Modal, Divider} from "antd";
+import {Modal, Divider, Button} from "antd";
 import firebase from "firebase/app";
 import {useHistory} from "react-router-dom";
 import {firebaseAuth} from "../../../config/fbConfig";
@@ -23,7 +23,7 @@ export default function SignInModal() {
         const user = result.user;
         generateUserDocument(user).then(function (result) {
           dispatch(sign_in_with_google(result));
-          if(result.accountTypes === designerTypes.newClient) {
+          if (result.accountTypes === designerTypes.newClient) {
             directProfile();
           }
         });
@@ -47,7 +47,7 @@ export default function SignInModal() {
         const user = result.user;
         generateUserDocument(user).then(function (result) {
           dispatch(sign_in_with_facebook(result));
-          if(result.accountType === designerTypes.newClient) {
+          if (result.accountType === designerTypes.newClient) {
             directProfile();
           }
         });
@@ -88,7 +88,7 @@ export default function SignInModal() {
     };
     generateUserDocument(user).then(function (result) {
       dispatch(sign_in_with_facebook(result));
-      if(result.accountType === designerTypes.newClient) {
+      if (result.accountType === designerTypes.newClient) {
         directProfile();
       }
     });
@@ -96,7 +96,10 @@ export default function SignInModal() {
 
   return (
     <div>
-      <span onClick={showLoginModal}>Sign In</span>
+      <div className="menuBtn">
+        <Button shape="round" onClick={showLoginModal}>Sign In</Button>
+      </div>
+
       <Modal
         className="loginModal"
         visible={isLoginShowing}
