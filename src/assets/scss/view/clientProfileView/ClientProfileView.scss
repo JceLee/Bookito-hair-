@@ -4,7 +4,7 @@
   margin: 20px;
 
   .profileForm {
-    margin-top: 3vh;
+    padding-top: 3vh;
     label {
       font-weight: 700;
     }
@@ -23,7 +23,8 @@
       width: 100%;
       background-color: black;
       color: white;
-      margin-top: 25px;
+      margin-top: 24px;
+      margin-bottom: 12px;
       border: 1px solid black;
       height: 32px;
     }
@@ -66,20 +67,20 @@
 
   @include clientProfile576 {
     .profileForm {
-      width: 500px;
+      width: 100%;
       margin-left: auto;
       margin-right: auto;
 
       .saveBtn {
-        width: 500px;
+        width: 100%;
       }
 
       .profilePhoto .ant-form-item-control-input {
-        width: 500px;
+        width: 100%;
       }
 
       .clientName .ant-form-item-control-input {
-        width: 500px;
+        width: 100%;
       }
     }
     .formItems {

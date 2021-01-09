@@ -17,29 +17,27 @@ const validateMessages = {
 };
 
 export default function ClientProfileView(props) {
-  const { form, editMode } = props;
-  const [client, setClient] = useState(useSelector((state) => state.currentUser.currentUser));
+  const { client, createMode, editMode, extraLogicOnSave } = props;
   const [edit, setEdit] = useState(editMode);
   const [profile, setProfile] = useState(client);
-  const [currentAddress, setCurrentAddress] = useState(client.location);
-  const [validatedAddress, setValidatedAddress] = useState(client.location);
-  const [addressLatLng, setAddressLatLng] = useState(client.latLng);
+  const [currentAddress, setCurrentAddress] = useState(client?.location);
+  const [validatedAddress, setValidatedAddress] = useState(client?.location);
+  const [addressLatLng, setAddressLatLng] = useState(client?.latLng);
   const dispatch = useDispatch();
 
-  // save profile to db and reload page
+  // Save profile to db and reload page
   const saveProfile = (values) => {
     setEdit(!edit);
     const updatedInfo = {
-      ...client,
       email: values.email,
       phone: values.phone,
       location: validatedAddress,
       displayName: values.nickName,
       latLng: addressLatLng,
     };
-    setClient(updatedInfo);
-    dispatch(refresh(updatedInfo));
-    // window.location.reload(false);
+    Object.assign(client, updatedInfo); // Update local client
+    dispatch(refresh(client)); // Update redux client
+    // Update firebase
     firebaseStore
       .collection("users")
       .doc(client.uid)
@@ -57,6 +55,8 @@ export default function ClientProfileView(props) {
           className: "onFinishMessage",
         });
       });
+    
+    extraLogicOnSave();
   };
 
   // save profile photo to db and close modal
@@ -126,11 +126,10 @@ export default function ClientProfileView(props) {
             });
           });
         const updatedInfo = {
-          ...client,
           photoURL: downloadURL,
         };
-        setClient(updatedInfo);
-        dispatch(refresh(updatedInfo));
+        Object.assign(client, updatedInfo); // Update local client
+        dispatch(refresh(client)); // Update redux client
       }
     );
     Promise.all(promises)
@@ -169,15 +168,15 @@ export default function ClientProfileView(props) {
         {...layout}
         onFinish={saveProfile}
         initialValues={{
-          nickName: client.displayName,
-          email: client.email,
-          phone: client.phone,
-          address: client.location,
+          nickName: client?.displayName,
+          email: client?.email,
+          phone: client?.phone,
+          address: client?.location,
         }}
         validateMessages={validateMessages}
       >
         <Form.Item className="profilePhoto">
-          <Avatar size={128} src={client.photoURL} />
+          <Avatar size={128} src={client?.photoURL} />
           {edit ? <EditOutlined className="editIcon" onClick={modalHandler} /> : null}
         </Form.Item>
         {edit ? (
@@ -191,7 +190,7 @@ export default function ClientProfileView(props) {
           </Form.Item>
         ) : (
           <Form.Item className="clientName">
-            <div className="formBottomMargin">{client.displayName}</div>
+            <div className="formBottomMargin">{client?.displayName}</div>
           </Form.Item>
         )}
 
@@ -206,13 +205,13 @@ export default function ClientProfileView(props) {
           </Form.Item>
         ) : (
           <Form.Item className="formItems" label="Email">
-            <div>{client.email}</div>
+            <div>{client?.email}</div>
           </Form.Item>
         )}
 
         {edit ? null : <hr />}
         <Form.Item label="Phone" name="phone" className="formItems">
-          {edit ? <Input className="clientInput" type="number" /> : <div>{client.phone}</div>}
+          {edit ? <Input className="clientInput" type="number" /> : <div>{client?.phone}</div>}
         </Form.Item>
 
         {edit ? null : <hr />}
@@ -250,11 +249,11 @@ export default function ClientProfileView(props) {
               // allowClear={true}
             />
           ) : (
-            <div>{client.location}</div>
+            <div>{client?.location}</div>
           )}
         </Form.Item>
 
-        <Form.Item {...layout} className="formItems">
+        {!createMode && <Form.Item {...layout} className="formItems">
           {edit ? (
             <Button className="saveBtn" htmlType="submit">
               Save
@@ -268,7 +267,7 @@ export default function ClientProfileView(props) {
             // />
             <BlackBtn className="editBtn" btnName="Edit" onClick={setEdit} />
           )}
-        </Form.Item>
+        </Form.Item>}
       </Form>
       {/* modal */}
       <Modal
@@ -281,7 +280,7 @@ export default function ClientProfileView(props) {
       >
         <div className="modalProfilePhoto">
           {files.length === 0 ? (
-            <Avatar size={128} src={profile.photoURL} />
+            <Avatar size={128} src={profile?.photoURL} />
           ) : (
             <Avatar size={128} src={files[0].preview} />
           )}
