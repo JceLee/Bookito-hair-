@@ -22,6 +22,10 @@ p {
   text-align: center;
 }
 
+.latestNewsText {
+  height: 200px;
+}
+
 .ant-modal-confirm .ant-modal-confirm-btns {
   float: none !important;
 }

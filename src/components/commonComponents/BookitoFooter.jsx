@@ -23,13 +23,13 @@ const howBktWorks = () => {
   });
 };
 
-const investors = () => {
+const latestNews = () => {
   Modal.info({
-    title: "Investors",
+    title: "Latest News",
     bodyStyle: footerMenuCSS,
-    style: { top: "25%" },
+    style: { top: "20%", textAlign: "center" },
     okText: "Exit",
-    content: <div>Investors</div>,
+    content: <div className="latestNewsText">No updated news yet.</div>,
   });
 };
 
@@ -98,8 +98,8 @@ export default function BookitoFooter() {
               How Bookito works
             </Button>
             <Divider className="menuDivider" type={dividerType} style={{ visibility: "hidden" }} />
-            <Button className="footerPtag" type="link" onClick={investors}>
-              Investors
+            <Button className="footerPtag" type="link" onClick={latestNews}>
+              Latest News
             </Button>
             <Divider className="menuDivider" type={dividerType} style={{ visibility: "hidden" }} />
             <Button className="footerPtag" type="link" onClick={helpCentre}>
