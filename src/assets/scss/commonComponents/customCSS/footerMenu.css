@@ -1,0 +1,35 @@
+.ant-modal-confirm-info .ant-modal-confirm-body > .anticon {
+  display: none;
+}
+
+.ant-modal-confirm-body > .anticon + .ant-modal-confirm-title + .ant-modal-confirm-content {
+  margin-left: 5px !important;
+}
+
+.ant-modal-confirm-title {
+  margin-bottom: 1.5em;
+}
+
+.aboutUsName {
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: 2em !important;
+}
+
+.helpCenterText {
+  text-align: center;
+}
+
+.ant-modal-confirm .ant-modal-confirm-btns {
+  float: none !important;
+}
+
+.ant-btn-primary {
+  color: #fdfdfd !important;
+  background-color: #1b1b1b !important;
+  border-color: #1b1b1b !important;
+  width: 100%;
+  margin-top: 0.5em;
+}
