@@ -1,12 +1,21 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { Button, Radio, Spin } from "antd";
+import { Button, Radio, Spin, message } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { refresh } from "../../../actions/currentUser";
+import { firebaseStore } from "../../../config/fbConfig";
 import { designerTypes } from "../../../constants/designerTypes";
 import InfoCard from "../mainView/InfoCard";
-import DesignerProfileCreateEdit from "../designerProfileView/designerProfileTop/DesignerProfileCreateEdit";
+import ClientProfileView from "../../view/clientProfileView/ClientProfileView";
+import ServiceNPriceForm from "../designerProfileView/designerProfileTop/designerEditProfile/ServiceNPriceForm";
+import HoursForm from "../designerProfileView/designerProfileTop/designerEditProfile/HoursForm";
+import WorksForm from "../designerProfileView/designerProfileTop/designerEditProfile/WorksForm";
+import SelfIntroForm from "../designerProfileView/designerProfileTop/designerEditProfile/SelfIntroForm";
 
 export default function BecomeDesignerView() {
   const designer = useSelector((state) => state.currentUser.currentUser);
+  const dispatch = useDispatch();
+
+  console.log(designer);
 
   const [createProfileStage, setCreateProfileStage] = useState(0);
   const [spinning, setSpinning] = useState(false);
@@ -23,7 +32,28 @@ export default function BecomeDesignerView() {
     }
   };
 
-  const completeProfileCreation = () => {};
+  const completeProfileCreation = () => {
+    designer.accountType = designerType;
+    console.log(designer);
+    // Update redux client
+    dispatch(refresh(designer));
+    // Update firebase
+    firebaseStore
+      .collection("users")
+      .doc(designer.uid)
+      .update(designer)
+      .then(function () {
+        return message.success({
+          content: "Saved",
+          duration: "2",
+          className: "onFinishMessage",
+        });
+      });
+  };
+
+  const saveClientProfileView = () => {
+    setCreateProfileStage(3);
+  };
 
   const playLoadingSpinner = () => {
     const loadTimeMin = 350;
@@ -62,16 +92,7 @@ export default function BecomeDesignerView() {
               src="https://www.flaticon.com/svg/static/icons/svg/1078/1078011.svg"
             />
           </div>
-          {designer.accountType === "client" ? (
-            <Button
-              className="getStartedBtn"
-              onClick={() => {
-                startProfileCreation();
-              }}
-            >
-              Get Started
-            </Button>
-          ) : (
+          {designer.accountType !== "client" ? (
             <Button
               className="getStartedBtn"
               onClick={() => {
@@ -80,11 +101,20 @@ export default function BecomeDesignerView() {
             >
               Go to my Profile
             </Button>
+          ) : (
+            <Button
+              className="getStartedBtn"
+              onClick={() => {
+                startProfileCreation();
+              }}
+            >
+              Get Started
+            </Button>
           )}
         </Spin>
       )}
 
-      {(createProfileStage === 1 || createProfileStage === 2) && (
+      {createProfileStage >= 1 && (
         <div className="createProfileStage1">
           <div className="subHeading">What is your profession?</div>
           <Radio.Group
@@ -111,11 +141,15 @@ export default function BecomeDesignerView() {
         </div>
       )}
 
-      {createProfileStage === 2 && (
+      {createProfileStage >= 2 && (
         <>
-          <div className="subHeading">Tell us about your business!</div>
+          <div className="subHeading">How can your customers contact you?</div>
           <div className="editProfileModal">
-            <DesignerProfileCreateEdit designer={designer} createMode={true} />
+            <ClientProfileView
+              client={designer}
+              editMode={true}
+              extraLogicOnSave={saveClientProfileView}
+            />
           </div>
 
           {/* <Button
@@ -126,6 +160,36 @@ export default function BecomeDesignerView() {
           >
             Complete
           </Button> */}
+        </>
+      )}
+
+      {createProfileStage === 3 && (
+        <>
+          <div className="subHeadingWideMargin">
+            Tell us about your business!
+          </div>
+          <div className="editProfileModal">
+            <div className="description">Service and Price</div>
+            <ServiceNPriceForm designer={designer} createMode={true} />
+
+            <div className="description">Hours</div>
+            <HoursForm designer={designer} createMode={true} />
+
+            <div className="description">Works</div>
+            <WorksForm designer={designer} createMode={true} />
+
+            <div className="description">Self-introduction</div>
+            <SelfIntroForm designer={designer} createMode={true} />
+          </div>
+
+          <Button
+            className="getStartedBtn becomeDesignerBtn"
+            onClick={() => {
+              completeProfileCreation();
+            }}
+          >
+            Complete
+          </Button>
         </>
       )}
     </div>

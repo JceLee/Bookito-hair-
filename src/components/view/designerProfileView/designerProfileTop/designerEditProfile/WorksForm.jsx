@@ -11,10 +11,9 @@ const layout = {
   wrapperCol: {span: 24},
 };
 
-export default function WorksForm() {
+export default function WorksForm(props) {
+  const { designer, createMode } = props;
   const designers = useSelector((state) => state.firestore.designers);
-  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner || state.currentUser.currentUser);
-  const [client, setClient] = useState(designer)
   const [form] = Form.useForm();
   const photoURLs = [];
   const [testState, setTestState] = useState(false);
@@ -23,14 +22,16 @@ export default function WorksForm() {
   const dispatch = useDispatch();
 
   const onUploadSubmission = (e) => {
-    e.preventDefault(); // prevent page refreshing
+    if (e) {
+      e.preventDefault(); // prevent page refreshing
+    }
     const promises = [];
     fileList.forEach((file) => {
       if (file["originFileObj"] !== undefined) {
         const uploadTask = firebaseOrigin
           .storage()
           .ref()
-          .child(`images/${client.uid}/${file.name}`)
+          .child(`images/${designer.uid}/${file.name}`)
           .put(file.originFileObj);
         promises.push(uploadTask);
         uploadTask.on(
@@ -59,7 +60,7 @@ export default function WorksForm() {
         console.log("pass");
       }
     });
-    if (testState) {
+    if (testState && !createMode) {
       updateFireStorage();
     }
     Promise.all(promises)
@@ -70,12 +71,12 @@ export default function WorksForm() {
   };
 
   const updateFireStorage = () => {
-    if (testState) {
+    if (testState && !createMode) {
       const updatedList = fileList.filter((work) => work["originFileObj"] === undefined);
       const newWorks = [...updatedList, ...photoURLs];
       firebaseStore
         .collection("users")
-        .doc(client.uid)
+        .doc(designer.uid)
         .update({works: newWorks})
         .then(function () {
           return message.success({
@@ -85,6 +86,12 @@ export default function WorksForm() {
           });
         });
       updateRedux(newWorks);
+    }
+  };
+
+  const updateDesigner = () => {
+    if (createMode) {
+      onUploadSubmission();
     }
   };
 
@@ -104,9 +111,10 @@ export default function WorksForm() {
     // });
   };
 
-  const onChange = ({fileList: newFileList}) => {
+  const onChange = ({fileList: newFileList, event: e}) => {
     setFileList(newFileList);
     setTestState(true);
+    updateDesigner();
   };
 
   const onPreview = async (file) => {
@@ -137,9 +145,9 @@ export default function WorksForm() {
           {fileList.length < 8 && "+ Upload"}
         </Upload>
       </ImgCrop>
-      <button className="blackBtn" onClick={onUploadSubmission}>
+      {!createMode && <button className="blackBtn" onClick={onUploadSubmission}>
         Save
-      </button>
+      </button>}
     </Form>
   );
 }

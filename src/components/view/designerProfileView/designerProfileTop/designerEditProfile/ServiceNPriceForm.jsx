@@ -18,8 +18,8 @@ const formInitialValues = {
   },
 };
 
-export default function ServiceNPriceForm() {
-  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner || state.currentUser.currentUser);
+export default function ServiceNPriceForm(props) {
+  const { designer, createMode } = props;
   const [tabNames] = useState(designer.services ? Object.keys(designer.services) : []);
   const [form] = Form.useForm();
   const [addTabModal, setAddTabModal] = useState(false);
@@ -116,7 +116,22 @@ export default function ServiceNPriceForm() {
   };
 
   const onValuesChange = () => {
-    // setTest(e);
+    const { panes } = state;
+    if (createMode) {
+      const tabList = panes.map(tab => tab.title);
+      const servicesRawValue = form.getFieldValue().services;
+      const servicesList = {};
+      Object.keys(servicesRawValue).forEach(serviceValue => {
+        if (tabList.includes(serviceValue)) {
+          servicesList[serviceValue] = servicesRawValue[serviceValue].filter(subService => !!subService).map(subService => ({
+            service: subService?.serviceName || "",
+            description: subService?.description || "",
+            price: subService?.price || 0,
+          }));
+        }
+      });
+      designer.services = servicesList;
+    }
   };
 
   const changeTabName = (e) => {
@@ -252,7 +267,7 @@ export default function ServiceNPriceForm() {
                   );
                 }}
               </Form.List>
-              <BlackBtn btnName="Save" onClick={yes} />
+              {!createMode && <BlackBtn btnName="Save" onClick={yes} />}
             </TabPane>
           );
         })}

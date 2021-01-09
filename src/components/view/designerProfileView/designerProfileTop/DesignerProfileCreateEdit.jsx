@@ -6,34 +6,31 @@ import HoursForm from "./designerEditProfile/HoursForm";
 import WorksForm from "./designerEditProfile/WorksForm";
 import SelfIntroForm from "./designerEditProfile/SelfIntroForm";
 
-const defaultStartTime = 16; // 08:00
-const defaultEndTime = 42; // 21:00
-const defaultTradingHours = [defaultStartTime, defaultEndTime];
 const { Panel } = Collapse;
 
 export default function DesignerProfileCreateEdit(props) {
-  const { designer, createMode } = props;
+  const { designer } = props;
 
   const editProfilePanels = [
     {
       header: "Address & Phone",
-      content: <ClientProfileView client={designer} createMode={createMode} editMode={true} />,
+      content: <ClientProfileView client={designer} editMode={true} />,
     },
     {
       header: "Service & Price",
-      content: <ServiceNPriceForm designer={designer} createMode={createMode} />,
+      content: <ServiceNPriceForm designer={designer} />,
     },
     {
       header: "Hours",
-      content: <HoursForm designer={designer} createMode={createMode} defaultTradingHours={defaultTradingHours} />,
+      content: <HoursForm designer={designer} />,
     },
     {
       header: "Works",
-      content: <WorksForm designer={designer} createMode={createMode} />,
+      content: <WorksForm designer={designer} />,
     },
     {
       header: "Self-introduction",
-      content: <SelfIntroForm designer={designer} createMode={createMode} />,
+      content: <SelfIntroForm designer={designer} />,
     },
   ];
 
@@ -56,14 +53,6 @@ export default function DesignerProfileCreateEdit(props) {
           );
         })}
       </Collapse>
-      {createMode && (
-        <Button
-          className="blackBtn"
-          onClick={() => {}}
-        >
-          Submit
-        </Button>
-      )}
     </>
   );
 }

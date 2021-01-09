@@ -4,25 +4,24 @@ import {useDispatch, useSelector} from "react-redux";
 import {refresh} from "../../../../../actions/currentUser";
 import { firebaseStore} from "../../../../../config/fbConfig";
 
-export default function SelfIntroForm() {
-  const [client, setClient] = useState(
-    useSelector((state) => state.currentUser.currentUser));
+export default function SelfIntroForm(props) {
+  const { designer, createMode } = props;
   const dispatch = useDispatch();
 
   // save profile to db and reload page
   const saveProfile = (values) => {
-    console.log(client.uid);
+    console.log(designer.uid);
     console.log(values.introduction);
     const updatedInfo = {
-      ...client,
+      ...designer,
       introduction: values.introduction,
     };
-    setClient(updatedInfo);
-    dispatch(refresh(updatedInfo));
-    // window.location.reload(false);
+    Object.assign(designer, updatedInfo); // Update local client
+    dispatch(refresh(designer)); // Update redux client
+    // Update firebase
     firebaseStore
       .collection("users")
-      .doc(client.uid)
+      .doc(designer.uid)
       .update({
         introduction: values.introduction,
       })
@@ -33,6 +32,12 @@ export default function SelfIntroForm() {
           className: "onFinishMessage",
         });
       });
+  };
+
+  const updateDesigner = (e) => {
+    if (createMode) {
+      designer.introduction = e.target.value;
+    }
   };
 
   const layout = {
@@ -52,13 +57,13 @@ export default function SelfIntroForm() {
     <div className="SelfIntroForm">
       <Form {...layout} name="selfIntro" onFinish={onFinish}>
         <Form.Item name={['introduction']}>
-          <Input.TextArea className="selfIntroInput" placeholder="(Promotion, discount, etc.)"/>
+          <Input.TextArea className="selfIntroInput" placeholder="(Promotion, discount, etc.)" onChange={updateDesigner} />
         </Form.Item>
-        <Form.Item wrapperCol={{...layout.wrapperCol, offset: 6}}>
+        {!createMode && <Form.Item wrapperCol={{...layout.wrapperCol, offset: 6}}>
           <Button className="selfIntroSaveBtn" htmlType="submit">
             Save
           </Button>
-        </Form.Item>
+        </Form.Item>}
       </Form>
     </div>
   )

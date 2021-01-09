@@ -230,10 +230,10 @@ $paddingOfworkImgInModal: 10px;
   .editHours {
     .ant-slider {
       margin: 4px 0;
-      @include tabletP {
-        width: 130%;
+      @include mobileLtoTabletP {
+        width: 132%;
         top: 32px;
-        left: -117.5px;
+        left: -33%;
       }
     }
 
@@ -260,7 +260,7 @@ $paddingOfworkImgInModal: 10px;
 
     .ant-form-item .ant-form-item-label {
       padding: 0;
-      @include tabletP {
+      @include mobileLtoTabletP {
         text-align: left;
       }
     }
@@ -273,7 +273,7 @@ $paddingOfworkImgInModal: 10px;
     .singleDaySliderCheckbox {
       position: relative;
       display: block;
-      @include tabletP {
+      @include mobileLtoTabletP {
         margin: 8px auto;
         padding-bottom: 16px;
       }
@@ -294,7 +294,7 @@ $paddingOfworkImgInModal: 10px;
       position: absolute;
       top: 6px;
       left: 60px;
-      @include tabletP {
+      @include mobileLtoTabletP {
         width: 100px;
       }
     }

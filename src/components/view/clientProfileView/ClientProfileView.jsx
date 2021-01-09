@@ -17,12 +17,12 @@ const validateMessages = {
 };
 
 export default function ClientProfileView(props) {
-  const { client, createMode, editMode } = props;
+  const { client, createMode, editMode, extraLogicOnSave } = props;
   const [edit, setEdit] = useState(editMode);
   const [profile, setProfile] = useState(client);
-  const [currentAddress, setCurrentAddress] = useState(client?.location || "");
-  const [validatedAddress, setValidatedAddress] = useState(client?.location || "");
-  const [addressLatLng, setAddressLatLng] = useState(client?.latLng || {});
+  const [currentAddress, setCurrentAddress] = useState(client?.location);
+  const [validatedAddress, setValidatedAddress] = useState(client?.location);
+  const [addressLatLng, setAddressLatLng] = useState(client?.latLng);
   const dispatch = useDispatch();
 
   // Save profile to db and reload page
@@ -55,6 +55,8 @@ export default function ClientProfileView(props) {
           className: "onFinishMessage",
         });
       });
+    
+    extraLogicOnSave();
   };
 
   // save profile photo to db and close modal
@@ -166,10 +168,10 @@ export default function ClientProfileView(props) {
         {...layout}
         onFinish={saveProfile}
         initialValues={{
-          nickName: client?.displayName || "",
-          email: client?.email || "",
-          phone: client?.phone || "",
-          address: client?.location || "",
+          nickName: client?.displayName,
+          email: client?.email,
+          phone: client?.phone,
+          address: client?.location,
         }}
         validateMessages={validateMessages}
       >
@@ -188,7 +190,7 @@ export default function ClientProfileView(props) {
           </Form.Item>
         ) : (
           <Form.Item className="clientName">
-            <div className="formBottomMargin">{client?.displayName || ""}</div>
+            <div className="formBottomMargin">{client?.displayName}</div>
           </Form.Item>
         )}
 
@@ -209,7 +211,7 @@ export default function ClientProfileView(props) {
 
         {edit ? null : <hr />}
         <Form.Item label="Phone" name="phone" className="formItems">
-          {edit ? <Input className="clientInput" type="number" /> : <div>{client?.phone || ""}</div>}
+          {edit ? <Input className="clientInput" type="number" /> : <div>{client?.phone}</div>}
         </Form.Item>
 
         {edit ? null : <hr />}
@@ -247,7 +249,7 @@ export default function ClientProfileView(props) {
               // allowClear={true}
             />
           ) : (
-            <div>{client?.location || ""}</div>
+            <div>{client?.location}</div>
           )}
         </Form.Item>
 
