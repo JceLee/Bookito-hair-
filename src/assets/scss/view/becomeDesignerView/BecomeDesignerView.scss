@@ -8,25 +8,30 @@
     // height: 5vh;
     padding: 0 10%;
   }
+
   .mainHeading {
     font-size: 32px;
     font-weight: 600;
   }
+
   .subHeading {
     font-size: 18px;
     margin-top: 24px;
     margin-bottom: 24px;
   }
+
   .subHeadingWideMargin {
     font-size: 18px;
     margin-top: 36px;
     margin-bottom: 24px;
   }
+
   .description {
     font-size: 16px;
     margin-top: 16px;
     margin-bottom: 24px;
   }
+
   .getStartedBtn {
     height: 38px;
     padding: 8px 20px;
@@ -37,6 +42,7 @@
     border-radius: 10px;
     margin-bottom: 10vh;
   }
+
   .getStartedBtn:hover {
     background-color: white;
     color: black;
@@ -44,18 +50,22 @@
     transition: background-color 0.3s;
     cursor: pointer;
   }
+
   .becomeDesignerBtn {
     float: right;
     height: 38px;
     margin-right: 1%;
     margin-top: 20px;
   }
+
   .infoCardsSection {
     text-align: center;
     margin: 0 auto;
+
     .infoCard {
       margin: 0 auto;
       margin-bottom: 24px;
+
       img {
         width: 200px;
         height: 200px;

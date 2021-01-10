@@ -48,8 +48,7 @@ export default function Navbar() {
       <div id="logo">
         <Link to="/">Bookito</Link>
       </div>
-
-      <div className="menuBtn">
+      <div id="menuBtn">
         <Dropdown overlay={menu} placement="bottomRight" trigger={["click"]}>
           {signedInUser === null ? <SignInModal/> :
             <Button shape="round" icon={<UserOutlined/>}>
