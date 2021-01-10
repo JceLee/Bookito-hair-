@@ -21,14 +21,12 @@
         margin: 0;
         padding: 0;
       }
-      // background-color: pink;
       .img {
         text-align: center;
         margin-top: 6%;
 
         @include tabletP {
           margin-top: 0;
-          //   text-align: left;
         }
 
         .memberImg {
