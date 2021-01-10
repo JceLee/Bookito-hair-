@@ -1,5 +1,5 @@
 import React from "react";
-import {Menu, Dropdown, Button, Typography, Drawer} from "antd";
+import {Menu, Dropdown, Button} from "antd";
 import {Link} from "react-router-dom";
 import {UserOutlined, BarsOutlined} from "@ant-design/icons";
 import SignInModal from "../view/authView/SignInModal";
@@ -56,8 +56,6 @@ export default function Navbar() {
             </Button>}
         </Dropdown>
       </div>
-
-
     </>
   );
 }
