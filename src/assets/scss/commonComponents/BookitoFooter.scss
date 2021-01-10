@@ -1,20 +1,118 @@
 .bookitoFooter {
-  background-color: #F7F7F7;
-  border-top: 1px solid #DDDDDD;
+  background-color: #f7f7f7;
+  border-top: 1px solid #dddddd;
 
   .footerContents {
     padding: 7% 5%;
+
+    .supportAndMenu {
+      padding: 6px 0;
+      font-size: 13.5px;
+      font-weight: 405;
+      color: darkslategrey;
+
+      @include tabletP {
+        padding: 0;
+        margin-top: 1.5%;
+      }
+
+      @include tabletL {
+        padding: 6px 0;
+      }
+
+      .footerMenu {
+        .footerPtag {
+          margin-bottom: 2%;
+
+          @include mobileMtoL {
+            margin-top: -1%;
+          }
+
+          @include tabletL {
+            margin-bottom: 0;
+          }
+        }
+
+        .ant-btn-link {
+          font-size: 13.5px;
+          font-weight: 405;
+          color: darkslategrey;
+        }
+
+        @include tabletP {
+          display: flex;
+          float: right;
+          margin-top: -2%;
+          margin-right: 3%;
+        }
+
+        @include tabletL {
+          margin-top: -3.5%;
+        }
+      }
+    }
+
+    .footerDivider {
+      margin: 5%;
+
+      @include tabletP {
+        margin: 2%;
+      }
+
+      @include tabletL {
+        margin: -1.5%;
+      }
+
+      @include desktopXL {
+        margin: -1%;
+      }
+    }
+
+    .copyright {
+      font-size: 13px;
+      margin-top: 5%;
+      text-align: center;
+      color: darkgray;
+
+      @include tabletP {
+        margin-top: 1%;
+      }
+
+      @include tabletL {
+        margin-top: 2.5%;
+      }
+
+      #bktCopyright {
+        margin-top: 5%;
+        text-align: center;
+
+        @include tabletP {
+          margin-top: 3%;
+        }
+
+        @include tabletL {
+          margin-top: 2.5%;
+        }
+      }
+    }
   }
 
   @include desktop {
     width: 100vw;
-    margin-left: calc((1130px - 100vw)/2);
+    margin-left: calc((1130px - 100vw) / 2);
 
     .footerContents {
       width: 1130px;
       margin: 0 auto;
       padding: 5% 0;
+
+      @include tabletL {
+        padding: 4% 0;
+      }
+
+      @include desktopXL {
+        padding: 3% 0;
+      }
     }
   }
-
 }
