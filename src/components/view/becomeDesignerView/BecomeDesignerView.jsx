@@ -34,7 +34,6 @@ export default function BecomeDesignerView() {
 
   const completeProfileCreation = async () => {
     designer.accountType = designerType;
-    console.log(designer);
     // Update redux client
     dispatch(refresh(designer));
     // Update firebase

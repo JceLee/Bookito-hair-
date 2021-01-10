@@ -29,6 +29,8 @@ export default function DesignerSchedule() {
           conformed.push({
             id: doc.data().aid,
             title: doc.data().customerName,
+            customerId: doc.data().customerId,
+            designerId: doc.data().designerId,
             startDate: startDate,
             endDate: endDate,
             serviceName: createTag(doc.data().bookedServices).serviceName,

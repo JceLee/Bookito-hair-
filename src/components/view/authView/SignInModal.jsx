@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Modal, Divider} from "antd";
+import {Modal, Divider, Button} from "antd";
 import firebase from "firebase/app";
 import {useHistory} from "react-router-dom";
 import {firebaseAuth} from "../../../config/fbConfig";
@@ -8,6 +8,7 @@ import {sign_in_with_facebook, sign_in_with_google} from "../../../actions/curre
 import {generateUserDocument} from "../../../helpers/getUserDocument";
 import googleLogo from "../../../assets/images/googleLogo.png";
 import facebookLogo from "../../../assets/images/facebookLogo.png";
+import {designerTypes} from "../../../constants/designerTypes";
 
 export default function SignInModal() {
   const [isLoginShowing, setIsLoginShowing] = useState(false);
@@ -20,10 +21,11 @@ export default function SignInModal() {
       .signInWithPopup(googleProvider)
       .then(function (result) {
         const user = result.user;
-        console.log("from google");
-        console.log(user);
         generateUserDocument(user).then(function (result) {
           dispatch(sign_in_with_google(result));
+          if (result.accountTypes === designerTypes.newClient) {
+            directProfile();
+          }
         });
       })
       .catch(function (error) {
@@ -45,6 +47,9 @@ export default function SignInModal() {
         const user = result.user;
         generateUserDocument(user).then(function (result) {
           dispatch(sign_in_with_facebook(result));
+          if (result.accountType === designerTypes.newClient) {
+            directProfile();
+          }
         });
       })
       .catch(function (error) {
@@ -83,12 +88,18 @@ export default function SignInModal() {
     };
     generateUserDocument(user).then(function (result) {
       dispatch(sign_in_with_facebook(result));
+      if (result.accountType === designerTypes.newClient) {
+        directProfile();
+      }
     });
   };
 
   return (
     <div>
-      <span onClick={showLoginModal}>Sign In</span>
+      <div className="menuBtn">
+        <Button shape="round" onClick={showLoginModal}>Sign In</Button>
+      </div>
+
       <Modal
         className="loginModal"
         visible={isLoginShowing}

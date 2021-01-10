@@ -1,6 +1,6 @@
 import {Upload, message, Form} from "antd";
 import ImgCrop from "antd-img-crop";
-import React, { useState} from "react";
+import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {firebaseOrigin, firebaseStore} from "../../../../../config/fbConfig";
 import {update_database} from "../../../../../actions/firebaseAction";
@@ -130,6 +130,12 @@ export default function WorksForm(props) {
     image.src = src;
     const imgWindow = window.open(src);
     imgWindow.document.write(image.outerHTML);
+  };
+
+  const dummyRequest = ({ file, onSuccess }) => {
+    setTimeout(() => {
+      onSuccess("ok");
+    }, 0);
   };
 
   return (

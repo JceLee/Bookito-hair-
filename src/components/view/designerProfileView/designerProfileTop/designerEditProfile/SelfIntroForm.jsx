@@ -10,8 +10,6 @@ export default function SelfIntroForm(props) {
 
   // save profile to db and reload page
   const saveProfile = (values) => {
-    console.log(designer.uid);
-    console.log(values.introduction);
     const updatedInfo = {
       ...designer,
       introduction: values.introduction,
