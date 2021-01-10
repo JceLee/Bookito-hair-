@@ -1,11 +1,11 @@
-import React, {useRef, useState} from "react";
-import {useSelector} from "react-redux";
-import {Button, Divider, Form, Input, InputNumber, message, Modal, Popconfirm, Tabs} from "antd";
-import {MinusCircleOutlined, PlusOutlined} from "@ant-design/icons";
+import React, { useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import { Button, Divider, Form, Input, InputNumber, message, Modal, Popconfirm, Tabs } from "antd";
+import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import BlackBtn from "../../../../commonComponents/BlackBtn";
 
-const {TabPane} = Tabs;
-const {TextArea} = Input;
+const { TabPane } = Tabs;
+const { TextArea } = Input;
 
 const formInitialValues = {
   services: {
@@ -18,29 +18,28 @@ const formInitialValues = {
   },
 };
 
-export default function ServiceNPriceForm() {
-  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
-  const [tabNames] = useState(Object.keys(designer.services));
+export default function ServiceNPriceForm(props) {
+  const { designer, createMode } = props;
+  const [tabNames] = useState(designer.services ? Object.keys(designer.services) : []);
   const [form] = Form.useForm();
   const [addTabModal, setAddTabModal] = useState(false);
   const [removeTabModal, setRemoveTabModal] = useState(false);
-  const promiseFunction = useRef(() => {
-  });
+  const promiseFunction = useRef(() => {});
   const newTabName = useRef("New tab");
 
   let initialPanes = tabNames.map((tabName) => {
-    return {title: `${tabName}`, key: `${tabName}`};
+    return { title: `${tabName}`, key: `${tabName}` };
   });
 
   const [state, setState] = useState({
-    activeKey: initialPanes[0].key,
+    activeKey: initialPanes[0]?.key,
     panes: initialPanes,
   });
 
   const [] = useState(false);
 
   const onChange = (activeKey) => {
-    setState({activeKey, panes: [...panes]});
+    setState({ activeKey, panes: [...panes] });
   };
 
   const onEdit = (targetKey, action) => {
@@ -53,10 +52,10 @@ export default function ServiceNPriceForm() {
 
   const add = async () => {
     await nameTabPromise();
-    const {panes} = state;
+    const { panes } = state;
     const activeKey = `${newTabName.current}`;
     const newPanes = [...panes];
-    newPanes.push({title: `${newTabName.current}`, key: activeKey});
+    newPanes.push({ title: `${newTabName.current}`, key: activeKey });
     setState({
       panes: newPanes,
       activeKey,
@@ -90,7 +89,7 @@ export default function ServiceNPriceForm() {
 
   const remove = async (targetKey) => {
     await removeTabPromise();
-    const {panes, activeKey} = state;
+    const { panes, activeKey } = state;
     let newActiveKey = activeKey;
     let lastIndex;
     panes.forEach((pane, i) => {
@@ -117,7 +116,22 @@ export default function ServiceNPriceForm() {
   };
 
   const onValuesChange = () => {
-    // setTest(e);
+    const { panes } = state;
+    if (createMode) {
+      const tabList = panes.map(tab => tab.title);
+      const servicesRawValue = form.getFieldValue().services;
+      const servicesList = {};
+      Object.keys(servicesRawValue).forEach(serviceValue => {
+        if (tabList.includes(serviceValue)) {
+          servicesList[serviceValue] = servicesRawValue[serviceValue].filter(subService => !!subService).map(subService => ({
+            service: subService?.serviceName || "",
+            description: subService?.description || "",
+            price: subService?.price || 0,
+          }));
+        }
+      });
+      designer.services = servicesList;
+    }
   };
 
   const changeTabName = (e) => {
@@ -135,7 +149,7 @@ export default function ServiceNPriceForm() {
     message.error("Click on No");
   };
 
-  const {panes, activeKey} = state;
+  const { activeKey, panes } = state;
 
   return (
     <Form
@@ -145,7 +159,13 @@ export default function ServiceNPriceForm() {
       name="editProfile"
       onFinish={yes}
     >
-      <Tabs type="editable-card" onChange={onChange} activeKey={activeKey} onEdit={onEdit}>
+      <Tabs
+        type="editable-card"
+        onChange={onChange}
+        activeKey={activeKey}
+        onEdit={onEdit} 
+        addIcon={<PlusOutlined style={{ height: 38, paddingTop: 11 }} />}
+      >
         {panes.map((tab) => {
           return (
             <TabPane
@@ -167,10 +187,10 @@ export default function ServiceNPriceForm() {
                   aria-label="remove"
                   tabIndex="0"
                   className="ant-tabs-tab-remove"
-                />
+                ></button>
               </Popconfirm>
               <Form.List name={["services", `${tab.title}`]}>
-                {(fields, {add, remove}) => {
+                {(fields, { add, remove }) => {
                   return (
                     <>
                       <div>
@@ -189,7 +209,7 @@ export default function ServiceNPriceForm() {
                                     },
                                   ]}
                                 >
-                                  <Input placeholder="Service Name"/>
+                                  <Input placeholder="Service Name" />
                                 </Form.Item>
                                 <Form.Item
                                   name={[field.name, "price"]}
@@ -224,9 +244,9 @@ export default function ServiceNPriceForm() {
                                 fieldKey={[field.fieldKey, "description"]}
                                 hasFeedback
                               >
-                                <TextArea placeholder="Description (optional)"/>
+                                <TextArea placeholder="Description (optional)" />
                               </Form.Item>
-                              <Divider className="dividerInServiceAndPrice"/>
+                              <Divider className="dividerInServiceAndPrice" />
                             </div>
                           );
                         })}
@@ -240,14 +260,14 @@ export default function ServiceNPriceForm() {
                           }}
                           block
                         >
-                          <PlusOutlined/> Add Service to {tab.title}
+                          <PlusOutlined /> Add Service to {tab.title}
                         </Button>
                       </Form.Item>
                     </>
                   );
                 }}
               </Form.List>
-              <BlackBtn btnName="Save" onClick={yes}/>
+              {!createMode && <BlackBtn btnName="Save" onClick={yes} />}
             </TabPane>
           );
         })}
@@ -266,7 +286,7 @@ export default function ServiceNPriceForm() {
           maxLength={8}
           onChange={updateInput}
         />
-        <Divider/>
+        <Divider />
         <BlackBtn
           className="saveButtonInEditProfile"
           btnName="Save"
@@ -281,9 +301,9 @@ export default function ServiceNPriceForm() {
         centered={true}
         footer={null}
       >
-        <div style={{textAlign: "center"}}>Are you sure you want to delete?</div>
-        <Divider/>
-        <BlackBtn btnName="Delete" onClick={promiseFunction.current}/>
+        <div style={{ textAlign: "center" }}>Are you sure you want to delete?</div>
+        <Divider />
+        <BlackBtn btnName="Delete" onClick={promiseFunction.current} />
       </Modal>
     </Form>
   );

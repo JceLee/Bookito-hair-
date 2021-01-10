@@ -1,5 +1,28 @@
 @import "../../Mixin.scss";
 
+#emptyMsgListPtag {
+  text-align: center;
+  color: darkgray;
+  margin-top: 70%;
+
+  @include mobileM {
+    margin-top: 65%;
+  }
+
+  @include mobileMtoL {
+    margin-top: 59%;
+  }
+
+  @include tabletP {
+    font-size: 1.05em;
+    margin-top: 33%;
+  }
+
+  @include tabletL {
+    margin-top: 24%;
+  }
+}
+
 .messengerCardComponent {
   margin: 0 20px 0 20px;
   display: flex;
@@ -25,6 +48,19 @@
     font-size: 12px;
     height: 20px;
     overflow: hidden;
+    width: 66vw;
+
+    @include mobileS {
+      width: 71vw;
+    }
+
+    @include mobileIphonePlus {
+      width: 74vw;
+    }
+
+    @include mobileLtoTabletP {
+      width: 79vw;
+    }
   }
 
   .rightSide {
