@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Divider, Button, Modal } from "antd";
+import React, {useState} from "react";
+import {Divider, Button, Modal} from "antd";
 import footerMenuCSS from "../../assets/scss/commonComponents/customCSS/footerMenu.css";
 
 let menuDividerType;
@@ -17,7 +17,7 @@ const howBktWorks = () => {
   Modal.info({
     title: "How Bookito works?",
     bodyStyle: footerMenuCSS,
-    style: { top: "25%" },
+    style: {top: "25%"},
     okText: "Exit",
     content: <div>video</div>,
   });
@@ -27,7 +27,7 @@ const latestNews = () => {
   Modal.info({
     title: "Latest News",
     bodyStyle: footerMenuCSS,
-    style: { top: "20%", textAlign: "center" },
+    style: {top: "20%", textAlign: "center"},
     okText: "Exit",
     content: <div className="latestNewsText">No updated news yet.</div>,
   });
@@ -37,7 +37,7 @@ const helpCentre = () => {
   Modal.info({
     title: "Help Centre",
     bodyStyle: footerMenuCSS,
-    style: { top: "25%" },
+    style: {top: "25%"},
     okText: "Exit",
     content: (
       <div className="helpCenterText">
@@ -53,9 +53,10 @@ const helpCentre = () => {
 
 const aboutUs = () => {
   Modal.info({
+    className: "testtesttest",
     title: "ABOUT US",
     bodyStyle: footerMenuCSS,
-    style: { top: "2%" },
+    style: {top: "2%"},
     okText: "Exit",
     content: (
       <div className="aboutUsPtag">
@@ -97,21 +98,21 @@ export default function BookitoFooter() {
             <Button className="footerPtag" type="link" onClick={howBktWorks}>
               How Bookito works
             </Button>
-            <Divider className="menuDivider" type={dividerType} style={{ visibility: "hidden" }} />
+            <Divider className="menuDivider" type={dividerType} style={{visibility: "hidden"}}/>
             <Button className="footerPtag" type="link" onClick={latestNews}>
               Latest News
             </Button>
-            <Divider className="menuDivider" type={dividerType} style={{ visibility: "hidden" }} />
+            <Divider className="menuDivider" type={dividerType} style={{visibility: "hidden"}}/>
             <Button className="footerPtag" type="link" onClick={helpCentre}>
               Help Centre
             </Button>
-            <Divider className="menuDivider" type={dividerType} style={{ visibility: "hidden" }} />
+            <Divider className="menuDivider" type={dividerType} style={{visibility: "hidden"}}/>
             <Button className="footerPtag" type="link" onClick={aboutUs}>
               About Us
             </Button>
           </section>
         </div>
-        <Divider className="footerDivider" />
+        <Divider className="footerDivider"/>
         <section className="copyright">
           <p>
             This site is protected by Bookito and the Google Privacy Policy and Terms of Service

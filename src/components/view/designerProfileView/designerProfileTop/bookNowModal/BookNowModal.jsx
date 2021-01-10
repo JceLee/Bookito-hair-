@@ -14,9 +14,8 @@ export default function BookNowModal(props) {
   const { Step } = Steps;
   const { visible, modalHandler } = props;
   const elementForScrollingTopInModal = document.getElementById("stepToTopId");
-
-  const [displayedDay, setDisplayedDay] = useState(null);
-  const [key, setKey] = useState("Cut");
+  const [displayedDay, setDisplayedDay] = useState(new Date());
+  const [key, setKey] = useState(Object.keys(designer.services)[0]);
   const [calculationBox, setCalculationBox] = useState([]);
   const [page, setPage] = useState("Estimated Price");
   const [current, setCurrent] = useState(0);
@@ -171,6 +170,9 @@ export default function BookNowModal(props) {
     console.log(newAppointment);
     message.success("Successfully booked!");
     writeAppointmentIntoDB(newAppointment);
+    setCurrent(0);
+    setCalculationBox([]);
+    setDisplayedDay(new Date());
     modalHandler();
   };
 

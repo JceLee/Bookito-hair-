@@ -132,6 +132,12 @@ export default function WorksForm(props) {
     imgWindow.document.write(image.outerHTML);
   };
 
+  const dummyRequest = ({ file, onSuccess }) => {
+    setTimeout(() => {
+      onSuccess("ok");
+    }, 0);
+  };
+
   return (
     <Form {...layout} name="editProfile" form={form}>
       <ImgCrop rotate>

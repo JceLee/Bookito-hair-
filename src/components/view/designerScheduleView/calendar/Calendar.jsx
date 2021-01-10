@@ -21,10 +21,12 @@ import { Badge } from "antd";
 import NewRequests from "./NewRequests";
 import { IconButton } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
+import ForumIcon from '@material-ui/icons/Forum';
 import DeleteAppointmentModal from "../calendar/DeleteAppointmentModal";
 import AddAppointmentModal from "./AddAppointmentModal";
 import { withStyles } from "@material-ui/core/styles";
 import { fade } from "@material-ui/core/styles/colorManipulator";
+import {CreateMessengerRoom} from "../../messengerView/CreateMessengerRoom"
 
 export default function Calendar(props) {
   const currentDate = new Date();
@@ -67,10 +69,17 @@ export default function Calendar(props) {
     return <TooltipContent appointmentData={appointmentData} formatDate={formatDate} />;
   };
 
+  const startChatting = (appointment) => {
+    CreateMessengerRoom(appointment.customerId, appointment.designerId);
+  }
+
   const getTooltipHeader = ({ appointmentData, ...restProps }) => {
     appointmentID.current = appointmentData.id;
     return (
       <AppointmentTooltip.Header {...restProps}>
+        <IconButton onClick={() => startChatting(appointmentData)}>
+          <ForumIcon />
+        </IconButton>
         <IconButton onClick={() => displayDeleteAppointmentModal()}>
           <DeleteIcon />
         </IconButton>
@@ -116,6 +125,10 @@ export default function Calendar(props) {
     name: "TimeTableCell",
   })(TimeTableCellBaseMonth);
 
+  const test = () => {
+    console.log("hahahah")
+  }
+
   return (
     <>
       <div className="calendar">
@@ -148,6 +161,7 @@ export default function Calendar(props) {
             <AppointmentTooltip
               headerComponent={getTooltipHeader}
               contentComponent={getTooltipContent}
+              onDeleteButtonClick={test}
               showCloseButton
             />{" "}
             {/*<Fab color="secondary" className="addButton" onClick={displayAddAppointmentModal}>*/}

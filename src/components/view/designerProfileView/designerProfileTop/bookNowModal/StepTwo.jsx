@@ -26,7 +26,7 @@ export default function StepTwo(props) {
     <div className="checkboxOption">
       <Card
         tabList={services}
-        activeTabKey={serviceKey}
+        activeTabKey={serviceKey || services[0]?.key}
         onTabChange={(serviceKey) => {
           onTabChange(serviceKey);
         }}
@@ -43,42 +43,12 @@ export default function StepTwo(props) {
                     calculationBox.some(e => e.id === menu.id)
                   }
                   onChange={() => {
-
                     navigateTo("Estimated Price");
                     if (calculationBox.some((e) => e.id === menu.id)) {
                       setCalculationBox(calculationBox.filter(e => e.id !== menu.id));
                     } else {
                       setCalculationBox([...calculationBox, menu]);
                     }
-
-
-                    // switch (serviceKey) {
-                    //   case "Cut":
-                    //     newCalculationBox["Cut"] =
-                    //       newCalculationBox["Cut"] === menu ? null : menu;
-                    //     break;
-                    //   case "Style":
-                    //     newCalculationBox["Style"] =
-                    //       newCalculationBox["Style"] === menu ? null : menu;
-                    //     break;
-                    //   case "Perms":
-                    //     newCalculationBox["Perms"] =
-                    //       newCalculationBox["Perms"] === menu ? null : menu;
-                    //     break;
-                    //   case "Colors":
-                    //     newCalculationBox["Colors"] =
-                    //       newCalculationBox["Colors"] === menu ? null : menu;
-                    //     break;
-                    //   case "Clinic":
-                    //     newCalculationBox["Clinic"] =
-                    //       newCalculationBox["Clinic"] === menu ? null : menu;
-                    //     break;
-                    //   case "Promo":
-                    //     newCalculationBox["Promo"] =
-                    //       newCalculationBox["Promo"] === menu ? null : menu;
-                    //     break;
-                    // }
-
                   }}
                 >
                   <Text strong>{menu.service}</Text>

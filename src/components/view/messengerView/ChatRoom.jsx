@@ -27,7 +27,6 @@ function ChatRoom(props) {
     date: "",
     type: "",
   });
-  const history = useHistory();
 
   useEffect(() => {
     const fetchData = async () => {
