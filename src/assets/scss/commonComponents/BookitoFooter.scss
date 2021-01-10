@@ -26,7 +26,10 @@
 
           @include mobileMtoL {
             margin-top: -1%;
-            margin-bottom: 2%;
+          }
+
+          @include tabletL {
+            margin-bottom: 0;
           }
         }
 
@@ -44,7 +47,7 @@
         }
 
         @include tabletL {
-          margin-top: -4.2%;
+          margin-top: -3.5%;
         }
       }
     }
@@ -102,6 +105,10 @@
       width: 1130px;
       margin: 0 auto;
       padding: 5% 0;
+
+      @include tabletL {
+        padding: 4% 0;
+      }
 
       @include desktopXL {
         padding: 3% 0;
