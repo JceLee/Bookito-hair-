@@ -23,14 +23,6 @@
       .footerMenu {
         .footerPtag {
           margin-bottom: 2%;
-
-          @include mobileMtoL {
-            margin-top: -1%;
-          }
-
-          @include tabletL {
-            margin-bottom: 0;
-          }
         }
 
         .ant-btn-link {
