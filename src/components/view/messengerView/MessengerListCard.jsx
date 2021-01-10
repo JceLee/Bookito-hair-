@@ -3,8 +3,6 @@ import { Row, Col, Avatar, Divider } from "antd";
 
 export default function MessengerListCard(props) {
   const { fname, photoURL, roomID, enterChatRoom, msgDate, lastMsg } = props;
-
-  console.log(lastMsg);
   return (
     <div
       className="messengerCardComponent"
