@@ -64,7 +64,6 @@ export default function MessengerListView() {
   const findID = (roomID) => {
     for (let i = 0; i < rooms.length; i++) {
       if (rooms[i].roomID === roomID) {
-        console.log(rooms[i].customerID, rooms[i].designerID);
         if (rooms[i].designerID === currentUser.uid) {
           return rooms[i].customerID;
         } else {
@@ -77,15 +76,13 @@ export default function MessengerListView() {
   const loadProfileImg = async (roomID) => {
     const designerID = findID(roomID);
     try {
-      console.log(designerID);
       const userDocument = await firebaseStore.doc(`users/${designerID}/`).get();
       profiles.current[roomID] = userDocument.data().photoURL;
       if (Object.keys(profiles.current).length === rooms.length && !forceRendering) {
-        console.log("haha");
         setForceRendering(!forceRendering);
       }
     } catch (error) {
-      console.error("Error fetching user", error);
+      console.log("Error fetching user", error);
     }
   };
 

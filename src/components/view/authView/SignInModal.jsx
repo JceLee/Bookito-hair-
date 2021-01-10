@@ -96,7 +96,7 @@ export default function SignInModal() {
 
   return (
     <div>
-      <div className="menuBtn">
+      <div>
         <Button shape="round" onClick={showLoginModal}>Sign In</Button>
       </div>
 

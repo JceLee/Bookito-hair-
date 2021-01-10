@@ -6,6 +6,7 @@
     font-size: 1.3em;
     font-weight: 600;
   }
+
   .aboutUsCard {
     @include tabletP {
       columns: 2;
@@ -58,14 +59,17 @@
           }
         }
       }
+
       .memberIntro {
         padding: 6px 24px;
         text-align: center;
         color: $black;
+
         #memberName {
           font-weight: 600;
           margin: 1em auto;
         }
+
         p {
           margin-bottom: 0.5em;
         }

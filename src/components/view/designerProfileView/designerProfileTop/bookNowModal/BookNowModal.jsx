@@ -167,7 +167,6 @@ export default function BookNowModal(props) {
       bookedServices: calculationBox,
       totalPrice: totalSum(),
     };
-    console.log(newAppointment);
     message.success("Successfully booked!");
     writeAppointmentIntoDB(newAppointment);
     setCurrent(0);
