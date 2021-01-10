@@ -3,11 +3,12 @@ import Grid from "@material-ui/core/Grid";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import AccessTime from "@material-ui/icons/AccessTime";
 import FaceIcon from "@material-ui/icons/Face";
+import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 import LocalPhoneOutlinedIcon from "@material-ui/icons/LocalPhoneOutlined";
 
 export default function TooltipContent(props) {
   const { appointmentData, formatDate } = props;
-  const { date, time, serviceName, phoneNumber, userName } = appointmentData;
+  const { serviceName, phoneNumber, title, price } = appointmentData;
 
   return (
     <div className="tooltipContent">
@@ -17,7 +18,7 @@ export default function TooltipContent(props) {
         </Grid>
         <Grid item xs={10}>
           <div>
-            <div className="title dateAndTitle">{userName}</div>
+            <div className="title dateAndTitle">{title}</div>
             <div className="text dateAndTitle">
               {formatDate(appointmentData.startDate, {
                 day: "numeric",
@@ -54,10 +55,10 @@ export default function TooltipContent(props) {
       </Grid>
       <Grid container alignItems="center" className="contentContainer">
         <Grid item xs={2} className="textCenter">
-          <LocalPhoneOutlinedIcon className="icon" />
+          <LocalAtmIcon className="icon" />
         </Grid>
         <Grid item xs={10}>
-          <span className="text">{phoneNumber}</span>
+          <span className="text">{price}</span>
         </Grid>
       </Grid>
     </div>

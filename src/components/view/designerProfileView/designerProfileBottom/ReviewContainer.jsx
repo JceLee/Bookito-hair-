@@ -75,7 +75,7 @@ export default function ReviewContainer(props) {
   return (
     <div className="reviewContainer" id={id}>
       <h2 id="reviewTitle">Reviews</h2>
-      {appointments.length == 0 ? "There is no review" : getReviews()}
+      {appointments.length === 0 ? "There is no review" : getReviews()}
       {reviews.slice(reviewNum.minValue, reviewNum.maxValue).map((review, index) => (
         <Review
           key={index}

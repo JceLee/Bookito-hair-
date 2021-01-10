@@ -27,7 +27,6 @@ function ChatRoom(props) {
     date: "",
     type: "",
   });
-  const history = useHistory();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,9 +64,7 @@ function ChatRoom(props) {
     chat.date = Moment(new Date()).format("DD/MM/YYYY HH:mm:ss");
     chat.type = "message";
     const newMessage = firebaseDate.ref("chats/").push();
-    console.log(chat);
     newMessage.set(chat);
-    console.log(chat);
     setNewChat({ roomID: "", nickname: "", message: "", date: "", type: "" });
   };
 
@@ -80,7 +77,7 @@ function ChatRoom(props) {
     <Container className="chatRoom">
       <ScrollToBottom className="chatContent">
         {chats.map((item, idx) => (
-          <div className="chatMessage">
+          <div className="chatMessage" key={idx}>
             <div
               className={`${
                 item.nickname === currentUser.fname

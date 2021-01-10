@@ -51,7 +51,7 @@ export default function MessengerListView() {
       .limitToLast(1)
       .once("value")
       .then((resp) => {
-        lastMsgs.current[roomID] = snapshotToArray(resp)[0].message;
+        lastMsgs.current[roomID] = snapshotToArray(resp)[0] !== undefined ? snapshotToArray(resp)[0].message : "No messages yet";
         loadProfileImg(roomID);
         return 1;
       });

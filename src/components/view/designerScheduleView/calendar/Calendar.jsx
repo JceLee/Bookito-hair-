@@ -21,10 +21,13 @@ import { Badge } from "antd";
 import NewRequests from "./NewRequests";
 import { IconButton } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
+import ForumIcon from '@material-ui/icons/Forum';
 import DeleteAppointmentModal from "../calendar/DeleteAppointmentModal";
 import AddAppointmentModal from "./AddAppointmentModal";
 import { withStyles } from "@material-ui/core/styles";
 import { fade } from "@material-ui/core/styles/colorManipulator";
+import {CreateMessengerRoom} from "../../messengerView/CreateMessengerRoom"
+import { useHistory } from "react-router-dom";
 
 export default function Calendar(props) {
   const currentDate = new Date();
@@ -67,10 +70,23 @@ export default function Calendar(props) {
     return <TooltipContent appointmentData={appointmentData} formatDate={formatDate} />;
   };
 
+  const history = useHistory();
+
+  const enterChatRoom = (roomID) => {
+    history.push(`/chatroom?roomID=${roomID}`);
+  };
+
+  const startChatting = (appointment) => {
+    enterChatRoom(CreateMessengerRoom(appointment.customerId, appointment.designerId));
+  }
+
   const getTooltipHeader = ({ appointmentData, ...restProps }) => {
     appointmentID.current = appointmentData.id;
     return (
       <AppointmentTooltip.Header {...restProps}>
+        <IconButton onClick={() => startChatting(appointmentData)}>
+          <ForumIcon />
+        </IconButton>
         <IconButton onClick={() => displayDeleteAppointmentModal()}>
           <DeleteIcon />
         </IconButton>
@@ -150,9 +166,9 @@ export default function Calendar(props) {
               contentComponent={getTooltipContent}
               showCloseButton
             />{" "}
-            <Fab color="secondary" className="addButton" onClick={displayAddAppointmentModal}>
-              <AddIcon />
-            </Fab>
+            {/*<Fab color="secondary" className="addButton" onClick={displayAddAppointmentModal}>*/}
+            {/*  <AddIcon />*/}
+            {/*</Fab>*/}
           </Scheduler>
         </Paper>
         <DeleteAppointmentModal

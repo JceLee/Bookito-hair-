@@ -17,19 +17,17 @@ export const getUserDocument = async (uid) => {
 export const generateUserDocument = async (user) => {
   if (!user) return;
   const userRef = firebaseStore.doc(`users/${user.uid}`);
-  const snapshot = await userRef.get();
-  if (!snapshot.exists) {
+  const userData = await userRef.get();
+  if (!userData.exists) {
     const {email, displayName, photoURL, uid} = user;
-    const accountTypes = designerTypes.client;
+    const accountTypes = designerTypes.newClient;
     const fname = displayName;
     const lname = "";
-    const location = "Vancouver, BC, Canada";
+    const location = "";
     const phone = "";
     const gender = "";
-    const hours = {
-    };
-    const services = {
-    };
+    const hours = {};
+    const services = {};
     const works = [];
     try {
       await userRef.set({

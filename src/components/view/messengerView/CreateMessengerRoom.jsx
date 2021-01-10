@@ -4,16 +4,24 @@ import { firebaseDate } from "../../../config/fbConfig";
 const ref = firebaseDate.ref("rooms/");
 
 export function CreateMessengerRoom(customer, designer) {
+
+  const roomID = customer > designer ? customer + designer : designer + customer;
   const room = {
-    roomID: customer.uid + designer.uid,
-    customerID: customer.uid,
-    designerID: designer.uid,
+    roomID: roomID,
+    customerID: customer,
+    designerID: designer,
   };
+
   ref
     .orderByChild("roomID")
-    .equalTo(room.roomID)
+    .equalTo(roomID)
     .once("value", (snapshot) => {
-      const newRoom = firebaseDate.ref("rooms/").push();
-      newRoom.set(room);
+      if (snapshot.val() === null) {
+        const newRoom = firebaseDate.ref("rooms/").push();
+        newRoom.set(room);
+      };
+      // enterChatRoom(room.roomID);
     });
+
+  return roomID;
 }

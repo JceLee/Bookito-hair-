@@ -14,6 +14,7 @@ export default function ScheduleCardHistory(props) {
   const [visibleBookNowModal, setVisibleBookNowModal] = useState(false);
 
   useEffect(() => {
+    let unmounted = false;
     function dispatchDesigner() {
       firebaseStore
         .collection("users")
@@ -24,9 +25,11 @@ export default function ScheduleCardHistory(props) {
         });
     }
     dispatchDesigner();
+    return () => { unmounted = true };
   }, [designerId]);
 
   useEffect(() => {
+    let unmounted = false;
     function manageReviews() {
       firebaseStore
         .collection("appointments")
@@ -37,6 +40,7 @@ export default function ScheduleCardHistory(props) {
         });
     }
     manageReviews();
+    return () => { unmounted = true };
   }, [appointment.aid]);
 
   const reviewModalHandler = () => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import Dialog from "@material-ui/core/Dialog";
 import { CloseOutlined } from "@ant-design/icons";
 import {Row, Col, notification} from "antd";
@@ -8,7 +8,7 @@ import {firebaseStore} from "../../../../config/fbConfig";
 export default function DeleteAppointmentModal(props) {
   const { deleteAppointmentModalState, displayDeleteAppointmentModal, forceUpdate, appointmentID } = props;
 
-  const changeState = (appointmentID) => {
+  const changeState = () => {
     firebaseStore
       .collection("appointments")
       .doc(appointmentID)
@@ -16,15 +16,14 @@ export default function DeleteAppointmentModal(props) {
         state: "DeletedByDesigner",
       })
       .then(function () {
-        forceUpdate();
+        displayDeleteAppointmentModal();
         return notification.success({
           className: "notificationSaved",
           style: { top: "550px" },
           message: "Saved",
           duration: "2",
         });
-      });
-  };
+      });}
 
   return (
     <Dialog
@@ -42,7 +41,7 @@ export default function DeleteAppointmentModal(props) {
       </Row>
       <Row className="modalContent">Are you sure you want to delete?</Row>
       <Row className="modalFooter">
-        <BlackBtn btnName="Delete" onclick={() => changeState(appointmentID)}/>
+        <BlackBtn btnName="Delete" onClick={changeState}/>
       </Row>
     </Dialog>
   );
