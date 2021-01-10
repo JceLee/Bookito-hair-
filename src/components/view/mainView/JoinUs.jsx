@@ -20,7 +20,6 @@ const settings = {
 
 export default function JoinUs() {
   const onClickDesignerTypeImg = (designerType) => {
-    console.log(designerType);
     return <BecomeDesignerView />;
   };
 

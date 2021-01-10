@@ -7,7 +7,6 @@ import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 import LocalPhoneOutlinedIcon from "@material-ui/icons/LocalPhoneOutlined";
 
 export default function TooltipContent(props) {
-  console.log(props);
   const { appointmentData, formatDate } = props;
   const { serviceName, phoneNumber, title, price } = appointmentData;
 

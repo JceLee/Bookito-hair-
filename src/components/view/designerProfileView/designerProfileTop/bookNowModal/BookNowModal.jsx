@@ -181,7 +181,6 @@ export default function BookNowModal(props) {
       .collection("appointments")
       .add(newAppointment)
       .then(function (docRef) {
-        console.log("create appointment :" + docRef.id);
         firebaseStore.collection("appointments").doc(docRef.id).update({
           aid: docRef.id,
         });
@@ -198,8 +197,7 @@ export default function BookNowModal(props) {
           text: "Customer A requests a new appointment.",
           html: notificationForm(designer, currentUser),
         },
-      })
-      .then(() => console.log("Queued email for delivery!"));
+      });
   };
 
   const getServiceContent = () => {

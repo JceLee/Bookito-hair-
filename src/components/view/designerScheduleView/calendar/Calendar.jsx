@@ -27,6 +27,7 @@ import AddAppointmentModal from "./AddAppointmentModal";
 import { withStyles } from "@material-ui/core/styles";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import {CreateMessengerRoom} from "../../messengerView/CreateMessengerRoom"
+import { useHistory } from "react-router-dom";
 
 export default function Calendar(props) {
   const currentDate = new Date();
@@ -69,8 +70,14 @@ export default function Calendar(props) {
     return <TooltipContent appointmentData={appointmentData} formatDate={formatDate} />;
   };
 
+  const history = useHistory();
+
+  const enterChatRoom = (roomID) => {
+    history.push(`/chatroom?roomID=${roomID}`);
+  };
+
   const startChatting = (appointment) => {
-    CreateMessengerRoom(appointment.customerId, appointment.designerId);
+    enterChatRoom(CreateMessengerRoom(appointment.customerId, appointment.designerId));
   }
 
   const getTooltipHeader = ({ appointmentData, ...restProps }) => {
@@ -125,10 +132,6 @@ export default function Calendar(props) {
     name: "TimeTableCell",
   })(TimeTableCellBaseMonth);
 
-  const test = () => {
-    console.log("hahahah")
-  }
-
   return (
     <>
       <div className="calendar">
@@ -161,7 +164,6 @@ export default function Calendar(props) {
             <AppointmentTooltip
               headerComponent={getTooltipHeader}
               contentComponent={getTooltipContent}
-              onDeleteButtonClick={test}
               showCloseButton
             />{" "}
             {/*<Fab color="secondary" className="addButton" onClick={displayAddAppointmentModal}>*/}
