@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { useSelector } from "react-redux";
 import {
   Button,
   Divider,
@@ -52,6 +51,10 @@ export default function ServiceNPriceForm(props) {
   const onChange = (activeKey) => {
     setState({ activeKey, panes: [...panes] });
   };
+
+  const test = (value) => {
+    // console.log(value.target);
+  }
 
   const onEdit = (targetKey, action) => {
     if (action === "add") {
@@ -174,10 +177,13 @@ export default function ServiceNPriceForm(props) {
               </Popconfirm>
               <Form.List name={["services", `${tab.title}`]}>
                 {(fields, { add, remove }) => {
+                  fields = designer.services[tab.title];
+                  console.log(fields);
                   return (
                     <>
                       <div>
                         {fields.map((field, index) => {
+                          console.log(field);
                           return (
                             <div
                               key={index}
@@ -195,7 +201,7 @@ export default function ServiceNPriceForm(props) {
                                     },
                                   ]}
                                 >
-                                  <Input placeholder="Service Name" />
+                                  <Input placeholder="Service Name" defaultValue={field.service}/>
                                 </Form.Item>
                                 <Form.Item
                                   name={[field.name, "price"]}
@@ -214,6 +220,7 @@ export default function ServiceNPriceForm(props) {
                                   <InputNumber
                                     placeholder="Price"
                                     // formatter={(value) => `$ ${value}`}
+                                    defaultValue={field.price}
                                   />
                                 </Form.Item>
                                 <MinusCircleOutlined
@@ -229,8 +236,9 @@ export default function ServiceNPriceForm(props) {
                                 className="serviceDescriptionInput"
                                 fieldKey={[field.fieldKey, "description"]}
                                 hasFeedback
+                                rules={[{ message: 'Username is required!' }]}
                               >
-                                <TextArea placeholder="Description (optional)" />
+                                <TextArea placeholder="Description (optional)" defaultValue={field.description}/>
                               </Form.Item>
                               <Divider className="dividerInServiceAndPrice" />
                             </div>
@@ -302,8 +310,8 @@ export default function ServiceNPriceForm(props) {
         formArea
       ) : (
         <Form
-          initialValues={formInitialValues}
           name="editProfile"
+          onChange={test}
           onFinish={yes}
         >
           {formArea}

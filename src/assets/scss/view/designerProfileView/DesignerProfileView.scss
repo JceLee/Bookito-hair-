@@ -488,10 +488,10 @@
         margin: 0 auto;
         width: 90vw;
         @include tabletP {
-          width: 35vw;
+          width: 45vw;
         }
         @include desktop {
-          width: 30vw;
+          width: 550px;
         }
       }
 
@@ -725,7 +725,7 @@
 .onFinishMessage {
   width: 160px;
   margin: 85vh auto 20vh;
-  
+
   @include tabletP {
     margin: 90vh auto 20vh;
   }

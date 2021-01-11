@@ -8,12 +8,12 @@ export default function Review(props) {
   const { id, customerName, rate, comment, date } = props;
 
   const dateFormatter = (date) => {
-    const [day, mm, dd, yy] = date.split(" ");
+    const [mm, dd] = date.split(" ");
     return `${mm} ${dd}`;
   };
 
   const determineVisibility = () => {
-    if (customerName == "") {
+    if (customerName === "") {
       reviewVisibility = "hidden";
     } else {
       reviewVisibility = "visible";

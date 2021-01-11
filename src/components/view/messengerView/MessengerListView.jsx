@@ -50,7 +50,10 @@ export default function MessengerListView() {
       .limitToLast(1)
       .once("value")
       .then((resp) => {
-        lastMsgs.current[roomID] = snapshotToArray(resp)[0] !== undefined ? snapshotToArray(resp)[0].message : "No messages yet";
+        console.log(snapshotToArray(resp))
+        console.log(lastMsgs.current);
+        lastMsgs.current[roomID] = snapshotToArray(resp)[0] !== undefined ? snapshotToArray(resp)[0] : {date : " ", message : "No messages yet"
+          };
         loadProfileImg(roomID);
         return 1;
       });
@@ -97,6 +100,7 @@ export default function MessengerListView() {
       {emptyMessengerList()}
       {rooms.map((room) => {
         loadLastMsg(room.roomID);
+        console.log(lastMsgs.current[room.roomID]?.date );
         return (
           <MessengerListCard
             key={room.roomID}
@@ -104,8 +108,8 @@ export default function MessengerListView() {
             photoURL={profiles.current[room.roomID]}
             enterChatRoom={enterChatRoom}
             roomID={room.roomID}
-            msgDate={"2020.12.17"}
-            lastMsg={lastMsgs.current[room.roomID]}
+            msgDate={lastMsgs.current[room.roomID]?.date}
+            lastMsg={lastMsgs.current[room.roomID]?.message}
           />
         );
       })}

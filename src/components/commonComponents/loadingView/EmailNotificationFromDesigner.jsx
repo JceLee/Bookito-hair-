@@ -19,7 +19,5 @@ export default function EmailNotificationFromDesigner(props) {
     history.push("/designer_schedule");
   };
 
-  console.log("Loading Page!");
-
   return <div>Please wait...</div>;
 }
