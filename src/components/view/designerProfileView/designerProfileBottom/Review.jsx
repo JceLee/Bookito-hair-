@@ -13,7 +13,7 @@ export default function Review(props) {
   };
 
   const determineVisibility = () => {
-    if (customerName == "") {
+    if (customerName === "") {
       reviewVisibility = "hidden";
     } else {
       reviewVisibility = "visible";

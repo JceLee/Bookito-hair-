@@ -23,7 +23,7 @@ export default function SignInModal() {
         const user = result.user;
         generateUserDocument(user).then(function (result) {
           dispatch(sign_in_with_google(result));
-          if (result.accountTypes === designerTypes.newClient) {
+          if (result.accountType === designerTypes.newClient) {
             directProfile();
           }
         });

@@ -7,9 +7,6 @@ import { Link } from "react-router-dom";
 export default function SignOut() {
   const [loggedIn, setLoggedIn] = useState(true);
   const dispatch = useDispatch();
-  useEffect(() => {
-    console.log("Hi");
-  }, [loggedIn]);
 
   const signOut = () => {
     firebaseAuth

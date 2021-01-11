@@ -6,7 +6,7 @@ import BlackBtn from "../../../commonComponents/BlackBtn";
 import {firebaseStore} from "../../../../config/fbConfig";
 
 export default function DeleteAppointmentModal(props) {
-  const { deleteAppointmentModalState, displayDeleteAppointmentModal, forceUpdate, appointmentID } = props;
+  const { deleteAppointmentModalState, displayDeleteAppointmentModal, appointmentID } = props;
 
   const changeState = () => {
     firebaseStore
