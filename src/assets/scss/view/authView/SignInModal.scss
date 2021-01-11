@@ -8,20 +8,13 @@
   font-weight: 700;
 }
 
-
-.menuBtn {
-
-  .ant-btn:hover {
-    color: $black;
-    border-color: $black;
-
-  }
-
+.signInBtn {
+  .ant-btn:active,
+  .ant-btn:hover,
   .ant-btn:focus {
     color: $black;
-    border-color: $black;
+    border-color: darkgray;
   }
-
 }
 
 .loginModal {
@@ -41,6 +34,7 @@
     width: 100vw;
     height: 100vh;
     vertical-align: middle;
+    // overflow: hidden;
 
     .ant-divider-horizontal {
       width: 280px;
@@ -55,7 +49,7 @@
       padding: 0;
 
       .loginModalContainer {
-        background-color: rgb(244, 244, 244);
+        // background-color: rgb(244, 244, 244);
         width: 100vw;
         height: 100vh;
         display: flex;

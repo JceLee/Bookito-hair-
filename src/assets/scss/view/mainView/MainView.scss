@@ -22,7 +22,6 @@
   width: 100%;
   height: 450px;
 
-
   @include tabletP {
     height: 600px;
   }
@@ -51,12 +50,11 @@
     }
 
     #mainSearchBar {
-
       @include desktop {
         width: 1130px;
       }
 
-      .ant-input-group{
+      .ant-input-group {
         z-index: 3;
       }
     }
@@ -182,15 +180,31 @@
 
 // new designer desktop section
 .newDesignersDesktopSection {
-  padding: 0 5%;
+  padding: 20px 5%;
+  // padding: 20px 25px;
   margin-bottom: 5vh;
   margin-top: 10%;
+  background-color: #fafafa;
+  // background-color: #ececec;
 
   @include tabletP {
     display: block;
+    margin-top: 8%;
+    margin-bottom: 9vh;
   }
+
+  @include tabletL {
+    // margin-top: 6%;
+    // margin-bottom: 11vh;
+    display: flex;
+  }
+
   @include mainPageNewDesigners1090 {
     display: flex;
+  }
+
+  @include desktop {
+    padding: 20px 4%;
   }
 
   .newDesignersHeading {
@@ -200,28 +214,63 @@
   .headerSection {
     text-align: center;
     margin-bottom: 5vh;
+
+    @include tabletL {
+      text-align: left;
+      // display: block;
+      width: 55%;
+      margin-right: 10%;
+      margin-top: 6%;
+    }
     @include mainPageNewDesigners1090 {
       text-align: left;
       display: block;
       width: 30%;
       margin-right: 10%;
+      margin-top: 6%;
     }
 
     .topLine {
-      font-size: 25pt;
-      font-weight: 500;
+      font-size: 20pt;
+      font-weight: 300;
       margin-bottom: 2%;
+
+      @include tabletL {
+        margin-left: 12%;
+      }
+
+      @include mainPageNewDesigners1090 {
+        margin-left: 0;
+      }
     }
 
     .bottomLine {
       font-weight: 300;
       margin: 0 auto;
+      padding: 6px 5%;
+
+      @include mobileM {
+        padding: 6px 6%;
+      }
+
+      @include mobileMtoL {
+        padding: 6px 11%;
+      }
+
       @include tabletP {
         width: 660px;
+        padding: 6px 20%;
+      }
+
+      @include tabletL {
+        width: 300px;
+        padding: 6px 0;
+        margin-left: 12%;
       }
 
       @include mainPageNewDesigners1090 {
         width: 100%;
+        margin-left: 0;
       }
     }
   }
@@ -236,6 +285,9 @@
 
   .imagesSection {
     width: 100%;
+    @include tabletL {
+      width: 60%;
+    }
     @include mainPageNewDesigners1090 {
       width: 70%;
     }
@@ -243,7 +295,8 @@
     .designerImagesRow {
       width: 100%;
       display: flex;
-      margin-bottom: 20px;
+      margin-top: 10px;
+      margin-bottom: 10px;
       justify-content: center;
       @include mainPageNewDesigners1090 {
         justify-content: flex-end;

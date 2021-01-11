@@ -66,6 +66,17 @@
     .helpCenterText {
       text-align: center;
     }
+    .sendMsgBtn {
+      text-align: center;
+      .ant-btn-link {
+        border-color: lightgrey;
+        color: steelblue;
+        // color: $black;
+        border-radius: 20px;
+        font-weight: 500;
+      }
+    }
+
     .ant-modal-confirm-btns {
       float: none;
       .ant-btn-primary {

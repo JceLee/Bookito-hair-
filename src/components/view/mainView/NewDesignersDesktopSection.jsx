@@ -12,15 +12,30 @@ export default function NewDesignersDesktopSection() {
     "https://i.pinimg.com/474x/42/65/1c/42651cb45931a16714948ff1610da3b6.jpg",
     "https://i.pinimg.com/474x/3b/78/db/3b78db4f25a7f3ba5d89c2575a41339f.jpg",
   ];
+
+  // let firstHalfNewDesigners = newDesignerImages.slice(0, 4);
+  // let secondHalfNewDesigners = newDesignerImages.slice(4, 8);
+  // let thirdHalfNewDesigners = null;
+
+  // const resizeScreen = () => {
+  //   if (window.innerWidth > 767 && window.innerWidth < 1090) {
+  //     let firstHalfNewDesigners = newDesignerImages.slice(0, 3);
+  //     let secondHalfNewDesigners = newDesignerImages.slice(3, 6);
+  //     let thirdHalfNewDesigners = newDesignerImages.slice(6, 8);
+  //   }
+  // };
+
+  // window.addEventListener("resize", resizeScreen);
+
   const firstHalfNewDesigners = newDesignerImages.slice(0, 4);
   const secondHalfNewDesigners = newDesignerImages.slice(4, 8);
   return (
     <div className="newDesignersDesktopSection">
       <div className="headerSection">
-        <div className="topLine">Designers' Works</div>
+        <div className="topLine">Book Now</div>
         <div className="bottomLine">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elite, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua.
+          Find Beauticians around your location and book them without call or visit in person. Check
+          your beautician's work anywhere and anytime before booking.
         </div>
       </div>
       {/* <div className="newDesignersHeaderSmallDesktopSection">New Designers</div> */}
