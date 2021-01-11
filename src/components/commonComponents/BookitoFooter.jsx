@@ -40,13 +40,20 @@ const helpCentre = () => {
     style: { top: "25%" },
     okText: "Exit",
     content: (
-      <div className="helpCenterText">
-        <h4>Please contact</h4>
-        <h4>
-          <b>bookito@gmail.com</b>
-        </h4>
-        <h4> if there is any issue.</h4>
-      </div>
+      <>
+        <div className="helpCenterText">
+          <h4>Please contact</h4>
+          <h4>
+            <b>bookito@gmail.com</b>
+          </h4>
+          <h4> if there is any issue.</h4>
+        </div>
+        <section className="sendMsgBtn">
+          <Button type="link" style={{ margin: 5, fontSize: 13 }}>
+            Send message
+          </Button>
+        </section>
+      </>
     ),
   });
 };
