@@ -13,22 +13,9 @@ export default function NewDesignersDesktopSection() {
     "https://i.pinimg.com/474x/3b/78/db/3b78db4f25a7f3ba5d89c2575a41339f.jpg",
   ];
 
-  // let firstHalfNewDesigners = newDesignerImages.slice(0, 4);
-  // let secondHalfNewDesigners = newDesignerImages.slice(4, 8);
-  // let thirdHalfNewDesigners = null;
-
-  // const resizeScreen = () => {
-  //   if (window.innerWidth > 767 && window.innerWidth < 1090) {
-  //     let firstHalfNewDesigners = newDesignerImages.slice(0, 3);
-  //     let secondHalfNewDesigners = newDesignerImages.slice(3, 6);
-  //     let thirdHalfNewDesigners = newDesignerImages.slice(6, 8);
-  //   }
-  // };
-
-  // window.addEventListener("resize", resizeScreen);
-
   const firstHalfNewDesigners = newDesignerImages.slice(0, 4);
   const secondHalfNewDesigners = newDesignerImages.slice(4, 8);
+
   return (
     <div className="newDesignersDesktopSection">
       <div className="headerSection">
