@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Button, Radio, Spin } from "antd";
-import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { designerTypes } from "../../../constants/designerTypes";
+import React, {useState} from "react";
+import {Button, Radio, Spin} from "antd";
+import {useSelector} from "react-redux";
+import {useHistory} from "react-router-dom";
+import {designerTypes} from "../../../constants/designerTypes";
 import InfoCard from "../mainView/InfoCard";
 import ClientProfileView from "../../view/clientProfileView/ClientProfileView";
 import DesignerProfileCreateEdit from "../designerProfileView/designerProfileTop/DesignerProfileCreateEdit";
@@ -105,7 +105,7 @@ export default function BecomeDesignerView() {
             )}
             onChange={onSelected}
             optionType="button"
-          ></Radio.Group>
+          />
 
           {createProfileStage === 1 && (
             <Button
@@ -139,7 +139,7 @@ export default function BecomeDesignerView() {
           <div className="subHeadingWideMargin">
             Tell your customers about your business! (3/3)
           </div>
-          <DesignerProfileCreateEdit designer={designer} createMode={true} selectedDesignerType={designerType} />
+          <DesignerProfileCreateEdit designer={designer} createMode={true} selectedDesignerType={designerType}/>
         </>
       )}
     </div>

@@ -28,7 +28,7 @@ export default function MobileSearchBarSlideBackground() {
           cssModule={sliderScss}
         >
           {mobiles.map((img, inx) => (
-            <div data-src={img} />
+            <div data-src={img} key={inx}/>
           ))}
         </AutoplaySlider>
       </div>

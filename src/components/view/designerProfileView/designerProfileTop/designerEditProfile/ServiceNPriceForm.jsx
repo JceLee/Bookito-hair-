@@ -75,7 +75,6 @@ export default function ServiceNPriceForm(props) {
 
   const updateInput = (e) => {
     newTabName.current = e.target.value;
-    console.log(newTabName.current);
   };
 
   const nameTabPromise = () => {
@@ -127,7 +126,6 @@ export default function ServiceNPriceForm(props) {
   };
 
   const changeTabName = (e) => {
-    console.log(e);
     console.log("clicked");
   };
 
@@ -137,7 +135,6 @@ export default function ServiceNPriceForm(props) {
   };
 
   const cancel = (e) => {
-    console.log(e);
     message.error("Click on No");
   };
 
@@ -169,11 +166,11 @@ export default function ServiceNPriceForm(props) {
                 cancelText="No"
               >
                 <button
-                  type="button"
-                  aria-label="remove"
-                  tabIndex="0"
-                  className="ant-tabs-tab-remove"
-                ></button>
+  type="button"
+  aria-label="remove"
+  tabIndex="0"
+  className="ant-tabs-tab-remove"
+  />
               </Popconfirm>
               <Form.List name={["services", `${tab.title}`]}>
                 {(fields, { add, remove }) => {
