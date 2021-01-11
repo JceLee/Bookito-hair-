@@ -1,6 +1,16 @@
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { Button, Divider, Form, Input, InputNumber, message, Modal, Popconfirm, Tabs } from "antd";
+import {
+  Button,
+  Divider,
+  Form,
+  Input,
+  InputNumber,
+  message,
+  Modal,
+  Popconfirm,
+  Tabs,
+} from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import BlackBtn from "../../../../commonComponents/BlackBtn";
 
@@ -20,8 +30,9 @@ const formInitialValues = {
 
 export default function ServiceNPriceForm(props) {
   const { designer, createMode } = props;
-  const [tabNames] = useState(designer.services ? Object.keys(designer.services) : []);
-  const [form] = Form.useForm();
+  const [tabNames] = useState(
+    designer.services ? Object.keys(designer.services) : []
+  );
   const [addTabModal, setAddTabModal] = useState(false);
   const [removeTabModal, setRemoveTabModal] = useState(false);
   const promiseFunction = useRef(() => {});
@@ -115,25 +126,6 @@ export default function ServiceNPriceForm(props) {
     console.log(values);
   };
 
-  const onValuesChange = () => {
-    const { panes } = state;
-    if (createMode) {
-      const tabList = panes.map(tab => tab.title);
-      const servicesRawValue = form.getFieldValue().services;
-      const servicesList = {};
-      Object.keys(servicesRawValue).forEach(serviceValue => {
-        if (tabList.includes(serviceValue)) {
-          servicesList[serviceValue] = servicesRawValue[serviceValue].filter(subService => !!subService).map(subService => ({
-            service: subService?.serviceName || "",
-            description: subService?.description || "",
-            price: subService?.price || 0,
-          }));
-        }
-      });
-      designer.services = servicesList;
-    }
-  };
-
   const changeTabName = (e) => {
     console.log(e);
     console.log("clicked");
@@ -151,19 +143,13 @@ export default function ServiceNPriceForm(props) {
 
   const { activeKey, panes } = state;
 
-  return (
-    <Form
-      initialValues={formInitialValues}
-      form={form}
-      onValuesChange={onValuesChange}
-      name="editProfile"
-      onFinish={yes}
-    >
+  const formArea = (
+    <>
       <Tabs
         type="editable-card"
         onChange={onChange}
         activeKey={activeKey}
-        onEdit={onEdit} 
+        onEdit={onEdit}
         addIcon={<PlusOutlined style={{ height: 38, paddingTop: 11 }} />}
       >
         {panes.map((tab) => {
@@ -196,12 +182,15 @@ export default function ServiceNPriceForm(props) {
                       <div>
                         {fields.map((field, index) => {
                           return (
-                            <div key={index} className="servicePriceDescription">
+                            <div
+                              key={index}
+                              className="servicePriceDescription"
+                            >
                               <div className="servicePriceMinusButton">
                                 <Form.Item
-                                  name={[field.name, "serviceName"]}
+                                  name={[field.name, "service"]}
                                   className="serviceNameInput"
-                                  fieldKey={[field.fieldKey, "serviceName"]}
+                                  fieldKey={[field.fieldKey, "service"]}
                                   hasFeedback
                                   rules={[
                                     {
@@ -260,7 +249,7 @@ export default function ServiceNPriceForm(props) {
                           }}
                           block
                         >
-                          <PlusOutlined /> Add Service to {tab.title}
+                          <PlusOutlined /> Add a service to {tab.title}
                         </Button>
                       </Form.Item>
                     </>
@@ -274,7 +263,7 @@ export default function ServiceNPriceForm(props) {
       </Tabs>
       <Modal
         className="tabNameModal"
-        title="Add a tab"
+        title="Add a service category"
         visible={addTabModal}
         onCancel={() => setAddTabModal(!addTabModal)}
         centered={true}
@@ -282,7 +271,7 @@ export default function ServiceNPriceForm(props) {
       >
         <Input
           className="newTabInput"
-          placeholder="Please type a name for new tab"
+          placeholder="Please type a name for a new service"
           maxLength={8}
           onChange={updateInput}
         />
@@ -295,16 +284,34 @@ export default function ServiceNPriceForm(props) {
       </Modal>
       <Modal
         className="removeTabModal"
-        title="Remove the tab"
+        title="Remove service category"
         visible={removeTabModal}
         onCancel={() => setRemoveTabModal(!removeTabModal)}
         centered={true}
         footer={null}
       >
-        <div style={{ textAlign: "center" }}>Are you sure you want to delete?</div>
+        <div style={{ textAlign: "center" }}>
+          Delete category and all corresponding services?
+        </div>
         <Divider />
         <BlackBtn btnName="Delete" onClick={promiseFunction.current} />
       </Modal>
-    </Form>
+    </>
+  );
+
+  return (
+    <>
+      {createMode ? (
+        formArea
+      ) : (
+        <Form
+          initialValues={formInitialValues}
+          name="editProfile"
+          onFinish={yes}
+        >
+          {formArea}
+        </Form>
+      )}
+    </>
   );
 }

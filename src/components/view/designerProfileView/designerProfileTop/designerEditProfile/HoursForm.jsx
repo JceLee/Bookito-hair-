@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { Checkbox, Form, Slider } from "antd";
-import formatTime, { destructureTimeRange } from "../../../../../helpers/timeFunctions";
+import { useDispatch } from "react-redux";
+import { Checkbox, Form, Slider, message } from "antd";
+import { refresh } from "../../../../../actions/currentUser";
+import { firebaseStore } from "../../../../../config/fbConfig";
+import formatTime, {
+  destructureTimeRange,
+} from "../../../../../helpers/timeFunctions";
 import BlackBtn from "../../../../commonComponents/BlackBtn";
 
-const defaultStartTime = 16; // 08:00
-const defaultEndTime = 42; // 21:00
-const defaultTradingHours = [defaultStartTime, defaultEndTime];
 const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const minValueInSlider = 0; // "00:00"
 const maxValueInSlider = 47; // "23:30"
@@ -20,22 +21,8 @@ let sliderVisibility;
 let checkboxOffset;
 
 export default function HoursForm(props) {
-  const { designer, createMode } = props;
-
-  // Set up for new designer
-  if (designer.accountType === "client") {
-    designer.hours = {
-      "Mon": [{ closed: false, tradingHours: defaultTradingHours }] ,
-      "Tue": [{ closed: false, tradingHours: defaultTradingHours }] ,
-      "Wed": [{ closed: false, tradingHours: defaultTradingHours }] ,
-      "Thu": [{ closed: false, tradingHours: defaultTradingHours }] ,
-      "Fri": [{ closed: false, tradingHours: defaultTradingHours }] ,
-      "Sat": [{ closed: false, tradingHours: defaultTradingHours }] ,
-      "Sun": [{ closed: false, tradingHours: defaultTradingHours }] ,
-    }
-  }
-
-  const [form] = Form.useForm();
+  const { designer, createMode, formInitialValues } = props;
+  const dispatch = useDispatch();
 
   const [DayChecked, setDayChecked] = useState({
     Mon: designer.hours["Mon"][0]["closed"],
@@ -46,53 +33,6 @@ export default function HoursForm(props) {
     Sat: designer.hours["Sat"][0]["closed"],
     Sun: designer.hours["Sun"][0]["closed"],
   });
-
-  let formInitialValues = {
-    hours: {
-      Mon: [
-        {
-          tradingHours: designer.hours["Mon"][0]["tradingHours"],
-          closed: designer.hours["Mon"][0]["closed"],
-        },
-      ],
-      Tue: [
-        {
-          tradingHours: designer.hours["Tue"][0]["tradingHours"],
-          closed: designer.hours["Tue"][0]["closed"],
-        },
-      ],
-      Wed: [
-        {
-          tradingHours: designer.hours["Wed"][0]["tradingHours"],
-          closed: designer.hours["Wed"][0]["closed"],
-        },
-      ],
-      Thu: [
-        {
-          tradingHours: designer.hours["Thu"][0]["tradingHours"],
-          closed: designer.hours["Thu"][0]["closed"],
-        },
-      ],
-      Fri: [
-        {
-          tradingHours: designer.hours["Fri"][0]["tradingHours"],
-          closed: designer.hours["Fri"][0]["closed"],
-        },
-      ],
-      Sat: [
-        {
-          tradingHours: designer.hours["Sat"][0]["tradingHours"],
-          closed: designer.hours["Sat"][0]["closed"],
-        },
-      ],
-      Sun: [
-        {
-          tradingHours: designer.hours["Sun"][0]["tradingHours"],
-          closed: designer.hours["Sun"][0]["closed"],
-        },
-      ],
-    },
-  };
 
   const formatter = (minutes) => {
     const formattedValue = formatTime(minutes * timeConvertingFactor);
@@ -137,10 +77,6 @@ export default function HoursForm(props) {
       ...prevValue,
       [day]: [from, to],
     }));
-
-    if (createMode) {
-      designer.hours[day][0]["tradingHours"] = minutes;
-    }
   };
 
   const onChangeCheckboxHandler = (event) => {
@@ -149,93 +85,124 @@ export default function HoursForm(props) {
       ...prevValue,
       [name]: checked,
     }));
-    
-    if (createMode) {
-      designer.hours[name][0]["closed"] = checked;
-    }
   };
 
-  const yes = (values) => {
-    console.log(values);
+  // save profile to db and reload page
+  const onFinish = (values) => {
+    const updatedInfo = {
+      ...designer,
+      hours: values.hours,
+    };
+    Object.assign(designer, updatedInfo); // Update local client
+    dispatch(refresh(designer)); // Update redux client
+    // Update firebase
+    firebaseStore
+      .collection("users")
+      .doc(designer.uid)
+      .update({
+        hours: values.hours,
+      })
+      .then(function () {
+        return message.success({
+          content: "Saved",
+          duration: "2",
+          className: "onFinishMessage",
+        });
+      });
   };
+
+  const formArea = (
+    <div className="editHours">
+      {days.map((day) => {
+        const [startTime, endTime] = FormattedTimes[day];
+        return (
+          <div key={day}>
+            <Form.List name={["hours", `${day}`]}>
+              {(fields) => {
+                return (
+                  <div>
+                    {fields.map((field, index) => {
+                      {
+                        DayChecked[day]
+                          ? (sliderVisibility = "hidden")
+                          : (sliderVisibility = "visible");
+                      }
+                      return (
+                        <div key={index} className="singleDaySliderCheckbox">
+                          <Form.Item
+                            name={[field.name, "closed"]}
+                            className="hoursFormItem"
+                            fieldKey={[field.fieldKey, "closed"]}
+                            valuePropName="checked"
+                          >
+                            <Checkbox
+                              className="hoursCheckbox"
+                              checked={DayChecked[day]}
+                              name={day}
+                              onChange={onChangeCheckboxHandler}
+                              style={{ top: `${checkboxOffset}` }}
+                            >
+                              Closed
+                            </Checkbox>
+                          </Form.Item>
+                          <span className="hoursFormSliderLabel">
+                            {day}
+                          </span>
+                          <Form.Item
+                            name={[field.name, "tradingHours"]}
+                            className="hoursFormItem"
+                            fieldKey={[field.fieldKey, "tradingHours"]}
+                            valuePropName="value"
+                            colon={false}
+                          >
+                            <Slider
+                              allowCross={false}
+                              range
+                              min={minValueInSlider}
+                              max={maxValueInSlider}
+                              disabled={DayChecked[day]}
+                              onChange={(minutes) =>
+                                onChangeSliderHandler(day, minutes)
+                              }
+                              tooltipPlacement="bottom"
+                              tipFormatter={formatter}
+                              style={{ visibility: `${sliderVisibility}` }}
+                            />
+                          </Form.Item>
+                          <span className="formattedTimesInSpan">
+                            {DayChecked[day]
+                              ? "Holiday"
+                              : `${startTime} - ${endTime}`}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              }}
+            </Form.List>
+          </div>
+        );
+      })}
+    </div>
+  );
 
   return (
-    <Form
-      {...layout}
-      form={form}
-      name="editProfile"
-      initialValues={formInitialValues}
-      scrollToFirstError
-      onFinish={yes}
-    >
-      <div className="editHours">
-        {days.map((day) => {
-          const [startTime, endTime] = FormattedTimes[day];
-          return (
-            <div key={day}>
-              <Form.List name={["hours", `${day}`]}>
-                {(fields) => {
-                  return (
-                    <div>
-                      {fields.map((field, index) => {
-                        {
-                          DayChecked[day]
-                            ? (sliderVisibility = "hidden")
-                            : (sliderVisibility = "visible");
-                        }
-                        return (
-                          <div key={index} className="singleDaySliderCheckbox">
-                            <Form.Item
-                              name={[field.name, "closed"]}
-                              className="hoursFormItem"
-                              fieldKey={[field.fieldKey, "closed"]}
-                              valuePropName="checked"
-                            >
-                              <Checkbox
-                                className="hoursCheckbox"
-                                checked={DayChecked[day]}
-                                name={day}
-                                onChange={onChangeCheckboxHandler}
-                                style={{ top: `${checkboxOffset}` }}
-                              >
-                                Closed
-                              </Checkbox>
-                            </Form.Item>
-                            <Form.Item
-                              name={[field.name, "tradingHours"]}
-                              className="hoursFormItem"
-                              fieldKey={[field.fieldKey, "tradingHours"]}
-                              valuePropName="value"
-                              label={day}
-                              colon={false}
-                            >
-                              <Slider
-                                allowCross={false}
-                                range
-                                min={minValueInSlider}
-                                max={maxValueInSlider}
-                                disabled={DayChecked[day]}
-                                onChange={(minutes) => onChangeSliderHandler(day, minutes)}
-                                tooltipPlacement="bottom"
-                                tipFormatter={formatter}
-                                style={{ visibility: `${sliderVisibility}` }}
-                              />
-                            </Form.Item>
-                            <span className="formattedTimesInSpan">
-                              {DayChecked[day] ? "Holiday" : `${startTime} - ${endTime}`}
-                            </span>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  );
-                }}
-              </Form.List>
-            </div>
-          );
-        })}
-      </div>
-      {!createMode && <BlackBtn btnName="Save" onClick={yes} />}
-    </Form>
+    <>
+      {createMode ? (
+        formArea
+      ) : (
+        <Form
+          {...layout}
+          name="editProfile"
+          initialValues={formInitialValues}
+          scrollToFirstError
+          onFinish={onFinish}
+        >
+          {formArea}
+          <BlackBtn btnName="Save" htmlType="submit" />
+        </Form>
+      )}
+    </>
   );
 }

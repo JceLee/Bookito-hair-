@@ -750,8 +750,12 @@
 }
 
 .onFinishMessage {
-  width: 60vw;
-  margin: 80vh auto 20vh;
+  width: 160px;
+  margin: 85vh auto 20vh;
+  
+  @include tabletP {
+    margin: 90vh auto 20vh;
+  }
 
   .ant-message-notice-content {
     width: 100%;
