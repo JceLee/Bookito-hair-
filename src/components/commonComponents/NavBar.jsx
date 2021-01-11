@@ -9,23 +9,7 @@ import {designerTypes} from "../../constants/designerTypes"
 export default function Navbar() {
   const signedInUser = useSelector((state) => state.currentUser.currentUser);
 
-  const menuItems =
-    signedInUser !== null
-      ? [
-        {name: "Schedule (Designer)", link: "/designer_schedule"},
-        {name: "Schedule (Client)", link: "/client_schedule"},
-        {name: "Profile (Designer)", link: `/designer_profile?uid=${signedInUser.uid}`},
-        {name: "Profile (Client)", link: "/client_profile"},
-        {name: "Divider", link: ""},
-        {name: "Message", link: "/messenger"},
-        {name: "Log In", link: ""},
-      ]
-      : [
-        // { name: "Become a designer", link: "/becomeDesigner" },
-        {name: "Log In", link: ""},
-      ];
-
-  const menuItems2 = signedInUser === null ? [
+  const menuItems = signedInUser === null ? [
     {name: "Log In", link: ""},
   ] : signedInUser.accountType === designerTypes.newClient || signedInUser.accountType ===designerTypes.client ? [
     {name: "Schedule (Client)", link: "/client_schedule"},
@@ -43,10 +27,10 @@ export default function Navbar() {
 
   const menu = (
     <Menu>
-      {menuItems2.map((menu, inx) => {
-        if (menu.name == "Divider") {
+      {menuItems.map((menu, inx) => {
+        if (menu.name === "Divider") {
           return <Menu.Divider key={inx}/>;
-        } else if (menu.name == "Log In") {
+        } else if (menu.name === "Log In") {
           return (
             <Menu.Item key={inx}><SignOut/></Menu.Item>
           );
