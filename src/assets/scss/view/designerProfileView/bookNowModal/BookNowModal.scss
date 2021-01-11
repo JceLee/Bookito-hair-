@@ -194,6 +194,9 @@ $modalBodyMargin: 110px;
 
       .ant-radio-group {
         margin: 0 0 5px 15px;
+        @include tabletL {
+          margin: 0;
+        }
         // width: 300px;
       }
 
