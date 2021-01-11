@@ -78,7 +78,7 @@
         background: $white;
         z-index: 1;
         transition: 1s;
-      
+
         @include desktop {
           top: 65px;
           width: 1130px;
@@ -116,7 +116,7 @@
     position: fixed;
     right: 2%;
     height: calc(100vh - 55px);
-    
+
     .mapContainer {
       width: 100%;
       @include tabletP{

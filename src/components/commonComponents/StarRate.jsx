@@ -1,23 +1,23 @@
 import React from "react";
-import { Rate } from "antd";
-import { StarFilled } from "@ant-design/icons";
+import {Rate} from "antd";
+import {StarFilled} from "@ant-design/icons";
 
 export function StarRate(props) {
-  const { onRate } = props;
+  const {onRate} = props;
 
-  return <Rate className="starRate" allowHalf allowClear={false} onChange={onRate} />;
+  return <Rate className="starRate" allowHalf allowClear={false} onChange={onRate}/>;
 }
 
 export function StarRead(props) {
-  const { rateScore, rateCount } = props;
+  const {rateScore, rateCount} = props;
 
   return (
     <span className="starReadContainer">
       <StarFilled
         className="starReadStar"
-        style={{ fontSize: "14px", marginBottom: 0, marginTop: 3 }}
+        style={{fontSize: "14px", marginBottom: 0, marginTop: 3}}
       />
-      <p className="starReadScore" style={{ paddingLeft: 2, paddingRight: 2 }}>
+      <p className="starReadScore" style={{paddingLeft: 2, paddingRight: 2}}>
         {rateScore.toFixed(2)}
       </p>
       <p className="starReadCount">{`(${rateCount})`}</p>

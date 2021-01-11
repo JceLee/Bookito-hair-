@@ -1,8 +1,8 @@
-import React, {useEffect, useRef, useState} from "react";
-import {useSelector} from "react-redux";
-import {useHistory} from "react-router-dom";
-import {firebaseDate, firebaseStore} from "../../../config/fbConfig";
-import {Divider} from "antd";
+import React, { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { firebaseDate, firebaseStore } from "../../../config/fbConfig";
+import { Divider } from "antd";
 import MessengerListCard from "./MessengerListCard";
 
 export default function MessengerListView() {
@@ -25,9 +25,7 @@ export default function MessengerListView() {
         const rooms = snapshotToArray(resp);
         setRooms(
           rooms.filter(
-            (room) =>
-              room.customerID === currentUser.uid ||
-              room.designerID === currentUser.uid
+            (room) => room.customerID === currentUser.uid || room.designerID === currentUser.uid
           )
         );
       });
@@ -46,11 +44,14 @@ export default function MessengerListView() {
   };
 
   const loadLastMsg = async (roomID) => {
-    await firebaseDate.ref("chats/")
+    await firebaseDate
+      .ref("chats/")
       .orderByChild("roomID")
-      .equalTo(roomID).limitToLast(1)
-      .once("value").then((resp) => {
-        lastMsgs.current[roomID] = snapshotToArray(resp)[0].message;
+      .equalTo(roomID)
+      .limitToLast(1)
+      .once("value")
+      .then((resp) => {
+        lastMsgs.current[roomID] = snapshotToArray(resp)[0] !== undefined ? snapshotToArray(resp)[0].message : "No messages yet";
         loadProfileImg(roomID);
         return 1;
       });
@@ -63,7 +64,6 @@ export default function MessengerListView() {
   const findID = (roomID) => {
     for (let i = 0; i < rooms.length; i++) {
       if (rooms[i].roomID === roomID) {
-        console.log(rooms[i].customerID, rooms[i].designerID)
         if (rooms[i].designerID === currentUser.uid) {
           return rooms[i].customerID;
         } else {
@@ -71,42 +71,45 @@ export default function MessengerListView() {
         }
       }
     }
-  }
+  };
 
   const loadProfileImg = async (roomID) => {
     const designerID = findID(roomID);
     try {
-      console.log(designerID);
       const userDocument = await firebaseStore.doc(`users/${designerID}/`).get();
       profiles.current[roomID] = userDocument.data().photoURL;
       if (Object.keys(profiles.current).length === rooms.length && !forceRendering) {
-        console.log("haha");
         setForceRendering(!forceRendering);
       }
     } catch (error) {
-      console.error("Error fetching user", error);
+      console.log("Error fetching user", error);
+    }
+  };
+
+  const emptyMessengerList = () => {
+    if (rooms.length === 0) {
+      return <p id="emptyMsgListPtag">No chat room yet :(</p>;
     }
   };
 
   return (
     <div>
-      <Divider/>
+      <Divider />
+      {emptyMessengerList()}
       {rooms.map((room) => {
         loadLastMsg(room.roomID);
-        return (<MessengerListCard
-          key={room.roomID}
-          fname={
-            room.designerID === currentUser.uid
-              ? room.customerID
-              : room.designerID
-          }
-          photoURL={profiles.current[room.roomID]}
-          enterChatRoom={enterChatRoom}
-          roomID={room.roomID}
-          msgDate={"2020.12.17"}
-          lastMsg={lastMsgs.current[room.roomID]}
-        />)
+        return (
+          <MessengerListCard
+            key={room.roomID}
+            fname={room.designerID === currentUser.uid ? room.customerID : room.designerID}
+            photoURL={profiles.current[room.roomID]}
+            enterChatRoom={enterChatRoom}
+            roomID={room.roomID}
+            msgDate={"2020.12.17"}
+            lastMsg={lastMsgs.current[room.roomID]}
+          />
+        );
       })}
     </div>
   );
-};
+}

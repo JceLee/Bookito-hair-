@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "react-day-picker/lib/style.css";
 import { Steps, Modal, Button, message } from "antd";
 import StepOne from "./StepOne";
@@ -14,9 +14,8 @@ export default function BookNowModal(props) {
   const { Step } = Steps;
   const { visible, modalHandler } = props;
   const elementForScrollingTopInModal = document.getElementById("stepToTopId");
-
-  const [displayedDay, setDisplayedDay] = useState(null);
-  const [key, setKey] = useState("Cut");
+  const [displayedDay, setDisplayedDay] = useState(new Date());
+  const [key, setKey] = useState(Object.keys(designer.services)[0]);
   const [calculationBox, setCalculationBox] = useState([]);
   const [page, setPage] = useState("Estimated Price");
   const [current, setCurrent] = useState(0);
@@ -94,7 +93,7 @@ export default function BookNowModal(props) {
   };
 
   const totalSum = () => {
-    return Object.values(calculationBox).reduce((sum, service) => {
+    return calculationBox.reduce((sum, service) => {
       if (!service) {
         return sum;
       }
@@ -152,14 +151,8 @@ export default function BookNowModal(props) {
   };
 
   const removeFromBox = (serviceToRemove) => {
-    let newCalculationBox = { ...calculationBox };
+    setCalculationBox(calculationBox.filter(e => e.id !== serviceToRemove.id));
 
-    for (let [key, value] of Object.entries(newCalculationBox)) {
-      if (serviceToRemove === value) {
-        newCalculationBox[key] = null;
-      }
-    }
-    setCalculationBox(newCalculationBox);
   };
 
   const requestNewAppointment = () => {
@@ -174,9 +167,11 @@ export default function BookNowModal(props) {
       bookedServices: calculationBox,
       totalPrice: totalSum(),
     };
-    console.log(newAppointment);
     message.success("Successfully booked!");
     writeAppointmentIntoDB(newAppointment);
+    setCurrent(0);
+    setCalculationBox([]);
+    setDisplayedDay(new Date());
     modalHandler();
   };
 
@@ -185,7 +180,6 @@ export default function BookNowModal(props) {
       .collection("appointments")
       .add(newAppointment)
       .then(function (docRef) {
-        console.log("create appointment :" + docRef.id);
         firebaseStore.collection("appointments").doc(docRef.id).update({
           aid: docRef.id,
         });
@@ -196,25 +190,29 @@ export default function BookNowModal(props) {
     firebaseStore
       .collection("mail")
       .add({
-        to: "lkm4351@gmail.com",
+        to: designer.email,
         message: {
           subject: "A REQUEST ARRIVE!",
           text: "Customer A requests a new appointment.",
           html: notificationForm(designer, currentUser),
         },
-      })
-      .then(() => console.log("Queued email for delivery!"));
+      });
   };
 
   const getServiceContent = () => {
+    // let contentString = "";
+    // for (let [key, value] of Object.entries(calculationBox)) {
+    //   if (value === null) {
+    //     continue;
+    //   }
+    //   let { service } = value;
+    //   contentString += `[${service}]` + " ";
+    // }
+    // return contentString;
     let contentString = "";
-    for (let [key, value] of Object.entries(calculationBox)) {
-      if (value === null) {
-        continue;
-      }
-      let { service } = value;
-      contentString += `[${service}]` + " ";
-    }
+    calculationBox.forEach(e => {
+      contentString += `[${e.service}]` + " ";
+    })
     return contentString;
   };
 

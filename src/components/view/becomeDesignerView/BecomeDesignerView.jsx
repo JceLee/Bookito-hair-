@@ -101,7 +101,7 @@ export default function BecomeDesignerView() {
             size="large"
             buttonStyle="outlined"
             options={Object.values(designerTypes).filter(
-              (type) => type !== "client"
+              (type) => type !== "client" && type !== "newClient"
             )}
             onChange={onSelected}
             optionType="button"
