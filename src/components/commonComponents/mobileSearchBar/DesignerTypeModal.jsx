@@ -12,7 +12,6 @@ export default function DesignerTypeModal(props) {
   const [address, setAddress] = useState("");
   const [form] = Form.useForm();
 
-
   useEffect(() => {
     // TODO: is setFieldsValue working as intended?
     form.setFieldsValue({
@@ -101,12 +100,12 @@ export default function DesignerTypeModal(props) {
           1. Choose designer type
         </div>
         <Radio.Group
-  size="large"
-  buttonStyle="outlined"
-  options={Object.values(designerTypes).filter(type => type !== "client" && type !== "newClient")}
-  onChange={onSelected}
-  optionType="button"
-  />
+          size="large"
+          buttonStyle="outlined"
+          options={Object.values(designerTypes).filter(type => type !== "client" && type !== "newClient")}
+          onChange={onSelected}
+          optionType="button"
+        />
       </div>
       <hr/>
       <div id="locationInputContainerInMobileSearchBar">
