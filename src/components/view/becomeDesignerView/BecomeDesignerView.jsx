@@ -1,20 +1,14 @@
 import React, { useState } from "react";
-import { Button, Radio, Spin, message } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import { Button, Radio, Spin } from "antd";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { refresh } from "../../../actions/currentUser";
-import { firebaseStore } from "../../../config/fbConfig";
 import { designerTypes } from "../../../constants/designerTypes";
 import InfoCard from "../mainView/InfoCard";
 import ClientProfileView from "../../view/clientProfileView/ClientProfileView";
-import ServiceNPriceForm from "../designerProfileView/designerProfileTop/designerEditProfile/ServiceNPriceForm";
-import HoursForm from "../designerProfileView/designerProfileTop/designerEditProfile/HoursForm";
-import WorksForm from "../designerProfileView/designerProfileTop/designerEditProfile/WorksForm";
-import SelfIntroForm from "../designerProfileView/designerProfileTop/designerEditProfile/SelfIntroForm";
+import DesignerProfileCreateEdit from "../designerProfileView/designerProfileTop/DesignerProfileCreateEdit";
 
 export default function BecomeDesignerView() {
   const designer = useSelector((state) => state.currentUser.currentUser);
-  const dispatch = useDispatch();
   const history = useHistory();
 
   const [createProfileStage, setCreateProfileStage] = useState(0);
@@ -32,32 +26,13 @@ export default function BecomeDesignerView() {
     }
   };
 
-  const completeProfileCreation = async () => {
-    designer.accountType = designerType;
-    // Update redux client
-    dispatch(refresh(designer));
-    // Update firebase
-    await firebaseStore
-      .collection("users")
-      .doc(designer.uid)
-      .update(designer)
-      .then(function () {
-        return message.success({
-          content: "Saved",
-          duration: "2",
-          className: "onFinishMessage",
-        });
-      });
-    goToMyProfile();
+  const saveClientProfileView = () => {
+    setCreateProfileStage(3);
   };
 
   const goToMyProfile = () => {
     const route = `/designer_profile?uid=${designer.uid}`;
     history.push(route);
-  };
-
-  const saveClientProfileView = () => {
-    setCreateProfileStage(3);
   };
 
   const playLoadingSpinner = () => {
@@ -97,7 +72,7 @@ export default function BecomeDesignerView() {
               src="https://www.flaticon.com/svg/static/icons/svg/1078/1078011.svg"
             />
           </div>
-          {designer.accountType !== "client" ? (
+          {designer?.accountType !== "client" ? (
             <Button
               className="getStartedBtn"
               onClick={() => {
@@ -121,12 +96,12 @@ export default function BecomeDesignerView() {
 
       {createProfileStage >= 1 && (
         <div className="createProfileStage1">
-          <div className="subHeading">What is your profession?</div>
+          <div className="subHeading">What is your profession? (1/3)</div>
           <Radio.Group
             size="large"
             buttonStyle="outlined"
             options={Object.values(designerTypes).filter(
-              (type) => type !== "client"
+              (type) => type !== "client" && type !== "newClient"
             )}
             onChange={onSelected}
             optionType="button"
@@ -148,7 +123,7 @@ export default function BecomeDesignerView() {
 
       {createProfileStage >= 2 && (
         <>
-          <div className="subHeading">How can your customers contact you?</div>
+          <div className="subHeading">How can your customers contact you? (2/3)</div>
           <div className="editProfileModal">
             <ClientProfileView
               client={designer}
@@ -162,30 +137,9 @@ export default function BecomeDesignerView() {
       {createProfileStage === 3 && (
         <>
           <div className="subHeadingWideMargin">
-            Tell us about your business!
+            Tell your customers about your business! (3/3)
           </div>
-          <div className="editProfileModal">
-            <div className="description">Service and Price</div>
-            <ServiceNPriceForm designer={designer} createMode={true} />
-
-            <div className="description">Hours</div>
-            <HoursForm designer={designer} createMode={true} />
-
-            <div className="description">Works</div>
-            <WorksForm designer={designer} createMode={true} />
-
-            <div className="description">Self-introduction</div>
-            <SelfIntroForm designer={designer} createMode={true} />
-          </div>
-
-          <Button
-            className="getStartedBtn becomeDesignerBtn"
-            onClick={() => {
-              completeProfileCreation();
-            }}
-          >
-            Complete
-          </Button>
+          <DesignerProfileCreateEdit designer={designer} createMode={true} selectedDesignerType={designerType} />
         </>
       )}
     </div>
