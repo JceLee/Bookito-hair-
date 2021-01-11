@@ -3,6 +3,7 @@
 .becomeDesignerView {
   padding: 0 5%;
   margin-top: 40px;
+  margin-bottom: 120px;
   overflow-x: hidden;
   @include desktop {
     // height: 5vh;
@@ -25,13 +26,6 @@
     margin-top: 36px;
     margin-bottom: 24px;
   }
-
-  .description {
-    font-size: 16px;
-    margin-top: 16px;
-    margin-bottom: 24px;
-  }
-
   .getStartedBtn {
     height: 38px;
     padding: 8px 20px;

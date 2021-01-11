@@ -1,6 +1,16 @@
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { Button, Divider, Form, Input, InputNumber, message, Modal, Popconfirm, Tabs } from "antd";
+import {
+  Button,
+  Divider,
+  Form,
+  Input,
+  InputNumber,
+  message,
+  Modal,
+  Popconfirm,
+  Tabs,
+} from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import BlackBtn from "../../../../commonComponents/BlackBtn";
 
@@ -18,10 +28,11 @@ const formInitialValues = {
   },
 };
 
-export default function ServiceNPriceForm() {
-  const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
-  const [tabNames] = useState(Object.keys(designer.services));
-  const [form] = Form.useForm();
+export default function ServiceNPriceForm(props) {
+  const { designer, createMode } = props;
+  const [tabNames] = useState(
+    designer.services ? Object.keys(designer.services) : []
+  );
   const [addTabModal, setAddTabModal] = useState(false);
   const [removeTabModal, setRemoveTabModal] = useState(false);
   const promiseFunction = useRef(() => {});
@@ -32,7 +43,7 @@ export default function ServiceNPriceForm() {
   });
 
   const [state, setState] = useState({
-    activeKey: initialPanes[0].key,
+    activeKey: initialPanes[0]?.key,
     panes: initialPanes,
   });
 
@@ -64,7 +75,6 @@ export default function ServiceNPriceForm() {
 
   const updateInput = (e) => {
     newTabName.current = e.target.value;
-    console.log(newTabName.current);
   };
 
   const nameTabPromise = () => {
@@ -115,12 +125,7 @@ export default function ServiceNPriceForm() {
     console.log(values);
   };
 
-  const onValuesChange = () => {
-    // setTest(e);
-  };
-
   const changeTabName = (e) => {
-    console.log(e);
     console.log("clicked");
   };
 
@@ -130,21 +135,20 @@ export default function ServiceNPriceForm() {
   };
 
   const cancel = (e) => {
-    console.log(e);
     message.error("Click on No");
   };
 
-  const { panes, activeKey } = state;
+  const { activeKey, panes } = state;
 
-  return (
-    <Form
-      initialValues={formInitialValues}
-      form={form}
-      onValuesChange={onValuesChange}
-      name="editProfile"
-      onFinish={yes}
-    >
-      <Tabs type="editable-card" onChange={onChange} activeKey={activeKey} onEdit={onEdit}>
+  const formArea = (
+    <>
+      <Tabs
+        type="editable-card"
+        onChange={onChange}
+        activeKey={activeKey}
+        onEdit={onEdit}
+        addIcon={<PlusOutlined style={{ height: 38, paddingTop: 11 }} />}
+      >
         {panes.map((tab) => {
           return (
             <TabPane
@@ -162,11 +166,11 @@ export default function ServiceNPriceForm() {
                 cancelText="No"
               >
                 <button
-                  type="button"
-                  aria-label="remove"
-                  tabIndex="0"
-                  className="ant-tabs-tab-remove"
-                ></button>
+  type="button"
+  aria-label="remove"
+  tabIndex="0"
+  className="ant-tabs-tab-remove"
+  />
               </Popconfirm>
               <Form.List name={["services", `${tab.title}`]}>
                 {(fields, { add, remove }) => {
@@ -175,12 +179,15 @@ export default function ServiceNPriceForm() {
                       <div>
                         {fields.map((field, index) => {
                           return (
-                            <div key={index} className="servicePriceDescription">
+                            <div
+                              key={index}
+                              className="servicePriceDescription"
+                            >
                               <div className="servicePriceMinusButton">
                                 <Form.Item
-                                  name={[field.name, "serviceName"]}
+                                  name={[field.name, "service"]}
                                   className="serviceNameInput"
-                                  fieldKey={[field.fieldKey, "serviceName"]}
+                                  fieldKey={[field.fieldKey, "service"]}
                                   hasFeedback
                                   rules={[
                                     {
@@ -239,21 +246,21 @@ export default function ServiceNPriceForm() {
                           }}
                           block
                         >
-                          <PlusOutlined /> Add Service to {tab.title}
+                          <PlusOutlined /> Add a service to {tab.title}
                         </Button>
                       </Form.Item>
                     </>
                   );
                 }}
               </Form.List>
-              <BlackBtn btnName="Save" onClick={yes} />
+              {!createMode && <BlackBtn btnName="Save" onClick={yes} />}
             </TabPane>
           );
         })}
       </Tabs>
       <Modal
         className="tabNameModal"
-        title="Add a tab"
+        title="Add a service category"
         visible={addTabModal}
         onCancel={() => setAddTabModal(!addTabModal)}
         centered={true}
@@ -261,7 +268,7 @@ export default function ServiceNPriceForm() {
       >
         <Input
           className="newTabInput"
-          placeholder="Please type a name for new tab"
+          placeholder="Please type a name for a new service"
           maxLength={8}
           onChange={updateInput}
         />
@@ -274,16 +281,34 @@ export default function ServiceNPriceForm() {
       </Modal>
       <Modal
         className="removeTabModal"
-        title="Remove the tab"
+        title="Remove service category"
         visible={removeTabModal}
         onCancel={() => setRemoveTabModal(!removeTabModal)}
         centered={true}
         footer={null}
       >
-        <div style={{ textAlign: "center" }}>Are you sure you want to delete?</div>
+        <div style={{ textAlign: "center" }}>
+          Delete category and all corresponding services?
+        </div>
         <Divider />
         <BlackBtn btnName="Delete" onClick={promiseFunction.current} />
       </Modal>
-    </Form>
+    </>
+  );
+
+  return (
+    <>
+      {createMode ? (
+        formArea
+      ) : (
+        <Form
+          initialValues={formInitialValues}
+          name="editProfile"
+          onFinish={yes}
+        >
+          {formArea}
+        </Form>
+      )}
+    </>
   );
 }

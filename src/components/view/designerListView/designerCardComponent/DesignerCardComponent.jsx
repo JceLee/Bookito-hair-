@@ -9,7 +9,6 @@ export default function DesignerCardComponent(props) {
   return (
     <div
       className="designerCardComponent"
-      // onClick={() => handleSearch(designer)}
     >
       <DesignerCardTop
         fname={designer.fname}

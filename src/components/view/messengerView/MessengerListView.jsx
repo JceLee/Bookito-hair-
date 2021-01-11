@@ -9,7 +9,6 @@ export default function MessengerListView() {
   const [currentUser, setCurrentUser] = useState(
     useSelector((state) => state.currentUser.currentUser)
   );
-
   const [rooms, setRooms] = useState([]);
   const [nickname, setNickname] = useState("");
   const history = useHistory();
