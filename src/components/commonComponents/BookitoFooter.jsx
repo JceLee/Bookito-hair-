@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Divider, Button, Modal } from "antd";
+import DescriptionSlider from "./DescriptionSlider"
 
 let menuDividerType;
 
@@ -19,7 +20,7 @@ const howBktWorks = () => {
     title: "How Bookito works?",
     style: { top: "25%" },
     okText: "Exit",
-    content: <div>video</div>,
+    content: <DescriptionSlider/>,
   });
 };
 

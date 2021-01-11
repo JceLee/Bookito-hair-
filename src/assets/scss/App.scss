@@ -1,10 +1,8 @@
 // Mixin
 @import "./Mixin.scss";
-
 // Main view
 @import "./view/MainView/MainView.scss";
 @import "./view/MainView/AwesomeSlider.scss";
-
 // Common components
 @import "./commonComponents/NavBar.scss";
 @import "./commonComponents/ScheduleCard.scss";
@@ -15,59 +13,49 @@
 @import "./commonComponents/Spinner.scss";
 @import "./commonComponents/StarRate.scss";
 @import "./commonComponents/map/Map.scss";
-
 // Designer List view
 @import "./view/designerListView/DesignerListView.scss";
 @import "./view/designerListView/DesignerCardComponent/DesignerCardComponent.scss";
 @import "./view/designerListView/designerListFilter/DesignerListFilter.scss";
-
 // Client Schedule view
 @import "./view/clientScheduleView/ClientScheduleView.scss";
 @import "./view/clientScheduleView/ReviewModal.scss";
-
 // Client Profile view
 @import "./view/clientProfileView/ClientProfileView.scss";
-
 // Designer Schedule view(Calendar)
 @import "./view/designerScheduleView/Calendar.scss";
 @import "./view/designerScheduleView/TooltipContent.scss";
 @import "./view/designerScheduleView/DeleteAppointmentModal.scss";
 @import "./view/designerScheduleView/AddAppointmentModal.scss";
-
 // Designer Profile View
 @import "./view/designerProfileView/bookNowModal/BookNowModal.scss";
 @import "./view/designerProfileView/DesignerProfileView.scss";
 @import "./view/designerProfileView/designerEditProfile/DesignerEditProfile.scss";
-
 // Auth components
 @import "./view/authView/SignInModal.scss";
 @import "./view/authView/SignUpModal.scss";
-
 // Messenger components
 @import "./view/messengerView/MessengerView.scss";
-
 // Become a Designer View
 @import "./view/becomeDesignerView/BecomeDesignerView.scss";
-
 // Footer
 @import "./commonComponents/BookitoFooter.scss";
 @import "./commonComponents/FooterMenu.scss";
 @import "./commonComponents/AboutUs.scss";
-
+@import "./commonComponents/DescriptionSlider.scss";
 body {
-  font-family: "Montserrat", sans-serif;
-  margin: 0 auto;
-
-  @include desktop {
-    width: 1130px;
-  }
+    font-family: "Montserrat", sans-serif;
+    margin: 0 auto;
+    @include desktop {
+        width: 1130px;
+    }
 }
 
 #layout {
-  background-color: $white;
+    background-color: $white;
 }
 
 // Spinner color should be globally black
 .ant-spin-dot-item {
-  background-color: $black;
+    background-color: $black;
 }
