@@ -20,7 +20,7 @@ export const generateUserDocument = async (user) => {
   const userData = await userRef.get();
   if (!userData.exists) {
     const {email, displayName, photoURL, uid} = user;
-    const accountTypes = designerTypes.newClient;
+    const accountType = designerTypes.newClient;
     const fname = displayName;
     const lname = "";
     const location = "";
@@ -31,7 +31,7 @@ export const generateUserDocument = async (user) => {
     const works = [];
     try {
       await userRef.set({
-        accountTypes,
+        accountType,
         email,
         photoURL,
         location,
