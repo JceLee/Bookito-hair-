@@ -7,6 +7,7 @@ export default function Map(props) {
         isDesktop,
         userLocation,
         designers,
+        style,
     } = props;
 
     const HomeMarker = userLocation && <Marker
@@ -28,7 +29,7 @@ export default function Map(props) {
 
     return (
         <>
-            {userLocation && <div className="mapComponent">
+            {userLocation && <div className="mapComponent" style={style}>
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: "AIzaSyDUz5tzN9Fm76pLUherzsDE-jG0LKBEhIc" }} // TODO: extract!
                     center={userLocation}
