@@ -6,12 +6,14 @@ import BookNowModal from "../designerProfileTop/bookNowModal/BookNowModal";
 import Avatar from "antd/lib/avatar/avatar";
 import { useSelector } from "react-redux";
 import DesignerProfileCreateEdit from "./DesignerProfileCreateEdit";
+import SignInModal from "../../authView/SignInModal";
 
 const searchBarHeight = 64;
 const avatarSize = 64;
 
 export default function DesignerProfileTop(props) {
   const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
+  const currentUser = useSelector((state) => state.currentUser.currentUser);
   const [stickyNavPositionFromTop] = useState(searchBarHeight);
   const [height, setHeight] = useState(0);
   const [visibleEditProfileModal, setVisibleEditProfileModal] = useState(false);

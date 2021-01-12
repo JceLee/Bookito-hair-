@@ -51,7 +51,7 @@ export default function Navbar() {
       </div>
       <div id="menuBtn">
         <Dropdown overlay={menu} placement="bottomRight" trigger={["click"]}>
-          {signedInUser === null ? <SignInModal/> :
+          {signedInUser === null ? <SignInModal isOpened={false}/> :
             <Button shape="round" icon={<UserOutlined/>}>
               <BarsOutlined/>
             </Button>}
