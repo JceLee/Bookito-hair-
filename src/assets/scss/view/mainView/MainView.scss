@@ -2,19 +2,22 @@
 
 .searchBarSectionDesktopImg {
   display: none;
-  z-index: 1;
+  z-index: 0;
+  pointer-events: none;
 
   @include tabletP {
-    display: block;
     position: absolute;
-    width: 100%;
-    height: 600px;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 100vh;
+    display: block;
     object-fit: cover;
   }
 
-  @include desktop {
-    width: 1130px;
-  }
+  // @include desktop {
+  //   width: 1130px;
+  // }
 }
 
 // search bar section
@@ -23,7 +26,7 @@
   height: 450px;
 
   @include tabletP {
-    height: 600px;
+    height: 100vh;
   }
 
   .searchBarSectionImg {
@@ -35,28 +38,31 @@
     }
 
     // hide timer
-    .awssld__timer {
+    .awssld__timer, .awssld__timer--animated, .awssld__timer--run {
       --timer-height: 0px;
       opacity: 0;
       pointer-events: none; /* prevent events (mouse clicking etc.) */
     }
   }
+  #searchBarLabel {
+    position: relative;
+    font-size: 42px;
+    font-weight: 600;
+    color: $white;
+  }
   #searchBarForm {
     border-top: 1px solid transparent;
-    top: 0;
+    padding-left: 0;
 
-    @include desktop {
-      width: 1130px;
+    // Search bar and label vertical position
+    @include tabletP {
+      padding-top: 400px;
+      padding-left: 60px; // This should be $defaultPaddingWidth, but it doesnt work :(
     }
-
-    #mainSearchBar {
-      @include desktop {
-        width: 1130px;
-      }
-
-      .ant-input-group {
-        z-index: 3;
-      }
+    // Compensate for NavBar height 
+    @include desktopL {
+      margin-top: -10px;
+      padding-left: 0;
     }
   }
 }
@@ -70,48 +76,106 @@
 }
 
 // joinUs section
+.joinUsBlocker {
+  @include mobileM {
+    height: 550px;
+  }
 
-.joinUs {
-  width: 100vw;
-  margin-top: 10%;
-  background: #000000;
+  @include mobileL {
+    height: 600px;
+  }
+  
+  @include mobileLtoTabletP {
+    height: 700px;
+  }
+
+  @include mobileLtoTabletP {
+    height: 700px;
+  }
+
+  @include tabletP {
+    height: 460px;
+  }
 
   @include desktop {
-    width: 1130px;
-    margin-top: 5%;
+    height: 530px;
+  }
+
+  .joinUsBackground {
+    background: $black;
+    padding: 50px 5vw;
+    text-align: center;
+
+    @include mobileM {
+      height: 550px;
+    }
+
+    @include mobileL {
+      height: 600px;
+    }
+
+    @include mobileLtoTabletP {
+      height: 680px;
+    }
+
+    @include tabletP {
+      height: 460px;
+    }
+
+    @include tabletL {
+      text-align: left;
+    }
+
+    @include desktop {
+      height: 530px;
+      padding: 0;
+      position: absolute;
+      left: 0;
+      right: 0;
+      width: auto;
+    }
+  }
+}
+
+.joinUs {
+  height: 400px;
+
+  @include desktop {
+    margin: 50px 0;
+    padding-left: $defaultPaddingWidth !important;
+    padding-right: $defaultPaddingWidth !important;
+    width: auto;
   }
 
   .joinUsTopLine {
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-top: 16px;
-    font-weight: bold;
-    font-size: 22px;
+    font-size: 28px;
     color: white;
   }
 
   .joinUsBottomLine {
-    padding-left: 20px;
-    padding-right: 20px;
+    margin: 6px 0;
     font-weight: 300;
     color: white;
   }
 
   .joinUsBottom {
-    padding-left: 20px;
-    padding-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 4px;
+
+    @include desktop {
+      margin: 4px 0;
+    }
 
     .joinUsBtn {
       text-align: center;
       width: auto;
       background-color: transparent;
       border: 1px solid white;
-      border-radius: 8px;
-      padding: 7px 15px;
+      border-radius: 4px;
+      padding: 8px 36px;
       font-size: 14px;
       line-height: 18px;
-      font-weight: 600;
+      font-weight: 500;
       color: white;
     }
   }
@@ -127,10 +191,14 @@
     width: 100%;
     display: flex;
     justify-content: center;
-
+    padding: 10px 0;
+  
     .imgWrapper {
-      padding: 2%;
-      width: 33.3%;
+      // padding: 0 2%;
+      // width: 33.3%;
+      @include desktop {
+        margin: 0 10px;
+      }
       .joinUsImgS {
         width: 100%;
       }
@@ -139,8 +207,18 @@
         color: white;
         font-size: 14px;
         line-height: 18px;
-        font-weight: 600;
-        text-align: center;
+        font-weight: 400;
+        text-align: right;
+      }
+    }
+    .imgWrapper:first-child {
+      @include desktop {
+        margin-left: 0;
+      }
+    }
+    .imgWrapper:last-child {
+      @include desktop {
+        margin-right: 0;
       }
     }
   }
@@ -172,31 +250,19 @@
   }
 }
 
-.newDesignerMobileSection {
-  @include tabletP {
-    display: none;
-  }
-}
-
 // new designer desktop section
-.newDesignersDesktopSection {
+.newDesignersSection {
   padding: 20px 5%;
-  // padding: 20px 25px;
-  margin-bottom: 5vh;
-  margin-top: 10%;
+  margin: 5vh 0;
   background-color: #fafafa;
-  // background-color: #ececec;
 
   @include tabletP {
     display: block;
-    margin-top: 8%;
-    margin-bottom: 9vh;
   }
 
   @include tabletL {
-    // margin-top: 6%;
-    // margin-bottom: 11vh;
     display: flex;
+    margin: 100px 0;
   }
 
   @include mainPageNewDesigners1090 {
@@ -204,7 +270,7 @@
   }
 
   @include desktop {
-    padding: 20px 4%;
+    padding: 0;
   }
 
   .newDesignersHeading {
@@ -231,7 +297,7 @@
     }
 
     .topLine {
-      font-size: 20pt;
+      font-size: 28px;
       font-weight: 300;
       margin-bottom: 2%;
 

@@ -620,7 +620,7 @@
           width: 90vw;
         }
         @include desktop {
-          width: 1130px;
+          width: $defaultBodyWidth;
         }
       }
 

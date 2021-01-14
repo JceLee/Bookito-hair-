@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import MobileSearchBar from "../../commonComponents/mobileSearchBar/MobileSearchBar";
 import MainSearchBar from "../../commonComponents/mainSearchBar/MainSearchBar";
 import MobileSearchBarSlideBackground from "../../commonComponents/mobileSearchBar/MobileSearchBarSlideBackground";
@@ -16,9 +16,20 @@ export default function SearchBarSection() {
 
   return (
     <div className="searchBarSection">
-      {screenWidth < tabletLWidth ? <MobileSearchBarSlideBackground /> : <MainSearchBarSlideBackground />}
+      {screenWidth < tabletLWidth ? (
+        <MobileSearchBarSlideBackground />
+      ) : (
+        <MainSearchBarSlideBackground />
+      )}
       <div id="searchBarForm">
-        {screenWidth < tabletLWidth ? <MobileSearchBar /> : <MainSearchBar />}
+        {screenWidth < tabletLWidth ? (
+          <MobileSearchBar />
+        ) : (
+          <>
+            <h1 id="searchBarLabel">Find your Beautician</h1>
+            <MainSearchBar />
+          </>
+        )}
       </div>
     </div>
   );

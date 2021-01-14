@@ -45,7 +45,7 @@ export default function Navbar() {
     </Menu>
   );
   return (
-    <>
+    <div id="navBar">
       <div id="logo">
         <Link to="/">Bookito</Link>
       </div>
@@ -57,6 +57,6 @@ export default function Navbar() {
             </Button>}
         </Dropdown>
       </div>
-    </>
+    </div>
   );
 }

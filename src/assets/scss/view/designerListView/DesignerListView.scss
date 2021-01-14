@@ -81,7 +81,7 @@
 
         @include desktop {
           top: 65px;
-          width: 1130px;
+          width: $defaultBodyWidth;
           transition: 0s;
         }
       }
@@ -114,7 +114,7 @@
   }
   .mapBase {
     position: fixed;
-    right: 2%;
+    right: 0;
     height: calc(100vh - 55px);
 
     .mapContainer {
@@ -123,7 +123,7 @@
         height: calc(100vh - 65px);
         position: sticky;
         top: 0;
-        width: 55vw;
+        width: 57vw;
         // width: 39.1vw; // 40VW - 0.9vw to accomodate for scrollbar
       }
     }

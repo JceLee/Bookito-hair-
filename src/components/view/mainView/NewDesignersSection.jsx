@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "antd";
 
-export default function NewDesignersDesktopSection() {
+export default function NewDesignersSection() {
   const newDesignerImages = [
     "https://i.pinimg.com/474x/60/87/58/608758f6be3e3e3200cc0fc13b6bb4e4.jpg",
     "https://i.pinimg.com/474x/d7/1a/ee/d71aee9cbedb8a37754d64b531fcec28.jpg",
@@ -17,7 +17,7 @@ export default function NewDesignersDesktopSection() {
   const secondHalfNewDesigners = newDesignerImages.slice(4, 8);
 
   return (
-    <div className="newDesignersDesktopSection">
+    <div className="newDesignersSection">
       <div className="headerSection">
         <div className="topLine">Book Now</div>
         <div className="bottomLine">
