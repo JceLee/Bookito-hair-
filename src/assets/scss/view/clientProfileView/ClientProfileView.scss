@@ -3,22 +3,45 @@
 .clientProfileView {
   margin: 20px;
 
+  @include tabletP {
+    width: 60%;
+    padding-top: 10%;
+    margin: auto;
+  }
+
+  @include tabletL {
+    width: 50%;
+    padding-top: 10%;
+    margin: auto;
+  }
+
+  @include desktop {
+    width: 45%;
+    padding-top: 10%;
+    margin: auto;
+  }
+
   .profileForm {
     padding-top: 3vh;
+
     label {
       font-weight: 700;
     }
+
     .formItems {
       margin-bottom: 10px;
     }
+
     hr {
       height: 1px;
       border: none;
       background-color: #dbdbdb;
     }
+
     .ant-form-item-label {
       padding: 0;
     }
+
     .saveBtn {
       width: 100%;
       background-color: black;
@@ -28,6 +51,7 @@
       border: 1px solid black;
       height: 32px;
     }
+
     .blackBtn {
       margin-top: 25px;
     }
@@ -47,9 +71,11 @@
       font-size: 18px;
       margin: 0;
     }
+
     .formTopMargin {
       margin-top: 45px;
     }
+
     .formBottomMargin {
       margin-bottom: 30px;
     }

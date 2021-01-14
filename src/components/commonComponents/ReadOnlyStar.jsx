@@ -5,5 +5,5 @@ import { Rate } from "antd";
 export default function ReadOnlyStar(props) {
   const { rate } = props;
 
-  return <Rate disabled allowHalf defaultValue={rate} />;
+  return <Rate disabled allowHalf defaultValue={rate} style={{color : "#ff7373"}}/>;
 }

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Menu, Dropdown, Button, Divider, Collapse } from "antd/lib/index";
+import React, {useState, useEffect} from "react";
+import {Menu, Dropdown, Button, Divider, Collapse} from "antd/lib/index";
 import {
   SearchOutlined,
   TagOutlined,
@@ -21,7 +21,7 @@ export default function DesignerListFilter(props) {
     updateSortBy,
     openMapDesktop
   } = props;
-  const { Panel } = Collapse;
+  const {Panel} = Collapse;
 
   const [activeKey, setActiveKey] = useState([0]);
   const [sortBy, setSortBy] = useState("");
@@ -32,7 +32,7 @@ export default function DesignerListFilter(props) {
   );
 
   useEffect(() => {
-    document.getElementById('scrollableDiv').addEventListener('scroll', toggleFilterCollapse, { passive: true });
+    document.getElementById('scrollableDiv').addEventListener('scroll', toggleFilterCollapse, {passive: true});
     return () => {
       document.getElementById('scrollableDiv').removeEventListener('scroll', toggleFilterCollapse)
     }
@@ -77,7 +77,7 @@ export default function DesignerListFilter(props) {
   //   toggleFilterSetting(0);
   // }
 
-  const handleFilterDate = (day, { selected }) => {
+  const handleFilterDate = (day, {selected}) => {
     setFilterDate(selected ? undefined : day);
     console.log(filterDate);
   };
@@ -125,7 +125,7 @@ export default function DesignerListFilter(props) {
 
   function truncate(str) {
     const n = 6;
-    return (str.length > n) ? str.substr(0, n-1) + '&hellip;' : str;
+    return (str.length > n) ? str.substr(0, n - 1) + '&hellip;' : str;
   };
 
   return (
@@ -136,7 +136,7 @@ export default function DesignerListFilter(props) {
         showNavBarElements={show}
       />
 
-      <Divider className="designerCardComponentDividerTop" />
+      <Divider className="designerCardComponentDividerTop"/>
       <div className="designerListFilterInner">
         <Dropdown
           overlay={sortMenu}
@@ -146,7 +146,7 @@ export default function DesignerListFilter(props) {
         >
           <Button className="filterBtn sortBtn">
             Sort
-            <DownOutlined />
+            <DownOutlined/>
           </Button>
         </Dropdown>
 
@@ -161,17 +161,17 @@ export default function DesignerListFilter(props) {
 
         <Button className="searchBtn filterBtn" onClick={showModal}>
           <span>
-            <SearchOutlined />
+            <SearchOutlined/>
           </span>
         </Button>
         <Button className="filterBtn" onClick={() => toggleFilterSetting(1)}>
           <span>
-            <TagOutlined /> Tag
+            <TagOutlined style={{color: "#ff7373"}}/> Tag
           </span>
         </Button>
         <Button className="filterBtn" onClick={() => toggleFilterSetting(2)}>
           <span>
-            <CalendarOutlined /> Date
+            <CalendarOutlined style={{color: "#ff7373"}}/> Date
           </span>
         </Button>
         {/* <Button className="filterBtn" onClick={() => toggleFilterSetting(3)}><span><ClockCircleOutlined /> Time</span></Button> */}
@@ -205,7 +205,7 @@ export default function DesignerListFilter(props) {
             </Panel> */}
         </Collapse>
       </div>
-      <Divider className="designerCardComponentDividerBottom" />
+      <Divider className="designerCardComponentDividerBottom"/>
     </div>
   );
 }

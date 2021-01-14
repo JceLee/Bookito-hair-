@@ -8,7 +8,7 @@ import Avatar from "antd/lib/avatar/avatar";
 import {useSelector} from "react-redux";
 import DesignerProfileCreateEdit from "./DesignerProfileCreateEdit";
 
-const searchBarHeight = 64;
+const searchBarHeight = 55;
 const avatarSize = 64;
 
 export default function DesignerProfileTop(props) {
@@ -80,15 +80,9 @@ export default function DesignerProfileTop(props) {
                 <DesignerProfileCreateEdit designer={designer}/>
               </Modal>
             </>
-          ) : (currentUser !== null ? (
-              <Link to={"/sign_in"}><Button className="buttonInProfileLayoutTab" onClick={() => {
-              }}>
-                Book Now
-              </Button></Link>) : (
-              <Button className="buttonInProfileLayoutTab" onClick={bookNowModalHandler}>
-                Book Now
-              </Button>)
-          )}
+          ) : (<Button className="buttonInProfileLayoutTab" onClick={bookNowModalHandler}>
+            Book Now
+          </Button>)}
         </div>
       </Affix>
       <BookNowModal visible={visibleBookNowModal} modalHandler={bookNowModalHandler}/>

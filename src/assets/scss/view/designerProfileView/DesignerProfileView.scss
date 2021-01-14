@@ -74,7 +74,7 @@
   }
   // Designer Top
   .designerTop {
-    background-color: $black;
+    background-color: $bookito;
     color: $white;
     text-align: left;
 
@@ -166,7 +166,13 @@
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-around;
-      background-color: $black;
+      font-size: 12px;
+      font-weight: 800;
+      background-color: $bookito;
+
+      @include desktop {
+        font-size: 15px;
+      }
 
       .buttonInProfileLayoutTab {
         font-size: 12px;
@@ -641,7 +647,7 @@
   .backTopButton {
     line-height: 40px;
     border-radius: 50%;
-    background-color: $black;
+    background-color: $bookito;
     color: $white;
     text-align: center;
     position: absolute;

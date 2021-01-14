@@ -17,11 +17,16 @@ export default function SignIn() {
   const faceBookProvider = new firebase.auth.FacebookAuthProvider();
 
   const hide = (element) => {
-    document.getElementById(element).style.display = "none";
+    if (document.getElementById(element) !== null) {
+      document.getElementById(element).style.display = "none";
+    }
   };
 
+
   const show = (element) => {
-    document.getElementById(element).style.display = "flex";
+    if (document.getElementById(element) !== null) {
+      document.getElementById(element).style.display = "flex";
+    }
   };
 
   useEffect(() => {
@@ -40,6 +45,8 @@ export default function SignIn() {
           dispatch(sign_in_with_google(result));
           if (result.accountType === designerTypes.newClient) {
             directProfile();
+          } else {
+            directToHome();
           }
         });
       })
@@ -64,6 +71,8 @@ export default function SignIn() {
           dispatch(sign_in_with_facebook(result));
           if (result.accountType === designerTypes.newClient) {
             directProfile();
+          } else {
+            directToHome();
           }
         });
       })
@@ -82,6 +91,10 @@ export default function SignIn() {
 
   const directProfile = () => {
     history.push("/client_profile");
+  };
+
+  const directToHome = () => {
+    history.push("/");
   };
 
   const showLoginModal = () => {
@@ -105,6 +118,8 @@ export default function SignIn() {
       dispatch(sign_in_with_facebook(result));
       if (result.accountType === designerTypes.newClient) {
         directProfile();
+      } else {
+        directToHome();
       }
     });
   };
