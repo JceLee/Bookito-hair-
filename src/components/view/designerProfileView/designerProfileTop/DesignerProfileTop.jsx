@@ -80,9 +80,8 @@ export default function DesignerProfileTop(props) {
                 <DesignerProfileCreateEdit designer={designer}/>
               </Modal>
             </>
-          ) : (currentUser === null ? (
+          ) : (currentUser !== null ? (
               <Link to={"/sign_in"}><Button className="buttonInProfileLayoutTab" onClick={() => {
-                this.forceUpdate()
               }}>
                 Book Now
               </Button></Link>) : (
