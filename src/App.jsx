@@ -8,7 +8,7 @@ import DesignerScheduleView from "./components/view/designerScheduleView/Designe
 import DesignerProfileView from "./components/view/designerProfileView/DesignerProfileView";
 import ClientScheduleView from "./components/view/clientScheduleView/ClientScheduleView";
 import ClientProfileView from "./components/view/clientProfileView/ClientProfileView";
-import SignUpModal from "./components/view/authView/SignUpModal";
+import SignIn from "./components/view/authView/SignIn";
 import MessengerListView from "./components/view/messengerView/MessengerListView";
 import ChatRoom from "./components/view/messengerView/ChatRoom";
 import EmailNotificationFromDesigner from "./components/commonComponents/loadingView/EmailNotificationFromDesigner";
@@ -39,7 +39,7 @@ export default function App() {
             <Route path="/designer_profile" component={DesignerProfileView}/>
             <Route path="/messenger" component={MessengerListView}/>
             <Route path="/chatroom" component={ChatRoom}/>
-            <Route path="/sign_up" component={SignUpModal}/>
+            <Route path="/sign_in" component={SignIn}/>
             <Route path="/loading" component={EmailNotificationFromDesigner}/>
             <Route path="/becomeDesigner" component={BecomeDesignerView}/>
             <Route path="/aboutUs" component={AboutUs}/>

@@ -1,0 +1,101 @@
+@import "../../Mixin.scss";
+
+.loginContainer {
+  // background-color: rgb(244, 244, 244);
+  width: 100vw;
+  height: calc(100vh - 55px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .loginContents {
+    width: 280px;
+    padding-bottom: 100px;
+    margin: auto;
+    @include tabletP {
+      width: 70%;
+      padding-bottom: 200px;
+    }
+    @include tabletL {
+      width: 80%;
+      padding-right: 30%;
+      padding-bottom: 200px;
+    }
+    @include desktop {
+      width: 90%;
+      padding-right: 50%;
+      padding-bottom: 150px;
+    }
+
+    .loginBtnContainer {
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+
+      .loginBtn {
+        width: 280px;
+        background-color: white;
+        border-radius: 5px;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        text-align: left;
+        display: flex;
+        padding: 5px 0;
+        margin: 15px 0;
+        @include tabletL {
+          width: 400px;
+          padding: 15px 0;
+          margin: 30px 0;
+          font-size: 22px;
+        }
+
+        .loginBtnLogo {
+          width: 22px;
+          height: 22px;
+          margin-left: 8px;
+          margin-right: 24px;
+
+          @include tabletL {
+            width: 33px;
+            height: 33px;
+            margin-left: 12px;
+            margin-right: 24px;
+          }
+        }
+      }
+    }
+  }
+
+  .loginMessageContainer {
+    text-align: left;
+    margin: 10px 0;
+
+    #loginMessageHeader {
+      font-size: 30px;
+      font-weight: bold;
+      line-height: 40px;
+      margin: 10px 0;
+      @include tabletL {
+        font-size: 45px;
+        font-weight: bold;
+        line-height: 60px;
+        margin: 20px 0;
+      }
+    }
+
+    .loginMessage {
+      font-size: small;
+      @include tabletL {
+        font-size: 25px;
+        margin: 10px 0;
+      }
+    }
+  }
+
+  .loginMessage {
+    font-size: small;
+    @include tabletL {
+      font-size: 25px;
+      margin: 10px 0;
+    }
+  }
+}
