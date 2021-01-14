@@ -10,8 +10,9 @@ import googleLogo from "../../../assets/images/googleLogo.png";
 import facebookLogo from "../../../assets/images/facebookLogo.png";
 import { designerTypes } from "../../../constants/designerTypes";
 
-export default function SignInModal() {
-  const [isLoginShowing, setIsLoginShowing] = useState(false);
+export default function SignInModal(props) {
+  const {isOpened} = {props};
+  const [isLoginShowing, setIsLoginShowing] = useState(isOpened);
   const dispatch = useDispatch();
   const googleProvider = new firebase.auth.GoogleAuthProvider();
   const faceBookProvider = new firebase.auth.FacebookAuthProvider();

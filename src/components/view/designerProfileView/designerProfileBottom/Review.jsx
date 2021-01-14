@@ -25,7 +25,7 @@ export default function Review(props) {
     <div className="review fade-in" id={id}>
       <Card size="small" style={{ visibility: `${determineVisibility()}` }}>
         <span id="reviewCustomerName">{customerName}</span>
-        <ReadOnlyStar rate={rate} style={{ visibility: `${determineVisibility()}` }} />
+        <ReadOnlyStar rate={rate} style={{ visibility: `${determineVisibility()}`}} />
         <p className="reviewDate">{dateFormatter(date)}</p>
         <div className="reviewContentContainter">
           <p className="reviewContent">{comment}</p>

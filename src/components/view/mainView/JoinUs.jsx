@@ -1,47 +1,52 @@
-import React from "react";
-import Slider from "react-slick";
-import BecomeDesignerView from "../becomeDesignerView/BecomeDesignerView";
-
-const images = {
-  "Hair Dressor": "https://picsum.photos/id/2/225/225",
-  "Lash Designer": "https://picsum.photos/id/3/225/225",
-  "Nail Artist": "https://picsum.photos/id/4/225/225",
-};
-
-const settings = {
-  centerMode: true,
-  initialSlide: 0,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  swipeToSlide: true,
-};
+import React, {useState} from "react";
+import joinUs from "../../../assets/images/backgrounds/signUp.jpg";
+import hair from "../../../assets/images/backgrounds/joinUsHair.jpg";
+import lash from "../../../assets/images/backgrounds/joinUsLash.jpg";
+import nail from "../../../assets/images/backgrounds/joinUsNail.jpg";
+import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 export default function JoinUs() {
-  const onClickDesignerTypeImg = (designerType) => {
-    return <BecomeDesignerView />;
+  const signedInUser = useSelector((state) => state.currentUser.currentUser);
+  const mobileLWidth = 480;
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const reportWindowSize = () => {
+    setScreenWidth(window.innerWidth);
   };
 
+  window.addEventListener("resize", reportWindowSize);
+
   return (
-    <div className="desigerTypeSlider">
-      <span className="designerTypeSliderHeader">Join awesome beauticians on Bookito</span>
-      <Slider {...settings} className="slick-slider">
-        {Object.values(images).map((image, index) => {
-          const designerType = Object.keys(images).find((key) => images[key] === image);
-          return (
-            <div key={index}>
-              <img
-                className="designerTypeImgInSlider"
-                src={image}
-                alt={`image${index}`}
-                onClick={() => onClickDesignerTypeImg(designerType)}
-              />
-              <span className="designerTypeCaption">{designerType}</span>
-            </div>
-          );
-        })}
-      </Slider>
+    <div className="joinUs">
+      <div className="joinUsTopLine">Become a designer</div>
+      <div className="joinUsBottomLine">
+        Join us with your talent. Let people all over the world see your brilliant works!
+      </div>
+      {screenWidth < mobileLWidth ? (
+        <img className="joinUsImg" src={joinUs}/>
+      ) : (
+        <div className="joinUsImgGroup">
+          <div className="imgWrapper">
+            <img className="joinUsImgS" src={hair}/>
+            <div className="imgDescription">hair dresser</div>
+          </div>
+          <div className="imgWrapper">
+            <img className="joinUsImgS" src={nail}/>
+            <div className="imgDescription">Nail Artist</div>
+          </div>
+          <div className="imgWrapper">
+            <img className="joinUsImgS" src={lash}/>
+            <div className="imgDescription">Lash designer</div>
+          </div>
+        </div>
+      )}
+
+      <div className="joinUsBottom">
+        <Link className="joinUsBtn" to={signedInUser !== null ? "/becomeDesigner" : "/sign_in"}>
+          Join Us
+        </Link>
+        {/*<button className="joinUsBtn"> Join  Us </button>*/}
+      </div>
     </div>
   );
 }

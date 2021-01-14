@@ -15,7 +15,7 @@ export function StarRead(props) {
     <span className="starReadContainer">
       <StarFilled
         className="starReadStar"
-        style={{fontSize: "14px", marginBottom: 0, marginTop: 3}}
+        style={{fontSize: "14px", marginBottom: 0, marginTop: 3, color: "#ff7373"}}
       />
       <p className="starReadScore" style={{paddingLeft: 2, paddingRight: 2}}>
         {rateScore.toFixed(2)}

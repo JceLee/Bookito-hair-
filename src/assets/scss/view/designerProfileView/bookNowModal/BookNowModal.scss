@@ -172,11 +172,11 @@ $modalBodyMargin: 110px;
 
           .DayPicker-Body {
             .DayPicker-Day--selected {
-              background-color: $black;
+              background-color: $bookito;
             }
 
             .DayPicker-Day:not(.DayPicker-Day--selected):hover {
-              background-color: $white;
+              background-color: $bookito;
             }
           }
         }
@@ -252,7 +252,7 @@ $modalBodyMargin: 110px;
       }
 
       .ant-radio-button-wrapper:not(:first-child)::before {
-        background-color: $black;
+        background-color: $bookito;
       }
       // .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled),
       // .ant-radio-button-wrapper-checked:not([class*=" ant-radio-button-wrapper-disabled"]).ant-radio-button-wrapper {
@@ -261,7 +261,7 @@ $modalBodyMargin: 110px;
       // }
       .ant-radio-button-wrapper:hover {
         color: $white;
-        background-color: $black;
+        background-color: $bookito;
         // border: 1px solid $black;
       }
     }
@@ -306,11 +306,11 @@ $modalBodyMargin: 110px;
           }
 
           .ant-tabs-tab:hover {
-            color: $black;
+            color: $bookito;
           }
 
           .ant-tabs-ink-bar {
-            background: $black;
+            background: $bookito;
           }
         }
 
@@ -325,12 +325,12 @@ $modalBodyMargin: 110px;
             }
 
             .ant-checkbox-input:focus + .ant-checkbox-inner {
-              border-color: $black;
+              border-color: $bookito;
             }
 
             .ant-checkbox-checked .ant-checkbox-inner {
-              background-color: $black;
-              border-color: $black;
+              background-color: $bookito;
+              border-color: $bookito;
             }
 
             .ant-checkbox-checked::after {
@@ -409,22 +409,25 @@ $modalBodyMargin: 110px;
         height: 55px;
       }
       .nextBtnInStepOne {
-        background: $black;
-        border-color: $black;
+        background: $bookito;
+        border-color: $bookito;
         color: $white;
         width: 50%;
+        font-weight: 800;
         height: 55px;
       }
       .previousBtn {
-        color: $black;
+        color: $bookito;
         border-color: #f0f0f0;
         float: left;
         width: 50%;
         height: 55px;
+        font-weight: 800;
       }
       .doneBtn {
-        background: $black;
-        border-color: $black;
+        background: $bookito;
+        border-color: $bookito;
+        font-weight: 800;
         color: $white;
         width: 50%;
         height: 55px;
