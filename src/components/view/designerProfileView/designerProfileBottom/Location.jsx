@@ -1,65 +1,21 @@
-import React, { useState, useEffect } from "react";
-import Geocode from "react-geocode";
-import GoogleMapReact from "google-map-react";
-import Marker from "./Marker.jsx";
+import React, { useState } from "react";
+import Map from "../../../commonComponents/map/Map";
 
 export default function Location(props) {
-  const { id, location, latLng } = props;
-  const [position, setPosition] = useState(latLng);
-  const [loading, setLoading] = useState(true);
+  const { id, designer } = props;
+  const [position, setPosition] = useState(designer.latLng);
 
-  Geocode.setApiKey("AIzaSyDUz5tzN9Fm76pLUherzsDE-jG0LKBEhIc");
-  Geocode.setLanguage("en");
-  Geocode.enableDebug();
-
-  useEffect(() => {
-    Geocode.fromAddress(location).then(
-      (response) => {
-        setPosition(latLng);
-        setLoading(false);
-        return position;
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }, [location, latLng, position]);
-
-  if (loading) return null;
-
-  let googleMap = (
+  return (
     <div className="location" id={id}>
       <h2 id="locationTitle">Location</h2>
       <div className="googleMap">
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: "AIzaSyC8CafSu5IPQErCTSwj0YpRPWQUeniuyg8" }}
-          defaultCenter={position}
-          defaultZoom={15}
-        >
-          <Marker
-            lat={position.lat}
-            lng={position.lng}
-            address={location.split(", ").slice(0, 1).join()}
-          />
-        </GoogleMapReact>
+        <Map
+          isDesktop={window.innerWidth >= 1200}
+          userLocation={position} // TODO: this should be user location, not designer location
+          designers={[designer]}
+          style={{height: "40vh"}}
+        />
       </div>
     </div>
-  );
-  return (
-    <>
-      {googleMap}
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-    </>
   );
 }

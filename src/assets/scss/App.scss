@@ -58,7 +58,8 @@ body {
   margin: 0 auto;
 
   @include desktop {
-    width: 1130px;
+    padding-left: $defaultPaddingWidth;
+    padding-right: $defaultPaddingWidth;
   }
 }
 

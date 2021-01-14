@@ -25,7 +25,7 @@ export default function DesignerListView(props) {
   const history = useHistory();
 
   const defaultInitialDisplayCount = 10;
-  const defaultBookitoWidth = "1130px";
+  const defaultBookitoWidth = "1300px";
   const defaultDesignerListingWidth = "96%";
 
   let lastScrollTop = 0;
@@ -73,6 +73,7 @@ export default function DesignerListView(props) {
     // This section of code is used to control the filter hiding and appearing on scrolling down and up respectively.
     if (window.innerWidth >= 1200) { // Mixin.scss desktop
       document.getElementsByTagName("body")[0].style.width = defaultDesignerListingWidth;
+      document.getElementsByTagName("body")[0].style.padding = 0;
     }
     document.getElementById('scrollableDiv').addEventListener('scroll', handleFilterDisplayOnScroll, { passive: true });
     return () => {

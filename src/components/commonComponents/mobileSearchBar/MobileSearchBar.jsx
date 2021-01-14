@@ -69,7 +69,7 @@ export default function MobileSearchBar() {
       {/*<div id="mainHeader">Find your favourite beautician</div>*/}
       <Input
         size="large"
-        placeholder="Find your Beauticians" // TODO: Extract string to string file
+        placeholder="Find your Beautician" // TODO: Extract string to string file
         suffix={<SearchOutlined />}
         onClick={showModal}
       />
