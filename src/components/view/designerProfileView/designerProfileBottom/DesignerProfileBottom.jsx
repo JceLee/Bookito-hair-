@@ -38,7 +38,7 @@ export default function DesignerProfileBottom() {
         </div>
       </div>
       <Divider className="profileDivider" />
-      <Location id="Location" location={designer.location} latLng={designer.latLng} />
+      <Location id="Location" designer={designer} />
     </div>
   );
 }

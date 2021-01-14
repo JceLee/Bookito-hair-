@@ -9,7 +9,7 @@ $generalFontSize: 15px;
 
 #mainSearchBar {
   width: 100%;
-  padding: 0 5%;
+  // padding: 0 5%; // TODO DO THIS for smaller desktop window size!!
   z-index: 1;
 
   #mainHeader {
@@ -18,11 +18,9 @@ $generalFontSize: 15px;
     font-weight: 700;
     padding: 10px 0;
   }
-  @include tabletP {
-    margin-top: 250px;
-  }
-  @include desktop {
-    padding: 0 10%;
+
+  .ant-input-group {
+    // z-index: 3;
   }
 
   .ant-select {

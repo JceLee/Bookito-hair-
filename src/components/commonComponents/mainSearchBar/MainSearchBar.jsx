@@ -37,14 +37,14 @@ export default function MainSearchBar(props) {
 
   //#region Functions related SearchBar
   // calculate and set height to show search bar on nav bar
-  useEffect(() => {
-    if (!disableMovement) {
-      heightToShowSearchBarOnNav =
-        (window.pageYOffset +
-          document.getElementById("searchBarForm").clientHeight) *
-        -1;
-    }
-  });
+  // useEffect(() => {
+  //   if (!disableMovement) {
+  //     heightToShowSearchBarOnNav =
+  //       (window.pageYOffset +
+  //         document.getElementById("searchBarForm").clientHeight) *
+  //       -1;
+  //   }
+  // });
 
   // give css when search bar sticks on nav bar
   const stickSearchBarOnNavBar = (width) => {
@@ -88,16 +88,16 @@ export default function MainSearchBar(props) {
     document.getElementById("mainHeader").style.display = "unset";
   };
 
-  useScrollPosition(({ prevPos, currPos }) => {
-    try {
-      if (currPos.y < heightToShowSearchBarOnNav) {
-        stickSearchBarOnNavBar(window.innerWidth);
-      } else {
-        takeSearchBarOffFromNavBar(window.innerWidth);
-      }
-    } catch {
-    }
-  });
+  // useScrollPosition(({ prevPos, currPos }) => {
+  //   try {
+  //     if (currPos.y < heightToShowSearchBarOnNav) {
+  //       stickSearchBarOnNavBar(window.innerWidth);
+  //     } else {
+  //       takeSearchBarOffFromNavBar(window.innerWidth);
+  //     }
+  //   } catch {
+  //   }
+  // });
   //#endregion
 
   //#region Functions related Location

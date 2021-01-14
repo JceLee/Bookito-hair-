@@ -8,6 +8,9 @@ $black: #1b1b1b;
 $grey: #a1a1a1;
 $lightGrey: #c6c6c6;
 
+$defaultBodyWidth: 1300px;
+$defaultPaddingWidth: calc((99% - 1300px)/2);
+
 @mixin mobileS {
   @media only screen and (min-width: 360px) {
     @content;

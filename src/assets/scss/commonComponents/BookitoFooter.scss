@@ -1,6 +1,11 @@
 .bookitoFooter {
   background-color: #f7f7f7;
   border-top: 1px solid #dddddd;
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100% !important;
+  margin: 0 !important;
 
   .footerContents {
     padding: 7% 5%;
@@ -13,7 +18,7 @@
 
       @include tabletP {
         padding: 0;
-        margin-top: 1.5%;
+        margin-top: 4%;
       }
 
       @include tabletL {
@@ -91,12 +96,10 @@
 
   @include desktop {
     width: 100vw;
-    margin-left: calc((1130px - 100vw) / 2);
 
     .footerContents {
-      width: 1130px;
+      width: $defaultBodyWidth;
       margin: 0 auto;
-      padding: 5% 0;
 
       @include tabletL {
         padding: 4% 0;

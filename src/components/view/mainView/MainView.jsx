@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import SearchBarSection from "./SearchBarSection";
-import NewDesignersDesktopSection from "./NewDesignersDesktopSection";
-import JoinUsMobile from "./JoinUsMobile";
+import NewDesignersSection from "./NewDesignersSection";
+import JoinUsSection from "./JoinUsSection";
 import BookitoFooter from "../../commonComponents/BookitoFooter";
 
 export default function MainView() {
@@ -16,9 +16,8 @@ export default function MainView() {
   return (
     <>
       <SearchBarSection/>
-      {screenWidth < tabletLWidth ? <JoinUsMobile/> : <JoinUsMobile/>}
-      <NewDesignersDesktopSection/>
-      <div className="newDesignerMobileSection"/>
+      <NewDesignersSection/>
+      <JoinUsSection/>
       <BookitoFooter/>
     </>
   );
