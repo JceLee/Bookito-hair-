@@ -54,6 +54,6 @@ export const getDistanceFromLatLonInKm = (lat1, lng1, lat2, lng2) => {
       Math.sin(dLon / 2);
   let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   let d = R * c;
-  let format_distance = d < 1 ? "Less than 1" : Math.round(d);
-  return format_distance;
+  // let format_distance = d < 1 ? "Less than 1" : Math.round(d);
+  return d.toFixed(2);
 };

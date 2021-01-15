@@ -10,13 +10,15 @@ export default function Map(props) {
         style,
     } = props;
 
+    const updatedDesigners = designers.filter(element => element !== undefined);
+
     const HomeMarker = userLocation && <Marker
         key={`map-marker-home`}
         lat={userLocation.lat}
         lng={userLocation.lng}
     />
 
-    const DesignerMarkers = designers && designers.map(designer => (
+    const DesignerMarkers = updatedDesigners && updatedDesigners.map(designer => (
         designer.latLng && <Marker
             isDesktop={isDesktop}
             key={`map-marker-${designer.uid}`}

@@ -21,12 +21,12 @@ export default function DesignerCardTop(props) {
           <Col><StarRead rateScore={rateScore} rateCount={rateCount} /></Col>
         </Row>
         <Row>
-          {!!distance && <p className="designerCardDistance">{`${distance}km from you`}</p>}
+          {!!distance && <p className="designerCardDistance">{ distance > 0.5 ? `${distance}km from you` : "Less than 0.5km from you"}</p>}
         </Row>
         <Row>
           <div className="designerCardServices">
             {services && Object.keys(services).map((serviceKey, i) => (
-              services[serviceKey] !== [] && 
+              services[serviceKey] !== [] &&
               <Tag key={`designerCardService${i}`} className="serviceTag" /*color="#332C1E"*/>{serviceKey}</Tag>
             ))}
           </div>
