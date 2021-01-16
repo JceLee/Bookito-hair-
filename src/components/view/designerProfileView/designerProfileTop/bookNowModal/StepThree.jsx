@@ -1,8 +1,8 @@
 import React from "react";
-import { List, Button, Typography } from "antd";
+import {List, Button, Typography} from "antd";
 
 export default function StepThree(props) {
-  const { Text } = Typography;
+  const {Text} = Typography;
   const {
     displayedDay,
     bookingTime,
@@ -22,7 +22,7 @@ export default function StepThree(props) {
       title: "Time",
       contents: bookingTime,
     },
-    { id: 3, title: "Service", contents: getServiceContent() },
+    {id: 3, title: "Service", contents: getServiceContent()},
   ];
 
   const moveToSelectTimePosition = (item) => {
@@ -51,13 +51,14 @@ export default function StepThree(props) {
                   value={item.id}
                   id={item.id}
                   onClick={() => moveToSelectTimePosition(item)}
+                  style={{color:"#ff7373"}}
                 >
                   Edit
                 </Button>
               </List.Item>
             );
           }}
-        ></List>
+        />
       </div>
     </div>
   );

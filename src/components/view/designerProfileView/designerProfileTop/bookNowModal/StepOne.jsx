@@ -24,6 +24,7 @@ export default function StepOne(props) {
     <div id="selectTimePosition">
       <p id="selectTime">Please select time</p>
       <Radio.Group>
+        <div className="btnGroup">
         {timeSelection.filter(e => e.disabled === false).map((hour, index) => {
           const { time, value, disabled } = hour;
           return (
@@ -38,6 +39,7 @@ export default function StepOne(props) {
             </Radio.Button>
           );
         })}
+        </div>
       </Radio.Group>
     </div>
   );
