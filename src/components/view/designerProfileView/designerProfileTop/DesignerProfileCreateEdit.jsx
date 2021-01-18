@@ -175,7 +175,7 @@ export default function DesignerProfileCreateEdit(props) {
     designer.services = values.services || {};
     designer.introduction = values.introduction || "";
     designer.hours = values.hours;
-    designer.accountType = "client";
+    designer.accountType = selectedDesignerType;
 
     // Update redux client
     dispatch(refresh(designer));

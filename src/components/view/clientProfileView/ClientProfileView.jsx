@@ -174,7 +174,7 @@ export default function ClientProfileView(props) {
           nickName: profile?.fname,
           email: profile?.email,
           phone: profile?.phone,
-          address: profile?.location,
+          address: profile?.location || " ",
         }}
         // validateMessages={validateMessages}
       >

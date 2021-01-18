@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   Button,
   Divider,
@@ -12,20 +13,11 @@ import {
 } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import BlackBtn from "../../../../commonComponents/BlackBtn";
+import { firebaseStore } from "../../../../../config/fbConfig";
+import { refresh } from "../../../../../actions/currentUser";
 
 const { TabPane } = Tabs;
 const { TextArea } = Input;
-
-const formInitialValues = {
-  services: {
-    Menu1: [],
-    Menu2: [],
-    Menu3: [],
-    Menu4: [],
-    Menu5: [],
-    Menu6: [],
-  },
-};
 
 export default function ServiceNPriceForm(props) {
   const { designer, createMode } = props;
@@ -36,6 +28,7 @@ export default function ServiceNPriceForm(props) {
   const [removeTabModal, setRemoveTabModal] = useState(false);
   const promiseFunction = useRef(() => {});
   const newTabName = useRef("New tab");
+  const dispatch = useDispatch();
 
   let initialPanes = tabNames.map((tabName) => {
     return { title: `${tabName}`, key: `${tabName}` };
@@ -46,15 +39,9 @@ export default function ServiceNPriceForm(props) {
     panes: initialPanes,
   });
 
-  const [] = useState(false);
-
   const onChange = (activeKey) => {
     setState({ activeKey, panes: [...panes] });
   };
-
-  const test = (value) => {
-    // console.log(value.target);
-  }
 
   const onEdit = (targetKey, action) => {
     if (action === "add") {
@@ -124,8 +111,38 @@ export default function ServiceNPriceForm(props) {
     });
   };
 
-  const yes = (values) => {
-    console.log(values);
+  const saveServices = async (values) => {
+    // Validate services
+    for (const service in values.services) {
+      // Firebase requires service category must not be empty
+      if (!values.services[service]) {
+        delete values.services[service];
+      }
+      // Firebase requires description to be not undefined
+      else {
+        for (const subService of values.services[service]) {
+          if (!subService.description) {
+            subService.description = "";
+          }
+        }
+      }
+    }
+    designer.services = values.services || {};
+
+    // Update redux client
+    dispatch(refresh(designer));
+    // Update firebase
+    await firebaseStore
+      .collection("users")
+      .doc(designer.uid)
+      .update(designer)
+      .then(function () {
+        return message.success({
+          content: "Saved",
+          duration: "2",
+          className: "onFinishMessage",
+        });
+      });
   };
 
   const changeTabName = (e) => {
@@ -169,21 +186,18 @@ export default function ServiceNPriceForm(props) {
                 cancelText="No"
               >
                 <button
-  type="button"
-  aria-label="remove"
-  tabIndex="0"
-  className="ant-tabs-tab-remove"
-  />
+                  type="button"
+                  aria-label="remove"
+                  tabIndex="0"
+                  className="ant-tabs-tab-remove"
+                />
               </Popconfirm>
               <Form.List name={["services", `${tab.title}`]}>
                 {(fields, { add, remove }) => {
-                  fields = designer.services[tab.title];
-                  console.log(fields);
                   return (
                     <>
                       <div>
                         {fields.map((field, index) => {
-                          console.log(field);
                           return (
                             <div
                               key={index}
@@ -201,7 +215,9 @@ export default function ServiceNPriceForm(props) {
                                     },
                                   ]}
                                 >
-                                  <Input placeholder="Service Name" defaultValue={field.service}/>
+                                  <Input
+                                    placeholder="Service Name"
+                                  />
                                 </Form.Item>
                                 <Form.Item
                                   name={[field.name, "price"]}
@@ -220,7 +236,6 @@ export default function ServiceNPriceForm(props) {
                                   <InputNumber
                                     placeholder="Price"
                                     // formatter={(value) => `$ ${value}`}
-                                    defaultValue={field.price}
                                   />
                                 </Form.Item>
                                 <MinusCircleOutlined
@@ -236,9 +251,11 @@ export default function ServiceNPriceForm(props) {
                                 className="serviceDescriptionInput"
                                 fieldKey={[field.fieldKey, "description"]}
                                 hasFeedback
-                                rules={[{ message: 'Username is required!' }]}
+                                rules={[{ message: "Username is required!" }]}
                               >
-                                <TextArea placeholder="Description (optional)" defaultValue={field.description}/>
+                                <TextArea
+                                  placeholder="Description (optional)"
+                                />
                               </Form.Item>
                               <Divider className="dividerInServiceAndPrice" />
                             </div>
@@ -261,7 +278,7 @@ export default function ServiceNPriceForm(props) {
                   );
                 }}
               </Form.List>
-              {!createMode && <BlackBtn btnName="Save" onClick={yes} />}
+              {!createMode && <BlackBtn btnName="Save" onClick={saveServices} />}
             </TabPane>
           );
         })}
@@ -311,9 +328,8 @@ export default function ServiceNPriceForm(props) {
       ) : (
         <Form
           name="editProfile"
-          onChange={test}
-          onFinish={yes}
-        >
+          initialValues={designer.services}
+          onFinish={saveServices}>
           {formArea}
         </Form>
       )}
