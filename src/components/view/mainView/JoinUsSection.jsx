@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import joinUs from "../../../assets/images/backgrounds/signUp.jpg";
 import hair from "../../../assets/images/backgrounds/joinUsHair.jpg";
 import lash from "../../../assets/images/backgrounds/joinUsLash.jpg";
 import nail from "../../../assets/images/backgrounds/joinUsNail.jpg";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 export default function JoinUsSection() {
+  const currentUser = useSelector((state) => state.currentUser.currentUser);
   const tabletPWidth = 768;
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const reportWindowSize = () => {
@@ -23,29 +25,31 @@ export default function JoinUsSection() {
             Join us - Reach out to new clients in your city.
           </div>
           {screenWidth < tabletPWidth ? (
-            <img className="joinUsImg" src={joinUs} />
+            <img className="joinUsImg" src={joinUs}/>
           ) : (
             <div className="joinUsImgGroup">
               <div className="imgWrapper">
-                <img className="joinUsImgS" src={nail} />
+                <img className="joinUsImgS" src={nail}/>
                 <div className="imgDescription">Nail Artist</div>
               </div>
               <div className="imgWrapper">
-                <img className="joinUsImgS" src={hair} />
+                <img className="joinUsImgS" src={hair}/>
                 <div className="imgDescription">hair dresser</div>
               </div>
               <div className="imgWrapper">
-                <img className="joinUsImgS" src={lash} />
+                <img className="joinUsImgS" src={lash}/>
                 <div className="imgDescription">Lash designer</div>
               </div>
             </div>
           )}
 
           <div className="joinUsBottom">
-            <Link className="joinUsBtn" to={"/becomeDesigner"}>
+            {currentUser === null ? (<Link className="joinUsBtn" to={"/sign_in"}>
               JOIN US !
-            </Link>
-            {/*<button className="joinUsBtn"> Join  Us </button>*/}
+            </Link>) : (<Link className="joinUsBtn" to={"/becomeDesigner"}>
+              JOIN US !
+            </Link>)}
+
           </div>
         </div>
       </div>

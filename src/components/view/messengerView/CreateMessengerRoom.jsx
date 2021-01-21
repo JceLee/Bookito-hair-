@@ -23,5 +23,7 @@ export function CreateMessengerRoom(customer, designer) {
       // enterChatRoom(room.roomID);
     });
 
+  console.log(roomID);
+
   return roomID;
 }

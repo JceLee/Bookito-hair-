@@ -1,18 +1,18 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, {useEffect, useState, useRef} from "react";
 import "react-day-picker/lib/style.css";
-import { Steps, Modal, Button, message } from "antd";
+import {Steps, Modal, Button, message} from "antd";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
-import { firebaseStore } from "../../../../../config/fbConfig";
-import { notificationForm } from "../../../../../helpers/notificationForm";
-import { useSelector } from "react-redux";
+import {firebaseStore} from "../../../../../config/fbConfig";
+import {notificationForm} from "../../../../../helpers/notificationForm";
+import {useSelector} from "react-redux";
 
 export default function BookNowModal(props) {
   const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
   const currentUser = useSelector((state) => state.currentUser.currentUser);
-  const { Step } = Steps;
-  const { visible, modalHandler } = props;
+  const {Step} = Steps;
+  const {visible, modalHandler} = props;
   const elementForScrollingTopInModal = document.getElementById("stepToTopId");
   const [displayedDay, setDisplayedDay] = useState(new Date());
   const [key, setKey] = useState(Object.keys(designer.services)[0]);
@@ -138,7 +138,7 @@ export default function BookNowModal(props) {
     setPage(rightPage);
   };
 
-  const handleDayClick = (day, { selected }) => {
+  const handleDayClick = (day, {selected}) => {
     setDisplayedDay(selected ? undefined : day);
   };
 
@@ -187,7 +187,7 @@ export default function BookNowModal(props) {
       .catch(function (error) {
         console.log("error :" + error);
       });
-    firebaseStore
+    await firebaseStore
       .collection("mail")
       .add({
         to: designer.email,
@@ -287,7 +287,7 @@ export default function BookNowModal(props) {
           <Button
             className="nextBtnInStepOne"
             type="primary"
-            style={{ position: "absolute", right: 0 }}
+            style={{position: "absolute", right: 0}}
             onClick={next}
           >
             Next
@@ -309,12 +309,12 @@ export default function BookNowModal(props) {
       visible={visible}
       footer={[createFooter()]}
       onCancel={modalHandler}
-      cancelButtonProps={{ style: { display: "none" } }}
+      cancelButtonProps={{style: {display: "none"}}}
     >
       <div id="stepToTopId">
         <Steps className="steps" current={current} onChange={onChange} progressDot>
           {steps.map((item) => (
-            <Step key={item.title} title={item.title} />
+            <Step key={item.title} title={item.title}/>
           ))}
         </Steps>
       </div>
