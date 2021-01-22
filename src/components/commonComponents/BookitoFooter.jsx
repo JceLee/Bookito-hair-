@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Link, useHistory} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom"
 import {Divider, Button, Modal, Carousel} from "antd";
 import {CreateMessengerRoom} from "../view/messengerView/CreateMessengerRoom"
 import {useSelector} from "react-redux";
@@ -63,7 +63,6 @@ const latestNews = () => {
   });
 };
 
-
 export default function BookitoFooter() {
   const [dividerType, setDividerType] = useState(getMenuDividerType());
   const currentUser = useSelector((state) => state.currentUser.currentUser);
@@ -95,7 +94,8 @@ export default function BookitoFooter() {
           </div>
           <section className="sendMsgBtn">
             <Button type="link" style={{margin: 5, fontSize: 13}} onClick={() => {
-              sendMessageToAdmin(currentUser)
+              sendMessageToAdmin(currentUser);
+              Modal.destroyAll();
             }}>
               Send message
             </Button>
