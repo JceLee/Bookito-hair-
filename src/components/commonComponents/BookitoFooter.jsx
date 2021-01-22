@@ -29,25 +29,49 @@ const howBktWorks = () => {
     lineHeight: '160px',
     textAlign: 'center',
     background: '#ff7373',
+    margin: "0 auto",
   };
+
+  const description = [
+    {
+      src : image1,
+      title : "1. Click 'Sign In' button on the nav bar."
+    }, {
+      src : image1,
+      title : "1. Click 'Sign In' button on the nav bar."
+    }, {
+      src : image1,
+      title : "1. Click 'Sign In' button on the nav bar."
+    }, {
+      src : image1,
+      title : "1. Click 'Sign In' button on the nav bar."
+    }, {
+      src : image1,
+      title : "1. Click 'Sign In' button on the nav bar."
+    }, {
+      src : image1,
+      title : "1. Click 'Sign In' button on the nav bar."
+    }, {
+      src : image1,
+      title : "1. Click 'Sign In' button on the nav bar."
+    }, {
+      src : image1,
+      title : "1. Click 'Sign In' button on the nav bar."
+    },
+  ]
+
   Modal.info({
     className: "howBktWorksModal",
     title: "How Bookito works?",
     okText: "Exit",
+    width: 425,
+    centered: true,
     content:
       <Carousel autoplay>
-        <div style={contentStyle}>
-          <img src={image1} width={320} height={600}/>
-        </div>
-        <div>
-          <h3 style={contentStyle}>2</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>3</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>4</h3>
-        </div>
+        {description.map((description, index) => (        <div style={contentStyle} key={index}>
+          <img src={description.src} />
+          <h4 style={{margin : "10px"}}> {description.title}</h4>
+        </div>))}
       </Carousel>
     ,
   });
