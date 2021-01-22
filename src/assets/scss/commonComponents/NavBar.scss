@@ -1,0 +1,85 @@
+@import "../Mixin.scss";
+
+$marginFromTablet: 10%;
+
+#header {
+  position: sticky;
+  top: 0;
+  background-color: $white;
+  height: 55px;
+  z-index: 2;
+  padding: 0 5%;
+
+  @include desktopL {
+    height: 65px;
+  }
+}
+
+#navBar {
+  height: 55px;
+  width: 100%;
+  margin: 0 auto;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $white;
+
+  @include desktopL {
+    position: fixed;
+    left: 0;
+    right: 0;
+    padding-left: $defaultPaddingWidth !important;
+    padding-right: $defaultPaddingWidth !important;
+    width: auto;
+    height: 65px;
+    padding: 0;
+  }
+}
+
+#logo a {
+  text-decoration: none;
+  color: $black;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+#logo {
+  width: 150px;
+  a {color: #ff7373;}
+
+}
+
+#menuBtn {
+  @include tabletP {
+    margin-left: auto;
+    align-items: center;
+
+    .ant-btn {
+      width: 80px;
+      height: 40px;
+    }
+  }
+}
+
+.ant-drawer-content-wrapper {
+  width: 60%;
+}
+
+.ant-drawer-body {
+  padding: 0;
+}
+
+// menu dropdown menu container
+.ant-dropdown-menu {
+  margin-top: 6px;
+  padding: 8px;
+  border-radius: 20px;
+  min-width: 140px;
+
+  .ant-dropdown-menu-item {
+    padding: 10px;
+  }
+}

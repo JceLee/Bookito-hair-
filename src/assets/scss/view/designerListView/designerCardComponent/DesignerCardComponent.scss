@@ -1,0 +1,141 @@
+@import "../../../Mixin.scss";
+
+// DesignerCardComponent.jsx
+.designerCardComponent {
+  padding: 10px 5%;
+  padding-top: 0px;
+
+  @include desktop {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+// DesignerCardTop.jsx
+.designerCardTop {
+  margin-top: 6px;
+  margin-bottom: 10px;
+  // padding-left: 5px;
+
+  .designerCardIcon {
+    margin: 5px 0;
+  }
+
+  .designerCardTopRight {
+    margin-left: 10px;
+
+    // @include designerCard {
+    //     margin-left: auto;
+    //     margin-right: 0;
+    //     text-align: right;
+    // }
+
+    // @include tabletP{
+    //     margin-left: 0;
+    //     margin-right: auto;
+    //     text-align: left;
+    // }
+
+    // @include designerCard1240{
+    //     margin-left: auto;
+    //     margin-right: 0;
+    //     text-align: right;
+    // }
+
+    .designerCardName {
+      color: $black;
+      margin-right: 8px;
+    }
+
+    //.starReadContainer {
+    //  color: #ff7373;
+    //}
+
+    .designerCardDistance {
+      margin-bottom: 3px;
+    }
+
+    .designerCardServices {
+      overflow: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      height: 30px;
+      max-width: 66vw;
+
+      @include mobileM {
+        max-width: 70vw;
+      }
+
+      // @include tabletP {
+      //     height: 81px;
+      //     width: 180px;
+      // }
+
+      .serviceTag {
+        margin-right: 6px;
+        margin-bottom: 4px;
+        border-radius: 20px;
+        border-color: $lightGrey;
+        background-color: $white;
+      }
+    }
+  }
+}
+
+// DesignerCardBottom.jsx
+.designerCardBottom {
+  margin-left: 4vw;
+  margin-bottom: 20px;
+
+  @include tabletP {
+    margin-left: 0;
+  }
+
+  .workImageDiv {
+    .workImage {
+      width: 37vw;
+      height: 37vw;
+
+      @include tabletP {
+        width: 160px;
+        height: 160px;
+      }
+
+      @include tabletL {
+        width: 200px;
+        height: 200px;
+      }
+
+      @include desktop {
+        width: 250px;
+        height: 250px;
+      }
+
+      @include desktopL {
+        width: 250px;
+        height: 250px;
+      }
+
+      @include desktopXL {
+        width: 10vw;
+        height: 10vw;
+      }
+    }
+
+    .workImageMapVisibleDesktop {
+      @include desktop {
+        width: 18.5vw;
+        height: 18.5vw;
+      }
+
+      @include desktopL {
+        width: 9vw;
+        height: 9vw;
+      }
+    }
+  }
+}
+
+.designerCardComponentDivider {
+  margin: 0px;
+}

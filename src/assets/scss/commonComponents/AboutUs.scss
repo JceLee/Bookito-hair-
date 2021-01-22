@@ -1,0 +1,80 @@
+@import "../Mixin.scss";
+
+.aboutUsPage {
+  .aboutUsTitle {
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-top: 10%;
+  }
+
+  .aboutUsCard {
+    @include tabletP {
+      columns: 2;
+      overflow: hidden;
+    }
+
+    @include tabletL {
+      columns: 3;
+    }
+
+    .aboutUsMemberInfo {
+      @include tabletP {
+        margin: 0;
+        padding: 0;
+      }
+      // background-color: pink;
+      .img {
+        text-align: center;
+        margin-top: 6%;
+
+        @include tabletP {
+          margin-top: 0;
+          //   text-align: left;
+        }
+
+        .memberImg {
+          margin-top: 5%;
+
+          @include desktopXL {
+            margin-top: 10%;
+          }
+
+          .ant-image-img {
+            width: 90vw;
+            height: 60vw;
+
+            @include tabletP {
+              width: 90%;
+              height: 30vw;
+            }
+
+            @include tabletL {
+              width: 90%;
+              height: 15vw;
+            }
+
+            @include desktopXL {
+              height: 10vw;
+            }
+          }
+        }
+      }
+
+      .memberIntro {
+        padding: 6px 24px;
+        text-align: center;
+        color: $black;
+
+        #memberName {
+          font-weight: 600;
+          margin: 1em auto;
+        }
+
+        p {
+          margin-bottom: 0.5em;
+        }
+      }
+    }
+  }
+}

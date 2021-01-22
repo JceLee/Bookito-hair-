@@ -1,0 +1,35 @@
+@import "../../Mixin.scss";
+
+.clientSchedule {
+  padding: 0 5%;
+  @include desktop {
+    padding: 0 10%;
+  }
+  .yourAppointments {
+    margin-top: 20px;
+    font-size: 20pt;
+    font-weight: 700;
+  }
+
+  .clientScheduleTabs {
+    .ant-tabs-nav {
+      .ant-tabs-tab {
+        font-size: 16px;
+        color: black;
+      }
+
+      .ant-tabs-tab-active .ant-tabs-tab-btn {
+        color: black;
+      }
+
+      .ant-tabs-nav-list .ant-tabs-ink-bar {
+        background: black;
+      }
+    }
+
+    .ant-tabs-content-holder .clientScheduleViewRow {
+      column-gap: 30px;
+      row-gap: 30px;
+    }
+  }
+}

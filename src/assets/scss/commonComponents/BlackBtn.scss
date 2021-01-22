@@ -1,0 +1,16 @@
+.blackBtn {
+  width: 100%;
+  background-color: black;
+  color: white;
+  margin: 0;
+  border: 1px solid black;
+  height: 32px;
+}
+
+.blackBtn:hover {
+  background-color: white;
+  color: black;
+  border-color: black;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}

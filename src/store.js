@@ -1,10 +1,8 @@
 import { createStore, applyMiddleware } from "redux";
-import reducer from "./reducers";
+import rootReducer from "./reducers/index";
+import { persistStore } from "redux-persist";
 import thunk from "redux-thunk";
 
-const store = createStore(
-        reducer,
-        applyMiddleware(thunk)
-);
-
-export default store;
+export const store = createStore(rootReducer, applyMiddleware(thunk));
+export const persistor = persistStore(store);
+export default { store, persistor };

@@ -1,0 +1,130 @@
+$red: #ff0000;
+$blue: #0000ff;
+$yellow: #ffff00;
+$orange: #ffa500;
+$green: #00ff00;
+$white: #fdfdfd;
+$black: #1b1b1b;
+$grey: #a1a1a1;
+$lightGrey: #c6c6c6;
+$bookito: #ff7373;
+
+$defaultBodyWidth: 1300px;
+$defaultPaddingWidth: calc((99% - 1300px)/2);
+
+@mixin mobileS {
+  @media only screen and (min-width: 360px) {
+    @content;
+  }
+}
+
+@mixin mobileM {
+  @media only screen and (min-width: 375px) {
+    @content;
+  }
+}
+
+@mixin mobilePixel {
+  @media only screen and (min-width: 411px) {
+    @content;
+  }
+}
+
+@mixin mobileIphonePlus {
+  @media only screen and (min-width: 414px) {
+    @content;
+  }
+}
+
+@mixin mobileMtoL {
+  @media only screen and (min-width: 425px) {
+    @content;
+  }
+}
+
+@mixin mobileL {
+  @media only screen and (min-width: 480px) {
+    @content;
+  }
+}
+
+@mixin mobileLtoTabletP {
+  @media only screen and (min-width: 540px) {
+    @content;
+  }
+}
+
+@mixin tabletP {
+  @media only screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin tabletL {
+  @media only screen and (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin desktopL { //+1920p
+  @media only screen and (min-width: 1440px) {
+    @content;
+  }
+}
+
+@mixin desktopXL { //+1920p
+  @media only screen and (min-width: 1920px) {
+    @content;
+  }
+}
+
+@mixin desktopXXL { //+4k
+  @media only screen and (min-width: 2560px) {
+    @content;
+  }
+}
+
+@mixin mobileOnly {
+  @media only screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+// for making DesignerCardComponent responsive
+@mixin designerCard {
+  @media only screen and (min-width: 571px) {
+    @content;
+  }
+}
+
+@mixin designerCard1240 {
+  @media only screen and (min-width: 1240px) {
+    @content;
+  }
+}
+
+// for calendar
+@mixin calendar700 {
+  @media only screen and (min-width: 700px) {
+    @content;
+  }
+}
+// for making client profile form responsive
+@mixin clientProfile576 {
+  @media only screen and (min-width: 576px) {
+    @content;
+  }
+}
+
+// for main page's new designer secion
+@mixin mainPageNewDesigners1090 {
+  @media only screen and (min-width: 1090px) {
+    @content;
+  }
+}

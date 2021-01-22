@@ -1,0 +1,97 @@
+@import "../../Mixin.scss";
+
+.mobileSearchBarModal {
+  top: 0;
+  margin: 0;
+  max-width: 100%;
+  height: 100%;
+
+  .ant-modal-body {
+    padding: 15px;
+
+    #designerTypeBtnContainerInMobileSearchBar {
+      margin: 5px 0 20px 0;
+
+      .ant-radio-group {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .ant-radio-button-wrapper {
+        border-left-width: 1px;
+        border-radius: 20px;
+        width: 46%;
+        height: 40px;
+        margin: 2%;
+        text-align: center;
+        color: #858585;
+        white-space: nowrap;
+        font-size: 0.9rem;
+
+        @include mobileM {
+          font-size: 1rem;
+        }
+      }
+
+      .ant-radio-button-wrapper:hover {
+        color: $bookito;
+        border: 2px solid $bookito;
+      }
+
+      .ant-radio-button-wrapper:not(:first-child)::before {
+        background-color: unset;
+      }
+
+      .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled),
+      .ant-radio-button-wrapper-checked:not([class*=" ant-radio-button-wrapper-disabled"]).ant-radio-button-wrapper {
+        border: 2px solid $bookito;
+        color: $bookito;
+      }
+    }
+
+    #locationInputContainerInMobileSearchBar {
+      margin: 20px 0;
+
+      .ant-input-affix-wrapper {
+        margin-left: 2%;
+        margin-right: 2%;
+        height: 50px;
+        width: 96%;
+        border-radius: 25px;
+      }
+
+      .ant-input-affix-wrapper:hover,
+      .ant-input-affix-wrapper:focus,
+      .ant-input-affix-wrapper-focused {
+        box-shadow: unset;
+        border: 2px solid $bookito;
+      }
+
+      .ant-input-suffix {
+        margin-right: 10px;
+        font-size: 20px;
+      }
+
+      .ant-input-search-icon::before {
+        border: unset;
+      }
+
+      #address-input {
+        margin-left: 10px;
+        // font-weight: bold;
+      }
+    }
+  }
+
+  #designerTypeTextInMobileSearchBar,
+  #locationTextInMobileSearchBar {
+    padding-left: 10px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .designerTypeBtn {
+    margin-right: 5px;
+  }
+}

@@ -1,0 +1,426 @@
+@import "../../Mixin.scss";
+
+.searchBarSectionDesktopImg {
+  display: none;
+  z-index: 0;
+  pointer-events: none;
+
+  @include tabletP {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 100vh;
+    display: block;
+    object-fit: cover;
+  }
+
+  // @include desktop {
+  //   width: 1130px;
+  // }
+}
+
+// search bar section
+.searchBarSection {
+  width: 100%;
+  height: 450px;
+
+  @include tabletP {
+    height: 100vh;
+  }
+
+  .searchBarSectionImg {
+    object-fit: cover;
+    position: absolute;
+    height: 450px;
+    @include tabletP {
+      display: none;
+    }
+
+    // hide timer
+    .awssld__timer, .awssld__timer--animated, .awssld__timer--run {
+      --timer-height: 0px;
+      opacity: 0;
+      pointer-events: none; /* prevent events (mouse clicking etc.) */
+    }
+  }
+  #searchBarLabel {
+    position: relative;
+    font-size: 42px;
+    font-weight: 600;
+    color: $white;
+  }
+  #searchBarForm {
+    border-top: 1px solid transparent;
+    padding-left: 0;
+
+    // Search bar and label vertical position
+    @include tabletP {
+      padding-top: 400px;
+      padding-left: 60px; // This should be $defaultPaddingWidth, but it doesnt work :(
+    }
+    // Compensate for NavBar height 
+    @include desktopL {
+      margin-top: -10px;
+      padding-left: 0;
+    }
+  }
+}
+
+.stickedSearchBarOnNav {
+  position: fixed;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+// joinUs section
+.joinUsBlocker {
+  @include mobileM {
+    height: 550px;
+  }
+
+  @include mobileL {
+    height: 600px;
+  }
+  
+  @include mobileLtoTabletP {
+    height: 700px;
+  }
+
+  @include mobileLtoTabletP {
+    height: 700px;
+  }
+
+  @include tabletP {
+    height: 460px;
+  }
+
+  @include desktop {
+    height: 530px;
+  }
+
+  .joinUsBackground {
+    background: $black;
+    padding: 50px 5vw;
+    text-align: center;
+
+    @include mobileM {
+      height: 550px;
+    }
+
+    @include mobileL {
+      height: 600px;
+    }
+
+    @include mobileLtoTabletP {
+      height: 680px;
+    }
+
+    @include tabletP {
+      height: 460px;
+    }
+
+    @include tabletL {
+      text-align: left;
+    }
+
+    @include desktop {
+      height: 530px;
+      padding: 0;
+      position: absolute;
+      left: 0;
+      right: 0;
+      width: auto;
+    }
+  }
+}
+
+.joinUs {
+  height: 400px;
+
+  @include desktop {
+    margin: 50px 0;
+    padding-left: $defaultPaddingWidth !important;
+    padding-right: $defaultPaddingWidth !important;
+    width: auto;
+  }
+
+  .joinUsTopLine {
+    font-size: 28px;
+    color: white;
+  }
+
+  .joinUsBottomLine {
+    margin: 6px 0;
+    font-weight: 300;
+    color: white;
+  }
+
+  .joinUsBottom {
+    margin-top: 20px;
+    margin-bottom: 4px;
+
+    @include desktop {
+      margin: 4px 0;
+    }
+
+    .joinUsBtn {
+      text-align: center;
+      width: auto;
+      background-color: transparent;
+      border: 1px solid white;
+      border-radius: 4px;
+      padding: 8px 36px;
+      font-size: 14px;
+      line-height: 18px;
+      font-weight: 500;
+      color: white;
+    }
+  }
+
+  .joinUsImg {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .joinUsImgGroup {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+  
+    .imgWrapper {
+      // padding: 0 2%;
+      // width: 33.3%;
+      @include desktop {
+        margin: 0 10px;
+      }
+      .joinUsImgS {
+        width: 100%;
+      }
+      .imgDescription {
+        margin-top: 10px;
+        color: white;
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 400;
+        text-align: right;
+      }
+    }
+    .imgWrapper:first-child {
+      @include desktop {
+        margin-left: 0;
+      }
+    }
+    .imgWrapper:last-child {
+      @include desktop {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+// info card section
+.infoCardsSection {
+  margin: 10%;
+  @include tabletP {
+    display: flex;
+    justify-content: center;
+  }
+
+  .infoCard {
+    margin: 15px;
+    object-fit: scale-down;
+    max-width: 334px;
+    max-height: 335px;
+
+    @include tabletL {
+      margin: 15px 60px;
+    }
+
+    .ant-card-cover {
+      max-width: 334px;
+      max-height: 216px;
+      overflow: hidden;
+    }
+  }
+}
+
+// new designer desktop section
+.newDesignersSection {
+  padding: 20px 5%;
+  margin: 5vh 0;
+  background-color: #fafafa;
+
+  @include tabletP {
+    display: block;
+  }
+
+  @include tabletL {
+    display: flex;
+    margin: 100px 0;
+  }
+
+  @include mainPageNewDesigners1090 {
+    display: flex;
+  }
+
+  @include desktop {
+    padding: 0;
+  }
+
+  .newDesignersHeading {
+    padding: 0 50px;
+  }
+
+  .headerSection {
+    text-align: center;
+    margin-bottom: 5vh;
+
+    @include tabletL {
+      text-align: left;
+      // display: block;
+      width: 55%;
+      margin-right: 10%;
+      margin-top: 6%;
+    }
+    @include mainPageNewDesigners1090 {
+      text-align: left;
+      display: block;
+      width: 30%;
+      margin-right: 10%;
+      margin-top: 6%;
+    }
+
+    .topLine {
+      font-size: 28px;
+      font-weight: 300;
+      margin-bottom: 2%;
+
+      @include tabletL {
+        margin-left: 12%;
+      }
+
+      @include mainPageNewDesigners1090 {
+        margin-left: 0;
+      }
+    }
+
+    .bottomLine {
+      font-weight: 300;
+      margin: 0 auto;
+      padding: 6px 5%;
+
+      @include mobileM {
+        padding: 6px 6%;
+      }
+
+      @include mobileMtoL {
+        padding: 6px 11%;
+      }
+
+      @include tabletP {
+        width: 660px;
+        padding: 6px 20%;
+      }
+
+      @include tabletL {
+        width: 300px;
+        padding: 6px 0;
+        margin-left: 12%;
+      }
+
+      @include mainPageNewDesigners1090 {
+        width: 100%;
+        margin-left: 0;
+      }
+    }
+  }
+
+  .newDesignersHeaderSmallDesktopSection {
+    font-size: 30pt;
+    font-weight: 500;
+    @include mainPageNewDesigners1090 {
+      display: none;
+    }
+  }
+
+  .imagesSection {
+    width: 100%;
+    @include tabletL {
+      width: 60%;
+    }
+    @include mainPageNewDesigners1090 {
+      width: 70%;
+    }
+
+    .designerImagesRow {
+      width: 100%;
+      display: flex;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      justify-content: center;
+      @include mainPageNewDesigners1090 {
+        justify-content: flex-end;
+      }
+
+      .newDesignerCard {
+        margin-right: 20px;
+        width: 150px;
+        height: 150px;
+        padding: 0;
+
+        + div:nth-last-child(-n + 2) {
+          display: none;
+          @include mainPageNewDesigners1090 {
+            display: unset;
+          }
+        }
+
+        + div:nth-child(2) {
+          margin-right: 0px;
+          @include mainPageNewDesigners1090 {
+            margin-right: 20px;
+          }
+        }
+
+        + div:last-child {
+          margin-right: 0px;
+        }
+
+        .designerImage {
+          width: 150px;
+          height: 150px;
+        }
+
+        .ant-card-body {
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+
+// footer
+
+//.bookitoFooter {
+//  background-color: #d9d9d9;
+//  color: #484848;
+//  .footerTitle {
+//    color: #222222;
+//    font-size: 12px;
+//    margin-bottom: 0;
+//    text-transform: uppercase;
+//  }
+//}
+
+// footer
+.footer {
+  background-color: #1b1b1b;
+  color: #fff;
+  text-align: center;
+}

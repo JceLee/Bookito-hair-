@@ -1,0 +1,44 @@
+@import "../../Mixin.scss";
+
+.reviewModal {
+  .ant-modal-body {
+    padding: 10px 10px 0;
+
+    .designerCardTopLeft {
+      .topLeftSecondCol {
+        margin-left: 15px;
+      }
+    }
+  }
+
+  .ant-modal-footer {
+    padding: 0;
+  }
+
+  #reviewForm {
+    display: flex;
+    flex-direction: column;
+
+    .reviewRateItem {
+      align-self: flex-end;
+    }
+  }
+
+  #reviewModalCancelBtn {
+    margin: 0;
+    color: $black;
+    border-color: $white;
+    float: left;
+    width: 50%;
+    height: 55px;
+  }
+
+  #reviewModalSubmitBtn {
+    margin: 0;
+    background: $black;
+    border-color: $black;
+    color: $white;
+    width: 50%;
+    height: 55px;
+  }
+}

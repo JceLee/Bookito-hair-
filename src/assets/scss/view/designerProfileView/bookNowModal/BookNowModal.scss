@@ -1,0 +1,459 @@
+@import "../../../Mixin.scss";
+
+$modalBodyMargin: 110px;
+
+//.ant-modal-wrap {
+//  background-color: $white;
+//  @include tabletP {
+//    background-color: transparent;
+//  }
+//}
+
+.bookNowModal {
+  top: 0;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 100%;
+  // height: 100%;
+  // outline: none;
+
+  // @include tabletP {
+  //   top: 100px;
+  //   right: 65px;
+  //   height: 789px;
+  // }
+
+  @include tabletP {
+    top: 100px;
+    right: 65px;
+    height: 670px;
+  }
+
+  .ant-modal-content {
+    font-size: 16px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    margin: 0;
+    height: 100%;
+
+    @include tabletP {
+      width: 650px;
+    }
+
+    .ant-modal-body {
+      height: calc(100vh - #{$modalBodyMargin});
+      padding: 0;
+      overflow: auto;
+
+      #stepToTopId {
+        margin-top: 10%;
+      }
+
+      @include tabletP {
+        overflow: none;
+        height: 680px;
+      }
+
+      @include tabletP {
+        // overflow: none;
+        height: 561px;
+      }
+    }
+
+    .steps {
+      .ant-steps-item-content {
+        width: 48px;
+        // width: 87px;
+        margin: 10px 20px 10px 16px;
+        text-align: center;
+
+        @include mobileM {
+          margin: 10px 25px 10px 20px;
+        }
+
+        @include tabletP {
+          margin: 10px 0 10px 10px;
+          width: 170px;
+        }
+      }
+
+      .ant-steps-item-title {
+        font-size: 13px;
+        // font-size: 10px;
+
+        @include mobileMtoL {
+          font-size: 15px;
+        }
+      }
+
+      .ant-steps-item-icon {
+        margin-left: 44px;
+
+        @include mobileM {
+          margin-left: 50px;
+        }
+
+        @include mobileMtoL {
+          margin-left: 52px;
+        }
+        @include tabletP {
+          margin-left: 110px;
+        }
+      }
+
+      .ant-steps-icon {
+        background: $black;
+      }
+
+      .ant-steps-icon-dot {
+        background: $black;
+        margin-left: -10px;
+      }
+
+      .ant-steps-icon-dot::after {
+        width: 70px;
+        height: 42px;
+      }
+
+      .ant-steps-item-tail {
+        margin-left: 37px;
+        @include mobileM {
+          margin-left: 42.5px;
+        }
+
+        @include mobileMtoL {
+          margin-left: 44px;
+        }
+
+        @include tabletP {
+          margin-left: 102.5px;
+        }
+      }
+
+      .ant-steps-item-tail::after {
+        background-color: $black;
+        height: 2px;
+      }
+    }
+
+    .stepOne {
+      @include tabletP {
+        width: 100%;
+        display: flex;
+        // justify-content: space-between;
+        // padding: 0 5px;
+      }
+
+      .DayPicker {
+        display: inline-block;
+        //font-size: 1.125rem;
+        width: 100%;
+
+        @include mobileM {
+          //font-size: 1.2rem;
+          width: 100%;
+        }
+
+        @include tabletP {
+          margin-top: 6%;
+        }
+
+        .DayPicker-NavButton {
+          top: 5.5%;
+          right: 8%;
+        }
+
+        .DayPicker-Month {
+          width: 90%;
+          max-width: 315px;
+          height: auto;
+          margin: 0;
+
+          @include tabletP {
+            width: 200px;
+            height: 200px;
+          }
+
+          .DayPicker-Body {
+            .DayPicker-Day--selected {
+              background-color: $bookito;
+            }
+
+            .DayPicker-Day:not(.DayPicker-Day--selected):hover {
+              background-color: $bookito;
+            }
+          }
+        }
+      }
+
+      #selectTime {
+        text-align: center;
+        font-size: 15px;
+        font-weight: bolder;
+        margin: 0 0 8% 0;
+        @include tabletP {
+          margin: 6% 10% 8% 0;
+        }
+      }
+
+      .ant-radio-group {
+        //width: 320px;
+        //
+        //@include mobileM {
+        //  padding: 0 20px;
+        //  width: 375px;
+        //}
+        //
+        //@include tabletL {
+        //  margin: 0;
+        //  width: 325px;
+        //}
+        //
+        //@include tabletP {
+        //  margin: 0;
+        //  width: 325px;
+        //}
+        // width: 300px;
+
+        width:100%;
+
+
+        .btnGroup {
+          width: 315px;
+          margin: 0 auto;
+
+          @include tabletP {
+            width: 325px;
+          }
+
+          .ant-radio-button-wrapper {
+            margin: 6.5px;
+            color: $black;
+            border-color: $bookito;
+            width: 65px;
+            font-size: 13px;
+            text-align: center;
+            padding: 0;
+
+            .ant-radio-button {
+              width: 100%;
+            }
+
+            // .hourRadioBtn:focus {
+            //   content: none;
+            // }
+          }
+
+          .ant-radio-button-wrapper:not(:first-child)::before {
+            background-color: $bookito;
+          }
+
+          // .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled),
+          // .ant-radio-button-wrapper-checked:not([class*=" ant-radio-button-wrapper-disabled"]).ant-radio-button-wrapper {
+          //   // border: 2px solid $black;
+          //   color: $black;
+          // }
+          .ant-radio-button-wrapper:hover {
+            color: $white;
+            background-color: $bookito;
+            // border: 1px solid $black;
+          }
+        }
+      }
+
+
+    }
+
+    .stepTwo {
+      @include tabletP {
+        width: 100%;
+        display: flex;
+        // justify-content: space-between;
+        // padding: 0 5px;
+      }
+
+      .genderService {
+        @include tabletP {
+          width: 54%;
+        }
+      }
+
+      .checkboxOption {
+        width: 87%;
+        margin: 8% 0 15% 6.5%;
+        // @include tabletP {
+        //   width: 75%;
+        //   height: 400px;
+        //   margin: 10px 0 50px 6.5%;
+        // }
+
+        .ant-card-head {
+          margin-bottom: 0;
+
+          .ant-tabs-tab {
+            margin: 0 14px 0 0;
+
+            @include mobileMtoL {
+              margin: 0 17px 0 0;
+            }
+
+            .ant-tabs-tab-btn {
+              color: $black;
+              font-size: 15px;
+            }
+          }
+
+          .ant-tabs-tab:hover {
+            color: $bookito;
+          }
+
+          .ant-tabs-ink-bar {
+            background: $bookito;
+          }
+        }
+
+        .ant-card-body {
+          padding: 0;
+
+          .servicesContent {
+            margin-top: 30px;
+
+            .ant-checkbox-wrapper {
+              margin-left: 20px;
+            }
+
+            .ant-checkbox-input:focus + .ant-checkbox-inner {
+              border-color: $bookito;
+            }
+
+            .ant-checkbox-checked .ant-checkbox-inner {
+              background-color: $bookito;
+              border-color: $bookito;
+            }
+
+            .ant-checkbox-checked::after {
+              border: none;
+            }
+
+            .serviceMenu {
+              margin: 0 0 30px 43px;
+            }
+
+            .ant-divider-horizontal {
+              margin: 0 0;
+            }
+          }
+        }
+      }
+
+      .estimatedPrice {
+        @include tabletP {
+          width: 45%;
+        }
+
+        .estimatedPricePtag {
+          text-align: center;
+          font-size: 15px;
+          font-weight: bolder;
+          margin-bottom: 8%;
+
+          @include tabletP {
+            margin: 5% 0 8% 0;
+          }
+        }
+
+        .servicePriceTag {
+          margin-left: 25px;
+
+          @include tabletP {
+            margin: 0 15px 0 10px;
+          }
+
+          .removeButton {
+            float: right;
+            margin-right: 14px;
+            color: $red;
+
+            @include tabletP {
+              margin: -8px -2px 0 0;
+            }
+          }
+        }
+      }
+
+      .totalCost {
+        text-align: center;
+        margin: 0 0 40px -10px;
+      }
+    }
+
+    .stepThree {
+      .ant-list-items {
+        margin: 10% 3.5% 0 7%;
+        @include tabletP {
+          margin: 10% 3% 0 5%;
+        }
+      }
+    }
+
+    .ant-modal-footer {
+      padding: 0 0;
+      bottom: 0;
+      border: none;
+
+      .mockData {
+        color: $white;
+        border-color: $white;
+        float: left;
+        width: 50%;
+        height: 55px;
+      }
+
+      .nextBtnInStepOne {
+        background: $bookito;
+        border-color: $bookito;
+        color: $white;
+        width: 50%;
+        font-weight: 800;
+        height: 55px;
+      }
+
+      .previousBtn {
+        color: $bookito;
+        border-color: #f0f0f0;
+        float: left;
+        width: 50%;
+        height: 55px;
+        font-weight: 800;
+      }
+
+      .doneBtn {
+        background: $bookito;
+        border-color: $bookito;
+        font-weight: 800;
+        color: $white;
+        width: 50%;
+        height: 55px;
+      }
+
+      .nextBtnInStepOne::after,
+      .previousBtn::after,
+      .doneBtn::after {
+        content: none;
+      }
+    }
+
+    .ant-modal-footer button + button {
+      margin-left: 0;
+    }
+  }
+}
+
+@include tabletP {
+}
+
+@include tabletL {
+}
+
+@include desktop {
+}

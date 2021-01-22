@@ -1,0 +1,76 @@
+@import "../../Mixin.scss";
+
+.calendar {
+  position: relative;
+  .MuiButton-label {
+    font-size: 10px;
+    @include calendar700 {
+      font-size: 14px;
+    }
+  }
+  .MuiSelect-root {
+    font-size: 10px;
+    padding: 7px 20px 7px 10px;
+    @include calendar700 {
+      font-size: 14px;
+      padding: 9px 20px 9px 10px;
+    }
+  }
+  .newRequestBtn {
+    font-size: 10px;
+    padding: 10px 5px;
+    border: 1px solid rgba(0, 0, 0, 0.23);
+
+    background-color: white;
+    border-radius: 4px;
+    white-space: nowrap;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    @include calendar700 {
+      font-size: 14px;
+      margin-right: 4px;
+    }
+    .MuiButtonLabel {
+      font-size: 12px;
+      padding: 11px 14px;
+      border: 1px solid rgba(0, 0, 0, 0.23);
+      margin-right: 4px;
+      background-color: white;
+      border-radius: 4px;
+      white-space: nowrap;
+      font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+      @include calendar700 {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .newRequestBadge .ant-badge-count {
+    right: 8px;
+  }
+  .addButton {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 30px;
+    z-index: 1;
+  }
+}
+
+.newRequestDiv {
+  .closeIconDiv {
+    text-align: right;
+    .closeIcon svg {
+      font-size: 15pt;
+      margin: 5px;
+    }
+  }
+}
+.noRequestsContainer {
+  width: 320px;
+  text-align: center;
+  margin-top: 50px;
+  .noRequestIcon {
+    width: 100px;
+    height: 100px;
+  }
+}

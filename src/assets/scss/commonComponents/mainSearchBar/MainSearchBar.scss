@@ -1,0 +1,163 @@
+@import "../../Mixin.scss";
+
+// variables
+$searchBarHeight: 50px;
+$designerTypeSelectorWidth: 200px;
+$locationInputWidth: 400px;
+$locationInputLeftMargin: 25px;
+$generalFontSize: 15px;
+
+#mainSearchBar {
+  width: 100%;
+  // padding: 0 5%; // TODO DO THIS for smaller desktop window size!!
+  z-index: 1;
+
+  #mainHeader {
+    position: relative;
+    font-size: 25pt;
+    font-weight: 700;
+    padding: 10px 0;
+  }
+
+  .ant-input-group {
+    // z-index: 3;
+  }
+
+  .ant-select {
+    width: $designerTypeSelectorWidth;
+  }
+
+  .ant-select-selector,
+  .ant-input-affix-wrapper {
+    box-shadow: 0px 0px 0.25px 0.25px rgba(0, 0, 0, 0);
+    height: $searchBarHeight;
+    font-weight: 600;
+    font-size: $generalFontSize;
+  }
+
+  .ant-select-selector {
+    z-index: 1;
+    border-radius: 25px;
+
+    .ant-select-selection-search {
+      margin-bottom: 40px;
+    }
+
+    &:hover {
+      border-color: $grey;
+    }
+  }
+
+  .ant-select-focused .ant-select-selector,
+  .ant-select-selector:focus,
+  .ant-select-selector:active,
+  .ant-select-open .ant-select-selector {
+    border-color: $grey !important;
+  }
+
+  .ant-form-item {
+    margin-bottom: 0;
+  }
+
+  // .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+  //   border-color: transparent;
+  // }
+
+  .ant-select-arrow {
+    &:focus {
+      border-color: $grey;
+    }
+    font-size: 16px;
+    margin-right: 10px;
+    margin-top: -8px;
+  }
+
+  .ant-select-selection-placeholder,
+  .ant-select-selection-item {
+    padding-left: 12px;
+    line-height: $searchBarHeight;
+    font-size: $generalFontSize;
+  }
+
+  .ant-select-selection-item {
+    // text-align: center;
+    // font-size: $generalFontSize;
+  }
+
+  .ant-input-affix-wrapper {
+    width: $locationInputWidth;
+    margin: 0 0 0 -25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+
+    @include desktop {
+      width: 500px;
+    }
+
+    &:hover {
+      border-color: $grey;
+    }
+    &:focus,
+    &-focused {
+      border-color: $grey;
+    }
+
+    .ant-input {
+      font-weight: 600;
+      font-size: $generalFontSize;
+      margin-left: $locationInputLeftMargin + 10px;
+    }
+  }
+
+  .ant-input-search-icon::before {
+    border-left: transparent;
+  }
+
+  .ant-input-search-icon {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+
+  .autocompleteDropdownContainer {
+    // box-shadow: 0px 0px 0.25px 0.25px $black;
+    // margin-left: -$locationInputLeftMargin;
+    margin-top: 3px;
+    width: $locationInputWidth + 70px;
+    padding: 10px;
+    background-color: $white;
+    border: 1px solid $lightGrey;
+    border-radius: 20px;
+    z-index: 1;
+
+    .autocompleteDropdownContainerLoading {
+      padding: 10px;
+    }
+  }
+
+  .autocompleteDropdownContainer:empty {
+    display: none;
+  }
+}
+
+.ant-select-dropdown {
+  padding: 10px;
+  box-shadow: 0px 0px 0px 0px;
+  border: 1px solid $lightGrey;
+  border-radius: 20px;
+
+  .ant-select-item {
+    transition: none;
+  }
+
+  .ant-select-item-option-selected {
+    background-color: $white;
+    color: rgba(0, 0, 0, 0.65);
+    border-radius: 10px;
+  }
+
+  .ant-select-item-option-active {
+    background-color: $bookito;
+    color: $white;
+    border-radius: 10px;
+  }
+}

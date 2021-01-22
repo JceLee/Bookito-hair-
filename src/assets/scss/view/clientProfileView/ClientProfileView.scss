@@ -1,0 +1,146 @@
+@import "../../Mixin.scss";
+
+.clientProfileView {
+  margin: 20px;
+
+  @include tabletP {
+    width: 60%;
+    padding-top: 10%;
+    margin: auto;
+  }
+
+  @include tabletL {
+    width: 50%;
+    padding-top: 10%;
+    margin: auto;
+  }
+
+  @include desktop {
+    width: 45%;
+    padding-top: 10%;
+    margin: auto;
+  }
+
+  .profileForm {
+    padding-top: 3vh;
+
+    label {
+      font-weight: 700;
+    }
+
+    .formItems {
+      margin-bottom: 10px;
+    }
+
+    hr {
+      height: 1px;
+      border: none;
+      background-color: #dbdbdb;
+    }
+
+    .ant-form-item-label {
+      padding: 0;
+    }
+
+    .saveBtn {
+      width: 100%;
+      background-color: black;
+      color: white;
+      margin-top: 24px;
+      margin-bottom: 12px;
+      border: 1px solid black;
+      height: 32px;
+    }
+
+    .blackBtn {
+      margin-top: 25px;
+    }
+
+    .profilePhoto {
+      text-align: center;
+      margin-bottom: 12px;
+
+      .editIcon {
+        position: absolute;
+      }
+    }
+
+    .clientName {
+      text-align: center;
+      font-weight: 600;
+      font-size: 18px;
+      margin: 0;
+    }
+
+    .formTopMargin {
+      margin-top: 45px;
+    }
+
+    .formBottomMargin {
+      margin-bottom: 30px;
+    }
+
+    .autocompleteDropdownContainer {
+      padding: 4px;
+      border: 1px solid lightgrey;
+      border-top: 0px;
+    }
+
+    .autocompleteDropdownContainer:empty {
+      display: none;
+    }
+  }
+
+  @include clientProfile576 {
+    .profileForm {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+
+      .saveBtn {
+        width: 100%;
+      }
+
+      .profilePhoto .ant-form-item-control-input {
+        width: 100%;
+      }
+
+      .clientName .ant-form-item-control-input {
+        width: 100%;
+      }
+    }
+    .formItems {
+      .ant-form-item-label {
+        text-align: left;
+      }
+    }
+  }
+}
+
+.changePhotoModal {
+  .modalProfilePhoto {
+    text-align: center;
+  }
+
+  .dragDropContainer {
+    border: dashed 2px gray;
+    padding: 40px;
+    margin: 24px 0px;
+    text-align: center;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .ant-upload.ant-upload-drag {
+    border: dashed 2px gray;
+    padding: 40px;
+    margin: 24px 0px;
+    text-align: center;
+
+    p {
+      margin: 0;
+    }
+  }
+}
