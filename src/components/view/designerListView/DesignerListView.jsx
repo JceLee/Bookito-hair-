@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Button, Drawer, Spin } from "antd";
+import React, {useState, useEffect} from "react";
+import {Button, Drawer, Spin} from "antd";
 import queryString from "query-string";
-import { load_database } from "../../../actions/firebaseAction";
-import { firebaseStore } from "../../../config/fbConfig";
-import { useDispatch, useSelector } from "react-redux";
+import {load_database} from "../../../actions/firebaseAction";
+import {firebaseStore} from "../../../config/fbConfig";
+import {useDispatch, useSelector} from "react-redux";
 import DesignerCardComponent from "./designerCardComponent/DesignerCardComponent";
 import DesignerListFilter from "./DesignerListFilter";
 import Map from "../../commonComponents/map/Map";
-import { CloseOutlined } from "@ant-design/icons";
-import { useHistory } from "react-router-dom";
-import { designerTags } from "../../../constants/designerTags";
-import { geocode } from "../../../helpers/geocode";
-import { getDistanceFromLatLonInKm } from "../../../helpers/geocode";
+import {CloseOutlined} from "@ant-design/icons";
+import {useHistory} from "react-router-dom";
+import {designerTags} from "../../../constants/designerTags";
+import {geocode} from "../../../helpers/geocode";
+import {getDistanceFromLatLonInKm} from "../../../helpers/geocode";
 import InfiniteScroll from "react-infinite-scroll-component";
 import MainSearchBar from "../../commonComponents/mainSearchBar/MainSearchBar";
 
@@ -34,7 +34,7 @@ export default function DesignerListView(props) {
   // User location variables
   const [searchParams, setSearchParams] = useState();
   const [userLocation, setUserLocation] = useState();
-  const [defaultLocation] = useState({ lat: 34.0522, lng: 118.2437 });
+  const [defaultLocation] = useState({lat: 34.0522, lng: 118.2437});
   const locationAddress = queryString.parse(props.location.search)["location"];
   const designerType = queryString.parse(props.location.search)["type"];
 
@@ -55,7 +55,6 @@ export default function DesignerListView(props) {
     setLoadingDesigners(true); // Start loading spin animation
     firebaseStore
       .collection("users")
-      .where("location", "==", locationAddress)
       .where("accountTypes", "==", designerType)
       .get()
       .then((querySnapshot) => {
@@ -64,7 +63,7 @@ export default function DesignerListView(props) {
           newDesigners.push(doc.data());
         });
         dispatch(load_database(newDesigners));
-        (async ()=>{
+        (async () => {
           await refreshSearchResults(newDesigners);
           setLoadingDesigners(false); // End loading spin animation
         })();
@@ -75,7 +74,7 @@ export default function DesignerListView(props) {
       document.getElementsByTagName("body")[0].style.width = defaultDesignerListingWidth;
       document.getElementsByTagName("body")[0].style.padding = 0;
     }
-    document.getElementById('scrollableDiv').addEventListener('scroll', handleFilterDisplayOnScroll, { passive: true });
+    document.getElementById('scrollableDiv').addEventListener('scroll', handleFilterDisplayOnScroll, {passive: true});
     return () => {
       if (window.innerWidth >= 1200) { // Mixin.scss desktop
         document.getElementsByTagName("body")[0].style.width = defaultBookitoWidth;
@@ -95,7 +94,7 @@ export default function DesignerListView(props) {
     return userLatLng;
   };
 
-  const assignDistanceToDesigners = async(designers, userLatLng) => {
+  const assignDistanceToDesigners = async (designers, userLatLng) => {
     // Calculate and set distance of designers from user location
     if (!userLatLng) {
       return;
@@ -121,13 +120,14 @@ export default function DesignerListView(props) {
   };
 
   const handleSearch = (designer) => {
-    const route = `/designer_profile?uid=${designer.uid}`;
+    const route = `/designer_profile/${designer.uid}`;
     history.push(route);
   };
 
   const updateSortBy = async (sortByKey) => {
     // play faux loading animation and delay
     await displayLoadingAnimation();
+
 
     let sortedDesigners = [...designersCurrent];
     setSortBy(sortByKey);
@@ -197,7 +197,7 @@ export default function DesignerListView(props) {
     if (date) {
       const dayOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][
         date.getDay()
-      ];
+        ];
       filteredDesigners = filteredDesigners.filter(
         (designer) =>
           designer.hours[dayOfWeek] && !designer.hours[dayOfWeek][0].closed
@@ -221,7 +221,8 @@ export default function DesignerListView(props) {
     if (window.innerWidth < 1200) { // Screen size less than desktop
       let scrollTop = window.pageYOffset || document.getElementById('scrollableDiv').scrollTop;
       setHideFilterBar(scrollTop > lastScrollTop);
-      lastScrollTop = scrollTop;    }
+      lastScrollTop = scrollTop;
+    }
   };
 
   const displayLoadingAnimation = () => {
@@ -272,7 +273,8 @@ export default function DesignerListView(props) {
         <div className="listingBase" id="scrollableDiv">
           {/* Controls above the designer listing */}
           <div className="listNavBar">
-            <div className={mapVisibleDesktop ? "filter desktopMapOpenWidthFilter" : "filter"} style={hideFilterBar ? { top: -40 } : {}}>
+            <div className={mapVisibleDesktop ? "filter desktopMapOpenWidthFilter" : "filter"}
+                 style={hideFilterBar ? {top: -40} : {}}>
               <DesignerListFilter
                 filterTags={filterTags}
                 updateFilter={updateFilter}
@@ -286,7 +288,7 @@ export default function DesignerListView(props) {
             <Button
               className="mobileOnly designerListOpenMapMobile"
               onClick={openMapMobile}
-              style={hideFilterBar ? { bottom: -40, visible: "hidden" } : {}}
+              style={hideFilterBar ? {bottom: -40, visible: "hidden"} : {}}
             >
               {" "}
               {/*shape="circle"*/}
@@ -307,18 +309,20 @@ export default function DesignerListView(props) {
           >
             <Spin spinning={loadingDesigners} size="large">
               {/* console.log(designers) || */}
-              {designersCurrentDisplayed.map((designer, index) => (
-                <div
-                  key={index}
-                  className="designerList"
-                >
-                  <DesignerCardComponent
-                    designer={designer}
-                    handleSearch={handleSearch}
-                    mapVisibleDesktop={mapVisibleDesktop}
-                  />
-                </div>
-              ))}
+              {designersCurrentDisplayed.map((designer, index) => {
+                if (designer !== undefined) {
+                  return <div
+                    key={index}
+                    className="designerList"
+                  >
+                    <DesignerCardComponent
+                      designer={designer}
+                      handleSearch={handleSearch}
+                      mapVisibleDesktop={mapVisibleDesktop}
+                    />
+                  </div>
+                }
+              })}
             </Spin>
           </InfiniteScroll>
         </div>
@@ -338,7 +342,7 @@ export default function DesignerListView(props) {
             shape="circle"
             onClick={closeMapMobile}
           >
-            <CloseOutlined />
+            <CloseOutlined/>
           </Button>
           {/* Map inside drawer */}
           <div className="mapContainer">
@@ -360,7 +364,7 @@ export default function DesignerListView(props) {
             shape="circle"
             onClick={closeMapDesktop}
           >
-            <CloseOutlined />
+            <CloseOutlined/>
           </Button>
           {/* Map on the right of designer list view */}
           <div className="mapContainer">

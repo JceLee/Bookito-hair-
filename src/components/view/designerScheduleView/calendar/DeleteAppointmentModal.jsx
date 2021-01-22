@@ -1,7 +1,7 @@
 import React, {useRef} from "react";
 import Dialog from "@material-ui/core/Dialog";
 import { CloseOutlined } from "@ant-design/icons";
-import {Row, Col, notification} from "antd";
+import {Row, Col, notification, Modal} from "antd";
 import BlackBtn from "../../../commonComponents/BlackBtn";
 import {firebaseStore} from "../../../../config/fbConfig";
 
@@ -23,7 +23,8 @@ export default function DeleteAppointmentModal(props) {
           message: "Saved",
           duration: "2",
         });
-      });}
+      });
+  }
 
   return (
     <Dialog

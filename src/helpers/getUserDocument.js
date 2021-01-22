@@ -44,8 +44,6 @@ export const generateUserDocument = async (user) => {
         uid,
         works,
       });
-      console.log("test");
-      console.log(user);
     } catch (error) {
       console.error("Error creating user document", error);
     }

@@ -139,7 +139,7 @@ export default function SignIn() {
               <img src={googleLogo} className="loginBtnLogo" alt="Google Logo"/>
               <div className="loginBtnText">Sign in with Google</div>
             </button>
-            <button onClick={signInWithFaceBook} className="loginBtn loginBtn--facebook">
+            <button onClick={() => {testAccount("Erica")}} className="loginBtn loginBtn--facebook">
               <img src={facebookLogo} className="loginBtnLogo" alt="Facebook Logo"/>
               <div className="loginBtnText">Sign in with Facebook</div>
             </button>
