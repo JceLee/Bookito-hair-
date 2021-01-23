@@ -1,12 +1,21 @@
 @import "../Mixin.scss";
 
 .howBktWorksModal {
+  .ant-modal-wrap {
+  }
+
+  .ant-modal-mask {
+  }
+
   .ant-modal-body {
+    .ant-modal-confirm-body {
+    }
     .ant-modal-confirm-body > .anticon {
       display: none;
     }
     .ant-modal-confirm-body > .anticon + .ant-modal-confirm-title + .ant-modal-confirm-content {
       margin-left: 0;
+      width: 100%;
     }
     .ant-modal-confirm-title {
       margin-bottom: 1em;
@@ -20,6 +29,9 @@
         width: 100%;
         margin-top: 0.5em;
       }
+    }
+    .slick-slide img {
+      width : 100%;
     }
   }
 }

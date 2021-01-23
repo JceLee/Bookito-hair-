@@ -1,7 +1,7 @@
 export const designerTypes = {
   "newClient": "newClient",
   "client": "client",
-  "hair": "Hair Designer",
+  "hair": "Hair Dresser",
   "nail": "Nail Artist",
-  "makeup": "Makeup Artist",
+  "lash": "Lash Technician",
 }

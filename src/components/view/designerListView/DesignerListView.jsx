@@ -55,7 +55,7 @@ export default function DesignerListView(props) {
     setLoadingDesigners(true); // Start loading spin animation
     firebaseStore
       .collection("users")
-      .where("accountTypes", "==", designerType)
+      .where("accountType", "==", designerType)
       .get()
       .then((querySnapshot) => {
         const newDesigners = [];
