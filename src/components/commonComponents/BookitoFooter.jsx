@@ -3,14 +3,13 @@ import {Link, useHistory} from "react-router-dom"
 import {Divider, Button, Modal, Carousel} from "antd";
 import {CreateMessengerRoom} from "../view/messengerView/CreateMessengerRoom"
 import {useSelector} from "react-redux";
-import image1 from "../../assets/images/instructions/image1.png"
-import image2 from "../../assets/images/instructions/image2.png"
-import image3 from "../../assets/images/instructions/image3.png"
-import image4 from "../../assets/images/instructions/image4.png"
-import image5 from "../../assets/images/instructions/image5.png"
-import image6 from "../../assets/images/instructions/image6.png"
-import image7 from "../../assets/images/instructions/image7.png"
-import image8 from "../../assets/images/instructions/image8.png"
+import image1 from "../../assets/images/instructions/image01.jpeg"
+import image2 from "../../assets/images/instructions/image02.jpeg"
+import image3 from "../../assets/images/instructions/image03.jpeg"
+import image4 from "../../assets/images/instructions/image04.jpeg"
+import image5 from "../../assets/images/instructions/image05.jpeg"
+import image6 from "../../assets/images/instructions/image06.jpeg"
+import image7 from "../../assets/images/instructions/image07.jpeg"
 
 let menuDividerType;
 
@@ -29,25 +28,50 @@ const howBktWorks = () => {
     lineHeight: '160px',
     textAlign: 'center',
     background: '#ff7373',
+    margin: "0 auto",
   };
+
+  const description = [
+    {
+      src: image1,
+      title: `Welcome to Bookito.io!
+Find a hairdresser, nail artist or lash technician near by your location. Browse their works and reviews and book an appointment without the need to call or visit, anytime, anywhere!
+`,
+    }, {
+      src: image2,
+      title: "Choose a service and the area you wish to search."
+    }, {
+      src: image3,
+      title: "Explore the beauticians available nearby. Customize your search to fine tune your results."
+    }, {
+      src: image4,
+      title: "Check out the detailed profile and browse their works and reviews! If it’s just right, click Book Now!"
+    }, {
+      src: image5,
+      title: "Pick a time and the service you want to receive and confirm your appointment."
+    }, {
+      src: image6,
+      title: "We will estimate the price of your appointment. You don’t pay until you receive the service on the day of your appointment!"
+    }, {
+      src: image7,
+      title: `From your Profile, go to “Your Appointments” to check your upcoming, pending, and past appointments.
+Pending means the appointment has yet been accepted by the beautician. Upcoming means your appointment has been confirmed. Hooray!
+`
+    },
+  ]
+
   Modal.info({
     className: "howBktWorksModal",
     title: "How Bookito works?",
     okText: "Exit",
+    width: 425,
+    centered: true,
     content:
       <Carousel autoplay>
-        <div style={contentStyle}>
-          <img src={image1} width={320} height={600}/>
-        </div>
-        <div>
-          <h3 style={contentStyle}>2</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>3</h3>
-        </div>
-        <div>
-          <h3 style={contentStyle}>4</h3>
-        </div>
+        {description.map((description, index) => (<div style={contentStyle} key={index}>
+          <img src={description.src}/>
+          <h4 style={{margin: "10px"}}> {description.title}</h4>
+        </div>))}
       </Carousel>
     ,
   });

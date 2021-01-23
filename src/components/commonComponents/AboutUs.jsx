@@ -4,6 +4,7 @@ import sampleImg from "../../assets/images/mobile.png";
 import jayce from "../../assets/images/aboutUs/jayce.jpeg";
 import heeja from "../../assets/images/aboutUs/heeja.jpeg";
 import bookito from "../../assets/images/aboutUs/bookito.jpeg";
+import Josh from "../../assets/images/aboutUs/josh.jpg";
 
 
 const ourTeam = [
@@ -14,7 +15,7 @@ const ourTeam = [
     description: "Project manager",
   },
   {
-    img: bookito,
+    img: Josh,
     name: "Joshua",
     email: "joshua_shin@hotmail.com",
     description: "Lead developer",
@@ -27,8 +28,8 @@ const ourTeam = [
   },
   {
     img: bookito,
-    name: "Gina",
-    email: "ginabinaakimm@gmail.com",
+    name: "Gina Kim",
+    email: "ginakim.jh@gmail.com",
     description: "Developer",
   },
   {
@@ -40,7 +41,7 @@ const ourTeam = [
   {
     img: bookito,
     name: "Jaewhee Seo",
-    email: "Jaewhee@gmail.com",
+    email: "jstylesss2@gmail.com",
     description: "Developer",
   },
 ];
@@ -48,14 +49,15 @@ const ourTeam = [
 export default function AboutUs() {
   return (
     <div className="aboutUsPage">
-      <h3 className="aboutUsTitle">Bookito Team</h3>
+      <h3 className="aboutUsTitle">ABOUT US</h3>
+      <p className="subTitle"> Our mission is to help you find a <strong>beautician </strong>and book an <strong>appointment</strong> without the need to call or visit, anytime, anywhere and beauticians to connect to a <strong>wider audience</strong>. We love helping people find each other and have a great experience.</p>
       <div className="aboutUsCard">
         {ourTeam.map((member, index) => {
           return (
             <div className="aboutUsMemberInfo" key={index}>
-              {/*<section className="img">*/}
-              {/*  <Image className="memberImg" src={member.img}/>*/}
-              {/*</section>*/}
+              <section className="img">
+                <Image className="memberImg" src={member.img}/>
+              </section>
               <section className="memberIntro">
                 <h4 id="memberName">{member.name}</h4>
                 <p>{member.description}</p>
