@@ -1,11 +1,11 @@
 @import "../Mixin.scss";
 
 .aboutUsPage {
+  margin: 10vh auto;
   .aboutUsTitle {
     text-align: left;
     font-size: 1.3em;
     font-weight: 600;
-    margin-top: 10%;
     color: $lightGrey;
     letter-spacing: 1.8px;
     margin-bottom: 8px;
@@ -56,22 +56,9 @@
           }
 
           .ant-image-img {
-            width: 90vw;
-            height: 60vw;
+            width: 335px;
+            height: 225px;
 
-            @include tabletP {
-              width: 90%;
-              height: 30vw;
-            }
-
-            @include tabletL {
-              width: 90%;
-              height: 15vw;
-            }
-
-            @include desktopXL {
-              height: 10vw;
-            }
           }
         }
       }
