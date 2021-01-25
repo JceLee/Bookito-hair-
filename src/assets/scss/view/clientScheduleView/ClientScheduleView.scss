@@ -1,10 +1,18 @@
 @import "../../Mixin.scss";
 
 .clientSchedule {
-  padding: 0 5%;
-  @include desktop {
-    padding: 0 10%;
+  padding: 10px 5%;
+
+  @include desktopL {
+    padding: 30px 0;
+    margin: 0;
   }
+
+  .clientProfileTitle {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
   .yourAppointments {
     margin-top: 20px;
     font-size: 20pt;
