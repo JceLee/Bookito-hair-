@@ -189,7 +189,7 @@ export default function ClientProfileView(props) {
             className="formItems formTopMargin"
             rules={[{required: true}]}
           >
-            <Input className="clientInput" type="text" required={true}/>
+            <Input className="clientInput" type="text" placeholder="Name" required={true}/>
           </Form.Item>
         ) : (
           <Form.Item className="clientName">
@@ -204,7 +204,7 @@ export default function ClientProfileView(props) {
             className="formItems"
             rules={[{required: true, type: "email"}]}
           >
-            <Input className="clientInput" type="email" required={true}/>
+            <Input className="clientInput" type="email" placeholder="Email" required={true}/>
           </Form.Item>
         ) : (
           <Form.Item className="formItems" label="Email">
@@ -213,8 +213,13 @@ export default function ClientProfileView(props) {
         )}
 
         {edit ? null : <hr/>}
-        <Form.Item label="Phone" name="phone" className="formItems">
-          {edit ? <Input className="clientInput" type="number"/> : <div>{profile?.phone}</div>}
+        <Form.Item
+          label="Phone"
+          name="phone"
+          className="formItems"
+          rules={[{required: editMode}]}
+        >
+          {edit ? <Input className="clientInput" type="number" placeholder="Phone" required={editMode}/> : <div>{profile?.phone}</div>}
         </Form.Item>
 
         {edit ? null : <hr/>}

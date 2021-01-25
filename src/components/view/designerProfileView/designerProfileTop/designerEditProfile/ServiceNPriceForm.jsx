@@ -294,7 +294,7 @@ export default function ServiceNPriceForm(props) {
         <Input
           className="newTabInput"
           placeholder="Please type a name for a new service"
-          maxLength={8}
+          maxLength={20}
           onChange={updateInput}
         />
         <Divider />
