@@ -46,7 +46,7 @@ export default function LocationInput(props) {
                   : "suggestion-item";
                 const style = suggestion.active
                   ? {
-                      backgroundColor: "#1b1b1b",
+                      backgroundColor: "#ff7373",
                       borderRadius: "10px",
                       color: "#fdfdfd",
                       cursor: "pointer",

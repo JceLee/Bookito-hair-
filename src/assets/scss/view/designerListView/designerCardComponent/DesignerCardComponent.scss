@@ -97,28 +97,18 @@
       height: 37vw;
 
       @include tabletP {
-        width: 160px;
-        height: 160px;
+        width: 20vw;
+        height: 20vw;
       }
 
       @include tabletL {
-        width: 200px;
-        height: 200px;
+        width: 20vw;
+        height: 20vw;
       }
 
       @include desktop {
-        width: 250px;
-        height: 250px;
-      }
-
-      @include desktopL {
-        width: 250px;
-        height: 250px;
-      }
-
-      @include desktopXL {
-        width: 10vw;
-        height: 10vw;
+        width: 285px;
+        height: 285px;
       }
     }
 

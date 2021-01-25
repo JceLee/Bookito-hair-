@@ -48,7 +48,7 @@ export default function Navbar() {
   return (
     <div id="navBar">
       <div id="logo">
-        <Link to="/">Bookito</Link>
+        <Link to="/"><span>Bookito</span><span className="logoBeta">BETA</span></Link>
       </div>
       <div id="menuBtn">
         {signedInUser === null ? <Link to="/sign_in" id="signInBtn"><Button shape="round">

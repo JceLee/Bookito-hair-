@@ -7,7 +7,7 @@
   overflow-x: hidden;
   @include desktop {
     // height: 5vh;
-    padding: 0 10%;
+    padding: 0;
   }
 
   .mainHeading {
@@ -54,7 +54,7 @@
 
   .infoCardsSection {
     text-align: center;
-    margin: 0 auto;
+    margin: 4vh auto;
 
     .infoCard {
       margin: 0 auto;
