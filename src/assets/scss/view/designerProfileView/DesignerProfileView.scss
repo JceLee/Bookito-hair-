@@ -455,9 +455,7 @@
         font-size: 16px;
         font-weight: 500;
         text-align: right;
-        padding-top: 1%;
-        padding-left: 1.5rem;
-        padding-bottom: 6%;
+        padding: 1% 1.5rem 6%;
         @include desktop {
           font-size: 16px;
         }
