@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import {Affix, Button, Modal, Form} from "antd";
-import {Link} from "react-router-dom";
 import DesignerNav from "./designerNav/DesignerNav.jsx";
 import ReadOnlyStar from "../../../commonComponents/ReadOnlyStar";
 import BookNowModal from "../designerProfileTop/bookNowModal/BookNowModal";
@@ -13,7 +12,6 @@ const avatarSize = 64;
 
 export default function DesignerProfileTop(props) {
   const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
-  const currentUser = useSelector((state) => state.currentUser.currentUser);
   const [stickyNavPositionFromTop] = useState(searchBarHeight);
   const [height, setHeight] = useState(0);
   const [visibleEditProfileModal, setVisibleEditProfileModal] = useState(false);
