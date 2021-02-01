@@ -1,8 +1,7 @@
-import { Upload, message, Form, Button } from "antd";
+import { Upload, Form, Button } from "antd";
 import ImgCrop from "antd-img-crop";
-import React, { useState } from "react";
+import React  from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { refresh } from "../../../../../actions/currentUser";
 
 const layout = {
   labelCol: { span: 6 },

@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, {useEffect, useState} from "react";
 import "react-day-picker/lib/style.css";
 import {Steps, Modal, Button, message} from "antd";
 import StepOne from "./StepOne";
