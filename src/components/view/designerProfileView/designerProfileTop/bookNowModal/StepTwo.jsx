@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {Button, Row, Col, Divider, Card, Typography, Checkbox} from "antd";
+import {Button, Row, Divider, Card, Typography, Checkbox} from "antd";
 
 export default function StepTwo(props) {
   const {Text} = Typography;

@@ -5,6 +5,7 @@ import jayce from "../../assets/images/aboutUs/jayce.jpeg";
 import heeja from "../../assets/images/aboutUs/heeja.jpeg";
 import bookito from "../../assets/images/aboutUs/bookito.jpeg";
 import Josh from "../../assets/images/aboutUs/josh.jpg";
+import BookitoFooter from "./BookitoFooter";
 
 
 const ourTeam = [
@@ -48,6 +49,7 @@ const ourTeam = [
 
 export default function AboutUs() {
   return (
+    <>
     <div className="aboutUsPage">
       <h3 className="aboutUsTitle">ABOUT US</h3>
       <p className="subTitle"> Our mission is to help you find a <strong>beautician </strong>and book an <strong>appointment</strong> without the need to call or visit, anytime, anywhere and beauticians to connect to a <strong>wider audience</strong>. We love helping people find each other and have a great experience.</p>
@@ -68,5 +70,7 @@ export default function AboutUs() {
         })}
       </div>
     </div>
+  <BookitoFooter/>
+  </>
   );
 }

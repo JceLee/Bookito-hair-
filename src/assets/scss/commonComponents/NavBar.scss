@@ -39,17 +39,25 @@ $marginFromTablet: 10%;
   }
 }
 
-#logo a {
-  text-decoration: none;
-  color: $black;
-  font-size: x-large;
-  font-weight: bold;
-}
-
 #logo {
   width: 150px;
-  a {color: #ff7373;}
-
+  a {
+    position: relative;
+    display: inline-block;
+    width: 130px;
+    text-decoration: none;
+    color: $black;
+    font-size: x-large;
+    font-weight: bold;
+    color: #ff7373;
+  }
+  .logoBeta {
+    margin-left: 4px;
+    font-size: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }
 
 #menuBtn {

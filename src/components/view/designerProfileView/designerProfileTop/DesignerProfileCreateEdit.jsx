@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Collapse, Button, Form, message } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import ClientProfileView from "../../../view/clientProfileView/ClientProfileView";
 import ServiceNPriceForm from "./designerEditProfile/ServiceNPriceForm";
@@ -121,7 +121,7 @@ export default function DesignerProfileCreateEdit(props) {
         // console.log("pass");
       }
     });
-    // if (fileList.length === designer?.works.length) { 
+    // if (fileList.length === designer?.works.length) {
     // TODO: bug - upload executes twice in certain cases
     updateFireStorage();
     // }
@@ -231,7 +231,7 @@ export default function DesignerProfileCreateEdit(props) {
               return (
                 <div key={`becomeDesignerForm${index}`}>
                   <div className="becomeDesignerFormDescription">{panel.header}</div>
-                  {panel.content}                
+                  {panel.content}
                 </div>
               );
             })}

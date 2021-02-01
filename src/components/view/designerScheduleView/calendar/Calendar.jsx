@@ -2,7 +2,7 @@ import React, {useRef, useState} from "react";
 import Paper from "@material-ui/core/Paper";
 import Fab from "@material-ui/core/Fab";
 import Drawer from "@material-ui/core/Drawer";
-import { ViewState } from "@devexpress/dx-react-scheduler";
+import {ViewState} from "@devexpress/dx-react-scheduler";
 import {
   Scheduler,
   DayView,
@@ -19,19 +19,19 @@ import TooltipContent from "./TooltipContent";
 import AddIcon from "@material-ui/icons/Add";
 import {Badge, Modal} from "antd";
 import NewRequests from "./NewRequests";
-import { IconButton } from "@material-ui/core";
+import {IconButton} from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ForumIcon from '@material-ui/icons/Forum';
 import DeleteAppointmentModal from "../calendar/DeleteAppointmentModal";
 import AddAppointmentModal from "./AddAppointmentModal";
-import { withStyles } from "@material-ui/core/styles";
-import { fade } from "@material-ui/core/styles/colorManipulator";
+import {withStyles} from "@material-ui/core/styles";
+import {fade} from "@material-ui/core/styles/colorManipulator";
 import {CreateMessengerRoom} from "../../messengerView/CreateMessengerRoom"
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 export default function Calendar(props) {
   const currentDate = new Date();
-  const { newRequests, appointmentArray, forceUpdate } = props;
+  const {newRequests, appointmentArray, forceUpdate} = props;
   const [newRequestState, setNewRequestState] = useState(false);
   const [addAppointmentModalState, setAddAppointmentModal] = useState(false);
   const [deleteAppointmentModalState, setDeleteAppointmentModal] = useState(false);
@@ -66,8 +66,8 @@ export default function Calendar(props) {
     );
   };
 
-  const getTooltipContent = ({ appointmentData, formatDate, ...restProps }) => {
-    return <TooltipContent appointmentData={appointmentData} formatDate={formatDate} />;
+  const getTooltipContent = ({appointmentData, formatDate, ...restProps}) => {
+    return <TooltipContent appointmentData={appointmentData} formatDate={formatDate}/>;
   };
 
   const history = useHistory();
@@ -80,34 +80,34 @@ export default function Calendar(props) {
     enterChatRoom(CreateMessengerRoom(appointment.customerId, appointment.designerId));
   }
 
-  const getTooltipHeader = ({ appointmentData, ...restProps }) => {
+  const getTooltipHeader = ({appointmentData, ...restProps}) => {
     appointmentID.current = appointmentData.id;
     return (
       <AppointmentTooltip.Header {...restProps}>
         <IconButton onClick={() => startChatting(appointmentData)}>
-          <ForumIcon />
+          <ForumIcon/>
         </IconButton>
         <IconButton onClick={() => displayDeleteAppointmentModal()}>
-          <DeleteIcon />
+          <DeleteIcon/>
         </IconButton>
       </AppointmentTooltip.Header>
     );
   };
 
-  const TimeTableCellBase = ({ classes, ...restProps }) => {
-    const { startDate } = restProps;
+  const TimeTableCellBase = ({classes, ...restProps}) => {
+    const {startDate} = restProps;
     const date = new Date(startDate);
     if (designer.holidays.includes(date.getDay())) {
-      return <WeekView.TimeTableCell {...restProps} className={classes.weekendCell} />;
+      return <WeekView.TimeTableCell {...restProps} className={classes.weekendCell}/>;
     }
     return <WeekView.TimeTableCell {...restProps} />;
   };
 
-  const TimeTableCellBaseMonth = ({ classes, ...restProps }) => {
-    const { startDate } = restProps;
+  const TimeTableCellBaseMonth = ({classes, ...restProps}) => {
+    const {startDate} = restProps;
     const date = new Date(startDate);
     if (designer.holidays.includes(date.getDay())) {
-      return <MonthView.TimeTableCell {...restProps} className={classes.weekendCell} />;
+      return <MonthView.TimeTableCell {...restProps} className={classes.weekendCell}/>;
     }
     return <MonthView.TimeTableCell {...restProps} />;
   };
@@ -137,8 +137,8 @@ export default function Calendar(props) {
       <div className="calendar">
         <Paper>
           <Scheduler data={appointmentArray}>
-            <ViewState defaultCurrentDate={currentDate} />
-            <MonthView timeTableCellComponent={grayMonthTimeTableCell} />
+            <ViewState defaultCurrentDate={currentDate}/>
+            <MonthView timeTableCellComponent={grayMonthTimeTableCell}/>
             <WeekView
               startDayHour={9}
               endDayHour={19}
@@ -149,7 +149,7 @@ export default function Calendar(props) {
               endDayHour={19}
               timeTableCellComponent={grayWeekTimeTableCell}
             />
-            <Toolbar flexibleSpaceComponent={customToolbar} />
+            <Toolbar flexibleSpaceComponent={customToolbar}/>
             <Drawer anchor="right" open={newRequestState} onClose={displayNewRequests}>
               <NewRequests
                 newRequests={newRequests}
@@ -157,10 +157,10 @@ export default function Calendar(props) {
                 forceUpdate={forceUpdate}
               />
             </Drawer>
-            <TodayButton className="todayBtn" />
-            <DateNavigator />
-            <ViewSwitcher />
-            <Appointments />
+            <TodayButton className="todayBtn"/>
+            <DateNavigator/>
+            <ViewSwitcher/>
+            <Appointments/>
             <AppointmentTooltip
               headerComponent={getTooltipHeader}
               contentComponent={getTooltipContent}
@@ -174,8 +174,8 @@ export default function Calendar(props) {
         <DeleteAppointmentModal
           deleteAppointmentModalState={deleteAppointmentModalState}
           displayDeleteAppointmentModal={displayDeleteAppointmentModal}
-          appointmentID = {appointmentID.current}
-          forceUpdate = {forceUpdate}
+          appointmentID={appointmentID.current}
+          forceUpdate={forceUpdate}
         />
         <AddAppointmentModal
           addAppointmentModalState={addAppointmentModalState}

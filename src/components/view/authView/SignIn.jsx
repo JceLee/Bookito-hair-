@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from "react";
-import {Modal, Divider, Button} from "antd";
 import firebase from "firebase/app";
 import {useHistory} from "react-router-dom";
 import {firebaseAuth} from "../../../config/fbConfig";
