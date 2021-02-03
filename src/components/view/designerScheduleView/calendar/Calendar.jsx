@@ -16,7 +16,6 @@ import {
   TodayButton,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import TooltipContent from "./TooltipContent";
-import AddIcon from "@material-ui/icons/Add";
 import {Badge, Modal} from "antd";
 import NewRequests from "./NewRequests";
 import {IconButton} from "@material-ui/core";
