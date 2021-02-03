@@ -5,40 +5,47 @@ import Hours from "./Hours.jsx";
 import Location from "./Location.jsx";
 import ReviewContainer from "./ReviewContainer";
 import ServiceNPrice from "./ServiceNPrice";
-import { Divider } from "antd";
-import { useSelector } from "react-redux";
+import {Divider} from "antd";
+import {useSelector} from "react-redux";
 import SelfIntro from "./SelfIntro.jsx";
 
 export default function DesignerProfileBottom() {
   const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
   return (
     <div className="designerBottom">
-      <Home id="Home" />
-      <Works id="Works" works={designer.works} />
-      <Divider className="profileDivider" />
-      <SelfIntro id="SelfIntro" introduction={designer.introduction} />
-      <Divider className="profileDivider" />
+      <Home id="Home"/>
+      <Works id="Works" works={designer.works}/>
+      <Divider className="profileDivider"/>
+      {() => {
+        if (designer.introduction.length !== 0) return (
+          <>
+            <SelfIntro id="SelfIntro" introduction={designer.introduction}/>
+            <Divider className="profileDivider"/>
+          </>
+        )
+      }}
+
       <div className="serviceNPriceHoursGrid">
         <div className="serviceGrid">
-          <ServiceNPrice id="Price" serviceNPrices={designer.services} />
+          <ServiceNPrice id="Price" serviceNPrices={designer.services}/>
         </div>
       </div>
-      <Divider className="profileDivider" />
+      <Divider className="profileDivider"/>
       <div className="hrsAndReviews">
         <div className="serviceNPriceHoursGrid">
           <div className="hoursGrid">
-            <Hours id="Hours" hours={designer.hours} />
+            <Hours id="Hours" hours={designer.hours}/>
           </div>
         </div>
-        <Divider id="HrsReviewDivider" />
+        <Divider id="HrsReviewDivider"/>
         <div className="serviceNPriceHoursGrid">
           <div className="hoursGrid">
-            <ReviewContainer id="Reviews" />
+            <ReviewContainer id="Reviews"/>
           </div>
         </div>
       </div>
-      <Divider className="profileDivider" />
-      <Location id="Location" designer={designer} />
+      <Divider className="profileDivider"/>
+      <Location id="Location" designer={designer}/>
     </div>
   );
 }
