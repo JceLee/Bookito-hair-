@@ -20,7 +20,7 @@ export default function MainSearchBarSlideBackground() {
       <AutoplaySlider
         play={true}
         cancelOnInteraction={false}
-        interval={Infinity}
+        interval={4000}
         bullets={false}
         fillParent={true}
         buttons={false}
