@@ -78,6 +78,7 @@ $content-background-color: #2f2f2f;
     height: 100%;
     width: 100%;
   }
+
   &__container {
     display: block;
     width: 100%;
@@ -92,6 +93,7 @@ $content-background-color: #2f2f2f;
       @extend %fill-parent;
     }
   }
+
   &__startUp {
     background-color: white;
     height: 100%;
@@ -110,6 +112,7 @@ $content-background-color: #2f2f2f;
       height: auto;
     }
   }
+
   &__content {
     @extend %fill-parent;
     background-color: white;
@@ -117,6 +120,7 @@ $content-background-color: #2f2f2f;
     display: flex;
     align-items: center;
     justify-content: center;
+
     > img,
     > video {
       object-fit: cover;
@@ -125,8 +129,9 @@ $content-background-color: #2f2f2f;
       position: absolute;
       top: 0;
       left: 0;
-      opacity: 0.7;
+      opacity: 0.8;
     }
+
     // > div {
     //   position: relative;
     //   z-index: 1;
@@ -134,10 +139,12 @@ $content-background-color: #2f2f2f;
     &--enter {
       // On content enter
     }
+
     &--exit {
       // On content exit
     }
   }
+
   &__controls {
     button {
       @extend %clear-focus;
@@ -153,10 +160,12 @@ $content-background-color: #2f2f2f;
       background-color: var(--control-button-background);
       color: #fff;
       cursor: pointer;
+
       .#{$root-element}__controls__arrow-left,
       .#{$root-element}__controls__arrow-right {
         opacity: var(--control-button-opacity);
       }
+
       &:hover {
         .#{$root-element}__controls__arrow-left,
         .#{$root-element}__controls__arrow-right {
@@ -164,23 +173,28 @@ $content-background-color: #2f2f2f;
         }
       }
     }
+
     &--active {
       .#{$root-element}__controls__arrow-left {
         opacity: var(--control-button-opacity-hover);
         transform: translate3d(-100%, 0, 0);
       }
+
       .#{$root-element}__controls__arrow-right {
         opacity: var(--control-button-opacity-hover);
         transform: translate3d(100%, 0, 0);
       }
     }
+
     &--hidden {
       display: none;
     }
+
     @media all and (max-width: 520px) {
       visibility: hidden;
     }
   }
+
   &__bar {
     display: block;
     width: 100%;
@@ -192,72 +206,85 @@ $content-background-color: #2f2f2f;
     z-index: 101;
     transition: transform 3000ms var(--transition-bezier);
     transform: translate3d(-100%, 0, 0);
+
     &--active {
       transform: translate3d(-20%, 0, 0);
     }
+
     &--end {
       transition-duration: 300ms;
       transform: translate3d(0, 0, 0);
     }
   }
+
   &__next {
     right: 0;
   }
+
   &__prev {
     left: 0;
   }
+
   &__box {
     z-index: 1;
     visibility: hidden;
     @extend %fill-parent;
   }
+
   &--animated {
     will-change: transform;
     visibility: visible;
   }
+
   &--animated-mobile {
     will-change: transform;
     transition: transform 325ms cubic-bezier(0.15, 0.65, 0.1, 1);
   }
+
   &--active {
     visibility: visible;
     z-index: 2;
     transform: translate3d(0, 0, 0);
   }
+
   &--moveRight,
   &--moveLeft {
     backface-visibility: hidden;
   }
+
   &--moveRight {
     // transform: translate3d(100%, 0, 0);
-    animation: slideFromRight var(--slider-transition-duration) both
-    var(--transition-bezier);
+    animation: slideFromRight var(--slider-transition-duration) both var(--transition-bezier);
   }
+
   &--moveLeft {
-    animation: slideFromLeft var(--slider-transition-duration) both
-    var(--transition-bezier);
+    animation: slideFromLeft var(--slider-transition-duration) both var(--transition-bezier);
   }
+
   &--exit {
     z-index: 0;
+
     &.#{$root-element}--moveLeft {
-      animation: slideToLeft var(--slider-transition-duration) both
-      var(--transition-bezier);
+      animation: slideToLeft var(--slider-transition-duration) both var(--transition-bezier);
     }
+
     &.#{$root-element}--moveRight {
-      animation: slideToRight var(--slider-transition-duration) both
-      var(--transition-bezier);
+      animation: slideToRight var(--slider-transition-duration) both var(--transition-bezier);
     }
   }
+
   &--first {
     .#{$root-element}__prev {
       visibility: hidden;
     }
   }
+
   &--last {
     .#{$root-element}__next {
       visibility: hidden;
     }
   }
+
   &--fill-parent {
     position: absolute !important;
     width: 100% !important;
@@ -270,6 +297,7 @@ $content-background-color: #2f2f2f;
       padding: 0;
     }
   }
+
   &__bullets {
     position: absolute;
     bottom: -40px;
@@ -277,6 +305,7 @@ $content-background-color: #2f2f2f;
     display: flex;
     align-items: center;
     justify-content: center;
+
     button {
       @extend %clear-focus;
       padding: 0;
@@ -297,9 +326,11 @@ $content-background-color: #2f2f2f;
         transform: scale(1.2);
       }
     }
+
     .#{$root-element}__bullets--loading {
       transform: scale(1.2);
     }
+
     .#{$root-element}__bullets--active {
       transform: scale(1.5);
       background: var(--control-bullet-active-color);
@@ -317,16 +348,15 @@ $content-background-color: #2f2f2f;
     position: relative;
     display: block;
     transition: transform 0.2s ease-out 0.125s, opacity 0.2s ease-out;
+
     &:before,
     &:after {
       content: ' ';
       position: absolute;
       right: calc(
           50% -
-          (
-          #{$cos45} * (var(--organic-arrow-height) +
-          var(--organic-arrow-thickness))
-          ) / 2
+          (#{$cos45} * (var(--organic-arrow-height) +
+          var(--organic-arrow-thickness))) / 2
       );
       height: 100%;
       border-radius: var(--organic-arrow-border-radius);
@@ -334,12 +364,14 @@ $content-background-color: #2f2f2f;
       background-color: var(--organic-arrow-color);
       transition: transform 0.15s ease-out, background-color 0.15s ease-out;
     }
+
     &:before {
       transform-origin: 100% 100% 0;
       // background-color: rgba(76, 177, 6, 0.75);
       top: -50%;
       transform: rotate(-45deg);
     }
+
     &:after {
       transform-origin: 100% 0% 0;
       // background-color: rgba(255, 247, 43, 0.75);
@@ -347,49 +379,57 @@ $content-background-color: #2f2f2f;
       transform: rotate(45deg);
     }
   }
+
   &__controls__arrow-right {
     &--active {
       transform: translate3d(100%, 0, 0);
+
       &:after {
         transform: rotate(90deg) translate3d(50%, 0, 0) !important;
       }
+
       &:before {
         transform: rotate(-90deg) translate3d(50%, 0, 0) !important;
       }
     }
   }
+
   &__controls__arrow-left {
     &:before,
     &:after {
       right: auto;
       left: calc(
           50% -
-          (
-          #{$cos45} * (var(--organic-arrow-height) +
-          var(--organic-arrow-thickness))
-          ) / 2
+          (#{$cos45} * (var(--organic-arrow-height) +
+          var(--organic-arrow-thickness))) / 2
       );
     }
+
     &:before {
       transform-origin: 0 100% 0;
       top: -50%;
       transform: rotate(45deg);
     }
+
     &:after {
       transform-origin: 0 0 0;
       top: 50%;
       transform: rotate(-45deg);
     }
+
     &--active {
       transform: translate3d(-100%, 0, 0);
+
       &:after {
         transform: rotate(-90deg) translate3d(-50%, 0, 0) !important;
       }
+
       &:before {
         transform: rotate(90deg) translate3d(-50%, 0, 0) !important;
       }
     }
   }
+
   &__controls {
     button:hover {
       .#{$root-element}__controls__arrow-left {
@@ -403,11 +443,13 @@ $content-background-color: #2f2f2f;
           transform: rotate(-30deg);
         }
       }
+
       .#{$root-element}__controls__arrow-right {
         &:before {
           opacity: 1;
           transform: rotate(-30deg);
         }
+
         &:after {
           opacity: 1;
           transform: rotate(30deg);
@@ -415,6 +457,7 @@ $content-background-color: #2f2f2f;
       }
     }
   }
+
   &__timer {
     --timer-delay: 2000ms;
     --timer-release: 200ms;
