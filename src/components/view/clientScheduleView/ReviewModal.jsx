@@ -9,7 +9,7 @@ export default function ReviewModal(props) {
   const designer = useSelector((state) => state.selectedDesigner.selectedDesigner);
   const { modalHandler, visible, appointment, disableReviewBtn } = props;
   const [rate, setRate] = useState(0);
-  const [reviewContext, setReviewContext] = useState("asdfas");
+  const [reviewContext, setReviewContext] = useState("Nice");
 
   const createFooter = () => {
     return (

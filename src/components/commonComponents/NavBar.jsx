@@ -2,7 +2,6 @@ import React from "react";
 import {Menu, Dropdown, Button} from "antd";
 import {Link} from "react-router-dom";
 import {UserOutlined, BarsOutlined} from "@ant-design/icons";
-import SignInModal from "../view/authView/SignInModal";
 import {useSelector} from "react-redux";
 import SignOut from "../view/authView/SignOut";
 import {designerTypes} from "../../constants/designerTypes"

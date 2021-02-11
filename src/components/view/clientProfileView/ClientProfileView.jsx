@@ -33,8 +33,8 @@ export default function ClientProfileView(props) {
       displayName: values.nickName,
       latLng: addressLatLng,
     };
-    Object.assign(profile, updatedInfo); // Update local client
-    dispatch(refresh(profile)); // Update redux client
+    setProfile(Object.assign(profile, updatedInfo)); // Update local client
+    dispatch(refresh(Object.assign(profile, updatedInfo))); // Update redux client
     // Update firebase
     firebaseStore
       .collection("users")
@@ -131,12 +131,14 @@ export default function ClientProfileView(props) {
         const updatedInfo = {
           photoURL: downloadURL,
         };
-        Object.assign(profile, updatedInfo); // Update local client
+        setProfile(Object.assign(profile, updatedInfo)); // Update local client
         dispatch(refresh(profile)); // Update redux client
       }
     );
     Promise.all(promises)
-      .then(() => modalHandler())
+      .then(() => {
+        modalHandler();
+      })
       .catch((err) => console.log(err.code));
   };
 
@@ -219,7 +221,8 @@ export default function ClientProfileView(props) {
           className="formItems"
           rules={[{required: editMode}]}
         >
-          {edit ? <Input className="clientInput" type="number" placeholder="Phone" required={editMode}/> : <div>{profile?.phone}</div>}
+          {edit ? <Input className="clientInput" type="number" placeholder="Phone" required={editMode}/> :
+            <div>{profile?.phone}</div>}
         </Form.Item>
 
         {edit ? null : <hr/>}
