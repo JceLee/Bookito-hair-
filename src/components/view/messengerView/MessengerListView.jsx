@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-import { firebaseDate, firebaseStore } from "../../../config/fbConfig";
-import { Divider } from "antd";
+import React, {useEffect, useRef, useState} from "react";
+import {useSelector} from "react-redux";
+import {useHistory} from "react-router-dom";
+import {firebaseDate, firebaseStore} from "../../../config/fbConfig";
+import {Divider} from "antd";
 import MessengerListCard from "./MessengerListCard";
 
 export default function MessengerListView() {
@@ -52,8 +52,9 @@ export default function MessengerListView() {
       .then((resp) => {
         console.log(snapshotToArray(resp))
         console.log(lastMsgs.current);
-        lastMsgs.current[roomID] = snapshotToArray(resp)[0] !== undefined ? snapshotToArray(resp)[0] : {date : " ", message : "No messages yet"
-          };
+        lastMsgs.current[roomID] = snapshotToArray(resp)[0] !== undefined ? snapshotToArray(resp)[0] : {
+          date: " ", message: "No messages yet"
+        };
         loadProfileImg(roomID);
         return 1;
       });
@@ -96,11 +97,11 @@ export default function MessengerListView() {
 
   return (
     <div>
-      <Divider />
+      <Divider/>
       {emptyMessengerList()}
       {rooms.map((room) => {
         loadLastMsg(room.roomID);
-        console.log(lastMsgs.current[room.roomID]?.date );
+        console.log(lastMsgs.current[room.roomID]?.date);
         return (
           <MessengerListCard
             key={room.roomID}

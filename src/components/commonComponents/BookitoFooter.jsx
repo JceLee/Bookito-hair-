@@ -88,7 +88,7 @@ const latestNews = () => {
 };
 
 export default function BookitoFooter() {
-  const [dividerType, setDividerType] = useState(getMenuDividerType());
+  const [dividerType, setDividerType] = useState(() => getMenuDividerType());
   const currentUser = useSelector((state) => state.currentUser.currentUser);
 
   const menuDivider = () => {
