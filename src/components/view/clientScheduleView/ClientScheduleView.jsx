@@ -38,9 +38,6 @@ export default function ClientSchedule() {
       .get()
       .then((querySnapshot) => {
         querySnapshot.docs.forEach((doc) => {
-          const dateObj = new Date(doc.data().date.slice(), doc.data().date.slice(), doc.data().date.slice())
-          console.log(new Date().toDateString());
-          console.log(doc.data().date);
           if (doc.data().state === "conformed") {
             confirmed.push(doc.data());
           } else if (doc.data().state === "pending") {
