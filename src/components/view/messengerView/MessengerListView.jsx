@@ -105,7 +105,7 @@ export default function MessengerListView() {
         return (
           <MessengerListCard
             key={room.roomID}
-            fname={room.designerID === currentUser.uid ? room.customerID : room.designerID}
+            fname={room.designerID === currentUser.uid ? room.customerName : room.designerName}
             photoURL={profiles.current[room.roomID]}
             enterChatRoom={enterChatRoom}
             roomID={room.roomID}
