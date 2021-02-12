@@ -29,7 +29,7 @@ function ChatRoom(props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      setNickname(currentUser.uid);
+      setNickname(currentUser.displayName);
       firebaseDate
         .ref("chats/")
         .orderByChild("roomID") //sorting
@@ -59,7 +59,8 @@ function ChatRoom(props) {
     e.preventDefault();
     const chat = newChat;
     chat.roomID = roomID;
-    chat.nickname = nickname;
+    chat.nickname = currentUser.uid;
+    chat.sender = currentUser.displayName;
     chat.date = Moment(new Date()).format("DD/MM/YYYY HH:mm:ss");
     chat.type = "message";
     const newMessage = firebaseDate.ref("chats/").push();
@@ -79,15 +80,15 @@ function ChatRoom(props) {
           <div className="chatMessage" key={idx}>
             <div
               className={`${
-                item.nickname === currentUser.fname
+                item.nickname === currentUser.uid
                   ? "rightBubble"
                   : "leftBubble"
               }`}
             >
-              {item.nickname === currentUser.fname ? (
+              {item.nickname === currentUser.uid ? (
                 <span className="msgName">Me</span>
               ) : (
-                <span className="msgName">{item.nickname}</span>
+                <span className="msgName">{item.sender}</span>
               )}
               <span className="msgDate"> at {item.date}</span>
               <p>{item.message}</p>
