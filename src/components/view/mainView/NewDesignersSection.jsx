@@ -17,7 +17,7 @@ export default function NewDesignersSection() {
   const secondHalfNewDesigners = newDesignerImages.slice(4, 8);
 
   return (
-    <div className="newDesignersSection">
+    <section className="newDesignersSection">
       <div className="headerSection">
         <div className="topLine">Book Now</div>
         <div className="bottomLine">
@@ -46,6 +46,6 @@ export default function NewDesignersSection() {
           })}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

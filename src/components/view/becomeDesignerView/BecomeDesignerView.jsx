@@ -48,17 +48,17 @@ export default function BecomeDesignerView() {
   };
 
   return (
-    <div className="becomeDesignerView">
-      <div className="mainHeading">
+    <section className="becomeDesignerView">
+      <h2 className="mainHeading">
         An online booking system tailored for beauticians.
-      </div>
+      </h2>
 
       {createProfileStage === 0 && (
         <Spin spinning={spinning} size="large">
-          <div className="subHeading">
+          <h3 className="subHeading">
             Manage your schedule and let your clients book appointments online.
-          </div>
-          <div className="infoCardsSection">
+          </h3>
+          <ul className="infoCardsSection">
             <InfoCard
               header="Manage your schedule"
               src="https://www.flaticon.com/svg/static/icons/svg/2693/2693507.svg"
@@ -71,7 +71,7 @@ export default function BecomeDesignerView() {
               header="Chat with your clients"
               src="https://www.flaticon.com/svg/static/icons/svg/1078/1078011.svg"
             />
-          </div>
+          </ul>
           {designer?.accountType !== "client" ? (
             <Button
               className="getStartedBtn"
@@ -142,6 +142,6 @@ export default function BecomeDesignerView() {
           <DesignerProfileCreateEdit designer={designer} createMode={true} selectedDesignerType={designerType}/>
         </>
       )}
-    </div>
+    </section>
   );
 }

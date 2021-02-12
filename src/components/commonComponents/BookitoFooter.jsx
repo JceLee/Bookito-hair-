@@ -108,7 +108,7 @@ export default function BookitoFooter() {
       style: {top: "25%"},
       okText: "Exit",
       content: (
-        <>
+        <footer>
           <div className="helpCenterText">
             <h4>Please contact</h4>
             <h4>
@@ -124,7 +124,7 @@ export default function BookitoFooter() {
               Send message
             </Button>
           </section>
-        </>
+        </footer>
       ),
     });
   };
@@ -140,10 +140,10 @@ export default function BookitoFooter() {
   }
 
   return (
-    <div className="bookitoFooter">
+    <footer className="bookitoFooter">
       <div className="footerContents">
-        <div className="supportAndMenu">
-          <section className="footerMenu">
+        <nav className="supportAndMenu">
+          <div className="footerMenu">
             <Button className="footerPtag" type="link" onClick={howBktWorks}>
               How Bookito works
             </Button>
@@ -165,17 +165,17 @@ export default function BookitoFooter() {
                 About Us
               </Button>
             </Link>
-          </section>
-        </div>
+          </div>
+        </nav>
         <Divider className="footerDivider"/>
-        <section className="copyright">
+        <div className="copyright">
           <p>
             This site is protected by Bookito and the Google Privacy Policy and Terms of Service
             apply.
           </p>
           <p id="bktCopyright">© 2020 Bookito.</p>
-        </section>
+        </div>
       </div>
-    </div>
+    </footer>
   );
 }

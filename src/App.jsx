@@ -26,25 +26,23 @@ export default function App() {
   return (
     <Router>
       <ScrollToTop>
-        <Layout id="layout">
-          <Header id="header">
-            <NavBar/>
-          </Header>
-          <Content id="content">
-            <Route exact path="/" component={MainView}/>
-            <Route path="/designer_list" component={DesignerListView}/>
-            <Route path="/designer_schedule" component={DesignerScheduleView}/>
-            <Route path="/client_schedule" component={ClientScheduleView}/>
-            <Route path="/client_profile" component={ClientProfileView}/>
-            <Route path="/designer_profile" component={DesignerProfileView}/>
-            <Route path="/messenger" component={MessengerListView}/>
-            <Route path="/chatroom" component={ChatRoom}/>
-            <Route path="/sign_in" component={SignIn}/>
-            <Route path="/loading" component={EmailNotificationFromDesigner}/>
-            <Route path="/becomeDesigner" component={BecomeDesignerView}/>
-            <Route path="/aboutUs" component={AboutUs}/>
-          </Content>
-        </Layout>
+        <Header id="header">
+          <NavBar/>
+        </Header>
+        <main>
+          <Route exact path="/" component={MainView}/>
+          <Route path="/designer_list" component={DesignerListView}/>
+          <Route path="/designer_schedule" component={DesignerScheduleView}/>
+          <Route path="/client_schedule" component={ClientScheduleView}/>
+          <Route path="/client_profile" component={ClientProfileView}/>
+          <Route path="/designer_profile" component={DesignerProfileView}/>
+          <Route path="/messenger" component={MessengerListView}/>
+          <Route path="/chatroom" component={ChatRoom}/>
+          <Route path="/sign_in" component={SignIn}/>
+          <Route path="/loading" component={EmailNotificationFromDesigner}/>
+          <Route path="/becomeDesigner" component={BecomeDesignerView}/>
+          <Route path="/aboutUs" component={AboutUs}/>
+        </main>
       </ScrollToTop>
     </Router>
   );
