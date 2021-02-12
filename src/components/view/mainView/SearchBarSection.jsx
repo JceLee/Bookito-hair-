@@ -15,7 +15,7 @@ export default function SearchBarSection() {
   window.addEventListener("resize", reportWindowSize);
 
   return (
-    <div className="searchBarSection">
+    <section className="searchBarSection">
       {screenWidth < tabletLWidth ? (
         <MobileSearchBarSlideBackground />
       ) : (
@@ -31,6 +31,6 @@ export default function SearchBarSection() {
           </>
         )}
       </div>
-    </div>
+    </section>
   );
 }

@@ -17,7 +17,7 @@ export default function JoinUsSection() {
   window.addEventListener("resize", reportWindowSize);
 
   return (
-    <div className="joinUsBlocker">
+    <section className="joinUsBlocker">
       <div className="joinUsBackground">
         <div className="joinUs">
           <div className="joinUsTopLine">Become a Bookito Beautician</div>
@@ -27,20 +27,20 @@ export default function JoinUsSection() {
           {screenWidth < tabletPWidth ? (
             <img className="joinUsImg" src={joinUs}/>
           ) : (
-            <div className="joinUsImgGroup">
-              <div className="imgWrapper">
+            <ul className="joinUsImgGroup">
+              <li className="imgWrapper">
                 <img className="joinUsImgS" src={nail}/>
                 <div className="imgDescription">Nail Artist</div>
-              </div>
-              <div className="imgWrapper">
+              </li>
+              <li className="imgWrapper">
                 <img className="joinUsImgS" src={hair}/>
                 <div className="imgDescription">hair dresser</div>
-              </div>
-              <div className="imgWrapper">
+              </li>
+              <li className="imgWrapper">
                 <img className="joinUsImgS" src={lash}/>
                 <div className="imgDescription">Lash designer</div>
-              </div>
-            </div>
+              </li>
+            </ul>
           )}
 
           <div className="joinUsBottom">
@@ -53,6 +53,6 @@ export default function JoinUsSection() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
