@@ -256,7 +256,7 @@ export default function DesignerListView(props) {
   };
 
   return (
-    <div className="listingContainer">
+    <section className="listingContainer">
       <MainSearchBar
         defaultDesignerType={designerType}
         defaultAddress={locationAddress}
@@ -376,6 +376,6 @@ export default function DesignerListView(props) {
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 }

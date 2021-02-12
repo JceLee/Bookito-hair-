@@ -124,28 +124,28 @@ export default function SignIn() {
   };
 
   return (
-    <div>
-      <div className="loginContainer">
-        <div className="loginContents">
-          <div className="loginMessageContainer">
-            <p id="loginMessageHeader">Sign In / Sign Up</p>
-            <p className="loginMessage">
-              We are happy to see you!
-            </p>
-          </div>
-          <div className="loginBtnContainer">
-            <button onClick={signInWithGoogle} className="loginBtn loginBtn--google">
-              <img src={googleLogo} className="loginBtnLogo" alt="Google Logo"/>
-              <div className="loginBtnText">Sign in with Google</div>
-            </button>
-            <button onClick={() => {testAccount("Erica")}} className="loginBtn loginBtn--facebook">
-              <img src={facebookLogo} className="loginBtnLogo" alt="Facebook Logo"/>
-              <div className="loginBtnText">Sign in with Facebook</div>
-            </button>
-            <p className="loginMessage">
-              No sign up required. Start using our app in less than a minute.
-            </p>
-          </div>
+    <div className="loginContainer">
+      <div className="loginContents">
+        <div className="loginMessageContainer">
+          <p id="loginMessageHeader">Sign In / Sign Up</p>
+          <p className="loginMessage">
+            We are happy to see you!
+          </p>
+        </div>
+        <div className="loginBtnContainer">
+          <button onClick={signInWithGoogle} className="loginBtn loginBtn--google">
+            <img src={googleLogo} className="loginBtnLogo" alt="Google Logo"/>
+            <div className="loginBtnText">Sign in with Google</div>
+          </button>
+          <button onClick={() => {
+            testAccount("Erica")
+          }} className="loginBtn loginBtn--facebook">
+            <img src={facebookLogo} className="loginBtnLogo" alt="Facebook Logo"/>
+            <div className="loginBtnText">Sign in with Facebook</div>
+          </button>
+          <p className="loginMessage">
+            No sign up required. Start using our app in less than a minute.
+          </p>
         </div>
       </div>
     </div>
