@@ -1,8 +1,8 @@
-import React, {useEffect, useRef, useState} from "react";
-import {useSelector} from "react-redux";
-import {useHistory} from "react-router-dom";
-import {firebaseDate, firebaseStore} from "../../../config/fbConfig";
-import {Divider} from "antd";
+import React, { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { firebaseDate, firebaseStore } from "../../../config/fbConfig";
+import { Divider } from "antd";
 import MessengerListCard from "./MessengerListCard";
 
 export default function MessengerListView() {
@@ -10,7 +10,7 @@ export default function MessengerListView() {
     useSelector((state) => state.currentUser.currentUser)
   );
   const [rooms, setRooms] = useState([]);
-  const [nickname, setNickname] = useState("");
+  // const [nickname, setNickname] = useState("");
   const history = useHistory();
   const [forceRendering, setForceRendering] = useState(false);
   const lastMsgs = useRef({});
@@ -18,7 +18,7 @@ export default function MessengerListView() {
 
   useEffect(() => {
     const fetchData = async () => {
-      setNickname(currentUser.fname);
+      // setNickname(currentUser.fname);
       firebaseDate.ref("rooms/").on("value", (resp) => {
         setRooms([]);
         const rooms = snapshotToArray(resp);
@@ -50,11 +50,15 @@ export default function MessengerListView() {
       .limitToLast(1)
       .once("value")
       .then((resp) => {
-        console.log(snapshotToArray(resp))
+        console.log(snapshotToArray(resp));
         console.log(lastMsgs.current);
-        lastMsgs.current[roomID] = snapshotToArray(resp)[0] !== undefined ? snapshotToArray(resp)[0] : {
-          date: " ", message: "No messages yet"
-        };
+        lastMsgs.current[roomID] =
+          snapshotToArray(resp)[0] !== undefined
+            ? snapshotToArray(resp)[0]
+            : {
+                date: " ",
+                message: "No messages yet",
+              };
         loadProfileImg(roomID);
         return 1;
       });
@@ -97,7 +101,7 @@ export default function MessengerListView() {
 
   return (
     <div>
-      <Divider/>
+      <Divider />
       {emptyMessengerList()}
       {rooms.map((room) => {
         loadLastMsg(room.roomID);

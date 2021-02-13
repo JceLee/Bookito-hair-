@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from "react";
-import {Modal, Form, Radio} from "antd";
+import React, { useState, useEffect } from "react";
+import { Modal, Form, Radio } from "antd";
 import LocationInput from "../LocationInput";
-import {geocodeByAddress, getLatLng} from "react-places-autocomplete";
-import {reverseGeocode} from "../../../helpers/geocode";
-import {useHistory} from "react-router-dom";
-import {designerTypes} from "../../../constants/designerTypes";
+import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+import { reverseGeocode } from "../../../helpers/geocode";
+import { useHistory } from "react-router-dom";
+import { designerTypes } from "../../../constants/designerTypes";
 
 export default function DesignerTypeModal(props) {
-  const {visible, onCancel, showNavBarElements} = props;
+  const { visible, onCancel, showNavBarElements } = props;
   const [designerType, setDesignerType] = useState("");
   const [address, setAddress] = useState("");
   const [form] = Form.useForm();
@@ -33,19 +33,19 @@ export default function DesignerTypeModal(props) {
     handleAddressChange(address);
   };
 
-  const getGeocodeByAddress = (address) => {
-    geocodeByAddress(address)
-      .then(async (results) => {
-        return getLatLng(results[0]);
-      })
-      .then((latLng) => {
-        return latLng;
-      })
-      .catch((error) => {
-        console.error("Error", error);
-        return null;
-      });
-  };
+  // const getGeocodeByAddress = (address) => {
+  //   geocodeByAddress(address)
+  //     .then(async (results) => {
+  //       return getLatLng(results[0]);
+  //     })
+  //     .then((latLng) => {
+  //       return latLng;
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error", error);
+  //       return null;
+  //     });
+  // };
 
   const history = useHistory();
 
@@ -58,9 +58,7 @@ export default function DesignerTypeModal(props) {
       showNavBarElements("logo");
       showNavBarElements("menuBtn");
     }
-    const route = `/designer_list?type=${designerType}${
-      location ? `&location=${location}` : ""
-    }`;
+    const route = `/designer_list?type=${designerType}${location ? `&location=${location}` : ""}`;
     window.scrollTo(0, 0);
     history.push(route);
     onCancel();
@@ -69,10 +67,7 @@ export default function DesignerTypeModal(props) {
   const handleGeolocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        reverseGeocode(
-          position.coords.latitude,
-          position.coords.longitude
-        ).then((address) => {
+        reverseGeocode(position.coords.latitude, position.coords.longitude).then((address) => {
           if (address) {
             setAddress(address);
           } else {
@@ -92,30 +87,26 @@ export default function DesignerTypeModal(props) {
       visible={visible}
       footer={null}
       width="100vw"
-      bodyStyle={{height: "100vh"}}
+      bodyStyle={{ height: "100vh" }}
       className="mobileSearchBarModal"
     >
       <div id="designerTypeBtnContainerInMobileSearchBar">
-        <div id="designerTypeTextInMobileSearchBar">
-          1. Choose designer type
-        </div>
+        <div id="designerTypeTextInMobileSearchBar">1. Choose designer type</div>
         <Radio.Group
           size="large"
           buttonStyle="outlined"
-          options={Object.values(designerTypes).filter(type => type !== "client" && type !== "newClient")}
+          options={Object.values(designerTypes).filter(
+            (type) => type !== "client" && type !== "newClient"
+          )}
           onChange={onSelected}
           optionType="button"
         />
       </div>
-      <hr/>
+      <hr />
       <div id="locationInputContainerInMobileSearchBar">
         <div id="locationTextInMobileSearchBar">2. Find your location</div>
         <Form form={form}>
-          <Form.Item
-            name="addressInput"
-            initialValue=""
-            rules={[{required: true}]}
-          >
+          <Form.Item name="addressInput" initialValue="" rules={[{ required: true }]}>
             <LocationInput
               address={address}
               clearAddress={clearAddress}

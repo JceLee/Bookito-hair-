@@ -1,12 +1,10 @@
 import React from "react";
-import {Image} from "antd";
-import sampleImg from "../../assets/images/mobile.png";
+import { Image } from "antd";
 import jayce from "../../assets/images/aboutUs/jayce.jpeg";
 import heeja from "../../assets/images/aboutUs/heeja.jpeg";
 import bookito from "../../assets/images/aboutUs/bookito.jpeg";
 import Josh from "../../assets/images/aboutUs/josh.jpg";
 import BookitoFooter from "./BookitoFooter";
-
 
 const ourTeam = [
   {
@@ -50,27 +48,33 @@ const ourTeam = [
 export default function AboutUs() {
   return (
     <>
-    <div className="aboutUsPage">
-      <h3 className="aboutUsTitle">ABOUT US</h3>
-      <p className="subTitle"> Our mission is to help you find a <strong>beautician </strong>and book an <strong>appointment</strong> without the need to call or visit, anytime, anywhere and beauticians to connect to a <strong>wider audience</strong>. We love helping people find each other and have a great experience.</p>
-      <div className="aboutUsCard">
-        {ourTeam.map((member, index) => {
-          return (
-            <div className="aboutUsMemberInfo" key={index}>
-              <section className="img">
-                <Image className="memberImg" src={member.img}/>
-              </section>
-              <section className="memberIntro">
-                <h4 id="memberName">{member.name}</h4>
-                <p>{member.description}</p>
-                <p>{member.email}</p>
-              </section>
-            </div>
-          );
-        })}
+      <div className="aboutUsPage">
+        <h3 className="aboutUsTitle">ABOUT US</h3>
+        <p className="subTitle">
+          {" "}
+          Our mission is to help you find a <strong>beautician </strong>and book an{" "}
+          <strong>appointment</strong> without the need to call or visit, anytime, anywhere and
+          beauticians to connect to a <strong>wider audience</strong>. We love helping people find
+          each other and have a great experience.
+        </p>
+        <div className="aboutUsCard">
+          {ourTeam.map((member, index) => {
+            return (
+              <div className="aboutUsMemberInfo" key={index}>
+                <section className="img">
+                  <Image className="memberImg" src={member.img} />
+                </section>
+                <section className="memberIntro">
+                  <h4 id="memberName">{member.name}</h4>
+                  <p>{member.description}</p>
+                  <p>{member.email}</p>
+                </section>
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
-  <BookitoFooter/>
-  </>
+      <BookitoFooter />
+    </>
   );
 }
