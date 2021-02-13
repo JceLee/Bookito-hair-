@@ -1,68 +1,46 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# <a href="https://bookito.io/">Bookito.io</a>
 
-## Available Scripts
+Bookito is an web app that connects beauticians to new clients.
+Beauticians such as hairdressers or nail artists can simply register to create a profile visible to Booktio users. Users can browse and discover beauticians around their location and book an appointment online without the inconvenience of calling or visiting.
 
-In the project directory, you can run:
+Additional features such as schedule calendar and real time messaging are offered to registered beauticians. 
 
-### `npm start`
+## Technology
+Bookito is a React/Redux based single page application.
+Redux in complement with Redux-Persist is used for state management.
 
-Runs the app in the development mode.<br />
+SCSS and its Mixin feature is used for responsive, mobile-first design.
+
+Google Maps API & Geocoding is used to provide address to latitude/longitude translation for map based browsing of local beautician in proximity to user.
+
+Firebase as backend is used in various capacities. Firebase Authentication is used for login handling, Realtime-Database for messenger feature, Storage for images, Firestore for various user and appointment data, and Firebase Email Trigger Extension is used to send email notifications.
+
+UI/UX was prototyped using Figma. 
+
+## Gallary
+
+<img src="screenshots/landing_desktop.png" alt="landing_desktop" width="800" />
+<img src="screenshots/landing_mobile.png" alt="landing_mobile" width="220" /></span>
+
+## To Start
+
+To run the app in development mode, `npm start`.
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Credits
+Kangmin Jayce Lee   - Project Manager & Developer
 
-### `npm test`
+Joshau Shin         - Developer
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Heeja Erica Jeong   - Developer
 
-### `npm run build`
+Gina Kim            - Developer
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Yongju Kwon         - Developer
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Jaewhee Seo         - Developer
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br/>
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+##### May 2020 - Jan 2021
