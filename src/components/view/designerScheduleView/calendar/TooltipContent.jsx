@@ -3,12 +3,11 @@ import Grid from "@material-ui/core/Grid";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import AccessTime from "@material-ui/icons/AccessTime";
 import FaceIcon from "@material-ui/icons/Face";
-import LocalAtmIcon from '@material-ui/icons/LocalAtm';
-import LocalPhoneOutlinedIcon from "@material-ui/icons/LocalPhoneOutlined";
+import LocalAtmIcon from "@material-ui/icons/LocalAtm";
 
 export default function TooltipContent(props) {
   const { appointmentData, formatDate } = props;
-  const { serviceName, phoneNumber, title, price } = appointmentData;
+  const { serviceName, title, price } = appointmentData;
 
   return (
     <div className="tooltipContent">

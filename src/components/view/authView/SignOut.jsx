@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { firebaseAuth } from "../../../config/fbConfig";
 import { sign_out } from "../../../actions/currentUser";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 export default function SignOut() {
-  const [loggedIn, setLoggedIn] = useState(true);
   const dispatch = useDispatch();
 
   const signOut = () => {
@@ -18,10 +17,6 @@ export default function SignOut() {
         // An error happened.
       })
       .then(function () {});
-  };
-
-  const handleSignOut = () => {
-    setLoggedIn(false);
   };
 
   return (

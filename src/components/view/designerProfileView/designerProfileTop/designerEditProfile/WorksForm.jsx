@@ -1,6 +1,6 @@
 import { Upload, Form, Button } from "antd";
 import ImgCrop from "antd-img-crop";
-import React  from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const layout = {
@@ -9,26 +9,26 @@ const layout = {
 };
 
 export default function WorksForm(props) {
-  const { designer, createMode, fileList, setFileList, onFinishWorksForm } = props;
+  const { createMode, fileList, setFileList, onFinishWorksForm } = props;
 
-  const designers = useSelector((state) => state.firestore.designers);
-  const dispatch = useDispatch();
+  // const designers = useSelector((state) => state.firestore.designers);
+  // const dispatch = useDispatch();
 
-  const updateRedux = (newWorks) => {
-    // TODO: Reactivate later - Kangmin
-    // const updatedInfo = {
-    //   ...client,
-    //   works: newWorks,
-    // };
-    // setClient(updatedInfo);
-    // dispatch(refresh(updatedInfo));
-    // designers.forEach((designer) => {
-    //   if (designer.uid === client.uid) {
-    //     designer.works = newWorks;
-    //     dispatch(update_database(designers));
-    //   }
-    // });
-  };
+  // TODO: Reactivate later - Kangmin
+  // const updateRedux = (newWorks) => {
+  //   const updatedInfo = {
+  //     ...client,
+  //     works: newWorks,
+  //   };
+  //   setClient(updatedInfo);
+  //   dispatch(refresh(updatedInfo));
+  //   designers.forEach((designer) => {
+  //     if (designer.uid === client.uid) {
+  //       designer.works = newWorks;
+  //       dispatch(update_database(designers));
+  //     }
+  //   });
+  // };
 
   const onChange = ({ fileList: newFileList, event: e }) => {
     setFileList(newFileList);
