@@ -1,9 +1,9 @@
-import React, {useRef} from "react";
+import React from "react";
 import Dialog from "@material-ui/core/Dialog";
 import { CloseOutlined } from "@ant-design/icons";
-import {Row, Col, notification, Modal} from "antd";
+import { Row, Col, notification } from "antd";
 import BlackBtn from "../../../commonComponents/BlackBtn";
-import {firebaseStore} from "../../../../config/fbConfig";
+import { firebaseStore } from "../../../../config/fbConfig";
 
 export default function DeleteAppointmentModal(props) {
   const { deleteAppointmentModalState, displayDeleteAppointmentModal, appointmentID } = props;
@@ -24,7 +24,7 @@ export default function DeleteAppointmentModal(props) {
           duration: "2",
         });
       });
-  }
+  };
 
   return (
     <Dialog
@@ -42,7 +42,7 @@ export default function DeleteAppointmentModal(props) {
       </Row>
       <Row className="modalContent">Are you sure you want to delete?</Row>
       <Row className="modalFooter">
-        <BlackBtn btnName="Delete" onClick={changeState}/>
+        <BlackBtn btnName="Delete" onClick={changeState} />
       </Row>
     </Dialog>
   );

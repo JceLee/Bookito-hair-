@@ -1,6 +1,6 @@
 import React from "react";
-import {Layout} from "antd";
-import {BrowserRouter as Router, Route} from "react-router-dom";
+import { Layout } from "antd";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import NavBar from "./components/commonComponents/NavBar";
 import MainView from "./components/view/mainView/MainView";
 import DesignerListView from "./components/view/designerListView/DesignerListView";
@@ -20,28 +20,28 @@ import BecomeDesignerView from "./components/view/becomeDesignerView/BecomeDesig
 import AboutUs from "./components/commonComponents/AboutUs";
 import ScrollToTop from "./ScrollToTop";
 
-const {Header, Content} = Layout;
+const { Header } = Layout;
 
 export default function App() {
   return (
     <Router>
       <ScrollToTop>
         <Header id="header">
-          <NavBar/>
+          <NavBar />
         </Header>
         <main>
-          <Route exact path="/" component={MainView}/>
-          <Route path="/designer_list" component={DesignerListView}/>
-          <Route path="/designer_schedule" component={DesignerScheduleView}/>
-          <Route path="/client_schedule" component={ClientScheduleView}/>
-          <Route path="/client_profile" component={ClientProfileView}/>
-          <Route path="/designer_profile" component={DesignerProfileView}/>
-          <Route path="/messenger" component={MessengerListView}/>
-          <Route path="/chatroom" component={ChatRoom}/>
-          <Route path="/sign_in" component={SignIn}/>
-          <Route path="/loading" component={EmailNotificationFromDesigner}/>
-          <Route path="/becomeDesigner" component={BecomeDesignerView}/>
-          <Route path="/aboutUs" component={AboutUs}/>
+          <Route exact path="/" component={MainView} />
+          <Route path="/designer_list" component={DesignerListView} />
+          <Route path="/designer_schedule" component={DesignerScheduleView} />
+          <Route path="/client_schedule" component={ClientScheduleView} />
+          <Route path="/client_profile" component={ClientProfileView} />
+          <Route path="/designer_profile" component={DesignerProfileView} />
+          <Route path="/messenger" component={MessengerListView} />
+          <Route path="/chatroom" component={ChatRoom} />
+          <Route path="/sign_in" component={SignIn} />
+          <Route path="/loading" component={EmailNotificationFromDesigner} />
+          <Route path="/becomeDesigner" component={BecomeDesignerView} />
+          <Route path="/aboutUs" component={AboutUs} />
         </main>
       </ScrollToTop>
     </Router>
