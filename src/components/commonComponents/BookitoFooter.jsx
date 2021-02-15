@@ -64,7 +64,7 @@ Pending means the appointment has yet been accepted by the beautician. Upcoming 
     className: "howBktWorksModal",
     title: "How Bookito works?",
     okText: "Exit",
-    width: 425,
+    style: {position: "fixed", top: 0, left: 0, margin: 0, padding : 0},
     centered: true,
     content:
       <Carousel autoplay>

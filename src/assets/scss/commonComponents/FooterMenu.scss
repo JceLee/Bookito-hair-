@@ -1,59 +1,83 @@
 @import "../Mixin.scss";
 
 .howBktWorksModal {
+
   .ant-modal-wrap {
   }
 
   .ant-modal-mask {
+
+    overflow: scroll;
   }
 
-  .ant-modal-body {
-    .ant-modal-confirm-body {
-    }
-    .ant-modal-confirm-body > .anticon {
-      display: none;
-    }
-    .ant-modal-confirm-body > .anticon + .ant-modal-confirm-title + .ant-modal-confirm-content {
-      margin-left: 0;
-      width: 100%;
-    }
-    .ant-modal-confirm-title {
-      margin-bottom: 1em;
-    }
-    .ant-modal-confirm-btns {
-      float: none;
-      .ant-btn-primary {
-        color: $white;
-        background: $black;
-        border-color: $black;
+  .ant-modal-content {
+
+    width: 100vw;
+    height: 100vh;
+    overflow: scroll;
+
+    .ant-modal-body {
+      .ant-modal-confirm-body {
+      }
+
+      .ant-modal-confirm-body > .anticon {
+        display: none;
+      }
+
+      .ant-modal-confirm-body > .anticon + .ant-modal-confirm-title + .ant-modal-confirm-content {
+        margin-left: 0;
         width: 100%;
-        margin-top: 0.5em;
+      }
+
+      .ant-modal-confirm-title {
+        margin-bottom: 1em;
+      }
+
+      .ant-modal-confirm-btns {
+        float: none;
+
+        .ant-btn-primary {
+          color: $white;
+          background: $black;
+          border-color: $black;
+          width: 100%;
+          margin-top: 0.5em;
+        }
+      }
+
+      .slick-slide img {
+        width: 100%;
       }
     }
-    .slick-slide img {
-      width : 100%;
-    }
   }
+
 }
 
 .latestNewsModal {
   .ant-modal-body {
+
+
     .ant-modal-confirm-body > .anticon {
       display: none;
     }
+
     .ant-modal-confirm-body > .anticon + .ant-modal-confirm-title + .ant-modal-confirm-content {
       margin-left: 0;
+
       .latestNewsText {
         text-align: center;
         height: 200px;
       }
     }
+
     .ant-modal-confirm-title {
       text-align: center;
       margin-bottom: 1em;
     }
+
     .ant-modal-confirm-btns {
       float: none;
+
       .ant-btn-primary {
         color: $white;
         background: $black;
@@ -70,18 +94,23 @@
     .ant-modal-confirm-body > .anticon {
       display: none;
     }
+
     .ant-modal-confirm-body > .anticon + .ant-modal-confirm-title + .ant-modal-confirm-content {
       margin-left: 0;
     }
+
     .ant-modal-confirm-title {
       text-align: center;
       margin-bottom: 1em;
     }
+
     .helpCenterText {
       text-align: center;
     }
+
     .sendMsgBtn {
       text-align: center;
+
       .ant-btn-link {
         border-color: lightgrey;
         color: $bookito;
@@ -93,6 +122,7 @@
 
     .ant-modal-confirm-btns {
       float: none;
+
       .ant-btn-primary {
         color: $white;
         background: $black;
