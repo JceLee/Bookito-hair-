@@ -18,15 +18,13 @@ Jayce (lkm4351@gmail.com)
 ### Lead Developer
 Joshua (joshua_shin@hotmail.com)
 
-### Lead Designer
-Erica (heejaerica@gmail.com)
-
 ### Developer
+Erica (heejaerica@gmail.com)
 Gina (ginakim.jh@gmail.com)
-Yongju Kwon (michaelkyj@gmail.com)
 Jaewhee Seo (jstylesss2@gmail.com)
+Yongju Kwon (michaelkyj@gmail.com)
 
 
 
 
-## ALL codes is protected by Bookito and the Github Privacy Policy and Terms of Service Apply.
+ALL codes is protected by Bookito and the Github Privacy Policy and Terms of Service Apply.
