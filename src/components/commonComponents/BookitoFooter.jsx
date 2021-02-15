@@ -64,7 +64,7 @@ Pending means the appointment has yet been accepted by the beautician. Upcoming 
     className: "howBktWorksModal",
     title: "How Bookito works?",
     okText: "Exit",
-    width: 425,
+    style: {position: "fixed", top: 0, left: 0, margin: 0, padding : 0},
     centered: true,
     content:
       <Carousel autoplay>
@@ -83,7 +83,8 @@ const latestNews = () => {
     title: "Latest News",
     style: {top: "20%"},
     okText: "Exit",
-    content: <div className="latestNewsText">No updated news yet.</div>,
+    content: <><p className="latestNewsText">Bookito is currently a beta service. We are waiting for Hair Dresser, Nail Artist, and Lash Technician to join us. You can still make reservations to Lash Technicians. If you have any problems using the service, please visit to Help Centre or send an email to 'bookito@gmail.com'.</p>
+      <p className="thankYou">Thank you.</p><h5 style={{textAlign: "center"}}>Jan.13.2021</h5></>,
   });
 };
 

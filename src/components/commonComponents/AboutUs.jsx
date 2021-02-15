@@ -48,7 +48,7 @@ const ourTeam = [
 export default function AboutUs() {
   return (
     <>
-      <div className="aboutUsPage">
+      <section className="aboutUsPage">
         <h3 className="aboutUsTitle">ABOUT US</h3>
         <p className="subTitle">
           {" "}
@@ -57,23 +57,23 @@ export default function AboutUs() {
           beauticians to connect to a <strong>wider audience</strong>. We love helping people find
           each other and have a great experience.
         </p>
-        <div className="aboutUsCard">
+        <ul className="aboutUsCard">
           {ourTeam.map((member, index) => {
             return (
-              <div className="aboutUsMemberInfo" key={index}>
-                <section className="img">
+              <li className="aboutUsMemberInfo" key={index}>
+                <div className="img">
                   <Image className="memberImg" src={member.img} />
-                </section>
-                <section className="memberIntro">
+                </div>
+                <div className="memberIntro">
                   <h4 id="memberName">{member.name}</h4>
                   <p>{member.description}</p>
                   <p>{member.email}</p>
-                </section>
-              </div>
+                </div>
+              </li>
             );
           })}
-        </div>
-      </div>
+        </ul>
+      </section>
       <BookitoFooter />
     </>
   );
