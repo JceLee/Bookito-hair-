@@ -2,6 +2,7 @@
 
 .aboutUsPage {
   margin: 10vh auto;
+
   .aboutUsTitle {
     text-align: left;
     font-size: 1.3em;
@@ -11,6 +12,7 @@
     margin-bottom: 8px;
     margin-left: 5vw;
   }
+
   .subTitle {
     font-size: 20px;
     margin-bottom: 32px;
@@ -19,11 +21,15 @@
     margin-left: 5vw;
 
     strong {
-      color : $bookito;
+      color: $bookito;
     }
   }
 
   .aboutUsCard {
+
+    list-style-type: none;
+    padding: 0;
+
     @include tabletP {
       columns: 2;
       overflow: hidden;
@@ -56,7 +62,7 @@
           }
 
           .ant-image-img {
-            width: 335px;
+            width: 320px;
             height: 225px;
 
           }
