@@ -50,7 +50,7 @@ $modalBodyMargin: 110px;
       }
 
       @include tabletP {
-        overflow: none;
+        //overflow: none;
         height: 680px;
       }
 
@@ -197,25 +197,8 @@ $modalBodyMargin: 110px;
       }
 
       .ant-radio-group {
-        //width: 320px;
-        //
-        //@include mobileM {
-        //  padding: 0 20px;
-        //  width: 375px;
-        //}
-        //
-        //@include tabletL {
-        //  margin: 0;
-        //  width: 325px;
-        //}
-        //
-        //@include tabletP {
-        //  margin: 0;
-        //  width: 325px;
-        //}
-        // width: 300px;
 
-        width:100%;
+        width: 100%;
 
 
         .btnGroup {
@@ -239,21 +222,19 @@ $modalBodyMargin: 110px;
               width: 100%;
             }
 
-            // .hourRadioBtn:focus {
-            //   content: none;
-            // }
           }
 
           .ant-radio-button-wrapper:not(:first-child)::before {
             background-color: $bookito;
           }
 
-          // .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled),
-          // .ant-radio-button-wrapper-checked:not([class*=" ant-radio-button-wrapper-disabled"]).ant-radio-button-wrapper {
-          //   // border: 2px solid $black;
-          //   color: $black;
-          // }
           .ant-radio-button-wrapper:hover {
+            color: $white;
+            background-color: $bookito;
+            // border: 1px solid $black;
+          }
+
+          .ant-radio-button-wrapper-checked {
             color: $white;
             background-color: $bookito;
             // border: 1px solid $black;
