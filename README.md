@@ -1,5 +1,3 @@
-ALL codes is protected by Bookito and the Github Privacy Policy and Terms of Service Apply.
-
 ### OUR GOAL
 
 Our mission is to help you find a beautician and book an appointment without the need to call or visit, anytime, anywhere and beauticians to connect to a wider audience. We love helping people find each other and have a great experience.
@@ -23,3 +21,5 @@ Erica (heejaerica@gmail.com)
 Gina (ginakim.jh@gmail.com)
 Yongju Kwon (michaelkyj@gmail.com)
 Jaewhee Seo (jstylesss2@gmail.com)
+
+ALL codes is protected by Bookito and the Github Privacy Policy and Terms of Service Apply.
