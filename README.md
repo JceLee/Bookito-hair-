@@ -16,7 +16,7 @@ JavaScript, React, Redux, SCSS, Google Maps API, Google Firebase(Realtime-databa
 Jayce (lkm4351@gmail.com)
 
 ### Lead Developer
-Joshua (joshua_shin@hotmail.com)
+Joshua (josh.shin.42@gmail.com)
 
 ### Developer
 Erica (heejaerica@gmail.com)
