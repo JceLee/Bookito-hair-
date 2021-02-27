@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Card } from "antd";
+import { firebaseStore } from "../../../config/fbConfig";
+import { designerTypes } from "../../../constants/designerTypes";
 
 export default function NewDesignersSection() {
   const newDesignerImages = [
@@ -12,6 +14,16 @@ export default function NewDesignersSection() {
     "https://i.pinimg.com/474x/42/65/1c/42651cb45931a16714948ff1610da3b6.jpg",
     "https://i.pinimg.com/474x/3b/78/db/3b78db4f25a7f3ba5d89c2575a41339f.jpg",
   ];
+
+  useCallback(() => {
+    firebaseStore
+      .collection("users")
+      .where("accountType", "==", designerTypes.lash)
+      .get()
+      .then((querySnapShot) => {
+        querySnapShot.docs.map((doc) => {});
+      });
+  }, []);
 
   const firstHalfNewDesigners = newDesignerImages.slice(0, 4);
   const secondHalfNewDesigners = newDesignerImages.slice(4, 8);
