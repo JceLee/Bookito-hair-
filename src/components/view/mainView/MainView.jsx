@@ -5,13 +5,12 @@ import JoinUsSection from "./JoinUsSection";
 import BookitoFooter from "../../commonComponents/BookitoFooter";
 
 export default function MainView() {
-
   return (
     <>
-      <SearchBarSection/>
-      <NewDesignersSection/>
-      <JoinUsSection/>
-      <BookitoFooter/>
+      <SearchBarSection />
+      <NewDesignersSection />
+      <JoinUsSection />
+      <BookitoFooter />
     </>
   );
 }
