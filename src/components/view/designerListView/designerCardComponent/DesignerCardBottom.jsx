@@ -8,7 +8,6 @@ export default function DesignerCardBottom(props) {
 
   useLayoutEffect(() => {
     function updateSize() {
-      console.log(size);
       setSize([window.innerWidth, window.innerHeight]);
     }
     window.addEventListener("resize", updateSize);

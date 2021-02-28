@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Drawer, Spin } from "antd";
 import queryString from "query-string";
-import { load_database } from "../../../actions/firebaseAction";
 import { firebaseStore } from "../../../config/fbConfig";
 import { useDispatch, useSelector } from "react-redux";
 import DesignerCardComponent from "./designerCardComponent/DesignerCardComponent";
@@ -12,14 +11,16 @@ import { useHistory } from "react-router-dom";
 import { designerTags } from "../../../constants/designerTags";
 import { geocode } from "../../../helpers/geocode";
 import { getDistanceFromLatLonInKm } from "../../../helpers/geocode";
+import { actions } from "../../../modules/designer/actions";
 import InfiniteScroll from "react-infinite-scroll-component";
 import MainSearchBar from "../../commonComponents/mainSearchBar/MainSearchBar";
 
 export default function DesignerListView(props) {
   // window.location.reload();
 
-  const designerState = useSelector((state) => state.firestore.designers);
-  const [designers, setDesigners] = useState(designerState);
+  const [designers, setDesigners] = useState(
+    useSelector((state) => state.designerList.designerList)
+  );
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -52,22 +53,11 @@ export default function DesignerListView(props) {
 
   useEffect(() => {
     setLoadingDesigners(true); // Start loading spin animation
-    firebaseStore
-      .collection("users")
-      .where("accountType", "==", designerType)
-      .get()
-      .then((querySnapshot) => {
-        const newDesigners = [];
-        querySnapshot.docs.forEach((doc) => {
-          newDesigners.push(doc.data());
-        });
-        dispatch(load_database(newDesigners));
-        (async () => {
-          await refreshSearchResults(newDesigners);
-          setLoadingDesigners(false); // End loading spin animation
-        })();
-      }, []);
+    dispatch(actions.load_request(designerType));
+    setLoadingDesigners(false); // End loading spin animation
+  }, []);
 
+  useEffect(() => {
     // This section of code is used to control the filter hiding and appearing on scrolling down and up respectively.
     if (window.innerWidth >= 1200) {
       // Mixin.scss desktop
@@ -86,7 +76,7 @@ export default function DesignerListView(props) {
         .getElementById("scrollableDiv")
         .removeEventListener("scroll", handleFilterDisplayOnScroll);
     };
-  }, [dispatch, props.location.search]);
+  }, [props.location.search]);
 
   const getAndSetUserLocation = async () => {
     const userLatLng = await geocode(props.location.search);
